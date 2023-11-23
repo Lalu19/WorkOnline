@@ -1,0 +1,30 @@
+{
+  "ApplicationName": "WareHouse",
+  "Url": "/WareHouse/WareHouseDashboard/Dashboard",
+  "IconImageUrl": "/Plugin/Warehouse.Management/logo.png",
+  "IconClass": "",
+  "AreaName": "WareHouse",
+  "Roles": [ "WareHouse Manager", "WareHouse User" ],
+  "Children": [
+    {
+      "ApplicationName": "Master",
+      "Url": "",
+      "IsGroup": true,
+      "IconImageUrl": "",
+      "IconClass": "icon-event_note",
+      "AreaName": "WareHouse",
+      "Roles": [ "WareHouse Manager", "WareHouse User" ],
+      "Children": [
+        {
+          "ApplicationName": "PinCode",
+          "IsGroup": false,
+          "Url": "/WareHouse/PinCode/PinCodeView",
+          "IconImageUrl": "",
+          "IconClass": "icon-event_note",
+          "AreaName": "WareHouse",
+          "Roles": [ "WareHouse Manager", "WareHouse User" ]
+        }
+      ]
+    }
+  ]
+}
