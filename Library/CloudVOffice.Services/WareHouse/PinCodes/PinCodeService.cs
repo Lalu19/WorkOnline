@@ -25,6 +25,7 @@ namespace CloudVOffice.Services.WareHouse.PinCodes
             _pinCodeRepo = pinCodeRepo;
         }
 
+
         public MessageEnum PinCodeCreate(PinCodeDTO pinCodeDTO)
         {
             try
