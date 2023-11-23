@@ -42,7 +42,7 @@ namespace Warehouse.Management.Controllers
             return View("~/Plugins/Warehouse.Management/Views/PinCode/PinCodeCreate.cshtml", pinCodeDTO);
 
         }
-
+         
         [HttpPost]
 		[Authorize(Roles = "WareHouse Manager")]
 		public IActionResult PinCodeCreate(PinCodeDTO pinCodeDTO)
