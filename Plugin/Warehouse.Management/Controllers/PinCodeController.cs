@@ -116,6 +116,5 @@ namespace Warehouse.Management.Controllers
             return Redirect("/WareHouse/PinCode/PinCodeView");
         }
 
-
     }
 }
