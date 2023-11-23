@@ -62,6 +62,7 @@ namespace Warehouse.Management.Controllers
                     }
                     else if (a == MessageEnum.Duplicate)
                     {
+
                         TempData["msg"] = MessageEnum.Duplicate;
                         ModelState.AddModelError("", "PinCode Already Exists");
                     }
