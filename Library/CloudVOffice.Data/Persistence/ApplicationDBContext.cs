@@ -51,10 +51,13 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<CompanyDetails> CompanyDetails { get; set; }
         public virtual DbSet<EmailTemplate> EmailTemplates { get; set; }
         public virtual DbSet<PinCode> PinCodes { get; set; }
+		public virtual DbSet<PinCodeMapping> PinCodeMappings { get; set; }
 
-        #endregion
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+		#endregion
+
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
             #region Base
@@ -211,19 +214,19 @@ namespace CloudVOffice.Data.Persistence
              .ValueGeneratedNever();
 
 
-//			modelBuilder.Entity<PinCodeMapping>()
-//.Property(s => s.CreatedDate)
-//.HasDefaultValueSql("getdate()");
+            modelBuilder.Entity<PinCodeMapping>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
 
-//			modelBuilder.Entity<PinCodeMapping>()
-//			 .Property(s => s.Deleted)
-//			 .HasDefaultValue(false)
-//			 .ValueGeneratedNever();
+            modelBuilder.Entity<PinCodeMapping>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
 
 
-			#endregion
+            #endregion
 
-			modelBuilder.Seed();
+            modelBuilder.Seed();
         }
     }
 }
