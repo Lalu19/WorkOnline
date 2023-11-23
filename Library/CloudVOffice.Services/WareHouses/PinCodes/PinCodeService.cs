@@ -1,8 +1,8 @@
 ﻿using CloudVOffice.Core.Domain.Common;
 using CloudVOffice.Core.Domain.Company;
-using CloudVOffice.Core.Domain.WareHouse.PinCodes;
+using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Data.DTO.Company;
-using CloudVOffice.Data.DTO.WareHouse.PinCodes;
+using CloudVOffice.Data.DTO.WareHouses.PinCodes;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
 using Microsoft.EntityFrameworkCore;

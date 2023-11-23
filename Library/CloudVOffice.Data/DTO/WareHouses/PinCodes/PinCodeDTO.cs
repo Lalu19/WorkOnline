@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CloudVOffice.Data.DTO.WareHouse.PinCodes
+namespace CloudVOffice.Data.DTO.WareHouses.PinCodes
 {
     public class PinCodeDTO
     {

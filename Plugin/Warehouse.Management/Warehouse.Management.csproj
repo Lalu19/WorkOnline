@@ -17,8 +17,6 @@
 		<None Remove="plugin.json" />
 		<None Remove="roles.json" />
 		<None Remove="Views\Dashboard.cshtml" />
-		<None Remove="Views\PinCodeMapping\PinMappingCreate.cshtml" />
-		<None Remove="Views\PinCodeMapping\PinMappingView.cshtml" />
 		<None Remove="Views\PinCode\PinCodeCreate.cshtml" />
 		<None Remove="Views\PinCode\PinCodeView.cshtml" />
 	</ItemGroup>

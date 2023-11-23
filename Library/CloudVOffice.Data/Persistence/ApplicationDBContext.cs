@@ -4,8 +4,7 @@ using CloudVOffice.Core.Domain.EmailTemplates;
 using CloudVOffice.Core.Domain.Logging;
 using CloudVOffice.Core.Domain.Pemission;
 using CloudVOffice.Core.Domain.Users;
-using CloudVOffice.Core.Domain.WareHouse.PinCodeMapping;
-using CloudVOffice.Core.Domain.WareHouse.PinCodes;
+using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Data.Seeding;
 using Microsoft.EntityFrameworkCore;
 
@@ -52,7 +51,6 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<CompanyDetails> CompanyDetails { get; set; }
         public virtual DbSet<EmailTemplate> EmailTemplates { get; set; }
         public virtual DbSet<PinCode> PinCodes { get; set; }
-        public virtual DbSet<PinCodeMapping> PinCodeMappings { get; set; }
 
         #endregion
 
@@ -213,14 +211,14 @@ namespace CloudVOffice.Data.Persistence
              .ValueGeneratedNever();
 
 
-			modelBuilder.Entity<PinCodeMapping>()
-.Property(s => s.CreatedDate)
-.HasDefaultValueSql("getdate()");
+//			modelBuilder.Entity<PinCodeMapping>()
+//.Property(s => s.CreatedDate)
+//.HasDefaultValueSql("getdate()");
 
-			modelBuilder.Entity<PinCodeMapping>()
-			 .Property(s => s.Deleted)
-			 .HasDefaultValue(false)
-			 .ValueGeneratedNever();
+//			modelBuilder.Entity<PinCodeMapping>()
+//			 .Property(s => s.Deleted)
+//			 .HasDefaultValue(false)
+//			 .ValueGeneratedNever();
 
 
 			#endregion

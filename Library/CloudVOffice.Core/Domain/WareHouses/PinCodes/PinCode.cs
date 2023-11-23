@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CloudVOffice.Core.Domain.WareHouse.PinCodes
+namespace CloudVOffice.Core.Domain.WareHouses.PinCodes
 {
     public class PinCode : IAuditEntity, ISoftDeletedEntity
     {

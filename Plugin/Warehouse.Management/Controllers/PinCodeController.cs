@@ -1,6 +1,6 @@
 ﻿using CloudVOffice.Core.Domain.Common;
-using CloudVOffice.Core.Domain.WareHouse.PinCodes;
-using CloudVOffice.Data.DTO.WareHouse.PinCodes;
+using CloudVOffice.Core.Domain.WareHouses.PinCodes;
+using CloudVOffice.Data.DTO.WareHouses.PinCodes;
 using CloudVOffice.Services.WareHouse.PinCodes;
 using CloudVOffice.Web.Framework;
 using CloudVOffice.Web.Framework.Controllers;

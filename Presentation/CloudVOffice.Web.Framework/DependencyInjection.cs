@@ -13,7 +13,6 @@ using CloudVOffice.Services.Permissions;
 
 using CloudVOffice.Services.Roles;
 using CloudVOffice.Services.Users;
-using CloudVOffice.Services.WareHouse.PinCodeMappings;
 using CloudVOffice.Services.WareHouse.PinCodes;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -44,7 +43,6 @@ namespace CloudVOffice.Web.Framework
             services.AddScoped<ILetterHeadService, LetterHeadService>();
            
             services.AddScoped<IPinCodeService, PinCodeService>();
-            services.AddScoped<IPinCodeMappingService, PinCodeMappingService>();
 
 
 
