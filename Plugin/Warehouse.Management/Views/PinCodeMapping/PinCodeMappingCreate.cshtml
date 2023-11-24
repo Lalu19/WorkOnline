@@ -3,6 +3,7 @@
 @model CloudVOffice.Data.DTO.WareHouses.PinCodes.PinCodeMappingDTO;
 @{
     Layout = "_MainAppLayout";
+    ViewData["Title"] = "PinCode Mapping";
 }
 @addTagHelper *, Syncfusion.EJ2
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
@@ -37,9 +38,10 @@
                             <div class="col-md-10">
                                 <b>PinCode Mapping View</b>
                             </div>
-                           @* <div class="col-md-2 ">
-                                <a href="/WareHouse/PinCodeMapping/PinCodeMappingView" class="btn btn-primary btn-sm float-right"><i class="icon-list2"></i> List</a>
-                            </div>*@
+                             <div class="col-md-2 ">
+                         <a href="/WareHouse/PinCodeMapping/PinCodeMappingView" class="btn btn-primary btn-sm float-right"><i class="icon-list2"></i>List</a>
+                            </div>
+                            
                         </div>
                     </div>
                     <div class="card-body">
@@ -48,12 +50,12 @@
 
                             <div class="form-group col-md-3">
                                 <label for="WareHuoseId" class="form-label">WareHouse Name</label>
-                                <ejs-dropdownlist id="WareHuoseId" allowFiltering="true" ejs-for="@Model.WareHuoseId" filtering="onWareHouseNamefiltering" dataSource="@(new SelectList((IEnumerable)ViewBag.WareHouseList, "WareHuoseId", "WarehouseName").Items)" placeholder="Select WareHouse" popupHeight="220px">
-                                    <e-dropdownlist-fields text="WarehouseName" value="WareHuoseId"></e-dropdownlist-fields>
+                                <ejs-dropdownlist id="WareHuoseId" allowFiltering="true" ejs-for="@Model.WareHuoseId" filtering="onWareHouseNamefiltering" dataSource="@(new SelectList((IEnumerable)ViewBag.WareHouseList, "WareHuoseId", "WareHouseName").Items)" placeholder="Select WareHouse" popupHeight="220px">
+                                    <e-dropdownlist-fields text="WareHouseName" value="WareHuoseId"></e-dropdownlist-fields>
                                 </ejs-dropdownlist>
                                 <span asp-validation-for="WareHuoseId"></span>
                             </div>
-
+                            
                             <div class="form-group col-md-4">
                                 <label for="PinCodeId" class="form-label">PinCode Number</label>
                                 <ejs-multiselect id="PinCodeId" ejs-for="@Model.PinCodeId"
@@ -84,7 +86,7 @@
 <script>
     function onWareHouseNamefiltering(e) {
         var query = new ej.data.Query();
-        query = (e.text !== '') ? query.where('WarehouseName', 'startswith', e.text, true) : query;
+        query = (e.text !== '') ? query.where('WareHouseName', 'startswith', e.text, true) : query;
         e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.WareHouseList)), query);
     }
     function onOrderNumberfiltering(e) {

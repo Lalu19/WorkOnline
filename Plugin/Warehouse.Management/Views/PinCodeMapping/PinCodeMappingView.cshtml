@@ -1,6 +1,7 @@
 ﻿@using CloudVOffice.Core.Domain.Common;
 @{
     Layout = "_MainAppLayout";
+    ViewData["Title"] = "PinCode Mapping";
 }
 @addTagHelper *, Syncfusion.EJ2
 <header class="main-heading">
@@ -54,8 +55,8 @@
 
                         <e-grid-selectionsettings persistSelection="true" type="Multiple" checkboxOnly="true"></e-grid-selectionsettings>
                         <e-grid-columns>
-                            <e-grid-column field="WareHouse.WarehouseName" headerText="WareHouse Name" textAlign="Left" width="150"></e-grid-column>
-                            <e-grid-column field="Pin.Pin" headerText="OrderId" textAlign="Left" width="180"></e-grid-column>
+                            <e-grid-column field="WareHuose.WareHouseName" headerText="WareHouse Name" textAlign="Left" width="150"></e-grid-column>
+                            <e-grid-column field="PinCode.Pin" headerText="Pin Code" textAlign="Left" width="180"></e-grid-column>
 
 
                             <e-grid-column headerText="Action" template="#Actions" width="120"></e-grid-column>
