@@ -53,10 +53,13 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<EmailTemplate> EmailTemplates { get; set; }
         public virtual DbSet<PinCode> PinCodes { get; set; }
         public virtual DbSet<WareHuose> WareHouses { get; set; }
+		public virtual DbSet<PinCodeMapping> PinCodeMappings { get; set; }
 
-        #endregion
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+		#endregion
+
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
             #region Base
