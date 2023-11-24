@@ -24,5 +24,6 @@ namespace CloudVOffice.Core.Domain.WareHouses.PinCodes
 
 		[ForeignKey("PinCodeId")]
 		public PinCode PinCode { get; set; }
-	}
+        
+    }
 }

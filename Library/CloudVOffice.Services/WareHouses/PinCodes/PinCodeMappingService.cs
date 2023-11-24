@@ -104,12 +104,12 @@ namespace CloudVOffice.Services.WareHouses.PinCodes
 				throw;
 			}
 		}
-		public PinCodeMapping GetPinCodeMappingById(int PinCodeMappingId)
+		public PinCodeMapping GetPinCodeMappingById(Int64 PinCodeMappingId)
 		{
 			return _dbContext.PinCodeMappings.Where(x => x.PinCodeMappingId == PinCodeMappingId && x.Deleted == false).SingleOrDefault();
 		}
 		
-        public MessageEnum PinCodeMappingDelete(long PinCodeMappingId, long DeletedBy)
+        public MessageEnum PinCodeMappingDelete(Int64 PinCodeMappingId, Int64 DeletedBy)
         {
             try
             {
