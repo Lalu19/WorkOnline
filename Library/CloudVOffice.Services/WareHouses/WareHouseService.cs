@@ -29,13 +29,18 @@ namespace CloudVOffice.Services.WareHouses
                 var ware = _dbContext.WareHouses.Where(w => w.WareHuoseId == wareHousesDTO.WareHuoseId && w.Deleted == false).FirstOrDefault();
                 if (ware == null)
                 {
-                    WareHuose wareHouses = new WareHuose();
+                    WareHuose wareHouse = new WareHuose();
 
-                    wareHouses.WarehouseName = wareHousesDTO.WarehouseName;
-                    //wareHouses.PinCodeId = wareHousesDTO.PinCodeId;
-                    wareHouses.IsActive = wareHousesDTO.IsActive;
-                    wareHouses.CreatedBy = wareHousesDTO.CreatedBy;
-                    var obj = _wareHouseRepo.Insert(wareHouses);
+                    wareHouse.Address = wareHousesDTO.Address;
+                    wareHouse.WareHouseName = wareHousesDTO.WareHouseName;
+                    wareHouse.Area = wareHousesDTO.Area;
+                    wareHouse.GSTNumber = wareHousesDTO.GSTNumber;
+                    wareHouse.Mobile = wareHousesDTO.Mobile;
+                    wareHouse.Telephone = wareHousesDTO.Telephone;
+                    wareHouse.IsActive = wareHousesDTO.IsActive;
+                    wareHouse.CreatedBy = wareHousesDTO.CreatedBy;
+
+                    var obj = _wareHouseRepo.Insert(wareHouse);
                     _dbContext.SaveChanges();
 
                     return MessageEnum.Success;
@@ -68,7 +73,7 @@ namespace CloudVOffice.Services.WareHouses
         {
             try
             {
-                var warehouses = _dbContext.WareHouses.Where(x => x.IsActive == true).ToList();
+                var warehouses = _dbContext.WareHouses.Where(x => x.Deleted == false).ToList();
                 return warehouses;
             }
             catch
@@ -77,21 +82,24 @@ namespace CloudVOffice.Services.WareHouses
             }
         }
 
-        public MessageEnum WareHouseUpdate(WareHouseDTO wareHousesDTO)
+        public MessageEnum WareHouseUpdate(WareHouseDTO wareHouseDTO)
         {
             try
             {
-                var ware = _dbContext.WareHouses.Where(w => w.WareHuoseId != wareHousesDTO.WareHuoseId && w.WarehouseName == wareHousesDTO.WarehouseName && w.Deleted == false).FirstOrDefault();
+                var ware = _dbContext.WareHouses.Where(w => w.WareHuoseId != wareHouseDTO.WareHuoseId && w.Deleted == false).FirstOrDefault();
 
                 if (ware == null)
                 {
-                    var warehouse = _dbContext.WareHouses.FirstOrDefault(x => x.WareHuoseId == wareHousesDTO.WareHuoseId);
+                    var warehouse = _dbContext.WareHouses.FirstOrDefault(x => x.WareHuoseId == wareHouseDTO.WareHuoseId);
 
                     if (warehouse != null)
                     {
-                        warehouse.WarehouseName = wareHousesDTO.WarehouseName;
-                        //warehouse.PinCodeId = wareHousesDTO.PinCodeId;
-                        warehouse.IsActive = warehouse.IsActive;
+                        warehouse.Area = wareHouseDTO.Area;
+                        warehouse.WareHouseName = wareHouseDTO.WareHouseName;
+                        warehouse.Address = wareHouseDTO.Address;
+                        warehouse.Telephone = wareHouseDTO.Telephone;
+                        warehouse.Mobile = wareHouseDTO.Mobile;
+                        warehouse.IsActive = wareHouseDTO.IsActive;
                         warehouse.UpdatedDate = DateTime.Now;
 
                         _wareHouseRepo.Update(warehouse);
@@ -123,6 +131,7 @@ namespace CloudVOffice.Services.WareHouses
                     warehouse.Deleted = true;
                     warehouse.UpdatedBy = DeletedBy;
                     warehouse.UpdatedDate = DateTime.Now;
+                    _dbContext.SaveChanges();
 
                     return MessageEnum.Deleted;
                 }

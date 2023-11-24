@@ -4,6 +4,7 @@ using CloudVOffice.Data.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CloudVOffice.Data.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20231123132101_WareHouseName")]
+    partial class WareHouseName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -351,7 +354,7 @@ namespace CloudVOffice.Data.Migrations
                         {
                             EmailTemplateId = 1,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(9070),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(7497),
                             Deleted = false,
                             EmailTemplateDescription = "<div role=\"document\">\r\n    <div class=\"_rp_T4 _rp_U4 ms-font-weight-regular ms-font-color-neutralDark\" style=\"display: none;\"></div>  <div autoid=\"_rp_w\" class=\"_rp_T4\" style=\"display: none;\"></div>  <div autoid=\"_rp_x\" class=\"_rp_T4\" id=\"Item.MessagePartBody\" style=\"\">\r\n        <div class=\"_rp_U4 ms-font-weight-regular ms-font-color-neutralDark rpHighlightAllClass rpHighlightBodyClass\" id=\"Item.MessageUniqueBody\" style=\"font-family: wf_segoe-ui_normal, &quot;Segoe UI&quot;, &quot;Segoe WP&quot;, Tahoma, Arial, sans-serif, serif, EmojiFont;\">\r\n            <div class=\"rps_ad57\">\r\n                <div>\r\n                    <div>\r\n                        <div style=\"margin: 0px; padding: 0px; font-family: Verdana, Helvetica, Arial, sans-serif, serif, EmojiFont; color: rgb(103, 103, 103);\">\r\n                            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"padding-top:0px; background-color:#FFFFFF; width:100%; border-collapse:separate\">\r\n                                <tbody>\r\n                                    <tr>\r\n                                        <td align=\"center\">\r\n                                            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"600\" style=\"padding:0px 24px 10px; background-color:white; border-collapse:separate; border:1px solid #e7e7e7; border-bottom:none\">\r\n                                                <tbody>\r\n                                                    <tr>\r\n                                                        <td></td>\r\n                                                    </tr>\r\n                                                    <tr>\r\n                                                        <td align=\"center\" style=\"min-width:590px\">\r\n                                                            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"padding:20px 0 0; border-collapse:separate\">\r\n                                                                <tbody>\r\n                                                                    <tr>\r\n                                                                        <td valign=\"middle\">\r\n                                                                            <h1 style=\"color:#676767; font-weight:400; margin:0px\">{%welcometitle%} </h1>\r\n                                                                        </td>\r\n                                                                        <td valign=\"middle\" align=\"right\" width=\"200px\">{%emailogo%}</td>\r\n                                                                    </tr>\r\n                                                                    <tr>\r\n                                                                        <td colspan=\"2\" style=\"text-align:center\">\r\n                                                                            <hr width=\"100%\" style=\"background-color:rgb(204,204,204); border:medium none; clear:both; display:block; font-size:0px; min-height:1px; line-height:0; margin:4px 0px 16px 0px\">\r\n                                                                        </td>\r\n                                                                    </tr>\r\n                                                                </tbody>\r\n                                                            </table>\r\n                                                        </td>\r\n                                                    </tr>\r\n                                                    <tr>\r\n                                                        <td style=\"min-width:590px\">\r\n                                                            <table border=\"0\">\r\n                                                                <tbody>\r\n                                                                    <tr>\r\n                                                                        <td>\r\n                                                                            <div style=\"margin-left:1.2rem; margin-bottom:1em\">\r\n                                                                                <h5 style=\"font-weight:400; margin-bottom:0; font-size:16px; color:#676767\"><span style=\"color:rgb(22,123,158); font-size:16px; margin-right:2px; font-weight:600\"></span>{%helloname%}</h5>\r\n                                                                                <p style=\"color:#676767; line-height:145%; margin:10px 0 0 0; font-size:16px\">{%accountcreatetionmessage%}</p>\r\n\r\n                                                                                <p style=\"color:#676767; line-height:145%; margin:10px 0 0 0; font-size:16px\">{%loginidmessage%}</p>\r\n\r\n\r\n                                                                                <p style=\"color:#676767; line-height:145%; margin:10px 0 0 0; font-size:16px\">{%aditionalmessage%}</p>\r\n                                                                                <div style=\"margin:20px 0 0 0; text-align:center\">{%setpasswordlink%}</div>\r\n                                                                                <br />\r\n                                                                                {%copylinkfrommessage%}\r\n                                                                            </div>\r\n                                                                         \r\n                                                                            <div style=\"margin-left:1.2rem; margin-bottom:1em\">\r\n                                                                                <p style=\"color:#676767; line-height:145%; margin:10px 0 0 0; font-size:16px\">\r\n                                                                                    {%emailsignature%}\r\n                                                                                </p>\r\n                                                                            </div>\r\n                                                                        </td>\r\n                                                                    </tr>\r\n                                                                </tbody>\r\n                                                            </table>\r\n                                                        </td>\r\n                                                    </tr>\r\n                                                    <tr>\r\n                                                        <td>\r\n                                                            <table border=\"0\" style=\"width:100%\">\r\n                                                                <tbody>\r\n                                                                    <tr>\r\n                                                                        <td>\r\n                                                                            <div style=\"text-align:center; border-top:1px solid rgb(230,230,230); padding-bottom:20px; padding-top:15px; line-height:125%; font-size:11px; margin:20px 20px 0 20px\">\r\n                                                                                <p style=\"color:rgb(115,115,115); font-size:10px\">© Copyright {%companyname%}, {%address%} </p>\r\n                                                                            </div>\r\n                                                                        </td>\r\n                                                                    </tr>\r\n                                                                    <tr>\r\n                                                                        <td align=\"right\">\r\n                                                                            <div style=\" margin:0 20px\">{%footerletterhera%}</div>\r\n                                                                        </td>\r\n                                                                    </tr>\r\n                                                                </tbody>\r\n                                                            </table>\r\n                                                        </td>\r\n                                                    </tr>\r\n                                                    <tr>\r\n                                                        <td>\r\n                                                            <table border=\"0\" style=\"width:100%\">\r\n                                                                <tbody>\r\n                                                                    <tr>\r\n                                                                        <td>\r\n                                                                            <div style=\"text-align:justify; border-top:1px solid rgb(230,230,230); padding-bottom:10px; padding-top:10px; line-height:125%; font-size:10px; margin:25px 20px 0 20px\">\r\n                                                                                <p style=\"color:rgb(115,115,115); margin:0; font-size:10px\">\r\n                                                                                    The information contained in this e-mail message and/or attachments to it may contain confidential\r\n                                                                                    or privileged information. If you are not the intended recipient, any dissemination,use, review, distribution,\r\n                                                                                    printing or copying of the information contained in this email message and/or attachments to it are strictly prohibited.\r\n                                                                                    If you have received this communication in error, please notify us by reply e-mail or telephone and immediately\r\n                                                                                    and permanently delete the message and any attachments. Thank you.\r\n                                                                                </p>\r\n                                                                            </div>\r\n                                                                        </td>\r\n                                                                    </tr>\r\n                                                                </tbody>\r\n                                                            </table>\r\n                                                        </td>\r\n                                                    </tr>\r\n                                                </tbody>\r\n                                            </table>\r\n                                        </td>\r\n                                    </tr>\r\n                                </tbody>\r\n                            </table>\r\n                        </div>\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n        </div> <div class=\"_rp_c5\" style=\"display: none;\"></div>\r\n    </div>  <span class=\"PersonaPaneLauncher\"><div ariatabindex=\"-1\" class=\"_pe_d _pe_62\" aria-expanded=\"false\" tabindex=\"-1\" aria-haspopup=\"false\">  <div style=\"display: none;\"></div> </div></span>\r\n</div>",
                             EmailTemplateName = "WelcomeEmail",
@@ -361,7 +364,7 @@ namespace CloudVOffice.Data.Migrations
                         {
                             EmailTemplateId = 7,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(9073),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(7500),
                             Deleted = false,
                             EmailTemplateDescription = "<div role=\"document\">\r\n    <div class=\"_rp_T4 _rp_U4 ms-font-weight-regular ms-font-color-neutralDark\" style=\"display: none;\"><br></div>  <div autoid=\"_rp_w\" class=\"_rp_T4\" style=\"display: none;\"><br></div>  <div autoid=\"_rp_x\" class=\"_rp_T4\" id=\"Item.MessagePartBody\" style=\"\">\r\n        <div class=\"_rp_U4 ms-font-weight-regular ms-font-color-neutralDark rpHighlightAllClass rpHighlightBodyClass\" id=\"Item.MessageUniqueBody\" style=\"font-family: wf_segoe-ui_normal, &quot;Segoe UI&quot;, &quot;Segoe WP&quot;, Tahoma, Arial, sans-serif, serif, EmojiFont;\">\r\n            <div class=\"rps_ad57\">\r\n                <div>\r\n                    <div>\r\n                        <div style=\"margin: 0px; padding: 0px; font-family: Verdana, Helvetica, Arial, sans-serif, serif, EmojiFont; color: rgb(103, 103, 103);\">\r\n                            <table cellpadding=\"0\" cellspacing=\"0\" style=\"padding-top:0px; background-color:#FFFFFF; width:100%; border-collapse:separate\" class=\"e-rte-table\">\r\n                                <tbody>\r\n                                    <tr>\r\n                                        <td align=\"center\" class=\"\">\r\n                                            <table cellpadding=\"0\" cellspacing=\"0\" width=\"600\" style=\"padding:0px 24px 10px; background-color:white; border-collapse:separate; border:1px solid #e7e7e7; border-bottom:none\" class=\"e-rte-table\">\r\n                                                <tbody>\r\n                                                    <tr>\r\n                                                        <td><br></td>\r\n                                                    </tr>\r\n                                                    <tr>\r\n                                                        <td align=\"center\" style=\"min-width:590px\">\r\n                                                            <table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"padding:20px 0 0; border-collapse:separate\" class=\"e-rte-table\">\r\n                                                                <tbody>\r\n                                                                    <tr>\r\n                                                                        <td valign=\"middle\" class=\"\">\r\n                                                                            <h1 style=\"color:#676767; font-weight:400; margin:0px\">Password Reset Request</h1>\r\n                                                                        </td>\r\n                                                                        <td valign=\"middle\" align=\"right\" width=\"200px\">{%emailogo%}</td>\r\n                                                                    </tr>\r\n                                                                    <tr>\r\n                                                                        <td colspan=\"2\" style=\"text-align:center\">\r\n                                                                            <hr width=\"100%\" style=\"background-color:rgb(204,204,204); border:medium none; clear:both; display:block; font-size:0px; min-height:1px; line-height:0; margin:4px 0px 16px 0px\">\r\n                                                                        </td>\r\n                                                                    </tr>\r\n                                                                </tbody>\r\n                                                            </table>\r\n                                                        </td>\r\n                                                    </tr>\r\n                                                    <tr>\r\n                                                        <td style=\"min-width:590px\">\r\n                                                            <table class=\"e-rte-table\">\r\n                                                                <tbody>\r\n                                                                    <tr>\r\n                                                                        <td class=\"\">\r\n                                                                            <div style=\"margin-left:1.2rem; margin-bottom:1em\">\r\n                                                                                <h5 style=\"font-weight:400; margin-bottom:0; font-size:16px; color:#676767\">Hello {%helloname%}</h5><div><br></div>\r\n                                                                                <p>We have received a request to reset your account password. To proceed with the password reset, please click on the link below:</p>\r\n                                                                                <div style=\"margin:20px 0 0 0; text-align:center\">{%setpasswordlink%}</div>\r\n                                                                                <br>If you did not request a password reset, Please ignore this email. Your account will&nbsp;<span style=\"background-color: transparent; text-align: inherit;\">remain secure, and no action is required.</span></div><div style=\"margin-left:1.2rem; margin-bottom:1em\"><span style=\"background-color: transparent; text-align: inherit;\"><p>For security reasons, this link will expire in 2 hours. If you&nbsp;<span style=\"background-color: transparent; text-align: inherit;\">are unable to reset your password within this time frame,&nbsp;</span><span style=\"background-color: transparent; text-align: inherit;\">please request another password reset.</span></p></span></div>\r\n                                                                         \r\n                                                                            <div style=\"margin-left:1.2rem; margin-bottom:1em\">\r\n                                                                                <p style=\"color:#676767; line-height:145%; margin:10px 0 0 0; font-size:16px\">\r\n                                                                                    {%emailsignature%}\r\n                                                                                </p>\r\n                                                                            </div>\r\n                                                                        </td>\r\n                                                                    </tr>\r\n                                                                </tbody>\r\n                                                            </table>\r\n                                                        </td>\r\n                                                    </tr>\r\n                                                    <tr>\r\n                                                        <td>\r\n                                                            <table style=\"width:100%\" class=\"e-rte-table\">\r\n                                                                <tbody>\r\n                                                                    <tr>\r\n                                                                        <td>\r\n                                                                            <div style=\"text-align:center; border-top:1px solid rgb(230,230,230); padding-bottom:20px; padding-top:15px; line-height:125%; font-size:11px; margin:20px 20px 0 20px\">\r\n                                                                                <p style=\"color:rgb(115,115,115); font-size:10px\">© Copyright {%companyname%}, {%address%} </p>\r\n                                                                            </div>\r\n                                                                        </td>\r\n                                                                    </tr>\r\n                                                                    <tr>\r\n                                                                        <td align=\"right\">\r\n                                                                            <div style=\" margin:0 20px\">{%footerletterhera%}</div>\r\n                                                                        </td>\r\n                                                                    </tr>\r\n                                                                </tbody>\r\n                                                            </table>\r\n                                                        </td>\r\n                                                    </tr>\r\n                                                    <tr>\r\n                                                        <td>\r\n                                                            <table style=\"width:100%\" class=\"e-rte-table\">\r\n                                                                <tbody>\r\n                                                                    <tr>\r\n                                                                        <td>\r\n                                                                            <div style=\"text-align:justify; border-top:1px solid rgb(230,230,230); padding-bottom:10px; padding-top:10px; line-height:125%; font-size:10px; margin:25px 20px 0 20px\">\r\n                                                                                <p style=\"color:rgb(115,115,115); margin:0; font-size:10px\">\r\n                                                                                    The information contained in this e-mail message and/or attachments to it may contain confidential\r\n                                                                                    or privileged information. If you are not the intended recipient, any dissemination,use, review, distribution,\r\n                                                                                    printing or copying of the information contained in this email message and/or attachments to it are strictly prohibited.\r\n                                                                                    If you have received this communication in error, please notify us by reply e-mail or telephone and immediately\r\n                                                                                    and permanently delete the message and any attachments. Thank you.\r\n                                                                                </p>\r\n                                                                            </div>\r\n                                                                        </td>\r\n                                                                    </tr>\r\n                                                                </tbody>\r\n                                                            </table>\r\n                                                        </td>\r\n                                                    </tr>\r\n                                                </tbody>\r\n                                            </table>\r\n                                        </td>\r\n                                    </tr>\r\n                                </tbody>\r\n                            </table>\r\n                        </div>\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n        </div> <div class=\"_rp_c5\" style=\"display: none;\"><br></div>\r\n    </div>  <span class=\"PersonaPaneLauncher\"><div ariatabindex=\"-1\" class=\"_pe_d _pe_62\" aria-expanded=\"false\" tabindex=\"-1\" aria-haspopup=\"false\">  <div style=\"display: none;\"><br></div> </div></span>\r\n</div>",
                             EmailTemplateName = "PasswordReset",
@@ -540,7 +543,7 @@ namespace CloudVOffice.Data.Migrations
                             ApplicationName = "Applications",
                             AreaName = "Application",
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(7649),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(6380),
                             Deleted = false,
                             IconClass = "icon-th-large-outline",
                             IconImageUrl = "/appstatic/images/applications.png",
@@ -553,7 +556,7 @@ namespace CloudVOffice.Data.Migrations
                             ApplicationName = "Setup",
                             AreaName = "Setup",
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(7654),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(6383),
                             Deleted = false,
                             IconClass = "icon-cogs",
                             IconImageUrl = "/appstatic/images/setup.png",
@@ -566,7 +569,7 @@ namespace CloudVOffice.Data.Migrations
                             ApplicationName = "Company Settings",
                             AreaName = "Setup",
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(7657),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(6386),
                             Deleted = false,
                             IconClass = "icon-office",
                             IsGroup = true,
@@ -579,7 +582,7 @@ namespace CloudVOffice.Data.Migrations
                             ApplicationName = "Company",
                             AreaName = "Setup",
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(7660),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(6388),
                             Deleted = false,
                             IsGroup = false,
                             Parent = 3,
@@ -591,7 +594,7 @@ namespace CloudVOffice.Data.Migrations
                             ApplicationName = "Letter Head",
                             AreaName = "Setup",
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(7663),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(6390),
                             Deleted = false,
                             IsGroup = false,
                             Parent = 3,
@@ -603,7 +606,7 @@ namespace CloudVOffice.Data.Migrations
                             ApplicationName = "User",
                             AreaName = "Setup",
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(7666),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(6393),
                             Deleted = false,
                             IconClass = "icon-users",
                             IsGroup = true,
@@ -616,7 +619,7 @@ namespace CloudVOffice.Data.Migrations
                             ApplicationName = "User List",
                             AreaName = "Setup",
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(7669),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(6395),
                             Deleted = false,
                             IsGroup = false,
                             Parent = 6,
@@ -628,7 +631,7 @@ namespace CloudVOffice.Data.Migrations
                             ApplicationName = "Email Setup",
                             AreaName = "Setup",
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(7671),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(6397),
                             Deleted = false,
                             IconClass = "icon-envelop",
                             IsGroup = true,
@@ -641,7 +644,7 @@ namespace CloudVOffice.Data.Migrations
                             ApplicationName = "Domain",
                             AreaName = "Setup",
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(7674),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(6399),
                             Deleted = false,
                             IsGroup = true,
                             Parent = 8,
@@ -653,7 +656,7 @@ namespace CloudVOffice.Data.Migrations
                             ApplicationName = "Email Account",
                             AreaName = "Setup",
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(7677),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(6402),
                             Deleted = false,
                             IsGroup = true,
                             Parent = 8,
@@ -745,7 +748,7 @@ namespace CloudVOffice.Data.Migrations
                             RoleAndApplicationWisePermissionId = 1L,
                             ApplicationId = 1,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(8308),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(6896),
                             Deleted = false,
                             RoleId = 1
                         },
@@ -754,7 +757,7 @@ namespace CloudVOffice.Data.Migrations
                             RoleAndApplicationWisePermissionId = 2L,
                             ApplicationId = 2,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(8311),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(6898),
                             Deleted = false,
                             RoleId = 1
                         },
@@ -763,7 +766,7 @@ namespace CloudVOffice.Data.Migrations
                             RoleAndApplicationWisePermissionId = 3L,
                             ApplicationId = 3,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(8314),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(6900),
                             Deleted = false,
                             RoleId = 1
                         },
@@ -772,7 +775,7 @@ namespace CloudVOffice.Data.Migrations
                             RoleAndApplicationWisePermissionId = 4L,
                             ApplicationId = 4,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(8316),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(6902),
                             Deleted = false,
                             RoleId = 1
                         },
@@ -781,7 +784,7 @@ namespace CloudVOffice.Data.Migrations
                             RoleAndApplicationWisePermissionId = 5L,
                             ApplicationId = 5,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(8318),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(6904),
                             Deleted = false,
                             RoleId = 1
                         },
@@ -790,7 +793,7 @@ namespace CloudVOffice.Data.Migrations
                             RoleAndApplicationWisePermissionId = 6L,
                             ApplicationId = 6,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(8320),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(6905),
                             Deleted = false,
                             RoleId = 1
                         },
@@ -799,7 +802,7 @@ namespace CloudVOffice.Data.Migrations
                             RoleAndApplicationWisePermissionId = 7L,
                             ApplicationId = 7,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(8322),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(6907),
                             Deleted = false,
                             RoleId = 1
                         },
@@ -808,7 +811,7 @@ namespace CloudVOffice.Data.Migrations
                             RoleAndApplicationWisePermissionId = 8L,
                             ApplicationId = 8,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(8324),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(6909),
                             Deleted = false,
                             RoleId = 1
                         },
@@ -817,7 +820,7 @@ namespace CloudVOffice.Data.Migrations
                             RoleAndApplicationWisePermissionId = 9L,
                             ApplicationId = 9,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(8326),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(6911),
                             Deleted = false,
                             RoleId = 1
                         },
@@ -826,7 +829,7 @@ namespace CloudVOffice.Data.Migrations
                             RoleAndApplicationWisePermissionId = 10L,
                             ApplicationId = 10,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(8329),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(6912),
                             Deleted = false,
                             RoleId = 1
                         });
@@ -878,7 +881,7 @@ namespace CloudVOffice.Data.Migrations
                             UserWiseViewMapperId = 1L,
                             ApplicationId = 1,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(8869),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(7304),
                             Deleted = false,
                             UserId = 1L
                         },
@@ -887,7 +890,7 @@ namespace CloudVOffice.Data.Migrations
                             UserWiseViewMapperId = 2L,
                             ApplicationId = 2,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(8873),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(7306),
                             Deleted = false,
                             UserId = 1L
                         },
@@ -896,7 +899,7 @@ namespace CloudVOffice.Data.Migrations
                             UserWiseViewMapperId = 3L,
                             ApplicationId = 3,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(8875),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(7308),
                             Deleted = false,
                             UserId = 1L
                         },
@@ -905,7 +908,7 @@ namespace CloudVOffice.Data.Migrations
                             UserWiseViewMapperId = 4L,
                             ApplicationId = 4,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(8877),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(7310),
                             Deleted = false,
                             UserId = 1L
                         },
@@ -914,7 +917,7 @@ namespace CloudVOffice.Data.Migrations
                             UserWiseViewMapperId = 5L,
                             ApplicationId = 5,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(8880),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(7312),
                             Deleted = false,
                             UserId = 1L
                         },
@@ -923,7 +926,7 @@ namespace CloudVOffice.Data.Migrations
                             UserWiseViewMapperId = 6L,
                             ApplicationId = 6,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(8882),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(7314),
                             Deleted = false,
                             UserId = 1L
                         },
@@ -932,7 +935,7 @@ namespace CloudVOffice.Data.Migrations
                             UserWiseViewMapperId = 7L,
                             ApplicationId = 7,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(8884),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(7315),
                             Deleted = false,
                             UserId = 1L
                         },
@@ -941,7 +944,7 @@ namespace CloudVOffice.Data.Migrations
                             UserWiseViewMapperId = 8L,
                             ApplicationId = 8,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(8886),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(7317),
                             Deleted = false,
                             UserId = 1L
                         },
@@ -950,7 +953,7 @@ namespace CloudVOffice.Data.Migrations
                             UserWiseViewMapperId = 9L,
                             ApplicationId = 9,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(8889),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(7366),
                             Deleted = false,
                             UserId = 1L
                         },
@@ -959,7 +962,7 @@ namespace CloudVOffice.Data.Migrations
                             UserWiseViewMapperId = 10L,
                             ApplicationId = 10,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(8891),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(7368),
                             Deleted = false,
                             UserId = 1L
                         });
@@ -1053,7 +1056,7 @@ namespace CloudVOffice.Data.Migrations
                         {
                             RoleId = 1,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 550, DateTimeKind.Local).AddTicks(7216),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(4252),
                             Deleted = false,
                             RoleName = "Administrator"
                         });
@@ -1144,7 +1147,7 @@ namespace CloudVOffice.Data.Migrations
                         {
                             UserId = 1L,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2023, 11, 24, 12, 9, 34, 551, DateTimeKind.Local).AddTicks(5622),
+                            CreatedDate = new DateTime(2023, 11, 23, 18, 51, 0, 659, DateTimeKind.Local).AddTicks(5716),
                             Deleted = false,
                             Email = "admin@appman.in",
                             FirstName = "Administrator",
@@ -1241,14 +1244,6 @@ namespace CloudVOffice.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("WareHuoseId"));
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Area")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<long>("CreatedBy")
                         .HasColumnType("bigint");
 
@@ -1261,18 +1256,8 @@ namespace CloudVOffice.Data.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<string>("GSTNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Mobile")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Telephone")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");
@@ -1281,6 +1266,7 @@ namespace CloudVOffice.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("WareHouseName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("WareHuoseId");
