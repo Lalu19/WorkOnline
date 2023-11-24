@@ -227,14 +227,14 @@ namespace CloudVOffice.Data.Persistence
              .ValueGeneratedNever();
 
 
-            //			modelBuilder.Entity<PinCodeMapping>()
-            //.Property(s => s.CreatedDate)
-            //.HasDefaultValueSql("getdate()");
+            modelBuilder.Entity<PinCodeMapping>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
 
-            //			modelBuilder.Entity<PinCodeMapping>()
-            //			 .Property(s => s.Deleted)
-            //			 .HasDefaultValue(false)
-            //			 .ValueGeneratedNever();
+            modelBuilder.Entity<PinCodeMapping>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
 
 
             #endregion

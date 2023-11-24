@@ -1238,11 +1238,11 @@ namespace CloudVOffice.Data.Migrations
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.WareHuose", b =>
                 {
-                    b.Property<long>("WareHouseId")
+                    b.Property<long>("WareHuoseId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("WareHouseId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("WareHuoseId"));
 
                     b.Property<long>("CreatedBy")
                         .HasColumnType("bigint");
@@ -1272,7 +1272,7 @@ namespace CloudVOffice.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("WareHouseId");
+                    b.HasKey("WareHuoseId");
 
                     b.ToTable("WareHouses");
                 });

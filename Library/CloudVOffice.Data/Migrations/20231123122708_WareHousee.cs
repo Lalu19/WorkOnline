@@ -15,7 +15,7 @@ namespace CloudVOffice.Data.Migrations
                 name: "WareHouses",
                 columns: table => new
                 {
-                    WareHouseId = table.Column<long>(type: "bigint", nullable: false)
+                    WareHuoseId = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     WarehouseName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PinCodeId = table.Column<long>(type: "bigint", nullable: false),
@@ -28,7 +28,7 @@ namespace CloudVOffice.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WareHouses", x => x.WareHouseId);
+                    table.PrimaryKey("PK_WareHouses", x => x.WareHuoseId);
                 });
 
             migrationBuilder.UpdateData(

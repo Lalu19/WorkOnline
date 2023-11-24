@@ -12,7 +12,7 @@ namespace CloudVOffice.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.RenameColumn(
-                name: "WareHouseId",
+                name: "WareHuoseId",
                 table: "WareHouses",
                 newName: "WareHuoseId");
 
@@ -261,7 +261,7 @@ namespace CloudVOffice.Data.Migrations
             migrationBuilder.RenameColumn(
                 name: "WareHuoseId",
                 table: "WareHouses",
-                newName: "WareHouseId");
+                newName: "WareHuoseId");
 
             migrationBuilder.UpdateData(
                 table: "Applications",
