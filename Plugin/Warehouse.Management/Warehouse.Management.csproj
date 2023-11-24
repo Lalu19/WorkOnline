@@ -21,6 +21,8 @@
 		<None Remove="Views\PinCodeMapping\PinCodeMappingView.cshtml" />
 		<None Remove="Views\PinCode\PinCodeCreate.cshtml" />
 		<None Remove="Views\PinCode\PinCodeView.cshtml" />
+		<None Remove="Views\WareHouse\WareHouseCreate.cshtml" />
+		<None Remove="Views\WareHouse\WareHouseView.cshtml" />
 	</ItemGroup>
 
 	<ItemGroup>

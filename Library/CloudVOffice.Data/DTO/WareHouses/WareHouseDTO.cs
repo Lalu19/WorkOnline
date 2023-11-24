@@ -9,8 +9,13 @@ namespace CloudVOffice.Data.DTO.WareHouses
     public class WareHouseDTO
     {
         public Int64? WareHuoseId { get; set; }
-        public String WarehouseName { get; set; }
-        public Int64 PinCodeId { get; set; }
+        public string GSTNumber { get; set; }
+        public string? Mobile { get; set; }
+        public string? WareHouseName { get; set; }
+        public string? Telephone { get; set; }
+        public string Area { get; set; }
+        public string Address { get; set; }
+
         public bool IsActive { get; set; }
         public Int64 CreatedBy { get; set; }
     }
