@@ -16,6 +16,7 @@ using CloudVOffice.Services.Users;
 using CloudVOffice.Services.WareHouse.PinCodes;
 using CloudVOffice.Services.WareHouses;
 using CloudVOffice.Services.WareHouses.PinCodes;
+using CloudVOffice.Services.ProductCategories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -46,9 +47,9 @@ namespace CloudVOffice.Web.Framework
            
             services.AddScoped<IPinCodeService, PinCodeService>();
             services.AddScoped<IPinCodeMappingService, PinCodeMappingService>();
-            services.AddScoped<IWareHouseService, WareHouseService>(); 
+            services.AddScoped<IWareHouseService, WareHouseService>();
 
-
+            services.AddScoped<ISectorService, SectorService>();
 
 
 
