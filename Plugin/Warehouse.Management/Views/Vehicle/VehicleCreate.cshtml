@@ -71,7 +71,9 @@
 								<label for="VehicleNumber" class="form-label">Vehicle Number&nbsp;<span style="color:red;"><b>*</b></span></label>
 								<input asp-for="@Model.VehicleNumber" type="text" class="form-control" autofocus="autofocus" placeholder="Vehicle Number" />
 								<span asp-validation-for="VehicleNumber"></span>
+								<div asp-validation-summary="ModelOnly" class="message-error"></div>
 							</div>
+							
 							<div class="form-group col-md-4">
 								<label for="BrandName" class="form-label">Brand Name&nbsp;<span style="color:red;"><b>*</b></span></label>
 								<input asp-for="@Model.BrandName" type="text" class="form-control" autofocus="autofocus" placeholder="Brand Name" />
@@ -117,7 +119,6 @@
 							</div>
 
 						</div>
-
 
 					</div>
 
