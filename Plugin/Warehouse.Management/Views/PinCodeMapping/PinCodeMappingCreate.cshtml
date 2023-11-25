@@ -59,7 +59,7 @@
                             <div class="form-group col-md-4">
                                 <label for="PinCodeId" class="form-label">PinCode Number</label>
                                 <ejs-multiselect id="PinCodeId" ejs-for="@Model.PinCodeId"
-                                                 allowFiltering="true" mode="Box"
+                                                 allowFiltering="true" filtering="onPinCodefiltering" mode="Box"
                                                  dataSource="@(new SelectList((IEnumerable)ViewBag.PinCodeList, "PinCodeId", "Pin").Items)"
                                                  placeholder="Select PinCodes" popupHeight="220px">
                                     <e-multiselect-fields text="Pin" value="PinCodeId"></e-multiselect-fields>
@@ -89,7 +89,7 @@
         query = (e.text !== '') ? query.where('WareHouseName', 'startswith', e.text, true) : query;
         e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.WareHouseList)), query);
     }
-    function onOrderNumberfiltering(e) {
+    function onPinCodefiltering(e) {
         var query = new ej.data.Query();
         query = (e.text !== '') ? query.where('Pin', 'startswith', e.text, true) : query;
         e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.PinCodeList)), query);
