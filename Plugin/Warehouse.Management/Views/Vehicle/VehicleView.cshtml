@@ -1,6 +1,6 @@
 ﻿@{
     Layout = "_MainAppLayout";
-    ViewData["Title"] = "Pin Code";
+    ViewData["Title"] = "Vehicle";
 }
 @addTagHelper *, Syncfusion.EJ2
 @using CloudVOffice.Core.Domain.Common;
@@ -34,17 +34,17 @@
 
                     <div class="row">
                         <div class="col-md-8">
-                            Pin Code
+                           Vehicle
                         </div>
                         <div class="col-md-4 text-right float-right">
-                            <a href="/WareHouse/PinCode/PinCodeCreate" class="btn btn-success btn-sm"><i class="icon icon-add"></i> Add </a>
+                            <a href="/WareHouse/Vehicle/VehicleCreate" class="btn btn-success btn-sm"><i class="icon icon-add"></i> Add </a>
 
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
 
-                    <ejs-grid id="GridOverview" dataSource="ViewBag.pins"
+                    <ejs-grid id="GridOverview" dataSource="ViewBag.vehicles"
                               allowFiltering="true" allowSorting="true"
                               allowExcelExport="true" allowGrouping="true"
                               allowMultiSorting="true"
@@ -61,10 +61,15 @@
                         <e-grid-columns>
 
                             <e-grid-column field="" type="checkbox" width="20" allowFiltering="false" allowSorting="false"></e-grid-column>
-                            <e-grid-column field="Pin" headerText="Pin Code" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="Lat" headerText="Latitude" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="Long" headerText="Longitude" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="IsActive" headerText="Is Active" textAlign="Left" template="#statusTemplate" width="120"></e-grid-column>
+                            <e-grid-column field="VehicleName" headerText="Vehicle Name" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="VehicleNumber" headerText="Vehicle Number" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="BrandName" headerText="Brand Name" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="ChasisNo" headerText="Chasis No" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="FuelType" headerText="Fuel Type" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="NoC" headerText="NoC" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="RC" headerText="RC" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="InsuranceDetails" headerText="Insurance Details" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="PurchaseYear" headerText="Purchase Year" textAlign="Left" width="120"></e-grid-column>
 
                             <e-grid-column headerText="Action" template="#Actions" width="100"></e-grid-column>
                         </e-grid-columns>
@@ -88,7 +93,7 @@
                 sweetAlert({
                     html: true,
                     icon: "success",
-                    title: "Pin",
+                    title: "Vehicle",
                     text: "Successfully created.",
                     type: "success"
                 });
@@ -97,16 +102,17 @@
                 sweetAlert({
                     html: true,
                     icon: "success",
-                    title: "Pin",
+                    title: "Vehicle",
                     text: "Successfully updated.",
                     type: "success"
                 });
             }
+          
             else if (message == "@((int)MessageEnum.Deleted)") {
                 sweetAlert({
                     html: true,
                     icon: "success",
-                    title: "Pin",
+                    title: "Vehicle",
                     text: "Successfully Deleted.",
                     type: "success"
                 });
@@ -124,7 +130,7 @@
                 sweetAlert({
                     html: true,
                     icon: "error",
-                    title: "Pin",
+                    title: "Vehicle",
                     text: "There is somthing going wrong.",
                     type: "error"
                 });
@@ -133,7 +139,7 @@
                 sweetAlert({
                     html: true,
                     icon: "error",
-                    title: "Pin",
+                    title: "Vehicle",
                     text: message,
                     type: "error"
                 });
@@ -156,7 +162,7 @@
             dangerMode: true,
         }).then(function (isConfirm) {
             if (isConfirm) {
-                window.location.href = "../../WareHouse/PinCode/DeletePin?PinCodeId=" + Id;
+                window.location.href = "../../WareHouse/Vehicle/DeleteVehicle?VehicleId=" + Id;
             }
         })
     }
@@ -165,9 +171,9 @@
 
 <script id="Actions" type="text/x-template">
     <div class="link">
-        <a href="../../WareHouse/PinCode/PinCodeCreate?PinCodeId=${PinCodeId}"><i class="icon-pencil3" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp;
+        <a href="../../WareHouse/Vehicle/VehicleCreate?VehicleId=${VehicleId}"><i class="icon-pencil3" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp;
 
-        <button onClick="Delete(${PinCodeId})" style="background: transparent;border: none;"><i class="icon-trash" style="font-size:22px"></i></button>   
+        <button onClick="Delete(${VehicleId})" style="background: transparent;border: none;"><i class="icon-trash" style="font-size:22px"></i></button>
     </div>
 </script>
 
@@ -208,16 +214,5 @@
     function dataBound(args) {
         this.autoFitColumns();
     }
-
-    function statusDetail(e) {
-
-        if (e.IsActive == true) {
-            return '<span class="badge badge-pill badge-success" > True </span>';
-        } else {
-            return '<span class="badge badge-pill badge-dark"> False </span>';
-        }
-
-    }
-
 
 </script>

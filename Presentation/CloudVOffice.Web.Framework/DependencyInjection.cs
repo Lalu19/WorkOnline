@@ -15,6 +15,9 @@ using CloudVOffice.Services.Roles;
 using CloudVOffice.Services.Users;
 using CloudVOffice.Services.WareHouse.PinCodes;
 using CloudVOffice.Services.WareHouses;
+using CloudVOffice.Services.WareHouses.PinCodes;
+using CloudVOffice.Services.ProductCategories;
+using CloudVOffice.Services.WareHouses.Vehicles;
 using CloudVOffice.Services.WareHouses.Employees;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -45,10 +48,14 @@ namespace CloudVOffice.Web.Framework
             services.AddScoped<ILetterHeadService, LetterHeadService>();
            
             services.AddScoped<IPinCodeService, PinCodeService>();
+            services.AddScoped<IPinCodeMappingService, PinCodeMappingService>();
+            services.AddScoped<IWareHouseService, WareHouseService>();
+            services.AddScoped<IWareHouseService, WareHouseService>(); 
+            services.AddScoped<IVehicleService, VehicleService>(); 
             services.AddScoped<IWareHouseService, WareHouseService>();
             services.AddScoped<IEmployeeService, EmployeeService>();
 
-
+            services.AddScoped<ISectorService, SectorService>();
 
 
 

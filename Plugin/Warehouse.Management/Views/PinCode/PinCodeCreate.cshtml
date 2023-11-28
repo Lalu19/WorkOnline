@@ -38,11 +38,25 @@
 		<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 
 			<div class="card">
+
+				<div class="card-header">
+
+					<div class="row">
+						<div class="col-md-8">
+							Pin Code
+						</div>
+						<div class="col-md-4 text-right float-right">
+							<a href="/WareHouse/PinCode/PinCodeView" class="btn btn-success btn-sm float-right"><i class="icon-list2"></i> List </a>
+
+						</div>
+					</div>
+				</div>
+
 				<form asp-route="WareHouse/PinCode/PinCodeCreate" method="post" autocomplete="off">
 					<div asp-ation-summary="ModelOnly" class="message-error"></div>
 
 
-					<div class="card-header"><b>Basic Info</b></div>
+					@*<div class="card-header"><b>Pin Code</b></div>*@
 					<div class="card-body">
 
 						<div class="form-row">
@@ -52,6 +66,7 @@
 								<label for="Pin" class="form-label">Pin Code&nbsp;<span style="color:red;"><b>*</b></span></label>
 								<input asp-for="@Model.Pin" type="text" class="form-control" autofocus="autofocus" placeholder="Pin"/>
 								<span asp-validation-for="Pin"></span>
+								<div asp-validation-summary="ModelOnly" class="message-error"></div>
 							</div>
 							<div class="form-group col-md-3">
 
@@ -78,7 +93,7 @@
 
 						</div>
 
-
+						
 					</div>
 
 					<div class="card-body">

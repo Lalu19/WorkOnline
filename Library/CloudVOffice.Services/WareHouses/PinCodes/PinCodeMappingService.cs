@@ -3,6 +3,7 @@ using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Data.DTO.WareHouses.PinCodes;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,12 +35,12 @@ namespace CloudVOffice.Services.WareHouses.PinCodes
 
 				if (objcheck == null)
 				{
-					foreach (var PinCodeMappingCode in pinCodeMappingDTO.PinCodeId)
+					foreach (var pinmappingid in pinCodeMappingDTO.PinCodeId)
 					{
 						PinCodeMapping pinCodeMapping = new PinCodeMapping();
 						
-						pinCodeMapping.PinCodeId = PinCodeMappingCode;
-						pinCodeMapping.WareHouseId = pinCodeMappingDTO.WareHouseId;
+						pinCodeMapping.PinCodeId = pinmappingid;
+						pinCodeMapping.WareHuoseId = pinCodeMappingDTO.WareHuoseId;
 						pinCodeMapping.CreatedBy = pinCodeMappingDTO.CreatedBy;
 						pinCodeMapping.CreatedDate = System.DateTime.Now;
 						var obj = _pinCodeMappingRepo.Insert(pinCodeMapping);
@@ -61,29 +62,26 @@ namespace CloudVOffice.Services.WareHouses.PinCodes
 		}
 		public List<PinCodeMapping> GetPinCodeMappingList()
 		{
-
-			throw new NotImplementedException();
-
-			//return _dbContext.PinCodeMappings
-			//	.Include(s => s.WareHouse)
-			//	.Include(s => s.PinCode)
-			//	.Where(x => x.Deleted == false).ToList();
+			return _dbContext.PinCodeMappings
+				.Include(s => s.WareHuose)
+				.Include(s => s.PinCode)
+				.Where(x => x.Deleted == false).ToList();
 		}
 		public MessageEnum PinCodeMappingUpdate(PinCodeMappingDTO pinCodeMappingDTO)
 		{
 			try
 			{
-				var UpdatepinCodeMapping = _dbContext.PinCodeMappings.Where(x => x.PinCodeMappingId != pinCodeMappingDTO.PinCodeMappingId && pinCodeMappingDTO.PinCodeId.Contains(x.PinCodeId) && x.WareHouseId == pinCodeMappingDTO.PinCodeMappingId && x.Deleted == false).FirstOrDefault();
+				var updatepinCodeMapping = _dbContext.PinCodeMappings.Where(x => x.PinCodeMappingId != pinCodeMappingDTO.PinCodeMappingId && pinCodeMappingDTO.PinCodeId.Contains(x.PinCodeId) && x.WareHuoseId == pinCodeMappingDTO.WareHuoseId && x.Deleted == false).FirstOrDefault();
 
-				if (UpdatepinCodeMapping == null)
+				if (updatepinCodeMapping == null)
 				{
 					var a = _dbContext.PinCodeMappings.Where(x => x.PinCodeMappingId == pinCodeMappingDTO.PinCodeMappingId).FirstOrDefault();
 					if (a != null)
 					{
-						foreach (var PinCodeMappingCode in pinCodeMappingDTO.PinCodeId)
+						foreach (var pinmappingid in pinCodeMappingDTO.PinCodeId)
 						{
-							a.WareHouseId = pinCodeMappingDTO.WareHouseId;
-							a.PinCodeId = PinCodeMappingCode;
+							a.WareHuoseId = pinCodeMappingDTO.WareHuoseId;
+							a.PinCodeId = pinmappingid;
 							
 							a.UpdatedBy = pinCodeMappingDTO.CreatedBy;
 							a.UpdatedDate = DateTime.Now;
@@ -106,33 +104,33 @@ namespace CloudVOffice.Services.WareHouses.PinCodes
 				throw;
 			}
 		}
-		public PinCodeMapping GetPinCodeMappingById(int PinCodeMappingId)
+		public PinCodeMapping GetPinCodeMappingById(Int64 PinCodeMappingId)
 		{
 			return _dbContext.PinCodeMappings.Where(x => x.PinCodeMappingId == PinCodeMappingId && x.Deleted == false).SingleOrDefault();
 		}
-		public MessageEnum PinCodeMappingDelete(int PinCodeMappingId, long DeletedBy)
-		{
-			try
-			{
-				var a = _dbContext.PinCodeMappings.Where(x => x.PinCodeMappingId == PinCodeMappingId).FirstOrDefault();
-
-				if (a != null)
-				{
-					a.Deleted = true;
-					a.UpdatedBy = DeletedBy;
-					a.UpdatedDate = DateTime.Now;
-					_dbContext.SaveChanges();
-					return MessageEnum.Deleted;
-				}
-				else
-					return MessageEnum.Invalid;
-			}
-			catch
-			{
-				throw;
-			}
-		}
 		
-	}
+        public MessageEnum PinCodeMappingDelete(Int64 PinCodeMappingId, Int64 DeletedBy)
+        {
+            try
+            {
+                var a = _dbContext.PinCodeMappings.Where(x => x.PinCodeMappingId == PinCodeMappingId).FirstOrDefault();
+
+                if (a != null)
+                {
+                    a.Deleted = true;
+                    a.UpdatedBy = DeletedBy;
+                    a.UpdatedDate = DateTime.Now;
+                    _dbContext.SaveChanges();
+                    return MessageEnum.Deleted;
+                }
+                else
+                    return MessageEnum.Invalid;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+    }
 
 }

@@ -3,10 +3,12 @@ using CloudVOffice.Core.Domain.Comunication;
 using CloudVOffice.Core.Domain.EmailTemplates;
 using CloudVOffice.Core.Domain.Logging;
 using CloudVOffice.Core.Domain.Pemission;
+using CloudVOffice.Core.Domain.ProductCategories;
 using CloudVOffice.Core.Domain.Users;
 using CloudVOffice.Core.Domain.WareHouses;
 using CloudVOffice.Core.Domain.WareHouses.Employees;
 using CloudVOffice.Core.Domain.WareHouses.PinCodes;
+using CloudVOffice.Core.Domain.WareHouses.Vehicles;
 using CloudVOffice.Data.Seeding;
 using Microsoft.EntityFrameworkCore;
 
@@ -55,14 +57,18 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<PinCode> PinCodes { get; set; }
         public virtual DbSet<WareHuose> WareHouses { get; set; }
 		public virtual DbSet<PinCodeMapping> PinCodeMappings { get; set; }
+        public virtual DbSet<Vehicle> Vehicles { get; set; }
 		public virtual DbSet<Employee> Employees { get; set; }
 
 
+        #endregion
 
-		#endregion
+        #region ProductCategories
+        public virtual DbSet<Sector> Sectors { get; set; }
+        #endregion
 
 
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
             #region Base
@@ -230,14 +236,37 @@ namespace CloudVOffice.Data.Persistence
              .ValueGeneratedNever();
 
 
-			//			modelBuilder.Entity<PinCodeMapping>()
-			//.Property(s => s.CreatedDate)
-			//.HasDefaultValueSql("getdate()");
+            modelBuilder.Entity<PinCodeMapping>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
 
-			//			modelBuilder.Entity<PinCodeMapping>()
-			//			 .Property(s => s.Deleted)
-			//			 .HasDefaultValue(false)
-			//			 .ValueGeneratedNever();
+            modelBuilder.Entity<PinCodeMapping>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
+
+
+            modelBuilder.Entity<Vehicle>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<Vehicle>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
+
+
+            #endregion
+
+            #region ProductCategories
+            modelBuilder.Entity<Sector>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<Sector>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
 
 			modelBuilder.Entity<Employee>()
 			.Property(s => s.CreatedDate)
@@ -251,6 +280,7 @@ namespace CloudVOffice.Data.Persistence
 
 
             #endregion
+
 
             modelBuilder.Seed();
         }
