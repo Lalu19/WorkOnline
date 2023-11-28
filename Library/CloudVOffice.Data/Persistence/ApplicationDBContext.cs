@@ -5,6 +5,7 @@ using CloudVOffice.Core.Domain.Logging;
 using CloudVOffice.Core.Domain.Pemission;
 using CloudVOffice.Core.Domain.Users;
 using CloudVOffice.Core.Domain.WareHouses;
+using CloudVOffice.Core.Domain.WareHouses.Employees;
 using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Data.Seeding;
 using Microsoft.EntityFrameworkCore;
@@ -54,6 +55,8 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<PinCode> PinCodes { get; set; }
         public virtual DbSet<WareHuose> WareHouses { get; set; }
 		public virtual DbSet<PinCodeMapping> PinCodeMappings { get; set; }
+		public virtual DbSet<Employee> Employees { get; set; }
+
 
 
 		#endregion
@@ -227,14 +230,24 @@ namespace CloudVOffice.Data.Persistence
              .ValueGeneratedNever();
 
 
-            //			modelBuilder.Entity<PinCodeMapping>()
-            //.Property(s => s.CreatedDate)
-            //.HasDefaultValueSql("getdate()");
+			//			modelBuilder.Entity<PinCodeMapping>()
+			//.Property(s => s.CreatedDate)
+			//.HasDefaultValueSql("getdate()");
 
-            //			modelBuilder.Entity<PinCodeMapping>()
-            //			 .Property(s => s.Deleted)
-            //			 .HasDefaultValue(false)
-            //			 .ValueGeneratedNever();
+			//			modelBuilder.Entity<PinCodeMapping>()
+			//			 .Property(s => s.Deleted)
+			//			 .HasDefaultValue(false)
+			//			 .ValueGeneratedNever();
+
+			modelBuilder.Entity<Employee>()
+			.Property(s => s.CreatedDate)
+			.HasDefaultValueSql("getdate()");
+
+			modelBuilder.Entity<Employee>()
+			 .Property(s => s.Deleted)
+			 .HasDefaultValue(false)
+			 .ValueGeneratedNever();
+
 
 
             #endregion

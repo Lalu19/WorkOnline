@@ -17,6 +17,8 @@
 		<None Remove="plugin.json" />
 		<None Remove="roles.json" />
 		<None Remove="Views\Dashboard.cshtml" />
+		<None Remove="Views\Employee\EmployeeCreate.cshtml" />
+		<None Remove="Views\Employee\EmployeeView.cshtml" />
 		<None Remove="Views\PinCode\PinCodeCreate.cshtml" />
 		<None Remove="Views\PinCode\PinCodeView.cshtml" />
 		<None Remove="Views\WareHouse\WareHouseCreate.cshtml" />

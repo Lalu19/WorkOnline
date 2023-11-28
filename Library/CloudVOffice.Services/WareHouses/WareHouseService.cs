@@ -86,7 +86,7 @@ namespace CloudVOffice.Services.WareHouses
         {
             try
             {
-                var ware = _dbContext.WareHouses.Where(w => w.WareHuoseId != wareHouseDTO.WareHuoseId && w.Deleted == false).FirstOrDefault();
+                var ware = _dbContext.WareHouses.Where(w => w.WareHuoseId != wareHouseDTO.WareHuoseId && w.WareHouseName == wareHouseDTO.WareHouseName && w.Deleted == false).FirstOrDefault();
 
                 if (ware == null)
                 {
