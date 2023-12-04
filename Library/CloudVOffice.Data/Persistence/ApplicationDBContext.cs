@@ -7,8 +7,11 @@ using CloudVOffice.Core.Domain.ProductCategories;
 using CloudVOffice.Core.Domain.Users;
 using CloudVOffice.Core.Domain.WareHouses;
 using CloudVOffice.Core.Domain.WareHouses.Employees;
+using CloudVOffice.Core.Domain.WareHouses.GST;
+using CloudVOffice.Core.Domain.WareHouses.HandlingTypes;
 using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Core.Domain.WareHouses.Vehicles;
+using CloudVOffice.Core.Domain.WareHouses.Vendors;
 using CloudVOffice.Data.Seeding;
 using Microsoft.EntityFrameworkCore;
 
@@ -59,6 +62,9 @@ namespace CloudVOffice.Data.Persistence
 		public virtual DbSet<PinCodeMapping> PinCodeMappings { get; set; }
         public virtual DbSet<Vehicle> Vehicles { get; set; }
 		public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Vendor> Vendors { get; set; }
+        public virtual DbSet<GST> GSTs { get; set; }
+        public virtual DbSet<HandlingType> HandlingTypes { get; set; }
 
 
         #endregion
@@ -278,6 +284,33 @@ namespace CloudVOffice.Data.Persistence
 			 .ValueGeneratedNever();
 
 
+            modelBuilder.Entity<Vendor>()
+           .Property(s => s.CreatedDate)
+           .HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<Vendor>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
+
+
+            modelBuilder.Entity<GST>()
+           .Property(s => s.CreatedDate)
+           .HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<GST>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
+
+            modelBuilder.Entity<HandlingType>()
+         .Property(s => s.CreatedDate)
+         .HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<HandlingType>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
 
             #endregion
 
