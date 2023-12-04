@@ -1,6 +1,6 @@
 ﻿@{
     Layout = "_MainAppLayout";
-    ViewData["Title"] = "Ware House";
+    ViewData["Title"] = "Vendor";
 }
 @addTagHelper *, Syncfusion.EJ2
 @using CloudVOffice.Core.Domain.Common;
@@ -34,17 +34,17 @@
 
                     <div class="row">
                         <div class="col-md-8">
-                            Ware House
+                            Vendor
                         </div>
                         <div class="col-md-4 text-right float-right">
-                            <a href="/WareHouse/WareHouse/WareHouseCreate" class="btn btn-success btn-sm"><i class="icon icon-add"></i> Add Warehouse</a>
+                            <a href="/WareHouse/Vendor/VendorCreate" class="btn btn-success btn-sm"><i class="icon icon-add"></i> Add Vendor</a>
 
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
 
-                    <ejs-grid id="GridOverview" dataSource="ViewBag.pins"
+                    <ejs-grid id="GridOverview" dataSource="ViewBag.vendors"
                               allowFiltering="true" allowSorting="true"
                               allowExcelExport="true" allowGrouping="true"
                               allowMultiSorting="true"
@@ -61,14 +61,19 @@
                         <e-grid-columns>
 
 
-                            <e-grid-column field="GSTNumber" headerText="GST Number" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="Mobile" headerText="Mobile" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="WareHouseName" headerText="WareHouse Name" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="Telephone" headerText="Telephone" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="Area" headerText="Area" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="VendorName" headerText="VendorName" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="CompanyName" headerText="CompanyName" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="GST" headerText="GST" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column field="Address" headerText="Address" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="IsActive" headerText="IsActive" textAlign="Left" width="120"></e-grid-column>
-
+                            <e-grid-column field="Telephone" headerText="Telephone" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="Mobile1" headerText="Mobile1" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="Mobile2" headerText="Mobile2" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="MailId" headerText="MailId" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="PocName" headerText="PocName" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="Segment" headerText="Segment" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="Category" headerText="Category" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="WarehousesAffiliated" headerText="WarehousesAffiliated" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="IsActive" headerText="Is Active" textAlign="Left" width="120"></e-grid-column>
 
                             <e-grid-column headerText="Action" template="#Actions" width="50"></e-grid-column>
                         </e-grid-columns>
@@ -92,7 +97,7 @@
                 sweetAlert({
                     html: true,
                     icon: "success",
-                    title: "WareHouse",
+                    title: "Vendor",
                     text: "Successfully created.",
                     type: "success"
                 });
@@ -101,7 +106,7 @@
                 sweetAlert({
                     html: true,
                     icon: "success",
-                    title: "WareHouse",
+                    title: "Vendor",
                     text: "Successfully updated.",
                     type: "success"
                 });
@@ -110,7 +115,7 @@
                 sweetAlert({
                     html: true,
                     icon: "success",
-                    title: "WareHouse",
+                    title: "Vendor",
                     text: "Successfully Deleted.",
                     type: "success"
                 });
@@ -119,7 +124,7 @@
                 sweetAlert({
                     html: true,
                     icon: "danger",
-                    title: "Designation",
+                    title: "Vendor",
                     text: "There is somthing going wrong.",
                     type: "danger"
                 });
@@ -128,7 +133,7 @@
                 sweetAlert({
                     html: true,
                     icon: "error",
-                    title: "WareHouse",
+                    title: "Vendor",
                     text: "There is somthing going wrong.",
                     type: "error"
                 });
@@ -137,7 +142,7 @@
                 sweetAlert({
                     html: true,
                     icon: "error",
-                    title: "WareHouse",
+                    title: "Vendor",
                     text: message,
                     type: "error"
                 });
@@ -160,7 +165,7 @@
             dangerMode: true,
         }).then(function (isConfirm) {
             if (isConfirm) {
-                window.location.href = "../../WareHouse/WareHouse/DeleteWareHouse?WareHuoseId=" + Id;
+                window.location.href = "../../WareHouse/Vendor/DeleteVendor?VendorId=" + Id;
             }
         })
     }
@@ -169,9 +174,9 @@
 
 <script id="Actions" type="text/x-template">
     <div class="link">
-        <a href="../../WareHouse/WareHouse/WareHouseCreate?WareHuoseId=${WareHuoseId}"><i class="icon-pencil3" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp;
+        <a href="../../WareHouse/Vendor/VendorCreate?VendorId=${VendorId}"><i class="icon-pencil3" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp;
 
-        <button onClick="Delete(${WareHuoseId})" style="background: transparent;border: none;"><i class="icon-trash" style="font-size:22px"></i></button>
+        <button onClick="Delete(${VendorId})" style="background: transparent;border: none;"><i class="icon-trash" style="font-size:22px"></i></button>
     </div>
 </script>
 

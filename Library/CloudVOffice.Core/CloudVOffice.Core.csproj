@@ -37,6 +37,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Configuration\" />
+	  <Folder Include="Domain\WareHouses\Items\" />
 	</ItemGroup>
 	
 

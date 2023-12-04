@@ -1,0 +1,165 @@
+﻿@model CloudVOffice.Data.DTO.WareHouses.Vendors.VendorDTO;
+@using System.Collections;
+@using Newtonsoft.Json;
+@{
+	Layout = "_MainAppLayout";
+	ViewData["Title"] = "Vendor";
+}
+@addTagHelper *, Syncfusion.EJ2
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<style>
+
+</style>
+<header class="main-heading">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+				<div class="page-icon">
+					<i class="icon-laptop_windows"></i>
+				</div>
+				<div class="page-title">
+					<h5>Ware House</h5>
+					<h6 class="sub-heading">  </h6>
+				</div>
+			</div>
+			<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+				<div class="right-actions">
+					<span class="last-login">  </span>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+
+<div class="main-content">
+	<div class="row gutters">
+		<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
+			<div class="card">
+				<form asp-route="WareHouse/Vendor/VendorCreate" method="post" autocomplete="off">
+					<div asp-ation-summary="ModelOnly" class="message-error"></div>
+
+
+					<div class="card-header"><b>Basic Info</b></div>
+					<div class="card-body">
+
+						<div class="form-row">
+							<div class="form-group col-md-3">
+								<input asp-for="@Model.VendorId" type="hidden" />
+
+								<label for="VendorName" class="form-label">VendorName&nbsp;<span style="color:red;"><b>*</b></span></label>
+								<input asp-for="@Model.VendorName" type="text" class="form-control" autofocus="autofocus" placeholder="VendorName" name="VendorName" />
+								<span asp-validation-for="VendorName"></span>
+							</div>
+							
+							<div class="form-group col-md-3">
+
+								<label for="CompanyName" class="form-label">CompanyName&nbsp;</label>
+								<input asp-for="@Model.CompanyName" type="text" class="form-control" autofocus="autofocus" placeholder="CompanyName" />
+								<span asp-validation-for="IsActive"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+
+								<label for="GST" class="form-label">GST&nbsp;</label>
+								<input asp-for="@Model.GST" type="text" class="form-control" autofocus="autofocus" placeholder="GST" />
+								<span asp-validation-for="GST"></span>
+							</div>
+							<div class="form-group col-md-3">
+
+								<label for="Address" class="form-label">Address&nbsp;</label>
+								<input asp-for="@Model.Address" type="text" class="form-control" autofocus="autofocus" placeholder="Address" />
+								<span asp-validation-for="Address"></span>
+							</div>
+						</div>
+
+						
+						<div class="form-row">
+							
+							
+							<div class="form-group col-md-3">
+
+								<label for="Telephone" class="form-label">Telephone&nbsp;</label>
+								<input asp-for="@Model.Telephone" type="text" class="form-control" autofocus="autofocus" placeholder="Telephone" />
+								<span asp-validation-for="Telephone"></span>
+							</div>
+							<div class="form-group col-md-3">
+
+								<label for="Mobile1" class="form-label">Mobile1&nbsp;</label>
+								<input asp-for="@Model.Mobile1" type="text" class="form-control" autofocus="autofocus" placeholder="Mobile1" />
+								<span asp-validation-for="Mobile1"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+
+								<label for="Mobile2" class="form-label">Mobile2&nbsp;</label>
+								<input asp-for="@Model.Mobile2" type="text" class="form-control" autofocus="autofocus" placeholder="Mobile2" />
+								<span asp-validation-for="Mobile2"></span>
+							</div>
+							<div class="form-group col-md-3">
+
+								<label for="MailId" class="form-label">MailId&nbsp;</label>
+								<input asp-for="@Model.MailId" type="text" class="form-control" autofocus="autofocus" placeholder="MailId" />
+								<span asp-validation-for="MailId"></span>
+							</div>
+
+						</div>
+						
+
+						<div class="form-row">
+							
+							
+							<div class="form-group col-md-3">
+
+								<label for="PoCName" class="form-label">PoCName&nbsp;</label>
+								<input asp-for="@Model.PoCName" type="text" class="form-control" autofocus="autofocus" placeholder="PoCName" />
+								<span asp-validation-for="PoCName"></span>
+							</div>
+							<div class="form-group col-md-3">
+
+								<label for="Segment" class="form-label">Segment&nbsp;</label>
+								<input asp-for="@Model.Segment" type="text" class="form-control" autofocus="autofocus" placeholder="Segment" />
+								<span asp-validation-for="Segment"></span>
+							</div>
+							<div class="form-group col-md-3">
+
+								<label for="Category" class="form-label">Category&nbsp;</label>
+								<input asp-for="@Model.Category" type="text" class="form-control" autofocus="autofocus" placeholder="Category" />
+								<span asp-validation-for="Category"></span>
+							</div>
+							<div class="form-group col-md-3">
+
+								<label for="WarehousesAffiliated" class="form-label">WarehousesAffiliated&nbsp;</label>
+								<input asp-for="@Model.WarehousesAffiliated" type="text" class="form-control" autofocus="autofocus" placeholder="WarehousesAffiliated" />
+								<span asp-validation-for="WarehousesAffiliated"></span>
+							</div>
+							<div class="form-group col-md-3">
+
+								<label for="IsActive" class="form-label">Is Active</label>
+								<br>
+								<input asp-for="@Model.IsActive" type="checkbox" />
+								<span asp-validation-for="IsActive"></span>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="card-body">
+
+						<div class="col-lg-2 col-md-2 col-sm-12">
+							<button type="submit" class="btn btn-primary">Save</button>
+						</div>
+					</div>
+
+				</form>
+
+			</div>
+
+
+
+		</div>
+	</div>
+
+</div>
