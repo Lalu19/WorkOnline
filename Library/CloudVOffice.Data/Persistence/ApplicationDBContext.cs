@@ -63,6 +63,10 @@ namespace CloudVOffice.Data.Persistence
 
         #region ProductCategories
         public virtual DbSet<Sector> Sectors { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<SubCategory1> SubCategories1 { get; set; }
+        public virtual DbSet<SubCategory2> SubCategories2 { get; set; }
         #endregion
 
 
@@ -266,11 +270,46 @@ namespace CloudVOffice.Data.Persistence
              .HasDefaultValue(false)
              .ValueGeneratedNever();
 
+            modelBuilder.Entity<Category>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
 
-            #endregion
+            modelBuilder.Entity<Category>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
+
+            modelBuilder.Entity<Product>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<Product>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
+
+			modelBuilder.Entity<SubCategory1>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
+
+			modelBuilder.Entity<SubCategory1>()
+			 .Property(s => s.Deleted)
+			 .HasDefaultValue(false)
+			 .ValueGeneratedNever();
+
+			modelBuilder.Entity<SubCategory2>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
+
+			modelBuilder.Entity<SubCategory2>()
+			 .Property(s => s.Deleted)
+			 .HasDefaultValue(false)
+			 .ValueGeneratedNever();
+
+			#endregion
 
 
-            modelBuilder.Seed();
+			modelBuilder.Seed();
         }
     }
 }

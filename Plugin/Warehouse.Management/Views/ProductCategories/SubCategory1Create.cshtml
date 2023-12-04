@@ -1,0 +1,91 @@
+﻿@model CloudVOffice.Data.DTO.ProductCategories.SubCategory1DTO;
+@using System.Collections;
+@using Newtonsoft.Json;
+
+@{
+    Layout = "_MainAppLayout";
+}
+@addTagHelper *, Syncfusion.EJ2
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+<header class="main-heading">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+                <div class="page-icon">
+                    <i class="icon-laptop_windows"></i>
+                </div>
+                <div class="page-title">
+                    <h5>WareHouse Dashboard</h5>
+                    <h6 class="sub-heading">Welcome to WareHouse Admin</h6>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                <div class="right-actions">
+                    <span class="last-login"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="main-content">
+    <div class="row gutters">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <div class="card">
+                <form asp-route="/WareHouse/SubCategory1/SubCategory1Create" method="post" autocomplete="off" enctype="multipart/form-data" onsubmit="prepareFormData(event)">
+
+                    <div class="card-header">
+
+                        <div class="row">
+                            <div class="col-md-10">
+                                <b>Category Create</b>
+                            </div>
+                            <div class="col-md-2 ">
+                                <a href="/WareHouse/SubCategory1/SubCategory1View" class="btn btn-primary btn-sm float-right"><i class="icon-list2"></i> List</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card-body">
+                        <div class="form-row">
+                            <input asp-for="@Model.SubCategory1Id" type="hidden" />
+
+                            <div class="form-group col-md-3">
+                                <label for="CategoryId" class="form-label">Category Name</label>
+                                <ejs-dropdownlist id="CategoryId" allowFiltering="true" ejs-for="@Model.CategoryId" filtering="onSubCategoryNamefiltering" dataSource="@(new SelectList((IEnumerable)ViewBag.categoryList, "CategoryId", "SectorName").Items)" placeholder="Select Category" popupHeight="220px">
+                                    <e-dropdownlist-fields text="CategoryName" value="CategoryId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="CategoryId"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="SubCategory1Name" class="form-label">SubCategory1 Name</label>
+                                <input asp-for="@Model.SubCategory1Name" type="text" class="form-control" autofocus="autofocus" placeholder="SubCategory1 Name" />
+                                <span asp-validation-for="SubCategory1Name"></span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-lg-2 col-md-2 col-sm-12">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function onSubCategoryNamefiltering(e) {
+        var query = new ej.data.Query();
+        query = (e.text !== '') ? query.where('SectorName', 'startswith', e.text, true) : query;
+        e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.categoryList)), query);
+    }
+</script>
+

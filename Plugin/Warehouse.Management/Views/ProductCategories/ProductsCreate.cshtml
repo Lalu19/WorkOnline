@@ -1,0 +1,125 @@
+﻿@using System.Collections;
+@using Newtonsoft.Json;
+@model CloudVOffice.Data.DTO.ProductCategories.ProductDTO;
+@{
+	Layout = "_MainAppLayout";
+	ViewData["Title"] = "Chart Of Accounts Create";
+	var productsList = new SelectList((IEnumerable)ViewBag.ParentGroup, "ParentGroupId", "ProductName");
+}
+@addTagHelper *, Syncfusion.EJ2
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<header class="main-heading">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+				<div class="page-icon">
+					<i class="icon-laptop_windows"></i>
+				</div>
+				<div class="page-title">
+					<h5>WareHouse</h5>
+					<h6 class="sub-heading">  </h6>
+				</div>
+			</div>
+			<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+				<div class="right-actions">
+					<span class="last-login">  </span>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+<div class="main-content">
+	<div class="row gutters">
+		<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
+			<div class="card">
+				<form asp-route="WareHouse/Product/ProductsCreate" method="post" autocomplete="off" enctype="multipart/form-data" onsubmit="prepareFormData(event)">
+					<div asp-action-summary="ModelOnly" class="message-error"></div>
+
+
+					<div class="card-header"><b>Basic Info</b></div>
+					<div class="card-body">
+						<div class="form-row">
+							<div class="form-group col-md-3">
+								<input asp-for="@Model.ProductId" type="hidden" />
+
+								<label for="ProductName" class="form-label">Product Name&nbsp;<span style="color:red"><b>*</b></span></label>
+								<input asp-for="@Model.ProductName" type="text" class="form-control" autofocus="autofocus" placeholder="Product Name" />
+								<span asp-validation-for="ProductName"></span>
+							</div>
+							
+							<div class="form-group col-md-3">
+
+								<label for="ParentGroupId" class="form-label">Parent Group </label>
+
+								<ejs-dropdowntree ejs-for="@Model.ParentGroupId" id="ParentGroupId" placeholder="Select Parent Group" popupHeight="200px">
+									<e-dropdowntree-fields child="ViewBag.child" dataSource="ViewBag.ParentGroup" value="ProductId" text="ProductName"></e-dropdowntree-fields>
+								</ejs-dropdowntree>
+
+								<span asp-validation-for="ParentGroupId"></span>
+								
+							</div>
+							<div class="form-group col-md-3">
+								<label for="Image" class="form-label">Icon Picture</label>
+								<input asp-for="@Model.ImageUpload" type="file" id="ImageUpload" name="ImageUpload" class="form-control" placeholder="IconPicture" accept=".png, .jpg, .jpeg" />
+								<span asp-validation-for="Image"></span>
+								@{
+									if (Model.Image != null)
+									{
+										<img src="/uploads/Category/@Model.Image" style="height:100px; width:100px" />
+										<input type="hidden" asp-for="@Model.Image">
+									}
+								}
+							</div>
+							
+						</div>
+
+					</div>
+
+					<div class="card-body">
+
+						<div class="col-lg-2 col-md-2 col-sm-12">
+							<button type="submit" class="btn btn-primary">Save</button>
+						</div>
+					</div>
+
+				</form>
+
+			</div>
+
+
+
+		</div>
+	</div>
+
+</div>
+
+<script>
+	function onParentChartOfAccountsfiltering(e) {
+		var query = new ej.data.Query();
+		query = (e.text !== '') ? query.where('ProductName', 'startswith', e.text, true) : query;
+		e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.ParentGroup)), query);
+	}
+
+</script>
+@section scripts{
+
+	<script>
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					$('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+					$('#imagePreview').hide();
+					$('#imagePreview').fadeIn(650);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+		$("#ImageUpload").change(function () {
+			readURL(this);
+		});
+	</script>
+
+}
