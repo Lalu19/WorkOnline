@@ -22,6 +22,9 @@ using CloudVOffice.Services.WareHouses.Employees;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using CloudVOffice.Services.WareHouses.Itemss;
+using CloudVOffice.Services.WareHouses.Vendors;
+using CloudVOffice.Services.WareHouses.GSTs;
+using CloudVOffice.Services.WareHouses.HandlingTypes;
 
 namespace CloudVOffice.Web.Framework
 {
@@ -57,7 +60,13 @@ namespace CloudVOffice.Web.Framework
             services.AddScoped<IEmployeeService, EmployeeService>();
 
             services.AddScoped<ISectorService, SectorService>();
-			//services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ISubCategory1Service, SubCategory1Service>();
+            services.AddScoped<ISubCategory2Service, SubCategory2Service>();
+            services.AddScoped<IVendorService, VendorService>();
+            services.AddScoped<IGSTService, GSTService>();
+            services.AddScoped<IHandlingTypeService, HandlingTypeService>();
 
 			services.AddScoped<IItemService, ItemService>();
 

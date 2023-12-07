@@ -376,6 +376,10 @@ namespace CloudVOffice.Data.Persistence
 			 .HasDefaultValue(false)
 			 .ValueGeneratedNever();
 
+			modelBuilder.Entity<SubCategory2>()
+			 .Property(s => s.Deleted)
+			 .HasDefaultValue(false)
+			 .ValueGeneratedNever();
 
 			#endregion
 
