@@ -68,16 +68,6 @@ namespace CloudVOffice.Web.Framework
             services.AddScoped<IHandlingTypeService, HandlingTypeService>();
 
 
-
-
-
-
-
-
-
-
-
-
             return services;
 
         }

@@ -13,22 +13,31 @@ using System.Threading.Tasks;
 using CloudVOffice.Services.WareHouses.GSTs;
 using CloudVOffice.Data.DTO.WareHouses.GSTs;
 using CloudVOffice.Core.Domain.WareHouses.GST;
+using CloudVOffice.Data.Persistence;
+using CloudVOffice.Services.WareHouses.Employees;
+using CloudVOffice.Services.WareHouses;
+using Microsoft.EntityFrameworkCore;
 
 namespace Warehouse.Management.Controllers
 {
     [Area(AreaNames.WareHouse)]
     public class GSTController : BasePluginController
     {
-            private readonly IGSTService _gstService;
-            public GSTController(IGSTService gstService)
+        private readonly IGSTService _gstService;
+		
+		
+
+		public GSTController(IGSTService gstService)
             {
                 _gstService = gstService;
-            }
+			
+			}
             [HttpGet]
             public IActionResult GSTCreate(Int64? GSTId)
             {
+			   
 
-                GSTDTO gstDTO = new GSTDTO();
+			GSTDTO gstDTO = new GSTDTO();
                 if (GSTId != null)
                 {
 
@@ -87,8 +96,8 @@ namespace Warehouse.Management.Controllers
                         }
                     }
                 }
-
-                return View("~/Plugins/Warehouse.Management/Views/GST/GSTCreate.cshtml", gstDTO);
+			
+			return View("~/Plugins/Warehouse.Management/Views/GST/GSTCreate.cshtml", gstDTO);
 
             }
 
