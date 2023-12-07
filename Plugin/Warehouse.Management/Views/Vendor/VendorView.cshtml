@@ -1,9 +1,9 @@
-﻿@{
+﻿@using CloudVOffice.Core.Domain.Common;
+@{
     Layout = "_MainAppLayout";
     ViewData["Title"] = "Vendor";
 }
 @addTagHelper *, Syncfusion.EJ2
-@using CloudVOffice.Core.Domain.Common;
 <header class="main-heading">
     <div class="container-fluid">
         <div class="row">
@@ -37,7 +37,7 @@
                             Vendor
                         </div>
                         <div class="col-md-4 text-right float-right">
-                            <a href="/WareHouse/Vendor/VendorCreate" class="btn btn-success btn-sm"><i class="icon icon-add"></i> Add Vendor</a>
+                            <a href="/WareHouse/Vendor/VendorCreate" class="btn btn-success btn-sm"><i class="icon icon-add"></i> Add </a>
 
                         </div>
                     </div>
@@ -60,22 +60,23 @@
                         <e-grid-selectionsettings persistSelection="true" type="Multiple" checkboxOnly="true"></e-grid-selectionsettings>
                         <e-grid-columns>
 
+                            <e-grid-column field="" type="checkbox" width="20" allowFiltering="false" allowSorting="false"></e-grid-column>
 
-                            <e-grid-column field="VendorName" headerText="VendorName" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="CompanyName" headerText="CompanyName" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="GST" headerText="GST" textAlign="Left" width="120"></e-grid-column>
+                             <e-grid-column field="SectorName" headerText="Sector Name" textAlign="Left" width="150"></e-grid-column>
+                            <e-grid-column field="CategoryName" headerText="Category Name" textAlign="Left" width="150"></e-grid-column>
+                            <e-grid-column field="WareHouseName" headerText="WareHouse Name" textAlign="Left" width="150"></e-grid-column>
+                            <e-grid-column field="VendorName" headerText="Vendor Name" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="CompanyName" headerText="Company Name" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column field="Address" headerText="Address" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column field="Telephone" headerText="Telephone" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column field="Mobile1" headerText="Mobile1" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column field="Mobile2" headerText="Mobile2" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column field="MailId" headerText="MailId" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="PocName" headerText="PocName" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="Segment" headerText="Segment" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="Category" headerText="Category" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="WarehousesAffiliated" headerText="WarehousesAffiliated" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="IsActive" headerText="Is Active" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="PoCName" headerText="PoCName" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="GST" headerText="GST" textAlign="Left" width="150"></e-grid-column>
+                            <e-grid-column field="IsActive" headerText="Is Active" textAlign="Left" template="#statusTemplate" width="120"></e-grid-column>
 
-                            <e-grid-column headerText="Action" template="#Actions" width="50"></e-grid-column>
+                            <e-grid-column headerText="Action" template="#Actions" width="100"></e-grid-column>
                         </e-grid-columns>
                     </ejs-grid>
 
@@ -165,7 +166,7 @@
             dangerMode: true,
         }).then(function (isConfirm) {
             if (isConfirm) {
-                window.location.href = "../../WareHouse/Vendor/DeleteVendor?VendorId=" + Id;
+                window.location.href = "/WareHouse/Vendor/DeleteVendor?VendorId=" + Id;
             }
         })
     }
@@ -174,7 +175,7 @@
 
 <script id="Actions" type="text/x-template">
     <div class="link">
-        <a href="../../WareHouse/Vendor/VendorCreate?VendorId=${VendorId}"><i class="icon-pencil3" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp;
+        <a href="/WareHouse/Vendor/VendorCreate?VendorId=${VendorId}"><i class="icon-pencil3" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp;
 
         <button onClick="Delete(${VendorId})" style="background: transparent;border: none;"><i class="icon-trash" style="font-size:22px"></i></button>
     </div>
@@ -217,5 +218,16 @@
     function dataBound(args) {
         this.autoFitColumns();
     }
+
+    function statusDetail(e) {
+
+        if (e.IsActive == true) {
+            return '<span class="badge badge-pill badge-success" > True </span>';
+        } else {
+            return '<span class="badge badge-pill badge-dark"> False </span>';
+        }
+
+    }
+
 
 </script>
