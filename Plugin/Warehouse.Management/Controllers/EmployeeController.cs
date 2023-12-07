@@ -12,6 +12,7 @@ using CloudVOffice.Data.Persistence;
 using CloudVOffice.Services.WareHouse.PinCodes;
 using CloudVOffice.Services.WareHouses;
 using CloudVOffice.Services.WareHouses.Employees;
+using CloudVOffice.Services.WareHouses.Vehicles;
 using CloudVOffice.Web.Framework;
 using CloudVOffice.Web.Framework.Controllers;
 using Microsoft.AspNetCore.Mvc;
@@ -24,18 +25,20 @@ namespace Warehouse.Management.Controllers
 		private readonly IEmployeeService _employeeService;
 		private readonly IWareHouseService _wareHouseService;
 		private readonly ApplicationDBContext _dbContext;
-		public EmployeeController(IEmployeeService employeeService, ApplicationDBContext dbContext, IWareHouseService wareHouseService)
+		private readonly IVehicleService _vehicleService;
+		public EmployeeController(IEmployeeService employeeService, ApplicationDBContext dbContext, IWareHouseService wareHouseService, IVehicleService vehicleService)
 		{
 			_employeeService = employeeService;
 			_dbContext = dbContext;
 			_wareHouseService = wareHouseService;
+			_vehicleService = vehicleService;
 		}
 
 		[HttpGet]
 		public IActionResult EmployeeCreate(int? employeeId)
 		{
 			ViewBag.WareHouses = _wareHouseService.GetWareHouseList();
-			
+			ViewBag.Vehicles = _vehicleService.GetVehicleList();
 
 
             EmployeeDTO employeeDTO = new EmployeeDTO();
@@ -104,6 +107,8 @@ namespace Warehouse.Management.Controllers
 					}
 				}
 			}
+            ViewBag.WareHouses = _wareHouseService.GetWareHouseList();
+            ViewBag.Vehicles = _vehicleService.GetVehicleList();
             ViewBag.Employees = _employeeService.GetEmployees();
             return View("~/Plugins/Warehouse.Management/Views/Employee/EmployeeView.cshtml", employeeDTO);
 		}

@@ -1,0 +1,445 @@
+﻿@model CloudVOffice.Data.DTO.WareHouses.Items.ItemDTO;
+@if (Model != null && Model.ItemId.HasValue)
+{
+	<!-- Display the ItemId if available -->
+	<p>ItemId: @Model.ItemId</p>
+}
+
+@using System.Collections;
+@using Newtonsoft.Json;
+@{
+	Layout = "_MainAppLayout";
+	ViewData["Title"] = "Item";
+}
+@addTagHelper *, Syncfusion.EJ2
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<style>
+
+</style>
+<header class="main-heading">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+				<div class="page-icon">
+					<i class="icon-laptop_windows"></i>
+				</div>
+				<div class="page-title">
+					<h5>Ware House</h5>
+					<h6 class="sub-heading">  </h6>
+				</div>
+			</div>
+			<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+				<div class="right-actions">
+					<span class="last-login">  </span>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+
+<div class="main-content">
+	<div class="row gutters">
+		<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
+			<div class="card">
+
+				<div class="card-header">
+
+					<div class="row">
+						<div class="col-md-8">
+							Item
+						</div>
+						<div class="col-md-4 text-right float-right">
+							<a href="/WareHouse/Item/ItemView" class="btn btn-success btn-sm float-right"><i class="icon-list2"></i> List </a>
+
+						</div>
+					</div>
+				</div>
+
+				<form asp-route="WareHouse/Item/ItemCreate" method="post" autocomplete="off" enctype="multipart/form-data" onsubmit="prepareFormData(event)">
+					<div asp-action-summary="ModelOnly" class="message-error"></div>
+
+
+					@*<div class="card-header"><b>Pin Code</b></div>*@
+					<div class="card-body">
+
+						<div class="form-row">
+							<div class="form-group col-md-3">
+								<input asp-for="@Model.ItemId" type="hidden" />
+							</div>
+						</div>
+						
+
+						<div class="form-row">
+							<div class="form-group col-md-3">
+
+								<label for="ItemName" class="form-label">Item Name&nbsp;<span style="color:red;"><b>*</b></span></label>
+								<input asp-for="@Model.ItemName" type="text" class="form-control" autofocus="autofocus" placeholder="Item Name" />
+								<span asp-validation-for="ItemName"></span>
+								<div asp-validation-summary="ModelOnly" class="message-error"></div>
+							</div>
+
+							<div class="form-group col-md-3">
+
+								<label for="CompanyName" class="form-label">Company Name &nbsp;</label>
+								<input asp-for="@Model.CompanyName" type="text" class="form-control" autofocus="autofocus" placeholder="Company Name" />
+								<span asp-validation-for="CompanyName"></span>
+							</div>
+
+
+							<div class="form-group col-md-3">
+
+								<label for="BrandName" class="form-label">Brand Name &nbsp;</label>
+								<input asp-for="@Model.BrandName" type="text" class="form-control" autofocus="autofocus" placeholder="Brand Name" />
+								<span asp-validation-for="BrandName"></span>
+							</div>
+
+						</div>
+
+						<div class="form-row">
+							<div class="form-group col-md-3">
+
+								<label for="UnitOfMeasurement" class="form-label">Unit Of Measurement&nbsp;</label>
+								<input asp-for="@Model.UnitOfMeasurement" type="text" class="form-control" autofocus="autofocus" placeholder="Unit Of Measurement" />
+								<span asp-validation-for="UnitOfMeasurement"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+
+								<label for="CaseWeight" class="form-label">Case Weight &nbsp;</label>
+								<input asp-for="@Model.CaseWeight" type="text" class="form-control" autofocus="autofocus" placeholder="Case Weight" />
+								<span asp-validation-for="CaseWeight"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+
+								<label for="UnitPerCase" class="form-label">Unit Per Case&nbsp;</label>
+								<input asp-for="@Model.UnitPerCase" type="number" class="form-control" autofocus="autofocus" placeholder="Unit PerCase" />
+								<span asp-validation-for="UnitPerCase"></span>
+							</div>							
+
+						</div>
+
+						<div class="form-row">
+							<div class="form-group col-md-3">
+
+								<label for="ManufactureDate" class="form-label">Manufacture Date&nbsp;</label>
+								<input asp-for="@Model.ManufactureDate" type="date" class="form-control" autofocus="autofocus" placeholder="Manufacture Date" />
+								<span asp-validation-for="ManufactureDate"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+
+								<label for="ExpiryDate" class="form-label">Expiry Date&nbsp;</label>
+								<input asp-for="@Model.ExpiryDate" type="date" class="form-control" autofocus="autofocus" placeholder="Expiry Date" />
+								<span asp-validation-for="ExpiryDate"></span>
+							</div>
+
+							@*<div class="form-group col-md-3">
+
+								<label for="Barcode" class="form-label">Barcode &nbsp;</label>
+								<input asp-for="@Model.Barcode" type="text" class="form-control" autofocus="autofocus" placeholder="Barcode" />
+								<span asp-validation-for="Barcode"></span>
+							</div>*@
+
+							<div class="form-group col-md-3">
+
+								<label for="HandlingType" class="form-label">Handling Type &nbsp;</label>
+								<input asp-for="@Model.HandlingType" type="text" class="form-control" autofocus="autofocus" placeholder="Handling Type" />
+								<span asp-validation-for="HandlingType"></span>
+							</div>
+
+							
+
+						</div>
+
+
+						<div class="form-row">
+
+							<div class="form-group col-md-3">
+
+								<label for="MRP" class="form-label">MRP &nbsp;</label>
+								<input asp-for="@Model.MRP" type="number" class="form-control" autofocus="autofocus" placeholder="MRP" />
+								<span asp-validation-for="MRP"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+
+								<label for="PurchaseCost" class="form-label">Purchase Cost &nbsp;</label>
+								<input asp-for="@Model.PurchaseCost" type="number" class="form-control" autofocus="autofocus" placeholder="Purchase Cost" />
+								<span asp-validation-for="PurchaseCost"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+
+								<label for="SalesCost" class="form-label">Sales Cost &nbsp;</label>
+								<input asp-for="@Model.SalesCost" type="number" class="form-control" autofocus="autofocus" placeholder="Sales Cost" />
+								<span asp-validation-for="SalesCost"></span>
+							</div>
+
+						</div>
+
+						<div class="form-row">
+
+							<div class="form-group col-md-3">
+
+								<label for="CGST" class="form-label">CGST &nbsp;</label>
+								<input asp-for="@Model.CGST" type="number" class="form-control" autofocus="autofocus" placeholder="CGST" />
+								<span asp-validation-for="CGST"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+
+								<label for="SGST" class="form-label">SGST &nbsp;</label>
+								<input asp-for="@Model.SGST" type="number" class="form-control" autofocus="autofocus" placeholder="SGST" />
+								<span asp-validation-for="SGST"></span>
+							</div>
+
+							
+
+						</div>
+
+
+
+						<div class="form-row">
+
+							@*<div class="form-group col-md-3">
+								<label for="Images" class="form-label">Images</label>
+								<input asp-for="@Model.ImagesUp" type="file" id="ImagesUp" class="form-control" autofocus="autofocus" placeholder="Upload Image" />
+								<span asp-validation-for="Images"></span>
+								@{
+									if (Model.Images != null)
+									{
+										<img src="/uploads/setup/@Model.Images" style="height:100px; width:100px" />
+										<input type="hidden" asp-for="@Model.Images">
+									}
+								}
+							</div>*@
+
+							<div class="form-group col-md-3">
+								<label for="Thumbnail" class="form-label">Thumbnail</label>
+								<input asp-for="@Model.ThumbnailUp" type="file" id="ThumbnailUp" class="form-control" autofocus="autofocus" placeholder="Upload Image" />
+								<span asp-validation-for="Thumbnail"></span>
+								@{
+									if (Model.Thumbnail != null)
+									{
+										<img src="/uploads/setup/@Model.Thumbnail" style="height:100px; width:100px" />
+										<input type="hidden" asp-for="@Model.Thumbnail" value="@Model.Thumbnail">
+									}
+								}
+							</div>
+
+
+							<div class="form-group col-md-3">
+								<label for="Images" class="form-label">Images</label>
+								<input asp-for="@Model.ImagesUp" type="file" id="ImagesUp" class="form-control" multiple />
+								<span asp-validation-for="Images"></span>
+
+								@if (Model.Images != null && Model.Images.Count > 0)
+								{
+									for (int i = 0; i < Model.Images.Count; i++)
+									{
+										<img src="/uploads/setup/@Model.Images[i]" style="height:100px; width:100px" />
+										<input type="hidden" name="Images" value="@Model.Images[i]" />
+									}
+								}
+							</div>
+
+
+							<div class="form-group col-md-3">
+								<label for="Barcode" class="form-label">Barcode &nbsp;</label>
+								<input asp-for="@Model.Barcode" type="text" class="form-control" autofocus="autofocus" placeholder="Barcode" readonly />
+								<span asp-validation-for="Barcode"></span>
+
+								@if (!string.IsNullOrEmpty(Model.Barcode))
+								{
+									<!-- Display the barcode image -->
+									<img src="data:image/png;base64,@(Model.Barcode)" alt="Barcode Image" />
+								}
+							</div>
+
+
+						</div>
+
+						<div class="form-row">
+							<div class="form-group col-md-3">
+
+								<label for="BarCodeNotAvailable" class="form-label">BarCode Not Available</label>
+								<br>
+								<input asp-for="@Model.BarCodeNotAvailable" type="checkbox" />
+								<span asp-validation-for="BarCodeNotAvailable"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+
+								<label for="IsActive" class="form-label">Is Active</label>
+								<br>
+								<input asp-for="@Model.IsActive" type="checkbox" />
+								<span asp-validation-for="IsActive"></span>
+							</div>
+
+						</div>
+
+
+						<br /><br />
+
+						<div class="form-row">
+							<div class="form-group col-md-3">
+								<button id="saveButton" type="submit" name="btnSave" value="btnSave" class="btn btn-primary">Save</button>
+							</div>
+
+							<div class="form-group col-md-3">
+								@if (Model != null && Model.ItemId.HasValue)
+								{
+									<!-- Display the ItemId if available -->
+									<p>ItemId: @Model.ItemId</p>
+
+									<!-- Set the value of the button to ItemId if available -->
+									<button id="generateBarcodeButton" type="submit" class="btn btn-secondary" value="@Model.ItemId" name="btnGenerateBarcode" style="margin-top: 5px;">Generate BarCode</button>
+								}
+								else
+								{
+									<!-- Default value for the button if ItemId is not available -->
+									<button id="generateBarcodeButton" type="submit" class="btn btn-secondary" value="btnGenerateBarcode" name="btnGenerateBarcode" style="margin-top: 5px;">Generate BarCode</button>
+								}
+							</div>
+						</div>
+
+
+
+
+
+
+
+
+					</div>
+
+					@*<div class="card-body">
+
+						<div class="col-lg-2 col-md-2 col-sm-12">
+							
+							<button id="saveButton" type="submit" name="btnSave" value="btnSave" class="btn btn-primary">Save</button>
+
+
+							@if (Model != null && Model.ItemId.HasValue)
+							{
+								<!-- Display the ItemId if available -->
+								<p>ItemId: @Model.ItemId</p>
+
+								<!-- Set the value of the button to ItemId if available -->
+								<button id="generateBarcodeButton" type="submit" class="btn btn-secondary" value="@Model.ItemId" name="btnGenerateBarcode">Generate BarCode</button>
+							}
+							else
+							{
+								<!-- Default value for the button if ItemId is not available -->
+								<button id="generateBarcodeButton" type="submit" class="btn btn-secondary" value="btnGenerateBarcode" name="btnGenerateBarcode">Generate BarCode</button>
+							}
+						</div>
+
+
+					</div>*@
+
+					@*<div class="card-body">
+						<div class="col-lg-2 col-md-2 col-sm-12">
+							<button id="saveButton" type="submit" class="btn btn-primary">Save</button>
+							
+						</div>
+					</div>*@
+
+				</form>
+
+			</div>
+
+
+
+		</div>
+	</div>
+
+</div>
+
+
+@section scripts{
+	@*<script>
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					$('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+					$('#imagePreview').hide();
+					$('#imagePreview').fadeIn(650);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+		$("#ImagesUp").change(function () {
+			readURL(this);
+		
+			});
+		});
+	</script>*@
+
+	<script>
+		function readThumbnailURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					$('#thumbnailPreview').attr('src', e.target.result);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+
+		function readImagesURL(input) {
+			if (input.files && input.files.length > 0) {
+				for (var i = 0; i < input.files.length; i++) {
+					var reader = new FileReader();
+					reader.onload = function (e) {
+						// Create an img element for each image and append it to a container
+						var img = $('<img>').attr('src', e.target.result).css({ 'height': '100px', 'width': '100px' });
+						$('#imagesPreview').append(img);
+					}
+					reader.readAsDataURL(input.files[i]);
+				}
+			}
+		}
+
+		$("#ThumbnailUp").change(function () {
+			readThumbnailURL(this);
+		});
+
+		$("#ImagesUp").change(function () {
+			readImagesURL(this);
+		});
+
+
+		$(document).ready(function () {
+			// Function to update the button text and visibility based on the checkbox state
+			function updateButtonsVisibility() {
+				var checkBox = $('#BarCodeNotAvailable');
+				var saveButton = $('#saveButton');
+				var generateBarcodeButton = $('#generateBarcodeButton');
+
+				if (checkBox.prop('checked')) {
+					saveButton.text('Save');
+					generateBarcodeButton.show();
+				} else {
+					saveButton.text('Save');
+					generateBarcodeButton.hide();
+				}
+			}
+
+			// Attach change event handler to the checkbox
+			$('#BarCodeNotAvailable').change(function () {
+				updateButtonsVisibility();
+			});
+
+			// Initial call to set the initial button text and visibility
+			updateButtonsVisibility();
+		});
+
+	</script>
+
+
+}
