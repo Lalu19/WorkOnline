@@ -21,6 +21,7 @@ using CloudVOffice.Services.WareHouses.Vehicles;
 using CloudVOffice.Services.WareHouses.Employees;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using CloudVOffice.Services.WareHouses.Itemss;
 using CloudVOffice.Services.WareHouses.Vendors;
 using CloudVOffice.Services.WareHouses.GSTs;
 using CloudVOffice.Services.WareHouses.HandlingTypes;
@@ -52,8 +53,8 @@ namespace CloudVOffice.Web.Framework
            
             services.AddScoped<IPinCodeService, PinCodeService>();
             services.AddScoped<IPinCodeMappingService, PinCodeMappingService>();
-            services.AddScoped<IWareHouseService, WareHouseService>();
-            services.AddScoped<IWareHouseService, WareHouseService>(); 
+            //services.AddScoped<IWareHouseService, WareHouseService>();
+            //services.AddScoped<IWareHouseService, WareHouseService>(); 
             services.AddScoped<IVehicleService, VehicleService>(); 
             services.AddScoped<IWareHouseService, WareHouseService>();
             services.AddScoped<IEmployeeService, EmployeeService>();
@@ -67,8 +68,19 @@ namespace CloudVOffice.Web.Framework
             services.AddScoped<IGSTService, GSTService>();
             services.AddScoped<IHandlingTypeService, HandlingTypeService>();
 
+			services.AddScoped<IItemService, ItemService>();
 
-            return services;
+
+
+
+
+
+
+
+
+
+
+			return services;
 
         }
     }

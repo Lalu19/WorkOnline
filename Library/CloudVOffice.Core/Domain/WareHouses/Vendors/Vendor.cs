@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CloudVOffice.Core.Domain.WareHouses.Vendors
 {
-    public class Vendor: IAuditEntity, ISoftDeletedEntity
+	public class Vendor : IAuditEntity, ISoftDeletedEntity
     {
         public Int64 VendorId { get; set; }
 		public int SectorId { get; set; }
