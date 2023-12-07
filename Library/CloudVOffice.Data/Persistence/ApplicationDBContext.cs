@@ -75,6 +75,8 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<SubCategory1> SubCategories1 { get; set; }
         public virtual DbSet<SubCategory2> SubCategories2 { get; set; }
+        public virtual DbSet<VendorOnboarding> VendorOnboardings { get; set; }
+
         #endregion
 
 
@@ -340,9 +342,10 @@ namespace CloudVOffice.Data.Persistence
 			modelBuilder.Entity<SubCategory1>()
 			 .Property(s => s.Deleted)
 			 .HasDefaultValue(false)
-			 .ValueGeneratedNever();
+			 .ValueGeneratedNever(); 
 
-			modelBuilder.Entity<SubCategory2>()
+
+            modelBuilder.Entity<SubCategory2>()
 .Property(s => s.CreatedDate)
 .HasDefaultValueSql("getdate()");
 
@@ -351,10 +354,19 @@ namespace CloudVOffice.Data.Persistence
 			 .HasDefaultValue(false)
 			 .ValueGeneratedNever();
 
-			#endregion
+            modelBuilder.Entity<VendorOnboarding>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<VendorOnboarding>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
+
+            #endregion
 
 
-			modelBuilder.Seed();
+            modelBuilder.Seed();
         }
     }
 }
