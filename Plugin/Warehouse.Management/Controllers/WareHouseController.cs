@@ -72,7 +72,7 @@ namespace Warehouse.Management.Controllers
                     {
 
                         TempData["msg"] = MessageEnum.Duplicate;
-                        ModelState.AddModelError("", "WareHouse Already Exists");
+                        ModelState.AddModelError("", "Item Already Exists");
                     }
                     else
                     {

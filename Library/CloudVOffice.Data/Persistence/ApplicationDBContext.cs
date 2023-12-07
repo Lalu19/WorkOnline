@@ -9,6 +9,8 @@ using CloudVOffice.Core.Domain.WareHouses;
 using CloudVOffice.Core.Domain.WareHouses.Employees;
 using CloudVOffice.Core.Domain.WareHouses.GST;
 using CloudVOffice.Core.Domain.WareHouses.HandlingTypes;
+using CloudVOffice.Core.Domain.WareHouses.Items;
+using CloudVOffice.Core.Domain.WareHouses.MOMs;
 using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Core.Domain.WareHouses.Vehicles;
 using CloudVOffice.Core.Domain.WareHouses.Vendors;
@@ -61,12 +63,11 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<WareHuose> WareHouses { get; set; }
 		public virtual DbSet<PinCodeMapping> PinCodeMappings { get; set; }
         public virtual DbSet<Vehicle> Vehicles { get; set; }
-		public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<Vendor> Vendors { get; set; }
-        public virtual DbSet<GST> GSTs { get; set; }
-        public virtual DbSet<HandlingType> HandlingTypes { get; set; }
-
-
+		public virtual DbSet<Employee> Employees { get; set; }        
+		public virtual DbSet<Item> Items { get; set; }
+		public virtual DbSet<Vendor> Vendors { get; set; }
+		public virtual DbSet<MOM> MOMs { get; set; }
+		
         #endregion
 
         #region ProductCategories
@@ -78,9 +79,15 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<VendorOnboarding> VendorOnboardings { get; set; }
 
         #endregion
+		public virtual DbSet<SubCategory1> SubCategories1 { get; set; }
+		public virtual DbSet<SubCategory2> SubCategories2 { get; set; }
+
+		public virtual DbSet<GST> GSTs { get; set; }
+		public virtual DbSet<HandlingType> HandlingTypes { get; set; }
+		#endregion
 
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
             #region Base
@@ -289,7 +296,8 @@ namespace CloudVOffice.Data.Persistence
              .HasDefaultValue(false)
              .ValueGeneratedNever();
 
-			modelBuilder.Entity<Employee>()
+
+            modelBuilder.Entity<Employee>()
 			.Property(s => s.CreatedDate)
 			.HasDefaultValueSql("getdate()");
 
@@ -299,38 +307,31 @@ namespace CloudVOffice.Data.Persistence
 			 .ValueGeneratedNever();
 
 
-            modelBuilder.Entity<Vendor>()
-           .Property(s => s.CreatedDate)
-           .HasDefaultValueSql("getdate()");
+            modelBuilder.Entity<Item>()
+            .Property(s => s.CreatedDate)
+            .HasDefaultValueSql("getdate()");
 
-            modelBuilder.Entity<Vendor>()
+            modelBuilder.Entity<Item>()
              .Property(s => s.Deleted)
              .HasDefaultValue(false)
              .ValueGeneratedNever();
 
 
-            modelBuilder.Entity<GST>()
-           .Property(s => s.CreatedDate)
-           .HasDefaultValueSql("getdate()");
-
-            modelBuilder.Entity<GST>()
-             .Property(s => s.Deleted)
-             .HasDefaultValue(false)
-             .ValueGeneratedNever();
-
-            modelBuilder.Entity<HandlingType>()
-         .Property(s => s.CreatedDate)
-         .HasDefaultValueSql("getdate()");
-
-            modelBuilder.Entity<HandlingType>()
-             .Property(s => s.Deleted)
-             .HasDefaultValue(false)
-             .ValueGeneratedNever();
             modelBuilder.Entity<Product>()
 .Property(s => s.CreatedDate)
 .HasDefaultValueSql("getdate()");
 
             modelBuilder.Entity<Product>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
+
+
+            modelBuilder.Entity<Vendor>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<Vendor>()
              .Property(s => s.Deleted)
              .HasDefaultValue(false)
              .ValueGeneratedNever();
@@ -342,12 +343,47 @@ namespace CloudVOffice.Data.Persistence
 			modelBuilder.Entity<SubCategory1>()
 			 .Property(s => s.Deleted)
 			 .HasDefaultValue(false)
+			 .ValueGeneratedNever();
+
+			modelBuilder.Entity<SubCategory2>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
+
+			modelBuilder.Entity<SubCategory2>()
+			 .Property(s => s.Deleted)
+			 .HasDefaultValue(false)
+			 .ValueGeneratedNever();
+
+			modelBuilder.Entity<GST>()
+		   .Property(s => s.CreatedDate)
+		   .HasDefaultValueSql("getdate()");
+
+			modelBuilder.Entity<GST>()
+			 .Property(s => s.Deleted)
+			 .HasDefaultValue(false)
+			 .ValueGeneratedNever();
+
+			modelBuilder.Entity<HandlingType>()
+		 .Property(s => s.CreatedDate)
+		 .HasDefaultValueSql("getdate()");
+
+			modelBuilder.Entity<HandlingType>()
+			 .Property(s => s.Deleted)
+			 .HasDefaultValue(false)
 			 .ValueGeneratedNever(); 
 
 
             modelBuilder.Entity<SubCategory2>()
 .Property(s => s.CreatedDate)
 .HasDefaultValueSql("getdate()");
+			modelBuilder.Entity<MOM>()
+		 .Property(s => s.CreatedDate)
+		 .HasDefaultValueSql("getdate()");
+
+			modelBuilder.Entity<MOM>()
+			 .Property(s => s.Deleted)
+			 .HasDefaultValue(false)
+			 .ValueGeneratedNever();
 
 			modelBuilder.Entity<SubCategory2>()
 			 .Property(s => s.Deleted)

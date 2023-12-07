@@ -3,6 +3,7 @@ using CloudVOffice.Core.Domain.WareHouses.Vendors;
 using CloudVOffice.Data.DTO.WareHouses.Vendors;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,16 +33,16 @@ namespace CloudVOffice.Services.WareHouses.Vendors
                     Vendor vendor = new Vendor();
                     vendor.VendorName = vendorDTO.VendorName;
                     vendor.CompanyName = vendorDTO.CompanyName;
-                    vendor.GST = vendorDTO.GST;
+                    vendor.GSTId = vendorDTO.GSTId;
                     vendor.Address = vendorDTO.Address;
                     vendor.Telephone = vendorDTO.Telephone;
                     vendor.Mobile1 = vendorDTO.Mobile1;
                     vendor.Mobile2 = vendorDTO.Mobile2;
                     vendor.MailId = vendorDTO.MailId;
                     vendor.PoCName = vendorDTO.PoCName;
-                    vendor.Segment = vendorDTO.Segment;
-                    vendor.Category = vendorDTO.Category;
-                    vendor.WarehousesAffiliated = vendorDTO.WarehousesAffiliated;
+                    vendor.SectorId = vendorDTO.SectorId;
+                    vendor.CategoryId = vendorDTO.CategoryId;
+                    vendor.WareHuoseId = vendorDTO.WareHuoseId;
                     vendor.IsActive = vendorDTO.IsActive;
                     vendor.CreatedBy = vendorDTO.CreatedBy;
                     var obj = _vendorRepo.Insert(vendor);
@@ -71,16 +72,16 @@ namespace CloudVOffice.Services.WareHouses.Vendors
                     {
                         a.VendorName = vendorDTO.VendorName;
                         a.CompanyName = vendorDTO.CompanyName;
-                        a.GST = vendorDTO.GST;
+                        a.GSTId = vendorDTO.GSTId;
                         a.Address = vendorDTO.Address;
                         a.Telephone = vendorDTO.Telephone;
                         a.Mobile1 = vendorDTO.Mobile1;
                         a.Mobile2 = vendorDTO.Mobile2;
                         a.MailId = vendorDTO.MailId;
                         a.PoCName = vendorDTO.PoCName;
-                        a.Segment = vendorDTO.Segment;
-                        a.Category = vendorDTO.Category;
-                        a.WarehousesAffiliated = vendorDTO.WarehousesAffiliated;
+                        a.SectorId = vendorDTO.SectorId;
+                        a.CategoryId = vendorDTO.CategoryId;
+                        a.WareHuoseId = vendorDTO.WareHuoseId;
                         a.IsActive = vendorDTO.IsActive;
                         a.UpdatedDate = DateTime.Now;
                         _dbContext.SaveChanges();
@@ -116,7 +117,13 @@ namespace CloudVOffice.Services.WareHouses.Vendors
         {
             try
             {
-                return _dbContext.Vendors.Where(x => x.Deleted == false).ToList();
+                 return _dbContext.Vendors.Where(x => x.Deleted == false).ToList();
+                //return _dbContext.Vendors
+                // .Include(s => s.Sector)
+                // .Include(s => s.Category)
+                // .Include(s => s.WareHuose)
+                // .Include(s => s.Gst)
+                // .Where(x => x.Deleted == false).ToList();
             }
             catch
             {
