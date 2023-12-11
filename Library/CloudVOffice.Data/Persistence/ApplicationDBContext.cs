@@ -76,15 +76,12 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<SubCategory1> SubCategories1 { get; set; }
         public virtual DbSet<SubCategory2> SubCategories2 { get; set; }
-        public virtual DbSet<VendorOnboarding> VendorOnboardings { get; set; }
 
         #endregion
-		public virtual DbSet<SubCategory1> SubCategories1 { get; set; }
-		public virtual DbSet<SubCategory2> SubCategories2 { get; set; }
-
+		
 		public virtual DbSet<GST> GSTs { get; set; }
 		public virtual DbSet<HandlingType> HandlingTypes { get; set; }
-		#endregion
+	
 
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -388,15 +385,6 @@ namespace CloudVOffice.Data.Persistence
 			 .Property(s => s.Deleted)
 			 .HasDefaultValue(false)
 			 .ValueGeneratedNever(); 
-
-			modelBuilder.Entity<MOM>()
-		 .Property(s => s.CreatedDate)
-		 .HasDefaultValueSql("getdate()");
-
-			modelBuilder.Entity<MOM>()
-			 .Property(s => s.Deleted)
-			 .HasDefaultValue(false)
-			 .ValueGeneratedNever();
 
 			modelBuilder.Entity<SubCategory2>()
 			 .Property(s => s.Deleted)
