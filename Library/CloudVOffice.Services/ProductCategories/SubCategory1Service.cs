@@ -28,6 +28,7 @@ namespace CloudVOffice.Services.ProductCategories
 				if (objcheck == null)
 				{
 					SubCategory1 ct = new SubCategory1();
+					ct.SectorId = subCategory1DTO.SectorId;
 					ct.CategoryId = subCategory1DTO.CategoryId;
 					ct.SubCategory1Name = subCategory1DTO.SubCategory1Name;
 
@@ -74,6 +75,7 @@ namespace CloudVOffice.Services.ProductCategories
 					var a = _dbContext.SubCategories1.Where(x => x.SubCategory1Id == subCategory1DTO.SubCategory1Id).FirstOrDefault();
 					if (a != null)
 					{
+						a.SectorId = subCategory1DTO.SectorId;
 						a.CategoryId = subCategory1DTO.CategoryId;
 						a.SubCategory1Name = subCategory1DTO.SubCategory1Name;
 						a.UpdatedBy = subCategory1DTO.CreatedBy;
@@ -118,5 +120,9 @@ namespace CloudVOffice.Services.ProductCategories
 			}
 		}
 
-	}
+        public List<SubCategory1> GetSubCategoryByCategoeyId(int CategoryId)
+        {
+            return _dbContext.SubCategories1.Where(x => x.CategoryId == CategoryId && x.Deleted == false).ToList();
+        }
+    }
 }

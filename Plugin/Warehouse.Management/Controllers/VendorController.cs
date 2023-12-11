@@ -69,6 +69,7 @@ namespace Warehouse.Management.Controllers
                     vendorDTO.SectorId = d.SectorId;
                     vendorDTO.GSTId = d.GSTId;
                     vendorDTO.CategoryId = d.CategoryId;
+                    vendorDTO.WareHuoseId = d.WareHuoseId;
                     vendorDTO.IsActive = d.IsActive;
 
                 }

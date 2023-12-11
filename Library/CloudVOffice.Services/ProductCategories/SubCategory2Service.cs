@@ -28,6 +28,8 @@ namespace CloudVOffice.Services.ProductCategories
 				if (objcheck == null)
 				{
 					SubCategory2 ct = new SubCategory2();
+					ct.SectorId = subCategory2DTO.SectorId;
+					ct.CategoryId = subCategory2DTO.CategoryId;
 					ct.SubCategory1Id = subCategory2DTO.SubCategory1Id;
 					ct.SubCategory2Name = subCategory2DTO.SubCategory2Name;
 
@@ -68,12 +70,14 @@ namespace CloudVOffice.Services.ProductCategories
 		{
 			try
 			{
-				var updateSubCategory2 = _dbContext.SubCategories2.Where(x => x.SubCategory1Id != subCategory2DTO.SubCategory2Id && x.SubCategory2Name == subCategory2DTO.SubCategory2Name && x.Deleted == false).FirstOrDefault();
+				var updateSubCategory2 = _dbContext.SubCategories2.Where(x => x.SubCategory2Id != subCategory2DTO.SubCategory2Id && x.SubCategory2Name == subCategory2DTO.SubCategory2Name && x.Deleted == false).FirstOrDefault();
 				if (updateSubCategory2 == null)
 				{
 					var a = _dbContext.SubCategories2.Where(x => x.SubCategory2Id == subCategory2DTO.SubCategory2Id).FirstOrDefault();
 					if (a != null)
 					{
+						a.SectorId = subCategory2DTO.SectorId;
+						a.CategoryId = subCategory2DTO.CategoryId;
 						a.SubCategory1Id = subCategory2DTO.SubCategory1Id;
 						a.SubCategory2Name = subCategory2DTO.SubCategory2Name;
 						a.UpdatedBy = subCategory2DTO.CreatedBy;

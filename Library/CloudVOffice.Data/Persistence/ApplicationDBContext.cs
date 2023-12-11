@@ -10,7 +10,6 @@ using CloudVOffice.Core.Domain.WareHouses.Employees;
 using CloudVOffice.Core.Domain.WareHouses.GST;
 using CloudVOffice.Core.Domain.WareHouses.HandlingTypes;
 using CloudVOffice.Core.Domain.WareHouses.Items;
-using CloudVOffice.Core.Domain.WareHouses.MOMs;
 using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Core.Domain.WareHouses.Vehicles;
 using CloudVOffice.Core.Domain.WareHouses.Vendors;
@@ -66,7 +65,8 @@ namespace CloudVOffice.Data.Persistence
 		public virtual DbSet<Employee> Employees { get; set; }        
 		public virtual DbSet<Item> Items { get; set; }
 		public virtual DbSet<Vendor> Vendors { get; set; }
-		public virtual DbSet<MOM> MOMs { get; set; }
+        public virtual DbSet<VendorOnboarding> VendorOnboardings { get; set; }
+		public virtual DbSet<ItemMasterForFarming> ItemMasterForFarmings { get; set; }
 		
         #endregion
 
@@ -269,6 +269,23 @@ namespace CloudVOffice.Data.Persistence
              .HasDefaultValue(false)
              .ValueGeneratedNever();
 
+            modelBuilder.Entity<VendorOnboarding>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<VendorOnboarding>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
+
+            modelBuilder.Entity<ItemMasterForFarming>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<ItemMasterForFarming>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
 
             #endregion
 
@@ -363,15 +380,6 @@ namespace CloudVOffice.Data.Persistence
 		 .HasDefaultValueSql("getdate()");
 
 			modelBuilder.Entity<HandlingType>()
-			 .Property(s => s.Deleted)
-			 .HasDefaultValue(false)
-			 .ValueGeneratedNever();
-
-			modelBuilder.Entity<MOM>()
-		 .Property(s => s.CreatedDate)
-		 .HasDefaultValueSql("getdate()");
-
-			modelBuilder.Entity<MOM>()
 			 .Property(s => s.Deleted)
 			 .HasDefaultValue(false)
 			 .ValueGeneratedNever();

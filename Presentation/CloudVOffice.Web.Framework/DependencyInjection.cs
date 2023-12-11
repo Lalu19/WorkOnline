@@ -69,6 +69,7 @@ namespace CloudVOffice.Web.Framework
             services.AddScoped<IHandlingTypeService, HandlingTypeService>();
 
 			services.AddScoped<IItemService, ItemService>();
+			services.AddScoped<IItemMasterForFarmingService, ItemMasterForFarmingService>();
 
 
 
