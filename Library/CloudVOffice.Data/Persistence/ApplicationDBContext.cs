@@ -74,6 +74,11 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<Sector> Sectors { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<SubCategory1> SubCategories1 { get; set; }
+        public virtual DbSet<SubCategory2> SubCategories2 { get; set; }
+        public virtual DbSet<VendorOnboarding> VendorOnboardings { get; set; }
+
+        #endregion
 		public virtual DbSet<SubCategory1> SubCategories1 { get; set; }
 		public virtual DbSet<SubCategory2> SubCategories2 { get; set; }
 
@@ -382,6 +387,15 @@ namespace CloudVOffice.Data.Persistence
 			modelBuilder.Entity<HandlingType>()
 			 .Property(s => s.Deleted)
 			 .HasDefaultValue(false)
+			 .ValueGeneratedNever(); 
+
+			modelBuilder.Entity<MOM>()
+		 .Property(s => s.CreatedDate)
+		 .HasDefaultValueSql("getdate()");
+
+			modelBuilder.Entity<MOM>()
+			 .Property(s => s.Deleted)
+			 .HasDefaultValue(false)
 			 .ValueGeneratedNever();
 
 			modelBuilder.Entity<SubCategory2>()
@@ -389,10 +403,19 @@ namespace CloudVOffice.Data.Persistence
 			 .HasDefaultValue(false)
 			 .ValueGeneratedNever();
 
-			#endregion
+            modelBuilder.Entity<VendorOnboarding>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<VendorOnboarding>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
+
+            #endregion
 
 
-			modelBuilder.Seed();
+            modelBuilder.Seed();
         }
     }
 }
