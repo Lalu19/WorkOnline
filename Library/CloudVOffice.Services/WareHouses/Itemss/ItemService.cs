@@ -19,6 +19,10 @@ using CloudVOffice.Data.Repository;
 using CloudVOffice.Services.WareHouses.Itemss;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using ZXing.QrCode;
+using CloudVOffice.Core.Domain.WareHouses;
+using CloudVOffice.Core.Domain.WareHouses.Employees;
+using CloudVOffice.Core.Domain.WareHouses.HandlingTypes;
+using CloudVOffice.Core.Domain.WareHouses.GST;
 
 namespace CloudVOffice.Services.WareHouses.Itemss
 {
@@ -114,6 +118,9 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 				{
 					Item item = new Item();
 					item.ItemName = itemDTO.ItemName;
+					item.SectorId = itemDTO.SectorId;
+					item.CategoryId = itemDTO.CategoryId;
+					item.SubCategory1Id = itemDTO.SubCategory1Id;
 					item.CompanyName = itemDTO.CompanyName;
 					item.BrandName = itemDTO.BrandName;
 					item.UnitOfMeasurement = itemDTO.UnitOfMeasurement;
@@ -150,7 +157,11 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					return new ItemDTO
 					{
 						ItemId = item.ItemId,
+
 						ItemName = item.ItemName,
+						SectorId = item.SectorId,
+						CategoryId = item.CategoryId,
+						SubCategory1Id = item.SubCategory1Id,
 						CompanyName = item.CompanyName,
 						BrandName = item.BrandName,
 						UnitOfMeasurement = item.UnitOfMeasurement,
@@ -382,6 +393,9 @@ namespace CloudVOffice.Services.WareHouses.Itemss
                     if (item != null)
                     {
                         item.ItemName = itemDTO.ItemName;
+						item.SectorId = itemDTO.SectorId;
+						item.CategoryId = itemDTO.CategoryId;
+						item.SubCategory1Id = itemDTO.SubCategory1Id;
                         item.CompanyName = itemDTO.CompanyName;
                         item.BrandName = itemDTO.BrandName;
                         item.UnitOfMeasurement = itemDTO.UnitOfMeasurement;
@@ -482,8 +496,22 @@ namespace CloudVOffice.Services.WareHouses.Itemss
         public List<Item> GetItemList()
         {
 			try 
-			{ 
-                return _dbContext.Items.Where(i => i.Deleted == false).ToList();
+			{
+				List<HandlingType> handlingTypes = _dbContext.HandlingTypes.Where(h => h.Deleted == false).ToList();
+				List<GST> gsts = _dbContext.GSTs.Where(g => g.Deleted == false).ToList();
+				List<Item> items = _dbContext.Items.Where(i  => i.Deleted == false).ToList();
+
+				foreach (var item in items)
+				{
+					HandlingType handlingType = handlingTypes.FirstOrDefault(h => h.HandlingTypeId == Convert.ToInt32(item.HandlingType));
+					GST gst = gsts.FirstOrDefault(g => g.GSTId == Convert.ToInt32(item.CGST));
+
+
+					item.HandlingType = handlingType != null ? handlingType.HandlingTypeName : null;
+					item.CGST = gst != null ? gst.GSTValue : null;
+				}
+
+					return items;
 			}
 			catch
 			{

@@ -8,7 +8,7 @@ namespace CloudVOffice.Data.DTO.WareHouses.Vendors
 {
     public class VendorDTO
     {
-		public Int64 VendorId { get; set; }
+		public Int64? VendorId { get; set; }
 		public int SectorId { get; set; }
 		public int CategoryId { get; set; }
 		public Int64 WareHuoseId { get; set; }

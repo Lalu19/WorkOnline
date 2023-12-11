@@ -70,6 +70,59 @@
 								<input asp-for="@Model.ItemId" type="hidden" />
 							</div>
 						</div>
+
+
+						<div class="form-row">
+							@*<div class="form-group col-md-3">
+
+								<label for="ItemName" class="form-label">Item Name&nbsp;<span style="color:red;"><b>*</b></span></label>
+								<input asp-for="@Model.ItemName" type="text" class="form-control" autofocus="autofocus" placeholder="Item Name" />
+								<span asp-validation-for="ItemName"></span>
+								<div asp-validation-summary="ModelOnly" class="message-error"></div>
+							</div>*@
+
+							<div class="form-group col-md-3">
+								<label for="SectorId" class="form-label">Sector &nbsp</label>
+								<ejs-dropdownlist id="SectorId" allowFiltering="true" dataSource="@(new SelectList((IEnumerable)ViewBag.Sectors, "SectorId", "SectorName").Items)" placeholder="Select Sector" popupHeight="220px" name="HandlingType" value="@Model.SectorId">
+									<e-dropdownlist-fields text="SectorName" value="SectorId"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="SectorId"></span>
+							</div>
+
+
+							@*<div class="form-group col-md-3">
+
+								<label for="CompanyName" class="form-label">Company Name &nbsp;</label>
+								<input asp-for="@Model.CompanyName" type="text" class="form-control" autofocus="autofocus" placeholder="Company Name" />
+								<span asp-validation-for="CompanyName"></span>
+							</div>*@
+
+							<div class="form-group col-md-3">
+								<label for="CategoryId" class="form-label">Category &nbsp;</label>
+								<ejs-dropdownlist id="CategoryId" allowFiltering="true" dataSource="@(new SelectList((IEnumerable)ViewBag.Categories, "CategoryId", "CategoryName").Items)" placeholder="Select Category" popupHeight="220px" value="@Model.CategoryId">
+									<e-dropdownlist-fields text="CategoryName" value="CategoryId"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="CategoryId"></span>
+							</div>
+
+
+							@*<div class="form-group col-md-3">
+
+								<label for="BrandName" class="form-label">Brand Name &nbsp;</label>
+								<input asp-for="@Model.BrandName" type="text" class="form-control" autofocus="autofocus" placeholder="Brand Name" />
+								<span asp-validation-for="BrandName"></span>
+							</div>*@
+
+
+							<div class="form-group col-md-3">
+								<label for="SubCategory1Id" class="form-label">Sub Category &nbsp;</label>
+								<ejs-dropdownlist id="SubCategory1Id" allowFiltering="true" dataSource="@(new SelectList((IEnumerable)ViewBag.SubCategories1, "SubCategory1Id", "SubCategory1Name").Items)" placeholder="Select SubCategory1" popupHeight="220px" value="@Model.SubCategory1Id">
+									<e-dropdownlist-fields text="SubCategory1Name" value="SubCategory1Id"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="SubCategory1Id"></span>
+							</div>
+
+						</div>
 						
 
 						<div class="form-row">
@@ -144,13 +197,20 @@
 								<span asp-validation-for="Barcode"></span>
 							</div>*@
 
-							<div class="form-group col-md-3">
+							@*<div class="form-group col-md-3">
 
 								<label for="HandlingType" class="form-label">Handling Type &nbsp;</label>
 								<input asp-for="@Model.HandlingType" type="text" class="form-control" autofocus="autofocus" placeholder="Handling Type" />
 								<span asp-validation-for="HandlingType"></span>
-							</div>
+							</div>*@
 
+							<div class="form-group col-md-3">
+								<label for="HandlingType" class="form-label">Handling Type</label>
+								<ejs-dropdownlist id="WareHouseName" allowFiltering="true" dataSource="@(new SelectList((IEnumerable)ViewBag.HandlingTypes, "HandlingTypeId", "HandlingTypeName").Items)" placeholder="Handling Type " popupHeight="220px" name="HandlingType" value="@Model.HandlingType">
+									<e-dropdownlist-fields text="HandlingTypeName" value="HandlingTypeId"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="HandlingType"></span>
+							</div>
 							
 
 						</div>
@@ -183,12 +243,21 @@
 
 						<div class="form-row">
 
-							<div class="form-group col-md-3">
+							@*<div class="form-group col-md-3">
 
 								<label for="CGST" class="form-label">CGST &nbsp;</label>
 								<input asp-for="@Model.CGST" type="number" class="form-control" autofocus="autofocus" placeholder="CGST" />
 								<span asp-validation-for="CGST"></span>
+							</div>*@
+
+							<div class="form-group col-md-3">
+								<label for="CGST" class="form-label">CGST</label>
+								<ejs-dropdownlist id="GSTValue" allowFiltering="true" dataSource="@(new SelectList((IEnumerable)ViewBag.Gst, "GSTId", "GSTValue").Items)" placeholder="Select CGST" popupHeight="220px" name="CGST" value="@Model.CGST">
+									<e-dropdownlist-fields text="GSTValue" value="GSTId"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="CGST"></span>
 							</div>
+
 
 							<div class="form-group col-md-3">
 
@@ -305,15 +374,11 @@
 									<button id="generateBarcodeButton" type="submit" class="btn btn-secondary" value="btnGenerateBarcode" name="btnGenerateBarcode" style="margin-top: 5px;">Generate BarCode</button>
 								}
 							</div>
+
+							
+
+
 						</div>
-
-
-
-
-
-
-
-
 					</div>
 
 					@*<div class="card-body">
@@ -358,6 +423,29 @@
 	</div>
 
 </div>
+
+
+@{
+
+    if (TempData["msg"] != null)
+    {
+        <script type="text/javascript">
+
+
+			var message = "@TempData["msg"]";
+			if (message == "Kindly Save the data first") {
+				sweetAlert({
+					html: true,
+					icon: "danger",
+					title: "Process Error",
+					text: "Kindly Save the data first.",
+					type: "danger"
+				});
+			}
+
+		</script>
+	}
+}
 
 
 @section scripts{

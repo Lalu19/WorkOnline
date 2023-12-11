@@ -6,9 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using CloudVOffice.Core.Domain.Common;
 using CloudVOffice.Core.Domain.WareHouses.Employees;
+using CloudVOffice.Core.Domain.WareHouses;
 using CloudVOffice.Data.DTO.WareHouses.Employees;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace CloudVOffice.Services.WareHouses.Employees
 {
@@ -16,6 +18,7 @@ namespace CloudVOffice.Services.WareHouses.Employees
 	{
 		private readonly ApplicationDBContext _dbContext;
 		private readonly ISqlRepository<Employee> _employeeRepo;
+
 		public EmployeeService(ApplicationDBContext dbContext, ISqlRepository<Employee> EmployeeRepo)
 		{
 			_dbContext = dbContext;
@@ -116,9 +119,25 @@ namespace CloudVOffice.Services.WareHouses.Employees
 		{
 			try
 			{
-				return _dbContext.Employees.Where(emp => emp.Deleted == false).ToList();
 
-            }
+				List<WareHuose> wareHuoses = _dbContext.WareHouses.Where(wh => wh.Deleted == false).ToList();
+
+				List<Employee> employees = _dbContext.Employees.Where(emp => emp.Deleted == false).ToList();
+
+
+				foreach (var employee in employees)
+				{
+
+					WareHuose assignedWareHouse = wareHuoses.FirstOrDefault(wh => wh.WareHuoseId == Convert.ToInt32(employee.AssignedWareHouse));
+
+
+					employee.AssignedWareHouse = assignedWareHouse != null ? assignedWareHouse.WareHouseName : null;
+				}
+
+
+				return employees;
+
+			}
 			catch
 			{
 				throw;
