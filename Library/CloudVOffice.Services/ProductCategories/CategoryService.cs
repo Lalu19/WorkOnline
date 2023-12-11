@@ -123,6 +123,9 @@ namespace CloudVOffice.Services.ProductCategories
             }
         }
 
-       
+        public List<Category> GetCategoryBySectorId(int SectorId)
+        {
+            return _dbContext.Categories.Where(x => x.SectorId == SectorId && x.Deleted == false).ToList();
+        }
     }
 }

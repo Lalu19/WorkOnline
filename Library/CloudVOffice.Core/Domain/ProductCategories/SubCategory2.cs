@@ -9,6 +9,8 @@ namespace CloudVOffice.Core.Domain.ProductCategories
 	public class SubCategory2
 	{
 		public int SubCategory2Id { get; set; }
+		public int SectorId { get; set; }
+		public int CategoryId { get; set; }
 		public int SubCategory1Id { get; set; }
 		public string SubCategory2Name { get; set; }
 		public Int64 CreatedBy { get; set; }

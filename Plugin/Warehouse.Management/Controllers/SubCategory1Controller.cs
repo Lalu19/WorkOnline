@@ -18,22 +18,27 @@ namespace Warehouse.Management.Controllers
 	{
 		private readonly ISubCategory1Service _subcategory1Service;
 		private readonly ICategoryService _categoryService;
-		public SubCategory1Controller(ISubCategory1Service subcategory1Service, ICategoryService categoryService)
+		private readonly ISectorService _sectorService;
+		public SubCategory1Controller(ISubCategory1Service subcategory1Service, ICategoryService categoryService , ISectorService sectorService)
 		{
 
 			_subcategory1Service = subcategory1Service;
 			_categoryService = categoryService;
-		}
+            _sectorService = sectorService;
+
+        }
 		[HttpGet]
 		public IActionResult SubCategory1Create(int? SubCategory1Id)
 		{
-			ViewBag.categoryList = _categoryService.GetCategoryList();
+            ViewBag.SectorList = _sectorService.GetSectorList();
+            ViewBag.categoryList = _categoryService.GetCategoryList();
 			SubCategory1DTO subcategory1DTO = new SubCategory1DTO();
 
 			if (SubCategory1Id != null)
 			{
 				SubCategory1 d = _subcategory1Service.GetSubCategory1ById(int.Parse(SubCategory1Id.ToString()));
 
+				subcategory1DTO.SectorId = d.SectorId;
 				subcategory1DTO.CategoryId = d.CategoryId;
 				subcategory1DTO.SubCategory1Name = d.SubCategory1Name;
 
@@ -88,7 +93,8 @@ namespace Warehouse.Management.Controllers
 				}
 			}
 
-			ViewBag.categoryList = _categoryService.GetCategoryList();
+            ViewBag.SectorList = _sectorService.GetSectorList();
+            ViewBag.categoryList = _categoryService.GetCategoryList();
 			return View("~/Plugins/Warehouse.Management/Views/ProductCategories/SubCategory1Create.cshtml", subCategory1DTO);
 
 		}
@@ -108,6 +114,12 @@ namespace Warehouse.Management.Controllers
             var a = _subcategory1Service.DeleteSubCategory1(SubCategory1Id, DeletedBy);
             return Redirect("/WareHouse/SubCategory1/SubCategory1View");
         }
+
+        public JsonResult GetSubCategoryByCategoeyId(int CategoryId)
+        {
+            return Json(_subcategory1Service.GetSubCategoryByCategoeyId(CategoryId));
+        }
+
 
     }
 }

@@ -13,7 +13,7 @@ namespace CloudVOffice.Core.Domain.WareHouses.Items
         public int? SectorId { get; set; }
         public int? CategoryId { get; set; }
         public int? SubCategory1Id { get; set; }
-        public string ItemName { get; set; }        
+        public string ItemName { get; set; }
         public string CompanyName { get; set; }
         public string BrandName { get; set; }
         public double UnitOfMeasurement { get; set; }
