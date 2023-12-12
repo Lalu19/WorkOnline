@@ -11,10 +11,13 @@ namespace CloudVOffice.Services.WareHouses.Vendors
 {
     public interface IVendorOnboarding
     {
-        public MessageEnum VendorOnboardingCreate(VendorOnboardingDTO vendorOnboardingDTO);
-        public VendorOnboarding GetVendorByVendorOnboardingId(int VendorOnboardingId);
+		public MessageEnum VendorOnboardingCreate(VendorOnboardingDTO vendorOnboardingDTO);
+		
+		public VendorOnboarding GetVendorByVendorOnboardingId(int vendorOnboardingId);
         public List<VendorOnboarding> GetVendorOnboardingList();
         public MessageEnum VendorOnboardingUpdate(VendorOnboardingDTO vendorOnboardingDTO);
-        public MessageEnum VendorOnboardingDelete(int VendorOnboardingId, Int64 DeletedBy);
+        public MessageEnum VendorOnboardingDelete(Int64 vendorId, Int64 DeletedBy);
+        //public List<VendorOnboarding> GetVendorOnboardingByVendorId(Int64 vendorId);
+        //public List<Vendor> GetVendorByVendorId(Int64 vendorId);
     }
 }

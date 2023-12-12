@@ -117,6 +117,9 @@ namespace Warehouse.Management.Controllers
             return Redirect("/WareHouse/Category/CategoryView");
         }
 
-
+        public JsonResult GetCategoryBySectorId(int SectorId)
+        {
+            return Json(_categoryService.GetCategoryBySectorId(SectorId));
+        }
     }
 }

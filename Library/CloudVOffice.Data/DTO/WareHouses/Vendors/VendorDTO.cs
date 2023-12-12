@@ -24,13 +24,15 @@ namespace CloudVOffice.Data.DTO.WareHouses.Vendors
         public string? PoCName { get; set; }
         public bool IsActive { get; set; }
         public Int64 CreatedBy { get; set; }
+        //public List<VendorOnboardingDTO>? VendorOnboardings { get; set; }
+        //public string VendorOnboardingString { get; set; }
     }
 
     public class VendorOnboardingDTO
     {
         public int? VendorOnboardingId { get; set; }
+        public Int64? VendorId { get; set; }
         public int SectorId { get; set; }
-        public Int64 VendorId { get; set; }
         public Int64 CreatedBy { get; set; }
     }
 }

@@ -68,7 +68,7 @@ namespace CloudVOffice.Services.ProductCategories
 		{
 			try
 			{
-				var updateSubCategory2 = _dbContext.SubCategories2.Where(x => x.SubCategory1Id != subCategory2DTO.SubCategory2Id && x.SubCategory2Name == subCategory2DTO.SubCategory2Name && x.Deleted == false).FirstOrDefault();
+				var updateSubCategory2 = _dbContext.SubCategories2.Where(x => x.SubCategory2Id != subCategory2DTO.SubCategory2Id && x.SubCategory2Name == subCategory2DTO.SubCategory2Name && x.Deleted == false).FirstOrDefault();
 				if (updateSubCategory2 == null)
 				{
 					var a = _dbContext.SubCategories2.Where(x => x.SubCategory2Id == subCategory2DTO.SubCategory2Id).FirstOrDefault();

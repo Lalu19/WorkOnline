@@ -19,7 +19,6 @@ namespace CloudVOffice.Core.Domain.WareHouses.Vendors
         public string? Telephone { get; set; }
         public string? Mobile1 { get; set; }
         public string? Mobile2 { get; set; }
-       
         public string? MailId { get; set; }
         public string? PoCName { get; set; }
 		public bool IsActive { get; set; }
@@ -28,5 +27,7 @@ namespace CloudVOffice.Core.Domain.WareHouses.Vendors
         public Int64? UpdatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public bool Deleted { get; set; }
+
+        //public ICollection<VendorOnboarding> VendorOnboardings { get; set; }
     }
 }

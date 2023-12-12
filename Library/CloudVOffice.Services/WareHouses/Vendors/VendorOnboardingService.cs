@@ -22,13 +22,14 @@ namespace CloudVOffice.Services.WareHouses.Vendors
             _dbContext = dbContext;
             _vendorOnboardingRepo = vendorOnboardingRepo;
         }
-        public MessageEnum VendorOnboardingCreate(VendorOnboardingDTO vendorOnboardingDTO)
+		public MessageEnum VendorOnboardingCreate(VendorOnboardingDTO vendorOnboardingDTO)
         {
             try
             {
                     VendorOnboarding ct = new VendorOnboarding();
                     ct.SectorId = vendorOnboardingDTO.SectorId;
-                    ct.VendorId = vendorOnboardingDTO.VendorId;
+                    ct.VendorId = (long)vendorOnboardingDTO.VendorId;
+                   // ct.VendorId = (int)vendorOnboardingDTO.VendorId;
 
                     ct.CreatedBy = vendorOnboardingDTO.CreatedBy;
                     ct.CreatedDate = System.DateTime.Now;
@@ -53,9 +54,9 @@ namespace CloudVOffice.Services.WareHouses.Vendors
                 throw;
             }
         }
-        public VendorOnboarding GetVendorByVendorOnboardingId(int VendorOnboardingId)
+        public VendorOnboarding GetVendorByVendorOnboardingId(int vendorOnboardingId)
         {
-            return _dbContext.VendorOnboardings.Where(x => x.VendorOnboardingId == VendorOnboardingId && x.Deleted == false).SingleOrDefault();
+            return _dbContext.VendorOnboardings.Where(x => x.VendorOnboardingId == vendorOnboardingId && x.Deleted == false).SingleOrDefault();
         }
         public MessageEnum VendorOnboardingUpdate(VendorOnboardingDTO vendorOnboardingDTO)
         {
@@ -68,7 +69,7 @@ namespace CloudVOffice.Services.WareHouses.Vendors
                     if (a != null)
                     {
                         a.SectorId = vendorOnboardingDTO.SectorId;
-                        a.VendorId = vendorOnboardingDTO.VendorId;
+                        a.VendorId = (int)vendorOnboardingDTO.VendorId;
                         a.UpdatedBy = vendorOnboardingDTO.CreatedBy;
                         a.UpdatedDate = DateTime.Now;
 
@@ -88,11 +89,12 @@ namespace CloudVOffice.Services.WareHouses.Vendors
                 throw;
             }
         }
-        public MessageEnum VendorOnboardingDelete(int VendorOnboardingId, Int64 DeletedBy)
+        public MessageEnum VendorOnboardingDelete(Int64 vendorId, Int64 DeletedBy)
         {
             try
             {
-                var a = _dbContext.VendorOnboardings.Where(x => x.VendorOnboardingId == VendorOnboardingId).FirstOrDefault();
+                //1st table Id,not this table Id
+                var a = _dbContext.VendorOnboardings.Where(x => x.VendorId == vendorId).FirstOrDefault();
                 if (a != null)
                 {
                     a.Deleted = true;
@@ -109,5 +111,7 @@ namespace CloudVOffice.Services.WareHouses.Vendors
                 throw;
             }
         }
-    }
+
+		
+	}
 }
