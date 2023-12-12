@@ -66,7 +66,7 @@ namespace Warehouse.Management.Controllers
             {
 
                 Vendor d = _vendorService.GetVendorByVendorId(int.Parse(vendorId.ToString()));
-                vendorDTO.VendorName = d.VendorName;
+				vendorDTO.VendorName = d.VendorName;
                 vendorDTO.CompanyName = d.CompanyName;
                 vendorDTO.Address = d.Address;
                 vendorDTO.Telephone = d.Telephone;
@@ -79,34 +79,6 @@ namespace Warehouse.Management.Controllers
                 vendorDTO.CategoryId = d.CategoryId;
                 vendorDTO.WareHuoseId = d.WareHuoseId;
                 vendorDTO.IsActive = d.IsActive;
-
-<<<<<<< HEAD
-                //vendorDTO.VendorOnboardings = new List<VendorOnboardingDTO>();
-                //var pd = d.VendorOnboardings.ToList();
-=======
-			VendorDTO vendorDTO = new VendorDTO();
-                if (vendorId != null)
-                {
-
-                    Vendor d = _vendorService.GetVendorByVendorId(int.Parse(vendorId.ToString()));
-                    vendorDTO.VendorName= d.VendorName;
-                    vendorDTO.CompanyName = d.CompanyName;
-                    vendorDTO.Address = d.Address;
-                    vendorDTO.Telephone = d.Telephone;
-                    vendorDTO.Mobile1 = d.Mobile1;
-                    vendorDTO.Mobile2 = d.Mobile2;
-                    vendorDTO.MailId=d.MailId;
-                    vendorDTO.PoCName=d.PoCName;
-                    vendorDTO.SectorId = d.SectorId;
-                    vendorDTO.GSTId = d.GSTId;
-                    vendorDTO.CategoryId = d.CategoryId;
-                    vendorDTO.WareHuoseId = d.WareHuoseId;
-                    vendorDTO.IsActive = d.IsActive;
-
-                }
-
-                return View("~/Plugins/Warehouse.Management/Views/Vendor/VendorCreate.cshtml", vendorDTO);
->>>>>>> 0ae461bd02fe5bc29efb208ce2ea850bc611f184
 
                 //for (int i = 0; i < d.VendorOnboardings.Count; i++)
                 //{

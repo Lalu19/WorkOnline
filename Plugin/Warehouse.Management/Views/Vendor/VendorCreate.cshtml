@@ -54,11 +54,10 @@
 							<input asp-for="@Model.VendorId" type="hidden" />
 
 							<div class="form-group col-md-3">
-<<<<<<< HEAD
+
 								<label for="SectorId" class="form-label">Sector</label>
-=======
+
 								<label for="SectorId" class="form-label">Sector Name</label>
->>>>>>> 0ae461bd02fe5bc29efb208ce2ea850bc611f184
 								<ejs-dropdownlist id="SectorId" allowFiltering="true" ejs-for="@Model.SectorId" filtering="onSectorNamefiltering" change="onChangeSector" dataSource="@(new SelectList((IEnumerable)ViewBag.SectorList, "SectorId", "SectorName").Items)" placeholder="Select Sector" popupHeight="220px">
 									<e-dropdownlist-fields text="SectorName" value="SectorId"></e-dropdownlist-fields>
 								</ejs-dropdownlist>
@@ -67,8 +66,6 @@
 
 
 							<div class="form-group col-md-3">
-<<<<<<< HEAD
-
 								<label for="CategoryId" class="form-label">Category Name&nbsp;</label>
 
 								@*<ejs-dropdownlist id="CategoryId" allowFiltering="true" ejs-for="@Model.CategoryId" filtering="onCategoryNamefiltering" dataSource="@(new SelectList((IEnumerable)ViewBag.CategoryList, "CategoryId", "CategoryName").Items)" placeholder="Select Category" popupHeight="220px">
@@ -77,13 +74,6 @@
 								<ejs-dropdownlist id="CategoryId" allowFiltering="true" ejs-for="@Model.CategoryId" placeholder="Select Category" popupHeight="220px">
 									<e-dropdownlist-fields text="categoryName" value="categoryId"></e-dropdownlist-fields>
 								</ejs-dropdownlist>
-
-=======
-								<label for="CategoryId" class="form-label">Category Name</label>
-								<ejs-dropdownlist id="CategoryId" allowFiltering="true" ejs-for="@Model.CategoryId" placeholder="Select Category" popupHeight="220px">
-									<e-dropdownlist-fields text="categoryName" value="categoryId"></e-dropdownlist-fields>
-								</ejs-dropdownlist>
->>>>>>> 0ae461bd02fe5bc29efb208ce2ea850bc611f184
 								<span asp-validation-for="CategoryId"></span>
 							</div>
 
