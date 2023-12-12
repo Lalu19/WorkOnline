@@ -292,6 +292,7 @@ namespace CloudVOffice.Data.Persistence
             #endregion
 
             #region ProductCategories
+
             modelBuilder.Entity<Sector>()
 .Property(s => s.CreatedDate)
 .HasDefaultValueSql("getdate()");
@@ -385,24 +386,6 @@ namespace CloudVOffice.Data.Persistence
 			 .Property(s => s.Deleted)
 			 .HasDefaultValue(false)
 			 .ValueGeneratedNever(); 
-
-
-            modelBuilder.Entity<SubCategory2>()
-.Property(s => s.CreatedDate)
-.HasDefaultValueSql("getdate()");
-			modelBuilder.Entity<MOM>()
-		 .Property(s => s.CreatedDate)
-		 .HasDefaultValueSql("getdate()");
-
-			modelBuilder.Entity<MOM>()
-			 .Property(s => s.Deleted)
-			 .HasDefaultValue(false)
-			 .ValueGeneratedNever();
-
-			modelBuilder.Entity<SubCategory2>()
-			 .Property(s => s.Deleted)
-			 .HasDefaultValue(false)
-			 .ValueGeneratedNever();
 
             modelBuilder.Entity<VendorOnboarding>()
 .Property(s => s.CreatedDate)
