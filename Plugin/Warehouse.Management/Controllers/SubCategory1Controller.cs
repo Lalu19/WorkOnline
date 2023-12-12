@@ -41,6 +41,8 @@ namespace Warehouse.Management.Controllers
 				subcategory1DTO.SectorId = d.SectorId;
 				subcategory1DTO.CategoryId = d.CategoryId;
 				subcategory1DTO.SubCategory1Name = d.SubCategory1Name;
+				subcategory1DTO.GST = d.GST;
+				subcategory1DTO.HSN = d.HSN;
 
 			}
 			return View("~/Plugins/Warehouse.Management/Views/ProductCategories/SubCategory1Create.cshtml", subcategory1DTO);
@@ -118,6 +120,11 @@ namespace Warehouse.Management.Controllers
         public JsonResult GetSubCategoryByCategoeyId(int CategoryId)
         {
             return Json(_subcategory1Service.GetSubCategoryByCategoeyId(CategoryId));
+        }
+
+        public JsonResult GetSubCategory1ById(int SubCategory1Id)
+        {
+            return Json(_subcategory1Service.GetSubCategory1ById(SubCategory1Id));
         }
 
 

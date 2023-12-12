@@ -35,6 +35,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 				{
 					ItemMasterForFarming itemMaster = new ItemMasterForFarming();
 
+					itemMaster.SectorId = itemMasterForFarmingDTO.SectorId;
 					itemMaster.CategoryId = itemMasterForFarmingDTO.CategoryId;
 					itemMaster.SubCategory1Id = itemMasterForFarmingDTO.SubCategory1Id;
 					itemMaster.Barcode = itemMasterForFarmingDTO.Barcode;
@@ -105,6 +106,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 
 					if (itemMaster != null)
 					{
+						itemMaster.SectorId = itemMasterForFarmingDTO.SectorId;
 						itemMaster.CategoryId = itemMasterForFarmingDTO.CategoryId;
 						itemMaster.SubCategory1Id = itemMasterForFarmingDTO.SubCategory1Id;
 						itemMaster.Barcode = itemMasterForFarmingDTO.Barcode;

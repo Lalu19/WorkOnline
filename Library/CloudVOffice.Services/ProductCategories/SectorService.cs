@@ -57,6 +57,21 @@ namespace CloudVOffice.Services.ProductCategories
                 throw;
             }
         }
+
+        public List<Sector> GetSectorListforFarmerProduces()
+        {
+            try
+            {
+                return _dbContext.Sectors
+                    .Where(x => x.SectorName == "Farmer Produces")
+                    .ToList();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public Sector GetSectorById(int SectorId)
         {
             return _dbContext.Sectors.Where(x => x.SectorId == SectorId && x.Deleted == false).SingleOrDefault();

@@ -3,6 +3,7 @@
     public class ItemMasterForFarming : IAuditEntity, ISoftDeletedEntity
     {
         public Int64 ItemMasterForFarmingId { get; set; }
+        public int? SectorId { get; set; }
         public int? CategoryId { get; set; }
         public int? SubCategory1Id { get; set; }
         public string? Thumbnail { get; set; }
@@ -15,7 +16,7 @@
         public double? Price { get; set; }
         public double? MinQty { get; set; }
         public double? GST { get; set; }
-        public double? HSN { get; set; }
+        public string? HSN { get; set; }
         public DateTime? HarvestDate { get; set; }
         public Int64 CreatedBy { get; set; }
 
