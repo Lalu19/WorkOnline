@@ -86,9 +86,7 @@ namespace CloudVOffice.Data.Persistence
 
 		#endregion
 
-        #endregion
-
-
+      
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
