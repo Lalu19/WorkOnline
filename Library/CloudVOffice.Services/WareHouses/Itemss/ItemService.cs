@@ -23,6 +23,7 @@ using CloudVOffice.Core.Domain.WareHouses;
 using CloudVOffice.Core.Domain.WareHouses.Employees;
 using CloudVOffice.Core.Domain.WareHouses.HandlingTypes;
 using CloudVOffice.Core.Domain.WareHouses.GST;
+using CloudVOffice.Core.Domain.ProductCategories;
 
 namespace CloudVOffice.Services.WareHouses.Itemss
 {
@@ -123,7 +124,8 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					item.SubCategory1Id = itemDTO.SubCategory1Id;
 					item.CompanyName = itemDTO.CompanyName;
 					item.BrandName = itemDTO.BrandName;
-					item.UnitOfMeasurement = itemDTO.UnitOfMeasurement;
+					item.ProductWeight = itemDTO.ProductWeight;
+					//item.UnitOfMeasurement = itemDTO.UnitOfMeasurement;
 					item.CaseWeight = itemDTO.CaseWeight;
 					item.UnitPerCase = itemDTO.UnitPerCase;
 					item.ManufactureDate = itemDTO.ManufactureDate;
@@ -131,6 +133,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					item.Barcode = itemDTO.Barcode;
 					item.BarCodeNotAvailable = itemDTO.BarCodeNotAvailable;
 					item.MRP = itemDTO.MRP;
+					item.HSN = itemDTO.HSN;
 					item.PurchaseCost = itemDTO.PurchaseCost;
 					item.SalesCost = itemDTO.SalesCost;
 					item.SGST = itemDTO.SGST;
@@ -164,7 +167,8 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						SubCategory1Id = item.SubCategory1Id,
 						CompanyName = item.CompanyName,
 						BrandName = item.BrandName,
-						UnitOfMeasurement = item.UnitOfMeasurement,
+						//UnitOfMeasurement = item.UnitOfMeasurement,
+                        ProductWeight = item.ProductWeight,
 						CaseWeight = item.CaseWeight,
 						UnitPerCase = item.UnitPerCase,
 						ManufactureDate = item.ManufactureDate,
@@ -175,6 +179,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						PurchaseCost = item.PurchaseCost,
 						SalesCost = item.SalesCost,
 						SGST = item.SGST,
+						HSN = item.HSN,
 						CGST = item.CGST,
 						HandlingType = item.HandlingType,
 
@@ -398,12 +403,14 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						item.SubCategory1Id = itemDTO.SubCategory1Id;
                         item.CompanyName = itemDTO.CompanyName;
                         item.BrandName = itemDTO.BrandName;
-                        item.UnitOfMeasurement = itemDTO.UnitOfMeasurement;
+						item.ProductWeight = itemDTO.ProductWeight;
+                        //item.UnitOfMeasurement = itemDTO.UnitOfMeasurement;
                         item.CaseWeight = itemDTO.CaseWeight;
                         item.UnitPerCase = itemDTO.UnitPerCase;
                         item.ManufactureDate = itemDTO.ManufactureDate;
                         item.ExpiryDate = itemDTO.ExpiryDate;
                         item.Barcode = itemDTO.Barcode;
+                        item.HSN = itemDTO.HSN;
                         item.BarCodeNotAvailable = itemDTO.BarCodeNotAvailable;
                         item.MRP = itemDTO.MRP;
                         item.PurchaseCost = itemDTO.PurchaseCost;
@@ -497,18 +504,28 @@ namespace CloudVOffice.Services.WareHouses.Itemss
         {
 			try 
 			{
+				List<Sector> sectors = _dbContext.Sectors.Where(s => s.Deleted == false).ToList();
+				List<Category> categories = _dbContext.Categories.Where(c => c.Deleted == false).ToList();
+				List<SubCategory1> subCategory1s = _dbContext.SubCategories1.Where(x => x.Deleted == false).ToList();
 				List<HandlingType> handlingTypes = _dbContext.HandlingTypes.Where(h => h.Deleted == false).ToList();
 				List<GST> gsts = _dbContext.GSTs.Where(g => g.Deleted == false).ToList();
 				List<Item> items = _dbContext.Items.Where(i  => i.Deleted == false).ToList();
+
 
 				foreach (var item in items)
 				{
 					HandlingType handlingType = handlingTypes.FirstOrDefault(h => h.HandlingTypeId == Convert.ToInt32(item.HandlingType));
 					GST gst = gsts.FirstOrDefault(g => g.GSTId == Convert.ToInt32(item.CGST));
+					Sector sector = sectors.FirstOrDefault(q => q.SectorId == Convert.ToInt32(item.SectorId));
+					Category category = categories.FirstOrDefault(z => z.CategoryId == Convert.ToInt32(item.CategoryId));
+					SubCategory1 subCategory1 = subCategory1s.FirstOrDefault(y => y.SubCategory1Id == Convert.ToInt32(item.SubCategory1Id));
 
 
 					item.HandlingType = handlingType != null ? handlingType.HandlingTypeName : null;
 					item.CGST = gst != null ? gst.GSTValue : null;
+					item.SectorName = sector != null ? sector.SectorName : null;
+					item.CategoryName = category != null ? category.CategoryName : null;
+					item.SubCategory1Name = subCategory1 != null ? subCategory1.SubCategory1Name : null;
 				}
 
 					return items;
