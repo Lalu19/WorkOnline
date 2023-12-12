@@ -103,7 +103,7 @@
                             <div class="form-group col-md-3">
                                 <label for="VehicleNumber" class="form-label">Vehicle Number &nbsp;</label>
                                 <ejs-dropdownlist id="VehicleNumber" allowFiltering="true" dataSource="@(new SelectList((IEnumerable)ViewBag.Vehicles, "VehicleId", "VehicleNumber").Items)" placeholder="Select Vehicle" popupHeight="220px" value="@Model.VehicleNumber">
-                                    <e-dropdownlist-fields text="VehicleNumber" value="VehicleNumber"></e-dropdownlist-fields>
+                                    <e-dropdownlist-fields text="VehicleNumber" value="VehicleId"></e-dropdownlist-fields>
                                 </ejs-dropdownlist>
                                 <span asp-validation-for="VehicleNumber"></span>
                             </div>

@@ -20,17 +20,20 @@ namespace Warehouse.Management.Controllers
 		private readonly IItemMasterForFarmingService _itemMasterForFarmingService;
 		private readonly IWebHostEnvironment _hostingEnvironment;
 
+        private readonly ISectorService _sectorService;
         private readonly ICategoryService _categoryService;
         private readonly ISubCategory1Service _subCategory1Service;
 
         public ItemMasterForFarmingController(IItemMasterForFarmingService itemMasterForFarmingService,
 			                                  IWebHostEnvironment hostingEnvironment,
+                                              ISectorService sectorService,
                                               ICategoryService categoryService,
                                               ISubCategory1Service subCategory1Service
                                               )
 		{
 			_itemMasterForFarmingService = itemMasterForFarmingService;
 			_hostingEnvironment = hostingEnvironment;
+            _sectorService = sectorService;
             _categoryService = categoryService;
             _subCategory1Service = subCategory1Service;
         }
@@ -38,7 +41,7 @@ namespace Warehouse.Management.Controllers
 		[HttpGet]
 		public IActionResult CreateItemMasterForFarming(int? itemMasterForFarmingId)
 		{
-
+            ViewBag.Sectors = _sectorService.GetSectorListforFarmerProduces();
             ViewBag.Categories = _categoryService.GetCategoryList();
             ViewBag.SubCategories = _subCategory1Service.GetSubCategory1List();
 
@@ -48,6 +51,7 @@ namespace Warehouse.Management.Controllers
 			{
 				var itemMaster1 = _itemMasterForFarmingService.GetItemMasterForFarmingByItemMasterForFarmingId(int.Parse(itemMasterForFarmingId.ToString()));
 
+                itemMaster.SectorId=itemMaster1.SectorId;
 				itemMaster.CategoryId = itemMaster1.CategoryId;
 				itemMaster.SubCategory1Id = itemMaster1.SubCategory1Id;
 				itemMaster.Barcode = itemMaster1.Barcode;
@@ -351,6 +355,7 @@ namespace Warehouse.Management.Controllers
 
             ViewBag.Items = _itemMasterForFarmingService.GetItemMasterForFarmingList();
 
+            ViewBag.Sectors = _sectorService.GetSectorListforFarmerProduces();
             ViewBag.Categories = _categoryService.GetCategoryList();
             ViewBag.SubCategories = _subCategory1Service.GetSubCategory1List();
 
@@ -382,11 +387,6 @@ namespace Warehouse.Management.Controllers
         }
 
 
-
-
-
-
-
         [HttpGet]
 		public IActionResult ItemMasterForFarmingView()
 		{
@@ -405,5 +405,6 @@ namespace Warehouse.Management.Controllers
 			return Redirect("/WareHouse/ItemMasterForFarming/ItemMasterForFarmingView");
 		}
 
-	}
+
+    }
 }

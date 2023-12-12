@@ -18,6 +18,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using CloudVOffice.Services.ProductCategories;
+//using Warehouse.Management.ViewModel;
+using CloudVOffice.Data.DTO.WareHouses.ViewModel;
 
 namespace Warehouse.Management.Controllers
 {
@@ -49,72 +51,123 @@ namespace Warehouse.Management.Controllers
         public IActionResult ItemCreate(int? itemId)
         {
 
-			ViewBag.Gst = _gSTService.GetGSTList();
-			ViewBag.HandlingTypes = _handlingTypeService.GetHandlingTypeList();
-			ViewBag.Sectors = _sectorService.GetSectorList();
-			ViewBag.Categories = _categoryService.GetCategoryList();
-			ViewBag.SubCategories1 = _subCategory1Service.GetSubCategory1List();
+			//ViewBag.Gst = _gSTService.GetGSTList();
+			//ViewBag.HandlingTypes = _handlingTypeService.GetHandlingTypeList();
+			//ViewBag.Sectors = _sectorService.GetSectorList();
+			//ViewBag.Categories = _categoryService.GetCategoryList();
+			//ViewBag.SubCategories1 = _subCategory1Service.GetSubCategory1List();
 
 
+			var viewForItem = new ViewForItem
+			{
+				HandlingTypes = _handlingTypeService.GetHandlingTypeList(),
+				GST = _gSTService.GetGSTList(),
+				Sectors = _sectorService.GetSectorList(),
+				Category = _categoryService.GetCategoryList(),
+				SubCategory1 = _subCategory1Service.GetSubCategory1List(),
+				CreatedItemDTO = new ItemDTO()
+			};
 
-			ItemDTO item = new ItemDTO();
+
+			//ItemDTO item = new ItemDTO();
             if (itemId != null)
             {
                 var item1 = _itemService.GetItemByItemId(int.Parse(itemId.ToString()));
 
-                item.ItemName = item1.ItemName;
-				item.SectorId = item1.SectorId;
-				item.CategoryId = item1.CategoryId;
-				item.SubCategory1Id = item1.SubCategory1Id;
-                item.CompanyName = item1.CompanyName;
-                item.BrandName = item1.BrandName;
-                item.UnitOfMeasurement = item1.UnitOfMeasurement;
-                item.CaseWeight = item1.CaseWeight;
-                item.UnitPerCase = item1.UnitPerCase;
-                item.ManufactureDate = item1.ManufactureDate;
-                item.ExpiryDate = item1.ExpiryDate;
-                item.Barcode = item1.Barcode;
-                item.BarCodeNotAvailable = item1.BarCodeNotAvailable;
-                item.MRP = item1.MRP;
-                item.PurchaseCost = item1.PurchaseCost;
-                item.SalesCost = item1.SalesCost;
-                item.CGST = item1.CGST;
-                item.SGST = item1.SGST;
-                item.HandlingType = item1.HandlingType;
-                item.Thumbnail = item1.Thumbnail;
-
-				//item.Images = item1.Images;
+				viewForItem.CreatedItemDTO.ItemId = itemId;
+				viewForItem.CreatedItemDTO.ItemName = item1.ItemName;
+				viewForItem.CreatedItemDTO.SectorId = item1.SectorId;
+				viewForItem.CreatedItemDTO.CategoryId = item1.CategoryId;
+				viewForItem.CreatedItemDTO.SubCategory1Id = item1.SubCategory1Id;
+				viewForItem.CreatedItemDTO.CompanyName = item1.CompanyName;
+				viewForItem.CreatedItemDTO.BrandName = item1.BrandName;
+				//viewForItem.CreatedItemDTO.UnitOfMeasurement = item1.UnitOfMeasurement;
+				viewForItem.CreatedItemDTO.ProductWeight = item1.ProductWeight;
+                viewForItem.CreatedItemDTO.CaseWeight = item1.CaseWeight;
+				viewForItem.CreatedItemDTO.UnitPerCase = item1.UnitPerCase;
+				viewForItem.CreatedItemDTO.ManufactureDate = item1.ManufactureDate;
+				viewForItem.CreatedItemDTO.ExpiryDate = item1.ExpiryDate;
+				viewForItem.CreatedItemDTO.Barcode = item1.Barcode;
+				viewForItem.CreatedItemDTO.BarCodeNotAvailable = item1.BarCodeNotAvailable;
+				viewForItem.CreatedItemDTO.MRP = item1.MRP;
+				viewForItem.CreatedItemDTO.PurchaseCost = item1.PurchaseCost;
+				viewForItem.CreatedItemDTO.SalesCost = item1.SalesCost;
+				viewForItem.CreatedItemDTO.CGST = item1.CGST;
+				viewForItem.CreatedItemDTO.SGST = item1.SGST;
+				viewForItem.CreatedItemDTO.HSN = item1.HSN;
+				viewForItem.CreatedItemDTO.HandlingType = item1.HandlingType;
+				viewForItem.CreatedItemDTO.Thumbnail = item1.Thumbnail;
 
 				if (!string.IsNullOrEmpty(item1.Images))
 				{
 					// Split the string into a list of images
-					item.Images = item1.Images.Split(',').ToList();
+					viewForItem.CreatedItemDTO.Images = item1.Images.Split(',').ToList();
 				}
 				else
 				{
-					item.Images = new List<string>();
+					viewForItem.CreatedItemDTO.Images = new List<string>();
 				}
+				viewForItem.CreatedItemDTO.IsActive = item1.IsActive;
 
-				item.Videos = item1.Videos;
-                item.IsActive = item1.IsActive;
 
-            }
 
-            return View("~/Plugins/Warehouse.Management/Views/Item/ItemCreate.cshtml", item);
+				//            item.ItemName = item1.ItemName;
+				//item.SectorId = item1.SectorId;
+				//item.CategoryId = item1.CategoryId;
+				//item.SubCategory1Id = item1.SubCategory1Id;
+				//            item.CompanyName = item1.CompanyName;
+				//            item.BrandName = item1.BrandName;
+				//            item.UnitOfMeasurement = item1.UnitOfMeasurement;
+				//            item.CaseWeight = item1.CaseWeight;
+				//            item.UnitPerCase = item1.UnitPerCase;
+				//            item.ManufactureDate = item1.ManufactureDate;
+				//            item.ExpiryDate = item1.ExpiryDate;
+				//            item.Barcode = item1.Barcode;
+				//            item.BarCodeNotAvailable = item1.BarCodeNotAvailable;
+				//            item.MRP = item1.MRP;
+				//            item.PurchaseCost = item1.PurchaseCost;
+				//            item.SalesCost = item1.SalesCost;
+				//            item.CGST = item1.CGST;
+				//            item.SGST = item1.SGST;
+				//            item.HandlingType = item1.HandlingType;
+				//            item.Thumbnail = item1.Thumbnail;
+
+				////item.Images = item1.Images;
+
+				//if (!string.IsNullOrEmpty(item1.Images))
+				//{
+				//	// Split the string into a list of images
+				//	item.Images = item1.Images.Split(',').ToList();
+				//}
+				//else
+				//{
+				//	item.Images = new List<string>();
+				//}
+
+				//item.Videos = item1.Videos;
+				//            item.IsActive = item1.IsActive;
+
+
+
+
+			}
+
+			return View("~/Plugins/Warehouse.Management/Views/Item/ItemCreate.cshtml", viewForItem);
         }
 
         [HttpPost]
-        public IActionResult ItemCreate(ItemDTO itemDTO)
+        public IActionResult ItemCreate(ViewForItem viewForItem)
         {
-            itemDTO.CreatedBy = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
+			viewForItem.CreatedItemDTO.CreatedBy = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
 
+			
 
 			TempData.Clear();
 
 			string btnSave = Request.Form["btnSave"];
 			string btnGenerateBarcode = Request.Form["btnGenerateBarcode"];
 
-			
+
 
 			//if (itemDTO.ImagesUp != null)
 			//{
@@ -134,29 +187,29 @@ namespace Warehouse.Management.Controllers
 			//    itemDTO.Images = uniqueFileName;
 			//}
 
-			if (itemDTO.ThumbnailUp != null)
-            {
-                FileInfo fileInfo = new FileInfo(itemDTO.ThumbnailUp.FileName);
-                string extn = fileInfo.Extension.ToLower();
-                Guid id = Guid.NewGuid();
-                string filename = id.ToString() + extn;
-
-                string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads/setup");
-                if (!Directory.Exists(uploadsFolder))
-                {
-                    Directory.CreateDirectory(uploadsFolder);
-                }
-                string uniqueFileName = Guid.NewGuid().ToString() + "_" + filename;
-                string imagePath = Path.Combine(uploadsFolder, uniqueFileName);
-                itemDTO.ThumbnailUp.CopyTo(new FileStream(imagePath, FileMode.Create));
-                itemDTO.Thumbnail = uniqueFileName;
-            }
-
-
-
-            if (itemDTO.ImagesUp != null && itemDTO.ImagesUp.Count > 0)
+			if (viewForItem.CreatedItemDTO.ThumbnailUp != null)
 			{
-				foreach (var image in itemDTO.ImagesUp)
+				FileInfo fileInfo = new FileInfo(viewForItem.CreatedItemDTO.ThumbnailUp.FileName);
+				string extn = fileInfo.Extension.ToLower();
+				Guid id = Guid.NewGuid();
+				string filename = id.ToString() + extn;
+
+				string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads/setup");
+				if (!Directory.Exists(uploadsFolder))
+				{
+					Directory.CreateDirectory(uploadsFolder);
+				}
+				string uniqueFileName = Guid.NewGuid().ToString() + "_" + filename;
+				string imagePath = Path.Combine(uploadsFolder, uniqueFileName);
+				viewForItem.CreatedItemDTO.ThumbnailUp.CopyTo(new FileStream(imagePath, FileMode.Create));
+				viewForItem.CreatedItemDTO.Thumbnail = uniqueFileName;
+			}
+
+
+
+			if (viewForItem.CreatedItemDTO.ImagesUp != null && viewForItem.CreatedItemDTO.ImagesUp.Count > 0)
+			{
+				foreach (var image in viewForItem.CreatedItemDTO.ImagesUp)
 				{
 					if (image != null && image.Length > 0)
 					{
@@ -183,7 +236,7 @@ namespace Warehouse.Management.Controllers
 						}
 
 						// Store the unique filename in your model
-						itemDTO.Images.Add(uniqueFileName); // Assuming Images is a List<string> or similar
+						viewForItem.CreatedItemDTO.Images.Add(uniqueFileName); // Assuming Images is a List<string> or similar
 					}
 				}
 			}
@@ -241,31 +294,45 @@ namespace Warehouse.Management.Controllers
 
 			if (btnGenerateBarcode != null)
 			{
-				var barcodeResult = GenerateBarcodeButton(itemDTO, btnGenerateBarcode);
+				var barcodeResult = GenerateBarcodeButton(viewForItem, btnGenerateBarcode);
 				if (barcodeResult is ViewResult)
-				{					
+				{
 					return barcodeResult;
 				}
 			}
 
 
-			if (itemDTO.ItemId == null)
+			if (viewForItem.CreatedItemDTO.ItemId == null)
 			{
 				if (btnSave != null)
 				{
-					
 
-					var createdItemDTO = _itemService.CreateItem(itemDTO);
 
-					if (createdItemDTO != null && itemDTO.BarCodeNotAvailable == true)
+					var createdItemDTO = _itemService.CreateItem(viewForItem.CreatedItemDTO);
+
+					if (createdItemDTO != null && viewForItem.CreatedItemDTO.BarCodeNotAvailable == true)
 					{
 						//TempData["msg"] = MessageEnum.Success;
 
-						return View("~/Plugins/Warehouse.Management/Views/Item/ItemCreate.cshtml", createdItemDTO);
+						//ViewBag.Sectors = _sectorService.GetSectorList();
+
+
+						var viewForItem1 = new ViewForItem
+						{
+							//CreatedItemDTO = _itemService.CreateItem(viewForItem.CreatedItemDTO),
+							CreatedItemDTO = createdItemDTO,
+							Sectors = _sectorService.GetSectorList(),
+							HandlingTypes = _handlingTypeService.GetHandlingTypeList(),
+							GST = _gSTService.GetGSTList(),
+							Category = _categoryService.GetCategoryList(),
+							SubCategory1 = _subCategory1Service.GetSubCategory1List()
+						};
+
+						return View("~/Plugins/Warehouse.Management/Views/Item/ItemCreate.cshtml", viewForItem1);
 					}
-					else if(createdItemDTO != null && itemDTO.BarCodeNotAvailable == false)
+					else if (createdItemDTO != null && viewForItem.CreatedItemDTO.BarCodeNotAvailable == false)
 					{
-						TempData["msg"] = MessageEnum.Success;						
+						TempData["msg"] = MessageEnum.Success;
 						return Redirect("/WareHouse/Item/ItemView");
 					}
 					else
@@ -274,11 +341,11 @@ namespace Warehouse.Management.Controllers
 						ModelState.AddModelError("", "Item Already Exists");
 						return Redirect("/WareHouse/Item/ItemView");
 					}
-				}				
+				}
 			}
 			else
 			{
-				var a = _itemService.UpdateItem(itemDTO);
+				var a = _itemService.UpdateItem(viewForItem.CreatedItemDTO);
 				if (a == MessageEnum.Updated)
 				{
 					TempData["msg"] = MessageEnum.Updated;
@@ -307,7 +374,7 @@ namespace Warehouse.Management.Controllers
 
 
 		[HttpPost]
-		public IActionResult GenerateBarcodeButton(ItemDTO itemDTO, string btnGenerateBarcode)
+		public IActionResult GenerateBarcodeButton(ViewForItem viewForItem, string btnGenerateBarcode)
 		{
 			if (btnGenerateBarcode != "btnGenerateBarcode")
 			{				
@@ -320,7 +387,18 @@ namespace Warehouse.Management.Controllers
 			else
 			{
 				TempData["msg"] = "Kindly Save the data first";
-				return View("~/Plugins/Warehouse.Management/Views/Item/ItemCreate.cshtml", itemDTO);
+				var viewForItem1 = new ViewForItem
+				{
+					//CreatedItemDTO = _itemService.CreateItem(viewForItem.CreatedItemDTO),
+					CreatedItemDTO = viewForItem.CreatedItemDTO,
+					Sectors = _sectorService.GetSectorList(),
+					HandlingTypes = _handlingTypeService.GetHandlingTypeList(),
+					GST = _gSTService.GetGSTList(),
+					Category = _categoryService.GetCategoryList(),
+					SubCategory1 = _subCategory1Service.GetSubCategory1List()
+				};
+
+				return View("~/Plugins/Warehouse.Management/Views/Item/ItemCreate.cshtml", viewForItem1);
 			}
 		}
 

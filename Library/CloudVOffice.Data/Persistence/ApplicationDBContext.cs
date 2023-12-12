@@ -86,6 +86,7 @@ namespace CloudVOffice.Data.Persistence
 
 		#endregion
 
+        #endregion
 
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -360,41 +361,41 @@ namespace CloudVOffice.Data.Persistence
 			 .HasDefaultValue(false)
 			 .ValueGeneratedNever();
 
-			modelBuilder.Entity<SubCategory1>()
+            modelBuilder.Entity<SubCategory1>()
 .Property(s => s.CreatedDate)
 .HasDefaultValueSql("getdate()");
 
-			modelBuilder.Entity<SubCategory1>()
-			 .Property(s => s.Deleted)
-			 .HasDefaultValue(false)
-			 .ValueGeneratedNever();
+            modelBuilder.Entity<SubCategory1>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
 
-			modelBuilder.Entity<SubCategory2>()
+            modelBuilder.Entity<SubCategory2>()
 .Property(s => s.CreatedDate)
 .HasDefaultValueSql("getdate()");
 
-			modelBuilder.Entity<SubCategory2>()
-			 .Property(s => s.Deleted)
-			 .HasDefaultValue(false)
-			 .ValueGeneratedNever();
+            modelBuilder.Entity<SubCategory2>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
 
-			modelBuilder.Entity<GST>()
-		   .Property(s => s.CreatedDate)
-		   .HasDefaultValueSql("getdate()");
+            modelBuilder.Entity<GST>()
+           .Property(s => s.CreatedDate)
+           .HasDefaultValueSql("getdate()");
 
-			modelBuilder.Entity<GST>()
-			 .Property(s => s.Deleted)
-			 .HasDefaultValue(false)
-			 .ValueGeneratedNever();
+            modelBuilder.Entity<GST>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
 
-			modelBuilder.Entity<HandlingType>()
-		 .Property(s => s.CreatedDate)
-		 .HasDefaultValueSql("getdate()");
+            modelBuilder.Entity<HandlingType>()
+         .Property(s => s.CreatedDate)
+         .HasDefaultValueSql("getdate()");
 
-			modelBuilder.Entity<HandlingType>()
-			 .Property(s => s.Deleted)
-			 .HasDefaultValue(false)
-			 .ValueGeneratedNever(); 
+            modelBuilder.Entity<HandlingType>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
 
 
 			modelBuilder.Entity<UnitGroup>()

@@ -11,6 +11,7 @@ using CloudVOffice.Data.DTO.WareHouses.Employees;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
 using Microsoft.EntityFrameworkCore;
+using CloudVOffice.Core.Domain.WareHouses.Vehicles;
 
 namespace CloudVOffice.Services.WareHouses.Employees
 {
@@ -121,6 +122,7 @@ namespace CloudVOffice.Services.WareHouses.Employees
 			{
 
 				List<WareHuose> wareHuoses = _dbContext.WareHouses.Where(wh => wh.Deleted == false).ToList();
+				List<Vehicle> vehicles = _dbContext.Vehicles.Where(v => v.Deleted == false).ToList();
 
 				List<Employee> employees = _dbContext.Employees.Where(emp => emp.Deleted == false).ToList();
 
@@ -129,11 +131,11 @@ namespace CloudVOffice.Services.WareHouses.Employees
 				{
 
 					WareHuose assignedWareHouse = wareHuoses.FirstOrDefault(wh => wh.WareHuoseId == Convert.ToInt32(employee.AssignedWareHouse));
-
+					Vehicle vehicle = vehicles.FirstOrDefault(v => v.VehicleId == Convert.ToInt32(employee.VehicleNumber));
 
 					employee.AssignedWareHouse = assignedWareHouse != null ? assignedWareHouse.WareHouseName : null;
+					employee.VehicleNumber = vehicle != null ? vehicle.VehicleNumber : null;
 				}
-
 
 				return employees;
 

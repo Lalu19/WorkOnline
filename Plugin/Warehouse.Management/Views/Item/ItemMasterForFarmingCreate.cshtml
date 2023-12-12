@@ -46,111 +46,107 @@
 
                     <div class="card-header">
 
-                    <div class="row">
-                        <div class="col-md-8">
-                            Item Master For Farmer
-                        </div>
-                        <div class="col-md-4 text-right float-right">
-                            <a href="/WareHouse/ItemMasterForFarming/ItemMasterForFarmingView" class="btn btn-success btn-sm float-right"><i class="icon-list2"></i> List </a>
+                        <div class="row">
+                            <div class="col-md-8">
+                                Item Master For Farmer
+                            </div>
+                            <div class="col-md-4 text-right float-right">
+                                <a href="/WareHouse/ItemMasterForFarming/ItemMasterForFarmingView" class="btn btn-success btn-sm float-right"><i class="icon-list2"></i> List </a>
 
+                            </div>
                         </div>
                     </div>
-                </div>
 
-              
+
                     @*<div class="card-header"><b>Pin Code</b></div>*@
                     <div class="card-body">
 
                         <div class="form-row">
                             <input asp-for="@Model.ItemMasterForFarmingId" type="hidden" />
 
+
+                            <div class="form-group col-md-3">
+                                <label for="SectorId" class="form-label">Sector Name</label>
+                                <ejs-dropdownlist id="SectorId" allowFiltering="true" ejs-for="@Model.SectorId" allowFiltering="true" change="onChangeSector" dataSource="@(new SelectList((IEnumerable)ViewBag.Sectors, "SectorId", "SectorName").Items)" placeholder="Select Sector" popupHeight="220px">
+                                    <e-dropdownlist-fields text="SectorName" value="SectorId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="SectorId"></span>
+                            </div>
+
+
                             <div class="form-group col-md-3">
                                 <label for="CategoryId" class="form-label">Category Name</label>
-                                <ejs-dropdownlist id="CategoryId" allowFiltering="true" ejs-for="@Model.CategoryId" change="onChangeCategory" dataSource="@(new SelectList((IEnumerable)ViewBag.Categories, "CategoryId", "CategoryName").Items)" placeholder="Select Category" popupHeight="220px">
-                                    <e-dropdownlist-fields text="CategoryName" value="CategoryId"></e-dropdownlist-fields>
+                                <ejs-dropdownlist id="CategoryId" allowFiltering="true" ejs-for="@Model.CategoryId" change="onChangeCategory" placeholder="Select Category" popupHeight="220px">
+                                    <e-dropdownlist-fields text="categoryName" value="categoryId"></e-dropdownlist-fields>
                                 </ejs-dropdownlist>
                                 <span asp-validation-for="CategoryId"></span>
                             </div>
 
+
                             <div class="form-group col-md-3">
                                 <label for="SubCategory1Id" class="form-label">SubCategory Name</label>
-                                <ejs-dropdownlist id="SubCategory1Id" allowFiltering="true" ejs-for="@Model.SubCategory1Id" placeholder="Select SubCategory" popupHeight="220px">
+                                <ejs-dropdownlist id="SubCategory1Id" allowFiltering="true" ejs-for="@Model.SubCategory1Id" change="onChangeSubCategory1" placeholder="Select SubCategory" popupHeight="220px">
                                     <e-dropdownlist-fields text="subCategory1Name" value="subCategory1Id"></e-dropdownlist-fields>
                                 </ejs-dropdownlist>
                                 <span asp-validation-for="SubCategory1Id"></span>
                             </div>
 
-
-                         @*   <div class="form-group col-md-3">
-                                <label for="UOMId" class="form-label">UOM</label>
-                                <ejs-dropdownlist id="UOMId" allowFiltering="true" ejs-for="@Model.UOMId" filtering="onUOMfiltering" dataSource="@(new SelectList((IEnumerable)ViewBag.UOMList, "UOMId", "UOM").Items)" placeholder="Select UOM" popupHeight="220px">
-                                    <e-dropdownlist-fields text="UOM" value="UOMId"></e-dropdownlist-fields>
-                                </ejs-dropdownlist>
-                                <span asp-validation-for="UOMId"></span>
-                            </div>*@
-
-                         
-
-                            <div class="form-group col-md-3">
-                                <label for="UOMId" class="form-label">UOMId&nbsp;</label>
-                                <input asp-for="@Model.UOMId" type="text" class="form-control" autofocus="autofocus" placeholder="UOMId" />
-                                <span asp-validation-for="UOMId"></span>
-                            </div>
-
                             <div class="form-group col-md-3">
                                 <label for="ProductName" class="form-label">Product Name &nbsp;</label>
-                                <input asp-for="@Model.ProductName" type="text" class="form-control" autofocus="autofocus" placeholder="Product Name" />
+                                <input asp-for="@Model.ProductName" type="text" id="ProductName" class="form-control" autofocus="autofocus" placeholder="Product Name" />
                                 <span asp-validation-for="ProductName"></span>
                             </div>
-                          
+                           
                         </div>
-
-                       
 
                         <div class="form-row">
 
+                             <div class="form-group col-md-3">
+                                <label for="UOMId" class="form-label">UOM&nbsp;</label>
+                                <input asp-for="@Model.UOMId" type="text" id="UOMId" class="form-control" autofocus="autofocus" placeholder="UOM" />
+                                <span asp-validation-for="UOMId"></span>
+                            </div>
+
                             <div class="form-group col-md-3">
                                 <label for="QtyPerKg" class="form-label">Qty Per Kg&nbsp;</label>
-                                <input asp-for="@Model.QtyPerKg" type="number" class="form-control" autofocus="autofocus" placeholder="Qty Per Kg" />
+                                <input asp-for="@Model.QtyPerKg" type="number" id="QtyPerKg" class="form-control" autofocus="autofocus" placeholder="Qty Per Kg" />
                                 <span asp-validation-for="QtyPerKg"></span>
                             </div>
 
                             <div class="form-group col-md-3">
                                 <label for="Price" class="form-label">Price &nbsp;</label>
-                                <input asp-for="@Model.Price" type="number" class="form-control" autofocus="autofocus" placeholder="Price" />
+                                <input asp-for="@Model.Price" type="number" id="Price" class="form-control" autofocus="autofocus" placeholder="Price" />
                                 <span asp-validation-for="Price"></span>
                             </div>
 
                             <div class="form-group col-md-3">
                                 <label for="MinQty" class="form-label">Min Qty &nbsp;</label>
-                                <input asp-for="@Model.MinQty" type="number" class="form-control" autofocus="autofocus" placeholder="MinQty" />
+                                <input asp-for="@Model.MinQty" type="number" id="MinQty" class="form-control" autofocus="autofocus" placeholder="MinQty" />
                                 <span asp-validation-for="MinQty"></span>
-                            </div>
-
-                            <div class="form-group col-md-3">
-                                <label for="GST" class="form-label">GST&nbsp;</label>
-                                <input asp-for="@Model.GST" type="number" class="form-control" autofocus="autofocus" placeholder="GST" readonly="readonly" value="0" />
-                                <span asp-validation-for="GST"></span>
                             </div>
 
                         </div>
 
                         <div class="form-row">
-
+                         
+                            <div class="form-group col-md-3">
+                                <label for="GST" class="form-label">GST&nbsp;</label>
+                                <input asp-for="@Model.GST" type="number" id="GST" class="form-control" autofocus="autofocus" placeholder="GST" readonly  />
+                                <span asp-validation-for="GST"></span>
+                            </div>
+                         
                             <div class="form-group col-md-3">
                                 <label for="HSN" class="form-label">HSN &nbsp;</label>
-                                <input asp-for="@Model.HSN" type="text" class="form-control" autofocus="autofocus" placeholder="HSN" readonly="readonly" value="0709" />
+                                <input asp-for="@Model.HSN" type="text" class="form-control" id="HSN" autofocus="autofocus" placeholder="HSN" readonly />
                                 <span asp-validation-for="HSN"></span>
                             </div>
-
                             <div class="form-group col-md-3">
-                                <label for="HarvestDate" class="form-label">HarvestDate &nbsp;</label>
-                                <input asp-for="@Model.HarvestDate" type="date" class="form-control" autofocus="autofocus" placeholder="HarvestDate" />
+                                <label for="HarvestDate" class="form-label">Harvest Date &nbsp;</label>
+                                <input asp-for="@Model.HarvestDate" type="date" id="HarvestDate" class="form-control" autofocus="autofocus" placeholder="HarvestDate" />
                                 <span asp-validation-for="HarvestDate"></span>
                             </div>
 
                         </div>
-
 
                         <div class="form-row">
                             <div class="form-group col-md-3">
@@ -167,7 +163,7 @@
                             </div>
 
                             <div class="form-group col-md-3">
-                                <label for="Images" class="form-label">Images</label>
+                                <label for="Images" class="form-label">Add Product Images</label>
                                 <input asp-for="@Model.ImagesUp" type="file" id="ImagesUp" class="form-control" multiple />
                                 <span asp-validation-for="Images"></span>
 
@@ -212,6 +208,29 @@
                             </div>
 
                             <div class="form-group col-md-3">
+                                <button id="reviewButton" type="button" class="btn btn-info" style="margin-top: 5px;">Review</button>
+                            </div>
+
+                            <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="reviewModalLabel">Review Data</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body" id="reviewModalBody">
+                                            <!-- Review data will be displayed here -->
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-3">
                                 @if (Model != null && Model.ItemMasterForFarmingId.HasValue)
                                 {
                                     <!-- Display the ItemId if available -->
@@ -235,6 +254,28 @@
 
 </div>
 
+<script>
+    function onChangeSector(args) {
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/Category/GetCategoryBySectorId",
+            data: { sectorId: args.value },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                var categoryDropDown = document.getElementById("CategoryId").ej2_instances[0];
+                categoryDropDown.dataSource = result;
+                categoryDropDown.dataBind();
+
+                categoryDropDown.value = null;
+            },
+            error: function () {
+
+            }
+        }); 
+    }
+</script>
 
 <script>
     function onChangeCategory(args) {
@@ -246,6 +287,7 @@
             dataType: "json",
             success: function (result) {
                 console.log(result);
+
                 var subcategoryDropDown = document.getElementById("SubCategory1Id").ej2_instances[0];
                 subcategoryDropDown.dataSource = result;
                 subcategoryDropDown.dataBind();
@@ -258,6 +300,33 @@
         });
     }
 </script>
+
+<script>
+    function onChangeSubCategory1(args) {
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/SubCategory1/GetSubCategory1ById",
+            data: { subCategory1Id: args.value },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+
+                var gstTextbox = document.getElementById("GST");
+                var hsnTextbox = document.getElementById("HSN");
+
+                gstTextbox.value = result.gst;
+                hsnTextbox.value = result.hsn;
+              
+            },
+            error: function () {
+
+            }
+        });
+    }
+</script>
+
+
 
 @{
     if (TempData["msg"] != null)
@@ -279,9 +348,16 @@
 
 @section scripts{
 
-
     <script>
-       
+
+
+        function onSectorNamefiltering(e) {
+            var query = new ej.data.Query();
+            query = (e.text !== '') ? query.where('SectorName', 'startswith', e.text, true) : query;
+            e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.Sectors)), query);
+        }
+
+
         function onCategoryNamefiltering(e) {
             var query = new ej.data.Query();
             query = (e.text !== '') ? query.where('CategoryName', 'startswith', e.text, true) : query;
@@ -301,8 +377,6 @@
         //}
 
     </script>
-
-
 
     <script>
         function readThumbnailURL(input) {
@@ -363,6 +437,48 @@
             updateButtonsVisibility();
         });
 
+    </script>
+
+    <script>
+        // Function to gather filled data and display in a popup
+        function reviewData() {
+            // Collect data from form fields
+            var sectorId = $("#SectorId").val() || '';
+            var categoryId = $("#CategoryId").val() || '';
+            var subCategory1Id = $("#SubCategory1Id").val() || '';
+            var uomId = $("#UOMId").val() || '';
+            var productName = $("#ProductName").val() || '';
+            var qtyPerKg = $("#QtyPerKg").val() || '';
+            var price = $("#Price").val() || '';
+            var minQty = $("#MinQty").val() || '';
+            var gst = $("#GST").val() || '';
+            var hsn = $("#HSN").val() || '';
+            var harvestDate = $("#HarvestDate").val() || '';
+
+            // Create HTML for displaying in the modal
+            var reviewHtml = "<b>Sector ID:</b> " + sectorId + "<br>";
+            reviewHtml += "<b>Category ID:</b> " + categoryId + "<br>";
+            reviewHtml += "<b>SubCategory1 ID:</b> " + subCategory1Id + "<br>";
+            reviewHtml += "<b>UOM:</b> " + uomId + "<br>";
+            reviewHtml += "<b>Product Name:</b> " + productName + "<br>";
+            reviewHtml += "<b>Qty Per Kg:</b> " + qtyPerKg + "<br>";
+            reviewHtml += "<b>Price:</b> " + price + "<br>";
+            reviewHtml += "<b>Min Qty:</b> " + minQty + "<br>";
+            reviewHtml += "<b>GST:</b> " + gst + "<br>";
+            reviewHtml += "<b>HSN:</b> " + hsn + "<br>";
+            reviewHtml += "<b>Harvest Date:</b> " + harvestDate + "<br>";
+
+            // Display the data in the modal
+            $("#reviewModalBody").html(reviewHtml);
+
+            // Show the modal
+            $("#reviewModal").modal("show");
+        }
+
+        // Attach click event handler to the "Review" button
+        $('#reviewButton').click(function () {
+            reviewData();
+        });
     </script>
 
 }

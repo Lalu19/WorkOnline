@@ -17,5 +17,6 @@ namespace CloudVOffice.Services.ProductCategories
         public MessageEnum DeleteSector(int SectorId, Int64 DeletedBy);
         public List<Sector> GetSectorList();
         public Sector GetSectorById(int SectorId);
+        public List<Sector> GetSectorListforFarmerProduces();
     }
 }

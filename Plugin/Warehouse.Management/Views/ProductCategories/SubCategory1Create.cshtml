@@ -71,18 +71,34 @@
                             </div>
 
 
-                          @*<div class="form-group col-md-3">
-                                <label for="CategoryId" class="form-label">Category Name</label>
-                                <ejs-dropdownlist id="CategoryId" allowFiltering="true" ejs-for="@Model.CategoryId" filtering="onSubCategoryNamefiltering" change="onChangeCategory" dataSource="@(new SelectList((IEnumerable)ViewBag.categoryList, "CategoryId", "CategoryName").Items)" placeholder="Select Category" popupHeight="220px">
-                                    <e-dropdownlist-fields text="CategoryName" value="CategoryId"></e-dropdownlist-fields>
-                                </ejs-dropdownlist>
-                                <span asp-validation-for="CategoryId"></span>
+                            @*<div class="form-group col-md-3">
+                            <label for="CategoryId" class="form-label">Category Name</label>
+                            <ejs-dropdownlist id="CategoryId" allowFiltering="true" ejs-for="@Model.CategoryId" filtering="onSubCategoryNamefiltering" dataSource="@(new SelectList((IEnumerable)ViewBag.categoryList, "CategoryId", "CategoryName").Items)" placeholder="Select Category" popupHeight="220px">
+                            <e-dropdownlist-fields text="CategoryName" value="CategoryId"></e-dropdownlist-fields>
+                            </ejs-dropdownlist>
+                            <span asp-validation-for="CategoryId"></span>
                             </div>*@
 
                             <div class="form-group col-md-3">
                                 <label for="SubCategory1Name" class="form-label">SubCategory1 Name</label>
                                 <input asp-for="@Model.SubCategory1Name" type="text" class="form-control" autofocus="autofocus" placeholder="SubCategory1 Name" />
                                 <span asp-validation-for="SubCategory1Name"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-3">
+                                <label for="GST" class="form-label">GST</label>
+                                <input asp-for="@Model.GST" type="text" class="form-control" autofocus="autofocus" placeholder="GST" />
+                                <span asp-validation-for="GST"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="HSN" class="form-label">HSN</label>
+                                <input asp-for="@Model.HSN" type="text" class="form-control" autofocus="autofocus" placeholder="HSN" />
+                                <span asp-validation-for="HSN"></span>
                             </div>
 
                         </div>
@@ -142,7 +158,6 @@
         });
     }
 </script>
-
 
 <script>
     function onChangeSector(args) {
