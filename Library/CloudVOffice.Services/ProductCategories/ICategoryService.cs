@@ -17,8 +17,6 @@ namespace CloudVOffice.Services.ProductCategories
         public MessageEnum DeleteCategory(int CategoryId, Int64 DeletedBy);
         public List<Category> GetCategoryList();
         public Category GetCategoryById(int CategoryId);
-
         public List<Category> GetCategoryBySectorId(int SectorId);
-
     }
 }
