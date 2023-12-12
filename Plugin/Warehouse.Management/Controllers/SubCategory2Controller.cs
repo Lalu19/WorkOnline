@@ -18,14 +18,18 @@ namespace Warehouse.Management.Controllers
     {
         private readonly ISubCategory2Service _subcategory2Service;
         private readonly ISubCategory1Service _subcategory1Service;
-        public SubCategory2Controller(ISubCategory2Service subcategory2Service, ISubCategory1Service subcategory1Service)
+        private readonly ISectorService _sectorService;
+        public SubCategory2Controller(ISubCategory2Service subcategory2Service, ISubCategory1Service subcategory1Service, ISectorService sectorService)
         {
             _subcategory2Service = subcategory2Service;
             _subcategory1Service = subcategory1Service;
+            _sectorService = sectorService;
         }
         [HttpGet]
         public IActionResult SubCategory2Create(int? SubCategory2Id)
         {
+            ViewBag.SectorList = _sectorService.GetSectorList();
+
             ViewBag.subcategory1List = _subcategory1Service.GetSubCategory1List();
             SubCategory2DTO subcategory2DTO = new SubCategory2DTO();
 
@@ -33,6 +37,8 @@ namespace Warehouse.Management.Controllers
             {
                 SubCategory2 d = _subcategory2Service.GetSubCategory2ById(int.Parse(SubCategory2Id.ToString()));
 
+                subcategory2DTO.SectorId = d.SectorId;
+                subcategory2DTO.CategoryId = d.CategoryId;
                 subcategory2DTO.SubCategory1Id = d.SubCategory1Id;
                 subcategory2DTO.SubCategory2Name = d.SubCategory2Name;
 
@@ -86,6 +92,7 @@ namespace Warehouse.Management.Controllers
                     }
                 }
             }
+            ViewBag.SectorList = _sectorService.GetSectorList();
 
             ViewBag.subcategory1List = _subcategory1Service.GetSubCategory1List();
             return View("~/Plugins/Warehouse.Management/Views/ProductCategories/SubCategory2Create.cshtml", subcategory2DTO);

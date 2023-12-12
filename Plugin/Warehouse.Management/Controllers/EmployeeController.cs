@@ -66,8 +66,8 @@ namespace Warehouse.Management.Controllers
 		{
 			employeeDTO.CreatedBy = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
 
-			if(ModelState.IsValid)
-			{
+			//if(ModelState.IsValid)
+			//{
 				if(employeeDTO.EmployeeId == null)   //during creation this will get true, as there will be no EmpId at creation
 				{
 					var a = _employeeService.EmployeeCreate(employeeDTO);
@@ -106,7 +106,7 @@ namespace Warehouse.Management.Controllers
 						ModelState.AddModelError("", "Un-Expected Error");
 					}
 				}
-			}
+			//}
             ViewBag.WareHouses = _wareHouseService.GetWareHouseList();
             ViewBag.Vehicles = _vehicleService.GetVehicleList();
             ViewBag.Employees = _employeeService.GetEmployees();

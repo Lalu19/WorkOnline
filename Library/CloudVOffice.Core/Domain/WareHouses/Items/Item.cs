@@ -10,6 +10,9 @@ namespace CloudVOffice.Core.Domain.WareHouses.Items
     public class Item : IAuditEntity, ISoftDeletedEntity
     {
         public Int64 ItemId { get; set; }
+        public int? SectorId { get; set; }
+        public int? CategoryId { get; set; }
+        public int? SubCategory1Id { get; set; }
         public string ItemName { get; set; }
         public string CompanyName { get; set; }
         public string BrandName { get; set; }

@@ -4,6 +4,7 @@
 
 @{
     Layout = "_MainAppLayout";
+    ViewData["Title"] = "Sub Category1";
 }
 @addTagHelper *, Syncfusion.EJ2
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
@@ -39,7 +40,7 @@
 
                         <div class="row">
                             <div class="col-md-10">
-                                <b>Category Create</b>
+                                <b>SubCategory1 Create</b>
                             </div>
                             <div class="col-md-2 ">
                                 <a href="/WareHouse/SubCategory1/SubCategory1View" class="btn btn-primary btn-sm float-right"><i class="icon-list2"></i> List</a>
@@ -53,12 +54,30 @@
                             <input asp-for="@Model.SubCategory1Id" type="hidden" />
 
                             <div class="form-group col-md-3">
+                                <label for="SectorId" class="form-label">Sector Name</label>
+                                <ejs-dropdownlist id="SectorId" allowFiltering="true" ejs-for="@Model.SectorId" filtering="onSectorNamefiltering" change="onChangeSector" dataSource="@(new SelectList((IEnumerable)ViewBag.SectorList, "SectorId", "SectorName").Items)" placeholder="Select Sector" popupHeight="220px">
+                                    <e-dropdownlist-fields text="SectorName" value="SectorId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="SectorId"></span>
+                            </div>
+
+
+                            <div class="form-group col-md-3">
+                                <label for="CategoryId" class="form-label">Category Name</label>
+                                <ejs-dropdownlist id="CategoryId" allowFiltering="true" ejs-for="@Model.CategoryId" placeholder="Select Category" popupHeight="220px">
+                                    <e-dropdownlist-fields text="categoryName" value="categoryId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="CategoryId"></span>
+                            </div>
+
+
+                          @*<div class="form-group col-md-3">
                                 <label for="CategoryId" class="form-label">Category Name</label>
                                 <ejs-dropdownlist id="CategoryId" allowFiltering="true" ejs-for="@Model.CategoryId" filtering="onSubCategoryNamefiltering" change="onChangeCategory" dataSource="@(new SelectList((IEnumerable)ViewBag.categoryList, "CategoryId", "CategoryName").Items)" placeholder="Select Category" popupHeight="220px">
                                     <e-dropdownlist-fields text="CategoryName" value="CategoryId"></e-dropdownlist-fields>
                                 </ejs-dropdownlist>
                                 <span asp-validation-for="CategoryId"></span>
-                            </div>
+                            </div>*@
 
                             <div class="form-group col-md-3">
                                 <label for="SubCategory1Name" class="form-label">SubCategory1 Name</label>
@@ -81,6 +100,20 @@
 </div>
 
 
+<script>
+    function onSectorNamefiltering(e) {
+        var query = new ej.data.Query();
+        query = (e.text !== '') ? query.where('SectorName', 'startswith', e.text, true) : query;
+        e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.SectorList)), query);
+    }
+</script>
+<script>
+    function onCategoryNamefiltering(e) {
+        var query = new ej.data.Query();
+        query = (e.text !== '') ? query.where('CategoryName', 'startswith', e.text, true) : query;
+        e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.CategoryList)), query);
+    }
+</script>
 <script>
     function onSubCategoryNamefiltering(e) {
         var query = new ej.data.Query();
@@ -111,3 +144,25 @@
 </script>
 
 
+<script>
+    function onChangeSector(args) {
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/Category/GetCategoryBySectorId",
+            data: { sectorId: args.value },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                var categoryDropDown = document.getElementById("CategoryId").ej2_instances[0];
+                categoryDropDown.dataSource = result;
+                categoryDropDown.dataBind();
+
+                categoryDropDown.value = null;
+            },
+            error: function () {
+
+            }
+        });
+    }
+</script>

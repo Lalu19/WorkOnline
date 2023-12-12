@@ -65,7 +65,8 @@ namespace CloudVOffice.Data.Persistence
 		public virtual DbSet<Employee> Employees { get; set; }        
 		public virtual DbSet<Item> Items { get; set; }
 		public virtual DbSet<Vendor> Vendors { get; set; }
-	
+        public virtual DbSet<VendorOnboarding> VendorOnboardings { get; set; }
+		public virtual DbSet<ItemMasterForFarming> ItemMasterForFarmings { get; set; }
 		
         #endregion
 
@@ -75,7 +76,6 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<SubCategory1> SubCategories1 { get; set; }
         public virtual DbSet<SubCategory2> SubCategories2 { get; set; }
-        public virtual DbSet<VendorOnboarding> VendorOnboardings { get; set; }
 
         #endregion
 		
@@ -271,6 +271,23 @@ namespace CloudVOffice.Data.Persistence
              .HasDefaultValue(false)
              .ValueGeneratedNever();
 
+            modelBuilder.Entity<VendorOnboarding>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<VendorOnboarding>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
+
+            modelBuilder.Entity<ItemMasterForFarming>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<ItemMasterForFarming>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
 
             #endregion
 
@@ -373,7 +390,15 @@ namespace CloudVOffice.Data.Persistence
             modelBuilder.Entity<SubCategory2>()
 .Property(s => s.CreatedDate)
 .HasDefaultValueSql("getdate()");
-			
+			modelBuilder.Entity<MOM>()
+		 .Property(s => s.CreatedDate)
+		 .HasDefaultValueSql("getdate()");
+
+			modelBuilder.Entity<MOM>()
+			 .Property(s => s.Deleted)
+			 .HasDefaultValue(false)
+			 .ValueGeneratedNever();
+
 			modelBuilder.Entity<SubCategory2>()
 			 .Property(s => s.Deleted)
 			 .HasDefaultValue(false)

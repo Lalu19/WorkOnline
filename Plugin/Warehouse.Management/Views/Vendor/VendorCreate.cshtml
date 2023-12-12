@@ -37,16 +37,16 @@
 			<div class="card">
 				<form asp-route="/WareHouse/Vendor/VendorCreate" method="post" autocomplete="off" enctype="multipart/form-data" onsubmit="prepareFormData(event)">
 
-				    <div class="card-header">
-					   <div class="row">
-						<div class="col-md-8">
-							Vendor
-						</div>
-						<div class="col-md-4 text-right float-right">
-							<a href="/WareHouse/Vendor/VendorView" class="btn btn-success btn-sm float-right"><i class="icon-list2"></i> List </a>
+					<div class="card-header">
+						<div class="row">
+							<div class="col-md-8">
+								Vendor
+							</div>
+							<div class="col-md-4 text-right float-right">
+								<a href="/WareHouse/Vendor/VendorView" class="btn btn-success btn-sm float-right"><i class="icon-list2"></i> List </a>
+							</div>
 						</div>
 					</div>
-				    </div>
 
 					<div class="card-body">
 
@@ -54,7 +54,11 @@
 							<input asp-for="@Model.VendorId" type="hidden" />
 
 							<div class="form-group col-md-3">
+<<<<<<< HEAD
 								<label for="SectorId" class="form-label">Sector</label>
+=======
+								<label for="SectorId" class="form-label">Sector Name</label>
+>>>>>>> 0ae461bd02fe5bc29efb208ce2ea850bc611f184
 								<ejs-dropdownlist id="SectorId" allowFiltering="true" ejs-for="@Model.SectorId" filtering="onSectorNamefiltering" change="onChangeSector" dataSource="@(new SelectList((IEnumerable)ViewBag.SectorList, "SectorId", "SectorName").Items)" placeholder="Select Sector" popupHeight="220px">
 									<e-dropdownlist-fields text="SectorName" value="SectorId"></e-dropdownlist-fields>
 								</ejs-dropdownlist>
@@ -63,6 +67,7 @@
 
 
 							<div class="form-group col-md-3">
+<<<<<<< HEAD
 
 								<label for="CategoryId" class="form-label">Category Name&nbsp;</label>
 
@@ -73,6 +78,12 @@
 									<e-dropdownlist-fields text="categoryName" value="categoryId"></e-dropdownlist-fields>
 								</ejs-dropdownlist>
 
+=======
+								<label for="CategoryId" class="form-label">Category Name</label>
+								<ejs-dropdownlist id="CategoryId" allowFiltering="true" ejs-for="@Model.CategoryId" placeholder="Select Category" popupHeight="220px">
+									<e-dropdownlist-fields text="categoryName" value="categoryId"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+>>>>>>> 0ae461bd02fe5bc29efb208ce2ea850bc611f184
 								<span asp-validation-for="CategoryId"></span>
 							</div>
 
@@ -118,7 +129,7 @@
 							<div class="form-group col-md-3">
 
 								<label for="Mobile1" class="form-label">Mobile Number&nbsp;</label>
-								<input asp-for="@Model.Mobile1" type="text" class="form-control" autofocus="autofocus" placeholder="Mobile1" />
+								<input asp-for="@Model.Mobile1" type="text" class="form-control" autofocus="autofocus" placeholder="Mobile Number" />
 								<span asp-validation-for="Mobile1"></span>
 							</div>
 
@@ -130,21 +141,21 @@
 							<div class="form-group col-md-3">
 
 								<label for="Mobile2" class="form-label">Alternate Mobile Number&nbsp;</label>
-								<input asp-for="@Model.Mobile2" type="text" class="form-control" autofocus="autofocus" placeholder="Mobile2" />
+								<input asp-for="@Model.Mobile2" type="text" class="form-control" autofocus="autofocus" placeholder="Alternate Mobile Number" />
 								<span asp-validation-for="Mobile2"></span>
 							</div>
 
 							<div class="form-group col-md-3">
 
 								<label for="MailId" class="form-label">Mail Id&nbsp;</label>
-								<input asp-for="@Model.MailId" type="text" class="form-control" autofocus="autofocus" placeholder="MailId" />
+								<input asp-for="@Model.MailId" type="text" class="form-control" autofocus="autofocus" placeholder="Mail Id" />
 								<span asp-validation-for="MailId"></span>
 							</div>
 
 							<div class="form-group col-md-3">
 
 								<label for="PoCName" class="form-label">PoC Name&nbsp;</label>
-								<input asp-for="@Model.PoCName" type="text" class="form-control" autofocus="autofocus" placeholder="PoCName" />
+								<input asp-for="@Model.PoCName" type="text" class="form-control" autofocus="autofocus" placeholder="PoC Name" />
 								<span asp-validation-for="PoCName"></span>
 							</div>
 
@@ -180,11 +191,38 @@
 			</div>
 
 
-
 		</div>
 	</div>
 
 </div>
+
+
+<script>
+	function onChangeSector(args) {
+		$.ajax({
+			type: "GET",
+			url: "/WareHouse/Category/GetCategoryBySectorId",
+			data: { sectorId: args.value },
+			contentType: "application/json",
+			dataType: "json",
+			success: function (result) {
+				console.log(result);
+				var categoryDropDown = document.getElementById("CategoryId").ej2_instances[0];
+				categoryDropDown.dataSource = result;
+				categoryDropDown.dataBind();
+
+				categoryDropDown.value = null;
+			},
+			error: function () {
+
+			}
+		});
+	}
+</script>
+
+
+
+
 <script>
 	function onWareHouseNamefiltering(e) {
 		var query = new ej.data.Query();
