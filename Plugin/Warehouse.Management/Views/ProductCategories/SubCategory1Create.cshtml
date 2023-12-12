@@ -137,6 +137,27 @@
         e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.categoryList)), query);
     }
 </script>
+<script>
+    function onChangeCategory(args) {
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/Category/GetCategoryBySectorId",
+            data: { sectorId: args.value },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                var sectorDropDown = document.getElementById("SectorId").ej2_instances[0];
+                sectorDropDown.dataSource = result;
+                sectorDropDown.dataBind();
+
+            },
+            error: function () {
+
+            }
+        });
+    }
+</script>
 
 <script>
     function onChangeSector(args) {

@@ -54,6 +54,9 @@
 							<input asp-for="@Model.VendorId" type="hidden" />
 
 							<div class="form-group col-md-3">
+
+								<label for="SectorId" class="form-label">Sector</label>
+
 								<label for="SectorId" class="form-label">Sector Name</label>
 								<ejs-dropdownlist id="SectorId" allowFiltering="true" ejs-for="@Model.SectorId" filtering="onSectorNamefiltering" change="onChangeSector" dataSource="@(new SelectList((IEnumerable)ViewBag.SectorList, "SectorId", "SectorName").Items)" placeholder="Select Sector" popupHeight="220px">
 									<e-dropdownlist-fields text="SectorName" value="SectorId"></e-dropdownlist-fields>
@@ -63,7 +66,11 @@
 
 
 							<div class="form-group col-md-3">
-								<label for="CategoryId" class="form-label">Category Name</label>
+								<label for="CategoryId" class="form-label">Category Name&nbsp;</label>
+
+								@*<ejs-dropdownlist id="CategoryId" allowFiltering="true" ejs-for="@Model.CategoryId" filtering="onCategoryNamefiltering" dataSource="@(new SelectList((IEnumerable)ViewBag.CategoryList, "CategoryId", "CategoryName").Items)" placeholder="Select Category" popupHeight="220px">
+									<e-dropdownlist-fields text="CategoryName" value="CategoryId"></e-dropdownlist-fields>
+								</ejs-dropdownlist>*@
 								<ejs-dropdownlist id="CategoryId" allowFiltering="true" ejs-for="@Model.CategoryId" placeholder="Select Category" popupHeight="220px">
 									<e-dropdownlist-fields text="categoryName" value="categoryId"></e-dropdownlist-fields>
 								</ejs-dropdownlist>
@@ -232,5 +239,27 @@
 		var query = new ej.data.Query();
 		query = (e.text !== '') ? query.where('GSTValue', 'startswith', e.text, true) : query;
 		e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.GSTList)), query);
+	}
+</script>
+<script>
+	function onChangeSector(args) {
+		$.ajax({
+			type: "GET",
+			url: "/WareHouse/Category/GetCategoryBySectorId",
+			data: { sectorId: args.value },
+			contentType: "application/json",
+
+			dataType: "json",
+			success: function (result) {
+				console.log(result);
+				var sectorDropDown = document.getElementById("CategoryId").ej2_instances[0];
+				sectorDropDown.dataSource = result;
+				sectorDropDown.dataBind();
+
+			},
+			error: function () {
+
+			}
+		});
 	}
 </script>

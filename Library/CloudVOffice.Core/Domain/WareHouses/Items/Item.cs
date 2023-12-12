@@ -13,12 +13,17 @@ namespace CloudVOffice.Core.Domain.WareHouses.Items
         public int? SectorId { get; set; }
         public int? CategoryId { get; set; }
         public int? SubCategory1Id { get; set; }
+        public string? SectorName { get; set; }
+        public string? CategoryName { get; set; }
+        public string? SubCategory1Name { get; set; }
+        public string? HSN { get; set; }
         public string ItemName { get; set; }
         public string CompanyName { get; set; }
         public string BrandName { get; set; }
-        public double UnitOfMeasurement { get; set; }
-        public int? CaseWeight { get; set; }
-        public int? UnitPerCase { get; set; }
+        public double ProductWeight { get; set; }
+        public Int64? UnitId { get; set; }
+        public double? CaseWeight { get; set; }
+        public double? UnitPerCase { get; set; }
         public DateTime? ManufactureDate { get; set; }
         public DateTime? ExpiryDate { get; set; }
         public string? Barcode { get; set; }

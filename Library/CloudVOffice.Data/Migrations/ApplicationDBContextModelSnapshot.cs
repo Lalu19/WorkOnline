@@ -1549,11 +1549,14 @@ namespace CloudVOffice.Data.Migrations
                     b.Property<double?>("CGST")
                         .HasColumnType("float");
 
-                    b.Property<int?>("CaseWeight")
-                        .HasColumnType("int");
+                    b.Property<double?>("CaseWeight")
+                        .HasColumnType("float");
 
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CompanyName")
                         .IsRequired()
@@ -1573,6 +1576,9 @@ namespace CloudVOffice.Data.Migrations
 
                     b.Property<DateTime?>("ExpiryDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("HSN")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("HandlingType")
                         .IsRequired()
@@ -1594,6 +1600,9 @@ namespace CloudVOffice.Data.Migrations
                     b.Property<DateTime?>("ManufactureDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<double>("ProductWeight")
+                        .HasColumnType("float");
+
                     b.Property<double>("PurchaseCost")
                         .HasColumnType("float");
 
@@ -1606,18 +1615,24 @@ namespace CloudVOffice.Data.Migrations
                     b.Property<int?>("SectorId")
                         .HasColumnType("int");
 
+                    b.Property<string>("SectorName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("SubCategory1Id")
                         .HasColumnType("int");
+
+                    b.Property<string>("SubCategory1Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Thumbnail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("UnitOfMeasurement")
-                        .HasColumnType("float");
+                    b.Property<long?>("UnitId")
+                        .HasColumnType("bigint");
 
-                    b.Property<int?>("UnitPerCase")
-                        .HasColumnType("int");
+                    b.Property<double?>("UnitPerCase")
+                        .HasColumnType("float");
 
                     b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");
@@ -1835,7 +1850,7 @@ namespace CloudVOffice.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("PurchaseYear")
+                    b.Property<DateTime?>("PurchaseYear")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("RC")

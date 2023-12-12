@@ -65,6 +65,8 @@ namespace CloudVOffice.Web.Framework
             services.AddScoped<ISubCategory1Service, SubCategory1Service>();
             services.AddScoped<ISubCategory2Service, SubCategory2Service>();
             services.AddScoped<IVendorService, VendorService>();
+            services.AddScoped<IVendorOnboarding, VendorOnboardingService>();
+
             services.AddScoped<IGSTService, GSTService>();
             services.AddScoped<IHandlingTypeService, HandlingTypeService>();
 

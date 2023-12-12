@@ -58,12 +58,6 @@ namespace CloudVOffice.Data.Persistence
 
         public virtual DbSet<CompanyDetails> CompanyDetails { get; set; }
         public virtual DbSet<EmailTemplate> EmailTemplates { get; set; }
-      
-
-        #endregion
-
-        #region WareHouse
-
         public virtual DbSet<PinCode> PinCodes { get; set; }
         public virtual DbSet<WareHuose> WareHouses { get; set; }
         public virtual DbSet<PinCodeMapping> PinCodeMappings { get; set; }
@@ -393,10 +387,16 @@ namespace CloudVOffice.Data.Persistence
              .ValueGeneratedNever();
 
 
+            modelBuilder.Entity<VendorOnboarding>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
 
+            modelBuilder.Entity<VendorOnboarding>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
 
             #endregion
-
 
             modelBuilder.Seed();
         }

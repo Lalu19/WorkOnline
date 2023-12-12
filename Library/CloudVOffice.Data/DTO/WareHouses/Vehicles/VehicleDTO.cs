@@ -11,7 +11,7 @@
         public string NoC { get; set; }
         public string RC { get; set; }
         public string InsuranceDetails { get; set; }
-        public DateTime PurchaseYear { get; set; }
+        public DateTime? PurchaseYear { get; set; }
         public Int64 CreatedBy { get; set; }
     }
 }

@@ -16,5 +16,6 @@ namespace CloudVOffice.Services.WareHouses.Vendors
         public List<Vendor> GetVendorList();
         public MessageEnum VendorUpdate(VendorDTO vendorDTO);
         public MessageEnum VendorDelete(Int64 vendorId, Int64 DeletedBy);
+
     }
 }
