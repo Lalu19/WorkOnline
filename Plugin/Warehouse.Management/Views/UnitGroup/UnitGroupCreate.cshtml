@@ -38,12 +38,25 @@
 					<div asp-validation-summary="ModelOnly" class="message-error"></div>
 
 
-					<div class="card-header"><b>Unit Group Name&nbsp;<span style="color:red"><b>*</b></span></b></div>
+				@*	<div class="card-header"><b>Unit Group Name&nbsp;<span style="color:red"><b>*</b></span></b></div>*@
+
+					<div class="card-header">
+
+						<div class="row">
+							<div class="col-md-10">
+								<b>Unit Group Create</b>
+							</div>
+							<div class="col-md-2 ">
+								<a href="/WareHouse/UnitGroup/UnitGroupView" class="btn btn-primary btn-sm float-right"><i class="icon-list2"></i> List</a>
+							</div>
+						</div>
+					</div>
+
 					<div class="card-body">
 						<div class="form-row">
 							<div class="form-group col-md-4">
 								<input asp-for="@Model.UnitGroupId" type="hidden" />
-								<label for="CustomerGroupName" class="form-label">Supplier Group Name</label>
+								<label for="CustomerGroupName" class="form-label">Unit Group Name</label>
 								<input asp-for="@Model.UnitGroupName" type="text" class="form-control" autofocus="autofocus" placeholder="Unit Group Name" />
 								<span asp-validation-for="UnitGroupName"></span>
 							</div>
