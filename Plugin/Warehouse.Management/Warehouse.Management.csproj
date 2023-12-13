@@ -39,6 +39,12 @@
 		<None Remove="Views\ProductCategories\SubCategory1View.cshtml" />
 		<None Remove="Views\ProductCategories\SubCategory2Create.cshtml" />
 		<None Remove="Views\ProductCategories\SubCategory2View.cshtml" />
+		<None Remove="Views\UnitConversionFactors\UnitConversionFactorsCreate.cshtml" />
+		<None Remove="Views\UnitConversionFactors\UnitConversionFactorsView.cshtml" />
+		<None Remove="Views\UnitGroup\UnitGroupCreate.cshtml" />
+		<None Remove="Views\UnitGroup\UnitGroupView.cshtml" />
+		<None Remove="Views\Unit\UnitCreate.cshtml" />
+		<None Remove="Views\Unit\UnitView.cshtml" />
 		<None Remove="Views\Vehicle\VehicleCreate.cshtml" />
 		<None Remove="Views\Vehicle\VehicleView.cshtml" />
 		<None Remove="Views\Vendor\VendorCreate.cshtml" />

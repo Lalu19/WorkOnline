@@ -25,6 +25,7 @@ using CloudVOffice.Services.WareHouses.Itemss;
 using CloudVOffice.Services.WareHouses.Vendors;
 using CloudVOffice.Services.WareHouses.GSTs;
 using CloudVOffice.Services.WareHouses.HandlingTypes;
+using CloudVOffice.Services.WareHouses.UOMs;
 
 namespace CloudVOffice.Web.Framework
 {
@@ -72,6 +73,12 @@ namespace CloudVOffice.Web.Framework
 
 			services.AddScoped<IItemService, ItemService>();
 			services.AddScoped<IItemMasterForFarmingService, ItemMasterForFarmingService>();
+            //Unit
+            services.AddScoped<IUnitGroup, UnitGroupService>();
+
+            services.AddScoped<IUnit, UnitService>();
+
+            services.AddScoped<IUnitConversionFactors, UnitConversionFactorsService>();
 
 
 
@@ -83,7 +90,7 @@ namespace CloudVOffice.Web.Framework
 
 
 
-			return services;
+            return services;
 
         }
     }
