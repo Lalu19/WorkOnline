@@ -176,7 +176,7 @@ namespace Warehouse.Management.Controllers
 			//    Guid id = Guid.NewGuid();
 			//    string filename = id.ToString() + extn;
 
-			//    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads/setup");
+			//    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads/itemimage");
 			//    if (!Directory.Exists(uploadsFolder))
 			//    {
 			//        Directory.CreateDirectory(uploadsFolder);
@@ -194,7 +194,7 @@ namespace Warehouse.Management.Controllers
 				Guid id = Guid.NewGuid();
 				string filename = id.ToString() + extn;
 
-				string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads/setup");
+				string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads/itemimage");
 				if (!Directory.Exists(uploadsFolder))
 				{
 					Directory.CreateDirectory(uploadsFolder);
@@ -221,7 +221,7 @@ namespace Warehouse.Management.Controllers
 						string filename = id.ToString() + extn;
 
 						// Construct the full path to save the file
-						string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads/setup");
+						string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads/itemimage");
 						if (!Directory.Exists(uploadsFolder))
 						{
 							Directory.CreateDirectory(uploadsFolder);

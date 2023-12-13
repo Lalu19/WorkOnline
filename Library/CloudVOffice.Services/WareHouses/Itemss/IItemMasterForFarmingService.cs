@@ -1,6 +1,8 @@
 ﻿using CloudVOffice.Core.Domain.Common;
+using CloudVOffice.Core.Domain.ProductCategories;
 using CloudVOffice.Core.Domain.WareHouses.Items;
 using CloudVOffice.Data.DTO.WareHouses.Items;
+using Org.BouncyCastle.Asn1.Mozilla;
 
 namespace CloudVOffice.Services.WareHouses.Itemss
 {
@@ -12,6 +14,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 
         public MessageEnum UpdateItemMasterForFarming(ItemMasterForFarmingDTO itemMasterForFarmingDTO);
         public void GenerateAndSaveBarcodeImage(string itemMasterForFarmingId);
+        public List<Sector> GetSectorListforFarmerProduces();
 
         public ItemMasterForFarming GetItemMasterForFarmingByItemMasterForFarmingId(Int64 itemMasterForFarmingId);
         public List<ItemMasterForFarming> GetItemMasterForFarmingList();

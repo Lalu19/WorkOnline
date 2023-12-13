@@ -1,4 +1,5 @@
 ﻿using CloudVOffice.Core.Domain.Common;
+using CloudVOffice.Core.Domain.ProductCategories;
 using CloudVOffice.Core.Domain.WareHouses.Items;
 using CloudVOffice.Data.DTO.WareHouses.Items;
 using CloudVOffice.Data.Persistence;
@@ -152,9 +153,22 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 				throw;
 			}
 		}
-		
 
-		public void GenerateAndSaveBarcodeImage(string itemMasterForFarmingId)
+        public List<Sector> GetSectorListforFarmerProduces()
+        {
+            try
+            {
+                return _dbContext.Sectors
+                    .Where(x => x.SectorName == "Farmer Produces")
+                    .ToList();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public void GenerateAndSaveBarcodeImage(string itemMasterForFarmingId)
 		{
 			byte[] barcodeImageBytes = GenerateBarcodeImage(itemMasterForFarmingId);
 			SaveBarcodeImageToDatabase(itemMasterForFarmingId, barcodeImageBytes);

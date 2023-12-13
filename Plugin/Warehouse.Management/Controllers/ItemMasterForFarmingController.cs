@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CloudVOffice.Data.DTO.WareHouses.ViewModel;
 
 namespace Warehouse.Management.Controllers
 {
@@ -41,229 +42,91 @@ namespace Warehouse.Management.Controllers
 		[HttpGet]
 		public IActionResult CreateItemMasterForFarming(int? itemMasterForFarmingId)
 		{
-            ViewBag.Sectors = _sectorService.GetSectorListforFarmerProduces();
-            ViewBag.Categories = _categoryService.GetCategoryList();
-            ViewBag.SubCategories = _subCategory1Service.GetSubCategory1List();
+            //ViewBag.Sectors = _sectorService.GetSectorListforFarmerProduces();
+            //ViewBag.Categories = _categoryService.GetCategoryList();
+            //ViewBag.SubCategories = _subCategory1Service.GetSubCategory1List();
 
-            ItemMasterForFarmingDTO itemMaster = new ItemMasterForFarmingDTO();
+
+            var viewForItemMasterFarming = new ViewForItemMasterFarming
+            {
+                    Sectors = _sectorService.GetSectorListforFarmerProduces(),
+                    Categories = _categoryService.GetCategoryList(),
+                    SubCategories = _subCategory1Service.GetSubCategory1List(),
+                    CreatedItemMasterFarmingDTO = new ItemMasterForFarmingDTO()
+                };
+
+
+            //ItemMasterForFarmingDTO itemMaster = new ItemMasterForFarmingDTO();
 
 			if (itemMasterForFarmingId != null)
 			{
 				var itemMaster1 = _itemMasterForFarmingService.GetItemMasterForFarmingByItemMasterForFarmingId(int.Parse(itemMasterForFarmingId.ToString()));
 
-                itemMaster.SectorId=itemMaster1.SectorId;
-				itemMaster.CategoryId = itemMaster1.CategoryId;
-				itemMaster.SubCategory1Id = itemMaster1.SubCategory1Id;
-				itemMaster.Barcode = itemMaster1.Barcode;
-				itemMaster.BarCodeNotAvailable = itemMaster1.BarCodeNotAvailable;
-				itemMaster.UOMId = itemMaster1.UOMId;
-				itemMaster.ProductName = itemMaster1.ProductName;
-				itemMaster.QtyPerKg = itemMaster1.QtyPerKg;
-				itemMaster.Price = itemMaster1.Price;
-				itemMaster.MinQty = itemMaster1.MinQty;
-				itemMaster.GST = itemMaster1.GST;
-				itemMaster.HSN = itemMaster1.HSN;
-				itemMaster.HarvestDate = itemMaster1.HarvestDate;
-				
-				itemMaster.Thumbnail = itemMaster1.Thumbnail;
+                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.SectorId = itemMaster1.SectorId;
+                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.CategoryId = itemMaster1.CategoryId;
+                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.SubCategory1Id = itemMaster1.SubCategory1Id;
+                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.Barcode = itemMaster1.Barcode;
+                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.BarCodeNotAvailable = itemMaster1.BarCodeNotAvailable;
+                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.UOMId = itemMaster1.UOMId;
+                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.ProductName = itemMaster1.ProductName;
+                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.QtyPerKg = itemMaster1.QtyPerKg;
+                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.Price = itemMaster1.Price;
+                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.MinQty = itemMaster1.MinQty;
+                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.GST = itemMaster1.GST;
+                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.HSN = itemMaster1.HSN;
+                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.HarvestDate = itemMaster1.HarvestDate;
+
+                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.Thumbnail = itemMaster1.Thumbnail;
 
 				if (!string.IsNullOrEmpty(itemMaster1.Images))
 				{
-					// Split the string into a list of images
-					itemMaster.Images = itemMaster1.Images.Split(',').ToList();
+                    // Split the string into a list of images
+                    viewForItemMasterFarming.CreatedItemMasterFarmingDTO.Images = itemMaster1.Images.Split(',').ToList();
 				}
 				else
 				{
-					itemMaster.Images = new List<string>();
+                    viewForItemMasterFarming.CreatedItemMasterFarmingDTO.Images = new List<string>();
 				}
 
 			}
 
-			return View("~/Plugins/Warehouse.Management/Views/Item/ItemMasterForFarmingCreate.cshtml", itemMaster);
+			return View("~/Plugins/Warehouse.Management/Views/Item/ItemMasterForFarmingCreate.cshtml", viewForItemMasterFarming);
 		}
-
-        //[HttpPost]
-        //public IActionResult CreateItemMasterForFarming(ItemMasterForFarmingDTO itemMasterForFarmingDTO, string btnSave, string btnGenerateBarcode)
-        //{
-        //	itemMasterForFarmingDTO.CreatedBy = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
-
-
-        //	if (itemMasterForFarmingDTO.ThumbnailUp != null)
-        //	{
-        //		FileInfo fileInfo = new FileInfo(itemMasterForFarmingDTO.ThumbnailUp.FileName);
-        //		string extn = fileInfo.Extension.ToLower();
-        //		Guid id = Guid.NewGuid();
-        //		string filename = id.ToString() + extn;
-
-        //		string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads/setup");
-        //		if (!Directory.Exists(uploadsFolder))
-        //		{
-        //			Directory.CreateDirectory(uploadsFolder);
-        //		}
-        //		string uniqueFileName = Guid.NewGuid().ToString() + "_" + filename;
-        //		string imagePath = Path.Combine(uploadsFolder, uniqueFileName);
-        //		itemMasterForFarmingDTO.ThumbnailUp.CopyTo(new FileStream(imagePath, FileMode.Create));
-        //		itemMasterForFarmingDTO.Thumbnail = uniqueFileName;
-        //	}
-
-
-
-        //	if (itemMasterForFarmingDTO.ImagesUp != null && itemMasterForFarmingDTO.ImagesUp.Count > 0)
-        //	{
-        //		foreach (var image in itemMasterForFarmingDTO.ImagesUp)
-        //		{
-        //			if (image != null && image.Length > 0)
-        //			{
-        //				// Get file extension
-        //				string extn = Path.GetExtension(image.FileName).ToLower();
-
-        //				// Generate unique filename
-        //				Guid id = Guid.NewGuid();
-        //				string filename = id.ToString() + extn;
-
-        //				// Construct the full path to save the file
-        //				string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads/setup");
-        //				if (!Directory.Exists(uploadsFolder))
-        //				{
-        //					Directory.CreateDirectory(uploadsFolder);
-        //				}
-        //				string uniqueFileName = Guid.NewGuid().ToString() + "_" + filename;
-        //				string imagePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-        //				// Copy the stream to the file
-        //				using (var fileStream = new FileStream(imagePath, FileMode.Create))
-        //				{
-        //					image.CopyTo(fileStream);
-        //				}
-
-        //				// Store the unique filename in your model
-        //				itemMasterForFarmingDTO.Images.Add(uniqueFileName); // Assuming Images is a List<string> or similar
-        //			}
-        //		}
-        //	}
-
-
-
-        //	if (itemMasterForFarmingDTO.ItemMasterForFarmingId == null)
-        //	{
-
-        //		if (!string.IsNullOrEmpty(btnSave) && itemMasterForFarmingDTO.BarCodeNotAvailable == false)
-        //		{
-
-        //			var createdItemDTO = _itemMasterForFarmingService.CreateItemMasterForFarming(itemMasterForFarmingDTO);
-
-        //			if (createdItemDTO != null)
-        //			{
-        //				TempData["msg"] = MessageEnum.Success;
-        //				// Pass the createdItemDTO directly to the view
-        //				return View("~/Plugins/Warehouse.Management/Views/Item/ItemMasterForFarmingView.cshtml");
-        //			}
-        //			else
-        //			{
-        //				TempData["msg"] = MessageEnum.Duplicate;
-        //				ModelState.AddModelError("", "Item Already Exists");
-        //			}
-        //		}
-
-        //		if (!string.IsNullOrEmpty(btnSave) && itemMasterForFarmingDTO.BarCodeNotAvailable == true)
-        //		{
-
-        //			var createdItemDTO = _itemMasterForFarmingService.CreateItemMasterForFarming(itemMasterForFarmingDTO);
-
-        //			if (createdItemDTO != null)
-        //			{
-        //				TempData["msg"] = MessageEnum.Success;
-
-
-        //				return View("~/Plugins/Warehouse.Management/Views/Item/ItemMasterForFarmingCreate.cshtml", createdItemDTO);
-        //			}
-        //			else
-        //			{
-        //				TempData["msg"] = MessageEnum.Duplicate;
-        //				ModelState.AddModelError("", "Item Already Exists");
-        //			}
-        //		}
-
-
-        //		if (!string.IsNullOrEmpty(btnGenerateBarcode) && itemMasterForFarmingDTO.BarCodeNotAvailable == true)
-        //		{
-
-        //			if (itemMasterForFarmingDTO.BarCodeNotAvailable)
-        //			{
-        //				_itemMasterForFarmingService.GenerateAndSaveBarcodeImage(btnGenerateBarcode);
-
-        //				TempData["msg"] = "Barcode generated and Item saved successfully";
-        //			}
-        //		}
-        //	}
-
-        //	else
-        //	{
-        //		var a = _itemMasterForFarmingService.UpdateItemMasterForFarming(itemMasterForFarmingDTO);
-        //		if (a == MessageEnum.Updated)
-        //		{
-        //			TempData["msg"] = MessageEnum.Updated;
-        //			return Redirect("/WareHouse/ItemMasterForFarming/ItemMasterForFarmingView");
-        //		}
-        //		else if (a == MessageEnum.Duplicate)
-        //		{
-        //			TempData["msg"] = MessageEnum.Duplicate;
-        //			ModelState.AddModelError("", "Item Already Exists");
-        //		}
-        //		else
-        //		{
-        //			TempData["msg"] = MessageEnum.UnExpectedError;
-        //			ModelState.AddModelError("", "Un-Expected Error");
-        //		}
-        //	}
-
-
-        //	ViewBag.Items = _itemMasterForFarmingService.GetItemMasterForFarmingList();
-
-        //          ViewBag.CategoryList = _categoryService.GetCategoryList();
-        //          ViewBag.SubCategory1List = _subCategory1Service.GetSubCategory1List();
-
-
-        //          //Continue with the rest of your logic or return the view as needed
-        //          return View("~/Plugins/Warehouse.Management/Views/Item/ItemMasterForFarmingView.cshtml", ViewBag.Items);
-
-        //}
-
 
 
         [HttpPost]
-        public IActionResult CreateItemMasterForFarming(ItemMasterForFarmingDTO itemMasterForFarmingDTO)
+        public IActionResult CreateItemMasterForFarming(ViewForItemMasterFarming viewForItemMasterFarming)
         {
-            itemMasterForFarmingDTO.CreatedBy = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
+            viewForItemMasterFarming.CreatedItemMasterFarmingDTO.CreatedBy = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
 
             TempData.Clear();
 
             string btnSave = Request.Form["btnSave"];
             string btnGenerateBarcode = Request.Form["btnGenerateBarcode"];
 
-            if (itemMasterForFarmingDTO.ThumbnailUp != null)
+            if (viewForItemMasterFarming.CreatedItemMasterFarmingDTO.ThumbnailUp != null)
             {
-                FileInfo fileInfo = new FileInfo(itemMasterForFarmingDTO.ThumbnailUp.FileName);
+                FileInfo fileInfo = new FileInfo(viewForItemMasterFarming.CreatedItemMasterFarmingDTO.ThumbnailUp.FileName);
                 string extn = fileInfo.Extension.ToLower();
                 Guid id = Guid.NewGuid();
                 string filename = id.ToString() + extn;
 
 
-                string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads/setup");
+                string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads/farmingimage");
                 if (!Directory.Exists(uploadsFolder))
                 {
                     Directory.CreateDirectory(uploadsFolder);
                 }
                 string uniqueFileName = Guid.NewGuid().ToString() + "_" + filename;
                 string imagePath = Path.Combine(uploadsFolder, uniqueFileName);
-                itemMasterForFarmingDTO.ThumbnailUp.CopyTo(new FileStream(imagePath, FileMode.Create));
-                itemMasterForFarmingDTO.Thumbnail = uniqueFileName;
+                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.ThumbnailUp.CopyTo(new FileStream(imagePath, FileMode.Create));
+                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.Thumbnail = uniqueFileName;
             }
 
 
-            if (itemMasterForFarmingDTO.ImagesUp != null && itemMasterForFarmingDTO.ImagesUp.Count > 0)
+            if (viewForItemMasterFarming.CreatedItemMasterFarmingDTO.ImagesUp != null && viewForItemMasterFarming.CreatedItemMasterFarmingDTO.ImagesUp.Count > 0)
             {
-                foreach (var image in itemMasterForFarmingDTO.ImagesUp)
+                foreach (var image in viewForItemMasterFarming.CreatedItemMasterFarmingDTO.ImagesUp)
                 {
                     if (image != null && image.Length > 0)
                     {
@@ -275,7 +138,7 @@ namespace Warehouse.Management.Controllers
                         string filename = id.ToString() + extn;
 
                         // Construct the full path to save the file
-                        string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads/setup");
+                        string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads/farmingimage");
                         if (!Directory.Exists(uploadsFolder))
                         {
                             Directory.CreateDirectory(uploadsFolder);
@@ -290,7 +153,7 @@ namespace Warehouse.Management.Controllers
                         }
 
                         // Store the unique filename in your model
-                        itemMasterForFarmingDTO.Images.Add(uniqueFileName); // Assuming Images is a List<string> or similar
+                        viewForItemMasterFarming.CreatedItemMasterFarmingDTO.Images.Add(uniqueFileName); // Assuming Images is a List<string> or similar
                     }
                 }
             }
@@ -299,7 +162,7 @@ namespace Warehouse.Management.Controllers
 
             if (btnGenerateBarcode != null)
             {
-                var barcodeResult = GenerateBarcodeButton(itemMasterForFarmingDTO, btnGenerateBarcode);
+                var barcodeResult = GenerateBarcodeButton(viewForItemMasterFarming, btnGenerateBarcode);
                 if (barcodeResult is ViewResult)
                 {
                     return barcodeResult;
@@ -307,19 +170,28 @@ namespace Warehouse.Management.Controllers
             }
 
 
-            if (itemMasterForFarmingDTO.ItemMasterForFarmingId == null)
+            if (viewForItemMasterFarming.CreatedItemMasterFarmingDTO.ItemMasterForFarmingId == null)
             {
                 if (btnSave != null)
                 {
-                    var createdItemDTO = _itemMasterForFarmingService.CreateItemMasterForFarming(itemMasterForFarmingDTO);
+                    var createdItemMasterFarmingDTO = _itemMasterForFarmingService.CreateItemMasterForFarming(viewForItemMasterFarming.CreatedItemMasterFarmingDTO);
 
-                    if (createdItemDTO != null && itemMasterForFarmingDTO.BarCodeNotAvailable == true)
+                    if (createdItemMasterFarmingDTO != null && viewForItemMasterFarming.CreatedItemMasterFarmingDTO.BarCodeNotAvailable == true)
                     {
                         //TempData["msg"] = MessageEnum.Success;
 
-                        return View("~/Plugins/Warehouse.Management/Views/Item/ItemMasterForFarmingCreate.cshtml", createdItemDTO);
+
+                        var viewForItemMasterFarming1 = new ViewForItemMasterFarming
+                        {
+                            CreatedItemMasterFarmingDTO = createdItemMasterFarmingDTO,
+                            Sectors = _sectorService.GetSectorListforFarmerProduces(),
+                            Categories = _categoryService.GetCategoryList(),
+                            SubCategories = _subCategory1Service.GetSubCategory1List(),
+                        };
+
+                        return View("~/Plugins/Warehouse.Management/Views/Item/ItemMasterForFarmingCreate.cshtml", viewForItemMasterFarming1);
                     }
-                    else if (createdItemDTO != null && itemMasterForFarmingDTO.BarCodeNotAvailable == false)
+                    else if (createdItemMasterFarmingDTO != null && viewForItemMasterFarming.CreatedItemMasterFarmingDTO.BarCodeNotAvailable == false)
                     {
                         TempData["msg"] = MessageEnum.Success;
                         return Redirect("/WareHouse/ItemMasterForFarming/ItemMasterForFarmingView");
@@ -334,7 +206,7 @@ namespace Warehouse.Management.Controllers
             }
             else
             {
-                var a = _itemMasterForFarmingService.UpdateItemMasterForFarming(itemMasterForFarmingDTO);
+                var a = _itemMasterForFarmingService.UpdateItemMasterForFarming(viewForItemMasterFarming.CreatedItemMasterFarmingDTO);
                 if (a == MessageEnum.Updated)
                 {
                     TempData["msg"] = MessageEnum.Updated;
@@ -355,9 +227,9 @@ namespace Warehouse.Management.Controllers
 
             ViewBag.Items = _itemMasterForFarmingService.GetItemMasterForFarmingList();
 
-            ViewBag.Sectors = _sectorService.GetSectorListforFarmerProduces();
-            ViewBag.Categories = _categoryService.GetCategoryList();
-            ViewBag.SubCategories = _subCategory1Service.GetSubCategory1List();
+            //ViewBag.Sectors = _sectorService.GetSectorListforFarmerProduces();
+            //ViewBag.Categories = _categoryService.GetCategoryList();
+            //ViewBag.SubCategories = _subCategory1Service.GetSubCategory1List();
 
 
             //Continue with the rest of your logic or return the view as needed
@@ -368,7 +240,7 @@ namespace Warehouse.Management.Controllers
 
 
         [HttpPost]
-        public IActionResult GenerateBarcodeButton(ItemMasterForFarmingDTO itemMasterForFarmingDTO, string btnGenerateBarcode)
+        public IActionResult GenerateBarcodeButton(ViewForItemMasterFarming viewForItemMasterFarming, string btnGenerateBarcode)
         {
             if (btnGenerateBarcode != "btnGenerateBarcode")
             {
@@ -382,7 +254,17 @@ namespace Warehouse.Management.Controllers
             else
             {
                 TempData["msg"] = "Kindly Save the data first";
-                return View("~/Plugins/Warehouse.Management/Views/Item/ItemMasterForFarmingCreate.cshtml", itemMasterForFarmingDTO);
+                var viewForItemMasterFarming1 = new ViewForItemMasterFarming
+                {
+                    CreatedItemMasterFarmingDTO = viewForItemMasterFarming.CreatedItemMasterFarmingDTO,
+                    Sectors = _sectorService.GetSectorListforFarmerProduces(),
+                    Categories = _categoryService.GetCategoryList(),
+                    SubCategories = _subCategory1Service.GetSubCategory1List(),
+                  
+                };
+
+
+                return View("~/Plugins/Warehouse.Management/Views/Item/ItemMasterForFarmingCreate.cshtml", viewForItemMasterFarming1);
             }
         }
 

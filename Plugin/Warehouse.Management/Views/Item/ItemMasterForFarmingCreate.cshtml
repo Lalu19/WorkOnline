@@ -1,11 +1,14 @@
 ﻿@using System.Collections;
 @using Newtonsoft.Json;
-@model CloudVOffice.Data.DTO.WareHouses.Items.ItemMasterForFarmingDTO;
 
-@if (Model != null && Model.ItemMasterForFarmingId.HasValue)
+
+@*@model CloudVOffice.Data.DTO.WareHouses.Items.ItemMasterForFarmingDTO;*@
+@model CloudVOffice.Data.DTO.WareHouses.ViewModel.ViewForItemMasterFarming ;
+
+@if (Model != null && Model.CreatedItemMasterFarmingDTO.ItemMasterForFarmingId.HasValue)
 {
     <!-- Display the ItemId if available -->
-    <p>ItemMasterForFarmingId: @Model.ItemMasterForFarmingId</p>
+    <p>ItemMasterForFarmingId: @Model.CreatedItemMasterFarmingDTO.ItemMasterForFarmingId</p>
 }
 
 @{
@@ -62,88 +65,88 @@
                     <div class="card-body">
 
                         <div class="form-row">
-                            <input asp-for="@Model.ItemMasterForFarmingId" type="hidden" />
+                            <input asp-for="@Model.CreatedItemMasterFarmingDTO.ItemMasterForFarmingId" type="hidden" />
 
 
                             <div class="form-group col-md-3">
                                 <label for="SectorId" class="form-label">Sector Name</label>
-                                <ejs-dropdownlist id="SectorId" allowFiltering="true" ejs-for="@Model.SectorId" allowFiltering="true" change="onChangeSector" dataSource="@(new SelectList((IEnumerable)ViewBag.Sectors, "SectorId", "SectorName").Items)" placeholder="Select Sector" popupHeight="220px">
+                                <ejs-dropdownlist id="SectorId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.SectorId" allowFiltering="true" change="onChangeSector" dataSource="@(new SelectList(Model.Sectors, "SectorId", "SectorName").Items)" placeholder="Select Sector" popupHeight="220px">
                                     <e-dropdownlist-fields text="SectorName" value="SectorId"></e-dropdownlist-fields>
                                 </ejs-dropdownlist>
-                                <span asp-validation-for="SectorId"></span>
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.SectorId"></span>
                             </div>
 
 
                             <div class="form-group col-md-3">
                                 <label for="CategoryId" class="form-label">Category Name</label>
-                                <ejs-dropdownlist id="CategoryId" allowFiltering="true" ejs-for="@Model.CategoryId" change="onChangeCategory" placeholder="Select Category" popupHeight="220px">
+                                <ejs-dropdownlist id="CategoryId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.CategoryId" change="onChangeCategory" placeholder="Select Category" popupHeight="220px">
                                     <e-dropdownlist-fields text="categoryName" value="categoryId"></e-dropdownlist-fields>
                                 </ejs-dropdownlist>
-                                <span asp-validation-for="CategoryId"></span>
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.CategoryId"></span>
                             </div>
 
 
                             <div class="form-group col-md-3">
                                 <label for="SubCategory1Id" class="form-label">SubCategory Name</label>
-                                <ejs-dropdownlist id="SubCategory1Id" allowFiltering="true" ejs-for="@Model.SubCategory1Id" change="onChangeSubCategory1" placeholder="Select SubCategory" popupHeight="220px">
+                                <ejs-dropdownlist id="SubCategory1Id" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.SubCategory1Id" change="onChangeSubCategory1" placeholder="Select SubCategory" popupHeight="220px">
                                     <e-dropdownlist-fields text="subCategory1Name" value="subCategory1Id"></e-dropdownlist-fields>
                                 </ejs-dropdownlist>
-                                <span asp-validation-for="SubCategory1Id"></span>
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.SubCategory1Id"></span>
                             </div>
 
                             <div class="form-group col-md-3">
                                 <label for="ProductName" class="form-label">Product Name &nbsp;</label>
-                                <input asp-for="@Model.ProductName" type="text" id="ProductName" class="form-control" autofocus="autofocus" placeholder="Product Name" />
-                                <span asp-validation-for="ProductName"></span>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.ProductName" type="text" id="ProductName" class="form-control" autofocus="autofocus" placeholder="Product Name" />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.ProductName"></span>
                             </div>
-                           
+
                         </div>
 
                         <div class="form-row">
 
-                             <div class="form-group col-md-3">
+                            <div class="form-group col-md-3">
                                 <label for="UOMId" class="form-label">UOM&nbsp;</label>
-                                <input asp-for="@Model.UOMId" type="text" id="UOMId" class="form-control" autofocus="autofocus" placeholder="UOM" />
-                                <span asp-validation-for="UOMId"></span>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.UOMId" type="text" id="UOMId" class="form-control" autofocus="autofocus" placeholder="UOM" />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.UOMId"></span>
                             </div>
 
                             <div class="form-group col-md-3">
                                 <label for="QtyPerKg" class="form-label">Qty Per Kg&nbsp;</label>
-                                <input asp-for="@Model.QtyPerKg" type="number" id="QtyPerKg" class="form-control" autofocus="autofocus" placeholder="Qty Per Kg" />
-                                <span asp-validation-for="QtyPerKg"></span>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.QtyPerKg" type="number" id="QtyPerKg" class="form-control" autofocus="autofocus" placeholder="Qty Per Kg" />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.QtyPerKg"></span>
                             </div>
 
                             <div class="form-group col-md-3">
                                 <label for="Price" class="form-label">Price &nbsp;</label>
-                                <input asp-for="@Model.Price" type="number" id="Price" class="form-control" autofocus="autofocus" placeholder="Price" />
-                                <span asp-validation-for="Price"></span>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.Price" type="number" id="Price" class="form-control" autofocus="autofocus" placeholder="Price" />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.Price"></span>
                             </div>
 
                             <div class="form-group col-md-3">
                                 <label for="MinQty" class="form-label">Min Qty &nbsp;</label>
-                                <input asp-for="@Model.MinQty" type="number" id="MinQty" class="form-control" autofocus="autofocus" placeholder="MinQty" />
-                                <span asp-validation-for="MinQty"></span>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.MinQty" type="number" id="MinQty" class="form-control" autofocus="autofocus" placeholder="MinQty" />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.MinQty"></span>
                             </div>
 
                         </div>
 
                         <div class="form-row">
-                         
+
                             <div class="form-group col-md-3">
                                 <label for="GST" class="form-label">GST&nbsp;</label>
-                                <input asp-for="@Model.GST" type="number" id="GST" class="form-control" autofocus="autofocus" placeholder="GST" readonly  />
-                                <span asp-validation-for="GST"></span>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.GST" type="number" id="GST" class="form-control" autofocus="autofocus" placeholder="GST" readonly />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.GST"></span>
                             </div>
-                         
+
                             <div class="form-group col-md-3">
                                 <label for="HSN" class="form-label">HSN &nbsp;</label>
-                                <input asp-for="@Model.HSN" type="text" class="form-control" id="HSN" autofocus="autofocus" placeholder="HSN" readonly />
-                                <span asp-validation-for="HSN"></span>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.HSN" type="text" class="form-control" id="HSN" autofocus="autofocus" placeholder="HSN" readonly />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.HSN"></span>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="HarvestDate" class="form-label">Harvest Date &nbsp;</label>
-                                <input asp-for="@Model.HarvestDate" type="date" id="HarvestDate" class="form-control" autofocus="autofocus" placeholder="HarvestDate" />
-                                <span asp-validation-for="HarvestDate"></span>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.HarvestDate" type="date" id="HarvestDate" class="form-control" autofocus="autofocus" placeholder="HarvestDate" />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.HarvestDate"></span>
                             </div>
 
                         </div>
@@ -151,41 +154,41 @@
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="Thumbnail" class="form-label">Thumbnail</label>
-                                <input asp-for="@Model.ThumbnailUp" type="file" id="ThumbnailUp" class="form-control" autofocus="autofocus" placeholder="Upload Image" />
-                                <span asp-validation-for="Thumbnail"></span>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.ThumbnailUp" type="file" id="ThumbnailUp" class="form-control" autofocus="autofocus" placeholder="Upload Image" />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.Thumbnail"></span>
                                 @{
-                                    if (Model.Thumbnail != null)
+                                    if (Model.CreatedItemMasterFarmingDTO.Thumbnail != null)
                                     {
-                                        <img src="/uploads/setup/@Model.Thumbnail" style="height:100px; width:100px" />
-                                        <input type="hidden" asp-for="@Model.Thumbnail" value="@Model.Thumbnail">
+                                        <img src="/uploads/farmingimage/@Model.CreatedItemMasterFarmingDTO.Thumbnail" style="height:100px; width:100px" />
+                                        <input type="hidden" asp-for="@Model.CreatedItemMasterFarmingDTO.Thumbnail" value="@Model.CreatedItemMasterFarmingDTO.Thumbnail">
                                     }
                                 }
                             </div>
 
                             <div class="form-group col-md-3">
                                 <label for="Images" class="form-label">Add Product Images</label>
-                                <input asp-for="@Model.ImagesUp" type="file" id="ImagesUp" class="form-control" multiple />
-                                <span asp-validation-for="Images"></span>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.ImagesUp" type="file" id="ImagesUp" class="form-control" multiple />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.Images"></span>
 
-                                @if (Model.Images != null && Model.Images.Count > 0)
+                                @if (Model.CreatedItemMasterFarmingDTO.Images != null && Model.CreatedItemMasterFarmingDTO.Images.Count > 0)
                                 {
-                                    for (int i = 0; i < Model.Images.Count; i++)
+                                    for (int i = 0; i < Model.CreatedItemMasterFarmingDTO.Images.Count; i++)
                                     {
-                                        <img src="/uploads/setup/@Model.Images[i]" style="height:100px; width:100px" />
-                                        <input type="hidden" name="Images" value="@Model.Images[i]" />
+                                        <img src="/uploads/farmingimage/@Model.CreatedItemMasterFarmingDTO.Images[i]" style="height:100px; width:100px" />
+                                        <input type="hidden" name="Images" value="@Model.CreatedItemMasterFarmingDTO.Images[i]" />
                                     }
                                 }
                             </div>
 
                             <div class="form-group col-md-3">
                                 <label for="Barcode" class="form-label">Barcode &nbsp;</label>
-                                <input asp-for="@Model.Barcode" type="text" class="form-control" autofocus="autofocus" placeholder="Barcode" readonly />
-                                <span asp-validation-for="Barcode"></span>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.Barcode" type="text" class="form-control" autofocus="autofocus" placeholder="Barcode" readonly />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.Barcode"></span>
 
-                                @if (!string.IsNullOrEmpty(Model.Barcode))
+                                @if (!string.IsNullOrEmpty(Model.CreatedItemMasterFarmingDTO.Barcode))
                                 {
                                     <!-- Display the barcode image -->
-                                    <img src="data:image/png;base64,@(Model.Barcode)" alt="Barcode Image" />
+                                    <img src="data:image/png;base64,@(Model.CreatedItemMasterFarmingDTO.Barcode)" alt="Barcode Image" />
                                 }
                             </div>
                         </div>
@@ -193,21 +196,22 @@
                         <div class="form-row">
                             <div class="form-group col-md-3">
 
-                                <label for="BarCodeNotAvailable" class="form-label">BarCode Not Available</label>
+                                <label for="BarCodeNotAvailable" class="form-label">Generate Barcode</label>
                                 <br>
-                                <input asp-for="@Model.BarCodeNotAvailable" type="checkbox" />
-                                <span asp-validation-for="BarCodeNotAvailable"></span>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.BarCodeNotAvailable" type="checkbox" id="BarCodeNotAvailable" />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.BarCodeNotAvailable"></span>
                             </div>
                         </div>
 
                         <br /><br />
 
                         <div class="form-row">
-                            <div class="form-group col-md-3">
+
+                            <div class="form-group col-md-2">
                                 <button id="saveButton" type="submit" name="btnSave" value="btnSave" class="btn btn-primary">Save</button>
                             </div>
 
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-2">
                                 <button id="reviewButton" type="button" class="btn btn-info" style="margin-top: 5px;">Review</button>
                             </div>
 
@@ -230,14 +234,14 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-3">
-                                @if (Model != null && Model.ItemMasterForFarmingId.HasValue)
+                            <div class="form-group col-md-2">
+                                @if (Model != null && Model.CreatedItemMasterFarmingDTO.ItemMasterForFarmingId.HasValue)
                                 {
                                     <!-- Display the ItemId if available -->
-                                    <p>ItemId: @Model.ItemMasterForFarmingId</p>
+                                    <p>ItemMasterForFarmingId: @Model.CreatedItemMasterFarmingDTO.ItemMasterForFarmingId</p>
 
                                     <!-- Set the value of the button to ItemId if available -->
-                                    <button id="generateBarcodeButton" type="submit" class="btn btn-secondary" value="@Model.ItemMasterForFarmingId" name="btnGenerateBarcode" style="margin-top: 5px;">Generate BarCode</button>
+                                    <button id="generateBarcodeButton" type="submit" class="btn btn-secondary" value="@Model.CreatedItemMasterFarmingDTO.ItemMasterForFarmingId" name="btnGenerateBarcode" style="margin-top: 5px;">Generate BarCode</button>
                                 }
                                 else
                                 {
@@ -245,6 +249,12 @@
                                     <button id="generateBarcodeButton" type="submit" class="btn btn-secondary" value="btnGenerateBarcode" name="btnGenerateBarcode" style="margin-top: 5px;">Generate BarCode</button>
                                 }
                             </div>
+
+                            <div class="form-group col-md-2"></div>
+                            <div class="form-group col-md-2"></div>
+                            <div class="form-group col-md-2"></div>
+
+
                         </div>
                     </div>
                 </form>
@@ -273,7 +283,7 @@
             error: function () {
 
             }
-        }); 
+        });
     }
 </script>
 
@@ -317,7 +327,7 @@
 
                 gstTextbox.value = result.gst;
                 hsnTextbox.value = result.hsn;
-              
+
             },
             error: function () {
 

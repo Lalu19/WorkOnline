@@ -82,13 +82,12 @@
                             <e-grid-column field="CGST" headerText="CGST" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column field="SGST" headerText="SGST" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column field="HandlingType" headerText="HandlingType" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="Thumbnail" headerText="Thumbnail" textAlign="Left" width="120"></e-grid-column>
-                            
-                            
+                           @* <e-grid-column field="Thumbnail" headerText="Thumbnail" textAlign="Left" width="120"></e-grid-column>*@
 
+                            <e-grid-column field="Thumbnail" template="#ImageTemplate" headerText="Thumbnail" textAlign="Left" width="120"> </e-grid-column>
+                            <e-grid-column field="Images" headerText="Images" textAlign="Left" width="120" template="#Multipleimagetemplate"></e-grid-column>
 
-
-                            <e-grid-column field="Images" headerText="Images" textAlign="Left" width="120"></e-grid-column>
+                          @*  <e-grid-column field="Images" headerText="Images" textAlign="Left" width="120"></e-grid-column>*@
                             
 
                             @*<e-grid-column field="IsActive" headerText="IsActive" textAlign="Left" width="120"></e-grid-column>*@
@@ -208,6 +207,11 @@
 </script>
 
 
+<script id="ImageTemplate" type="text/x-template">${imageTemplate(data)}</script>
+<script id="Multipleimagetemplate" type="text/x-template">
+    ${Multipleimagetemplate(data)}
+</script>
+
 <script id="Actions" type="text/x-template">
     <div class="link">
         <a href="../../WareHouse/Item/ItemCreate?ItemId=${ItemId}"><i class="icon-pencil3" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp;
@@ -264,5 +268,35 @@
 
     }
 
+    function imageTemplate(i) {
 
+        if (i.Thumbnail != null) {
+            return ' <img src="/uploads/itemimage/' + i.Thumbnail + '" style="height:100px; width:100px ;padding: 5px 0px 5px 0;" />';
+        } else {
+            return 'No Image';
+        }
+    }
+    function Multipleimagetemplate(item) {
+        console.log('Item:', item);
+
+        if (item.Images) {
+            // Split the comma-separated string into an array of image filenames
+            const imageFilenames = item.Images.split(',');
+
+            if (imageFilenames.length > 0) {
+                // Create HTML for each image with reduced size and padding
+                const imagesHtml = imageFilenames.map(filename => {
+                    // Assuming the images are in a specific folder, adjust the path accordingly
+                    return `<img src="/uploads/itemimage/${filename.trim()}" class="grid-image" style="height: 100px; width: 100px; padding: 5px 0 5px 0;" />`;
+                }).join('');
+
+                // Return the HTML for all images
+                return '<div class="image-container">' + imagesHtml + '</div>';
+            }
+        }
+
+        // Return 'No Images' if there are no images or if the Images field is null
+        console.log('No Images');
+        return 'No Images';
+    }
 </script>

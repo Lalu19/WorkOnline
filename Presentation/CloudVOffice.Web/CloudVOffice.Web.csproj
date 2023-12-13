@@ -21,6 +21,8 @@
 		<Folder Include="Plugins\" />
 		<Folder Include="wwwroot\uploads\employee\" />
 		<Folder Include="wwwroot\uploads\Category\" />
+		<Folder Include="wwwroot\uploads\farmingimage\" />
+		<Folder Include="wwwroot\uploads\itemimage\" />
 
 
 	</ItemGroup>
