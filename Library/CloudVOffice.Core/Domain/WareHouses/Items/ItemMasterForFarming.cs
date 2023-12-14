@@ -6,6 +6,9 @@
         public int? SectorId { get; set; }
         public int? CategoryId { get; set; }
         public int? SubCategory1Id { get; set; }
+        public string? Sector { get; set; }
+        public string? Category { get; set; }
+        public string? SubCategory1 { get; set; }
         public string? Thumbnail { get; set; }
         public string? Images { get; set; }
 		public string? Barcode { get; set; }
