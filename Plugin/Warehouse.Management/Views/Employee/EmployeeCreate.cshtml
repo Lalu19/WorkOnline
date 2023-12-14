@@ -49,41 +49,8 @@
                         <input asp-for="@Model.EmployeeId" type="hidden" />                       
 
                         <div class="form-row">
-                            <div class="form-group col-md-3">
 
-                                <label for="EmployeeName" class="form-label">Employee Name &nbsp;<span style="color:red;"><b>*</b></span></label>
-                                <input asp-for="@Model.EmployeeName" type="text" class="form-control" autofocus="autofocus" placeholder="Employee Name" />
-                                <span asp-validation-for="EmployeeName"></span>
-                            </div>
-
-                            <div class="form-group col-md-3">
-
-                                <label for="DateOfBirth" class="form-label">Date of Birth &nbsp;<span style="color:red;"><b>*</b></span></label>
-                                <input asp-for="@Model.DateOfBirth" type="date" class="form-control" autofocus="autofocus" placeholder="Date Of Birth" />
-                                <span asp-validation-for="DateOfBirth"></span>
-                            </div>
-
-                            <div class="form-group col-md-3">
-
-                                <label for="IsActive" class="form-label">Is Active</label>
-                                <br>
-                                <input asp-for="@Model.IsActive" type="checkbox" />
-                                <span asp-validation-for="IsActive"></span>
-
-                            </div>
-                        </div>
-
-@*                             <div class="form-group col-md-3">
-                                <label for="AssignedWareHouse" class="form-label">Assigned WareHouse</label>
-                            <ejs-dropdownlist id="WarehuoseId" allowFiltering="true" dataSource="@(new SelectList((IEnumerable)ViewBag.WareHouses, "WarehuoseId", "WarehouseName").Items)" placeholder="Select Warehouse" popupHeight="220px">
-                                <e-dropdownlist-fields text="WarehuoseId" value="WareHouseName"></e-dropdownlist-fields>
-                                </ejs-dropdownlist>
-                            <span asp-validation-for="AssignedWareHouse"></span>
-                            </div>*@
-
-
-                        <div class="form-row">
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label for="AssignedWareHouse" class="form-label">Assigned WareHouse</label>
                                 <ejs-dropdownlist id="WareHouseName" allowFiltering="true" dataSource="@(new SelectList((IEnumerable)ViewBag.WareHouses, "WareHuoseId", "WareHouseName").Items)" placeholder="Select WareHouse" popupHeight="220px" name="AssignedWareHouse" value="@Model.AssignedWareHouse">
                                     <e-dropdownlist-fields text="WareHouseName" value="WareHuoseId"></e-dropdownlist-fields>
@@ -91,16 +58,24 @@
                                 <span asp-validation-for="AssignedWareHouse"></span>
                             </div>
 
-                            @*<div class="form-group col-md-3">
-                                <label for="AssignedWareHouse" class="form-label">Vehicle Number &nbsp;</label>
-                                <ejs-dropdownlist id="VehicleNumber" allowFiltering="true" dataSource="@(new SelectList((IEnumerable)ViewBag.Vehicles, "VehicleId", "VehicleNumber").Items)" placeholder="Select Vehicle" popupHeight="220px">
-                                    <e-dropdownlist-fields text="VehicleNumber" value="VehicleNumber"></e-dropdownlist-fields>
-                                </ejs-dropdownlist>
-                                <span asp-validation-for="VehicleNumber"></span>
-                            </div>*@
+                            <div class="form-group col-md-4">
+                                <label for="EmployeeName" class="form-label">Employee Name &nbsp;<span style="color:red;"><b>*</b></span></label>
+                                <input asp-for="@Model.EmployeeName" type="text" class="form-control" autofocus="autofocus" placeholder="Employee Name" />
+                                <span asp-validation-for="EmployeeName"></span>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="DateOfBirth" class="form-label">Date of Birth &nbsp;<span style="color:red;"><b>*</b></span></label>
+                                <input asp-for="@Model.DateOfBirth" type="date" class="form-control" autofocus="autofocus" placeholder="Date Of Birth" />
+                                <span asp-validation-for="DateOfBirth"></span>
+                            </div>
+
+                        </div>
 
 
-                            <div class="form-group col-md-3">
+                        <div class="form-row">
+
+                            <div class="form-group col-md-4">
                                 <label for="VehicleNumber" class="form-label">Vehicle Number &nbsp;</label>
                                 <ejs-dropdownlist id="VehicleNumber" allowFiltering="true" dataSource="@(new SelectList((IEnumerable)ViewBag.Vehicles, "VehicleId", "VehicleNumber").Items)" placeholder="Select Vehicle" popupHeight="220px" value="@Model.VehicleNumber">
                                     <e-dropdownlist-fields text="VehicleNumber" value="VehicleId"></e-dropdownlist-fields>
@@ -108,37 +83,38 @@
                                 <span asp-validation-for="VehicleNumber"></span>
                             </div>
 
-                            <div class="form-group col-md-3">
-
+                            <div class="form-group col-md-4">
                                 <label for="Position" class="form-label">Position &nbsp;<span style="color:red;"><b>*</b></span></label>
                                 <input asp-for="@Model.Position" type="text" class="form-control" autofocus="autofocus" placeholder="Position" />
                                 <span asp-validation-for="Position"></span>
                             </div>
 
-                        </div>
-
-
-
-                        <div class="form-row">
-                            
-
-                            <div class="form-group col-md-3">
-
+                            <div class="form-group col-md-4">
                                 <label for="Mobile" class="form-label">Mobile &nbsp;<span style="color:red;"><b>*</b></span></label>
                                 <input asp-for="@Model.Mobile" type="text" class="form-control" autofocus="autofocus" placeholder="Mobile" />
                                 <span asp-validation-for="Mobile"></span>
                             </div>
 
-                            <div class="form-group col-md-3">
+                        </div>
+
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-4">
 
                                 <label for="Priority" class="form-label">Priority &nbsp;<span style="color:red;"><b>*</b></span></label>
                                 <input asp-for="@Model.Priority" type="text" class="form-control" autofocus="autofocus" placeholder="Priority" />
                                 <span asp-validation-for="Priority"></span>
                             </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="IsActive" class="form-label">Is Active</label>
+                                <br>
+                                <input asp-for="@Model.IsActive" type="checkbox" />
+                                <span asp-validation-for="IsActive"></span>
+
+                            </div>
                         </div>
-
-
-                        
 
 
                         <div asp-validation-summary="ModelOnly" class="message-error"></div>
@@ -154,6 +130,7 @@
         </div>
     </div>
 </div>
+
 <script>
     //function onWareHouseNamefiltering(e) {
     //    var query = new ej.data.Query();

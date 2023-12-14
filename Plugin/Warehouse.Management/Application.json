@@ -1,30 +1,225 @@
 {
-  "ApplicationName": "WareHouse",
+  "ApplicationName": "WareHouse DashBoard",
   "Url": "/WareHouse/WareHouseDashboard/Dashboard",
   "IconImageUrl": "/Plugin/Warehouse.Management/logo.png",
-  "IconClass": "",
+  "IconClass": "icon-th-large-outline",
   "AreaName": "WareHouse",
   "Roles": [ "WareHouse Manager", "WareHouse User" ],
   "Children": [
     {
-      "ApplicationName": "Master",
+      "ApplicationName": "WareHouse Create",
+      "Url": "/WareHouse/WareHouse/WareHouseCreate",
+      "IsGroup": true,
+      "IconImageUrl": "",
+      "IconClass": "icon-clipboard2",
+      "AreaName": "WareHouse",
+      "Roles": [ "WareHouse Manager", "WareHouse User" ],
+      "Children": []
+    },
+    {
+      "ApplicationName": "Location Master",
       "Url": "",
       "IsGroup": true,
       "IconImageUrl": "",
-      "IconClass": "icon-event_note",
+      "IconClass": "icon-envelop",
       "AreaName": "WareHouse",
       "Roles": [ "WareHouse Manager", "WareHouse User" ],
       "Children": [
         {
-          "ApplicationName": "PinCode",
-          "IsGroup": false,
+          "ApplicationName": "PinCode List",
           "Url": "/WareHouse/PinCode/PinCodeView",
+          "IsGroup": true,
           "IconImageUrl": "",
-          "IconClass": "icon-event_note",
+          "IconClass": "icon-clipboard2",
+          "AreaName": "WareHouse",
+          "Roles": [ "WareHouse Manager", "WareHouse User" ]
+        },
+        {
+          "ApplicationName": "PinCode Mapping List",
+          "Url": "/WareHouse/PinCodeMapping/PinCodeMappingView",
+          "IsGroup": true,
+          "IconImageUrl": "",
+          "IconClass": "icon-clipboard2",
           "AreaName": "WareHouse",
           "Roles": [ "WareHouse Manager", "WareHouse User" ]
         }
       ]
+    },
+    {
+      "ApplicationName": "Category Master",
+      "Url": "",
+      "IsGroup": true,
+      "IconImageUrl": "",
+      "IconClass": "icon-clipboard2",
+      "AreaName": "WareHouse",
+      "Roles": [ "WareHouse Manager", "WareHouse User" ],
+      "Children": [
+        {
+          "ApplicationName": "Sector List",
+          "Url": "/WareHouse/Sector/SectorView",
+          "IsGroup": true,
+          "IconImageUrl": "",
+          "IconClass": "icon-clipboard2",
+          "AreaName": "WareHouse",
+          "Roles": [ "WareHouse Manager", "WareHouse User" ]
+        },
+        {
+          "ApplicationName": "Category List",
+          "Url": "/WareHouse/Category/CategoryView",
+          "IsGroup": true,
+          "IconImageUrl": "",
+          "IconClass": "icon-clipboard2",
+          "AreaName": "WareHouse",
+          "Roles": [ "WareHouse Manager", "WareHouse User" ]
+        },
+        {
+          "ApplicationName": "SubCategory1 List",
+          "Url": "/WareHouse/SubCategory1/SubCategory1View",
+          "IsGroup": true,
+          "IconImageUrl": "",
+          "IconClass": "icon-clipboard2",
+          "AreaName": "WareHouse",
+          "Roles": [ "WareHouse Manager", "WareHouse User" ]
+        },
+        {
+          "ApplicationName": "SubCategory2 List",
+          "Url": "/WareHouse/SubCategory2/SubCategory2View",
+          "IsGroup": true,
+          "IconImageUrl": "",
+          "IconClass": "icon-clipboard2",
+          "AreaName": "WareHouse",
+          "Roles": [ "WareHouse Manager", "WareHouse User" ]
+        }
+      ]
+    },
+    {
+      "ApplicationName": "UOM",
+      "Url": "",
+      "IsGroup": true,
+      "IconImageUrl": "",
+      "IconClass": "icon-clipboard2",
+      "AreaName": "WareHouse",
+      "Roles": [ "WareHouse Manager", "WareHouse User" ],
+      "Children": [
+        {
+          "ApplicationName": "Unit Group List",
+          "Url": "/WareHouse/UnitGroup/UnitGroupView",
+          "IsGroup": true,
+          "IconImageUrl": "",
+          "IconClass": "icon-clipboard2",
+          "AreaName": "WareHouse",
+          "Roles": [ "WareHouse Manager", "WareHouse User" ]
+        },
+        {
+          "ApplicationName": "Unit List",
+          "Url": "/WareHouse/Unit/UnitView",
+          "IsGroup": true,
+          "IconImageUrl": "",
+          "IconClass": "icon-clipboard2",
+          "AreaName": "WareHouse",
+          "Roles": [ "WareHouse Manager", "WareHouse User" ]
+        },
+        {
+          "ApplicationName": "Unit Conversion Facters",
+          "Url": "/WareHouse/UnitConversionFactors/UnitConversionFactorsView",
+          "IsGroup": true,
+          "IconImageUrl": "",
+          "IconClass": "icon-clipboard2",
+          "AreaName": "WareHouse",
+          "Roles": [ "WareHouse Manager", "WareHouse User" ]
+        }
+      ]
+    },
+    {
+      "ApplicationName": "GST List",
+      "Url": "/WareHouse/GST/GSTView",
+      "IsGroup": true,
+      "IconImageUrl": "",
+      "IconClass": "icon-clipboard2",
+      "AreaName": "WareHouse",
+      "Roles": [ "WareHouse Manager", "WareHouse User" ],
+      "Children": []
+    },
+    {
+      "ApplicationName": "Handling Type List",
+      "Url": "/WareHouse/HandlingType/HandlingTypeView",
+      "IsGroup": true,
+      "IconImageUrl": "",
+      "IconClass": "icon-clipboard2",
+      "AreaName": "WareHouse",
+      "Roles": [ "WareHouse Manager", "WareHouse User" ],
+      "Children": []
+    },
+    {
+      "ApplicationName": "Item Master",
+      "Url": "",
+      "IsGroup": true,
+      "IconImageUrl": "",
+      "IconClass": "icon-clipboard2",
+      "AreaName": "WareHouse",
+      "Roles": [ "WareHouse Manager", "WareHouse User" ],
+      "Children": [
+        {
+          "ApplicationName": "Item List",
+          "Url": "/WareHouse/Item/ItemView",
+          "IsGroup": true,
+          "IconImageUrl": "",
+          "IconClass": "icon-clipboard2",
+          "AreaName": "WareHouse",
+          "Roles": [ "WareHouse Manager", "WareHouse User" ]
+        },
+        {
+          "ApplicationName": "ItemList For Farming ",
+          "Url": "/WareHouse/ItemMasterForFarming/ItemMasterForFarmingView",
+          "IsGroup": true,
+          "IconImageUrl": "",
+          "IconClass": "icon-clipboard2",
+          "AreaName": "WareHouse",
+          "Roles": [ "WareHouse Manager", "WareHouse User" ]
+        }
+      ]
+    },
+    {
+      "ApplicationName": "Vender Master",
+      "Url": "",
+      "IsGroup": true,
+      "IconImageUrl": "",
+      "IconClass": "icon-clipboard2",
+      "AreaName": "WareHouse",
+      "Roles": [ "WareHouse Manager", "WareHouse User" ],
+      "Children": [
+        {
+          "ApplicationName": "Vender List",
+          "Url": "/WareHouse/Vendor/VendorView",
+          "IsGroup": true,
+          "IconImageUrl": "",
+          "IconClass": "icon-clipboard2",
+          "AreaName": "WareHouse",
+          "Roles": [ "WareHouse Manager", "WareHouse User" ]
+        }
+      ]
+    },
+    {
+      "ApplicationName": "Employee Create",
+      "Url": "/WareHouse/Employee/EmployeeCreate",
+      "IsGroup": true,
+      "IconImageUrl": "",
+      "IconClass": "icon-clipboard2",
+      "AreaName": "WareHouse",
+      "Roles": [ "WareHouse Manager", "WareHouse User" ],
+      "Children": []
+    },
+    {
+      "ApplicationName": "Vehicle Create",
+      "Url": "/WareHouse/Vehicle/VehicleCreate",
+      "IsGroup": true,
+      "IconImageUrl": "",
+      "IconClass": "icon-clipboard2",
+      "AreaName": "WareHouse",
+      "Roles": [ "WareHouse Manager", "WareHouse User" ],
+      "Children": []
     }
+
+
   ]
 }
