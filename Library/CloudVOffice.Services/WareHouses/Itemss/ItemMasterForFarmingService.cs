@@ -49,6 +49,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					itemMaster.GST = itemMasterForFarmingDTO.GST;
 					itemMaster.HSN = itemMasterForFarmingDTO.HSN;
 					itemMaster.HarvestDate = itemMasterForFarmingDTO.HarvestDate;
+					itemMaster.CreatedBy = itemMasterForFarmingDTO.CreatedBy;
 
 					itemMaster.Thumbnail = itemMasterForFarmingDTO.Thumbnail;
 					if (itemMasterForFarmingDTO.Images != null && itemMasterForFarmingDTO.Images.Any())
@@ -79,6 +80,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						GST = itemMaster.GST,
 						HSN = itemMaster.HSN,
 						HarvestDate = itemMaster.HarvestDate,
+						CreatedBy = itemMaster.CreatedBy,
 
 						Images = !string.IsNullOrEmpty(itemMaster.Images) ? itemMaster.Images.Split(',').ToList() : new List<string>(),
 						Thumbnail = itemMaster.Thumbnail
@@ -238,7 +240,23 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 		{
 			try
 			{
-				return _dbContext.ItemMasterForFarmings.Where(i => i.Deleted == false).ToList();
+                List<Sector> sectors = _dbContext.Sectors.Where(s => s.Deleted == false).ToList();
+                List<Category> categories = _dbContext.Categories.Where(c => c.Deleted == false).ToList();
+                List<SubCategory1> subCategory1s = _dbContext.SubCategories1.Where(x => x.Deleted == false).ToList();
+                List<ItemMasterForFarming> items = _dbContext.ItemMasterForFarmings.Where(i => i.Deleted == false).ToList();
+
+                foreach (var item in items)
+				{
+					Sector sector = sectors.FirstOrDefault(i => i.SectorId == item.SectorId);
+					Category category = categories.FirstOrDefault(c =>  c.CategoryId == item.CategoryId);
+					SubCategory1 subCategory1 = subCategory1s.FirstOrDefault(s => s.CategoryId == item.CategoryId);
+
+					item.Sector = sector != null ? sector.SectorName : null;
+					item.Category = category != null ? category.CategoryName : null;
+					item.SubCategory1 = subCategory1 != null ? subCategory1.SubCategory1Name : null;
+				}
+
+				return items;   
 			}
 			catch
 			{
