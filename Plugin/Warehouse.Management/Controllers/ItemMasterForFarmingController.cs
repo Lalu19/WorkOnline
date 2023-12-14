@@ -66,6 +66,7 @@ namespace Warehouse.Management.Controllers
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.CategoryId = itemMaster1.CategoryId;
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.SubCategory1Id = itemMaster1.SubCategory1Id;
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.Barcode = itemMaster1.Barcode;
+                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.ItemMasterForFarmingId = itemMasterForFarmingId;
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.BarCodeNotAvailable = itemMaster1.BarCodeNotAvailable;
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.UOMId = itemMaster1.UOMId;
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.ProductName = itemMaster1.ProductName;

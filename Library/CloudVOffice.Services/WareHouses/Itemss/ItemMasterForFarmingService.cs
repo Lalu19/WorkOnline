@@ -100,7 +100,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 		{
 			try
 			{
-				var itemMaster1 = _dbContext.ItemMasterForFarmings.Where(i => i.ItemMasterForFarmingId != itemMasterForFarmingDTO.ItemMasterForFarmingId /*&& i.ItemName == itemDTO.ItemName*/).FirstOrDefault();
+				var itemMaster1 = _dbContext.ItemMasterForFarmings.Where(i => i.ItemMasterForFarmingId != itemMasterForFarmingDTO.ItemMasterForFarmingId && i.ProductName == itemMasterForFarmingDTO.ProductName).FirstOrDefault();
 				if (itemMaster1 == null)
 				{
 					var itemMaster = _dbContext.ItemMasterForFarmings.Where(i => i.ItemMasterForFarmingId == itemMasterForFarmingDTO.ItemMasterForFarmingId).FirstOrDefault();
