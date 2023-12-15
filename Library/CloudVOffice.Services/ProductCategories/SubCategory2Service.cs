@@ -99,7 +99,6 @@ namespace CloudVOffice.Services.ProductCategories
 				throw;
 			}
 		}
-
 		public MessageEnum DeleteSubCategory2(int SubCategory2Id, Int64 DeletedBy)
 		{
 			try
@@ -121,11 +120,9 @@ namespace CloudVOffice.Services.ProductCategories
 				throw;
 			}
 		}
-
-
-        public List<SubCategory2> GetSubCategory2BySubCategory1Id(int SubCategory1Id)
-        {
-            return _dbContext.SubCategories2.Where(x => x.SubCategory1Id == SubCategory1Id && x.Deleted == false).ToList();
-        }
-    }
+		public List<SubCategory2> GetSubCategory2BySubCategory1Id(int SubCategory1Id)
+		{
+			return _dbContext.SubCategories2.Where(x => x.SubCategory1Id == SubCategory1Id && x.Deleted == false).ToList();
+		}
+	}
 }

@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using ZXing;
 using ZXing.Common;
 using ZXing.Rendering;
-
 using CloudVOffice.Core.Domain.Common;
 using CloudVOffice.Core.Domain.WareHouses.Items;
 using CloudVOffice.Core.Domain.WareHouses.PinCodes;
@@ -24,6 +23,8 @@ using CloudVOffice.Core.Domain.WareHouses.Employees;
 using CloudVOffice.Core.Domain.WareHouses.HandlingTypes;
 using CloudVOffice.Core.Domain.WareHouses.GST;
 using CloudVOffice.Core.Domain.ProductCategories;
+using CloudVOffice.Core.Domain.WareHouses.Vendors;
+using CloudVOffice.Core.Domain.WareHouses.Districts;
 
 namespace CloudVOffice.Services.WareHouses.Itemss
 {
@@ -37,76 +38,6 @@ namespace CloudVOffice.Services.WareHouses.Itemss
             _dbContext = dbContext;
             _itemRepo = itemRepo;
         }
-
-		//public MessageEnum CreateItem(ItemDTO itemDTO)
-		//{
-		//	try
-		//	{
-
-
-		//		var item1 = _dbContext.Items.Where(i => i.ItemId == itemDTO.ItemId && i.Deleted == false).FirstOrDefault();
-
-		//		if (item1 == null)
-		//		{
-		//			Item item = new Item();
-		//			item.ItemName = itemDTO.ItemName;
-		//			item.CompanyName = itemDTO.CompanyName;
-		//			item.BrandName = itemDTO.BrandName;
-		//			item.UnitOfMeasurement = itemDTO.UnitOfMeasurement;
-		//			item.CaseWeight = itemDTO.CaseWeight;
-		//			item.UnitPerCase = itemDTO.UnitPerCase;
-		//			item.ManufactureDate = itemDTO.ManufactureDate;
-		//			item.ExpiryDate = itemDTO.ExpiryDate;
-		//			item.Barcode = itemDTO.Barcode;
-		//			item.BarCodeAvailable = itemDTO.BarCodeAvailable;
-		//			item.MRP = itemDTO.MRP;
-		//			item.PurchaseCost = itemDTO.PurchaseCost;
-		//			item.SalesCost = itemDTO.SalesCost;
-		//			item.SGST = itemDTO.SGST;
-		//			item.CGST = itemDTO.CGST;
-		//			item.HandlingType = itemDTO.HandlingType;
-		//			//item.Images = itemDTO.Images;
-
-		//			if (itemDTO.Images != null && itemDTO.Images.Any())
-		//			{
-		//				// Join the list of images into a comma-separated string
-		//				item.Images = string.Join(",", itemDTO.Images);
-		//			}
-		//			else
-		//			{
-		//				item.Images = null; // or an empty string depending on your database schema
-		//			}
-
-		//			item.Thumbnail = itemDTO.Thumbnail;
-
-		//			item.Videos = itemDTO.Videos;
-		//			item.IsActive = itemDTO.IsActive;
-		//			item.CreatedBy = itemDTO.CreatedBy;
-
-		//			_itemRepo.Insert(item);
-		//			_dbContext.SaveChanges();
-
-
-		//			return MessageEnum.Success;
-
-
-		//		}
-		//		else
-		//		{
-		//			return MessageEnum.Duplicate;
-		//		}
-		//	}
-		//	catch
-		//	{
-		//		throw;
-		//	}
-
-		//}
-
-
-
-
-
 		public ItemDTO CreateItem(ItemDTO itemDTO)
 		{
 			try
@@ -122,6 +53,11 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					item.SectorId = itemDTO.SectorId;
 					item.CategoryId = itemDTO.CategoryId;
 					item.SubCategory1Id = itemDTO.SubCategory1Id;
+					item.SubCategory2Id = itemDTO.SubCategory2Id;
+					item.WareHouseName = itemDTO.WareHouseName;
+					item.DistrictName = itemDTO.DistrictName;
+					item.VendorName = itemDTO.VendorName;
+					item.EmployeeName = itemDTO.EmployeeName;
 					item.CompanyName = itemDTO.CompanyName;
 					item.BrandName = itemDTO.BrandName;
 					item.ProductWeight = itemDTO.ProductWeight;
@@ -139,6 +75,8 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					item.SGST = itemDTO.SGST;
 					item.CGST = itemDTO.CGST;
 					item.HandlingType = itemDTO.HandlingType;
+					item.InvoiceNo = itemDTO.InvoiceNo;
+					item.ReceivedDate = itemDTO.ReceivedDate;
                     item.CreatedBy = itemDTO.CreatedBy;
 
                     if (itemDTO.Images != null && itemDTO.Images.Any())
@@ -166,6 +104,11 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						SectorId = item.SectorId,
 						CategoryId = item.CategoryId,
 						SubCategory1Id = item.SubCategory1Id,
+						SubCategory2Id = item.SubCategory2Id,
+						WareHouseName = item.WareHouseName,
+						DistrictName = item.DistrictName,
+						VendorName = item.VendorName,
+						EmployeeName = item.EmployeeName,
 						CompanyName = item.CompanyName,
 						BrandName = item.BrandName,
 						//UnitOfMeasurement = item.UnitOfMeasurement,
@@ -183,6 +126,8 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						HSN = item.HSN,
 						CGST = item.CGST,
 						HandlingType = item.HandlingType,
+						InvoiceNo = item.InvoiceNo,
+						ReceivedDate = item.ReceivedDate,
 						CreatedBy = item.CreatedBy,
 
                         Images = !string.IsNullOrEmpty(item.Images) ? item.Images.Split(',').ToList() : new List<string>(),
@@ -403,7 +348,12 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						item.SectorId = itemDTO.SectorId;
 						item.CategoryId = itemDTO.CategoryId;
 						item.SubCategory1Id = itemDTO.SubCategory1Id;
-                        item.CompanyName = itemDTO.CompanyName;
+						item.SubCategory2Id = itemDTO.SubCategory2Id;
+						item.WareHouseName = itemDTO.WareHouseName;
+						item.DistrictName = itemDTO.DistrictName;
+						item.VendorName = itemDTO.VendorName;
+						item.EmployeeName = itemDTO.EmployeeName;
+						item.CompanyName = itemDTO.CompanyName;
                         item.BrandName = itemDTO.BrandName;
 						item.ProductWeight = itemDTO.ProductWeight;
                         //item.UnitOfMeasurement = itemDTO.UnitOfMeasurement;
@@ -420,10 +370,13 @@ namespace CloudVOffice.Services.WareHouses.Itemss
                         item.SGST = itemDTO.SGST;
                         item.CGST = itemDTO.CGST;
                         item.HandlingType = itemDTO.HandlingType;
-						
-					    //item.Images = itemDTO.Images;
+						item.InvoiceNo = itemDTO.InvoiceNo;
+						item.ReceivedDate = itemDTO.ReceivedDate;
+						item.UpdatedBy = itemDTO.CreatedBy;
 
-					    if (itemDTO.Images != null && itemDTO.Images.Any())
+						//item.Images = itemDTO.Images;
+
+						if (itemDTO.Images != null && itemDTO.Images.Any())
 					    {
 						    // Join the list of images into a comma-separated string
 						    item.Images = string.Join(",", itemDTO.Images);
@@ -435,7 +388,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 
                         item.Thumbnail = itemDTO.Thumbnail;
 					    item.Videos = itemDTO.Videos;
-                        item.IsActive = itemDTO.IsActive;
+                        //item.IsActive = itemDTO.IsActive;
                         item.UpdatedDate = DateTime.Now;
 
                         _itemRepo.Update(item);
@@ -510,6 +463,11 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 				List<Sector> sectors = _dbContext.Sectors.Where(s => s.Deleted == false).ToList();
 				List<Category> categories = _dbContext.Categories.Where(c => c.Deleted == false).ToList();
 				List<SubCategory1> subCategory1s = _dbContext.SubCategories1.Where(x => x.Deleted == false).ToList();
+				List<SubCategory2> subCategory2s = _dbContext.SubCategories2.Where(x => x.Deleted == false).ToList();
+				List<WareHuose> warehouses = _dbContext.WareHouses.Where(x => x.Deleted == false).ToList();
+				List<District> districts = _dbContext.Districts.Where(x => x.Deleted == false).ToList();
+				List<Employee> employees = _dbContext.Employees.Where(x => x.Deleted == false).ToList();
+				List<Vendor> vendors = _dbContext.Vendors.Where(x => x.Deleted == false).ToList();
 				List<HandlingType> handlingTypes = _dbContext.HandlingTypes.Where(h => h.Deleted == false).ToList();
 				List<GST> gsts = _dbContext.GSTs.Where(g => g.Deleted == false).ToList();
 				List<Item> items = _dbContext.Items.Where(i  => i.Deleted == false).ToList();
@@ -518,10 +476,15 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 				foreach (var item in items)
 				{
 					HandlingType handlingType = handlingTypes.FirstOrDefault(h => h.HandlingTypeId == Convert.ToInt32(item.HandlingType));
+					WareHuose wareHuose = warehouses.FirstOrDefault(h => h.WareHuoseId == Convert.ToInt32(item.WareHouseName));
+					District district = districts.FirstOrDefault(h => h.DistrictId == Convert.ToInt32(item.DistrictName));
+					Vendor vendor = vendors.FirstOrDefault(h => h.VendorId == Convert.ToInt32(item.VendorName));
+					Employee emp = employees.FirstOrDefault(h => h.EmployeeId == Convert.ToInt32(item.EmployeeName));
 					GST gst = gsts.FirstOrDefault(g => g.GSTId == Convert.ToInt32(item.CGST));
 					Sector sector = sectors.FirstOrDefault(q => q.SectorId == Convert.ToInt32(item.SectorId));
 					Category category = categories.FirstOrDefault(z => z.CategoryId == Convert.ToInt32(item.CategoryId));
 					SubCategory1 subCategory1 = subCategory1s.FirstOrDefault(y => y.SubCategory1Id == Convert.ToInt32(item.SubCategory1Id));
+					SubCategory2 subCategory2 = subCategory2s.FirstOrDefault(y => y.SubCategory2Id == Convert.ToInt32(item.SubCategory2Id));
 
 
 					item.HandlingType = handlingType != null ? handlingType.HandlingTypeName : null;
@@ -529,6 +492,11 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					item.SectorName = sector != null ? sector.SectorName : null;
 					item.CategoryName = category != null ? category.CategoryName : null;
 					item.SubCategory1Name = subCategory1 != null ? subCategory1.SubCategory1Name : null;
+					item.SubCategory2Name = subCategory2 != null ? subCategory2.SubCategory2Name : null;
+					item.WareHouseName = wareHuose != null ? wareHuose.WareHouseName : null;
+					item.DistrictName = district != null ? district.DistrictName : null;
+					item.VendorName = vendor != null ? vendor.VendorName : null;
+					item.EmployeeName = emp != null ? emp.EmployeeName : null;
 				}
 
 					return items;
