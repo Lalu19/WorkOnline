@@ -139,6 +139,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					item.SGST = itemDTO.SGST;
 					item.CGST = itemDTO.CGST;
 					item.HandlingType = itemDTO.HandlingType;
+                    item.CreatedBy = itemDTO.CreatedBy;
 
                     if (itemDTO.Images != null && itemDTO.Images.Any())
                     {
@@ -182,6 +183,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						HSN = item.HSN,
 						CGST = item.CGST,
 						HandlingType = item.HandlingType,
+						CreatedBy = item.CreatedBy,
 
                         Images = !string.IsNullOrEmpty(item.Images) ? item.Images.Split(',').ToList() : new List<string>(),
                         Thumbnail = item.Thumbnail
@@ -418,6 +420,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
                         item.SGST = itemDTO.SGST;
                         item.CGST = itemDTO.CGST;
                         item.HandlingType = itemDTO.HandlingType;
+						
 					    //item.Images = itemDTO.Images;
 
 					    if (itemDTO.Images != null && itemDTO.Images.Any())

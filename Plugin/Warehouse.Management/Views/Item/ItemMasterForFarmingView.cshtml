@@ -65,9 +65,9 @@
                           @*<e-grid-column field="Category.CategoryName" headerText="Category Name" textAlign="Left" width="150"></e-grid-column>
                             <e-grid-column field="SubCategory.SubCategoryName" headerText="SubCategory Name" textAlign="Left" width="150"></e-grid-column>*@
                            
-                            <e-grid-column field="SectorId" headerText="Sector Name" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="CategoryId" headerText="Category Name" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="SubCategory1Id" headerText="SubCategory Name" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="Sector" headerText="Sector Name" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="Category" headerText="Category Name" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="SubCategory1" headerText="SubCategory Name" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column field="ProductName" headerText="Product Name" textAlign="Left" width="120"></e-grid-column>
 
                             <e-grid-column field="UOMId" headerText="UOM" textAlign="Left" width="120"></e-grid-column>
@@ -87,8 +87,11 @@
                             @*<e-grid-column field="Barcode" headerText="Barcode" textAlign="Left" width="120"></e-grid-column>*@
                             <e-grid-column field="BarCodeAvailable" headerText="Bar Code Available" textAlign="Left" width="120"></e-grid-column>
                             
-                            <e-grid-column field="Thumbnail" headerText="Thumbnail" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="Images" headerText="Images" textAlign="Left" width="120"></e-grid-column>
+                            @* <e-grid-column field="Thumbnail" headerText="Thumbnail" textAlign="Left" width="120"></e-grid-column>*@
+                            <e-grid-column field="Thumbnail" template="#ImageTemplate" headerText="Thumbnail" textAlign="Left" width="120"> </e-grid-column>
+                            @* <e-grid-column field="Images" headerText="Images" textAlign="Left" width="120"> </e-grid-column>*@
+                            <e-grid-column field="Images" headerText="Images" textAlign="Left" width="120" template="#Multipleimagetemplate"></e-grid-column>
+
 
 
                             <e-grid-column headerText="Action" template="#Actions" width="100"></e-grid-column>
@@ -203,6 +206,11 @@
     }
 </script>
 
+<script id="ImageTemplate" type="text/x-template">${imageTemplate(data)}</script>
+<script id="Multipleimagetemplate" type="text/x-template">
+    ${Multipleimagetemplate(data)}
+</script>
+
 
 <script id="Actions" type="text/x-template">
     <div class="link">
@@ -260,6 +268,37 @@
 
     }
 
+    function imageTemplate(i) {
+
+        if (i.Thumbnail != null) {
+            return ' <img src="/uploads/farmingimage/' + i.Thumbnail + '" style="height:100px; width:100px ;padding: 5px 0px 5px 0;" />';
+        } else {
+            return 'No Image';
+        }
+    }
+    function Multipleimagetemplate(item) {
+        console.log('Item:', item);
+
+        if (item.Images) {
+            // Split the comma-separated string into an array of image filenames
+            const imageFilenames = item.Images.split(',');
+
+            if (imageFilenames.length > 0) {
+                // Create HTML for each image with reduced size and padding
+                const imagesHtml = imageFilenames.map(filename => {
+                    // Assuming the images are in a specific folder, adjust the path accordingly
+                    return `<img src="/uploads/farmingimage/${filename.trim()}" class="grid-image" style="height: 100px; width: 100px; padding: 5px 0 5px 0;" />`;
+                }).join('');
+
+                // Return the HTML for all images
+                return '<div class="image-container">' + imagesHtml + '</div>';
+            }
+        }
+
+        // Return 'No Images' if there are no images or if the Images field is null
+        console.log('No Images');
+        return 'No Images';
+    }
 
 </script>
 
