@@ -16,5 +16,6 @@ namespace CloudVOffice.Services.ProductCategories
 		public MessageEnum DeleteSubCategory2(int SubCategory2Id, Int64 DeletedBy);
 		public List<SubCategory2> GetSubCategory2List();
 		public SubCategory2 GetSubCategory2ById(int SubCategory2Id);
+		public List<SubCategory2> GetSubCategory2BySubCategory1Id(int SubCategory1Id);
 	}
 }

@@ -20,6 +20,9 @@ using Microsoft.AspNetCore.Mvc;
 using CloudVOffice.Services.ProductCategories;
 //using Warehouse.Management.ViewModel;
 using CloudVOffice.Data.DTO.WareHouses.ViewModel;
+using CloudVOffice.Services.WareHouses;
+using CloudVOffice.Services.WareHouses.Vendors;
+using CloudVOffice.Services.WareHouses.Employees;
 
 namespace Warehouse.Management.Controllers
 {
@@ -33,10 +36,15 @@ namespace Warehouse.Management.Controllers
 		private readonly ISectorService _sectorService;
 		private readonly ICategoryService _categoryService;
 		private readonly ISubCategory1Service _subCategory1Service;
+		private readonly ISubCategory2Service _subCategory2Service;
+		private readonly IWareHouseService _warehouseService;
+		//private readonly IDistrictService _districtService;
+		private readonly IVendorService _vendorService;
+		private readonly IEmployeeService _employeeService;
 
 
 
-		public ItemController(IItemService itemService, IWebHostEnvironment hostingEnvironment, IHandlingTypeService handlingTypeService, IGSTService gSTService, ISectorService sectorService, ICategoryService categoryService, ISubCategory1Service subCategory1Service)
+		public ItemController(IItemService itemService, IWebHostEnvironment hostingEnvironment, IHandlingTypeService handlingTypeService, IGSTService gSTService, ISectorService sectorService, ICategoryService categoryService, ISubCategory1Service subCategory1Service, ISubCategory2Service subCategory2Service, IWareHouseService warehouseService, IVendorService vendorService, IEmployeeService employeeService/*, IDistrictService districtService*/)
         {
 			_hostingEnvironment = hostingEnvironment;
 			_itemService = itemService;
@@ -45,6 +53,11 @@ namespace Warehouse.Management.Controllers
 			_sectorService = sectorService;
 			_categoryService = categoryService;
 			_subCategory1Service = subCategory1Service;
+			_subCategory2Service = subCategory2Service;
+			_warehouseService = warehouseService;
+			//_districtService = districtService;
+			_vendorService = vendorService;
+			_employeeService = employeeService;
 		}
 
         [HttpGet]
@@ -61,10 +74,15 @@ namespace Warehouse.Management.Controllers
 			var viewForItem = new ViewForItem
 			{
 				HandlingTypes = _handlingTypeService.GetHandlingTypeList(),
+				WareHuose = _warehouseService.GetWareHouseList(),
+				//District = _districtService.GetDistrictList(),
+				Vendor = _vendorService.GetVendorList(),
+				Employee = _employeeService.GetEmployees(),
 				GST = _gSTService.GetGSTList(),
 				Sectors = _sectorService.GetSectorList(),
 				Category = _categoryService.GetCategoryList(),
 				SubCategory1 = _subCategory1Service.GetSubCategory1List(),
+				SubCategory2 = _subCategory2Service.GetSubCategory2List(),
 				CreatedItemDTO = new ItemDTO()
 			};
 
@@ -79,6 +97,7 @@ namespace Warehouse.Management.Controllers
 				viewForItem.CreatedItemDTO.SectorId = item1.SectorId;
 				viewForItem.CreatedItemDTO.CategoryId = item1.CategoryId;
 				viewForItem.CreatedItemDTO.SubCategory1Id = item1.SubCategory1Id;
+				viewForItem.CreatedItemDTO.SubCategory2Id = item1.SubCategory2Id;
 				viewForItem.CreatedItemDTO.CompanyName = item1.CompanyName;
 				viewForItem.CreatedItemDTO.BrandName = item1.BrandName;
 				//viewForItem.CreatedItemDTO.UnitOfMeasurement = item1.UnitOfMeasurement;
@@ -96,6 +115,10 @@ namespace Warehouse.Management.Controllers
 				viewForItem.CreatedItemDTO.SGST = item1.SGST;
 				viewForItem.CreatedItemDTO.HSN = item1.HSN;
 				viewForItem.CreatedItemDTO.HandlingType = item1.HandlingType;
+				viewForItem.CreatedItemDTO.WareHouseName = item1.WareHouseName;
+				viewForItem.CreatedItemDTO.DistrictName = item1.DistrictName;
+				viewForItem.CreatedItemDTO.VendorName = item1.VendorName;
+				viewForItem.CreatedItemDTO.EmployeeName = item1.EmployeeName;
 				viewForItem.CreatedItemDTO.Thumbnail = item1.Thumbnail;
 
 				if (!string.IsNullOrEmpty(item1.Images))
@@ -107,7 +130,7 @@ namespace Warehouse.Management.Controllers
 				{
 					viewForItem.CreatedItemDTO.Images = new List<string>();
 				}
-				viewForItem.CreatedItemDTO.IsActive = item1.IsActive;
+				//viewForItem.CreatedItemDTO.IsActive = item1.IsActive;
 
 
 
@@ -325,7 +348,12 @@ namespace Warehouse.Management.Controllers
 							HandlingTypes = _handlingTypeService.GetHandlingTypeList(),
 							GST = _gSTService.GetGSTList(),
 							Category = _categoryService.GetCategoryList(),
-							SubCategory1 = _subCategory1Service.GetSubCategory1List()
+							SubCategory1 = _subCategory1Service.GetSubCategory1List(),
+							SubCategory2 = _subCategory2Service.GetSubCategory2List(),
+							WareHuose = _warehouseService.GetWareHouseList(),
+							//District = _districtService.GetDistrictList(),
+							Employee = _employeeService.GetEmployees(),
+							Vendor = _vendorService.GetVendorList()
 						};
 
 						return View("~/Plugins/Warehouse.Management/Views/Item/ItemCreate.cshtml", viewForItem1);
@@ -395,7 +423,12 @@ namespace Warehouse.Management.Controllers
 					HandlingTypes = _handlingTypeService.GetHandlingTypeList(),
 					GST = _gSTService.GetGSTList(),
 					Category = _categoryService.GetCategoryList(),
-					SubCategory1 = _subCategory1Service.GetSubCategory1List()
+					SubCategory1 = _subCategory1Service.GetSubCategory1List(),
+					SubCategory2 = _subCategory2Service.GetSubCategory2List(),
+					WareHuose = _warehouseService.GetWareHouseList(),
+					//District = _districtService.GetDistrictList(),
+					Employee = _employeeService.GetEmployees(),
+					Vendor = _vendorService.GetVendorList()
 				};
 
 				return View("~/Plugins/Warehouse.Management/Views/Item/ItemCreate.cshtml", viewForItem1);
