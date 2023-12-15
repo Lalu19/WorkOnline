@@ -24,6 +24,7 @@ using CloudVOffice.Core.Domain.WareHouses.HandlingTypes;
 using CloudVOffice.Core.Domain.WareHouses.GST;
 using CloudVOffice.Core.Domain.ProductCategories;
 using CloudVOffice.Core.Domain.WareHouses.Vendors;
+using CloudVOffice.Core.Domain.WareHouses.Districts;
 
 namespace CloudVOffice.Services.WareHouses.Itemss
 {
@@ -464,7 +465,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 				List<SubCategory1> subCategory1s = _dbContext.SubCategories1.Where(x => x.Deleted == false).ToList();
 				List<SubCategory2> subCategory2s = _dbContext.SubCategories2.Where(x => x.Deleted == false).ToList();
 				List<WareHuose> warehouses = _dbContext.WareHouses.Where(x => x.Deleted == false).ToList();
-				//List<District> districts = _dbContext.Districts.Where(x => x.Deleted == false).ToList();
+				List<District> districts = _dbContext.Districts.Where(x => x.Deleted == false).ToList();
 				List<Employee> employees = _dbContext.Employees.Where(x => x.Deleted == false).ToList();
 				List<Vendor> vendors = _dbContext.Vendors.Where(x => x.Deleted == false).ToList();
 				List<HandlingType> handlingTypes = _dbContext.HandlingTypes.Where(h => h.Deleted == false).ToList();
@@ -476,7 +477,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 				{
 					HandlingType handlingType = handlingTypes.FirstOrDefault(h => h.HandlingTypeId == Convert.ToInt32(item.HandlingType));
 					WareHuose wareHuose = warehouses.FirstOrDefault(h => h.WareHuoseId == Convert.ToInt32(item.WareHouseName));
-					//District district = districts.FirstOrDefault(h => h.DistrictId == Convert.ToInt32(item.DistrictName));
+					District district = districts.FirstOrDefault(h => h.DistrictId == Convert.ToInt32(item.DistrictName));
 					Vendor vendor = vendors.FirstOrDefault(h => h.VendorId == Convert.ToInt32(item.VendorName));
 					Employee emp = employees.FirstOrDefault(h => h.EmployeeId == Convert.ToInt32(item.EmployeeName));
 					GST gst = gsts.FirstOrDefault(g => g.GSTId == Convert.ToInt32(item.CGST));
@@ -493,7 +494,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					item.SubCategory1Name = subCategory1 != null ? subCategory1.SubCategory1Name : null;
 					item.SubCategory2Name = subCategory2 != null ? subCategory2.SubCategory2Name : null;
 					item.WareHouseName = wareHuose != null ? wareHuose.WareHouseName : null;
-					//item.DistrictName = district != null ? district.DistrictName : null;
+					item.DistrictName = district != null ? district.DistrictName : null;
 					item.VendorName = vendor != null ? vendor.VendorName : null;
 					item.EmployeeName = emp != null ? emp.EmployeeName : null;
 				}
