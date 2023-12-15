@@ -6,6 +6,7 @@ using CloudVOffice.Core.Domain.Pemission;
 using CloudVOffice.Core.Domain.ProductCategories;
 using CloudVOffice.Core.Domain.Users;
 using CloudVOffice.Core.Domain.WareHouses;
+using CloudVOffice.Core.Domain.WareHouses.Districts;
 using CloudVOffice.Core.Domain.WareHouses.Employees;
 using CloudVOffice.Core.Domain.WareHouses.GST;
 using CloudVOffice.Core.Domain.WareHouses.HandlingTypes;
@@ -83,6 +84,7 @@ namespace CloudVOffice.Data.Persistence
 		public virtual DbSet<UnitGroup> UnitGroups { get; set; }
 		public virtual DbSet<Unit> Units { get; set; }
 		public virtual DbSet<UnitConversionFactors> UnitConversionFactors { get; set; }
+		public virtual DbSet<District> Districts { get; set; }
 
 		#endregion
 
@@ -410,6 +412,15 @@ namespace CloudVOffice.Data.Persistence
  .HasDefaultValueSql("getdate()");
 
 			modelBuilder.Entity<UnitConversionFactors>()
+			 .Property(s => s.Deleted)
+			 .HasDefaultValue(false)
+			 .ValueGeneratedNever();
+
+			modelBuilder.Entity<District>()
+ .Property(s => s.CreatedDate)
+ .HasDefaultValueSql("getdate()");
+
+			modelBuilder.Entity<District>()
 			 .Property(s => s.Deleted)
 			 .HasDefaultValue(false)
 			 .ValueGeneratedNever();

@@ -26,6 +26,7 @@ using CloudVOffice.Services.WareHouses.Vendors;
 using CloudVOffice.Services.WareHouses.GSTs;
 using CloudVOffice.Services.WareHouses.HandlingTypes;
 using CloudVOffice.Services.WareHouses.UOMs;
+using CloudVOffice.Services.WareHouses.Districts;
 
 namespace CloudVOffice.Web.Framework
 {
@@ -79,6 +80,8 @@ namespace CloudVOffice.Web.Framework
             services.AddScoped<IUnit, UnitService>();
 
             services.AddScoped<IUnitConversionFactors, UnitConversionFactorsService>();
+
+            services.AddScoped<IDistrictService, DistrictService>();
 
 
 
