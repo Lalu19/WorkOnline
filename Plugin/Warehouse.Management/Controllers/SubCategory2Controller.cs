@@ -114,6 +114,10 @@ namespace Warehouse.Management.Controllers
             return Redirect("/WareHouse/SubCategory2/SubCategory2View");
         }
 
+        public JsonResult GetSubCategory2BySubCategory1Id(int SubCategory1Id)
+        {
+            return Json(_subcategory2Service.GetSubCategory2BySubCategory1Id(SubCategory1Id));
+        }
 
     }
 }

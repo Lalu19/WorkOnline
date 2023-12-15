@@ -3,12 +3,20 @@
     public class ItemMasterForFarming : IAuditEntity, ISoftDeletedEntity
     {
         public Int64 ItemMasterForFarmingId { get; set; }
-        public int? SectorId { get; set; }
+
+		public string? WareHouseName { get; set; }
+		public string? EmployeeName { get; set; }
+		public string? VendorName { get; set; }
+		public string? DistrictName { get; set; }
+
+		public int? SectorId { get; set; }
         public int? CategoryId { get; set; }
         public int? SubCategory1Id { get; set; }
+        public int? SubCategory2Id { get; set; }
         public string? Sector { get; set; }
         public string? Category { get; set; }
         public string? SubCategory1 { get; set; }
+        public string? SubCategory2 { get; set; }
         public string? Thumbnail { get; set; }
         public string? Images { get; set; }
 		public string? Barcode { get; set; }
@@ -21,7 +29,11 @@
         public double? GST { get; set; }
         public string? HSN { get; set; }
         public DateTime? HarvestDate { get; set; }
-        public Int64 CreatedBy { get; set; }
+
+		public string? InvoiceNo { get; set; }
+		public DateTime? ReceivedDate { get; set; }
+
+		public Int64 CreatedBy { get; set; }
 
         public DateTime CreatedDate { get; set; }
         public Int64? UpdatedBy { get; set; }

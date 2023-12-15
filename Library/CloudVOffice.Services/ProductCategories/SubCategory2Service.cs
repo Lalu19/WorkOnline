@@ -121,5 +121,11 @@ namespace CloudVOffice.Services.ProductCategories
 				throw;
 			}
 		}
-	}
+
+
+        public List<SubCategory2> GetSubCategory2BySubCategory1Id(int SubCategory1Id)
+        {
+            return _dbContext.SubCategories2.Where(x => x.SubCategory1Id == SubCategory1Id && x.Deleted == false).ToList();
+        }
+    }
 }
