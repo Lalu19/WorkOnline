@@ -27,6 +27,7 @@
         public const string Attendance = "Attendance";
         public const string Recruitment = "Recruitment";
         public const string WareHouse = "WareHouse";
+        public const string SalesExecutive = "SalesExecutive";
 
 
     }
