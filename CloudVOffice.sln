@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.API", "Plugin\Web.API\W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Warehouse.Management", "Plugin\Warehouse.Management\Warehouse.Management.csproj", "{5ED2CD5F-C531-4630-8CB2-37B6C8578A2D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesExecutive", "Plugin\SalesExecutive\SalesExecutive.csproj", "{152C88D0-546A-443D-A509-700571815944}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{5ED2CD5F-C531-4630-8CB2-37B6C8578A2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5ED2CD5F-C531-4630-8CB2-37B6C8578A2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5ED2CD5F-C531-4630-8CB2-37B6C8578A2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{152C88D0-546A-443D-A509-700571815944}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{152C88D0-546A-443D-A509-700571815944}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{152C88D0-546A-443D-A509-700571815944}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{152C88D0-546A-443D-A509-700571815944}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,6 +84,7 @@ Global
 		{27240D01-4DED-4BAE-BD8D-3806331976A5} = {E609A01A-F889-4EE6-8665-2DDCD1C7DD6E}
 		{C3D3EF49-2D25-409D-9BE8-3E4B5DF6135E} = {94EFDF8F-BB1B-43E6-BECB-CE10FC2F03B8}
 		{5ED2CD5F-C531-4630-8CB2-37B6C8578A2D} = {94EFDF8F-BB1B-43E6-BECB-CE10FC2F03B8}
+		{152C88D0-546A-443D-A509-700571815944} = {94EFDF8F-BB1B-43E6-BECB-CE10FC2F03B8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4DEF2CA5-EC2C-4C0B-878F-AEA8D00FE3E6}
