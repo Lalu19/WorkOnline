@@ -85,12 +85,13 @@ namespace CloudVOffice.Data.Persistence
 		public virtual DbSet<Unit> Units { get; set; }
 		public virtual DbSet<UnitConversionFactors> UnitConversionFactors { get; set; }
 		public virtual DbSet<District> Districts { get; set; }
+        public virtual DbSet<DamageItem> DamageItems { get; set; }
 		public virtual DbSet<DamageItemForFarming> DamageItemForFarmings { get; set; }
 
-		#endregion
+        #endregion
 
-      
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
             #region Base
@@ -425,6 +426,15 @@ namespace CloudVOffice.Data.Persistence
 			 .Property(s => s.Deleted)
 			 .HasDefaultValue(false)
 			 .ValueGeneratedNever();
+
+            modelBuilder.Entity<DamageItem>()
+ .Property(s => s.CreatedDate)
+ .HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<DamageItem>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
 
             modelBuilder.Entity<DamageItemForFarming>()
  .Property(s => s.CreatedDate)
