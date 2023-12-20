@@ -23,6 +23,7 @@
 		<Folder Include="wwwroot\uploads\Category\" />
 		<Folder Include="wwwroot\uploads\farmingimage\" />
 		<Folder Include="wwwroot\uploads\itemimage\" />
+		<Folder Include="wwwroot\uploads\damageproduct\" />
 
 
 	</ItemGroup>
