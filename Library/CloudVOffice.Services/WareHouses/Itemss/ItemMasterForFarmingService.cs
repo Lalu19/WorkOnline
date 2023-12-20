@@ -1,6 +1,7 @@
 ﻿using CloudVOffice.Core.Domain.Common;
 using CloudVOffice.Core.Domain.ProductCategories;
 using CloudVOffice.Core.Domain.WareHouses;
+using CloudVOffice.Core.Domain.WareHouses.Districts;
 using CloudVOffice.Core.Domain.WareHouses.Employees;
 using CloudVOffice.Core.Domain.WareHouses.Items;
 using CloudVOffice.Core.Domain.WareHouses.Vendors;
@@ -284,8 +285,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
                 List<WareHuose> wareHuoses = _dbContext.WareHouses.Where(x => x.Deleted == false).ToList();
                 List<Employee> employees = _dbContext.Employees.Where(x => x.Deleted == false).ToList();
                 List<Vendor> venders = _dbContext.Vendors.Where(x => x.Deleted == false).ToList();
-
-              //List<District> districts = _dbContext.Districts.Where(x => x.Deleted == false).ToList();
+                List<District> districts = _dbContext.Districts.Where(x => x.Deleted == false).ToList();
 
                 List<ItemMasterForFarming> items = _dbContext.ItemMasterForFarmings.Where(i => i.Deleted == false).ToList();
 
@@ -299,8 +299,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					WareHuose wareHuose = wareHuoses.FirstOrDefault(s => s.WareHuoseId == Convert.ToInt32(item.WareHouseName));
                     Employee employee = employees.FirstOrDefault(s => s.EmployeeId == Convert.ToInt32(item.EmployeeName));
                     Vendor vendor = venders.FirstOrDefault(s => s.VendorId == Convert.ToInt32(item.VendorName));
-
-				   // District district = districts.FirstOrDefault(s => s.DistrictId == Convert.ToInt32(item.DistrictName));
+				    District district = districts.FirstOrDefault(s => s.DistrictId == Convert.ToInt32(item.DistrictName));
 
 
 					item.Sector = sector != null ? sector.SectorName : null;
@@ -310,8 +309,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					item.WareHouseName = wareHuose != null ? wareHuose.WareHouseName : null;
 					item.EmployeeName = employee != null ? employee.EmployeeName : null;
 					item.VendorName = vendor != null ? vendor.VendorName : null;
-
-				   //item.DistrictName = district != null ? district.DistrictName : null;
+				    item.DistrictName = district != null ? district.DistrictName : null;
 				}
 
 				return items;   

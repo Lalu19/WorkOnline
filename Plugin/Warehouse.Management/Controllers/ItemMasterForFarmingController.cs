@@ -15,6 +15,7 @@ using CloudVOffice.Data.DTO.WareHouses.ViewModel;
 using CloudVOffice.Services.WareHouses;
 using CloudVOffice.Services.WareHouses.Employees;
 using CloudVOffice.Services.WareHouses.Vendors;
+using CloudVOffice.Services.WareHouses.Districts;
 
 namespace Warehouse.Management.Controllers
 {
@@ -31,8 +32,7 @@ namespace Warehouse.Management.Controllers
         private readonly IWareHouseService _wareHouseService;
         private readonly IEmployeeService _employeeService;
         private readonly IVendorService _vendorService;
-
-       // private readonly IDistrictService _districtService;
+        private readonly IDistrictService _districtService;
 
         public ItemMasterForFarmingController(IItemMasterForFarmingService itemMasterForFarmingService,
 			                                  IWebHostEnvironment hostingEnvironment,
@@ -42,8 +42,8 @@ namespace Warehouse.Management.Controllers
                                               ISubCategory2Service subCategory2Service,
 											  IWareHouseService wareHouseService,
                                               IEmployeeService employeeService,
-                                              IVendorService vendorService
-                                              //IDistrictService districtService
+                                              IVendorService vendorService,
+                                              IDistrictService districtService
                                               )
 		{
 			_itemMasterForFarmingService = itemMasterForFarmingService;
@@ -55,9 +55,8 @@ namespace Warehouse.Management.Controllers
 			_wareHouseService = wareHouseService;
             _employeeService = employeeService;
             _vendorService = vendorService;
-			//_districtService = districtService
-
-		}
+            _districtService = districtService;
+        }
 
 		[HttpGet]
 		public IActionResult CreateItemMasterForFarming(int? itemMasterForFarmingId)
@@ -76,7 +75,7 @@ namespace Warehouse.Management.Controllers
 			    	WareHouses = _wareHouseService.GetWareHouseList(),
 			    	Employees = _employeeService.GetEmployees(),
 			    	Vendors = _vendorService.GetVendorList(),
-				  //  Districts = _districtService.GetDistrictList(),
+				    Districts = _districtService.GetDistrictList(),
 
                     CreatedItemMasterFarmingDTO = new ItemMasterForFarmingDTO()
                 };
@@ -96,7 +95,7 @@ namespace Warehouse.Management.Controllers
 				viewForItemMasterFarming.CreatedItemMasterFarmingDTO.WareHouseName = itemMaster1.WareHouseName;
 				viewForItemMasterFarming.CreatedItemMasterFarmingDTO.EmployeeName = itemMaster1.EmployeeName;
 				viewForItemMasterFarming.CreatedItemMasterFarmingDTO.VendorName = itemMaster1.VendorName;
-				//viewForItemMasterFarming.CreatedItemMasterFarmingDTO.DistrictName = itemMaster1.DistrictName;
+				viewForItemMasterFarming.CreatedItemMasterFarmingDTO.DistrictName = itemMaster1.DistrictName;
 
 				viewForItemMasterFarming.CreatedItemMasterFarmingDTO.Barcode = itemMaster1.Barcode;
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.ItemMasterForFarmingId = itemMasterForFarmingId;
@@ -228,7 +227,7 @@ namespace Warehouse.Management.Controllers
 							WareHouses = _wareHouseService.GetWareHouseList(),
                             Employees = _employeeService.GetEmployees(),
                             Vendors = _vendorService.GetVendorList(),
-                            //Districts = _districtService.GetDistrictList(),
+                            Districts = _districtService.GetDistrictList(),
                         };
 
                         return View("~/Plugins/Warehouse.Management/Views/Item/ItemMasterForFarmingCreate.cshtml", viewForItemMasterFarming1);
@@ -306,7 +305,7 @@ namespace Warehouse.Management.Controllers
 					WareHouses = _wareHouseService.GetWareHouseList(),
                     Employees = _employeeService.GetEmployees(),
                     Vendors = _vendorService.GetVendorList(),
-                    //Districts = _districtService.GetDistrictList(),
+                    Districts = _districtService.GetDistrictList(),
 
                 };
 
