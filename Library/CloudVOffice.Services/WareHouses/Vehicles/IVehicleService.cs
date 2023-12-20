@@ -17,6 +17,6 @@ namespace CloudVOffice.Services.WareHouses.Vehicles
         public Vehicle GetVehicleByVehicleId(Int64 vehicleId);
         public List<Vehicle> GetVehicleList();
         public MessageEnum VehicleUpdate(VehicleDTO vehicleDTO);
-        public MessageEnum VehicleDelete(Int64 pinCodeId, Int64 DeletedBy);
+        public MessageEnum VehicleDelete(Int64 vehicleId, Int64 DeletedBy);
     }
 }

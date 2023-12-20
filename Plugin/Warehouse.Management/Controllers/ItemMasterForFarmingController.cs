@@ -100,7 +100,7 @@ namespace Warehouse.Management.Controllers
 				viewForItemMasterFarming.CreatedItemMasterFarmingDTO.Barcode = itemMaster1.Barcode;
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.ItemMasterForFarmingId = itemMasterForFarmingId;
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.BarCodeNotAvailable = itemMaster1.BarCodeNotAvailable;
-                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.UOMId = itemMaster1.UOMId;
+                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.UnitId = itemMaster1.UnitId;
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.ProductName = itemMaster1.ProductName;
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.QtyPerKg = itemMaster1.QtyPerKg;
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.Price = itemMaster1.Price;
@@ -334,5 +334,10 @@ namespace Warehouse.Management.Controllers
 		}
 
 
-    }
+		public JsonResult GetItemMasterFarmingById(int ItemMasterForFarmingId)
+		{
+			return Json(_itemMasterForFarmingService.GetItemMasterForFarmingById(ItemMasterForFarmingId));
+		}
+
+	}
 }

@@ -53,7 +53,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 
 					itemMaster.Barcode = itemMasterForFarmingDTO.Barcode;
 					itemMaster.BarCodeNotAvailable = itemMasterForFarmingDTO.BarCodeNotAvailable;
-					itemMaster.UOMId = itemMasterForFarmingDTO.UOMId;
+					itemMaster.UnitId = itemMasterForFarmingDTO.UnitId;
 					itemMaster.ProductName = itemMasterForFarmingDTO.ProductName;
 					itemMaster.QtyPerKg = itemMasterForFarmingDTO.QtyPerKg;
 					itemMaster.Price = itemMasterForFarmingDTO.Price;
@@ -95,7 +95,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 
                         Barcode = itemMaster.Barcode,
 						BarCodeNotAvailable = itemMaster.BarCodeNotAvailable,
-						UOMId = itemMaster.UOMId,
+						UnitId = itemMaster.UnitId,
 						ProductName = itemMaster.ProductName,
 						QtyPerKg = itemMaster.QtyPerKg,
 						Price = itemMaster.Price,
@@ -148,7 +148,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 
                         itemMaster.Barcode = itemMasterForFarmingDTO.Barcode;
 						itemMaster.BarCodeNotAvailable = itemMasterForFarmingDTO.BarCodeNotAvailable;
-						itemMaster.UOMId = itemMasterForFarmingDTO.UOMId;
+						itemMaster.UnitId = itemMasterForFarmingDTO.UnitId;
 						itemMaster.ProductName = itemMasterForFarmingDTO.ProductName;
 						itemMaster.QtyPerKg = itemMasterForFarmingDTO.QtyPerKg;
 						itemMaster.Price = itemMasterForFarmingDTO.Price;
@@ -273,6 +273,42 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 			}
 		}
 
+
+
+		public ItemMasterForFarming GetItemMasterForFarmingById(long itemMasterForFarmingId)
+		{
+			try
+			{
+
+				ItemMasterForFarming items = _dbContext.ItemMasterForFarmings.Where(i => i.Deleted == false && i.ItemMasterForFarmingId == itemMasterForFarmingId).FirstOrDefault();
+
+
+				// return _dbContext.ItemMasterForFarmings.Where(i => i.ItemMasterForFarmingId == itemMasterForFarmingId).FirstOrDefault();
+
+
+					WareHuose wareHuose = _dbContext.WareHouses.FirstOrDefault(s => s.WareHuoseId == Convert.ToInt32(items.WareHouseName));
+					Employee employee = _dbContext.Employees.FirstOrDefault(s => s.EmployeeId == Convert.ToInt32(items.EmployeeName));
+					Vendor vendor = _dbContext.Vendors.FirstOrDefault(s => s.VendorId == Convert.ToInt32(items.VendorName));
+					District district = _dbContext.Districts.FirstOrDefault(s => s.DistrictId == Convert.ToInt32(items.DistrictName));
+
+
+					items.WareHouseName = wareHuose != null ? wareHuose.WareHouseName : null;
+					items.EmployeeName = employee != null ? employee.EmployeeName : null;
+					items.VendorName = vendor != null ? vendor.VendorName : null;
+					items.DistrictName = district != null ? district.DistrictName : null;
+				
+
+				return items;
+			}
+			catch
+			{
+				throw;
+			}
+		}
+
+
+
+
 		public List<ItemMasterForFarming> GetItemMasterForFarmingList()
 		{
 			try
@@ -306,6 +342,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					item.Category = category != null ? category.CategoryName : null;
 					item.SubCategory1 = subCategory1 != null ? subCategory1.SubCategory1Name : null;
 					item.SubCategory2 = subCategory2 != null ? subCategory2.SubCategory2Name : null;
+
 					item.WareHouseName = wareHuose != null ? wareHuose.WareHouseName : null;
 					item.EmployeeName = employee != null ? employee.EmployeeName : null;
 					item.VendorName = vendor != null ? vendor.VendorName : null;
