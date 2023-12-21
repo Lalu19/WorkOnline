@@ -147,11 +147,23 @@
                                 <span asp-validation-for="CreatedItemMasterFarmingDTO.ProductName"></span>
                             </div>
 
+
                             <div class="form-group col-md-3">
+                                <label for="UnitId" class="form-label">Unit Name</label>
+                                <ejs-dropdownlist id="UnitId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.ShortName" allowFiltering="true" dataSource="@(new SelectList(Model.Units, "UnitId", "ShortName").Items)" placeholder="Select Unit" popupHeight="220px">
+                                    <e-dropdownlist-fields text="ShortName" value="UnitId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.ShortName"></span>
+                            </div>
+
+
+
+
+                           @* <div class="form-group col-md-3">
                                 <label for="UnitId" class="form-label">Unit&nbsp;</label>
                                 <input asp-for="@Model.CreatedItemMasterFarmingDTO.UnitId" type="text" id="UnitId" class="form-control" autofocus="autofocus" placeholder="Unit" />
                                 <span asp-validation-for="CreatedItemMasterFarmingDTO.UnitId"></span>
-                            </div>
+                            </div>*@
 
                             <div class="form-group col-md-3">
                                 <label for="QtyPerKg" class="form-label">Quantity&nbsp;</label>
@@ -611,7 +623,7 @@
             reviewHtml += "<b>Vendor Name:</b> " + vendorName + "<br>";
             reviewHtml += "<b>District Name:</b> " + districtName + "<br>";
             reviewHtml += "<b>Product Name:</b> " + productName + "<br>";
-            reviewHtml += "<b>UOM:</b> " + unitId + "<br>";
+            reviewHtml += "<b>Unit Name:</b> " + unitId + "<br>";
             reviewHtml += "<b>Qty Per Kg:</b> " + qtyPerKg + "<br>";
             reviewHtml += "<b>Price:</b> " + price + "<br>";
             reviewHtml += "<b>Min Qty:</b> " + minQty + "<br>";
