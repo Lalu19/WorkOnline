@@ -148,15 +148,20 @@
 								<input asp-for="@Model.PoCName" type="text" class="form-control" autofocus="autofocus" placeholder="PoC Name" />
 								<span asp-validation-for="PoCName"></span>
 							</div>
-
 							<div class="form-group col-md-3">
+
+								<label for="GSTNumber" class="form-label">GST Number&nbsp;</label>
+								<input asp-for="@Model.GSTNumber" type="text" class="form-control" autofocus="autofocus" placeholder="GST Number" />
+								<span asp-validation-for="GSTNumber"></span>
+							</div>
+						@*	<div class="form-group col-md-3">
 
 								<label for="GSTId" class="form-label">GST&nbsp;</label>
 								<ejs-dropdownlist id="GSTId" allowFiltering="true" ejs-for="@Model.GSTId" filtering="onGSTValuefiltering" dataSource="@(new SelectList((IEnumerable)ViewBag.GSTList, "GSTId", "GSTValue").Items)" placeholder="Select GSTValue" popupHeight="220px">
 									<e-dropdownlist-fields text="GSTValue" value="GSTId"></e-dropdownlist-fields>
 								</ejs-dropdownlist>
 								<span asp-validation-for="GSTId"></span>
-							</div>
+							</div>*@
 
 							<div class="form-group col-md-3">
 
@@ -234,13 +239,13 @@
 		e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.CategoryList)), query);
 	}
 </script>
-<script>
+@*<script>
 	function onGSTValuefiltering(e) {
 		var query = new ej.data.Query();
 		query = (e.text !== '') ? query.where('GSTValue', 'startswith', e.text, true) : query;
 		e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.GSTList)), query);
 	}
-</script>
+</script>*@
 <script>
 	function onChangeSector(args) {
 		$.ajax({

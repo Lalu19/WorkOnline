@@ -57,7 +57,7 @@ namespace Warehouse.Management.Controllers
             ViewBag.WareHouseList = _wareHouseService.GetWareHouseList();
             ViewBag.SectorList = _sectorService.GetSectorList();
             ViewBag.CategoryList = _categoryService.GetCategoryList();
-            ViewBag.GSTList = _gstService.GetGSTList();
+           // ViewBag.GSTList = _gstService.GetGSTList();
 
             ViewBag.VendorOnboardinglist = _vendorOnboardingService.GetVendorOnboardingList();
 
@@ -75,7 +75,7 @@ namespace Warehouse.Management.Controllers
                 vendorDTO.MailId = d.MailId;
                 vendorDTO.PoCName = d.PoCName;
                 vendorDTO.SectorId = d.SectorId;
-                vendorDTO.GSTId = d.GSTId;
+                vendorDTO.GSTNumber = d.GSTNumber;
                 vendorDTO.CategoryId = d.CategoryId;
                 vendorDTO.WareHuoseId = d.WareHuoseId;
                 vendorDTO.IsActive = d.IsActive;
@@ -155,7 +155,7 @@ namespace Warehouse.Management.Controllers
             ViewBag.WareHouseList = _wareHouseService.GetWareHouseList();
             ViewBag.SectorList = _sectorService.GetSectorList();
             ViewBag.CategoryList = _categoryService.GetCategoryList();
-            ViewBag.GSTList = _gstService.GetGSTList();
+          //  ViewBag.GSTList = _gstService.GetGSTList();
 
             ViewBag.VendorOnboardinglist = _vendorOnboardingService.GetVendorOnboardingList();
 

@@ -36,7 +36,7 @@ namespace CloudVOffice.Services.WareHouses.Vehicles
                     vehicle.BrandName = vehicleDTO.BrandName;
                     vehicle.ChasisNo = vehicleDTO.ChasisNo;
                     vehicle.FuelType = vehicleDTO.FuelType;
-                    vehicle.NoC = vehicleDTO.NoC;
+                    vehicle.DL = vehicleDTO.DL;
                     vehicle.RC = vehicleDTO.RC;
                     vehicle.InsuranceDetails = vehicleDTO.InsuranceDetails;
                     vehicle.PurchaseYear = vehicleDTO.PurchaseYear;
@@ -71,7 +71,7 @@ namespace CloudVOffice.Services.WareHouses.Vehicles
                         a.BrandName = vehicleDTO.BrandName;
                         a.ChasisNo = vehicleDTO.ChasisNo;
                         a.FuelType = vehicleDTO.FuelType;
-                        a.NoC = vehicleDTO.NoC;
+                        a.DL = vehicleDTO.DL;
                         a.RC = vehicleDTO.RC;
                         a.InsuranceDetails = vehicleDTO.InsuranceDetails;
                         a.PurchaseYear = vehicleDTO.PurchaseYear;

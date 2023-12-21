@@ -36,7 +36,7 @@ namespace CloudVOffice.Services.WareHouses.Vendors
                     Vendor vendor = new Vendor();
                     vendor.VendorName = vendorDTO.VendorName;
                     vendor.CompanyName = vendorDTO.CompanyName;
-                    vendor.GSTId = vendorDTO.GSTId;
+                    vendor.GSTNumber = vendorDTO.GSTNumber;
                     vendor.Address = vendorDTO.Address;
                     vendor.Telephone = vendorDTO.Telephone;
                     vendor.Mobile1 = vendorDTO.Mobile1;
@@ -94,7 +94,7 @@ namespace CloudVOffice.Services.WareHouses.Vendors
                     {
                         a.VendorName = vendorDTO.VendorName;
                         a.CompanyName = vendorDTO.CompanyName;
-                        a.GSTId = vendorDTO.GSTId;
+                        a.GSTNumber = vendorDTO.GSTNumber;
                         a.Address = vendorDTO.Address;
                         a.Telephone = vendorDTO.Telephone;
                         a.Mobile1 = vendorDTO.Mobile1;
