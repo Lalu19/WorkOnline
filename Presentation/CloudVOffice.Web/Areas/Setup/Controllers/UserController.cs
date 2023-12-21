@@ -64,6 +64,7 @@ namespace CloudVOffice.Web.Areas.Setup.Controllers
                 userCreateDTO.LastName = user.LastName;
                 userCreateDTO.Email = user.Email;
                 userCreateDTO.PhoneNo = user.PhoneNo;
+                userCreateDTO.Password = user.Password;
 
                 userCreateDTO.DateOfBirth = user.DateOfBirth;
                 userCreateDTO.UserTypeId = user.UserTypeId;
@@ -104,7 +105,7 @@ namespace CloudVOffice.Web.Areas.Setup.Controllers
         {
 
             createUserDTO.CreatedBy = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
-
+            createUserDTO.UserTypeId = 1;
             if (ModelState.IsValid)
             {
                 if (createUserDTO.UserId != null)

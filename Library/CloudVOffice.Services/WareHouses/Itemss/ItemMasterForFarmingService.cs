@@ -53,7 +53,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 
 					itemMaster.Barcode = itemMasterForFarmingDTO.Barcode;
 					itemMaster.BarCodeNotAvailable = itemMasterForFarmingDTO.BarCodeNotAvailable;
-					itemMaster.UOMId = itemMasterForFarmingDTO.UOMId;
+					itemMaster.UnitId = itemMasterForFarmingDTO.UnitId;
 					itemMaster.ProductName = itemMasterForFarmingDTO.ProductName;
 					itemMaster.QtyPerKg = itemMasterForFarmingDTO.QtyPerKg;
 					itemMaster.Price = itemMasterForFarmingDTO.Price;
@@ -95,7 +95,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 
                         Barcode = itemMaster.Barcode,
 						BarCodeNotAvailable = itemMaster.BarCodeNotAvailable,
-						UOMId = itemMaster.UOMId,
+						UnitId = itemMaster.UnitId,
 						ProductName = itemMaster.ProductName,
 						QtyPerKg = itemMaster.QtyPerKg,
 						Price = itemMaster.Price,
@@ -148,7 +148,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 
                         itemMaster.Barcode = itemMasterForFarmingDTO.Barcode;
 						itemMaster.BarCodeNotAvailable = itemMasterForFarmingDTO.BarCodeNotAvailable;
-						itemMaster.UOMId = itemMasterForFarmingDTO.UOMId;
+						itemMaster.UnitId = itemMasterForFarmingDTO.UnitId;
 						itemMaster.ProductName = itemMasterForFarmingDTO.ProductName;
 						itemMaster.QtyPerKg = itemMasterForFarmingDTO.QtyPerKg;
 						itemMaster.Price = itemMasterForFarmingDTO.Price;

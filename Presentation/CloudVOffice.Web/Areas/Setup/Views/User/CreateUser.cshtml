@@ -56,10 +56,15 @@
 										<input asp-for="@Model.Email" type="email" class="form-control" autofocus="autofocus" placeholder="Email" readonly />
 									}
 								}
-
-							
 							<span asp-validation-for="Email"></span>
 						</div>
+
+						<div class="form-group col-md-3">
+
+							<label for="Password" class="form-label">Password</label>
+							<input asp-for="@Model.Password" type="text" class="form-control" autofocus="autofocus" placeholder="Password" />
+							<span asp-validation-for="Password"></span>
+						</div>	
 					
 					</div>
 					<div class="form-row">
@@ -101,7 +106,7 @@
 							<span asp-validation-for="PhoneNo"></span>
 						</div>
 
-							<div class="form-group col-md-3">
+							@*<div class="form-group col-md-3">
 
 								<label for="UserTypeId" class="form-label">User Type</label>
 
@@ -110,9 +115,9 @@
 								</select>
 								
 								<span asp-validation-for="UserTypeId"></span>
-							</div>
+							</div>*@
 
-
+							
 
 					</div>
 				</div>

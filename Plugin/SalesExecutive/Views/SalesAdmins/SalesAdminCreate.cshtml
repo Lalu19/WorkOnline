@@ -1,0 +1,282 @@
+﻿@model CloudVOffice.Data.DTO.Sales.SalesAdminDTO;
+@using System.Collections;
+@using Newtonsoft.Json;
+@{
+	Layout = "_MainAppLayout";
+	ViewData["Title"] = "SalesAdminTarget";
+}
+@addTagHelper *, Syncfusion.EJ2
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<style>
+
+</style>
+<header class="main-heading">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+				<div class="page-icon">
+					<i class="icon-laptop_windows"></i>
+				</div>
+				<div class="page-title">
+					<h5>Sales</h5>
+					<h6 class="sub-heading">  </h6>
+				</div>
+			</div>
+			<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+				<div class="right-actions">
+					<span class="last-login">  </span>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+
+<div class="main-content">
+	<div class="row gutters">
+		<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
+			<div class="card">
+
+				<div class="card-header">
+
+					<div class="row">
+						<div class="col-md-8">
+							Sales Admin Target
+						</div>
+						<div class="col-md-4 text-right float-right">
+							<a href="/SalesExecutive/SalesAdmin/SalesAdminTargetView" class="btn btn-success btn-sm float-right"><i class="icon-list2"></i> List </a>
+
+						</div>
+					</div>
+				</div>
+
+				<form asp-route="SalesExecutive/SalesAdmin/CreateTargetBySalesAdmin" method="post" autocomplete="off">
+					<div asp-ation-summary="ModelOnly" class="message-error"></div>
+
+
+					<div class="card-header"><b>Category Wise</b></div>
+					<div class="card-body">
+
+						<div class="form-row">
+							
+						<input asp-for="@Model.SalesAdminTargetId" type="hidden" />
+							
+
+							<div class="form-group col-md-3">
+
+								<label for="SalesAdminTargetName" class="form-label">SalesAdmin Target Name&nbsp;<span style="color:red;"><b>*</b></span></label>
+								<input asp-for="@Model.SalesAdminTargetName" type="text" class="form-control" autofocus="autofocus" placeholder="SalesAdminTargetName" />
+								<span asp-validation-for="SalesAdminTargetName"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+
+								<label for="Month" class="form-label">Month &nbsp;</label>
+								<input asp-for="@Model.Month" type="text" class="form-control" autofocus="autofocus" placeholder="Month" />
+								<span asp-validation-for="Month"></span>
+							</div>
+
+						</div>
+
+						<div class="form-row">
+							
+
+
+							<div class="form-group col-md-3">
+								<label for="SectorId" class="form-label">Sector &nbsp</label>
+								<ejs-dropdownlist id="SectorId" name="SectorId" allowFiltering="true" change="onChangeSector"								  
+												  dataSource="@(new SelectList((IEnumerable)ViewBag.Sectors, "SectorId", "SectorName").Items)"
+
+												  placeholder="Select Sector" popupHeight="220px"
+												  value="@Model.SectorId" autofocus="autofocus">
+									<e-dropdownlist-fields text="SectorName" value="SectorId"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="SectorId"></span>
+							</div>
+
+
+
+							<div class="form-group col-md-3">
+								<label for="CategoryId" class="form-label">Category Name</label>
+								<ejs-dropdownlist id="CategoryId" allowFiltering="true" ejs-for="@Model.CategoryId" placeholder="Select SubCategory1" popupHeight="220px">
+									<e-dropdownlist-fields text="categoryName" value="categoryId"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="CategoryId"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+
+								<label for="MonthlyCategoryWiseTarget" class="form-label">Monthly CategoryWise Target &nbsp;<span style="color:red;"><b>*</b></span></label>
+								<input asp-for="@Model.MonthlyCategoryWiseTarget" type="text" class="form-control" autofocus="autofocus" placeholder="Monthly CategoryWise Target" />
+								<span asp-validation-for="MonthlyCategoryWiseTarget"></span>
+							</div>
+
+						</div>
+
+						<br /><br />
+
+						
+
+						<div class="form-row">
+							<div class="form-group col-md-3">
+
+								<label for="MonthlySectorWiseTarget" class="form-label">Monthly SectorWise Target&nbsp;<span style="color:red;"><b>*</b></span></label>
+								<input asp-for="@Model.MonthlySectorWiseTarget" type="text" class="form-control" autofocus="autofocus" placeholder="MonthlySectorWiseTarget" />
+								<span asp-validation-for="MonthlySectorWiseTarget"></span>								
+							</div>
+						
+						</div>
+
+
+						<br /><br />
+
+
+						
+						
+						<div class="card-header"><b>Brand Wise</b></div>
+							<div class="card-body">
+								<div class="form-row">
+
+									<div class="form-group col-md-3">
+
+										<label for="MonthlyBrandWiseTarget" class="form-label">Monthly BrandWise Target &nbsp;<span style="color:red;"><b>*</b></span></label>
+										<input asp-for="@Model.MonthlyBrandWiseTarget" type="text" class="form-control" autofocus="autofocus" placeholder="Monthly BrandWise Target" />
+										<span asp-validation-for="MonthlyBrandWiseTarget"></span>
+
+									</div>
+
+									<div class="form-group col-md-3">
+
+										<label for="UnitId" class="form-label">UnitId &nbsp;<span style="color:red;"><b>*</b></span></label>
+										<input asp-for="@Model.UnitId" type="text" class="form-control" autofocus="autofocus" placeholder="UnitId" />
+										<span asp-validation-for="UnitId"></span>
+
+									</div>
+								</div>
+
+
+
+							</div>
+					</div>
+
+					<div id="dynamicFieldsContainer"></div>
+
+					<div class="card-body">
+
+						<div class="col-lg-2 col-md-2 col-sm-12">
+							<button type="submit" class="btn btn-primary">Save</button>
+						</div>
+					</div>
+
+				</form>
+
+			</div>
+
+
+
+		</div>
+	</div>
+
+</div>
+
+
+<script>
+	function onChangeSector(args) {
+		$.ajax({
+			type: "GET",
+			url: "/WareHouse/Category/GetCategoryBySectorId",
+			data: { sectorId: args.value },
+			contentType: "application/json",
+			dataType: "json",
+			success: function (result) {
+				console.log(result);
+				var categoryDropDown = document.getElementById("CategoryId").ej2_instances[0];
+				categoryDropDown.dataSource = result;
+				categoryDropDown.dataBind();
+
+				categoryDropDown.value = null;
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+	function{
+		$.ajax({
+			type: "GET",
+			url: "/SalesExecutive/SalesAdmin/GetCategoryBySectorId",
+			data: { sectorId: args.value },
+			contentType: "application/json",
+			dataType: "json",
+			success: function (result) {
+				console.log(result);
+				var categoryDropDown = document.getElementById("CategoryId").ej2_instances[0];
+				categoryDropDown.dataSource = result;
+				categoryDropDown.dataBind();
+
+				categoryDropDown.value = null;
+			},
+			error: function () {
+
+			}
+		});
+	}
+</script>
+
+
+@*<script>
+	function onChangeSector(args) {
+		$.ajax({
+			type: "GET",
+			url: "/WareHouse/Category/GetCategoryBySectorId",
+			data: { sectorId: args.value },
+			contentType: "application/json",
+			dataType: "json",
+			success: function (result) {
+				console.log(result);
+
+				// Clear existing dropdowns and textboxes
+				$("#dynamicFieldsContainer").empty();
+
+				// Create pairs of Category dropdowns and MonthlyCategoryWiseTarget textboxes based on the result
+				for (var i = 0; i < result.length; i++) {
+					createDynamicFields(result[i]);
+				}
+			},
+			error: function () {
+				// Handle error
+			}
+		});
+	}
+
+	function createDynamicFields(category) {
+		// Create a div to hold each set of dynamic fields
+		var dynamicFieldsDiv = $("<div class='form-group col-md-3'>");
+
+		// Create the Category dropdown
+		dynamicFieldsDiv.append("<label for='CategoryId" + category.categoryId + "' class='form-label'>Category Name</label>");
+		dynamicFieldsDiv.append("<ejs-dropdownlist id='CategoryId" + category.categoryId + "' allowFiltering='true' placeholder='Select SubCategory' popupHeight='220px'></ejs-dropdownlist>");
+		dynamicFieldsDiv.append("<span asp-validation-for='CategoryId'></span>");
+
+		// Create the MonthlyCategoryWiseTarget textbox
+		dynamicFieldsDiv.append("<label for='MonthlyCategoryWiseTarget" + category.categoryId + "' class='form-label'>Monthly CategoryWise Target &nbsp;<span style='color:red;'><b>*</b></span></label>");
+		dynamicFieldsDiv.append("<input asp-for='MonthlyCategoryWiseTarget' type='text' class='form-control' autofocus='autofocus' placeholder='Monthly CategoryWise Target' id='MonthlyCategoryWiseTarget" + category.categoryId + "' />");
+		dynamicFieldsDiv.append("<span asp-validation-for='MonthlyCategoryWiseTarget'></span>");
+
+		// Append the dynamic fields to the container
+		$("#dynamicFieldsContainer").append(dynamicFieldsDiv);
+
+		// Initialize the Category dropdown with data
+		var categoryDropdown = document.getElementById("CategoryId" + category.categoryId).ej2_instances[0];
+		categoryDropdown.dataSource = category.items; // Assuming 'items' property contains the data for the dropdown
+		categoryDropdown.fields = { text: "categoryName", value: "categoryId" }; // Set the display text field
+		categoryDropdown.dataBind();
+	}
+</script>*@
+
+
+
+

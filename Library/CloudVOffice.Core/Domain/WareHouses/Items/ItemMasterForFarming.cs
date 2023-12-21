@@ -21,7 +21,7 @@
         public string? Images { get; set; }
 		public string? Barcode { get; set; }
 		public bool BarCodeNotAvailable { get; set; }
-		public int? UOMId { get; set; }
+		public Int64? UnitId { get; set; }
         public string ProductName { get; set; }
         public double? QtyPerKg { get; set; }
         public double? Price { get; set; }

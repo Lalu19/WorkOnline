@@ -13,6 +13,7 @@ namespace CloudVOffice.Data.DTO.Users
         [DisplayName("Last Name")]
         public string? LastName { get; set; }
 
+        public string? Password { get; set; }
         [Required]
         [DisplayName("Email Id")]
         [DataType(DataType.EmailAddress)]
