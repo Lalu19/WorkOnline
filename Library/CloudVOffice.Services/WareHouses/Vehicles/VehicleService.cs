@@ -116,11 +116,11 @@ namespace CloudVOffice.Services.WareHouses.Vehicles
                 throw;
             }
         }
-        public MessageEnum VehicleDelete(Int64 pinCodeId, long DeletedBy)
+        public MessageEnum VehicleDelete(Int64 vehicleId, long DeletedBy)
         {
             try
             {
-                var a = _dbContext.Vehicles.Where(x => x.VehicleId == pinCodeId).FirstOrDefault();
+                var a = _dbContext.Vehicles.Where(x => x.VehicleId == vehicleId).FirstOrDefault();
                 if (a != null)
                 {
                     a.Deleted = true;

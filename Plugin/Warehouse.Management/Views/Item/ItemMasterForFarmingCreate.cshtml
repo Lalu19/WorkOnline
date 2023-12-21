@@ -76,7 +76,6 @@
                                 <span asp-validation-for="CreatedItemMasterFarmingDTO.SectorId"></span>
                             </div>
 
-
                             <div class="form-group col-md-3">
                                 <label for="CategoryId" class="form-label">Category Name</label>
                                 <ejs-dropdownlist id="CategoryId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.CategoryId" change="onChangeCategory" placeholder="Select Category" popupHeight="220px">
@@ -85,19 +84,21 @@
                                 <span asp-validation-for="CreatedItemMasterFarmingDTO.CategoryId"></span>
                             </div>
 
-
                             <div class="form-group col-md-3">
                                 <label for="SubCategory1Id" class="form-label">SubCategory Name</label>
-                                <ejs-dropdownlist id="SubCategory1Id" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.SubCategory1Id" change="onChangeSubCategory1" placeholder="Select SubCategory" popupHeight="220px">
+                                <ejs-dropdownlist id="SubCategory1Id" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.SubCategory1Id" change="onChangeSubCategory" placeholder="Select SubCategory" popupHeight="220px">
                                     <e-dropdownlist-fields text="subCategory1Name" value="subCategory1Id"></e-dropdownlist-fields>
                                 </ejs-dropdownlist>
                                 <span asp-validation-for="CreatedItemMasterFarmingDTO.SubCategory1Id"></span>
                             </div>
 
+
                             <div class="form-group col-md-3">
-                                <label for="ProductName" class="form-label">Product Name &nbsp;</label>
-                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.ProductName" type="text" id="ProductName" class="form-control" autofocus="autofocus" placeholder="Product Name" />
-                                <span asp-validation-for="CreatedItemMasterFarmingDTO.ProductName"></span>
+                                <label for="SubCategory2Id" class="form-label">SubCategory1 Name</label>
+                                <ejs-dropdownlist id="SubCategory2Id" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.SubCategory2Id" placeholder="Select SubCategory1" popupHeight="220px">
+                                    <e-dropdownlist-fields text="subCategory2Name" value="subCategory2Id"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.SubCategory2Id"></span>
                             </div>
 
                         </div>
@@ -105,9 +106,51 @@
                         <div class="form-row">
 
                             <div class="form-group col-md-3">
-                                <label for="UOMId" class="form-label">UOM&nbsp;</label>
-                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.UOMId" type="text" id="UOMId" class="form-control" autofocus="autofocus" placeholder="UOM" />
-                                <span asp-validation-for="CreatedItemMasterFarmingDTO.UOMId"></span>
+                                <label for="WareHuoseId" class="form-label">WareHouse Name</label>
+                                <ejs-dropdownlist id="WareHuoseId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.WareHouseName" allowFiltering="true"  dataSource="@(new SelectList(Model.WareHouses, "WareHuoseId", "WareHouseName").Items)" placeholder="Select WareHouse" popupHeight="220px">
+                                    <e-dropdownlist-fields text="WareHouseName" value="WareHuoseId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.WareHouseName"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="EmployeeId" class="form-label">Employee Name</label>
+                                <ejs-dropdownlist id="EmployeeId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.EmployeeName" allowFiltering="true" dataSource="@(new SelectList(Model.Employees, "EmployeeId", "EmployeeName").Items)" placeholder="Select Employee" popupHeight="220px">
+                                    <e-dropdownlist-fields text="EmployeeName" value="EmployeeId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.EmployeeName"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="VendorId" class="form-label">Vendor Name</label>
+                                <ejs-dropdownlist id="VendorId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.VendorName" allowFiltering="true" dataSource="@(new SelectList(Model.Vendors, "VendorId", "VendorName").Items)" placeholder="Select Vendor" popupHeight="220px">
+                                    <e-dropdownlist-fields text="VendorName" value="VendorId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.VendorName"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="DistrictId" class="form-label">District Name</label>
+                                <ejs-dropdownlist id="DistrictId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.DistrictName" allowFiltering="true" dataSource="@(new SelectList(Model.Districts, "DistrictId", "DistrictName").Items)" placeholder="Select District" popupHeight="220px">
+                                    <e-dropdownlist-fields text="DistrictName" value="DistrictId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.DistrictName"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-3">
+                                <label for="ProductName" class="form-label">Product Name &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.ProductName" type="text" id="ProductName" class="form-control" autofocus="autofocus" placeholder="Product Name" />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.ProductName"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="UnitId" class="form-label">Unit Id&nbsp;</label>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.UnitId" type="text" id="UnitId" class="form-control" autofocus="autofocus" placeholder="UnitId" />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.UnitId"></span>
                             </div>
 
                             <div class="form-group col-md-3">
@@ -122,15 +165,15 @@
                                 <span asp-validation-for="CreatedItemMasterFarmingDTO.Price"></span>
                             </div>
 
+                        </div>
+
+                        <div class="form-row">
+
                             <div class="form-group col-md-3">
                                 <label for="MinQty" class="form-label">Min Qty &nbsp;</label>
                                 <input asp-for="@Model.CreatedItemMasterFarmingDTO.MinQty" type="number" id="MinQty" class="form-control" autofocus="autofocus" placeholder="MinQty" />
                                 <span asp-validation-for="CreatedItemMasterFarmingDTO.MinQty"></span>
                             </div>
-
-                        </div>
-
-                        <div class="form-row">
 
                             <div class="form-group col-md-3">
                                 <label for="GST" class="form-label">GST&nbsp;</label>
@@ -143,15 +186,30 @@
                                 <input asp-for="@Model.CreatedItemMasterFarmingDTO.HSN" type="text" class="form-control" id="HSN" autofocus="autofocus" placeholder="HSN" readonly />
                                 <span asp-validation-for="CreatedItemMasterFarmingDTO.HSN"></span>
                             </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="InvoiceNo" class="form-label">Invoice No &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.InvoiceNo" type="text" id="InvoiceNo" class="form-control" id="InvoiceNo" autofocus="autofocus" placeholder="InvoiceNo" />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.InvoiceNo"></span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-3">
+                                <label for="ReceivedDate" class="form-label">Received Date &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.ReceivedDate" type="date" id="ReceivedDate" class="form-control" autofocus="autofocus" placeholder="Received Date" />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.ReceivedDate"></span>
+                            </div>
+
                             <div class="form-group col-md-3">
                                 <label for="HarvestDate" class="form-label">Harvest Date &nbsp;</label>
                                 <input asp-for="@Model.CreatedItemMasterFarmingDTO.HarvestDate" type="date" id="HarvestDate" class="form-control" autofocus="autofocus" placeholder="HarvestDate" />
                                 <span asp-validation-for="CreatedItemMasterFarmingDTO.HarvestDate"></span>
                             </div>
 
-                        </div>
-
-                        <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="Thumbnail" class="form-label">Thumbnail</label>
                                 <input asp-for="@Model.CreatedItemMasterFarmingDTO.ThumbnailUp" type="file" id="ThumbnailUp" class="form-control" autofocus="autofocus" placeholder="Upload Image" />
@@ -180,6 +238,17 @@
                                 }
                             </div>
 
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-3">
+                                <label for="BarCodeNotAvailable" class="form-label">Generate Barcode</label>
+                                <br>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.BarCodeNotAvailable" type="checkbox" id="BarCodeNotAvailable" />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.BarCodeNotAvailable"></span>
+                            </div>
+
                             <div class="form-group col-md-3">
                                 <label for="Barcode" class="form-label">Barcode &nbsp;</label>
                                 <input asp-for="@Model.CreatedItemMasterFarmingDTO.Barcode" type="text" class="form-control" autofocus="autofocus" placeholder="Barcode" readonly />
@@ -191,16 +260,7 @@
                                     <img src="data:image/png;base64,@(Model.CreatedItemMasterFarmingDTO.Barcode)" alt="Barcode Image" />
                                 }
                             </div>
-                        </div>
 
-                        <div class="form-row">
-                            <div class="form-group col-md-3">
-
-                                <label for="BarCodeNotAvailable" class="form-label">Generate Barcode</label>
-                                <br>
-                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.BarCodeNotAvailable" type="checkbox" id="BarCodeNotAvailable" />
-                                <span asp-validation-for="CreatedItemMasterFarmingDTO.BarCodeNotAvailable"></span>
-                            </div>
                         </div>
 
                         <br /><br />
@@ -311,8 +371,31 @@
     }
 </script>
 
-<script>
-    function onChangeSubCategory1(args) {
+@*<script>
+    function onChangeSubCategory(args) {
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/SubCategory2/GetSubCategory2BySubCategory1Id",
+            data: { subCategory1Id: args.value },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                var subcategory2DropDown = document.getElementById("SubCategory2Id").ej2_instances[0];
+                subcategory2DropDown.dataSource = result;
+                subcategory2DropDown.dataBind();
+
+                subcategory2DropDown.value = null;
+            },
+            error: function () {
+
+            }
+        });
+    }
+</script>*@
+
+@*<script>
+    function onChangeSubCategory(args) {
         $.ajax({
             type: "GET",
             url: "/WareHouse/SubCategory1/GetSubCategory1ById",
@@ -331,6 +414,52 @@
             },
             error: function () {
 
+            }
+        });
+    }
+</script>*@
+
+<script>
+    function onChangeSubCategory(args) {
+        // First API call
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/SubCategory1/GetSubCategory1ById",
+            data: { subCategory1Id: args.value },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+
+                var gstTextbox = document.getElementById("GST");
+                var hsnTextbox = document.getElementById("HSN");
+
+                gstTextbox.value = result.gst;
+                hsnTextbox.value = result.hsn;
+
+                // Second API call
+                $.ajax({
+                    type: "GET",
+                    url: "/WareHouse/SubCategory2/GetSubCategory2BySubCategory1Id",
+                    data: { subCategory1Id: args.value },
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (result) {
+                        console.log(result);
+                        var subcategory2DropDown = document.getElementById("SubCategory2Id").ej2_instances[0];
+                        subcategory2DropDown.dataSource = result;
+                        subcategory2DropDown.dataBind();
+
+                        subcategory2DropDown.value = null;
+                    },
+                    error: function () {
+                        // Handle error for the second API call
+                    }
+                });
+
+            },
+            error: function () {
+                // Handle error for the first API call
             }
         });
     }
@@ -456,26 +585,40 @@
             var sectorId = $("#SectorId").val() || '';
             var categoryId = $("#CategoryId").val() || '';
             var subCategory1Id = $("#SubCategory1Id").val() || '';
-            var uomId = $("#UOMId").val() || '';
+            var subCategory2Id = $("#SubCategory2Id").val() || '';
+            var wareHouseName = $("#WareHuoseId").val() || '';
+            var employeeName = $("#EmployeeId").val() || '';
+            var vendorName = $("#VendorId").val() || '';
+            var districtName = $("#DistrictId").val() || '';
             var productName = $("#ProductName").val() || '';
+            var unitId = $("#UnitId").val() || '';
             var qtyPerKg = $("#QtyPerKg").val() || '';
             var price = $("#Price").val() || '';
             var minQty = $("#MinQty").val() || '';
             var gst = $("#GST").val() || '';
             var hsn = $("#HSN").val() || '';
+            var invoiceNo = $("#InvoiceNo").val() || '';
+            var receivedDate = $("#ReceivedDate").val() || '';
             var harvestDate = $("#HarvestDate").val() || '';
 
             // Create HTML for displaying in the modal
-            var reviewHtml = "<b>Sector ID:</b> " + sectorId + "<br>";
-            reviewHtml += "<b>Category ID:</b> " + categoryId + "<br>";
-            reviewHtml += "<b>SubCategory1 ID:</b> " + subCategory1Id + "<br>";
-            reviewHtml += "<b>UOM:</b> " + uomId + "<br>";
+            var reviewHtml = "<b>Sector Name:</b> " + sectorId + "<br>";
+            reviewHtml += "<b>Category Name:</b> " + categoryId + "<br>";
+            reviewHtml += "<b>SubCategory Name:</b> " + subCategory1Id + "<br>";
+            reviewHtml += "<b>SubCategory1 Name:</b> " + subCategory2Id + "<br>";
+            reviewHtml += "<b>WareHouse Name:</b> " + wareHouseName + "<br>";
+            reviewHtml += "<b>Employee Name:</b> " + employeeName + "<br>";
+            reviewHtml += "<b>Vendor Name:</b> " + vendorName + "<br>";
+            reviewHtml += "<b>District Name:</b> " + districtName + "<br>";
             reviewHtml += "<b>Product Name:</b> " + productName + "<br>";
+            reviewHtml += "<b>UOM:</b> " + unitId + "<br>";
             reviewHtml += "<b>Qty Per Kg:</b> " + qtyPerKg + "<br>";
             reviewHtml += "<b>Price:</b> " + price + "<br>";
             reviewHtml += "<b>Min Qty:</b> " + minQty + "<br>";
             reviewHtml += "<b>GST:</b> " + gst + "<br>";
             reviewHtml += "<b>HSN:</b> " + hsn + "<br>";
+            reviewHtml += "<b>Invoice No:</b> " + invoiceNo + "<br>";
+            reviewHtml += "<b>Received Date:</b> " + receivedDate + "<br>";
             reviewHtml += "<b>Harvest Date:</b> " + harvestDate + "<br>";
 
             // Display the data in the modal

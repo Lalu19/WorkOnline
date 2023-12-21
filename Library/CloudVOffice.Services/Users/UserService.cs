@@ -79,83 +79,152 @@ namespace CloudVOffice.Services.Users
             throw new NotImplementedException();
         }
 
-        public List<Application> GetUserMenu(Int64 UserId)
-        {
-            var user = _context.Users.Include(s => s.UserRoleMappings).ThenInclude(a => a.Role)
+		//public List<Application> GetUserMenu(Int64 UserId)
+		//{
+		//    var user = _context.Users.Include(s => s.UserRoleMappings).ThenInclude(a => a.Role)
 
-             .Where(x => x.UserId == UserId).SingleOrDefault();
-            List<Application> application = new List<Application>();
-            for (int i = 0; i < user.UserRoleMappings.Count; i++)
-            {
-                var pmenu = _context.UserWiseViewMappers
-                    .Include(a => a.Application)
-                    .Where(x => x.UserId == UserId && x.Deleted == false && x.Application.Parent == null).ToList();
-                for (int j = 0; j < pmenu.Count; j++)
-                {
-                    if (application.Where(x => x.ApplicationId == pmenu[j].ApplicationId).ToList().Count == 0)
-                    {
-                        pmenu[j].Application.Children = new List<Application>();
+		//     .Where(x => x.UserId == UserId).SingleOrDefault();
+		//    List<Application> application = new List<Application>();
+		//    for (int i = 0; i < user.UserRoleMappings.Count; i++)
+		//    {
+		//        var pmenu = _context.UserWiseViewMappers
+		//            .Include(a => a.Application)
+		//            .Where(x => x.UserId == UserId && x.Deleted == false && x.Application.Parent == null).ToList();
+		//        for (int j = 0; j < pmenu.Count; j++)
+		//        {
+		//            if (application.Where(x => x.ApplicationId == pmenu[j].ApplicationId).ToList().Count == 0)
+		//            {
+		//                pmenu[j].Application.Children = new List<Application>();
 
-                        application.Add(pmenu[j].Application);
-                    }
-                }
-                for (int j = 0; j < application.Count; j++)
-                {
-                    var smenu = _context.UserWiseViewMappers
-                        .Include(a => a.Application)
-                        .Where(x => x.UserId == UserId && x.Deleted == false && x.Application.Parent == application[j].ApplicationId).ToList();
-                    for (int k = 0; k < smenu.Count; k++)
-                    {
-                        var slist = application[j].Children;
-                        if (application[j].Children != null && application[j].Children.Count > 0)
-                        {
-                            int sapplicationId = smenu[k].ApplicationId;
+		//                application.Add(pmenu[j].Application);
+		//            }
+		//        }
+		//        for (int j = 0; j < application.Count; j++)
+		//        {
+		//            var smenu = _context.UserWiseViewMappers
+		//                .Include(a => a.Application)
+		//                .Where(x => x.UserId == UserId && x.Deleted == false && x.Application.Parent == application[j].ApplicationId).ToList();
+		//            for (int k = 0; k < smenu.Count; k++)
+		//            {
+		//                var slist = application[j].Children;
+		//                if (application[j].Children != null && application[j].Children.Count > 0)
+		//                {
+		//                    int sapplicationId = smenu[k].ApplicationId;
 
-                            if (slist.Where(x => x.ApplicationId == sapplicationId).ToList().Count == 0)
-                            {
-                                smenu[k].Application.Children = new List<Application>();
-                                application[j].Children.Add(smenu[k].Application);
-                            }
-                        }
-                        else
-                        {
-                            smenu[k].Application.Children = new List<Application>();
+		//                    if (slist.Where(x => x.ApplicationId == sapplicationId).ToList().Count == 0)
+		//                    {
+		//                        smenu[k].Application.Children = new List<Application>();
+		//                        application[j].Children.Add(smenu[k].Application);
+		//                    }
+		//                }
+		//                else
+		//                {
+		//                    smenu[k].Application.Children = new List<Application>();
 
-                            application[j].Children.Add(smenu[k].Application);
-                        }
+		//                    application[j].Children.Add(smenu[k].Application);
+		//                }
 
-                        var tmenu = _context.UserWiseViewMappers
-                            .Include(a => a.Application)
-                            .Where(x => x.UserId == UserId && x.Deleted == false && x.Application.Parent == application[j].Children[k].ApplicationId).ToList();
-                        for (int l = 0; l < tmenu.Count; l++)
-                        {
-                            var tlist = application[j].Children[k].Children;
-                            if (tlist != null && tlist.Count > 0)
-                            {
-                                int tapplicationId = tmenu[l].ApplicationId;
+		//                var tmenu = _context.UserWiseViewMappers
+		//                    .Include(a => a.Application)
+		//                    .Where(x => x.UserId == UserId && x.Deleted == false && x.Application.Parent == application[j].Children[k].ApplicationId).ToList();
+		//                for (int l = 0; l < tmenu.Count; l++)
+		//                {
+		//                    var tlist = application[j].Children[k].Children;
+		//                    if (tlist != null && tlist.Count > 0)
+		//                    {
+		//                        int tapplicationId = tmenu[l].ApplicationId;
 
-                                if (tlist.Where(x => x.ApplicationId == tmenu[l].ApplicationId).ToList().Count == 0)
-                                {
-                                    var napplication = tmenu[l].Application;
-                                    application[j].Children[k].Children.Add(napplication);
-                                }
-                            }
-                            else
-                            {
-                                var napplication = tmenu[l].Application;
-                                application[j].Children[k].Children.Add(napplication);
-                            }
+		//                        if (tlist.Where(x => x.ApplicationId == tmenu[l].ApplicationId).ToList().Count == 0)
+		//                        {
+		//                            var napplication = tmenu[l].Application;
+		//                            application[j].Children[k].Children.Add(napplication);
+		//                        }
+		//                    }
+		//                    else
+		//                    {
+		//                        var napplication = tmenu[l].Application;
+		//                        application[j].Children[k].Children.Add(napplication);
+		//                    }
 
-                        }
-                    }
-                }
+		//                }
+		//            }
+		//        }
 
-            }
-            return application;
+		//    }
+		//    return application;
 
-        }
+		//}
+		public List<Application> GetUserMenu(Int64 UserId)
+		{
+			var user = _context.Users.Include(s => s.UserRoleMappings).ThenInclude(a => a.Role)
 
-        public async Task<MessageEnum> CreateUser(UserCreateDTO userCreateDTO)
+			 .Where(x => x.UserId == UserId).SingleOrDefault();
+
+			List<int> roles = new List<int>();
+			for (int i = 0; i < user.UserRoleMappings.Count; i++)
+			{
+				roles.Add(user.UserRoleMappings[i].RoleId);
+			}
+
+			List<Application> application = new List<Application>();
+
+			var pmenu = _context.RoleAndApplicationWisePermissions
+			   .Include(a => a.Application)
+			   .Where(x => roles.Contains(x.RoleId) && x.Deleted == false && x.Application.Parent == null).ToList();
+
+
+			for (int j = 0, pc = 0; j < pmenu.Count; j++)
+			{
+				if (application.Where(x => x.ApplicationId == pmenu[j].ApplicationId).ToList().Count == 0)
+				{
+					pmenu[j].Application.Children = new List<Application>();
+
+					application.Add(pmenu[j].Application);
+
+					var smenu = _context.RoleAndApplicationWisePermissions
+					.Include(a => a.Application)
+					.Where(x => roles.Contains(x.RoleId) && x.Deleted == false && x.Application.Parent == pmenu[j].ApplicationId).ToList();
+
+					for (int k = 0, sc = 0; k < smenu.Count; k++)
+					{
+						int ApplicationId = smenu[k].ApplicationId;
+						var appli = application[pc];
+						var Sappcheck = appli.Children.Where(x => x.ApplicationId == ApplicationId).ToList();
+						if (Sappcheck.Count == 0)
+						{
+							smenu[k].Application.Children = new List<Application>();
+							application[pc].Children.Add(smenu[k].Application);
+							var tmenu = _context.RoleAndApplicationWisePermissions
+							.Include(a => a.Application)
+							.Where(x => roles.Contains(x.RoleId) && x.Deleted == false && x.Application.Parent == smenu[k].ApplicationId).ToList();
+
+							for (int l = 0; l < tmenu.Count; l++)
+							{
+								var tappcheck = application[pc].Children[sc].Children.Where(x => x.ApplicationId == tmenu[l].ApplicationId).ToList();
+								if (tappcheck.Count == 0)
+								{
+									tmenu[l].Application.Children = new List<Application>();
+									application[pc].Children[sc].Children.Add(tmenu[l].Application);
+								}
+
+							}
+							sc = sc + 1;
+						}
+
+
+
+					}
+					pc = pc + 1;
+
+				}
+
+
+			}
+
+			return application;
+
+		}
+		public async Task<MessageEnum> CreateUser(UserCreateDTO userCreateDTO)
         {
             var objCheck = _context.Users
 
@@ -170,7 +239,7 @@ namespace CloudVOffice.Services.Users
                     users.MiddleName = userCreateDTO.MiddleName;
                     users.LastName = userCreateDTO.LastName;
                     users.Email = userCreateDTO.Email;
-                    //users.Password = Encrypt.EncryptPassword("Appman@2019", userCreateDTO.Email) ;
+                    users.Password = Encrypt.EncryptPassword(userCreateDTO.Password, userCreateDTO.Email) ;
                     users.PhoneNo = userCreateDTO.PhoneNo;
                     users.DateOfBirth = userCreateDTO.DateOfBirth;
                     users.UserTypeId = userCreateDTO.UserTypeId;
@@ -182,11 +251,11 @@ namespace CloudVOffice.Services.Users
                         if (userCreateDTO.roles[i].IsSelected == true)
                         {
                             AssignRole(obj.UserId, userCreateDTO.roles[i].RoleId);
-                            _userViewPermissions.AssignViewPermissions(obj.UserId, userCreateDTO.roles[i].RoleId);
+                           // _userViewPermissions.AssignViewPermissions(obj.UserId, userCreateDTO.roles[i].RoleId);
                         }
 
                     }
-                    SendWelcomeMessage(obj);
+                  //  SendWelcomeMessage(obj);
 
                     return MessageEnum.Success;
 
@@ -208,14 +277,15 @@ namespace CloudVOffice.Services.Users
         {
             var user = _context.Users
                 .Include(x => x.UserRoleMappings)
-                .Include(x => x.UserWiseViewMapper)
+                //.Include(x => x.UserWiseViewMapper)
                 .SingleOrDefault(opt => opt.UserId == userCreateDTO.UserId && opt.Deleted == false);
             if (user != null)
             {
                 user.FirstName = userCreateDTO.FirstName;
                 user.MiddleName = userCreateDTO.MiddleName;
                 user.LastName = userCreateDTO.LastName;
-
+                //user.Password = Encrypt.EncryptPassword(userCreateDTO.Password, userCreateDTO.Email);
+                user.Password = userCreateDTO.Password;
                 user.DateOfBirth = userCreateDTO.DateOfBirth;
                 user.PhoneNo = userCreateDTO.PhoneNo;
                 user.UserTypeId = userCreateDTO.UserTypeId;
@@ -228,7 +298,7 @@ namespace CloudVOffice.Services.Users
                 for (int i = 0; i < UnAsignedRoles.Count; i++)
                 {
                     UnAssignRole(user.UserId, UnAsignedRoles[i].RoleId);
-                    _userViewPermissions.UnAssignViewPermissions(user.UserId, userCreateDTO.roles[i].RoleId);
+                  //  _userViewPermissions.UnAssignViewPermissions(user.UserId, userCreateDTO.roles[i].RoleId);
 
                 }
                 for (int i = 0; i < userCreateDTO.roles.Count; i++)
@@ -236,7 +306,7 @@ namespace CloudVOffice.Services.Users
                     if (userCreateDTO.roles[i].IsSelected == true)
                     {
                         AssignRole(user.UserId, userCreateDTO.roles[i].RoleId);
-                        _userViewPermissions.AssignViewPermissions(user.UserId, userCreateDTO.roles[i].RoleId);
+                      //  _userViewPermissions.AssignViewPermissions(user.UserId, userCreateDTO.roles[i].RoleId);
                     }
 
                 }

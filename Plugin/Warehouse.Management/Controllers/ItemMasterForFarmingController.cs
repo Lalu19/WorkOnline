@@ -12,6 +12,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CloudVOffice.Data.DTO.WareHouses.ViewModel;
+using CloudVOffice.Services.WareHouses;
+using CloudVOffice.Services.WareHouses.Employees;
+using CloudVOffice.Services.WareHouses.Vendors;
+using CloudVOffice.Services.WareHouses.Districts;
 
 namespace Warehouse.Management.Controllers
 {
@@ -24,12 +28,22 @@ namespace Warehouse.Management.Controllers
         private readonly ISectorService _sectorService;
         private readonly ICategoryService _categoryService;
         private readonly ISubCategory1Service _subCategory1Service;
+        private readonly ISubCategory2Service _subCategory2Service;
+        private readonly IWareHouseService _wareHouseService;
+        private readonly IEmployeeService _employeeService;
+        private readonly IVendorService _vendorService;
+        private readonly IDistrictService _districtService;
 
         public ItemMasterForFarmingController(IItemMasterForFarmingService itemMasterForFarmingService,
 			                                  IWebHostEnvironment hostingEnvironment,
                                               ISectorService sectorService,
                                               ICategoryService categoryService,
-                                              ISubCategory1Service subCategory1Service
+                                              ISubCategory1Service subCategory1Service,
+                                              ISubCategory2Service subCategory2Service,
+											  IWareHouseService wareHouseService,
+                                              IEmployeeService employeeService,
+                                              IVendorService vendorService,
+                                              IDistrictService districtService
                                               )
 		{
 			_itemMasterForFarmingService = itemMasterForFarmingService;
@@ -37,6 +51,11 @@ namespace Warehouse.Management.Controllers
             _sectorService = sectorService;
             _categoryService = categoryService;
             _subCategory1Service = subCategory1Service;
+            _subCategory2Service = subCategory2Service;
+			_wareHouseService = wareHouseService;
+            _employeeService = employeeService;
+            _vendorService = vendorService;
+            _districtService = districtService;
         }
 
 		[HttpGet]
@@ -51,7 +70,13 @@ namespace Warehouse.Management.Controllers
             {
                     Sectors = _sectorService.GetSectorListforFarmerProduces(),
                     Categories = _categoryService.GetCategoryList(),
-                    SubCategories = _subCategory1Service.GetSubCategory1List(),
+                    SubCategories1 = _subCategory1Service.GetSubCategory1List(),
+				    SubCategories2 = _subCategory2Service.GetSubCategory2List(),
+			    	WareHouses = _wareHouseService.GetWareHouseList(),
+			    	Employees = _employeeService.GetEmployees(),
+			    	Vendors = _vendorService.GetVendorList(),
+				    Districts = _districtService.GetDistrictList(),
+
                     CreatedItemMasterFarmingDTO = new ItemMasterForFarmingDTO()
                 };
 
@@ -65,10 +90,17 @@ namespace Warehouse.Management.Controllers
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.SectorId = itemMaster1.SectorId;
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.CategoryId = itemMaster1.CategoryId;
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.SubCategory1Id = itemMaster1.SubCategory1Id;
-                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.Barcode = itemMaster1.Barcode;
+
+				viewForItemMasterFarming.CreatedItemMasterFarmingDTO.SubCategory2Id = itemMaster1.SubCategory2Id;
+				viewForItemMasterFarming.CreatedItemMasterFarmingDTO.WareHouseName = itemMaster1.WareHouseName;
+				viewForItemMasterFarming.CreatedItemMasterFarmingDTO.EmployeeName = itemMaster1.EmployeeName;
+				viewForItemMasterFarming.CreatedItemMasterFarmingDTO.VendorName = itemMaster1.VendorName;
+				viewForItemMasterFarming.CreatedItemMasterFarmingDTO.DistrictName = itemMaster1.DistrictName;
+
+				viewForItemMasterFarming.CreatedItemMasterFarmingDTO.Barcode = itemMaster1.Barcode;
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.ItemMasterForFarmingId = itemMasterForFarmingId;
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.BarCodeNotAvailable = itemMaster1.BarCodeNotAvailable;
-                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.UOMId = itemMaster1.UOMId;
+                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.UnitId = itemMaster1.UnitId;
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.ProductName = itemMaster1.ProductName;
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.QtyPerKg = itemMaster1.QtyPerKg;
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.Price = itemMaster1.Price;
@@ -77,7 +109,10 @@ namespace Warehouse.Management.Controllers
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.HSN = itemMaster1.HSN;
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.HarvestDate = itemMaster1.HarvestDate;
 
-                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.Thumbnail = itemMaster1.Thumbnail;
+				viewForItemMasterFarming.CreatedItemMasterFarmingDTO.InvoiceNo = itemMaster1.InvoiceNo;
+				viewForItemMasterFarming.CreatedItemMasterFarmingDTO.ReceivedDate = itemMaster1.ReceivedDate;
+
+				viewForItemMasterFarming.CreatedItemMasterFarmingDTO.Thumbnail = itemMaster1.Thumbnail;
 
 				if (!string.IsNullOrEmpty(itemMaster1.Images))
 				{
@@ -187,7 +222,12 @@ namespace Warehouse.Management.Controllers
                             CreatedItemMasterFarmingDTO = createdItemMasterFarmingDTO,
                             Sectors = _sectorService.GetSectorListforFarmerProduces(),
                             Categories = _categoryService.GetCategoryList(),
-                            SubCategories = _subCategory1Service.GetSubCategory1List(),
+                            SubCategories1 = _subCategory1Service.GetSubCategory1List(),
+							SubCategories2 = _subCategory2Service.GetSubCategory2List(),
+							WareHouses = _wareHouseService.GetWareHouseList(),
+                            Employees = _employeeService.GetEmployees(),
+                            Vendors = _vendorService.GetVendorList(),
+                            Districts = _districtService.GetDistrictList(),
                         };
 
                         return View("~/Plugins/Warehouse.Management/Views/Item/ItemMasterForFarmingCreate.cshtml", viewForItemMasterFarming1);
@@ -260,8 +300,13 @@ namespace Warehouse.Management.Controllers
                     CreatedItemMasterFarmingDTO = viewForItemMasterFarming.CreatedItemMasterFarmingDTO,
                     Sectors = _sectorService.GetSectorListforFarmerProduces(),
                     Categories = _categoryService.GetCategoryList(),
-                    SubCategories = _subCategory1Service.GetSubCategory1List(),
-                  
+                    SubCategories1 = _subCategory1Service.GetSubCategory1List(),
+					SubCategories2 = _subCategory2Service.GetSubCategory2List(),
+					WareHouses = _wareHouseService.GetWareHouseList(),
+                    Employees = _employeeService.GetEmployees(),
+                    Vendors = _vendorService.GetVendorList(),
+                    Districts = _districtService.GetDistrictList(),
+
                 };
 
 
@@ -289,5 +334,10 @@ namespace Warehouse.Management.Controllers
 		}
 
 
-    }
+		public JsonResult GetItemMasterFarmingById(int ItemMasterForFarmingId)
+		{
+			return Json(_itemMasterForFarmingService.GetItemMasterForFarmingById(ItemMasterForFarmingId));
+		}
+
+	}
 }

@@ -24,7 +24,7 @@ namespace Warehouse.Management.Controllers
         }
 
         [HttpGet]
-		[Authorize(Roles = "WareHouse Manager")]
+		//[Authorize(Roles = "WareHouse Manager")]
 		public IActionResult PinCodeCreate(int? pinCodeId)
         {
             PinCodeDTO pinCodeDTO = new PinCodeDTO();
@@ -44,7 +44,7 @@ namespace Warehouse.Management.Controllers
         }
          
         [HttpPost]
-		[Authorize(Roles = "WareHouse Manager")]
+		//[Authorize(Roles = "WareHouse Manager")]
 		public IActionResult PinCodeCreate(PinCodeDTO pinCodeDTO)
         {
             pinCodeDTO.CreatedBy  = (int) Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
@@ -97,7 +97,7 @@ namespace Warehouse.Management.Controllers
 
 
 
-        [Authorize(Roles = "WareHouse Manager")]
+        //[Authorize(Roles = "WareHouse Manager")]
         public IActionResult PinCodeView()
         {
             ViewBag.pins = _pinCodeService.GetPinList();
@@ -107,7 +107,7 @@ namespace Warehouse.Management.Controllers
 
 
         [HttpGet]
-        [Authorize(Roles = "WareHouse Manager")]
+        //[Authorize(Roles = "WareHouse Manager")]
         public IActionResult DeletePin(Int64 pinCodeId)
         {
             Int64 DeletedBy = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
