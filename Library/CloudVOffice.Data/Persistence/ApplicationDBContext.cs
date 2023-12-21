@@ -87,11 +87,12 @@ namespace CloudVOffice.Data.Persistence
 		public virtual DbSet<District> Districts { get; set; }
         public virtual DbSet<DamageItem> DamageItems { get; set; }
 		public virtual DbSet<DamageItemForFarming> DamageItemForFarmings { get; set; }
+		public virtual DbSet<AddDistrict> AddDistricts { get; set; }
 
-        #endregion
+		#endregion
 
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
             #region Base
@@ -445,11 +446,20 @@ namespace CloudVOffice.Data.Persistence
              .HasDefaultValue(false)
              .ValueGeneratedNever();
 
+			modelBuilder.Entity<AddDistrict>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
 
-            #endregion
+			modelBuilder.Entity<AddDistrict>()
+			 .Property(s => s.Deleted)
+			 .HasDefaultValue(false)
+			 .ValueGeneratedNever();
 
 
-            modelBuilder.Seed();
+			#endregion
+
+
+			modelBuilder.Seed();
         }
     }
 }
