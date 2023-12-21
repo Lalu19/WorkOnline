@@ -4,7 +4,7 @@
   "IconImageUrl": "/Plugin/Warehouse.Management/logo.png",
   "IconClass": "icon-th-large-outline",
   "AreaName": "WareHouse",
-  "Roles": [ "WareHouse Manager", "WareHouse User" ],
+  "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ],
   "Children": [
     {
       "ApplicationName": "WareHouse Create",
