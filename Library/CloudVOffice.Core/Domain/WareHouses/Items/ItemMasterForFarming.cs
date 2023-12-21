@@ -9,7 +9,7 @@
 		public string? EmployeeName { get; set; }
 		public int? VendorId { get; set; }
 		public string? VendorName { get; set; }
-		public int? DistrictId { get; set; }
+		public int? AddDistrictId { get; set; }
 		public string? DistrictName { get; set; }
         public int? SectorId { get; set; }
         public int? CategoryId { get; set; }

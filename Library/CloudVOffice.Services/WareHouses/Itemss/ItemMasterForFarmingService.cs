@@ -297,20 +297,20 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 				WareHuose wareHuose = _dbContext.WareHouses.FirstOrDefault(s => s.WareHuoseId == Convert.ToInt32(items.WareHouseName));
 				Employee employee = _dbContext.Employees.FirstOrDefault(s => s.EmployeeId == Convert.ToInt32(items.EmployeeName));
 				Vendor vendor = _dbContext.Vendors.FirstOrDefault(s => s.VendorId == Convert.ToInt32(items.VendorName));
-				District district = _dbContext.Districts.FirstOrDefault(s => s.DistrictId == Convert.ToInt32(items.DistrictName));
+                AddDistrict addDistrict = _dbContext.AddDistricts.FirstOrDefault(s => s.AddDistrictId == Convert.ToInt32(items.DistrictName));
 				Unit unit = _dbContext.Units.FirstOrDefault(s => s.UnitId == Convert.ToInt32(items.ShortName));
 
 				items.WareHouseName = wareHuose != null ? wareHuose.WareHouseName : null;
 				items.EmployeeName = employee != null ? employee.EmployeeName : null;
 				items.VendorName = vendor != null ? vendor.VendorName : null;
-				items.DistrictName = district != null ? district.DistrictName : null;
+				items.DistrictName = addDistrict != null ? addDistrict.DistrictName : null;
 				items.ShortName = unit != null ? unit.ShortName : null;
 
 
 				items.WareHuoseId = wareHuose != null ? Convert.ToInt32(wareHuose.WareHuoseId) : (int?)null;
 				items.EmployeeId = employee != null ? Convert.ToInt32(employee.EmployeeId) : (int?)null;
 				items.VendorId = vendor != null ? Convert.ToInt32(vendor.VendorId) : (int?)null;
-				items.DistrictId = district != null ? Convert.ToInt32(district.DistrictId) : (int?)null;
+				items.AddDistrictId = addDistrict != null ? Convert.ToInt32(addDistrict.AddDistrictId) : (int?)null;
 				items.UnitId = unit != null ? Convert.ToInt32(unit.UnitId) : (int?)null;
 
 				return items;
@@ -336,7 +336,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
                 List<WareHuose> wareHuoses = _dbContext.WareHouses.Where(x => x.Deleted == false).ToList();
                 List<Employee> employees = _dbContext.Employees.Where(x => x.Deleted == false).ToList();
                 List<Vendor> venders = _dbContext.Vendors.Where(x => x.Deleted == false).ToList();
-                List<District> districts = _dbContext.Districts.Where(x => x.Deleted == false).ToList();
+                List<AddDistrict> districts = _dbContext.AddDistricts.Where(x => x.Deleted == false).ToList();
                 List<Unit> units = _dbContext.Units.Where(x => x.Deleted == false).ToList();
 
                 List<ItemMasterForFarming> items = _dbContext.ItemMasterForFarmings.Where(i => i.Deleted == false).ToList();
@@ -351,7 +351,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					WareHuose wareHuose = wareHuoses.FirstOrDefault(s => s.WareHuoseId == Convert.ToInt32(item.WareHouseName));
                     Employee employee = employees.FirstOrDefault(s => s.EmployeeId == Convert.ToInt32(item.EmployeeName));
                     Vendor vendor = venders.FirstOrDefault(s => s.VendorId == Convert.ToInt32(item.VendorName));
-				    District district = districts.FirstOrDefault(s => s.DistrictId == Convert.ToInt32(item.DistrictName));
+				    AddDistrict addDistrict = districts.FirstOrDefault(s => s.AddDistrictId == Convert.ToInt32(item.DistrictName));
 				    Unit unit = units.FirstOrDefault(s => s.UnitId == Convert.ToInt32(item.ShortName));
 
 
@@ -363,7 +363,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					item.WareHouseName = wareHuose != null ? wareHuose.WareHouseName : null;
 					item.EmployeeName = employee != null ? employee.EmployeeName : null;
 					item.VendorName = vendor != null ? vendor.VendorName : null;
-				    item.DistrictName = district != null ? district.DistrictName : null;
+				    item.DistrictName = addDistrict != null ? addDistrict.DistrictName : null;
 				    item.ShortName = unit != null ? unit.ShortName : null;
 				}
 

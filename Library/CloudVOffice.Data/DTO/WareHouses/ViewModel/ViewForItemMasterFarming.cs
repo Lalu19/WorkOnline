@@ -18,7 +18,7 @@ namespace CloudVOffice.Data.DTO.WareHouses.ViewModel
         public List<WareHuose> WareHouses { get; set; }
         public List<Employee> Employees { get; set; }
         public List<Vendor> Vendors { get; set; }
-        public List<District> Districts { get; set; }
+        public List<AddDistrict> AddDistricts { get; set; }
         public List<Unit> Units { get; set; }
     }
 }

@@ -33,7 +33,6 @@ namespace Warehouse.Management.Controllers
         private readonly IWareHouseService _wareHouseService;
         private readonly IEmployeeService _employeeService;
         private readonly IVendorService _vendorService;
-        private readonly IDistrictService _districtService;
         private readonly IUnit _unitService;
         private readonly IAddDistrictService _addDistrictService;
 
@@ -46,8 +45,7 @@ namespace Warehouse.Management.Controllers
 											  IWareHouseService wareHouseService,
                                               IEmployeeService employeeService,
                                               IVendorService vendorService,
-                                              IDistrictService districtService,
-                                              IUnit unitService
+                                              IUnit unitService,
                                               IAddDistrictService addDistrictService
                                               )
 		{
@@ -60,7 +58,6 @@ namespace Warehouse.Management.Controllers
 			_wareHouseService = wareHouseService;
             _employeeService = employeeService;
             _vendorService = vendorService;
-            _districtService = districtService;
             _unitService = unitService;
             _addDistrictService = addDistrictService;
         }
@@ -82,7 +79,6 @@ namespace Warehouse.Management.Controllers
 			    	WareHouses = _wareHouseService.GetWareHouseList(),
 			    	Employees = _employeeService.GetEmployees(),
 			    	Vendors = _vendorService.GetVendorList(),
-				    Districts = _districtService.GetDistrictList(),
 				    Units = _unitService.GetUnit(),
 				    AddDistricts = _addDistrictService.GetAddDistrictList(),
 
@@ -238,7 +234,6 @@ namespace Warehouse.Management.Controllers
 							WareHouses = _wareHouseService.GetWareHouseList(),
                             Employees = _employeeService.GetEmployees(),
                             Vendors = _vendorService.GetVendorList(),
-                            Districts = _districtService.GetDistrictList(),
                             Units = _unitService.GetUnit(),
                             AddDistricts = _addDistrictService.GetAddDistrictList(),
                         };
@@ -318,7 +313,6 @@ namespace Warehouse.Management.Controllers
 					WareHouses = _wareHouseService.GetWareHouseList(),
                     Employees = _employeeService.GetEmployees(),
                     Vendors = _vendorService.GetVendorList(),
-                    Districts = _districtService.GetDistrictList(),
                     Units = _unitService.GetUnit(),
                     AddDistricts = _addDistrictService.GetAddDistrictList(),
 
