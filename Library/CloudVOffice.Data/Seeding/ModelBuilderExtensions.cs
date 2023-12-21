@@ -184,57 +184,59 @@ namespace CloudVOffice.Data.Seeding
                               AreaName = "Setup"
 
 
-                          },
+                          }
 
 
-                            new Application
-                            {
-                                ApplicationId = 8,
-                                ApplicationName = "Email Setup",
-                                Parent = 2,
-                                IsGroup = true,
-                                Url = "",
-                                CreatedBy = 1,
+						 // new Application
+						 // {
+							//  ApplicationId = 8,
+							//  ApplicationName = "Email Setup",
+							//  Parent = 2,
+							//  IsGroup = true,
+							//  Url = "",
+							//  CreatedBy = 1,
 
-                                CreatedDate = System.DateTime.Now,
-                                Deleted = false,
-                                AreaName = "Setup",
-                                IconClass = "icon-envelop",
-
-
-                            },
-                            new Application
-                            {
-                                ApplicationId = 9,
-                                ApplicationName = "Domain",
-                                Parent = 8,
-                                IsGroup = true,
-                                Url = "/Setup/EmailDomain/EmailDomainView",
-                                CreatedBy = 1,
-
-                                CreatedDate = System.DateTime.Now,
-                                Deleted = false,
-                                AreaName = "Setup"
+							//  CreatedDate = System.DateTime.Now,
+							//  Deleted = false,
+							//  AreaName = "Setup",
+							//  IconClass = "icon-envelop",
 
 
-                            },
-                              new Application
-                              {
-                                  ApplicationId = 10,
-                                  ApplicationName = "Email Account",
-                                  Parent = 8,
-                                  IsGroup = true,
-                                  Url = "/Setup/EmailAccount/EmailAccountView",
-                                  CreatedBy = 1,
+						 // },
+							//new Application
+							//{
+							//	ApplicationId = 9,
+							//	ApplicationName = "Domain",
+							//	Parent = 8,
+							//	IsGroup = true,
+							//	Url = "/Setup/EmailDomain/EmailDomainView",
+							//	CreatedBy = 1,
 
-                                  CreatedDate = System.DateTime.Now,
-                                  Deleted = false,
-                                  AreaName = "Setup"
+							//	CreatedDate = System.DateTime.Now,
+							//	Deleted = false,
+							//	AreaName = "Setup"
 
 
-                              }
+							//},
+							//  new Application
+							//  {
+							//	  ApplicationId = 10,
+							//	  ApplicationName = "Email Account",
+							//	  Parent = 8,
+							//	  IsGroup = true,
+							//	  Url = "/Setup/EmailAccount/EmailAccountView",
+							//	  CreatedBy = 1,
 
-                    );
+							//	  CreatedDate = System.DateTime.Now,
+							//	  Deleted = false,
+							//	  AreaName = "Setup"
+
+
+							//  }
+
+
+
+					);
 
             });
 
@@ -348,9 +350,7 @@ namespace CloudVOffice.Data.Seeding
 
                                  CreatedDate = System.DateTime.Now,
                                  Deleted = false
-                             }
-
-
+                             }                             
                     );
 
             });
@@ -371,6 +371,11 @@ namespace CloudVOffice.Data.Seeding
                         CreatedDate = System.DateTime.Now,
                         Deleted = false
                     },
+
+
+
+
+
                      new UserWiseViewMapper
                      {
                          UserWiseViewMapperId = 2,
@@ -464,10 +469,6 @@ namespace CloudVOffice.Data.Seeding
                            CreatedDate = System.DateTime.Now,
                            Deleted = false
                        }
-
-
-
-
 
                     );
 

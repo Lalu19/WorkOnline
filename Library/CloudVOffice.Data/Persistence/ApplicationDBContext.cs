@@ -4,6 +4,7 @@ using CloudVOffice.Core.Domain.EmailTemplates;
 using CloudVOffice.Core.Domain.Logging;
 using CloudVOffice.Core.Domain.Pemission;
 using CloudVOffice.Core.Domain.ProductCategories;
+using CloudVOffice.Core.Domain.Sales;
 using CloudVOffice.Core.Domain.Users;
 using CloudVOffice.Core.Domain.WareHouses;
 using CloudVOffice.Core.Domain.WareHouses.Districts;
@@ -75,8 +76,7 @@ namespace CloudVOffice.Data.Persistence
 		public virtual DbSet<VendorOnboarding> VendorOnboardings { get; set; }
 		public virtual DbSet<ItemMasterForFarming> ItemMasterForFarmings { get; set; }
 		public virtual DbSet<Sector> Sectors { get; set; }
-        public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }        
         public virtual DbSet<SubCategory1> SubCategories1 { get; set; }
         public virtual DbSet<SubCategory2> SubCategories2 { get; set; }
 		public virtual DbSet<GST> GSTs { get; set; }
@@ -85,8 +85,15 @@ namespace CloudVOffice.Data.Persistence
 		public virtual DbSet<Unit> Units { get; set; }
 		public virtual DbSet<UnitConversionFactors> UnitConversionFactors { get; set; }
 		public virtual DbSet<District> Districts { get; set; }
-        public virtual DbSet<DamageItem> DamageItems { get; set; }
+		public virtual DbSet<DamageItem> DamageItems { get; set; }
 		public virtual DbSet<DamageItemForFarming> DamageItemForFarmings { get; set; }
+		public virtual DbSet<AddDistrict> AddDistricts { get; set; }
+
+		#endregion
+
+        #region Sales
+
+        public virtual DbSet<SalesAdminTarget> SalesAdminTargets { get; set; }
 
         #endregion
 
@@ -313,17 +320,7 @@ namespace CloudVOffice.Data.Persistence
             modelBuilder.Entity<Item>()
              .Property(s => s.Deleted)
              .HasDefaultValue(false)
-             .ValueGeneratedNever();
-
-
-            modelBuilder.Entity<Product>()
-.Property(s => s.CreatedDate)
-.HasDefaultValueSql("getdate()");
-
-            modelBuilder.Entity<Product>()
-             .Property(s => s.Deleted)
-             .HasDefaultValue(false)
-             .ValueGeneratedNever();
+             .ValueGeneratedNever();            
 
 
             modelBuilder.Entity<Vendor>()
@@ -427,29 +424,52 @@ namespace CloudVOffice.Data.Persistence
 			 .HasDefaultValue(false)
 			 .ValueGeneratedNever();
 
-            modelBuilder.Entity<DamageItem>()
+			modelBuilder.Entity<DamageItem>()
  .Property(s => s.CreatedDate)
  .HasDefaultValueSql("getdate()");
 
-            modelBuilder.Entity<DamageItem>()
+			modelBuilder.Entity<DamageItem>()
+			 .Property(s => s.Deleted)
+			 .HasDefaultValue(false)
+			 .ValueGeneratedNever();
+
+			modelBuilder.Entity<DamageItemForFarming>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
+
+			modelBuilder.Entity<DamageItemForFarming>()
+			 .Property(s => s.Deleted)
+			 .HasDefaultValue(false)
+			 .ValueGeneratedNever();
+
+
+            modelBuilder.Entity<AddDistrict>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<AddDistrict>()
              .Property(s => s.Deleted)
              .HasDefaultValue(false)
              .ValueGeneratedNever();
-
-            modelBuilder.Entity<DamageItemForFarming>()
- .Property(s => s.CreatedDate)
- .HasDefaultValueSql("getdate()");
-
-            modelBuilder.Entity<DamageItemForFarming>()
-             .Property(s => s.Deleted)
-             .HasDefaultValue(false)
-             .ValueGeneratedNever();
-
-
             #endregion
 
 
-            modelBuilder.Seed();
+
+            #region Sales
+
+            modelBuilder.Entity<SalesAdminTarget>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<SalesAdminTarget>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
+
+			#endregion
+
+
+			modelBuilder.Seed();
         }
     }
 }

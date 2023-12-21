@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace CloudVOffice.Core.Domain.WareHouses.Items
 {
-	public class DamageItem
+	public class DamageItem : IAuditEntity, ISoftDeletedEntity
 	{
 		public Int64 DamageItemId { get; set; }
 		public Int64 ItemId { get; set; }
-        public string ItemName { get; set; }
-        public string? WareHouseName { get; set; }
+		public string ItemName { get; set; }
+		public string? WareHouseName { get; set; }
 		public string? DistrictName { get; set; }
 		public string? VendorName { get; set; }
 		public string? EmployeeName { get; set; }
@@ -23,7 +23,7 @@ namespace CloudVOffice.Core.Domain.WareHouses.Items
 		public double? UnitPerCase { get; set; }
 		public DateTime? ManufactureDate { get; set; }
 		public DateTime? ExpiryDate { get; set; }
-		
+
 		public double MRP { get; set; }
 		public double PurchaseCost { get; set; }
 		public double SalesCost { get; set; }

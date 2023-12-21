@@ -3,18 +3,15 @@
     public class ItemMasterForFarming : IAuditEntity, ISoftDeletedEntity
     {
         public Int64 ItemMasterForFarmingId { get; set; }
-
-		public string? WareHouseName { get; set; }
-		public string? EmployeeName { get; set; }
-		public string? VendorName { get; set; }
-		public string? DistrictName { get; set; }
-
 		public int? WareHuoseId { get; set; }
+		public string? WareHouseName { get; set; }
 		public int? EmployeeId { get; set; }
+		public string? EmployeeName { get; set; }
 		public int? VendorId { get; set; }
+		public string? VendorName { get; set; }
 		public int? DistrictId { get; set; }
-
-		public int? SectorId { get; set; }
+		public string? DistrictName { get; set; }
+        public int? SectorId { get; set; }
         public int? CategoryId { get; set; }
         public int? SubCategory1Id { get; set; }
         public int? SubCategory2Id { get; set; }
@@ -26,7 +23,7 @@
         public string? Images { get; set; }
 		public string? Barcode { get; set; }
 		public bool BarCodeNotAvailable { get; set; }
-        public Int64? UnitId { get; set; }
+		public Int64? UnitId { get; set; }
         public string ProductName { get; set; }
         public double? QtyPerKg { get; set; }
         public double? Price { get; set; }

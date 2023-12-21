@@ -35,8 +35,11 @@ namespace CloudVOffice.Core.Domain.WareHouses.Items
         public string? Barcode { get; set; }
         public bool BarCodeNotAvailable { get; set; }
         public double MRP { get; set; }
+        public double? MRPCaseCost { get; set; }
         public double PurchaseCost { get; set; }
+        public double? PurchaseCaseCost { get; set; }
         public double SalesCost { get; set; }
+        public double? SalesCaseCost { get; set; }
         public double? CGST { get; set; }
         public double? SGST { get; set; }
         public string? HandlingType { get; set; }

@@ -4,7 +4,7 @@
   "IconImageUrl": "/Plugin/Warehouse.Management/logo.png",
   "IconClass": "icon-th-large-outline",
   "AreaName": "WareHouse",
-  "Roles": [ "WareHouse Manager", "WareHouse User" ],
+  "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ],
   "Children": [
     {
       "ApplicationName": "WareHouse Create",
@@ -13,7 +13,7 @@
       "IconImageUrl": "",
       "IconClass": "icon-clipboard2",
       "AreaName": "WareHouse",
-      "Roles": [ "WareHouse Manager", "WareHouse User" ],
+      "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ],
       "Children": []
     },
     {
@@ -23,7 +23,7 @@
       "IconImageUrl": "",
       "IconClass": "icon-envelop",
       "AreaName": "WareHouse",
-      "Roles": [ "WareHouse Manager", "WareHouse User" ],
+      "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ],
       "Children": [
         {
           "ApplicationName": "PinCode List",
@@ -32,7 +32,7 @@
           "IconImageUrl": "",
           "IconClass": "icon-clipboard2",
           "AreaName": "WareHouse",
-          "Roles": [ "WareHouse Manager", "WareHouse User" ]
+          "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ]
         },
         {
           "ApplicationName": "PinCode Mapping List",
@@ -41,7 +41,7 @@
           "IconImageUrl": "",
           "IconClass": "icon-clipboard2",
           "AreaName": "WareHouse",
-          "Roles": [ "WareHouse Manager", "WareHouse User" ]
+          "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ]
         }
       ]
     },
@@ -52,7 +52,7 @@
       "IconImageUrl": "",
       "IconClass": "icon-clipboard2",
       "AreaName": "WareHouse",
-      "Roles": [ "WareHouse Manager", "WareHouse User" ],
+      "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ],
       "Children": [
         {
           "ApplicationName": "Sector List",
@@ -61,7 +61,7 @@
           "IconImageUrl": "",
           "IconClass": "icon-clipboard2",
           "AreaName": "WareHouse",
-          "Roles": [ "WareHouse Manager", "WareHouse User" ]
+          "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ]
         },
         {
           "ApplicationName": "Category List",
@@ -70,7 +70,7 @@
           "IconImageUrl": "",
           "IconClass": "icon-clipboard2",
           "AreaName": "WareHouse",
-          "Roles": [ "WareHouse Manager", "WareHouse User" ]
+          "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ]
         },
         {
           "ApplicationName": "SubCategory1 List",
@@ -79,7 +79,7 @@
           "IconImageUrl": "",
           "IconClass": "icon-clipboard2",
           "AreaName": "WareHouse",
-          "Roles": [ "WareHouse Manager", "WareHouse User" ]
+          "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ]
         },
         {
           "ApplicationName": "SubCategory2 List",
@@ -88,7 +88,7 @@
           "IconImageUrl": "",
           "IconClass": "icon-clipboard2",
           "AreaName": "WareHouse",
-          "Roles": [ "WareHouse Manager", "WareHouse User" ]
+          "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ]
         }
       ]
     },
@@ -99,7 +99,7 @@
       "IconImageUrl": "",
       "IconClass": "icon-clipboard2",
       "AreaName": "WareHouse",
-      "Roles": [ "WareHouse Manager", "WareHouse User" ],
+      "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ],
       "Children": [
         {
           "ApplicationName": "Unit Group List",
@@ -108,7 +108,7 @@
           "IconImageUrl": "",
           "IconClass": "icon-clipboard2",
           "AreaName": "WareHouse",
-          "Roles": [ "WareHouse Manager", "WareHouse User" ]
+          "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ]
         },
         {
           "ApplicationName": "Unit List",
@@ -117,7 +117,7 @@
           "IconImageUrl": "",
           "IconClass": "icon-clipboard2",
           "AreaName": "WareHouse",
-          "Roles": [ "WareHouse Manager", "WareHouse User" ]
+          "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ]
         },
         {
           "ApplicationName": "Unit Conversion Facters",
@@ -126,7 +126,7 @@
           "IconImageUrl": "",
           "IconClass": "icon-clipboard2",
           "AreaName": "WareHouse",
-          "Roles": [ "WareHouse Manager", "WareHouse User" ]
+          "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ]
         }
       ]
     },
@@ -137,7 +137,7 @@
       "IconImageUrl": "",
       "IconClass": "icon-clipboard2",
       "AreaName": "WareHouse",
-      "Roles": [ "WareHouse Manager", "WareHouse User" ],
+      "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ],
       "Children": []
     },
     {
@@ -147,7 +147,7 @@
       "IconImageUrl": "",
       "IconClass": "icon-clipboard2",
       "AreaName": "WareHouse",
-      "Roles": [ "WareHouse Manager", "WareHouse User" ],
+      "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ],
       "Children": []
     },
     {
@@ -157,7 +157,7 @@
       "IconImageUrl": "",
       "IconClass": "icon-clipboard2",
       "AreaName": "WareHouse",
-      "Roles": [ "WareHouse Manager", "WareHouse User" ],
+      "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ],
       "Children": [
         {
           "ApplicationName": "Item List",
@@ -166,7 +166,7 @@
           "IconImageUrl": "",
           "IconClass": "icon-clipboard2",
           "AreaName": "WareHouse",
-          "Roles": [ "WareHouse Manager", "WareHouse User" ]
+          "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ]
         },
         {
           "ApplicationName": "ItemList For Farming ",
@@ -175,7 +175,7 @@
           "IconImageUrl": "",
           "IconClass": "icon-clipboard2",
           "AreaName": "WareHouse",
-          "Roles": [ "WareHouse Manager", "WareHouse User" ]
+          "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ]
         }
       ]
     },
@@ -186,7 +186,7 @@
       "IconImageUrl": "",
       "IconClass": "icon-clipboard2",
       "AreaName": "WareHouse",
-      "Roles": [ "WareHouse Manager", "WareHouse User" ],
+      "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ],
       "Children": [
         {
           "ApplicationName": "Vender List",
@@ -195,7 +195,7 @@
           "IconImageUrl": "",
           "IconClass": "icon-clipboard2",
           "AreaName": "WareHouse",
-          "Roles": [ "WareHouse Manager", "WareHouse User" ]
+          "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ]
         }
       ]
     },
@@ -206,7 +206,7 @@
       "IconImageUrl": "",
       "IconClass": "icon-clipboard2",
       "AreaName": "WareHouse",
-      "Roles": [ "WareHouse Manager", "WareHouse User" ],
+      "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ],
       "Children": []
     },
     {
@@ -216,7 +216,7 @@
       "IconImageUrl": "",
       "IconClass": "icon-clipboard2",
       "AreaName": "WareHouse",
-      "Roles": [ "WareHouse Manager", "WareHouse User" ],
+      "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ],
       "Children": []
     }
 

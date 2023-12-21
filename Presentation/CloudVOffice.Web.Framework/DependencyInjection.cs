@@ -27,6 +27,7 @@ using CloudVOffice.Services.WareHouses.GSTs;
 using CloudVOffice.Services.WareHouses.HandlingTypes;
 using CloudVOffice.Services.WareHouses.UOMs;
 using CloudVOffice.Services.WareHouses.Districts;
+using CloudVOffice.Services.Sales;
 
 namespace CloudVOffice.Web.Framework
 {
@@ -62,8 +63,7 @@ namespace CloudVOffice.Web.Framework
             services.AddScoped<IEmployeeService, EmployeeService>();
 
             services.AddScoped<ISectorService, SectorService>();
-            services.AddScoped<ICategoryService, CategoryService>();
-            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ICategoryService, CategoryService>();            
             services.AddScoped<ISubCategory1Service, SubCategory1Service>();
             services.AddScoped<ISubCategory2Service, SubCategory2Service>();
             services.AddScoped<IVendorService, VendorService>();
@@ -82,10 +82,12 @@ namespace CloudVOffice.Web.Framework
             services.AddScoped<IUnitConversionFactors, UnitConversionFactorsService>();
 
             services.AddScoped<IDistrictService, DistrictService>();
+            services.AddScoped<ISalesAdminService, SalesAdminService>();
 
             services.AddScoped<IDamageItemService, DamageItemService>();
 
             services.AddScoped<IDamageItemForFarmingService, DamageItemForFarmingService>();
+			services.AddScoped<IAddDistrictService, AddDistrictService>();
 
 
 
@@ -97,7 +99,7 @@ namespace CloudVOffice.Web.Framework
 
 
 
-            return services;
+			return services;
 
         }
     }
