@@ -130,9 +130,9 @@
                             </div>
 
                             <div class="form-group col-md-3">
-                                <label for="DistrictId" class="form-label">District Name</label>
-                                <ejs-dropdownlist id="DistrictId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.DistrictName" allowFiltering="true" dataSource="@(new SelectList(Model.Districts, "DistrictId", "DistrictName").Items)" placeholder="Select District" popupHeight="220px">
-                                    <e-dropdownlist-fields text="DistrictName" value="DistrictId"></e-dropdownlist-fields>
+                                <label for="AddDistrictId" class="form-label">District Name</label>
+                                <ejs-dropdownlist id="AddDistrictId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.DistrictName" allowFiltering="true" dataSource="@(new SelectList(Model.AddDistricts, "AddDistrictId", "DistrictName").Items)" placeholder="Select District" popupHeight="220px">
+                                    <e-dropdownlist-fields text="DistrictName" value="AddDistrictId"></e-dropdownlist-fields>
                                 </ejs-dropdownlist>
                                 <span asp-validation-for="CreatedItemMasterFarmingDTO.DistrictName"></span>
                             </div>

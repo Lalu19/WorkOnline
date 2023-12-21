@@ -465,7 +465,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 				List<SubCategory1> subCategory1s = _dbContext.SubCategories1.Where(x => x.Deleted == false).ToList();
 				List<SubCategory2> subCategory2s = _dbContext.SubCategories2.Where(x => x.Deleted == false).ToList();
 				List<WareHuose> warehouses = _dbContext.WareHouses.Where(x => x.Deleted == false).ToList();
-				List<District> districts = _dbContext.Districts.Where(x => x.Deleted == false).ToList();
+				List<AddDistrict> districts = _dbContext.AddDistricts.Where(x => x.Deleted == false).ToList();
 				List<Employee> employees = _dbContext.Employees.Where(x => x.Deleted == false).ToList();
 				List<Vendor> vendors = _dbContext.Vendors.Where(x => x.Deleted == false).ToList();
 				List<HandlingType> handlingTypes = _dbContext.HandlingTypes.Where(h => h.Deleted == false).ToList();
@@ -477,7 +477,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 				{
 					HandlingType handlingType = handlingTypes.FirstOrDefault(h => h.HandlingTypeId == Convert.ToInt32(item.HandlingType));
 					WareHuose wareHuose = warehouses.FirstOrDefault(h => h.WareHuoseId == Convert.ToInt32(item.WareHouseName));
-					District district = districts.FirstOrDefault(h => h.DistrictId == Convert.ToInt32(item.DistrictName));
+					AddDistrict district = districts.FirstOrDefault(h => h.AddDistrictId == Convert.ToInt32(item.DistrictName));
 					Vendor vendor = vendors.FirstOrDefault(h => h.VendorId == Convert.ToInt32(item.VendorName));
 					Employee emp = employees.FirstOrDefault(h => h.EmployeeId == Convert.ToInt32(item.EmployeeName));
 					GST gst = gsts.FirstOrDefault(g => g.GSTId == Convert.ToInt32(item.CGST));

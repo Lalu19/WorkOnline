@@ -1,9 +1,9 @@
 ﻿@using System.Collections;
 @using Newtonsoft.Json;
-@model CloudVOffice.Data.DTO.WareHouses.Districts.DistrictDTO;
+@model CloudVOffice.Data.DTO.WareHouses.Districts.DistrictMappingDTO;
 @{
     Layout = "_MainAppLayout";
-    ViewData["Title"] = "District";
+    ViewData["Title"] = "District Mapping";
 }
 @addTagHelper *, Syncfusion.EJ2
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
@@ -16,7 +16,7 @@
                 </div>
                 <div class="page-title">
                     <h5>Ware House</h5>
-                    <h6 class="sub-heading">Welcome to District</h6>
+                    <h6 class="sub-heading">Welcome to District Mapping</h6>
                 </div>
             </div>
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
@@ -31,7 +31,7 @@
     <div class="row gutters">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
             <div class="card">
-                <form asp-route="WareHouse/District/DistrictCreate" method="post" autocomplete="off" enctype="multipart/form-data">
+                <form asp-route="WareHouse/DistrictMapping/DistrictMappingCreate" method="post" autocomplete="off" enctype="multipart/form-data">
 
                     <div class="card-header">
                         <div class="row">
@@ -39,19 +39,21 @@
                                 <b>PinCode Mapping View</b>
                             </div>
                             <div class="col-md-2 ">
-                                <a href="/WareHouse/District/DistrictView" class="btn btn-primary btn-sm float-right"><i class="icon-list2"></i>List</a>
+                                <a href="/WareHouse/DistrictMapping/DistrictMappingView" class="btn btn-primary btn-sm float-right"><i class="icon-list2"></i>List</a>
                             </div>
 
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="form-row">
-                            <input asp-for="@Model.DistrictId" type="hidden" />
+                            <input asp-for="@Model.DistrictMappingId" type="hidden" />
 
-                            <div class="form-group col-md-4">
-                                <label for="DistrictName" class="form-label">District Name</label>
-                                <input asp-for="@Model.DistrictName" type="text" class="form-control" autofocus="autofocus" placeholder="District Name" />
-                                <span asp-validation-for="DistrictName"></span>
+                            <div class="form-group col-md-3">
+                                <label for="AddDistrictId" class="form-label">District Name</label>
+                                <ejs-dropdownlist id="AddDistrictId" allowFiltering="true" ejs-for="@Model.AddDistrictId" filtering="onWareHouseNamefiltering" dataSource="@(new SelectList((IEnumerable)ViewBag.AddDistricts, "AddDistrictId", "DistrictName").Items)" placeholder="Select District" popupHeight="220px">
+                                    <e-dropdownlist-fields text="DistrictName" value="AddDistrictId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="AddDistrictId"></span>
                             </div>
 
                             <div class="form-group col-md-4">
@@ -82,6 +84,11 @@
     </div>
 </div>
 <script>
+    function onWareHouseNamefiltering(e) {
+        var query = new ej.data.Query();
+        query = (e.text !== '') ? query.where('WareHouseName', 'startswith', e.text, true) : query;
+        e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.AddDistricts)), query);
+    }
     function onPinCodefiltering(e) {
         var query = new ej.data.Query();
         query = (e.text !== '') ? query.where('Pin', 'startswith', e.text, true) : query;

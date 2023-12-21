@@ -32,7 +32,7 @@ namespace Warehouse.Management.Controllers
         private readonly IWareHouseService _wareHouseService;
         private readonly IEmployeeService _employeeService;
         private readonly IVendorService _vendorService;
-        private readonly IDistrictService _districtService;
+        private readonly IAddDistrictService _addDistrictService;
 
         public ItemMasterForFarmingController(IItemMasterForFarmingService itemMasterForFarmingService,
 			                                  IWebHostEnvironment hostingEnvironment,
@@ -43,7 +43,7 @@ namespace Warehouse.Management.Controllers
 											  IWareHouseService wareHouseService,
                                               IEmployeeService employeeService,
                                               IVendorService vendorService,
-                                              IDistrictService districtService
+                                              IAddDistrictService addDistrictService
                                               )
 		{
 			_itemMasterForFarmingService = itemMasterForFarmingService;
@@ -55,7 +55,7 @@ namespace Warehouse.Management.Controllers
 			_wareHouseService = wareHouseService;
             _employeeService = employeeService;
             _vendorService = vendorService;
-            _districtService = districtService;
+            _addDistrictService = addDistrictService;
         }
 
 		[HttpGet]
@@ -75,7 +75,7 @@ namespace Warehouse.Management.Controllers
 			    	WareHouses = _wareHouseService.GetWareHouseList(),
 			    	Employees = _employeeService.GetEmployees(),
 			    	Vendors = _vendorService.GetVendorList(),
-				    Districts = _districtService.GetDistrictList(),
+				    AddDistricts = _addDistrictService.GetAddDistrictList(),
 
                     CreatedItemMasterFarmingDTO = new ItemMasterForFarmingDTO()
                 };
@@ -227,7 +227,7 @@ namespace Warehouse.Management.Controllers
 							WareHouses = _wareHouseService.GetWareHouseList(),
                             Employees = _employeeService.GetEmployees(),
                             Vendors = _vendorService.GetVendorList(),
-                            Districts = _districtService.GetDistrictList(),
+                            AddDistricts = _addDistrictService.GetAddDistrictList(),
                         };
 
                         return View("~/Plugins/Warehouse.Management/Views/Item/ItemMasterForFarmingCreate.cshtml", viewForItemMasterFarming1);
@@ -305,7 +305,7 @@ namespace Warehouse.Management.Controllers
 					WareHouses = _wareHouseService.GetWareHouseList(),
                     Employees = _employeeService.GetEmployees(),
                     Vendors = _vendorService.GetVendorList(),
-                    Districts = _districtService.GetDistrictList(),
+                    AddDistricts = _addDistrictService.GetAddDistrictList(),
 
                 };
 

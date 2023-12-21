@@ -1,7 +1,7 @@
 ﻿@using CloudVOffice.Core.Domain.Common;
 @{
     Layout = "_MainAppLayout";
-    ViewData["Title"] = "District";
+    ViewData["Title"] = "District Mapping";
 }
 @addTagHelper *, Syncfusion.EJ2
 <header class="main-heading">
@@ -13,7 +13,7 @@
                 </div>
                 <div class="page-title">
                     <h5>Ware House</h5>
-                    <h6 class="sub-heading">Welcome to District</h6>
+                    <h6 class="sub-heading">Welcome to District Mapping</h6>
                 </div>
             </div>
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
@@ -32,16 +32,16 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-10">
-                            PinCode Mapping View
+                            District Mapping View
                         </div>
                         <div class="col-md-2 ">
-                            <a href="/WareHouse/District/DistrictCreate" class="btn btn-primary btn-sm float-right"><i class="icon icon-add"></i>Add</a>
+                            <a href="/WareHouse/DistrictMapping/DistrictMappingCreate" class="btn btn-primary btn-sm float-right"><i class="icon icon-add"></i>Add</a>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
 
-                    <ejs-grid id="GridOverview" dataSource="ViewBag.District"
+                    <ejs-grid id="GridOverview" dataSource="ViewBag.DistrictMappings"
                               allowFiltering="true" allowSorting="true"
                               allowExcelExport="true" allowGrouping="true"
                               allowMultiSorting="true"
@@ -55,8 +55,8 @@
 
                         <e-grid-selectionsettings persistSelection="true" type="Multiple" checkboxOnly="true"></e-grid-selectionsettings>
                         <e-grid-columns>
-                            <e-grid-column field="DistrictName" headerText="District Name" textAlign="Left" width="150"></e-grid-column>
-                            <e-grid-column field="PinCodeId" headerText="Pin Code" textAlign="Left" width="180"></e-grid-column>
+                            <e-grid-column field="AddDistrict" headerText="District Name" textAlign="Left" width="150"></e-grid-column>
+                            <e-grid-column field="PinCode" headerText="Pin Code" textAlign="Left" width="180"></e-grid-column>
 
 
                             <e-grid-column headerText="Action" template="#Actions" width="120"></e-grid-column>
@@ -71,8 +71,8 @@
 </div>
 <script id="Actions" type="text/x-template">
     <div class="link">
-        <a href="/WareHouse/District/DistrictCreate?DistrictId=${DistrictId}"><i class="icon-pencil3" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp;
-        <button onClick="Delete(${DistrictId})" style="background: transparent;border: none;"><i class="icon-trash" style="font-size:22px"></i></button>
+        <a href="/WareHouse/DistrictMapping/DistrictMappingCreate?DistrictMappingId=${DistrictMappingId}"><i class="icon-pencil3" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp;
+        <button onClick="Delete(${DistrictMappingId})" style="background: transparent;border: none;"><i class="icon-trash" style="font-size:22px"></i></button>
 
     </div>
 </script>
@@ -90,7 +90,7 @@
             dangerMode: true,
         }).then(function (isConfirm) {
             if (isConfirm) {
-                window.location.href = "/WareHouse/District/DistrictDelete?DistrictId=" + Id;
+                window.location.href = "/WareHouse/DistrictMapping/DistrictDelete?DistrictMappingId=" + Id;
             }
         })
     }
@@ -119,7 +119,7 @@
                 sweetAlert({
                     html: true,
                     icon: "success",
-                    title: "District",
+                    title: "PinCode Mapping",
                     text: "Successfully created.",
                     type: "success"
                 });
@@ -128,7 +128,7 @@
                 sweetAlert({
                     html: true,
                     icon: "success",
-                    title: "District",
+                    title: "District Mapping",
                     text: "Successfully updated.",
                     type: "success"
                 });
@@ -137,7 +137,7 @@
                 sweetAlert({
                     html: true,
                     icon: "success",
-                    title: "District",
+                    title: "District Mapping",
                     text: "Successfully Deleted.",
                     type: "success"
                 });
@@ -146,7 +146,7 @@
                 sweetAlert({
                     html: true,
                     icon: "danger",
-                    title: "District",
+                    title: "District Mapping",
                     text: "There is somthing going wrong.",
                     type: "danger"
                 });
@@ -155,7 +155,7 @@
                 sweetAlert({
                     html: true,
                     icon: "error",
-                    title: "District",
+                    title: "District Mapping",
                     text: "There is somthing going wrong.",
                     type: "error"
                 });
@@ -164,7 +164,7 @@
                 sweetAlert({
                     html: true,
                     icon: "question",
-                    title: "District ",
+                    title: "District Mapping",
                     text: message,
                     type: "error"
                 });

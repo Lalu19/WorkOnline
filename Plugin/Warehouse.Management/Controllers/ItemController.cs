@@ -39,13 +39,13 @@ namespace Warehouse.Management.Controllers
 		private readonly ISubCategory1Service _subCategory1Service;
 		private readonly ISubCategory2Service _subCategory2Service;
 		private readonly IWareHouseService _warehouseService;
-		private readonly IDistrictService _districtService;
+		private readonly IAddDistrictService _addDistrictService;
 		private readonly IVendorService _vendorService;
 		private readonly IEmployeeService _employeeService;
 
 
 
-		public ItemController(IItemService itemService, IWebHostEnvironment hostingEnvironment, IHandlingTypeService handlingTypeService, IGSTService gSTService, ISectorService sectorService, ICategoryService categoryService, ISubCategory1Service subCategory1Service, ISubCategory2Service subCategory2Service, IWareHouseService warehouseService, IVendorService vendorService, IEmployeeService employeeService, IDistrictService districtService)
+		public ItemController(IItemService itemService, IWebHostEnvironment hostingEnvironment, IHandlingTypeService handlingTypeService, IGSTService gSTService, ISectorService sectorService, ICategoryService categoryService, ISubCategory1Service subCategory1Service, ISubCategory2Service subCategory2Service, IWareHouseService warehouseService, IVendorService vendorService, IEmployeeService employeeService, IAddDistrictService addDistrictService)
         {
 			_hostingEnvironment = hostingEnvironment;
 			_itemService = itemService;
@@ -56,7 +56,7 @@ namespace Warehouse.Management.Controllers
 			_subCategory1Service = subCategory1Service;
 			_subCategory2Service = subCategory2Service;
 			_warehouseService = warehouseService;
-			_districtService = districtService;
+            _addDistrictService = addDistrictService;
 			_vendorService = vendorService;
 			_employeeService = employeeService;
 		}
@@ -76,7 +76,7 @@ namespace Warehouse.Management.Controllers
 			{
 				HandlingTypes = _handlingTypeService.GetHandlingTypeList(),
 				WareHuose = _warehouseService.GetWareHouseList(),
-				District = _districtService.GetDistrictList(),
+				AddDistrict = _addDistrictService.GetAddDistrictList(),
 				Vendor = _vendorService.GetVendorList(),
 				Employee = _employeeService.GetEmployees(),
 				GST = _gSTService.GetGSTList(),
@@ -352,7 +352,7 @@ namespace Warehouse.Management.Controllers
 							SubCategory1 = _subCategory1Service.GetSubCategory1List(),
 							SubCategory2 = _subCategory2Service.GetSubCategory2List(),
 							WareHuose = _warehouseService.GetWareHouseList(),
-							District = _districtService.GetDistrictList(),
+							AddDistrict = _addDistrictService.GetAddDistrictList(),
 							Employee = _employeeService.GetEmployees(),
 							Vendor = _vendorService.GetVendorList()
 						};
@@ -427,7 +427,7 @@ namespace Warehouse.Management.Controllers
 					SubCategory1 = _subCategory1Service.GetSubCategory1List(),
 					SubCategory2 = _subCategory2Service.GetSubCategory2List(),
 					WareHuose = _warehouseService.GetWareHouseList(),
-					District = _districtService.GetDistrictList(),
+					AddDistrict = _addDistrictService.GetAddDistrictList(),
 					Employee = _employeeService.GetEmployees(),
 					Vendor = _vendorService.GetVendorList()
 				};

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace CloudVOffice.Data.DTO.WareHouses.Districts
 {
-	public class DistrictDTO
+	public class DistrictMappingDTO
 	{
-		public Int64? DistrictId { get; set; }
+		public Int64? DistrictMappingId { get; set; }
 		public List<Int64> PinCodeId { get; set; }
-		public string? DistrictName { get; set; }
+        public Int64? AddDistrictId { get; set; }
 		public Int64 CreatedBy { get; set; }
 	}
 }

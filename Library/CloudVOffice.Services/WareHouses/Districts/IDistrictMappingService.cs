@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace CloudVOffice.Services.WareHouses.Districts
 {
-	public interface IDistrictService
+	public interface IDistrictMappingService
 	{
-		public MessageEnum DistrictCreate(DistrictDTO districtDTO);
-		public District GetDistrictById(Int64 districtId);
-		public List<District> GetDistrictList();
-		public MessageEnum DistrictUpdate(DistrictDTO districtDTO);
-		public MessageEnum DistrictDelete(Int64 districtId, Int64 DeletedBy);
+		public MessageEnum DistrictCreate(DistrictMappingDTO districtMappingDTO);
+		public DistrictMapping GetDistrictById(Int64 districtMappingId);
+		public List<DistrictMapping> GetDistrictList();
+		public MessageEnum DistrictUpdate(DistrictMappingDTO districtMappingDTO);
+		public MessageEnum DistrictDelete(Int64 districtMappingId, Int64 DeletedBy);
 	}
 }
