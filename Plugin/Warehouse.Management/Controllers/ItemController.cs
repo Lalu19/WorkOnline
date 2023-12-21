@@ -47,14 +47,14 @@ namespace Warehouse.Management.Controllers
 
 
 
-		public ItemController(IItemService itemService, IWebHostEnvironment hostingEnvironment, IHandlingTypeService handlingTypeService, IGSTService gSTService, ISectorService sectorService, ICategoryService categoryService, ISubCategory1Service subCategory1Service, ISubCategory2Service subCategory2Service, IWareHouseService warehouseService, IVendorService vendorService, IEmployeeService employeeService, IAddDistrictService addDistrictService)
+		public ItemController(IItemService itemService, IWebHostEnvironment hostingEnvironment, IHandlingTypeService handlingTypeService, IGSTService gSTService, ISectorService sectorService, ICategoryService categoryService, ISubCategory1Service subCategory1Service, ISubCategory2Service subCategory2Service, IWareHouseService warehouseService, IVendorService vendorService, IEmployeeService employeeService, IAddDistrictService addDistrictService, IUnit unitService)
         {
 			_hostingEnvironment = hostingEnvironment;
 			_itemService = itemService;
 			_handlingTypeService = handlingTypeService;
 			_gSTService = gSTService;
 			_sectorService = sectorService;
-			_categoryService = categoryService;
+            _categoryService = categoryService;
 			_subCategory1Service = subCategory1Service;
 			_subCategory2Service = subCategory2Service;
 			_warehouseService = warehouseService;
