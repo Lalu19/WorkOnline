@@ -28,7 +28,8 @@ namespace CloudVOffice.Core.Domain.WareHouses.Items
         public string? BrandName { get; set; }
         public double ProductWeight { get; set; }
         public Int64? UnitId { get; set; }
-        public double? CaseWeight { get; set; }
+		public string? ShortName { get; set; }
+		public double? CaseWeight { get; set; }
         public double? UnitPerCase { get; set; }
         public DateTime? ManufactureDate { get; set; }
         public DateTime? ExpiryDate { get; set; }

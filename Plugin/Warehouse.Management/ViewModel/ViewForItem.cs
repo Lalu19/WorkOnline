@@ -9,6 +9,7 @@ using CloudVOffice.Core.Domain.WareHouses.Districts;
 using CloudVOffice.Core.Domain.WareHouses.Employees;
 using CloudVOffice.Core.Domain.WareHouses.GST;
 using CloudVOffice.Core.Domain.WareHouses.HandlingTypes;
+using CloudVOffice.Core.Domain.WareHouses.UOMs;
 using CloudVOffice.Core.Domain.WareHouses.Vendors;
 using CloudVOffice.Data.DTO.WareHouses.Items;
 
@@ -27,5 +28,6 @@ namespace Warehouse.Management.ViewModel
 		public List<District> District { get; set; }
 		public List<Vendor> Vendor { get; set; }
 		public List<Employee> Employee { get; set; }
+		public List<Unit> Unit { get; set; }
 	}
 }

@@ -2,9 +2,6 @@
 @*@model CloudVOffice.Data.DTO.WareHouses.Items.ItemDTO;*@
 @model CloudVOffice.Data.DTO.WareHouses.ViewModel.ViewForItem ;
 
-
-
-
 @if (Model != null && Model.CreatedItemDTO.ItemId.HasValue)
 {
 	<!-- Display the ItemId if available -->
@@ -20,9 +17,6 @@
 @addTagHelper *, Syncfusion.EJ2
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<style>
-
-</style>
 <header class="main-heading">
 	<div class="container-fluid">
 		<div class="row">
@@ -99,16 +93,16 @@
 							</div>
 
 							<div class="form-group col-md-3">
-								<label for="SubCategory1Id" class="form-label">SubCategory Name</label>
-								<ejs-dropdownlist id="SubCategory1Id" allowFiltering="true" ejs-for="@Model.CreatedItemDTO.SubCategory1Id" change="onChangeSubCategory" placeholder="Select SubCategory" popupHeight="220px">
+								<label for="SubCategory1Id" class="form-label">SubCategory1 Name</label>
+								<ejs-dropdownlist id="SubCategory1Id" allowFiltering="true" ejs-for="@Model.CreatedItemDTO.SubCategory1Id" change="onChangeSubCategory" placeholder="Select SubCategory1" popupHeight="220px">
 									<e-dropdownlist-fields text="subCategory1Name" value="subCategory1Id"></e-dropdownlist-fields>
 								</ejs-dropdownlist>
 								<span asp-validation-for="CreatedItemDTO.SubCategory1Id"></span>
 							</div>
 
 							<div class="form-group col-md-3">
-								<label for="SubCategory2Id" class="form-label">SubCategory1 Name</label>
-								<ejs-dropdownlist id="SubCategory2Id" allowFiltering="true" ejs-for="@Model.CreatedItemDTO.SubCategory2Id" placeholder="Select SubCategory1" popupHeight="220px">
+								<label for="SubCategory2Id" class="form-label">SubCategory2 Name</label>
+								<ejs-dropdownlist id="SubCategory2Id" allowFiltering="true" ejs-for="@Model.CreatedItemDTO.SubCategory2Id" placeholder="Select SubCategory2" popupHeight="220px">
 									<e-dropdownlist-fields text="subCategory2Name" value="subCategory2Id"></e-dropdownlist-fields>
 								</ejs-dropdownlist>
 								<span asp-validation-for="CreatedItemDTO.SubCategory2Id"></span>
@@ -175,28 +169,45 @@
 								<span asp-validation-for="CreatedItemDTO.CompanyName"></span>
 							</div>
 
+							@*<div class="form-group col-md-3">
+								<label for="UnitId" class="form-label">Unit&nbsp;</label>
+								<input asp-for="@Model.CreatedItemDTO.UnitId" type="text" id="UnitId" class="form-control" autofocus="autofocus" placeholder="Unit" />
+								<span asp-validation-for="CreatedItemDTO.UnitId"></span>
+							</div>*@
+
+							<div class="form-group col-md-3">
+								<label for="UnitId" class="form-label">Unit</label>
+								<ejs-dropdownlist id="UnitId" allowFiltering="true" name="CreatedItemDTO.UnitId"
+												  dataSource="@(new SelectList(Model.Unit, "UnitId", "ShortName").Items)"
+												  placeholder="Select Unit" popupHeight="220px"
+												  value="@Model.CreatedItemDTO.UnitId">
+									<e-dropdownlist-fields text="ShortName" value="UnitId"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="CreatedItemDTO.UnitId"></span>
+							</div>
 							<div class="form-group col-md-3">
 								<label for="ProductWeight" class="form-label">Product Weight&nbsp;</label>
 								<input asp-for="@Model.CreatedItemDTO.ProductWeight" type="text" class="form-control" autofocus="autofocus" placeholder="ProductWeight" oninput="calculateCaseWeight()" id="ProductWeight" />
 								<span asp-validation-for="CreatedItemDTO.ProductWeight"></span>
 							</div>
 
-							
 							<div class="form-group col-md-3">
 								<label for="UnitPerCase" class="form-label">Unit Per Case&nbsp;</label>
 								<input asp-for="@Model.CreatedItemDTO.UnitPerCase" type="number" class="form-control" autofocus="autofocus" placeholder="Unit Per Case" oninput="calculateCaseWeight()" id="UnitPerCase" />
 								<span asp-validation-for="CreatedItemDTO.UnitPerCase"></span>
 							</div>
 
+						
+
+						</div>
+
+						<div class="form-row">
 							<div class="form-group col-md-3">
 								<label for="CaseWeight" class="form-label">Case Weight &nbsp;</label>
 								<input asp-for="@Model.CreatedItemDTO.CaseWeight" type="text" class="form-control" autofocus="autofocus" placeholder="Case Weight" id="CaseWeight" readonly />
 								<span asp-validation-for="CreatedItemDTO.CaseWeight"></span>
 							</div>
 
-						</div>
-
-						<div class="form-row">
 							<div class="form-group col-md-3">
 
 								<label for="BrandName" class="form-label">Brand Name &nbsp;</label>
@@ -220,6 +231,10 @@
 								<span asp-validation-for="CreatedItemDTO.ManufactureDate"></span>
 							</div>
 
+						
+						</div>
+
+						<div class="form-row">
 							<div class="form-group col-md-3">
 
 								<label for="ExpiryDate" class="form-label">Expiry Date&nbsp;</label>
@@ -227,9 +242,7 @@
 								<span asp-validation-for="CreatedItemDTO.ExpiryDate"></span>
 							</div>
 
-						</div>
 
-						<div class="form-row">
 							<div class="form-group col-md-3">
 
 								<label for="ReceivedDate" class="form-label">Received Date&nbsp;</label>
@@ -255,6 +268,12 @@
 								<span asp-validation-for="CreatedItemDTO.InvoiceNo"></span>
 							</div>
 
+							
+							
+							
+						</div>
+
+						<div class="form-row">
 							<div class="form-group col-md-3">
 
 								<label for="MRP" class="form-label">MRP &nbsp;</label>
@@ -262,9 +281,12 @@
 								<span asp-validation-for="CreatedItemDTO.MRP"></span>
 							</div>
 
-						</div>
+							<div class="form-group col-md-3">
 
-						<div class="form-row">
+								<label for="MRPCaseCost" class="form-label">MRP Case Cost &nbsp;</label>
+								<input asp-for="@Model.CreatedItemDTO.MRPCaseCost" type="number" id="MRPCaseCost" class="form-control" autofocus="autofocus" placeholder="MRP Case Cost" readonly />
+								<span asp-validation-for="CreatedItemDTO.MRPCaseCost"></span>
+							</div>
 							<div class="form-group col-md-3">
 
 								<label for="PurchaseCost" class="form-label">Purchase Cost &nbsp;</label>
@@ -274,9 +296,28 @@
 
 							<div class="form-group col-md-3">
 
+								<label for="PurchaseCaseCost" class="form-label">Purchase Case Cost &nbsp;</label>
+								<input asp-for="@Model.CreatedItemDTO.PurchaseCaseCost" type="number" id="PurchaseCaseCost" class="form-control" autofocus="autofocus" placeholder="Purchase Case Cost" readonly />
+								<span asp-validation-for="CreatedItemDTO.PurchaseCaseCost"></span>
+							</div>
+
+							
+
+						</div>
+
+						<div class="form-row">
+							<div class="form-group col-md-3">
+
 								<label for="SalesCost" class="form-label">Sales Cost &nbsp;</label>
 								<input asp-for="@Model.CreatedItemDTO.SalesCost" type="number" id="SalesCost" class="form-control" autofocus="autofocus" placeholder="Sales Cost" />
 								<span asp-validation-for="CreatedItemDTO.SalesCost"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+
+								<label for="SalesCaseCost" class="form-label">Sales Case Cost &nbsp;</label>
+								<input asp-for="@Model.CreatedItemDTO.SalesCaseCost" type="number" id="SalesCaseCost" class="form-control" autofocus="autofocus" placeholder="Sales Case Cost" readonly />
+								<span asp-validation-for="CreatedItemDTO.SalesCaseCost"></span>
 							</div>
 							<div class="form-group col-md-3">
 								<label for="CGST" class="form-label">CGST</label>
@@ -296,8 +337,6 @@
 								<input asp-for="@Model.CreatedItemDTO.SGST" type="number" id="SGST" class="form-control" autofocus="autofocus" placeholder="SGST" />
 								<span asp-validation-for="CreatedItemDTO.SGST"></span>
 							</div>
-
-						
 
 						</div>
 
@@ -320,8 +359,6 @@
 									}
 								}
 							</div>
-
-
 							<div class="form-group col-md-3">
 								<label for="Images" class="form-label">Images</label>
 								<input asp-for="@Model.CreatedItemDTO.ImagesUp" type="file" id="ImagesUp" class="form-control" multiple />
@@ -348,17 +385,7 @@
 									<img src="data:image/png;base64,@(Model.CreatedItemDTO.Barcode)" alt="Barcode Image" />
 								}
 							</div>
-
-						</div>
-
-						<div class="form-row">
-							<div class="form-group col-md-3">
-
-								<label for="BarCodeNotAvailable" class="form-label">Generate Barcode</label>
-								<br>
-								<input asp-for="@Model.CreatedItemDTO.BarCodeNotAvailable" type="checkbox" id="BarCodeNotAvailable" />
-								<span asp-validation-for="CreatedItemDTO.BarCodeNotAvailable"></span>
-							</div>
+						
 
 						@*	<div class="form-group col-md-3">
 
@@ -369,7 +396,15 @@
 							</div>*@
 
 						</div>
+						<div class="form-row">
+					    	<div class="form-group col-md-3">
 
+							<label for="BarCodeNotAvailable" class="form-label">Generate Barcode</label>
+							<br>
+							<input asp-for="@Model.CreatedItemDTO.BarCodeNotAvailable" type="checkbox" id="BarCodeNotAvailable" />
+							<span asp-validation-for="CreatedItemDTO.BarCodeNotAvailable"></span>
+						</div>
+						</div>
 						<br /><br />
 
 						<div class="form-row">
@@ -531,6 +566,34 @@
 	}
 </script>
 
+<!-- Add this script block after the existing script block in your HTML -->
+
+<script>
+	function calculateCaseCosts() {
+		var unitPerCaseValue = parseFloat(document.getElementById('UnitPerCase').value) || 0;
+
+		// MRPCaseCost calculation
+		var MRPValue = parseFloat(document.getElementById('MRP').value) || 0;
+		var MRPCaseCost = unitPerCaseValue * MRPValue;
+		document.getElementById('MRPCaseCost').value = MRPCaseCost.toFixed(2);
+
+		// PurchaseCaseCost calculation
+		var purchaseCostValue = parseFloat(document.getElementById('PurchaseCost').value) || 0;
+		var purchaseCaseCost = unitPerCaseValue * purchaseCostValue;
+		document.getElementById('PurchaseCaseCost').value = purchaseCaseCost.toFixed(2);
+
+		// SalesCaseCost calculation
+		var salesCostValue = parseFloat(document.getElementById('SalesCost').value) || 0;
+		var salesCaseCost = unitPerCaseValue * salesCostValue;
+		document.getElementById('SalesCaseCost').value = salesCaseCost.toFixed(2);
+	}
+
+	// Call the function whenever UnitPerCase, MRP, PurchaseCost, or SalesCost changes
+	document.getElementById('UnitPerCase').addEventListener('input', calculateCaseCosts);
+	document.getElementById('MRP').addEventListener('input', calculateCaseCosts);
+	document.getElementById('PurchaseCost').addEventListener('input', calculateCaseCosts);
+	document.getElementById('SalesCost').addEventListener('input', calculateCaseCosts);
+</script>
 
 @section scripts{
 	@*<script>
@@ -637,8 +700,11 @@
 			var expiryDate = $("#ExpiryDate").val() || '';
 			var handlingType = $("#HandlingType").val() || '';
 			var mrp = $("#MRP").val() || '';
+			var mRPCaseCost = $("#MRPCaseCost").val() || '';
 			var purchaseCost = $("#PurchaseCost").val() || '';
+			var purchaseCaseCost = $("#PurchaseCaseCost").val() || '';
 			var salesCost = $("#SalesCost").val() || '';
+			var salesCaseCost = $("#SalesCaseCost").val() || '';
 			var cgst = $("#GSTValue").val() || '';
 			var sgst = $("#SGST").val() || '';
 			var hsn = $("#HSN").val() || '';
@@ -662,8 +728,11 @@
 			reviewHtml += "<b>ExpiryDate:</b> " + expiryDate + "<br>";
 			reviewHtml += "<b>HandlingType:</b> " + handlingType + "<br>";
 			reviewHtml += "<b>MRP:</b> " + mrp + "<br>";
+			reviewHtml += "<b>MRPCaseCost:</b> " + mRPCaseCost + "<br>";
 			reviewHtml += "<b>PurchaseCost:</b> " + purchaseCost + "<br>";
+			reviewHtml += "<b>PurchaseCaseCost:</b> " + purchaseCaseCost + "<br>";
 			reviewHtml += "<b>SalesCost:</b> " + salesCost + "<br>";
+			reviewHtml += "<b>SalesCaseCost:</b> " + salesCaseCost + "<br>";
 			reviewHtml += "<b>CGST:</b> " + cgst + "<br>";
 			reviewHtml += "<b>SGST:</b> " + sgst + "<br>";
 			reviewHtml += "<b>HSN:</b> " + hsn + "<br>";
