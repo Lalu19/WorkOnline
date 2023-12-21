@@ -24,7 +24,7 @@ namespace CloudVOffice.Data.DTO.WareHouses.Items
 		public string? Barcode { get; set; }
 		public bool BarCodeNotAvailable { get; set; }
 
-        public Int64? UnitId { get; set; }
+		public Int64? UnitId { get; set; }
         public string ProductName { get; set; }
         public double? QtyPerKg { get; set; }
         public double? Price { get; set; }

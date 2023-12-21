@@ -41,8 +41,6 @@
 		<None Remove="Views\PinCode\PinCodeView.cshtml" />
 		<None Remove="Views\ProductCategories\CategoryCreate.cshtml" />
 		<None Remove="Views\ProductCategories\CategoryView.cshtml" />
-		<None Remove="Views\ProductCategories\ProductsCreate.cshtml" />
-		<None Remove="Views\ProductCategories\ProductsView.cshtml" />
 		<None Remove="Views\ProductCategories\SubCategory1Create.cshtml" />
 		<None Remove="Views\ProductCategories\SubCategory1View.cshtml" />
 		<None Remove="Views\ProductCategories\SubCategory2Create.cshtml" />

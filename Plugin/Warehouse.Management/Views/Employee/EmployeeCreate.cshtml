@@ -50,13 +50,26 @@
 
                         <div class="form-row">
 
-                            <div class="form-group col-md-4">
+                            @*<div class="form-group col-md-4">
                                 <label for="AssignedWareHouse" class="form-label">Assigned WareHouse</label>
                                 <ejs-dropdownlist id="WareHouseName" allowFiltering="true" dataSource="@(new SelectList((IEnumerable)ViewBag.WareHouses, "WareHuoseId", "WareHouseName").Items)" placeholder="Select WareHouse" popupHeight="220px" name="AssignedWareHouse" value="@Model.AssignedWareHouse">
                                     <e-dropdownlist-fields text="WareHouseName" value="WareHuoseId"></e-dropdownlist-fields>
                                 </ejs-dropdownlist>
                                 <span asp-validation-for="AssignedWareHouse"></span>
+                            </div>*@
+
+                            <div class="form-group col-md-4">
+                                <label for="AssignedWareHouse" class="form-label">Assigned WareHouse</label>
+                                <ejs-dropdownlist id="WareHouseName" allowFiltering="true"
+                                                  dataSource="@(new SelectList((IEnumerable)ViewBag.WareHouses, "WareHuoseId", "WareHouseName").Items)"
+                                                  placeholder="Select WareHouse" popupHeight="220px"
+                                                  name="AssignedWareHouse"
+                                                  value="@Model.AssignedWareHouse">
+                                    <e-dropdownlist-fields text="WareHouseName" value="WareHuoseId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="AssignedWareHouse"></span>
                             </div>
+
 
                             <div class="form-group col-md-4">
                                 <label for="EmployeeName" class="form-label">Employee Name &nbsp;<span style="color:red;"><b>*</b></span></label>
