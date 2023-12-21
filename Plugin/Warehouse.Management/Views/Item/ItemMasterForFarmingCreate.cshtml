@@ -148,7 +148,7 @@
                             </div>
 
                             <div class="form-group col-md-3">
-                                <label for="UnitId" class="form-label">UnitId&nbsp;</label>
+                                <label for="UnitId" class="form-label">Unit Id&nbsp;</label>
                                 <input asp-for="@Model.CreatedItemMasterFarmingDTO.UnitId" type="text" id="UnitId" class="form-control" autofocus="autofocus" placeholder="UnitId" />
                                 <span asp-validation-for="CreatedItemMasterFarmingDTO.UnitId"></span>
                             </div>
@@ -591,7 +591,7 @@
             var vendorName = $("#VendorId").val() || '';
             var districtName = $("#DistrictId").val() || '';
             var productName = $("#ProductName").val() || '';
-            var uomId = $("#UOMId").val() || '';
+            var unitId = $("#UnitId").val() || '';
             var qtyPerKg = $("#QtyPerKg").val() || '';
             var price = $("#Price").val() || '';
             var minQty = $("#MinQty").val() || '';
@@ -611,7 +611,7 @@
             reviewHtml += "<b>Vendor Name:</b> " + vendorName + "<br>";
             reviewHtml += "<b>District Name:</b> " + districtName + "<br>";
             reviewHtml += "<b>Product Name:</b> " + productName + "<br>";
-            reviewHtml += "<b>UOM:</b> " + uomId + "<br>";
+            reviewHtml += "<b>UOM:</b> " + unitId + "<br>";
             reviewHtml += "<b>Qty Per Kg:</b> " + qtyPerKg + "<br>";
             reviewHtml += "<b>Price:</b> " + price + "<br>";
             reviewHtml += "<b>Min Qty:</b> " + minQty + "<br>";

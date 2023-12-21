@@ -84,6 +84,10 @@ namespace CloudVOffice.Web.Framework
             services.AddScoped<IDistrictService, DistrictService>();
             services.AddScoped<ISalesAdminService, SalesAdminService>();
 
+            services.AddScoped<IDamageItemService, DamageItemService>();
+
+            services.AddScoped<IDamageItemForFarmingService, DamageItemForFarmingService>();
+
 
 
 

@@ -29,12 +29,9 @@
         public double? GST { get; set; }
         public string? HSN { get; set; }
         public DateTime? HarvestDate { get; set; }
-
 		public string? InvoiceNo { get; set; }
 		public DateTime? ReceivedDate { get; set; }
-
 		public Int64 CreatedBy { get; set; }
-
         public DateTime CreatedDate { get; set; }
         public Int64? UpdatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
