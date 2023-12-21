@@ -24,6 +24,7 @@ using CloudVOffice.Services.WareHouses;
 using CloudVOffice.Services.WareHouses.Vendors;
 using CloudVOffice.Services.WareHouses.Employees;
 using CloudVOffice.Services.WareHouses.Districts;
+using CloudVOffice.Services.WareHouses.UOMs;
 
 namespace Warehouse.Management.Controllers
 {
@@ -42,6 +43,7 @@ namespace Warehouse.Management.Controllers
 		private readonly IAddDistrictService _addDistrictService;
 		private readonly IVendorService _vendorService;
 		private readonly IEmployeeService _employeeService;
+		private readonly IUnit _unitService;
 
 
 
@@ -59,6 +61,7 @@ namespace Warehouse.Management.Controllers
             _addDistrictService = addDistrictService;
 			_vendorService = vendorService;
 			_employeeService = employeeService;
+			_unitService = unitService;
 		}
 
         [HttpGet]
@@ -70,7 +73,6 @@ namespace Warehouse.Management.Controllers
 			//ViewBag.Sectors = _sectorService.GetSectorList();
 			//ViewBag.Categories = _categoryService.GetCategoryList();
 			//ViewBag.SubCategories1 = _subCategory1Service.GetSubCategory1List();
-
 
 			var viewForItem = new ViewForItem
 			{
@@ -84,6 +86,7 @@ namespace Warehouse.Management.Controllers
 				Category = _categoryService.GetCategoryList(),
 				SubCategory1 = _subCategory1Service.GetSubCategory1List(),
 				SubCategory2 = _subCategory2Service.GetSubCategory2List(),
+				Unit = _unitService.GetUnit(),
 				CreatedItemDTO = new ItemDTO()
 			};
 
@@ -101,6 +104,7 @@ namespace Warehouse.Management.Controllers
 				viewForItem.CreatedItemDTO.SubCategory2Id = item1.SubCategory2Id;
 				viewForItem.CreatedItemDTO.CompanyName = item1.CompanyName;
 				viewForItem.CreatedItemDTO.BrandName = item1.BrandName;
+				viewForItem.CreatedItemDTO.UnitId = item1.UnitId;
 				//viewForItem.CreatedItemDTO.UnitOfMeasurement = item1.UnitOfMeasurement;
 				viewForItem.CreatedItemDTO.ProductWeight = item1.ProductWeight;
                 viewForItem.CreatedItemDTO.CaseWeight = item1.CaseWeight;
@@ -110,8 +114,11 @@ namespace Warehouse.Management.Controllers
 				viewForItem.CreatedItemDTO.Barcode = item1.Barcode;
 				viewForItem.CreatedItemDTO.BarCodeNotAvailable = item1.BarCodeNotAvailable;
 				viewForItem.CreatedItemDTO.MRP = item1.MRP;
+				viewForItem.CreatedItemDTO.MRPCaseCost = item1.MRPCaseCost;
 				viewForItem.CreatedItemDTO.PurchaseCost = item1.PurchaseCost;
+				viewForItem.CreatedItemDTO.PurchaseCaseCost = item1.PurchaseCaseCost;
 				viewForItem.CreatedItemDTO.SalesCost = item1.SalesCost;
+				viewForItem.CreatedItemDTO.SalesCaseCost = item1.SalesCaseCost;
 				viewForItem.CreatedItemDTO.CGST = item1.CGST;
 				viewForItem.CreatedItemDTO.SGST = item1.SGST;
 				viewForItem.CreatedItemDTO.HSN = item1.HSN;
@@ -121,6 +128,7 @@ namespace Warehouse.Management.Controllers
 				viewForItem.CreatedItemDTO.VendorName = item1.VendorName;
 				viewForItem.CreatedItemDTO.EmployeeName = item1.EmployeeName;
 				viewForItem.CreatedItemDTO.Thumbnail = item1.Thumbnail;
+				viewForItem.CreatedItemDTO.InvoiceNo = item1.InvoiceNo;
 
 				if (!string.IsNullOrEmpty(item1.Images))
 				{
@@ -331,7 +339,6 @@ namespace Warehouse.Management.Controllers
 				if (btnSave != null)
 				{
 
-
 					var createdItemDTO = _itemService.CreateItem(viewForItem.CreatedItemDTO);
 
 					if (createdItemDTO != null && viewForItem.CreatedItemDTO.BarCodeNotAvailable == true)
@@ -354,7 +361,8 @@ namespace Warehouse.Management.Controllers
 							WareHuose = _warehouseService.GetWareHouseList(),
 							AddDistrict = _addDistrictService.GetAddDistrictList(),
 							Employee = _employeeService.GetEmployees(),
-							Vendor = _vendorService.GetVendorList()
+							Vendor = _vendorService.GetVendorList(),
+							Unit = _unitService.GetUnit()
 						};
 
 						return View("~/Plugins/Warehouse.Management/Views/Item/ItemCreate.cshtml", viewForItem1);
@@ -429,7 +437,8 @@ namespace Warehouse.Management.Controllers
 					WareHuose = _warehouseService.GetWareHouseList(),
 					AddDistrict = _addDistrictService.GetAddDistrictList(),
 					Employee = _employeeService.GetEmployees(),
-					Vendor = _vendorService.GetVendorList()
+					Vendor = _vendorService.GetVendorList(),
+					Unit = _unitService.GetUnit()
 				};
 
 				return View("~/Plugins/Warehouse.Management/Views/Item/ItemCreate.cshtml", viewForItem1);
@@ -453,5 +462,10 @@ namespace Warehouse.Management.Controllers
             TempData["msg"] = a;
             return Redirect("/WareHouse/Item/ItemView");
         }
-    }
+
+		public JsonResult GetItemById(int ItemId)
+		{
+			return Json(_itemService.GetItemByItemId(ItemId));
+		}
+	}
 }
