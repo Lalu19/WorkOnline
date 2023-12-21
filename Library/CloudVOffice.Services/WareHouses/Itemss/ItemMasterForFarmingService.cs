@@ -286,17 +286,29 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 				// return _dbContext.ItemMasterForFarmings.Where(i => i.ItemMasterForFarmingId == itemMasterForFarmingId).FirstOrDefault();
 
 
-					WareHuose wareHuose = _dbContext.WareHouses.FirstOrDefault(s => s.WareHuoseId == Convert.ToInt32(items.WareHouseName));
-					Employee employee = _dbContext.Employees.FirstOrDefault(s => s.EmployeeId == Convert.ToInt32(items.EmployeeName));
-					Vendor vendor = _dbContext.Vendors.FirstOrDefault(s => s.VendorId == Convert.ToInt32(items.VendorName));
-					District district = _dbContext.Districts.FirstOrDefault(s => s.DistrictId == Convert.ToInt32(items.DistrictName));
+				//WareHuose wareHuose = _dbContext.WareHouses.FirstOrDefault(s => s.WareHuoseId == Convert.ToInt32(items.WareHouseName));
+				//Employee employee = _dbContext.Employees.FirstOrDefault(s => s.EmployeeId == Convert.ToInt32(items.EmployeeName));
+				//Vendor vendor = _dbContext.Vendors.FirstOrDefault(s => s.VendorId == Convert.ToInt32(items.VendorName));
+				//District district = _dbContext.Districts.FirstOrDefault(s => s.DistrictId == Convert.ToInt32(items.DistrictName));
+				//items.WareHouseName = wareHuose != null ? wareHuose.WareHouseName : null;
+				//items.EmployeeName = employee != null ? employee.EmployeeName : null;
+				//items.VendorName = vendor != null ? vendor.VendorName : null;
+				//items.DistrictName = district != null ? district.DistrictName : null;
 
 
-					items.WareHouseName = wareHuose != null ? wareHuose.WareHouseName : null;
-					items.EmployeeName = employee != null ? employee.EmployeeName : null;
-					items.VendorName = vendor != null ? vendor.VendorName : null;
-					items.DistrictName = district != null ? district.DistrictName : null;
-				
+				//WareHuose wareHuose = _dbContext.WareHouses.FirstOrDefault(s => s.WareHuoseId == Convert.ToInt32(items.WareHouseName));
+				//Employee employee = _dbContext.Employees.FirstOrDefault(s => s.EmployeeId == Convert.ToInt32(items.EmployeeName));
+				//Vendor vendor = _dbContext.Vendors.FirstOrDefault(s => s.VendorId == Convert.ToInt32(items.VendorName));
+				//District district = _dbContext.Districts.FirstOrDefault(s => s.DistrictId == Convert.ToInt32(items.DistrictName));
+				//items.WareHouseName = wareHuose != null ? wareHuose.WareHouseName : null;
+				//items.WareHouseId = wareHuose != null ? wareHuose.WareHuoseId : (int?)null; 
+				//items.EmployeeName = employee != null ? employee.EmployeeName : null;
+				//items.EmployeeId = employee != null ? employee.EmployeeId : (int?)null; 
+				//items.VendorName = vendor != null ? vendor.VendorName : null;
+				//items.VendorId = vendor != null ? vendor.VendorId : (int?)null; 
+				//items.DistrictName = district != null ? district.DistrictName : null;
+				//items.DistrictId = district != null ? district.DistrictId : (int?)null; 
+
 
 				return items;
 			}

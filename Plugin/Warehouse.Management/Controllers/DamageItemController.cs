@@ -22,18 +22,23 @@ namespace Warehouse.Management.Controllers
 	{
 		private readonly IDamageItemService _damageItemService;
 		private readonly IWebHostEnvironment _hostingEnvironment;
+		private readonly IItemService _itemService;
 
-		public DamageItemController(IDamageItemService damageItemService, IWebHostEnvironment hostingEnvironment)
+		public DamageItemController(IDamageItemService damageItemService,
+			                        IWebHostEnvironment hostingEnvironment,
+									IItemService itemService)
 		{
 			_damageItemService = damageItemService;
 			_hostingEnvironment = hostingEnvironment;
+			_itemService = itemService;
 		}
 
 		[HttpGet]
 		public IActionResult CreateDamageItem(int? damageItemId)
 		{
-			DamageItemDTO damageItemDTO = new DamageItemDTO();
+			ViewBag.ItemList = _itemService.GetItemList();
 
+			DamageItemDTO damageItemDTO = new DamageItemDTO();
 
 			if (damageItemId != null)
 			{
@@ -136,6 +141,9 @@ namespace Warehouse.Management.Controllers
 					}
 				}
 			}
+
+		     ViewBag.ItemList = _itemService.GetItemList();
+
 			return View("~/Plugins/Warehouse.Management/Views/Item/DamageItemCreate.cshtml", damageItemDTO);
         }
 

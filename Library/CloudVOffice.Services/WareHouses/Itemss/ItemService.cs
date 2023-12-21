@@ -61,6 +61,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					item.CompanyName = itemDTO.CompanyName;
 					item.BrandName = itemDTO.BrandName;
 					item.ProductWeight = itemDTO.ProductWeight;
+					item.UnitId = itemDTO.UnitId;
 					//item.UnitOfMeasurement = itemDTO.UnitOfMeasurement;
 					item.CaseWeight = itemDTO.CaseWeight;
 					item.UnitPerCase = itemDTO.UnitPerCase;
@@ -111,6 +112,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						EmployeeName = item.EmployeeName,
 						CompanyName = item.CompanyName,
 						BrandName = item.BrandName,
+						UnitId = item.UnitId,
 						//UnitOfMeasurement = item.UnitOfMeasurement,
                         ProductWeight = item.ProductWeight,
 						CaseWeight = item.CaseWeight,
@@ -356,6 +358,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						item.CompanyName = itemDTO.CompanyName;
                         item.BrandName = itemDTO.BrandName;
 						item.ProductWeight = itemDTO.ProductWeight;
+						item.UnitId = itemDTO.UnitId;
                         //item.UnitOfMeasurement = itemDTO.UnitOfMeasurement;
                         item.CaseWeight = itemDTO.CaseWeight;
                         item.UnitPerCase = itemDTO.UnitPerCase;

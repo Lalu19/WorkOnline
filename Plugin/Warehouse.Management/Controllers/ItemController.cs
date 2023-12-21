@@ -101,6 +101,7 @@ namespace Warehouse.Management.Controllers
 				viewForItem.CreatedItemDTO.SubCategory2Id = item1.SubCategory2Id;
 				viewForItem.CreatedItemDTO.CompanyName = item1.CompanyName;
 				viewForItem.CreatedItemDTO.BrandName = item1.BrandName;
+				viewForItem.CreatedItemDTO.UnitId = item1.UnitId;
 				//viewForItem.CreatedItemDTO.UnitOfMeasurement = item1.UnitOfMeasurement;
 				viewForItem.CreatedItemDTO.ProductWeight = item1.ProductWeight;
                 viewForItem.CreatedItemDTO.CaseWeight = item1.CaseWeight;
@@ -121,6 +122,7 @@ namespace Warehouse.Management.Controllers
 				viewForItem.CreatedItemDTO.VendorName = item1.VendorName;
 				viewForItem.CreatedItemDTO.EmployeeName = item1.EmployeeName;
 				viewForItem.CreatedItemDTO.Thumbnail = item1.Thumbnail;
+				viewForItem.CreatedItemDTO.InvoiceNo = item1.InvoiceNo;
 
 				if (!string.IsNullOrEmpty(item1.Images))
 				{
@@ -453,5 +455,10 @@ namespace Warehouse.Management.Controllers
             TempData["msg"] = a;
             return Redirect("/WareHouse/Item/ItemView");
         }
-    }
+
+		public JsonResult GetItemById(int ItemId)
+		{
+			return Json(_itemService.GetItemByItemId(ItemId));
+		}
+	}
 }

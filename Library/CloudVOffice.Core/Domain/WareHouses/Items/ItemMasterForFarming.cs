@@ -9,6 +9,11 @@
 		public string? VendorName { get; set; }
 		public string? DistrictName { get; set; }
 
+		public int? WareHuoseId { get; set; }
+		public int? EmployeeId { get; set; }
+		public int? VendorId { get; set; }
+		public int? DistrictId { get; set; }
+
 		public int? SectorId { get; set; }
         public int? CategoryId { get; set; }
         public int? SubCategory1Id { get; set; }
