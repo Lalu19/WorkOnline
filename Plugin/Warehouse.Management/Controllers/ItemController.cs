@@ -54,7 +54,7 @@ namespace Warehouse.Management.Controllers
 			_handlingTypeService = handlingTypeService;
 			_gSTService = gSTService;
 			_sectorService = sectorService;
-			_categoryService = categoryService;
+            _categoryService = categoryService;
 			_subCategory1Service = subCategory1Service;
 			_subCategory2Service = subCategory2Service;
 			_warehouseService = warehouseService;
