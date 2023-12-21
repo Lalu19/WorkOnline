@@ -35,6 +35,7 @@ namespace Warehouse.Management.Controllers
         private readonly IVendorService _vendorService;
         private readonly IDistrictService _districtService;
         private readonly IUnit _unitService;
+        private readonly IAddDistrictService _addDistrictService;
 
         public ItemMasterForFarmingController(IItemMasterForFarmingService itemMasterForFarmingService,
 			                                  IWebHostEnvironment hostingEnvironment,
@@ -47,6 +48,7 @@ namespace Warehouse.Management.Controllers
                                               IVendorService vendorService,
                                               IDistrictService districtService,
                                               IUnit unitService
+                                              IAddDistrictService addDistrictService
                                               )
 		{
 			_itemMasterForFarmingService = itemMasterForFarmingService;
@@ -60,6 +62,7 @@ namespace Warehouse.Management.Controllers
             _vendorService = vendorService;
             _districtService = districtService;
             _unitService = unitService;
+            _addDistrictService = addDistrictService;
         }
 
 		[HttpGet]
@@ -81,6 +84,7 @@ namespace Warehouse.Management.Controllers
 			    	Vendors = _vendorService.GetVendorList(),
 				    Districts = _districtService.GetDistrictList(),
 				    Units = _unitService.GetUnit(),
+				    AddDistricts = _addDistrictService.GetAddDistrictList(),
 
                     CreatedItemMasterFarmingDTO = new ItemMasterForFarmingDTO()
                 };
@@ -236,6 +240,7 @@ namespace Warehouse.Management.Controllers
                             Vendors = _vendorService.GetVendorList(),
                             Districts = _districtService.GetDistrictList(),
                             Units = _unitService.GetUnit(),
+                            AddDistricts = _addDistrictService.GetAddDistrictList(),
                         };
 
                         return View("~/Plugins/Warehouse.Management/Views/Item/ItemMasterForFarmingCreate.cshtml", viewForItemMasterFarming1);
@@ -315,6 +320,7 @@ namespace Warehouse.Management.Controllers
                     Vendors = _vendorService.GetVendorList(),
                     Districts = _districtService.GetDistrictList(),
                     Units = _unitService.GetUnit(),
+                    AddDistricts = _addDistrictService.GetAddDistrictList(),
 
                 };
 

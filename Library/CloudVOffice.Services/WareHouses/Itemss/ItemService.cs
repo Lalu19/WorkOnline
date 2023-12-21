@@ -25,6 +25,7 @@ using CloudVOffice.Core.Domain.WareHouses.GST;
 using CloudVOffice.Core.Domain.ProductCategories;
 using CloudVOffice.Core.Domain.WareHouses.Vendors;
 using CloudVOffice.Core.Domain.WareHouses.Districts;
+using CloudVOffice.Core.Domain.WareHouses.UOMs;
 
 namespace CloudVOffice.Services.WareHouses.Itemss
 {
@@ -62,7 +63,6 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					item.BrandName = itemDTO.BrandName;
 					item.ProductWeight = itemDTO.ProductWeight;
 					item.UnitId = itemDTO.UnitId;
-					//item.UnitOfMeasurement = itemDTO.UnitOfMeasurement;
 					item.CaseWeight = itemDTO.CaseWeight;
 					item.UnitPerCase = itemDTO.UnitPerCase;
 					item.ManufactureDate = itemDTO.ManufactureDate;
@@ -70,9 +70,12 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					item.Barcode = itemDTO.Barcode;
 					item.BarCodeNotAvailable = itemDTO.BarCodeNotAvailable;
 					item.MRP = itemDTO.MRP;
+					item.MRPCaseCost = itemDTO.MRPCaseCost;
 					item.HSN = itemDTO.HSN;
 					item.PurchaseCost = itemDTO.PurchaseCost;
+					item.PurchaseCaseCost = itemDTO.PurchaseCaseCost;
 					item.SalesCost = itemDTO.SalesCost;
+					item.SalesCaseCost = itemDTO.SalesCaseCost;
 					item.SGST = itemDTO.SGST;
 					item.CGST = itemDTO.CGST;
 					item.HandlingType = itemDTO.HandlingType;
@@ -113,7 +116,6 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						CompanyName = item.CompanyName,
 						BrandName = item.BrandName,
 						UnitId = item.UnitId,
-						//UnitOfMeasurement = item.UnitOfMeasurement,
                         ProductWeight = item.ProductWeight,
 						CaseWeight = item.CaseWeight,
 						UnitPerCase = item.UnitPerCase,
@@ -122,8 +124,11 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						Barcode = item.Barcode,
 						BarCodeNotAvailable = item.BarCodeNotAvailable,
 						MRP = item.MRP,
+						MRPCaseCost = item.MRPCaseCost,
 						PurchaseCost = item.PurchaseCost,
+						PurchaseCaseCost = item.PurchaseCaseCost,
 						SalesCost = item.SalesCost,
+						SalesCaseCost = item.SalesCaseCost,
 						SGST = item.SGST,
 						HSN = item.HSN,
 						CGST = item.CGST,
@@ -159,121 +164,6 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 			byte[] barcodeImageBytes = GenerateBarcodeImage(itemId);
 			SaveBarcodeImageToDatabase(itemId, barcodeImageBytes);
 		}
-
-
-
-
-
-		//private Image GenerateBarcodeImage(Int64 itemId)
-		//{
-		//          //Use the BarcodeLib or any other library to generate the barcode image
-
-
-		//          Barcode barcode = new Barcode();
-		//          string data = itemId.ToString();
-		//          barcode.IncludeLabel = true;
-		//          barcode.Alignment = AlignmentPositions.Center;
-
-		//          // Assuming there is a new way to specify the barcode type in version 3.0.3
-		//          //barcode.EncodedType = BarcodeLib.TYPE.UPCA;
-		//          //barcode.EncodedType = BarcodeLib.
-
-
-		//          //return barcode.Encode(Type(data), Color.Black, Color.White, 290, 120);
-
-		//      }
-
-
-		//private Bitmap GenerateBarcodeImage(Int64 itemId)
-		//{
-		//	BarcodeWriter barcodeWriter = new BarcodeWriter();
-		//	barcodeWriter.Format = BarcodeFormat.UPCA; // Use UPCA format for UPC-A barcodes
-		//	barcodeWriter.Options = new ZXing.Common.EncodingOptions
-		//	{
-		//		Width = 290,   // Set the width of the barcode image
-		//		Height = 120,  // Set the height of the barcode image
-		//		Margin = 10    // Set the margin of the barcode
-		//	};
-
-		//	string data = itemId.ToString();
-		//	Bitmap barcodeBitmap = barcodeWriter.Write(data);
-
-		//	return barcodeBitmap;
-		//}
-
-		//private Bitmap GenerateBarcodeImage(string itemId)
-		//{
-		//	////BarcodeWriter barcodeWriter = new BarcodeWriter();
-
-		//	//BarcodeWriter<Bitmap> barcodeWriter = new BarcodeWriter<Bitmap>();
-		//	//barcodeWriter.Format = BarcodeFormat.UPC_A; // Use UPCA format for UPC-A barcodes
-		//	//barcodeWriter.Options = new ZXing.Common.EncodingOptions
-		//	//{
-		//	//	Width = 290,   // Set the width of the barcode image
-		//	//	Height = 120,  // Set the height of the barcode image
-		//	//	Margin = 10    // Set the margin of the barcode
-		//	//};
-
-		//	//string data = itemId.ToString();
-		//	//Bitmap barcodeBitmap = barcodeWriter.Write(data);
-
-		//	//return barcodeBitmap;
-
-
-
-
-		//	//BarcodeWriter<Bitmap> barcodeWriter = new BarcodeWriter<Bitmap>
-		//	//{
-		//	//	Format = BarcodeFormat.UPC_A,
-		//	//	Options = new ZXing.Common.EncodingOptions
-		//	//	{
-		//	//		Width = 290,
-		//	//		Height = 120,
-		//	//		Margin = 10
-		//	//	},
-		//	//};
-
-		//	//string data = itemId.ToString();
-		//	//Bitmap barcodeBitmap = barcodeWriter.Write(data);
-
-		//	//return barcodeBitmap;
-
-
-		//	BarcodeWriterPixelData writer = new BarcodeWriterPixelData()
-		//	{
-		//		Format = BarcodeFormat.CODE_128,
-		//		Options = new ZXing.Common.EncodingOptions
-		//		{
-		//			Height = 400,
-		//			Width = 800,
-		//			PureBarcode = false, // Indicates that the text should be displayed
-		//			Margin = 10
-		//		}
-		//	};
-
-		//	var pixelData = writer.Write("test text");
-
-		//	using (var bitmap = new Bitmap(pixelData.Width, pixelData.Height, System.Drawing.Imaging.PixelFormat.Format32bppRgb))
-		//	{
-		//		using (var ms = new System.IO.MemoryStream())
-		//		{
-		//			var bitmapData = bitmap.LockBits(new Rectangle(0, 0, pixelData.Width, pixelData.Height), System.Drawing.Imaging.ImageLockMode.WriteOnly, System.Drawing.Imaging.PixelFormat.Format32bppRgb);
-		//			try
-		//			{
-		//				System.Runtime.InteropServices.Marshal.Copy(pixelData.Pixels, 0, bitmapData.Scan0, pixelData.Pixels.Length);
-		//			}
-		//			finally
-		//			{
-		//				bitmap.UnlockBits(bitmapData);
-		//			}
-
-		//			bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-		//			return File(ms.ToArray(), "image/jpeg");
-		//		}
-		//	}
-
-		//}
-
 
 		public byte[] GenerateBarcodeImage(string itemId)
 		{
@@ -359,7 +249,6 @@ namespace CloudVOffice.Services.WareHouses.Itemss
                         item.BrandName = itemDTO.BrandName;
 						item.ProductWeight = itemDTO.ProductWeight;
 						item.UnitId = itemDTO.UnitId;
-                        //item.UnitOfMeasurement = itemDTO.UnitOfMeasurement;
                         item.CaseWeight = itemDTO.CaseWeight;
                         item.UnitPerCase = itemDTO.UnitPerCase;
                         item.ManufactureDate = itemDTO.ManufactureDate;
@@ -368,8 +257,11 @@ namespace CloudVOffice.Services.WareHouses.Itemss
                         item.HSN = itemDTO.HSN;
                         item.BarCodeNotAvailable = itemDTO.BarCodeNotAvailable;
                         item.MRP = itemDTO.MRP;
+                        item.MRPCaseCost = itemDTO.MRPCaseCost;
                         item.PurchaseCost = itemDTO.PurchaseCost;
+                        item.PurchaseCaseCost = itemDTO.PurchaseCaseCost;
                         item.SalesCost = itemDTO.SalesCost;
+                        item.SalesCaseCost = itemDTO.SalesCaseCost;
                         item.SGST = itemDTO.SGST;
                         item.CGST = itemDTO.CGST;
                         item.HandlingType = itemDTO.HandlingType;
@@ -468,19 +360,20 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 				List<SubCategory1> subCategory1s = _dbContext.SubCategories1.Where(x => x.Deleted == false).ToList();
 				List<SubCategory2> subCategory2s = _dbContext.SubCategories2.Where(x => x.Deleted == false).ToList();
 				List<WareHuose> warehouses = _dbContext.WareHouses.Where(x => x.Deleted == false).ToList();
-				List<District> districts = _dbContext.Districts.Where(x => x.Deleted == false).ToList();
+				List<AddDistrict> districts = _dbContext.AddDistricts.Where(x => x.Deleted == false).ToList();
 				List<Employee> employees = _dbContext.Employees.Where(x => x.Deleted == false).ToList();
 				List<Vendor> vendors = _dbContext.Vendors.Where(x => x.Deleted == false).ToList();
 				List<HandlingType> handlingTypes = _dbContext.HandlingTypes.Where(h => h.Deleted == false).ToList();
 				List<GST> gsts = _dbContext.GSTs.Where(g => g.Deleted == false).ToList();
 				List<Item> items = _dbContext.Items.Where(i  => i.Deleted == false).ToList();
+				List<Unit> units = _dbContext.Units.Where(i  => i.Deleted == false).ToList();
 
 
 				foreach (var item in items)
 				{
 					HandlingType handlingType = handlingTypes.FirstOrDefault(h => h.HandlingTypeId == Convert.ToInt32(item.HandlingType));
 					WareHuose wareHuose = warehouses.FirstOrDefault(h => h.WareHuoseId == Convert.ToInt32(item.WareHouseName));
-					District district = districts.FirstOrDefault(h => h.DistrictId == Convert.ToInt32(item.DistrictName));
+					AddDistrict district = districts.FirstOrDefault(h => h.AddDistrictId == Convert.ToInt32(item.DistrictName));
 					Vendor vendor = vendors.FirstOrDefault(h => h.VendorId == Convert.ToInt32(item.VendorName));
 					Employee emp = employees.FirstOrDefault(h => h.EmployeeId == Convert.ToInt32(item.EmployeeName));
 					GST gst = gsts.FirstOrDefault(g => g.GSTId == Convert.ToInt32(item.CGST));
@@ -488,6 +381,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					Category category = categories.FirstOrDefault(z => z.CategoryId == Convert.ToInt32(item.CategoryId));
 					SubCategory1 subCategory1 = subCategory1s.FirstOrDefault(y => y.SubCategory1Id == Convert.ToInt32(item.SubCategory1Id));
 					SubCategory2 subCategory2 = subCategory2s.FirstOrDefault(y => y.SubCategory2Id == Convert.ToInt32(item.SubCategory2Id));
+					Unit unit = units.FirstOrDefault(h => h.UnitId == Convert.ToInt32(item.UnitId));
 
 
 					item.HandlingType = handlingType != null ? handlingType.HandlingTypeName : null;
@@ -500,6 +394,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					item.DistrictName = district != null ? district.DistrictName : null;
 					item.VendorName = vendor != null ? vendor.VendorName : null;
 					item.EmployeeName = emp != null ? emp.EmployeeName : null;
+					item.ShortName = unit != null ? unit.ShortName : null;
 				}
 
 					return items;

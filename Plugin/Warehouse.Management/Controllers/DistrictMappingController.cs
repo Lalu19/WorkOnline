@@ -20,53 +20,57 @@ using CloudVOffice.Core.Domain.WareHouses.Districts;
 namespace Warehouse.Management.Controllers
 {
 	[Area(AreaNames.WareHouse)]
-	public class DistrictController : BasePluginController
+	public class DistrictMappingController : BasePluginController
 	{
 		
-		private readonly IDistrictService _districtService;
+		private readonly IDistrictMappingService _districtService;
 		private readonly IPinCodeService _pinCodeService;
+        private readonly IAddDistrictService _addDistrictService;
 
-		public DistrictController(IDistrictService districtService, IPinCodeService pinCodeService)
+        public DistrictMappingController(IDistrictMappingService districtService, IPinCodeService pinCodeService, IAddDistrictService addDistrictService)
 		{
 			_districtService = districtService;
 			_pinCodeService = pinCodeService;
-		}
+			_addDistrictService = addDistrictService;
+
+        }
 
 
 		[HttpGet]
-		public IActionResult DistrictCreate(Int64? DistrictId)
+		public IActionResult DistrictCreate(Int64? DistrictMappingId)
 		{
 
 			ViewBag.PinCodeList = _pinCodeService.GetPinList();
-			DistrictDTO districtDTO = new DistrictDTO();
+            ViewBag.AddDistricts = _addDistrictService.GetAddDistrictList();
+            DistrictMappingDTO districtMappingDTO = new DistrictMappingDTO();
 
-			if (DistrictId != null)
+			if (DistrictMappingId != null)
 			{
-				District RF = _districtService.GetDistrictById(int.Parse(DistrictId.ToString()));
+				DistrictMapping RF = _districtService.GetDistrictById(int.Parse(DistrictMappingId.ToString()));
 
-				districtDTO.PinCodeId = new List<long> { RF.PinCodeId, 12345 };
-				districtDTO.DistrictName = RF.DistrictName;
+                districtMappingDTO.PinCodeId = new List<long> { RF.PinCodeId, 12345 };
+                districtMappingDTO.AddDistrictId = RF.AddDistrictId;
 
 			}
-			return View("~/Plugins/Warehouse.Management/Views/District/DistrictCreate.cshtml", districtDTO);
+			return View("~/Plugins/Warehouse.Management/Views/District/DistrictMappingCreate.cshtml", districtMappingDTO);
 		}
 
 		[HttpPost]
-		public IActionResult DistrictCreate(DistrictDTO districtDTO)
+		public IActionResult DistrictCreate(DistrictMappingDTO districtMappingDTO)
 		{
-			districtDTO.CreatedBy = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
+            districtMappingDTO.CreatedBy = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
 
 			if (ModelState.IsValid)
 			{
 
-				if (districtDTO.DistrictId == null)
+				if (districtMappingDTO.DistrictMappingId == null)
 				{
-					var a = _districtService.DistrictCreate(districtDTO);
+					var a = _districtService.DistrictCreate(districtMappingDTO);
 
 					if (a == MessageEnum.Success)
 					{
 						TempData["msg"] = MessageEnum.Success;
-						return Redirect("/WareHouse/District/DistrictView");
+						return Redirect("/WareHouse/DistrictMapping/DistrictMappingView");
 
 					}
 					else if (a == MessageEnum.Duplicate)
@@ -86,11 +90,11 @@ namespace Warehouse.Management.Controllers
 				}
 				else
 				{
-					var a = _districtService.DistrictUpdate(districtDTO);
+					var a = _districtService.DistrictUpdate(districtMappingDTO);
 					if (a == MessageEnum.Updated)
 					{
 						TempData["msg"] = MessageEnum.Updated;
-						return Redirect("/WareHouse/District/DistrictView");
+						return Redirect("/WareHouse/DistrictMapping/DistrictMappingView");
 
 					}
 					else if (a == MessageEnum.Duplicate)
@@ -106,25 +110,26 @@ namespace Warehouse.Management.Controllers
 				}
 			}
 			ViewBag.PinCodeList = _pinCodeService.GetPinList();
+            ViewBag.AddDistricts = _addDistrictService.GetAddDistrictList();
 
-			return View("~/Plugins/Warehouse.Management/Views/District/DistrictCreate.cshtml", districtDTO);
+            return View("~/Plugins/Warehouse.Management/Views/District/DistrictMappingCreate.cshtml", districtMappingDTO);
 		}
 
 
 		public IActionResult DistrictView()
 		{
-			ViewBag.District = _districtService.GetDistrictList();
+			ViewBag.DistrictMappings = _districtService.GetDistrictList();
 
-			return View("~/Plugins/Warehouse.Management/Views/District/DistrictView.cshtml");
+			return View("~/Plugins/Warehouse.Management/Views/District/DistrictMappingView.cshtml");
 		}
 
 		[HttpGet]
-		public IActionResult DistrictDelete(Int64 DistrictId)
+		public IActionResult DistrictDelete(Int64 DistrictMappingId)
 		{
 			Int64 DeletedBy = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
 
-			var a = _districtService.DistrictDelete(DistrictId, DeletedBy);
-			return Redirect("/WareHouse/District/DistrictView");
+			var a = _districtService.DistrictDelete(DistrictMappingId, DeletedBy);
+			return Redirect("/WareHouse/DistrictMapping/DistrictMappingView");
 		}
 	}
 }

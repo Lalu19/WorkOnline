@@ -81,7 +81,7 @@ namespace CloudVOffice.Web.Framework
 
             services.AddScoped<IUnitConversionFactors, UnitConversionFactorsService>();
 
-            services.AddScoped<IDistrictService, DistrictService>();
+            services.AddScoped<IDistrictMappingService, DistrictMappingService>();
             services.AddScoped<ISalesAdminService, SalesAdminService>();
 
             services.AddScoped<IDamageItemService, DamageItemService>();

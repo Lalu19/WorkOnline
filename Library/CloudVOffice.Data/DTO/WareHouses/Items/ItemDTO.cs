@@ -28,16 +28,20 @@ namespace CloudVOffice.Data.DTO.WareHouses.Items
         public string? BrandName { get; set; }
         public double ProductWeight { get; set; }
         public Int64? UnitId { get; set; }
-        public double? CaseWeight { get; set; }
+		public string? ShortName { get; set; }
+		public double? CaseWeight { get; set; }
         public double? UnitPerCase { get; set; }
         public DateTime? ManufactureDate { get; set; }
         public DateTime? ExpiryDate { get; set; }
         public string? Barcode { get; set; }
 		public bool BarCodeNotAvailable { get; set; }
 		public double MRP { get; set; }
-        public double PurchaseCost { get; set; }
-        public double SalesCost { get; set; }
-        public double? CGST { get; set; }
+		public double? MRPCaseCost { get; set; }
+		public double PurchaseCost { get; set; }
+		public double? PurchaseCaseCost { get; set; }
+		public double SalesCost { get; set; }
+		public double? SalesCaseCost { get; set; }
+		public double? CGST { get; set; }
         public double? SGST { get; set; }
         public string? HandlingType { get; set; }
 		public string? InvoiceNo { get; set; }
