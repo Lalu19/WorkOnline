@@ -319,7 +319,7 @@
 								<input asp-for="@Model.CreatedItemDTO.SalesCaseCost" type="number" id="SalesCaseCost" class="form-control" autofocus="autofocus" placeholder="Sales Case Cost" readonly />
 								<span asp-validation-for="CreatedItemDTO.SalesCaseCost"></span>
 							</div>
-							<div class="form-group col-md-3">
+							@*<div class="form-group col-md-3">
 								<label for="CGST" class="form-label">CGST</label>
 								<ejs-dropdownlist id="GSTValue" allowFiltering="true" name="CreatedItemDTO.CGST"
 												  dataSource="@(new SelectList(Model.GST, "GSTId", "GSTValue").Items)"
@@ -328,13 +328,18 @@
 									<e-dropdownlist-fields text="GSTValue" value="GSTId"></e-dropdownlist-fields>
 								</ejs-dropdownlist>
 								<span asp-validation-for="CreatedItemDTO.CGST"></span>
-							</div>
+							</div>*@
+							<div class="form-group col-md-3">
 
+								<label for="CGST" class="form-label">CGST &nbsp;</label>
+								<input asp-for="@Model.CreatedItemDTO.CGST" type="number" id="CGST" class="form-control" autofocus="autofocus" placeholder="CGST" readonly />
+								<span asp-validation-for="CreatedItemDTO.CGST"></span>
+							</div>
 
 							<div class="form-group col-md-3">
 
 								<label for="SGST" class="form-label">SGST &nbsp;</label>
-								<input asp-for="@Model.CreatedItemDTO.SGST" type="number" id="SGST" class="form-control" autofocus="autofocus" placeholder="SGST" />
+								<input asp-for="@Model.CreatedItemDTO.SGST" type="number" id="SGST" class="form-control" autofocus="autofocus" placeholder="SGST" readonly />
 								<span asp-validation-for="CreatedItemDTO.SGST"></span>
 							</div>
 
@@ -344,7 +349,7 @@
 							<div class="form-group col-md-3">
 
 								<label for="HSN" class="form-label">HSN &nbsp;</label>
-								<input asp-for="@Model.CreatedItemDTO.HSN" type="text" id="HSN" class="form-control" autofocus="autofocus" placeholder="HSN" />
+								<input asp-for="@Model.CreatedItemDTO.HSN" type="text" id="HSN" class="form-control" autofocus="autofocus" placeholder="HSN" readonly />
 								<span asp-validation-for="CreatedItemDTO.HSN"></span>
 							</div>
 							<div class="form-group col-md-3">
@@ -533,7 +538,7 @@
 	}
 </script>
 
-<script>
+@*<script>
 	function onChangeSubCategory(args) {
 		$.ajax({
 			type: "GET",
@@ -551,6 +556,54 @@
 			},
 			error: function () {
 
+			}
+		});
+	}
+</script>*@
+
+<script>
+	function onChangeSubCategory(args) {
+		// First API call
+		$.ajax({
+			type: "GET",
+			url: "/WareHouse/SubCategory1/GetSubCategory1ById",
+			data: { subCategory1Id: args.value },
+			contentType: "application/json",
+			dataType: "json",
+			success: function (result) {
+				console.log(result);
+
+				var cgstTextbox = document.getElementById("CGST");
+				var sgstTextbox = document.getElementById("SGST");
+				var hsnTextbox = document.getElementById("HSN");
+
+				cgstTextbox.value = (result.gst)/2;
+				sgstTextbox.value = (result.gst)/2;
+				hsnTextbox.value = result.hsn;
+
+				// Second API call
+				$.ajax({
+					type: "GET",
+					url: "/WareHouse/SubCategory2/GetSubCategory2BySubCategory1Id",
+					data: { subCategory1Id: args.value },
+					contentType: "application/json",
+					dataType: "json",
+					success: function (result) {
+						console.log(result);
+						var subcategory2DropDown = document.getElementById("SubCategory2Id").ej2_instances[0];
+						subcategory2DropDown.dataSource = result;
+						subcategory2DropDown.dataBind();
+
+						subcategory2DropDown.value = null;
+					},
+					error: function () {
+						// Handle error for the second API call
+					}
+				});
+
+			},
+			error: function () {
+				// Handle error for the first API call
 			}
 		});
 	}
@@ -705,7 +758,7 @@
 			var purchaseCaseCost = $("#PurchaseCaseCost").val() || '';
 			var salesCost = $("#SalesCost").val() || '';
 			var salesCaseCost = $("#SalesCaseCost").val() || '';
-			var cgst = $("#GSTValue").val() || '';
+			var cgst = $("#CGST").val() || '';
 			var sgst = $("#SGST").val() || '';
 			var hsn = $("#HSN").val() || '';
 			

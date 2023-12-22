@@ -34,7 +34,7 @@ namespace Warehouse.Management.Controllers
         private readonly IItemService _itemService;
 		private readonly IWebHostEnvironment _hostingEnvironment;
 		private readonly IHandlingTypeService _handlingTypeService;
-		private readonly IGSTService _gSTService;
+		//private readonly IGSTService _gSTService;
 		private readonly ISectorService _sectorService;
 		private readonly ICategoryService _categoryService;
 		private readonly ISubCategory1Service _subCategory1Service;
@@ -47,12 +47,12 @@ namespace Warehouse.Management.Controllers
 
 
 
-		public ItemController(IItemService itemService, IWebHostEnvironment hostingEnvironment, IHandlingTypeService handlingTypeService, IGSTService gSTService, ISectorService sectorService, ICategoryService categoryService, ISubCategory1Service subCategory1Service, ISubCategory2Service subCategory2Service, IWareHouseService warehouseService, IVendorService vendorService, IEmployeeService employeeService, IAddDistrictService addDistrictService, IUnit unitService)
+		public ItemController(IItemService itemService, IWebHostEnvironment hostingEnvironment, IHandlingTypeService handlingTypeService/*, IGSTService gSTService*/, ISectorService sectorService, ICategoryService categoryService, ISubCategory1Service subCategory1Service, ISubCategory2Service subCategory2Service, IWareHouseService warehouseService, IVendorService vendorService, IEmployeeService employeeService, IAddDistrictService addDistrictService, IUnit unitService)
         {
 			_hostingEnvironment = hostingEnvironment;
 			_itemService = itemService;
 			_handlingTypeService = handlingTypeService;
-			_gSTService = gSTService;
+			//_gSTService = gSTService;
 			_sectorService = sectorService;
             _categoryService = categoryService;
 			_subCategory1Service = subCategory1Service;
@@ -81,7 +81,7 @@ namespace Warehouse.Management.Controllers
 				AddDistrict = _addDistrictService.GetAddDistrictList(),
 				Vendor = _vendorService.GetVendorList(),
 				Employee = _employeeService.GetEmployees(),
-				GST = _gSTService.GetGSTList(),
+				//GST = _gSTService.GetGSTList(),
 				Sectors = _sectorService.GetSectorList(),
 				Category = _categoryService.GetCategoryList(),
 				SubCategory1 = _subCategory1Service.GetSubCategory1List(),
@@ -354,7 +354,7 @@ namespace Warehouse.Management.Controllers
 							CreatedItemDTO = createdItemDTO,
 							Sectors = _sectorService.GetSectorList(),
 							HandlingTypes = _handlingTypeService.GetHandlingTypeList(),
-							GST = _gSTService.GetGSTList(),
+							//GST = _gSTService.GetGSTList(),
 							Category = _categoryService.GetCategoryList(),
 							SubCategory1 = _subCategory1Service.GetSubCategory1List(),
 							SubCategory2 = _subCategory2Service.GetSubCategory2List(),
@@ -430,7 +430,7 @@ namespace Warehouse.Management.Controllers
 					CreatedItemDTO = viewForItem.CreatedItemDTO,
 					Sectors = _sectorService.GetSectorList(),
 					HandlingTypes = _handlingTypeService.GetHandlingTypeList(),
-					GST = _gSTService.GetGSTList(),
+					//GST = _gSTService.GetGSTList(),
 					Category = _categoryService.GetCategoryList(),
 					SubCategory1 = _subCategory1Service.GetSubCategory1List(),
 					SubCategory2 = _subCategory2Service.GetSubCategory2List(),
