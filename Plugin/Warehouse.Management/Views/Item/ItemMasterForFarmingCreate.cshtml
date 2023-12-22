@@ -438,11 +438,28 @@
             success: function (result) {
                 console.log(result);
 
-                var gstTextbox = document.getElementById("GST");
                 var hsnTextbox = document.getElementById("HSN");
-
-                gstTextbox.value = result.gst;
                 hsnTextbox.value = result.hsn;
+
+                // Third API call
+                $.ajax({
+                    type: "GET",
+                    url: "/WareHouse/GST/GetGSTByGSTId",
+                    data: { gstId: result.gstId }, // Adjust the parameter accordingly
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (gstResult) {
+                        console.log(gstResult);
+
+                        var gstTextbox = document.getElementById("GST");
+                        gstTextbox.value = gstResult.gstValue;
+
+                        // Do something with the GST result
+                    },
+                    error: function () {
+                        // Handle error for the third API call
+                    }
+                });
 
                 // Second API call
                 $.ajax({

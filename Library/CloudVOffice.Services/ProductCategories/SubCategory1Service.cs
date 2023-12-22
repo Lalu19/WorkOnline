@@ -31,7 +31,7 @@ namespace CloudVOffice.Services.ProductCategories
                     ct.SectorId = subCategory1DTO.SectorId;
                     ct.CategoryId = subCategory1DTO.CategoryId;
                     ct.SubCategory1Name = subCategory1DTO.SubCategory1Name;
-                    ct.GST = subCategory1DTO.GST;
+                    ct.GSTId = subCategory1DTO.GSTId;
                     ct.HSN = subCategory1DTO.HSN;
 
                     ct.CreatedBy = subCategory1DTO.CreatedBy;
@@ -80,7 +80,7 @@ namespace CloudVOffice.Services.ProductCategories
                         a.SectorId = subCategory1DTO.SectorId;
                         a.CategoryId = subCategory1DTO.CategoryId;
                         a.SubCategory1Name = subCategory1DTO.SubCategory1Name;
-                        a.GST = subCategory1DTO.GST;
+                        a.GSTId = subCategory1DTO.GSTId;
                         a.HSN = subCategory1DTO.HSN;
                         a.UpdatedBy = subCategory1DTO.CreatedBy;
                         a.UpdatedDate = DateTime.Now;
