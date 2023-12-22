@@ -18,18 +18,18 @@ namespace CloudVOffice.Services.WareHouses.Districts
 	public class DistrictMappingService: IDistrictMappingService
 	{
 		private readonly ApplicationDBContext _dbContext;
-		private readonly ISqlRepository<DistrictMapping> _districtRepo;
+		private readonly ISqlRepository<DistrictMapping> _districtMappingRepo;
 
 		public DistrictMappingService(ApplicationDBContext dbContext,
-								   ISqlRepository<DistrictMapping> districtRepo
+								   ISqlRepository<DistrictMapping> districtMappingRepo
 
 									)
 		{
 			_dbContext = dbContext;
-			_districtRepo = districtRepo;
+            _districtMappingRepo = districtMappingRepo;
 
 		}
-        public MessageEnum DistrictCreate(DistrictMappingDTO districtMappingDTO)
+        public MessageEnum DistrictMappingCreate(DistrictMappingDTO districtMappingDTO)
         {
             try
             {
@@ -46,7 +46,7 @@ namespace CloudVOffice.Services.WareHouses.Districts
                         districtMapping.AddDistrictId = (long)districtMappingDTO.AddDistrictId;
                         districtMapping.CreatedBy = districtMappingDTO.CreatedBy;
                         districtMapping.CreatedDate = System.DateTime.Now;
-                        var obj = _districtRepo.Insert(districtMapping);
+                        var obj = _districtMappingRepo.Insert(districtMapping);
 
                     }
                     return MessageEnum.Success;
@@ -63,14 +63,19 @@ namespace CloudVOffice.Services.WareHouses.Districts
                 throw;
             }
         }
-        public List<DistrictMapping> GetDistrictList()
+        public List<DistrictMapping> GetDistrictMappingList()
 		{
-            return _dbContext.DistrictMappings
-                .Include(s => s.AddDistrictId)
-                .Include(s => s.PinCodeId)
-                .Where(x => x.Deleted == false).ToList();
+            try
+            {
+                return _dbContext.DistrictMappings.Where(x => x.Deleted == false).ToList();
+            }
+            catch
+            {
+                throw;
+            }
+
         }
-        public MessageEnum DistrictUpdate(DistrictMappingDTO districtMappingDTO)
+        public MessageEnum DistrictMappingUpdate(DistrictMappingDTO districtMappingDTO)
         {
             try
             {
@@ -106,12 +111,12 @@ namespace CloudVOffice.Services.WareHouses.Districts
                 throw;
             }
         }
-        public DistrictMapping GetDistrictById(Int64 districtMappingId)
+        public DistrictMapping GetDistrictMappingById(Int64 districtMappingId)
 		{
 			return _dbContext.DistrictMappings.Where(x => x.DistrictMappingId == districtMappingId && x.Deleted == false).SingleOrDefault();
 		}
 
-		public MessageEnum DistrictDelete(Int64 DistrictMappingId, Int64 DeletedBy)
+		public MessageEnum DistrictMappingDelete(Int64 DistrictMappingId, Int64 DeletedBy)
 		{
 			try
 			{

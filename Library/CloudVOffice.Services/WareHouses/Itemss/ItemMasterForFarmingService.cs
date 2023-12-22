@@ -51,7 +51,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
                     itemMaster.VendorName = itemMasterForFarmingDTO.VendorName;
                     itemMaster.DistrictName = itemMasterForFarmingDTO.DistrictName;
                    // itemMaster.UnitId = itemMasterForFarmingDTO.UnitId;
-                    itemMaster.ShortName = itemMasterForFarmingDTO.ShortName;
+                    itemMaster.UnitId = itemMasterForFarmingDTO.UnitId;
 					
 
 					itemMaster.Barcode = itemMasterForFarmingDTO.Barcode;
@@ -95,9 +95,9 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						EmployeeName =itemMaster.EmployeeName,
 						VendorName =itemMaster.VendorName,
                         DistrictName = itemMaster.DistrictName,
-                        ShortName = itemMaster.ShortName,
+                       // ShortName = itemMaster.ShortName,
 
-                        //UnitId = itemMaster.UnitId,
+                        UnitId = itemMaster.UnitId,
 
                         Barcode = itemMaster.Barcode,
 						BarCodeNotAvailable = itemMaster.BarCodeNotAvailable,
@@ -151,8 +151,8 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						itemMaster.EmployeeName = itemMasterForFarmingDTO.EmployeeName;
 						itemMaster.VendorName = itemMasterForFarmingDTO.VendorName;
                         itemMaster.DistrictName = itemMasterForFarmingDTO.DistrictName;
-                        itemMaster.ShortName = itemMasterForFarmingDTO.ShortName;
-                       // itemMaster.UnitId = itemMasterForFarmingDTO.UnitId;
+                       // itemMaster.ShortName = itemMasterForFarmingDTO.ShortName;
+                        itemMaster.UnitId = itemMasterForFarmingDTO.UnitId;
 
                         itemMaster.Barcode = itemMasterForFarmingDTO.Barcode;
 						itemMaster.BarCodeNotAvailable = itemMasterForFarmingDTO.BarCodeNotAvailable;
@@ -352,7 +352,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
                     Employee employee = employees.FirstOrDefault(s => s.EmployeeId == Convert.ToInt32(item.EmployeeName));
                     Vendor vendor = venders.FirstOrDefault(s => s.VendorId == Convert.ToInt32(item.VendorName));
 				    AddDistrict addDistrict = districts.FirstOrDefault(s => s.AddDistrictId == Convert.ToInt32(item.DistrictName));
-				    Unit unit = units.FirstOrDefault(s => s.UnitId == Convert.ToInt32(item.ShortName));
+				    Unit unit = units.FirstOrDefault(s => s.UnitId == Convert.ToInt32(item.UnitId));
 
 
 					item.Sector = sector != null ? sector.SectorName : null;

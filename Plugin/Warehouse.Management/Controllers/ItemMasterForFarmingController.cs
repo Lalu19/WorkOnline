@@ -101,7 +101,7 @@ namespace Warehouse.Management.Controllers
 				viewForItemMasterFarming.CreatedItemMasterFarmingDTO.EmployeeName = itemMaster1.EmployeeName;
 				viewForItemMasterFarming.CreatedItemMasterFarmingDTO.VendorName = itemMaster1.VendorName;
 				viewForItemMasterFarming.CreatedItemMasterFarmingDTO.DistrictName = itemMaster1.DistrictName;
-                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.ShortName = itemMaster1.ShortName;
+                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.UnitId = itemMaster1.UnitId;
 
 
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.Barcode = itemMaster1.Barcode;

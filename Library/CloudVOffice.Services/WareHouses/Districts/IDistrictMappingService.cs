@@ -13,10 +13,10 @@ namespace CloudVOffice.Services.WareHouses.Districts
 {
 	public interface IDistrictMappingService
 	{
-		public MessageEnum DistrictCreate(DistrictMappingDTO districtMappingDTO);
-		public DistrictMapping GetDistrictById(Int64 districtMappingId);
-		public List<DistrictMapping> GetDistrictList();
-		public MessageEnum DistrictUpdate(DistrictMappingDTO districtMappingDTO);
-		public MessageEnum DistrictDelete(Int64 districtMappingId, Int64 DeletedBy);
+		public MessageEnum DistrictMappingCreate(DistrictMappingDTO districtMappingDTO);
+		public DistrictMapping GetDistrictMappingById(Int64 districtMappingId);
+		public List<DistrictMapping> GetDistrictMappingList();
+		public MessageEnum DistrictMappingUpdate(DistrictMappingDTO districtMappingDTO);
+		public MessageEnum DistrictMappingDelete(Int64 districtMappingId, Int64 DeletedBy);
 	}
 }
