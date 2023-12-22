@@ -364,7 +364,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 				List<Employee> employees = _dbContext.Employees.Where(x => x.Deleted == false).ToList();
 				List<Vendor> vendors = _dbContext.Vendors.Where(x => x.Deleted == false).ToList();
 				List<HandlingType> handlingTypes = _dbContext.HandlingTypes.Where(h => h.Deleted == false).ToList();
-				List<GST> gsts = _dbContext.GSTs.Where(g => g.Deleted == false).ToList();
+				//List<GST> gsts = _dbContext.GSTs.Where(g => g.Deleted == false).ToList();
 				List<Item> items = _dbContext.Items.Where(i  => i.Deleted == false).ToList();
 				List<Unit> units = _dbContext.Units.Where(i  => i.Deleted == false).ToList();
 
@@ -376,7 +376,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					AddDistrict district = districts.FirstOrDefault(h => h.AddDistrictId == Convert.ToInt32(item.DistrictName));
 					Vendor vendor = vendors.FirstOrDefault(h => h.VendorId == Convert.ToInt32(item.VendorName));
 					Employee emp = employees.FirstOrDefault(h => h.EmployeeId == Convert.ToInt32(item.EmployeeName));
-					GST gst = gsts.FirstOrDefault(g => g.GSTId == Convert.ToInt32(item.CGST));
+				//	GST gst = gsts.FirstOrDefault(g => g.GSTId == Convert.ToInt32(item.CGST));
 					Sector sector = sectors.FirstOrDefault(q => q.SectorId == Convert.ToInt32(item.SectorId));
 					Category category = categories.FirstOrDefault(z => z.CategoryId == Convert.ToInt32(item.CategoryId));
 					SubCategory1 subCategory1 = subCategory1s.FirstOrDefault(y => y.SubCategory1Id == Convert.ToInt32(item.SubCategory1Id));
@@ -385,7 +385,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 
 
 					item.HandlingType = handlingType != null ? handlingType.HandlingTypeName : null;
-					item.CGST = gst != null ? gst.GSTValue : null;
+					//item.CGST = gst != null ? gst.GSTValue : null;
 					item.SectorName = sector != null ? sector.SectorName : null;
 					item.CategoryName = category != null ? category.CategoryName : null;
 					item.SubCategory1Name = subCategory1 != null ? subCategory1.SubCategory1Name : null;
