@@ -2,6 +2,7 @@
 using CloudVOffice.Core.Domain.ProductCategories;
 using CloudVOffice.Data.DTO.ProductCategories;
 using CloudVOffice.Services.ProductCategories;
+using CloudVOffice.Services.WareHouses.GSTs;
 using CloudVOffice.Web.Framework;
 using CloudVOffice.Web.Framework.Controllers;
 using Microsoft.AspNetCore.Mvc;
@@ -19,12 +20,14 @@ namespace Warehouse.Management.Controllers
 		private readonly ISubCategory1Service _subcategory1Service;
 		private readonly ICategoryService _categoryService;
 		private readonly ISectorService _sectorService;
-		public SubCategory1Controller(ISubCategory1Service subcategory1Service, ICategoryService categoryService , ISectorService sectorService)
+		private readonly IGSTService _gstService;
+		public SubCategory1Controller(ISubCategory1Service subcategory1Service, ICategoryService categoryService , ISectorService sectorService , IGSTService gSTService)
 		{
 
 			_subcategory1Service = subcategory1Service;
 			_categoryService = categoryService;
             _sectorService = sectorService;
+            _gstService = gSTService;
 
         }
 		[HttpGet]
@@ -32,6 +35,7 @@ namespace Warehouse.Management.Controllers
 		{
             ViewBag.SectorList = _sectorService.GetSectorList();
             ViewBag.categoryList = _categoryService.GetCategoryList();
+            ViewBag.GstList = _gstService.GetGSTList();
 			SubCategory1DTO subcategory1DTO = new SubCategory1DTO();
 
 			if (SubCategory1Id != null)
@@ -41,7 +45,7 @@ namespace Warehouse.Management.Controllers
 				subcategory1DTO.SectorId = d.SectorId;
 				subcategory1DTO.CategoryId = d.CategoryId;
 				subcategory1DTO.SubCategory1Name = d.SubCategory1Name;
-				subcategory1DTO.GST = d.GST;
+				subcategory1DTO.GSTId = d.GSTId;
 				subcategory1DTO.HSN = d.HSN;
 
 			}
@@ -94,7 +98,7 @@ namespace Warehouse.Management.Controllers
 					}
 				}
 			}
-
+            ViewBag.GstList = _gstService.GetGSTList();
             ViewBag.SectorList = _sectorService.GetSectorList();
             ViewBag.categoryList = _categoryService.GetCategoryList();
 			return View("~/Plugins/Warehouse.Management/Views/ProductCategories/SubCategory1Create.cshtml", subCategory1DTO);

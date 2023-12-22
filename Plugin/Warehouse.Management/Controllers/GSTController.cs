@@ -116,6 +116,11 @@ namespace Warehouse.Management.Controllers
                 var a = _gstService.GSTDelete(GSTId, DeletedBy);
                 return Redirect("/WareHouse/GST/GSTView");
             }
-    }
+
+		public JsonResult GetGSTByGSTId(Int64 gstId)
+		{
+			return Json(_gstService.GetGSTByGSTId(gstId));
+		}
+	}
  }
 

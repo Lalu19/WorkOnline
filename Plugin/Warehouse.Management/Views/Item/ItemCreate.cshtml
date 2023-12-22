@@ -568,13 +568,29 @@
 			success: function (result) {
 				console.log(result);
 
-				var cgstTextbox = document.getElementById("CGST");
-				var sgstTextbox = document.getElementById("SGST");
 				var hsnTextbox = document.getElementById("HSN");
-
-				cgstTextbox.value = (result.gst)/2;
-				sgstTextbox.value = (result.gst)/2;
 				hsnTextbox.value = result.hsn;
+
+				// Third API call
+				$.ajax({
+					type: "GET",
+					url: "/WareHouse/GST/GetGSTByGSTId",
+					data: { gstId: result.gstId }, // Adjust the parameter accordingly
+					contentType: "application/json",
+					dataType: "json",
+					success: function (gstResult) {
+						console.log(gstResult);
+						var cgstTextbox = document.getElementById("CGST");
+						cgstTextbox.value = (gstResult.gstValue) / 2;
+
+						var sgstTextbox = document.getElementById("SGST");
+						sgstTextbox.value = (gstResult.gstValue) / 2;
+
+					},
+					error: function () {
+						// Handle error for the third API call
+					}
+				});
 
 				// Second API call
 				$.ajax({
