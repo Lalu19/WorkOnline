@@ -5,11 +5,6 @@
 @*@model CloudVOffice.Data.DTO.WareHouses.Items.ItemMasterForFarmingDTO;*@
 @model CloudVOffice.Data.DTO.WareHouses.ViewModel.ViewForItemMasterFarming ;
 
-@if (Model != null && Model.CreatedItemMasterFarmingDTO.ItemMasterForFarmingId.HasValue)
-{
-    <!-- Display the ItemId if available -->
-    <p>ItemMasterForFarmingId: @Model.CreatedItemMasterFarmingDTO.ItemMasterForFarmingId</p>
-}
 
 @{
     Layout = "_MainAppLayout";
@@ -107,34 +102,34 @@
 
                             <div class="form-group col-md-3">
                                 <label for="WareHuoseId" class="form-label">WareHouse Name</label>
-                                <ejs-dropdownlist id="WareHuoseId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.WareHouseName" allowFiltering="true"  dataSource="@(new SelectList(Model.WareHouses, "WareHuoseId", "WareHouseName").Items)" placeholder="Select WareHouse" popupHeight="220px">
+                                <ejs-dropdownlist id="WareHuoseId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.WareHuoseId" allowFiltering="true" dataSource="@(new SelectList(Model.WareHouses, "WareHuoseId", "WareHouseName").Items)" placeholder="Select WareHouse" popupHeight="220px">
                                     <e-dropdownlist-fields text="WareHouseName" value="WareHuoseId"></e-dropdownlist-fields>
                                 </ejs-dropdownlist>
-                                <span asp-validation-for="CreatedItemMasterFarmingDTO.WareHouseName"></span>
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.WareHuoseId"></span>
                             </div>
 
                             <div class="form-group col-md-3">
                                 <label for="EmployeeId" class="form-label">Employee Name</label>
-                                <ejs-dropdownlist id="EmployeeId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.EmployeeName" allowFiltering="true" dataSource="@(new SelectList(Model.Employees, "EmployeeId", "EmployeeName").Items)" placeholder="Select Employee" popupHeight="220px">
+                                <ejs-dropdownlist id="EmployeeId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.EmployeeId" allowFiltering="true" dataSource="@(new SelectList(Model.Employees, "EmployeeId", "EmployeeName").Items)" placeholder="Select Employee" popupHeight="220px">
                                     <e-dropdownlist-fields text="EmployeeName" value="EmployeeId"></e-dropdownlist-fields>
                                 </ejs-dropdownlist>
-                                <span asp-validation-for="CreatedItemMasterFarmingDTO.EmployeeName"></span>
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.EmployeeId"></span>
                             </div>
 
                             <div class="form-group col-md-3">
                                 <label for="VendorId" class="form-label">Vendor Name</label>
-                                <ejs-dropdownlist id="VendorId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.VendorName" allowFiltering="true" dataSource="@(new SelectList(Model.Vendors, "VendorId", "VendorName").Items)" placeholder="Select Vendor" popupHeight="220px">
+                                <ejs-dropdownlist id="VendorId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.VendorId" allowFiltering="true" dataSource="@(new SelectList(Model.Vendors, "VendorId", "VendorName").Items)" placeholder="Select Vendor" popupHeight="220px">
                                     <e-dropdownlist-fields text="VendorName" value="VendorId"></e-dropdownlist-fields>
                                 </ejs-dropdownlist>
-                                <span asp-validation-for="CreatedItemMasterFarmingDTO.VendorName"></span>
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.VendorId"></span>
                             </div>
 
                             <div class="form-group col-md-3">
                                 <label for="AddDistrictId" class="form-label">District Name</label>
-                                <ejs-dropdownlist id="AddDistrictId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.DistrictName" allowFiltering="true" dataSource="@(new SelectList(Model.AddDistricts, "AddDistrictId", "DistrictName").Items)" placeholder="Select District" popupHeight="220px">
+                                <ejs-dropdownlist id="AddDistrictId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.AddDistrictId" allowFiltering="true" dataSource="@(new SelectList(Model.AddDistricts, "AddDistrictId", "DistrictName").Items)" placeholder="Select District" popupHeight="220px">
                                     <e-dropdownlist-fields text="DistrictName" value="AddDistrictId"></e-dropdownlist-fields>
                                 </ejs-dropdownlist>
-                                <span asp-validation-for="CreatedItemMasterFarmingDTO.DistrictName"></span>
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.AddDistrictId"></span>
                             </div>
 
                         </div>

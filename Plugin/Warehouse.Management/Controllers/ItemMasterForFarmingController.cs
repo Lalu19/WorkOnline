@@ -97,17 +97,23 @@ namespace Warehouse.Management.Controllers
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.SubCategory1Id = itemMaster1.SubCategory1Id;
 
 				viewForItemMasterFarming.CreatedItemMasterFarmingDTO.SubCategory2Id = itemMaster1.SubCategory2Id;
-				viewForItemMasterFarming.CreatedItemMasterFarmingDTO.WareHouseName = itemMaster1.WareHouseName;
-				viewForItemMasterFarming.CreatedItemMasterFarmingDTO.EmployeeName = itemMaster1.EmployeeName;
-				viewForItemMasterFarming.CreatedItemMasterFarmingDTO.VendorName = itemMaster1.VendorName;
-				viewForItemMasterFarming.CreatedItemMasterFarmingDTO.DistrictName = itemMaster1.DistrictName;
+
+                //viewForItemMasterFarming.CreatedItemMasterFarmingDTO.WareHouseName = itemMaster1.WareHouseName;
+                //viewForItemMasterFarming.CreatedItemMasterFarmingDTO.EmployeeName = itemMaster1.EmployeeName;
+                //viewForItemMasterFarming.CreatedItemMasterFarmingDTO.VendorName = itemMaster1.VendorName;
+                //viewForItemMasterFarming.CreatedItemMasterFarmingDTO.DistrictName = itemMaster1.DistrictName;
+
+                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.WareHuoseId = itemMaster1.WareHuoseId;
+                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.EmployeeId = itemMaster1.EmployeeId;
+                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.VendorId = itemMaster1.VendorId;
+                viewForItemMasterFarming.CreatedItemMasterFarmingDTO.AddDistrictId = itemMaster1.AddDistrictId;
+
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.UnitId = itemMaster1.UnitId;
 
 
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.Barcode = itemMaster1.Barcode;
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.ItemMasterForFarmingId = itemMasterForFarmingId;
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.BarCodeNotAvailable = itemMaster1.BarCodeNotAvailable;
-                //viewForItemMasterFarming.CreatedItemMasterFarmingDTO.UnitId = itemMaster1.UnitId;
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.ProductName = itemMaster1.ProductName;
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.QtyPerKg = itemMaster1.QtyPerKg;
                 viewForItemMasterFarming.CreatedItemMasterFarmingDTO.Price = itemMaster1.Price;

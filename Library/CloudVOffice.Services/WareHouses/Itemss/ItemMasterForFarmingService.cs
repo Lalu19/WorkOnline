@@ -46,17 +46,22 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					itemMaster.SubCategory1Id = itemMasterForFarmingDTO.SubCategory1Id;
 
 					itemMaster.SubCategory2Id = itemMasterForFarmingDTO.SubCategory2Id;
-                    itemMaster.WareHouseName = itemMasterForFarmingDTO.WareHouseName;
-                    itemMaster.EmployeeName = itemMasterForFarmingDTO.EmployeeName;
-                    itemMaster.VendorName = itemMasterForFarmingDTO.VendorName;
-                    itemMaster.DistrictName = itemMasterForFarmingDTO.DistrictName;
-                   // itemMaster.UnitId = itemMasterForFarmingDTO.UnitId;
+
+                    //itemMaster.WareHouseName = itemMasterForFarmingDTO.WareHouseName;
+                    //itemMaster.EmployeeName = itemMasterForFarmingDTO.EmployeeName;
+                    //itemMaster.VendorName = itemMasterForFarmingDTO.VendorName;
+                    //itemMaster.DistrictName = itemMasterForFarmingDTO.DistrictName;
+
+
+                    itemMaster.WareHuoseId = itemMasterForFarmingDTO.WareHuoseId;
+                    itemMaster.EmployeeId = itemMasterForFarmingDTO.EmployeeId;
+                    itemMaster.VendorId = itemMasterForFarmingDTO.VendorId;
+                    itemMaster.AddDistrictId = itemMasterForFarmingDTO.AddDistrictId;
                     itemMaster.UnitId = itemMasterForFarmingDTO.UnitId;
 					
 
 					itemMaster.Barcode = itemMasterForFarmingDTO.Barcode;
 					itemMaster.BarCodeNotAvailable = itemMasterForFarmingDTO.BarCodeNotAvailable;
-					//itemMaster.UnitId = itemMasterForFarmingDTO.UnitId;
 					itemMaster.ProductName = itemMasterForFarmingDTO.ProductName;
 					itemMaster.QtyPerKg = itemMasterForFarmingDTO.QtyPerKg;
 					itemMaster.Price = itemMasterForFarmingDTO.Price;
@@ -91,17 +96,23 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						SubCategory1Id = itemMaster.SubCategory1Id,
 
 						SubCategory2Id = itemMaster.SubCategory2Id,
-						WareHouseName =itemMaster.WareHouseName,
-						EmployeeName =itemMaster.EmployeeName,
-						VendorName =itemMaster.VendorName,
-                        DistrictName = itemMaster.DistrictName,
-                       // ShortName = itemMaster.ShortName,
 
+
+                        //WareHouseName =itemMaster.WareHouseName,
+                        //EmployeeName =itemMaster.EmployeeName,
+                        //VendorName =itemMaster.VendorName,
+                        //DistrictName = itemMaster.DistrictName,
+
+
+
+                        WareHuoseId = itemMaster.WareHuoseId,
+                        EmployeeId = itemMaster.EmployeeId,
+                        VendorId = itemMaster.VendorId,
+                        AddDistrictId = itemMaster.AddDistrictId,
                         UnitId = itemMaster.UnitId,
 
                         Barcode = itemMaster.Barcode,
 						BarCodeNotAvailable = itemMaster.BarCodeNotAvailable,
-						//UnitId = itemMaster.UnitId,
 						ProductName = itemMaster.ProductName,
 						QtyPerKg = itemMaster.QtyPerKg,
 						Price = itemMaster.Price,
@@ -147,11 +158,17 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						itemMaster.SubCategory1Id = itemMasterForFarmingDTO.SubCategory1Id;
 
 						itemMaster.SubCategory2Id = itemMasterForFarmingDTO.SubCategory2Id;
-						itemMaster.WareHouseName = itemMasterForFarmingDTO.WareHouseName;
-						itemMaster.EmployeeName = itemMasterForFarmingDTO.EmployeeName;
-						itemMaster.VendorName = itemMasterForFarmingDTO.VendorName;
-                        itemMaster.DistrictName = itemMasterForFarmingDTO.DistrictName;
-                       // itemMaster.ShortName = itemMasterForFarmingDTO.ShortName;
+
+
+                        //itemMaster.WareHouseName = itemMasterForFarmingDTO.WareHouseName;
+                        //itemMaster.EmployeeName = itemMasterForFarmingDTO.EmployeeName;
+                        //itemMaster.VendorName = itemMasterForFarmingDTO.VendorName;
+                        //itemMaster.DistrictName = itemMasterForFarmingDTO.DistrictName;
+
+                        itemMaster.WareHuoseId = itemMasterForFarmingDTO.WareHuoseId;
+                        itemMaster.EmployeeId = itemMasterForFarmingDTO.EmployeeId;
+                        itemMaster.VendorId = itemMasterForFarmingDTO.VendorId;
+                        itemMaster.AddDistrictId = itemMasterForFarmingDTO.AddDistrictId;
                         itemMaster.UnitId = itemMasterForFarmingDTO.UnitId;
 
                         itemMaster.Barcode = itemMasterForFarmingDTO.Barcode;

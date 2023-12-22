@@ -2,11 +2,6 @@
 @*@model CloudVOffice.Data.DTO.WareHouses.Items.ItemDTO;*@
 @model CloudVOffice.Data.DTO.WareHouses.ViewModel.ViewForItem ;
 
-@if (Model != null && Model.CreatedItemDTO.ItemId.HasValue)
-{
-	<!-- Display the ItemId if available -->
-	<p>ItemId: @Model.CreatedItemDTO.ItemId</p>
-}
 
 @using System.Collections;
 @using Newtonsoft.Json;
