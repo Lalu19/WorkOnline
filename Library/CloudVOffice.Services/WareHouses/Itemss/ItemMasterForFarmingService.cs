@@ -365,10 +365,10 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					SubCategory1 subCategory1 = subCategory1s.FirstOrDefault(s => s.SubCategory1Id == item.SubCategory1Id);
 					SubCategory2 subCategory2 = subCategory2s.FirstOrDefault(s => s.SubCategory2Id == item.SubCategory2Id);
 
-					WareHuose wareHuose = wareHuoses.FirstOrDefault(s => s.WareHuoseId == Convert.ToInt32(item.WareHouseName));
-                    Employee employee = employees.FirstOrDefault(s => s.EmployeeId == Convert.ToInt32(item.EmployeeName));
-                    Vendor vendor = venders.FirstOrDefault(s => s.VendorId == Convert.ToInt32(item.VendorName));
-				    AddDistrict addDistrict = districts.FirstOrDefault(s => s.AddDistrictId == Convert.ToInt32(item.DistrictName));
+					WareHuose wareHuose = wareHuoses.FirstOrDefault(s => s.WareHuoseId == Convert.ToInt32(item.WareHuoseId));
+                    Employee employee = employees.FirstOrDefault(s => s.EmployeeId == Convert.ToInt32(item.EmployeeId));
+                    Vendor vendor = venders.FirstOrDefault(s => s.VendorId == Convert.ToInt32(item.VendorId));
+				    AddDistrict addDistrict = districts.FirstOrDefault(s => s.AddDistrictId == Convert.ToInt32(item.AddDistrictId));
 				    Unit unit = units.FirstOrDefault(s => s.UnitId == Convert.ToInt32(item.UnitId));
 
 

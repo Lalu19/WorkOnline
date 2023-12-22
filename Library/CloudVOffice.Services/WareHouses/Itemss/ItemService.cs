@@ -55,11 +55,18 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					item.CategoryId = itemDTO.CategoryId;
 					item.SubCategory1Id = itemDTO.SubCategory1Id;
 					item.SubCategory2Id = itemDTO.SubCategory2Id;
-					item.WareHouseName = itemDTO.WareHouseName;
-					item.DistrictName = itemDTO.DistrictName;
-					item.VendorName = itemDTO.VendorName;
-					item.EmployeeName = itemDTO.EmployeeName;
-					item.CompanyName = itemDTO.CompanyName;
+
+                    //item.WareHouseName = itemDTO.WareHouseName;
+                    //item.DistrictName = itemDTO.DistrictName;
+                    //item.VendorName = itemDTO.VendorName;
+                    //item.EmployeeName = itemDTO.EmployeeName;
+
+                    item.WareHuoseId = itemDTO.WareHuoseId;
+                    item.AddDistrictId = itemDTO.AddDistrictId;
+                    item.VendorId = itemDTO.VendorId;
+                    item.EmployeeId = itemDTO.EmployeeId;
+
+                    item.CompanyName = itemDTO.CompanyName;
 					item.BrandName = itemDTO.BrandName;
 					item.ProductWeight = itemDTO.ProductWeight;
 					item.UnitId = itemDTO.UnitId;
@@ -78,8 +85,12 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					item.SalesCaseCost = itemDTO.SalesCaseCost;
 					item.SGST = itemDTO.SGST;
 					item.CGST = itemDTO.CGST;
-					item.HandlingType = itemDTO.HandlingType;
-					item.InvoiceNo = itemDTO.InvoiceNo;
+
+                    //item.HandlingType = itemDTO.HandlingType;
+
+                    item.HandlingTypeId = itemDTO.HandlingTypeId;
+
+                    item.InvoiceNo = itemDTO.InvoiceNo;
 					item.ReceivedDate = itemDTO.ReceivedDate;
                     item.CreatedBy = itemDTO.CreatedBy;
 
@@ -109,11 +120,18 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						CategoryId = item.CategoryId,
 						SubCategory1Id = item.SubCategory1Id,
 						SubCategory2Id = item.SubCategory2Id,
-						WareHouseName = item.WareHouseName,
-						DistrictName = item.DistrictName,
-						VendorName = item.VendorName,
-						EmployeeName = item.EmployeeName,
-						CompanyName = item.CompanyName,
+
+                        //WareHouseName = item.WareHouseName,
+                        //DistrictName = item.DistrictName,
+                        //VendorName = item.VendorName,
+                        //EmployeeName = item.EmployeeName,
+
+                        WareHuoseId = item.WareHuoseId,
+                        AddDistrictId = item.AddDistrictId,
+                        VendorId = item.VendorId,
+                        EmployeeId = item.EmployeeId,
+
+                        CompanyName = item.CompanyName,
 						BrandName = item.BrandName,
 						UnitId = item.UnitId,
                         ProductWeight = item.ProductWeight,
@@ -132,8 +150,11 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						SGST = item.SGST,
 						HSN = item.HSN,
 						CGST = item.CGST,
-						HandlingType = item.HandlingType,
-						InvoiceNo = item.InvoiceNo,
+
+                        //HandlingType = item.HandlingType,
+                        HandlingTypeId = item.HandlingTypeId,
+
+                        InvoiceNo = item.InvoiceNo,
 						ReceivedDate = item.ReceivedDate,
 						CreatedBy = item.CreatedBy,
 
@@ -241,11 +262,19 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						item.CategoryId = itemDTO.CategoryId;
 						item.SubCategory1Id = itemDTO.SubCategory1Id;
 						item.SubCategory2Id = itemDTO.SubCategory2Id;
-						item.WareHouseName = itemDTO.WareHouseName;
-						item.DistrictName = itemDTO.DistrictName;
-						item.VendorName = itemDTO.VendorName;
-						item.EmployeeName = itemDTO.EmployeeName;
-						item.CompanyName = itemDTO.CompanyName;
+
+                        //item.WareHouseName = itemDTO.WareHouseName;
+                        //item.DistrictName = itemDTO.DistrictName;
+                        //item.VendorName = itemDTO.VendorName;
+                        //item.EmployeeName = itemDTO.EmployeeName;
+
+                        item.WareHuoseId = itemDTO.WareHuoseId;
+                        item.AddDistrictId = itemDTO.AddDistrictId;
+                        item.VendorId = itemDTO.VendorId;
+                        item.EmployeeId = itemDTO.EmployeeId;
+
+
+                        item.CompanyName = itemDTO.CompanyName;
                         item.BrandName = itemDTO.BrandName;
 						item.ProductWeight = itemDTO.ProductWeight;
 						item.UnitId = itemDTO.UnitId;
@@ -264,8 +293,11 @@ namespace CloudVOffice.Services.WareHouses.Itemss
                         item.SalesCaseCost = itemDTO.SalesCaseCost;
                         item.SGST = itemDTO.SGST;
                         item.CGST = itemDTO.CGST;
-                        item.HandlingType = itemDTO.HandlingType;
-						item.InvoiceNo = itemDTO.InvoiceNo;
+
+                        //item.HandlingType = itemDTO.HandlingType;
+                        item.HandlingTypeId = itemDTO.HandlingTypeId;
+
+                        item.InvoiceNo = itemDTO.InvoiceNo;
 						item.ReceivedDate = itemDTO.ReceivedDate;
 						item.UpdatedBy = itemDTO.CreatedBy;
 
@@ -371,11 +403,11 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 
 				foreach (var item in items)
 				{
-					HandlingType handlingType = handlingTypes.FirstOrDefault(h => h.HandlingTypeId == Convert.ToInt32(item.HandlingType));
-					WareHuose wareHuose = warehouses.FirstOrDefault(h => h.WareHuoseId == Convert.ToInt32(item.WareHouseName));
-					AddDistrict district = districts.FirstOrDefault(h => h.AddDistrictId == Convert.ToInt32(item.DistrictName));
-					Vendor vendor = vendors.FirstOrDefault(h => h.VendorId == Convert.ToInt32(item.VendorName));
-					Employee emp = employees.FirstOrDefault(h => h.EmployeeId == Convert.ToInt32(item.EmployeeName));
+					HandlingType handlingType = handlingTypes.FirstOrDefault(h => h.HandlingTypeId == Convert.ToInt32(item.HandlingTypeId));
+					WareHuose wareHuose = warehouses.FirstOrDefault(h => h.WareHuoseId == Convert.ToInt32(item.WareHuoseId));
+					AddDistrict district = districts.FirstOrDefault(h => h.AddDistrictId == Convert.ToInt32(item.AddDistrictId));
+					Vendor vendor = vendors.FirstOrDefault(h => h.VendorId == Convert.ToInt32(item.VendorId));
+					Employee emp = employees.FirstOrDefault(h => h.EmployeeId == Convert.ToInt32(item.EmployeeId));
 				//	GST gst = gsts.FirstOrDefault(g => g.GSTId == Convert.ToInt32(item.CGST));
 					Sector sector = sectors.FirstOrDefault(q => q.SectorId == Convert.ToInt32(item.SectorId));
 					Category category = categories.FirstOrDefault(z => z.CategoryId == Convert.ToInt32(item.CategoryId));
