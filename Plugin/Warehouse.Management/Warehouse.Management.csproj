@@ -35,6 +35,8 @@
 		<None Remove="Views\GST\GSTView.cshtml" />
 		<None Remove="Views\HandlingType\HandlingTypeCreate.cshtml" />
 		<None Remove="Views\HandlingType\HandlingTypeView.cshtml" />
+		<None Remove="Views\Month\MonthCreate.cshtml" />
+		<None Remove="Views\Month\MonthView.cshtml" />
 		<None Remove="Views\PinCodeMapping\PinCodeMappingCreate.cshtml" />
 		<None Remove="Views\PinCodeMapping\PinCodeMappingView.cshtml" />
 		<None Remove="Views\PinCode\PinCodeCreate.cshtml" />
