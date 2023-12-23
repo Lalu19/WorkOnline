@@ -315,6 +315,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
                 AddDistrict addDistrict = _dbContext.AddDistricts.FirstOrDefault(s => s.AddDistrictId == Convert.ToInt32(items.AddDistrictId));
 				Unit unit = _dbContext.Units.FirstOrDefault(s => s.UnitId == Convert.ToInt32(items.UnitId));
 
+
 				items.WareHouseName = wareHuose != null ? wareHuose.WareHouseName : null;
 				items.EmployeeName = employee != null ? employee.EmployeeName : null;
 				items.VendorName = vendor != null ? vendor.VendorName : null;

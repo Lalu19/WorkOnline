@@ -351,7 +351,7 @@ namespace Warehouse.Management.Controllers
 
 		public JsonResult GetItemMasterFarmingById(int ItemMasterForFarmingId)
 		{
-			return Json(_itemMasterForFarmingService.GetItemMasterForFarmingById(ItemMasterForFarmingId));
+			return Json(_itemMasterForFarmingService.GetItemMasterForFarmingByItemMasterForFarmingId(ItemMasterForFarmingId));
 		}
 
 	}
