@@ -155,7 +155,6 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 			}
 		}
 
-
 		public void GenerateAndSaveBarcodeImage(string itemId)
         {
 
@@ -201,7 +200,6 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 			}
 		}
 
-
 		private void SaveBarcodeImageToDatabase(string itemId, byte[] barcodeImageBytes)
         {
 			//// Convert the Image to a byte array
@@ -224,19 +222,18 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 			_dbContext.SaveChanges();
 		}
 
+		public MessageEnum UpdateItem(ItemDTO itemDTO)
+		{
+			try
+			{
+				var item1 = _dbContext.Items.Where(i => i.ItemId != itemDTO.ItemId && i.ItemName == itemDTO.ItemName).FirstOrDefault();
+				if (item1 == null)
+				{
+					var item = _dbContext.Items.Where(i => i.ItemId == itemDTO.ItemId).FirstOrDefault();
 
-        public MessageEnum UpdateItem(ItemDTO itemDTO)
-        {
-            try
-            {
-                var item1 = _dbContext.Items.Where(i => i.ItemId != itemDTO.ItemId && i.ItemName == itemDTO.ItemName).FirstOrDefault();
-                if (item1 == null)
-                {
-                    var item = _dbContext.Items.Where(i => i.ItemId == itemDTO.ItemId).FirstOrDefault();
-
-                    if (item != null)
-                    {
-                        item.ItemName = itemDTO.ItemName;
+					if (item != null)
+					{
+						item.ItemName = itemDTO.ItemName;
 						item.SectorId = itemDTO.SectorId;
 						item.CategoryId = itemDTO.CategoryId;
 						item.SubCategory1Id = itemDTO.SubCategory1Id;
@@ -246,70 +243,68 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						item.VendorName = itemDTO.VendorName;
 						item.EmployeeName = itemDTO.EmployeeName;
 						item.CompanyName = itemDTO.CompanyName;
-                        item.BrandName = itemDTO.BrandName;
+						item.BrandName = itemDTO.BrandName;
 						item.ProductWeight = itemDTO.ProductWeight;
 						item.UnitId = itemDTO.UnitId;
-                        item.CaseWeight = itemDTO.CaseWeight;
-                        item.UnitPerCase = itemDTO.UnitPerCase;
-                        item.ManufactureDate = itemDTO.ManufactureDate;
-                        item.ExpiryDate = itemDTO.ExpiryDate;
-                        item.Barcode = itemDTO.Barcode;
-                        item.HSN = itemDTO.HSN;
-                        item.BarCodeNotAvailable = itemDTO.BarCodeNotAvailable;
-                        item.MRP = itemDTO.MRP;
-                        item.MRPCaseCost = itemDTO.MRPCaseCost;
-                        item.PurchaseCost = itemDTO.PurchaseCost;
-                        item.PurchaseCaseCost = itemDTO.PurchaseCaseCost;
-                        item.SalesCost = itemDTO.SalesCost;
-                        item.SalesCaseCost = itemDTO.SalesCaseCost;
-                        item.SGST = itemDTO.SGST;
-                        item.CGST = itemDTO.CGST;
-                        item.HandlingType = itemDTO.HandlingType;
+						item.CaseWeight = itemDTO.CaseWeight;
+						item.UnitPerCase = itemDTO.UnitPerCase;
+						item.ManufactureDate = itemDTO.ManufactureDate;
+						item.ExpiryDate = itemDTO.ExpiryDate;
+						item.Barcode = itemDTO.Barcode;
+						item.HSN = itemDTO.HSN;
+						item.BarCodeNotAvailable = itemDTO.BarCodeNotAvailable;
+						item.MRP = itemDTO.MRP;
+						item.MRPCaseCost = itemDTO.MRPCaseCost;
+						item.PurchaseCost = itemDTO.PurchaseCost;
+						item.PurchaseCaseCost = itemDTO.PurchaseCaseCost;
+						item.SalesCost = itemDTO.SalesCost;
+						item.SalesCaseCost = itemDTO.SalesCaseCost;
+						item.SGST = itemDTO.SGST;
+						item.CGST = itemDTO.CGST;
+						item.HandlingType = itemDTO.HandlingType;
 						item.InvoiceNo = itemDTO.InvoiceNo;
 						item.ReceivedDate = itemDTO.ReceivedDate;
 						item.UpdatedBy = itemDTO.CreatedBy;
 
-						//item.Images = itemDTO.Images;
-
 						if (itemDTO.Images != null && itemDTO.Images.Any())
-					    {
-						    // Join the list of images into a comma-separated string
-						    item.Images = string.Join(",", itemDTO.Images);
-					    }
-					    else
-					    {
-						    item.Images = null; // or an empty string depending on your database schema
-					    }
+						{
+							// Join the list of images into a comma-separated string
+							item.Images = string.Join(",", itemDTO.Images);
+						}
 
-                        item.Thumbnail = itemDTO.Thumbnail;
-					    item.Videos = itemDTO.Videos;
-                        //item.IsActive = itemDTO.IsActive;
-                        item.UpdatedDate = DateTime.Now;
+						if (itemDTO.ThumbnailUp != null)
+						{
+							// Update the thumbnail only if a new file is provided
+							// Your existing logic to save the thumbnail goes here
+						}
 
-                        _itemRepo.Update(item);
-                        _dbContext.SaveChanges();
+						// Update other fields as needed
 
-                        return MessageEnum.Updated;
-                    }
-                    else { return MessageEnum.Invalid; }
-                }
-                else
-                {
-                    return MessageEnum.Duplicate;
-                }
-            }
-            catch
-            {
-                throw;
-            }
-        }
+						item.UpdatedDate = DateTime.Now;
+
+						_itemRepo.Update(item);
+						_dbContext.SaveChanges();
+
+						return MessageEnum.Updated;
+					}
+					else
+					{
+						return MessageEnum.Invalid;
+					}
+				}
+				else
+				{
+					return MessageEnum.Duplicate;
+				}
+			}
+			catch
+			{
+				throw;
+			}
+		}
 
 
-
-
-
-
-        public Item GetItemByItemId(Int64 itemId)
+		public Item GetItemByItemId(Int64 itemId)
         {
             try
             {
@@ -348,8 +343,6 @@ namespace CloudVOffice.Services.WareHouses.Itemss
                 throw;
             }
         }
-
-        
 
         public List<Item> GetItemList()
         {

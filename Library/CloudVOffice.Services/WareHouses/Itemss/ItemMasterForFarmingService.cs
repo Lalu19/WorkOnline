@@ -174,12 +174,13 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						{
 							itemMaster.Images = string.Join(",", itemMasterForFarmingDTO.Images);
 						}
-						else
+						if (itemMasterForFarmingDTO.ThumbnailUp != null)
 						{
-							itemMaster.Images = null; 
+							// Update the thumbnail only if a new file is provided
+							// Your existing logic to save the thumbnail goes here
 						}
 
-						itemMaster.Thumbnail = itemMasterForFarmingDTO.Thumbnail;
+						//itemMaster.Thumbnail = itemMasterForFarmingDTO.Thumbnail;
 						
 						itemMaster.UpdatedDate = DateTime.Now;
 

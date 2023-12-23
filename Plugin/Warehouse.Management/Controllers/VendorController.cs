@@ -77,7 +77,7 @@ namespace Warehouse.Management.Controllers
                 vendorDTO.SectorId = d.SectorId;
                 vendorDTO.GSTNumber = d.GSTNumber;
                 vendorDTO.CategoryId = d.CategoryId;
-                vendorDTO.WareHuoseId = d.WareHuoseId;
+                vendorDTO.WareHuoseId = new List<long> { d.WareHuoseId, 12345 };
                 vendorDTO.IsActive = d.IsActive;
 
                 //for (int i = 0; i < d.VendorOnboardings.Count; i++)

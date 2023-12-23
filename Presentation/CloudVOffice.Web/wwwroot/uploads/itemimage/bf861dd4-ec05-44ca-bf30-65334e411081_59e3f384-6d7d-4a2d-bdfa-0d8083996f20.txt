@@ -1,0 +1,113 @@
+USE [OW_DB]
+GO
+SET IDENTITY_INSERT [dbo].[PinCodes] ON 
+
+GO
+INSERT [dbo].[PinCodes] ([PinCodeId], [Pin], [Lat], [Long], [IsActive], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted]) VALUES (1, N'756083', 20, 25, 1, 1, CAST(N'2023-12-08 10:54:44.7100000' AS DateTime2), NULL, CAST(N'2023-12-14 11:08:52.0195012' AS DateTime2), 0)
+GO
+INSERT [dbo].[PinCodes] ([PinCodeId], [Pin], [Lat], [Long], [IsActive], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted]) VALUES (2, N'123456', 50, 50, 1, 1, CAST(N'2023-12-08 10:55:06.2100000' AS DateTime2), NULL, NULL, 0)
+GO
+INSERT [dbo].[PinCodes] ([PinCodeId], [Pin], [Lat], [Long], [IsActive], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted]) VALUES (3, N'987654', 60, 60, 1, 1, CAST(N'2023-12-08 10:55:26.1370000' AS DateTime2), NULL, NULL, 0)
+GO
+INSERT [dbo].[PinCodes] ([PinCodeId], [Pin], [Lat], [Long], [IsActive], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted]) VALUES (4, N'456321', 90, 90, 1, 1, CAST(N'2023-12-08 10:55:51.1330000' AS DateTime2), NULL, NULL, 0)
+GO
+INSERT [dbo].[PinCodes] ([PinCodeId], [Pin], [Lat], [Long], [IsActive], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted]) VALUES (5, N'752115', 20, 80, 0, 5, CAST(N'2023-12-18 12:40:05.3370000' AS DateTime2), NULL, NULL, 0)
+GO
+SET IDENTITY_INSERT [dbo].[PinCodes] OFF
+GO
+SET IDENTITY_INSERT [dbo].[PinCodeMappings] ON 
+
+GO
+INSERT [dbo].[PinCodeMappings] ([PinCodeMappingId], [PinCodeId], [WareHuoseId], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted]) VALUES (1, 1, 1, 1, CAST(N'2023-12-08 10:59:51.5214410' AS DateTime2), NULL, NULL, 0)
+GO
+INSERT [dbo].[PinCodeMappings] ([PinCodeMappingId], [PinCodeId], [WareHuoseId], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted]) VALUES (2, 4, 1, 1, CAST(N'2023-12-08 10:59:51.6707864' AS DateTime2), 1, CAST(N'2023-12-15 16:43:59.8986984' AS DateTime2), 0)
+GO
+SET IDENTITY_INSERT [dbo].[PinCodeMappings] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Sectors] ON 
+
+GO
+INSERT [dbo].[Sectors] ([SectorId], [SectorName], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted]) VALUES (1, N'FMCG', 1, CAST(N'2023-12-08 11:01:34.9114529' AS DateTime2), NULL, NULL, 0)
+GO
+INSERT [dbo].[Sectors] ([SectorId], [SectorName], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted]) VALUES (2, N'FMCD', 1, CAST(N'2023-12-08 11:01:48.2683491' AS DateTime2), NULL, NULL, 0)
+GO
+INSERT [dbo].[Sectors] ([SectorId], [SectorName], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted]) VALUES (3, N'Farmer Produces', 1, CAST(N'2023-12-08 11:02:07.0281016' AS DateTime2), NULL, NULL, 0)
+GO
+INSERT [dbo].[Sectors] ([SectorId], [SectorName], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted]) VALUES (4, N'Harware', 1, CAST(N'2023-12-09 22:35:05.2730141' AS DateTime2), NULL, NULL, 0)
+GO
+INSERT [dbo].[Sectors] ([SectorId], [SectorName], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted]) VALUES (5, N'Pharma', 1, CAST(N'2023-12-09 22:36:04.3052438' AS DateTime2), NULL, NULL, 0)
+GO
+SET IDENTITY_INSERT [dbo].[Sectors] OFF
+GO
+SET IDENTITY_INSERT [dbo].[SubCategories1] ON 
+
+GO
+INSERT [dbo].[SubCategories1] ([SubCategory1Id], [CategoryId], [SubCategory1Name], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [SectorId], [GST], [HSN]) VALUES (1, 1, N'Rice & Flours', 1, CAST(N'2023-12-09 16:02:50.4517928' AS DateTime2), 1, CAST(N'2023-12-11 09:45:24.9403438' AS DateTime2), 0, 1, NULL, NULL)
+GO
+INSERT [dbo].[SubCategories1] ([SubCategory1Id], [CategoryId], [SubCategory1Name], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [SectorId], [GST], [HSN]) VALUES (2, 1, N'Oil & Ghee', 1, CAST(N'2023-12-09 16:03:42.5454798' AS DateTime2), 1, CAST(N'2023-12-11 09:45:40.3756529' AS DateTime2), 0, 1, NULL, NULL)
+GO
+INSERT [dbo].[SubCategories1] ([SubCategory1Id], [CategoryId], [SubCategory1Name], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [SectorId], [GST], [HSN]) VALUES (3, 1, N'Pulses', 1, CAST(N'2023-12-09 16:04:05.4451543' AS DateTime2), NULL, NULL, 0, 1, NULL, NULL)
+GO
+INSERT [dbo].[SubCategories1] ([SubCategory1Id], [CategoryId], [SubCategory1Name], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [SectorId], [GST], [HSN]) VALUES (4, 1, N'Millets', 1, CAST(N'2023-12-09 16:04:25.4536924' AS DateTime2), NULL, NULL, 0, 1, NULL, NULL)
+GO
+INSERT [dbo].[SubCategories1] ([SubCategory1Id], [CategoryId], [SubCategory1Name], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [SectorId], [GST], [HSN]) VALUES (5, 1, N'Spices', 1, CAST(N'2023-12-09 16:04:49.7678401' AS DateTime2), NULL, NULL, 0, 1, NULL, NULL)
+GO
+INSERT [dbo].[SubCategories1] ([SubCategory1Id], [CategoryId], [SubCategory1Name], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [SectorId], [GST], [HSN]) VALUES (6, 1, N'Salt & Sugar', 1, CAST(N'2023-12-09 16:05:12.1952945' AS DateTime2), NULL, NULL, 0, 1, NULL, NULL)
+GO
+INSERT [dbo].[SubCategories1] ([SubCategory1Id], [CategoryId], [SubCategory1Name], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [SectorId], [GST], [HSN]) VALUES (7, 1, N'Dry Fruits', 1, CAST(N'2023-12-09 16:05:31.1299141' AS DateTime2), NULL, NULL, 0, 1, NULL, NULL)
+GO
+INSERT [dbo].[SubCategories1] ([SubCategory1Id], [CategoryId], [SubCategory1Name], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [SectorId], [GST], [HSN]) VALUES (8, 2, N'Tea & Coffee', 1, CAST(N'2023-12-09 16:52:20.7965483' AS DateTime2), NULL, NULL, 0, 1, NULL, NULL)
+GO
+INSERT [dbo].[SubCategories1] ([SubCategory1Id], [CategoryId], [SubCategory1Name], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [SectorId], [GST], [HSN]) VALUES (9, 2, N'Soft/Energy Drink', 1, CAST(N'2023-12-09 16:52:43.7722452' AS DateTime2), NULL, NULL, 0, 1, NULL, NULL)
+GO
+INSERT [dbo].[SubCategories1] ([SubCategory1Id], [CategoryId], [SubCategory1Name], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [SectorId], [GST], [HSN]) VALUES (10, 2, N'Fruit Juices', 1, CAST(N'2023-12-09 16:53:05.2657582' AS DateTime2), NULL, NULL, 0, 1, NULL, NULL)
+GO
+INSERT [dbo].[SubCategories1] ([SubCategory1Id], [CategoryId], [SubCategory1Name], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [SectorId], [GST], [HSN]) VALUES (11, 3, N'Cakes', 1, CAST(N'2023-12-09 16:53:30.7899468' AS DateTime2), NULL, NULL, 0, 1, NULL, NULL)
+GO
+INSERT [dbo].[SubCategories1] ([SubCategory1Id], [CategoryId], [SubCategory1Name], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [SectorId], [GST], [HSN]) VALUES (12, 3, N'Biscuits', 1, CAST(N'2023-12-09 16:53:50.4047819' AS DateTime2), NULL, NULL, 0, 1, NULL, NULL)
+GO
+INSERT [dbo].[SubCategories1] ([SubCategory1Id], [CategoryId], [SubCategory1Name], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [SectorId], [GST], [HSN]) VALUES (13, 3, N'Chips', 1, CAST(N'2023-12-09 16:54:16.1558556' AS DateTime2), NULL, NULL, 0, 1, NULL, NULL)
+GO
+INSERT [dbo].[SubCategories1] ([SubCategory1Id], [CategoryId], [SubCategory1Name], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [SectorId], [GST], [HSN]) VALUES (14, 4, N'Motters1', 1, CAST(N'2023-12-09 16:55:29.8382911' AS DateTime2), NULL, NULL, 0, 2, NULL, NULL)
+GO
+INSERT [dbo].[SubCategories1] ([SubCategory1Id], [CategoryId], [SubCategory1Name], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [SectorId], [GST], [HSN]) VALUES (15, 6, N'Fruit', 1, CAST(N'2023-12-09 16:56:00.3161403' AS DateTime2), 1, CAST(N'2023-12-11 17:59:18.1629336' AS DateTime2), 0, 3, 0, N'6031')
+GO
+INSERT [dbo].[SubCategories1] ([SubCategory1Id], [CategoryId], [SubCategory1Name], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [SectorId], [GST], [HSN]) VALUES (16, 5, N'Chicken', 1, CAST(N'2023-12-09 16:57:47.2220319' AS DateTime2), 1, CAST(N'2023-12-11 17:57:20.3609687' AS DateTime2), 0, 3, 5, N'0207')
+GO
+INSERT [dbo].[SubCategories1] ([SubCategory1Id], [CategoryId], [SubCategory1Name], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [SectorId], [GST], [HSN]) VALUES (17, 7, N'Putty', 1, CAST(N'2023-12-09 22:57:28.0079966' AS DateTime2), NULL, NULL, 0, 4, NULL, NULL)
+GO
+INSERT [dbo].[SubCategories1] ([SubCategory1Id], [CategoryId], [SubCategory1Name], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [SectorId], [GST], [HSN]) VALUES (18, 7, N'Paint', 1, CAST(N'2023-12-09 22:57:53.3206199' AS DateTime2), NULL, NULL, 0, 4, NULL, NULL)
+GO
+INSERT [dbo].[SubCategories1] ([SubCategory1Id], [CategoryId], [SubCategory1Name], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [SectorId], [GST], [HSN]) VALUES (19, 8, N'Gums', 1, CAST(N'2023-12-09 22:58:30.4222920' AS DateTime2), NULL, NULL, 0, 4, NULL, NULL)
+GO
+INSERT [dbo].[SubCategories1] ([SubCategory1Id], [CategoryId], [SubCategory1Name], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [SectorId], [GST], [HSN]) VALUES (20, 8, N'Adhesives', 1, CAST(N'2023-12-09 22:59:02.0824324' AS DateTime2), NULL, NULL, 0, 4, NULL, NULL)
+GO
+INSERT [dbo].[SubCategories1] ([SubCategory1Id], [CategoryId], [SubCategory1Name], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [SectorId], [GST], [HSN]) VALUES (21, 6, N'Fish', 1, CAST(N'2023-12-11 12:33:38.8482559' AS DateTime2), 1, CAST(N'2023-12-11 17:56:58.2315797' AS DateTime2), 0, 3, 5, N'0301')
+GO
+INSERT [dbo].[SubCategories1] ([SubCategory1Id], [CategoryId], [SubCategory1Name], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [SectorId], [GST], [HSN]) VALUES (22, 6, N'Vegetables', 1, CAST(N'2023-12-11 12:34:01.4358901' AS DateTime2), 1, CAST(N'2023-12-11 17:38:46.5967260' AS DateTime2), 0, 3, 0, N'6031')
+GO
+SET IDENTITY_INSERT [dbo].[SubCategories1] OFF
+GO
+SET IDENTITY_INSERT [dbo].[SubCategories2] ON 
+
+GO
+INSERT [dbo].[SubCategories2] ([SubCategory2Id], [SubCategory1Id], [SubCategory2Name], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [CategoryId], [SectorId]) VALUES (1, 16, N'Meat', 1, CAST(N'2023-12-09 21:53:06.5129714' AS DateTime2), 1, CAST(N'2023-12-11 10:18:57.5117845' AS DateTime2), 0, 5, 3)
+GO
+INSERT [dbo].[SubCategories2] ([SubCategory2Id], [SubCategory1Id], [SubCategory2Name], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [CategoryId], [SectorId]) VALUES (2, 15, N'Vegetables', 1, CAST(N'2023-12-09 22:05:24.6046159' AS DateTime2), NULL, NULL, 0, 6, 3)
+GO
+SET IDENTITY_INSERT [dbo].[SubCategories2] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Users] ON 
+
+GO
+INSERT [dbo].[Users] ([UserId], [FirstName], [MiddleName], [LastName], [Email], [Password], [PhoneNo], [DateOfBirth], [FailedLoginAttempts], [LastIpAddress], [LastLoginDate], [LastActivityDate], [IsActive], [UserTypeId], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [ResetPasswordToken], [ResetPasswordTokenExpirey], [UserType]) VALUES (1, N'Administrator', NULL, NULL, N'admin@appman.in', N'r9NmU79/NE0x0el2cuI8PeI4GlVCdpOeB875sWPUeJw=', N'9583000000', NULL, 0, NULL, CAST(N'2023-12-18 14:24:50.0280651' AS DateTime2), CAST(N'0001-01-01 00:00:00.0000000' AS DateTime2), 1, 1, 1, CAST(N'2023-12-18 14:28:26.8209794' AS DateTime2), 1, CAST(N'2023-12-18 12:42:53.7452541' AS DateTime2), 0, NULL, NULL, 1)
+GO
+INSERT [dbo].[Users] ([UserId], [FirstName], [MiddleName], [LastName], [Email], [Password], [PhoneNo], [DateOfBirth], [FailedLoginAttempts], [LastIpAddress], [LastLoginDate], [LastActivityDate], [IsActive], [UserTypeId], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [ResetPasswordToken], [ResetPasswordTokenExpirey], [UserType]) VALUES (2, N'Lalu', NULL, N'Prasad', N'lalu@gmail.com', N'0+R5fBCk11mnaLl1Ol8WN+9xLa1NPW90JhqB14ILdC8=', N'56486556', CAST(N'2023-12-15 00:00:00.0000000' AS DateTime2), NULL, NULL, NULL, CAST(N'0001-01-01 00:00:00.0000000' AS DateTime2), 1, 1, 1, CAST(N'2023-12-15 18:23:10.8700000' AS DateTime2), 1, CAST(N'2023-12-18 11:54:15.5117212' AS DateTime2), 0, N'Y88iCega1YsZykZsIp49/4Kv125gLR1OS6ctTg0T8Eg=', CAST(N'2023-12-15 19:23:01.2736090' AS DateTime2), 1)
+GO
+INSERT [dbo].[Users] ([UserId], [FirstName], [MiddleName], [LastName], [Email], [Password], [PhoneNo], [DateOfBirth], [FailedLoginAttempts], [LastIpAddress], [LastLoginDate], [LastActivityDate], [IsActive], [UserTypeId], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [ResetPasswordToken], [ResetPasswordTokenExpirey], [UserType]) VALUES (3, N'Lalu', NULL, NULL, N'lalup@appman.in', NULL, N'5613', CAST(N'2023-12-15 00:00:00.0000000' AS DateTime2), NULL, NULL, NULL, CAST(N'0001-01-01 00:00:00.0000000' AS DateTime2), 1, 1, 1, CAST(N'2023-12-15 18:40:16.8500000' AS DateTime2), NULL, NULL, 0, N'T2J2MW4QPFUqFaEREZNiwz3ZuyC/WTqgdEbfY+rj86k=', CAST(N'2023-12-15 19:40:07.1728410' AS DateTime2), 1)
+GO
+INSERT [dbo].[Users] ([UserId], [FirstName], [MiddleName], [LastName], [Email], [Password], [PhoneNo], [DateOfBirth], [FailedLoginAttempts], [LastIpAddress], [LastLoginDate], [LastActivityDate], [IsActive], [UserTypeId], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [Deleted], [ResetPasswordToken], [ResetPasswordTokenExpirey], [UserType]) VALUES (5, N'Preetam', NULL, N'S', N'preetam@gmail.com', N'PqUl6N8dYek+5HGsyhnVuYPv2EcWuf7Va5tasykkVDA=', N'100', CAST(N'2023-11-01 00:00:00.0000000' AS DateTime2), 0, NULL, CAST(N'2023-12-18 14:27:41.2091490' AS DateTime2), CAST(N'0001-01-01 00:00:00.0000000' AS DateTime2), 1, 1, 1, CAST(N'2023-12-18 11:09:17.2330000' AS DateTime2), 1, CAST(N'2023-12-18 12:35:09.8409912' AS DateTime2), 0, NULL, NULL, 1)
+GO
+SET IDENTITY_INSERT [dbo].[Users] OFF
+GO
+\
