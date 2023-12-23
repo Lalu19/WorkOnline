@@ -26,19 +26,20 @@ namespace CloudVOffice.Services.WareHouses.PinCodes
 			_pinCodeMappingRepo = pinCodeMappingRepo;
 
 		}
+
 		public MessageEnum PinCodeMappingCreate(PinCodeMappingDTO pinCodeMappingDTO)
 		{
 			try
 			{
-
-				var objcheck = _dbContext.PinCodeMappings.SingleOrDefault(opt => opt.Deleted == false);
+				//var objcheck = _dbContext.PinCodeMappings.Where(x => x.Deleted == false).FirstOrDefault();
+				var objcheck = _dbContext.PinCodeMappings.FirstOrDefault(opt => opt.Deleted == false && opt.WareHuoseId == pinCodeMappingDTO.WareHuoseId);
 
 				if (objcheck == null)
 				{
 					foreach (var pinmappingid in pinCodeMappingDTO.PinCodeId)
 					{
 						PinCodeMapping pinCodeMapping = new PinCodeMapping();
-						
+
 						pinCodeMapping.PinCodeId = pinmappingid;
 						pinCodeMapping.WareHuoseId = pinCodeMappingDTO.WareHuoseId;
 						pinCodeMapping.CreatedBy = pinCodeMappingDTO.CreatedBy;
@@ -60,6 +61,9 @@ namespace CloudVOffice.Services.WareHouses.PinCodes
 				throw;
 			}
 		}
+
+
+
 		public List<PinCodeMapping> GetPinCodeMappingList()
 		{
 			return _dbContext.PinCodeMappings
