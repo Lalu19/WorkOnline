@@ -14,10 +14,16 @@ namespace CloudVOffice.Core.Domain.WareHouses.Items
         public int? CategoryId { get; set; }
         public int? SubCategory1Id { get; set; }
         public int? SubCategory2Id { get; set; }
-		public string? WareHouseName { get; set; }
-		public string? DistrictName { get; set; }
-		public string? VendorName { get; set; }
-		public string? EmployeeName { get; set; }
+
+        public int? WareHuoseId { get; set; }
+        public string? WareHouseName { get; set; }
+        public int? AddDistrictId { get; set; }
+        public string? DistrictName { get; set; }
+        public int? VendorId { get; set; }
+        public string? VendorName { get; set; }
+        public int? EmployeeId { get; set; }
+        public string? EmployeeName { get; set; }
+
 		public string? SectorName { get; set; }
         public string? CategoryName { get; set; }
         public string? SubCategory1Name { get; set; }
@@ -43,6 +49,7 @@ namespace CloudVOffice.Core.Domain.WareHouses.Items
         public double? SalesCaseCost { get; set; }
         public double? CGST { get; set; }
         public double? SGST { get; set; }
+        public int? HandlingTypeId { get; set; }
         public string? HandlingType { get; set; }
 		public string? Images { get; set; }
         public string? Thumbnail { get; set; }

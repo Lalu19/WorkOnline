@@ -2,11 +2,6 @@
 @*@model CloudVOffice.Data.DTO.WareHouses.Items.ItemDTO;*@
 @model CloudVOffice.Data.DTO.WareHouses.ViewModel.ViewForItem ;
 
-@if (Model != null && Model.CreatedItemDTO.ItemId.HasValue)
-{
-	<!-- Display the ItemId if available -->
-	<p>ItemId: @Model.CreatedItemDTO.ItemId</p>
-}
 
 @using System.Collections;
 @using Newtonsoft.Json;
@@ -114,45 +109,45 @@
 						<div class="form-row">
 							<div class="form-group col-md-3">
 								<label for="WareHouseName" class="form-label">WareHouse Name</label>
-								<ejs-dropdownlist id="WareHouseName" allowFiltering="true" name="CreatedItemDTO.WareHouseName"
+								<ejs-dropdownlist id="WareHouseName" allowFiltering="true" name="CreatedItemDTO.WareHuoseId"
 												  dataSource="@(new SelectList(Model.WareHuose, "WareHuoseId", "WareHouseName").Items)"
 												  placeholder="WareHouse Name " popupHeight="220px"
-												  value="@Model.CreatedItemDTO.WareHouseName">
+												  value="@Model.CreatedItemDTO.WareHuoseId">
 									<e-dropdownlist-fields text="WareHouseName" value="WareHuoseId"></e-dropdownlist-fields>
 								</ejs-dropdownlist>
-								<span asp-validation-for="CreatedItemDTO.WareHouseName"></span>
+								<span asp-validation-for="CreatedItemDTO.WareHuoseId"></span>
 							</div>
 
 							<div class="form-group col-md-3">
 								<label for="DistrictName" class="form-label">District Name</label>
-								<ejs-dropdownlist id="DistrictName" allowFiltering="true" name="CreatedItemDTO.DistrictName"
+								<ejs-dropdownlist id="DistrictName" allowFiltering="true" name="CreatedItemDTO.AddDistrictId"
 												  dataSource="@(new SelectList(Model.AddDistrict, "AddDistrictId", "DistrictName").Items)"
 												  placeholder="District Name " popupHeight="220px"
-												  value="@Model.CreatedItemDTO.DistrictName">
+												  value="@Model.CreatedItemDTO.AddDistrictId">
 									<e-dropdownlist-fields text="DistrictName" value="AddDistrictId"></e-dropdownlist-fields>
 								</ejs-dropdownlist>
-								<span asp-validation-for="CreatedItemDTO.DistrictName"></span>
+								<span asp-validation-for="CreatedItemDTO.AddDistrictId"></span>
 							</div>
 
 							<div class="form-group col-md-3">
 								<label for="EmployeeName" class="form-label">Employee Name</label>
-								<ejs-dropdownlist id="EmployeeName" allowFiltering="true" name="CreatedItemDTO.EmployeeName"
+								<ejs-dropdownlist id="EmployeeName" allowFiltering="true" name="CreatedItemDTO.EmployeeId"
 												  dataSource="@(new SelectList(Model.Employee, "EmployeeId", "EmployeeName").Items)"
 												  placeholder="Employee Name " popupHeight="220px"
-												  value="@Model.CreatedItemDTO.EmployeeName">
+												  value="@Model.CreatedItemDTO.EmployeeId">
 									<e-dropdownlist-fields text="EmployeeName" value="EmployeeId"></e-dropdownlist-fields>
 								</ejs-dropdownlist>
 								<span asp-validation-for="CreatedItemDTO.EmployeeName"></span>
 							</div>
 							<div class="form-group col-md-3">
 								<label for="VendorName" class="form-label">Vendor Name</label>
-								<ejs-dropdownlist id="VendorName" allowFiltering="true" name="CreatedItemDTO.VendorName"
+								<ejs-dropdownlist id="VendorName" allowFiltering="true" name="CreatedItemDTO.VendorId"
 												  dataSource="@(new SelectList(Model.Vendor, "VendorId", "VendorName").Items)"
 												  placeholder="Vendor Name " popupHeight="220px"
-												  value="@Model.CreatedItemDTO.VendorName">
+												  value="@Model.CreatedItemDTO.VendorId">
 									<e-dropdownlist-fields text="VendorName" value="VendorId"></e-dropdownlist-fields>
 								</ejs-dropdownlist>
-								<span asp-validation-for="CreatedItemDTO.VendorName"></span>
+								<span asp-validation-for="CreatedItemDTO.VendorId"></span>
 							</div>
 
 						
@@ -253,13 +248,13 @@
 
 							<div class="form-group col-md-3">
 								<label for="HandlingType" class="form-label">Handling Type</label>
-								<ejs-dropdownlist id="HandlingType" allowFiltering="true" name="CreatedItemDTO.HandlingType"
+								<ejs-dropdownlist id="HandlingType" allowFiltering="true" name="CreatedItemDTO.HandlingTypeId"
 												  dataSource="@(new SelectList(Model.HandlingTypes, "HandlingTypeId", "HandlingTypeName").Items)"
 												  placeholder="Handling Type " popupHeight="220px"
-												  value="@Model.CreatedItemDTO.HandlingType">
+												  value="@Model.CreatedItemDTO.HandlingTypeId">
 									<e-dropdownlist-fields text="HandlingTypeName" value="HandlingTypeId"></e-dropdownlist-fields>
 								</ejs-dropdownlist>
-								<span asp-validation-for="CreatedItemDTO.HandlingType"></span>
+								<span asp-validation-for="CreatedItemDTO.HandlingTypeId"></span>
 							</div>
 							<div class="form-group col-md-3">
 

@@ -28,6 +28,7 @@ using CloudVOffice.Services.WareHouses.HandlingTypes;
 using CloudVOffice.Services.WareHouses.UOMs;
 using CloudVOffice.Services.WareHouses.Districts;
 using CloudVOffice.Services.Sales;
+using CloudVOffice.Services.WareHouses.Months;
 
 namespace CloudVOffice.Web.Framework
 {
@@ -89,6 +90,7 @@ namespace CloudVOffice.Web.Framework
             services.AddScoped<IDamageItemForFarmingService, DamageItemForFarmingService>();
 			services.AddScoped<IAddDistrictService, AddDistrictService>();
 
+            services.AddScoped<IMonthService, MonthService>();
 
 
 
@@ -99,7 +101,8 @@ namespace CloudVOffice.Web.Framework
 
 
 
-			return services;
+
+            return services;
 
         }
     }

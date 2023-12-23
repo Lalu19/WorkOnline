@@ -1,9 +1,9 @@
-﻿@using CloudVOffice.Core.Domain.Common;
-@{
+﻿@{
     Layout = "_MainAppLayout";
-    ViewData["Title"] = "District Mapping";
+    ViewData["Title"] = "Month";
 }
 @addTagHelper *, Syncfusion.EJ2
+@using CloudVOffice.Core.Domain.Common;
 <header class="main-heading">
     <div class="container-fluid">
         <div class="row">
@@ -12,42 +12,46 @@
                     <i class="icon-laptop_windows"></i>
                 </div>
                 <div class="page-title">
-                    <h5>Ware House</h5>
-                    <h6 class="sub-heading">Welcome to District Mapping</h6>
+                    <h5>WareHouse</h5>
+                    <h6 class="sub-heading">  </h6>
                 </div>
             </div>
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                 <div class="right-actions">
-                    <span class="last-login"></span>
+                    <span class="last-login">  </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
+
 <div class="main-content">
     <div class="row gutters">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-header">
+
                     <div class="row">
-                        <div class="col-md-10">
-                            District Mapping View
+                        <div class="col-md-8">
+                            Month
                         </div>
-                        <div class="col-md-2 ">
-                            <a href="/WareHouse/DistrictMapping/DistrictMappingCreate" class="btn btn-primary btn-sm float-right"><i class="icon icon-add"></i>Add</a>
+                        <div class="col-md-4 text-right float-right">
+                            <a href="/WareHouse/Month/MonthCreate" class="btn btn-success btn-sm"><i class="icon icon-add"></i> Add</a>
+
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
 
-                    <ejs-grid id="GridOverview" dataSource="ViewBag.DistrictMappings"
+                    <ejs-grid id="GridOverview" dataSource="ViewBag.Months"
                               allowFiltering="true" allowSorting="true"
                               allowExcelExport="true" allowGrouping="true"
                               allowMultiSorting="true"
                               allowPdfExport="true"
                               height="600" rowHeight="38"
                               enableHover="false" enableHeaderFocus="true"
+                              allowResizing="true" autoFit="true" dataBound="dataBound"
                               enableVirtualization="true" allowSelection="true"
                               toolbarClick="toolbarClick" toolbar="@(new List<string>() {"ExcelExport", "PdfExport", "CsvExport" ,"Search"})">
 
@@ -55,11 +59,10 @@
 
                         <e-grid-selectionsettings persistSelection="true" type="Multiple" checkboxOnly="true"></e-grid-selectionsettings>
                         <e-grid-columns>
-                            <e-grid-column field="AddDistrict" headerText="District Name" textAlign="Left" width="150"></e-grid-column>
-                            <e-grid-column field="PinCode" headerText="Pin Code" textAlign="Left" width="180"></e-grid-column>
 
 
-                            <e-grid-column headerText="Action" template="#Actions" width="120"></e-grid-column>
+                            <e-grid-column field="MonthName" headerText="Month Name" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column headerText="Action" template="#Actions" width="50"></e-grid-column>
                         </e-grid-columns>
                     </ejs-grid>
 
@@ -69,13 +72,72 @@
     </div>
 
 </div>
-<script id="Actions" type="text/x-template">
-    <div class="link">
-        <a href="../../WareHouse/DistrictMapping/DistrictMappingCreate?DistrictMappingId=${DistrictMappingId}"><i class="icon-pencil3" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp;
-        <button onClick="Delete(${DistrictMappingId})" style="background: transparent;border: none;"><i class="icon-trash" style="font-size:22px"></i></button>
 
-    </div>
-</script>
+
+@{
+
+    if (TempData["msg"] != null)
+    {
+        <script type="text/javascript">
+            const message = "@TempData["msg"]";
+            if (message == "@((int)MessageEnum.Success)") {
+                sweetAlert({
+                    html: true,
+                    icon: "success",
+                    title: "Month",
+                    text: "Successfully created.",
+                    type: "success"
+                });
+            }
+            else if (message == "@((int)MessageEnum.Updated)") {
+                sweetAlert({
+                    html: true,
+                    icon: "success",
+                    title: "Month",
+                    text: "Successfully updated.",
+                    type: "success"
+                });
+            }
+            else if (message == "@((int)MessageEnum.Deleted)") {
+                sweetAlert({
+                    html: true,
+                    icon: "success",
+                    title: "Month",
+                    text: "Successfully Deleted.",
+                    type: "success"
+                });
+            }
+            else if (message == "@((int)MessageEnum.UnExpectedError)") {
+                sweetAlert({
+                    html: true,
+                    icon: "danger",
+                    title: "Designation",
+                    text: "There is somthing going wrong.",
+                    type: "danger"
+                });
+            }
+            else if (message == "@((int)MessageEnum.Error)") {
+                sweetAlert({
+                    html: true,
+                    icon: "error",
+                    title: "Month",
+                    text: "There is somthing going wrong.",
+                    type: "error"
+                });
+            }
+            else {
+                sweetAlert({
+                    html: true,
+                    icon: "error",
+                    title: "Month",
+                    text: message,
+                    type: "error"
+                });
+            }
+        </script>
+    }
+}
+
 <script type="text/javascript">
     function Delete(Id) {
         swal({
@@ -90,15 +152,25 @@
             dangerMode: true,
         }).then(function (isConfirm) {
             if (isConfirm) {
-<<<<<<< HEAD
-                window.location.href = "../../WareHouse/DistrictMapping/DistrictMappingDelete?DistrictMappingId=" + Id;
-=======
-                window.location.href = "/WareHouse/DistrictMapping/DistrictMappingDelete?DistrictMappingId=" + Id;
->>>>>>> 816dffd9fc3b29644629b27e2e528420aabb7366
+                window.location.href = "../../WareHouse/Month/MonthDelete?MonthId=" + Id;
             }
         })
     }
 </script>
+
+
+<script id="Actions" type="text/x-template">
+    <div class="link">
+        <a href="../../WareHouse/Month/MonthCreate?MonthId=${MonthId}"><i class="icon-pencil3" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp;
+
+        <button onClick="Delete(${MonthId})" style="background: transparent;border: none;"><i class="icon-trash" style="font-size:22px"></i></button>
+    </div>
+</script>
+
+<script id="statusTemplate" type="text/x-template">
+    ${statusDetail(data)}
+</script>
+
 <script>
     function toolbarClick(args) {
         var gridObj = document.getElementById("GridOverview").ej2_instances[0];
@@ -112,67 +184,25 @@
             gridObj.csvExport();
         }
     }
-</script>
-@{
+    function exportQueryCellInfo(args) {
+        if (args.column.headerText === 'Employee Image') {
+            if (args.name === "excelQueryCellInfo") {
+                args.image = { height: 75, base64: args.data["EmployeeImage"], width: 75 };
+            } else {
+                args.image = { base64: args.data["EmployeeImage"] };
+            }
+        }
+        if (args.column.headerText === 'Track') {
+            args.hyperLink = {
+                target: "../../DMS/DesktopLogin/Track?id=" + args.data["erpUser"],
+                displayText: "Track"
+            };
+        }
+    };
 
-    if (TempData["msg"] != null)
-    {
-        <script type="text/javascript">
-            const message = "@TempData["msg"]";
-            if (message == "@((int)MessageEnum.Success)") {
-                sweetAlert({
-                    html: true,
-                    icon: "success",
-                    title: "District Mapping",
-                    text: "Successfully created.",
-                    type: "success"
-                });
-            }
-            else if (message == "@((int)MessageEnum.Updated)") {
-                sweetAlert({
-                    html: true,
-                    icon: "success",
-                    title: "District Mapping",
-                    text: "Successfully updated.",
-                    type: "success"
-                });
-            }
-            else if (message == "@((int)MessageEnum.Deleted)") {
-                sweetAlert({
-                    html: true,
-                    icon: "success",
-                    title: "District Mapping",
-                    text: "Successfully Deleted.",
-                    type: "success"
-                });
-            }
-            else if (message == "@((int)MessageEnum.UnExpectedError)") {
-                sweetAlert({
-                    html: true,
-                    icon: "danger",
-                    title: "District Mapping",
-                    text: "There is somthing going wrong.",
-                    type: "danger"
-                });
-            }
-            else if (message == "@((int)MessageEnum.Error)") {
-                sweetAlert({
-                    html: true,
-                    icon: "error",
-                    title: "District Mapping",
-                    text: "There is somthing going wrong.",
-                    type: "error"
-                });
-            }
-            else {
-                sweetAlert({
-                    html: true,
-                    icon: "question",
-                    title: "District Mapping",
-                    text: message,
-                    type: "error"
-                });
-            }
-        </script>
+
+    function dataBound(args) {
+        this.autoFitColumns();
     }
-}
+
+</script>

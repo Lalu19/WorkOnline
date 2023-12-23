@@ -110,6 +110,7 @@ namespace Warehouse.Management.Controllers
                 viewForItem.CreatedItemDTO.CaseWeight = item1.CaseWeight;
 				viewForItem.CreatedItemDTO.UnitPerCase = item1.UnitPerCase;
 				viewForItem.CreatedItemDTO.ManufactureDate = item1.ManufactureDate;
+				viewForItem.CreatedItemDTO.ReceivedDate = item1.ReceivedDate;
 				viewForItem.CreatedItemDTO.ExpiryDate = item1.ExpiryDate;
 				viewForItem.CreatedItemDTO.Barcode = item1.Barcode;
 				viewForItem.CreatedItemDTO.BarCodeNotAvailable = item1.BarCodeNotAvailable;
@@ -122,12 +123,20 @@ namespace Warehouse.Management.Controllers
 				viewForItem.CreatedItemDTO.CGST = item1.CGST;
 				viewForItem.CreatedItemDTO.SGST = item1.SGST;
 				viewForItem.CreatedItemDTO.HSN = item1.HSN;
-				viewForItem.CreatedItemDTO.HandlingType = item1.HandlingType;
-				viewForItem.CreatedItemDTO.WareHouseName = item1.WareHouseName;
-				viewForItem.CreatedItemDTO.DistrictName = item1.DistrictName;
-				viewForItem.CreatedItemDTO.VendorName = item1.VendorName;
-				viewForItem.CreatedItemDTO.EmployeeName = item1.EmployeeName;
-				viewForItem.CreatedItemDTO.Thumbnail = item1.Thumbnail;
+
+                //viewForItem.CreatedItemDTO.HandlingType = item1.HandlingType;
+                //viewForItem.CreatedItemDTO.WareHouseName = item1.WareHouseName;
+                //viewForItem.CreatedItemDTO.DistrictName = item1.DistrictName;
+                //viewForItem.CreatedItemDTO.VendorName = item1.VendorName;
+                //viewForItem.CreatedItemDTO.EmployeeName = item1.EmployeeName;
+
+                viewForItem.CreatedItemDTO.HandlingTypeId = item1.HandlingTypeId;
+                viewForItem.CreatedItemDTO.WareHuoseId = item1.WareHuoseId;
+                viewForItem.CreatedItemDTO.AddDistrictId = item1.AddDistrictId;
+                viewForItem.CreatedItemDTO.VendorId = item1.VendorId;
+                viewForItem.CreatedItemDTO.EmployeeId = item1.EmployeeId;
+
+                viewForItem.CreatedItemDTO.Thumbnail = item1.Thumbnail;
 				viewForItem.CreatedItemDTO.InvoiceNo = item1.InvoiceNo;
 
 				if (!string.IsNullOrEmpty(item1.Images))
