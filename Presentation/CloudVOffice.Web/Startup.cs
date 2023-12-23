@@ -81,7 +81,7 @@ namespace CloudVOffice.Web
             {
                 x.LoginPath = "/App/Login";
 
-                x.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+                x.ExpireTimeSpan = TimeSpan.FromMinutes(60);
                 x.SlidingExpiration = true;
                 x.AccessDeniedPath = "/Forbidden/";
 

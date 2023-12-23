@@ -42,6 +42,24 @@
           "IconClass": "icon-clipboard2",
           "AreaName": "WareHouse",
           "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ]
+        },
+        {
+          "ApplicationName": "District List",
+          "Url": "/WareHouse/AddDistrict/AddDistrictView",
+          "IsGroup": true,
+          "IconImageUrl": "",
+          "IconClass": "icon-clipboard2",
+          "AreaName": "WareHouse",
+          "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ]
+        },
+        {
+          "ApplicationName": "District Mapping List",
+          "Url": "/WareHouse/DistrictMapping/DistrictMappingView",
+          "IsGroup": true,
+          "IconImageUrl": "",
+          "IconClass": "icon-clipboard2",
+          "AreaName": "WareHouse",
+          "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ]
         }
       ]
     },
@@ -151,7 +169,7 @@
       "Children": []
     },
     {
-      "ApplicationName": "Item Master",
+      "ApplicationName": "Product Master",
       "Url": "",
       "IsGroup": true,
       "IconImageUrl": "",
@@ -160,7 +178,7 @@
       "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ],
       "Children": [
         {
-          "ApplicationName": "Item List",
+          "ApplicationName": "Product List",
           "Url": "/WareHouse/Item/ItemView",
           "IsGroup": true,
           "IconImageUrl": "",
@@ -169,8 +187,26 @@
           "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ]
         },
         {
-          "ApplicationName": "ItemList For Farming ",
+          "ApplicationName": "Damage Product List",
+          "Url": "/WareHouse/DamageItem/DamageItemView",
+          "IsGroup": true,
+          "IconImageUrl": "",
+          "IconClass": "icon-clipboard2",
+          "AreaName": "WareHouse",
+          "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ]
+        },
+        {
+          "ApplicationName": "ProductList For Farming ",
           "Url": "/WareHouse/ItemMasterForFarming/ItemMasterForFarmingView",
+          "IsGroup": true,
+          "IconImageUrl": "",
+          "IconClass": "icon-clipboard2",
+          "AreaName": "WareHouse",
+          "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ]
+        },
+        {
+          "ApplicationName": "Damage ProductList For Farming ",
+          "Url": "/WareHouse/DamageItemForFarming/DamageItemForFarmingView",
           "IsGroup": true,
           "IconImageUrl": "",
           "IconClass": "icon-clipboard2",
@@ -180,7 +216,7 @@
       ]
     },
     {
-      "ApplicationName": "Vender Master",
+      "ApplicationName": "Vendor Master",
       "Url": "",
       "IsGroup": true,
       "IconImageUrl": "",
@@ -200,24 +236,44 @@
       ]
     },
     {
-      "ApplicationName": "Employee Create",
-      "Url": "/WareHouse/Employee/EmployeeCreate",
+      "ApplicationName": "WareHouse Employee",
+      "Url": "",
       "IsGroup": true,
       "IconImageUrl": "",
       "IconClass": "icon-clipboard2",
       "AreaName": "WareHouse",
       "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ],
-      "Children": []
+      "Children": [
+        {
+          "ApplicationName": "Employee List",
+          "Url": "/WareHouse/Employee/EmployeeView",
+          "IsGroup": true,
+          "IconImageUrl": "",
+          "IconClass": "icon-clipboard2",
+          "AreaName": "WareHouse",
+          "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ]
+        }
+      ]
     },
     {
-      "ApplicationName": "Vehicle Create",
-      "Url": "/WareHouse/Vehicle/VehicleCreate",
+      "ApplicationName": "Vehicle Master",
+      "Url": "",
       "IsGroup": true,
       "IconImageUrl": "",
       "IconClass": "icon-clipboard2",
       "AreaName": "WareHouse",
       "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ],
-      "Children": []
+      "Children": [
+        {
+          "ApplicationName": "Vehicle List",
+          "Url": "/WareHouse/Vehicle/VehicleView",
+          "IsGroup": true,
+          "IconImageUrl": "",
+          "IconClass": "icon-clipboard2",
+          "AreaName": "WareHouse",
+          "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ]
+        }
+      ]
     }
 
 

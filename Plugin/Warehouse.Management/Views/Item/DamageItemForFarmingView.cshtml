@@ -54,11 +54,10 @@
                               enableHover="false" enableHeaderFocus="true"
                               allowResizing="true" autoFit="true" dataBound="dataBound"
                               enableVirtualization="true" allowSelection="true"
-                              toolbarClick="toolbarClick" toolbar="@(new List<string>() {"ExcelExport", "PdfExport", "CsvExport" ,"Search"})">
+                              toolbarClick="toolbarClick" toolbar="@(new List<string>() {"ExcelExport", "PdfExport", "CsvExport" ,"Search"})" allowPaging="true">
 
                         <e-grid-filtersettings type="Menu"></e-grid-filtersettings>
-
-                        <e-grid-selectionsettings persistSelection="true" type="Multiple" checkboxOnly="true"></e-grid-selectionsettings>
+                        <e-grid-pagesettings pageCount="4" pageSizes="true"></e-grid-pagesettings>
                         <e-grid-columns>
 
                             <e-grid-column field="ItemMasterForFarmingId" headerText="ItemMasterForFarming Id" textAlign="Left" width="120"></e-grid-column>
