@@ -34,7 +34,7 @@ namespace CloudVOffice.Services.WareHouses.Districts
             try
             {
 
-                var objcheck = _dbContext.DistrictMappings.SingleOrDefault(opt => opt.Deleted == false);
+                var objcheck = _dbContext.DistrictMappings.Where(opt => opt.Deleted == false && opt.AddDistrictId==districtMappingDTO.AddDistrictId).SingleOrDefault();
 
                 if (objcheck == null)
                 {

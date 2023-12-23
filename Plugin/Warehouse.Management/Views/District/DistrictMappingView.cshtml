@@ -71,7 +71,7 @@
 </div>
 <script id="Actions" type="text/x-template">
     <div class="link">
-        <a href="/WareHouse/DistrictMapping/DistrictMappingCreate?DistrictMappingId=${DistrictMappingId}"><i class="icon-pencil3" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp;
+        <a href="../../WareHouse/DistrictMapping/DistrictMappingCreate?DistrictMappingId=${DistrictMappingId}"><i class="icon-pencil3" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp;
         <button onClick="Delete(${DistrictMappingId})" style="background: transparent;border: none;"><i class="icon-trash" style="font-size:22px"></i></button>
 
     </div>
@@ -90,7 +90,7 @@
             dangerMode: true,
         }).then(function (isConfirm) {
             if (isConfirm) {
-                window.location.href = "/WareHouse/DistrictMapping/DistrictDelete?DistrictMappingId=" + Id;
+                window.location.href = "../../WareHouse/DistrictMapping/DistrictMappingDelete?DistrictMappingId=" + Id;
             }
         })
     }
@@ -119,7 +119,7 @@
                 sweetAlert({
                     html: true,
                     icon: "success",
-                    title: "PinCode Mapping",
+                    title: "District Mapping",
                     text: "Successfully created.",
                     type: "success"
                 });
