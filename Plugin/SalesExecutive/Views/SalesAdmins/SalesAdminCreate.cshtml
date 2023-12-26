@@ -4,8 +4,10 @@
 @{
 	Layout = "_MainAppLayout";
 	ViewData["Title"] = "SalesAdminTarget";
+
 }
 @addTagHelper *, Syncfusion.EJ2
+
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <style>
@@ -52,7 +54,7 @@
 					</div>
 				</div>
 
-				<form asp-route="SalesExecutive/SalesAdmin/CreateTargetBySalesAdmin" method="post" autocomplete="off">
+				<form id="formPost" asp-route="SalesExecutive/SalesAdmin/CreateTargetBySalesAdmin" method="post" autocomplete="off">
 					<div asp-ation-summary="ModelOnly" class="message-error"></div>
 
 
@@ -60,9 +62,9 @@
 					<div class="card-body">
 
 						<div class="form-row">
-							
-						<input asp-for="@Model.SalesAdminTargetId" type="hidden" />
-							
+
+							<input asp-for="@Model.SalesAdminTargetId" type="hidden" />
+
 
 							<div class="form-group col-md-3">
 
@@ -81,14 +83,13 @@
 						</div>
 
 						<div class="form-row">
-							
+
 
 
 							<div class="form-group col-md-3">
 								<label for="SectorId" class="form-label">Sector &nbsp</label>
-								<ejs-dropdownlist id="SectorId" name="SectorId" allowFiltering="true" change="onChangeSector"								  
+								<ejs-dropdownlist id="SectorId" name="SectorId" allowFiltering="true" change="onChangeSector"
 												  dataSource="@(new SelectList((IEnumerable)ViewBag.Sectors, "SectorId", "SectorName").Items)"
-
 												  placeholder="Select Sector" popupHeight="220px"
 												  value="@Model.SectorId" autofocus="autofocus">
 									<e-dropdownlist-fields text="SectorName" value="SectorId"></e-dropdownlist-fields>
@@ -109,66 +110,136 @@
 							<div class="form-group col-md-3">
 
 								<label for="MonthlyCategoryWiseTarget" class="form-label">Monthly CategoryWise Target &nbsp;<span style="color:red;"><b>*</b></span></label>
+								<input asp-for="@Model.MonthlyCategoryWiseTarget" id="CategoryWiseTarget" type="text" class="form-control" autofocus="autofocus" placeholder="Monthly CategoryWise Target" />
+								<span asp-validation-for="MonthlyCategoryWiseTarget"></span>
+							</div>
+
+
+						</div>
+
+						@*<div class="form-row">
+
+
+
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="form-label">Sector</label>
+									<div class="input-box">
+										<select class="form-control" id="SectorId">
+										</select>
+									</div>
+
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="form-label">Category</label>
+									<div class="input-box">
+										<select class="form-control" id="CategoryId">
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group col-md-3">
+
+								<label for="MonthlyCategoryWiseTarget" class="form-label">Monthly CategoryWise Target &nbsp;<span style="color:red;"><b>*</b></span></label>
 								<input asp-for="@Model.MonthlyCategoryWiseTarget" type="text" class="form-control" autofocus="autofocus" placeholder="Monthly CategoryWise Target" />
 								<span asp-validation-for="MonthlyCategoryWiseTarget"></span>
 							</div>
 
-						</div>
+
+						</div>*@
+
+
 
 						<br /><br />
 
-						
 
-						<div class="form-row">
+						<div class="row">
+							<div class="col-md-6">
+								<button type="button" id="Add_Target" class="btn btn-radius btn-info">Add</button>
+							</div>
+						</div>
+
+
+						<div class="table-responsive">
+							<table id="Statee" class="table table-bordered table-hover mb-0">
+								<thead>
+									<tr>
+										<th>Sector</th>
+										<th>Category</th>
+										<th>Target</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody id="Target_tb">
+								</tbody>
+							</table>
+						</div>
+
+
+						<br />
+						<br />
+						<br />
+
+						<div class="row">
+							<div class="col-md-6">
+
+								<button type="button" id="btnSave" class="btn btn-radius btn-success">Save</button>
+
+							</div>
+						</div>
+
+
+						@*<div class="form-row">
 							<div class="form-group col-md-3">
 
 								<label for="MonthlySectorWiseTarget" class="form-label">Monthly SectorWise Target&nbsp;<span style="color:red;"><b>*</b></span></label>
 								<input asp-for="@Model.MonthlySectorWiseTarget" type="text" class="form-control" autofocus="autofocus" placeholder="MonthlySectorWiseTarget" />
-								<span asp-validation-for="MonthlySectorWiseTarget"></span>								
+								<span asp-validation-for="MonthlySectorWiseTarget"></span>
 							</div>
-						
-						</div>
+
+						</div>*@
 
 
 						<br /><br />
 
 
-						
-						
-						<div class="card-header"><b>Brand Wise</b></div>
-							<div class="card-body">
-								<div class="form-row">
 
-									<div class="form-group col-md-3">
 
-										<label for="MonthlyBrandWiseTarget" class="form-label">Monthly BrandWise Target &nbsp;<span style="color:red;"><b>*</b></span></label>
-										<input asp-for="@Model.MonthlyBrandWiseTarget" type="text" class="form-control" autofocus="autofocus" placeholder="Monthly BrandWise Target" />
-										<span asp-validation-for="MonthlyBrandWiseTarget"></span>
+						@*<div class="card-header"><b>Brand Wise</b></div>
+						<div class="card-body">
+							<div class="form-row">
 
-									</div>
+								<div class="form-group col-md-3">
 
-									<div class="form-group col-md-3">
+									<label for="MonthlyBrandWiseTarget" class="form-label">Monthly BrandWise Target &nbsp;<span style="color:red;"><b>*</b></span></label>
+									<input asp-for="@Model.MonthlyBrandWiseTarget" type="text" class="form-control" autofocus="autofocus" placeholder="Monthly BrandWise Target" />
+									<span asp-validation-for="MonthlyBrandWiseTarget"></span>
 
-										<label for="UnitId" class="form-label">UnitId &nbsp;<span style="color:red;"><b>*</b></span></label>
-										<input asp-for="@Model.UnitId" type="text" class="form-control" autofocus="autofocus" placeholder="UnitId" />
-										<span asp-validation-for="UnitId"></span>
-
-									</div>
 								</div>
 
+								<div class="form-group col-md-3">
 
+									<label for="UnitId" class="form-label">UnitId &nbsp;<span style="color:red;"><b>*</b></span></label>
+									<input asp-for="@Model.UnitId" type="text" class="form-control" autofocus="autofocus" placeholder="UnitId" />
+									<span asp-validation-for="UnitId"></span>
 
+								</div>
 							</div>
+
+
+
+						</div>*@
 					</div>
 
-					<div id="dynamicFieldsContainer"></div>
-
-					<div class="card-body">
+					@*<div class="card-body">
 
 						<div class="col-lg-2 col-md-2 col-sm-12">
-							<button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" id="btnSave" class="btn btn-primary">Save</button>
 						</div>
-					</div>
+					</div>*@
 
 				</form>
 
@@ -181,8 +252,46 @@
 
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 <script>
+
+	//GetSector()
+	//function GetSector() {		
+	//	var opt = '';
+	//	$.ajax({
+	//		type: "GET",
+	//		url: "/WareHouse/Sector/GetSectorList",
+	//		contentType: "application/json",
+	//		success: function (res) {
+	//			console.log(res)
+	//			var options = [];
+	//			options.push('<option value="">Please Select </option>');
+	//			for (var i = 0; i < res.data.length; i++) {
+	//				//if (Id == res.data[i].userId) {
+	//				//	opt = 'selected'
+	//				//} else {
+	//				//	opt = '';
+	//				//}
+	//				options.push('<option value="' + res.data[i].sectorId + '" ' + opt + '>' + res.data[i].sectorName + '</option>');
+	//			}
+	//			$("#SectorId").html(options.join(''));
+	//		},
+	//		error: function (data) {
+	//			if (data.status == 401) {
+	//				window.location.replace('/Message/TokenExpire');
+	//			} else if (data.status == 403) {
+	//				window.location.replace('/Message/Unauthorize');
+	//			}
+	//		}
+	//	});
+	//}
+
+	var selectedSectorValue;
+	var selectedCategoryValue;
+
 	function onChangeSector(args) {
 		$.ajax({
 			type: "GET",
@@ -197,6 +306,8 @@
 				categoryDropDown.dataBind();
 
 				categoryDropDown.value = null;
+
+				selectedSectorValue = args.value;				
 			},
 			error: function () {
 
@@ -204,79 +315,359 @@
 		});
 	}
 
-	function{
+
+	GetCategoryId()
+	function GetCategoryId() {
+
+		var categoryIdValue = $('#CategoryId').val();
+
 		$.ajax({
 			type: "GET",
-			url: "/SalesExecutive/SalesAdmin/GetCategoryBySectorId",
-			data: { sectorId: args.value },
+			url: "/SalesExecutive/SalesAdmin/GetCategoryIdByName",
+			data: { categoryName: categoryIdValue },
 			contentType: "application/json",
 			dataType: "json",
 			success: function (result) {
 				console.log(result);
-				var categoryDropDown = document.getElementById("CategoryId").ej2_instances[0];
-				categoryDropDown.dataSource = result;
-				categoryDropDown.dataBind();
 
-				categoryDropDown.value = null;
-			},
-			error: function () {
-
+				selectedCategoryValue = result;				
 			}
 		});
 	}
+
+	
+
+
+	$(document).ready(function () {
+		$("#Add_Target").click(function (e) {
+
+			GetCategoryId();
+
+			var secId = selectedSectorValue;
+			var SectorValue = $('#SectorId').val();		
+			var CategoryValue = $('#CategoryId').val();
+			var CategoryId = selectedCategoryValue;
+			var CategoryText = $('#CategoryId option:selected').text();
+			var CategoryWiseValue = $('#CategoryWiseTarget').val();
+
+			if (SectorValue && CategoryValue && CategoryWiseValue) {
+				var row = "<tr><td data-value='" + secId + "'>" + SectorValue + "</td><td data-value='" + CategoryId + "'>" + CategoryValue + "</td><td data-value='" + CategoryWiseValue + "'>" + CategoryWiseValue + "</td><td><button class='delRowBtn'><i class='ion-trash-b' style='color: red;'></i></button></td></tr>";
+
+				$('#Target_tb').append(row);
+			} else {
+				// Handle empty values or show an error message
+				console.error("Sector, Category, and Category Wise values cannot be empty.");
+			}
+		});
+
+		$(document).on("click", ".delRowBtn", function () {
+			$(this).closest("tr").remove();
+		});
+	});
+
+
+	//function{
+	//	$.ajax({
+	//		type: "GET",
+	//		url: "/SalesExecutive/SalesAdmin/GetCategoryBySectorId",
+	//		data: { sectorId: args.value },
+	//		contentType: "application/json",
+	//		dataType: "json",
+	//		success: function (result) {
+	//			console.log(result);
+	//			var categoryDropDown = document.getElementById("CategoryId").ej2_instances[0];
+	//			categoryDropDown.dataSource = result;
+	//			categoryDropDown.dataBind();
+
+	//			categoryDropDown.value = null;
+	//		},
+	//		error: function () {
+
+	//		}
+	//	});
+	//}
+
+</script>
+
+<script>
+	$(document).ready(function () {
+		$("#btnSave").click(function (e) {
+			var itemDetails = [];
+
+			$.each($("#Statee tbody tr"), function () {
+				var $irow = $(this),
+					rowObj = {};
+
+				// Retrieve the data-value attributes
+				var SectorId = parseInt($irow.find("td:eq(0)").data("value"));
+				var CategoryId = $irow.find("td:eq(1)").data("value");
+				var MonthlyCategoryWiseTarget = $irow.find("td:eq(2)").data("value");
+
+
+				var a = {
+					"sector": SectorId,
+					"category": CategoryId,
+					"monthlyCategoryWiseTarget": MonthlyCategoryWiseTarget,
+					"createdBy": @(Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value))
+				};
+
+				itemDetails.push(a);
+			});
+
+			console.log("itemDetails:", itemDetails);
+
+			console.log(itemDetails);
+
+			var model = {
+				"Targets": itemDetails
+
+			};
+
+			$.ajax({
+				type: "POST",
+				url: "/SalesExecutive/SalesAdmin/CreateTargetBySalesAdmin",
+				data: JSON.stringify(model),
+				//data: JSON.stringify(model),
+				contentType: "application/json",
+				dataType: "json",
+				success: function (result) {
+					console.log("Data saved successfully:", result);
+					// You might want to handle success feedback here
+				},
+				error: function (error) {
+					console.log("Error saving data:", error);
+					// Handle the error or provide feedback to the user
+				}
+			});
+
+		});
+	});
 </script>
 
 
-@*<script>
-	function onChangeSector(args) {
-		$.ajax({
-			type: "GET",
-			url: "/WareHouse/Category/GetCategoryBySectorId",
-			data: { sectorId: args.value },
-			contentType: "application/json",
-			dataType: "json",
-			success: function (result) {
-				console.log(result);
 
-				// Clear existing dropdowns and textboxes
-				$("#dynamicFieldsContainer").empty();
 
-				// Create pairs of Category dropdowns and MonthlyCategoryWiseTarget textboxes based on the result
-				for (var i = 0; i < result.length; i++) {
-					createDynamicFields(result[i]);
+
+
+@section scripts{
+    <script>
+        $(function () {
+            $("#btttnSaved").click(function (e) {
+                if (!document.getElementById("formPost").checkValidity()) {
+                    e.preventDefault();
+                }
+                else {
+                    var itemDetails = [];
+
+                    $.each($("#Statee tbody tr"), function () {
+                        var $irow = $(this),
+                            rowObj = {};
+
+                        // Retrieve the data-value attributes
+                        var Sector = parseInt($irow.find("td:eq(0)").data("value"));
+                        var Category = parseInt($irow.find("td:eq(1)").data("value"));
+
+                        var a = {
+							"userId": Sector,
+							"stateId": Category
+                        }
+                        itemDetails.push(a);
+                    });
+                    console.log("itemDetails:", itemDetails);
+
+                    // Show preloader
+                    var preloader = $("#preloader");
+                    preloader.removeClass("d-none");
+                    var model = {
+						"sectorId": parseInt($("#SectorId").val()),
+						"categoryId": parseInt($("#CategoryId").val()),
+                        stateUserDTOs: itemDetails,
+                    }
+                    console.log(model)
+      //              $.ajax({
+      //                  type: "POST",
+						//url: "/SalesExecutive/SalesAdmin/CreateTargetBySalesAdmin",
+      //                  data: JSON.stringify(model),
+      //                  contentType: "application/json; charset=utf-8",                        
+      //                  dataType: "json",                        
+
+      //                  success: function (data, statusText, xhr) {
+                        //    if (xhr.status === 200) {
+                        //        Swal.fire({
+                        //            icon: "success",
+                        //            title: "State User",
+                        //            text: "Successfully created!",
+                        //        }).then(function () {
+                        //            location.reload(); // Refresh the page
+                        //        });
+
+                        //        //preloader.addClass("d-none");
+                        //    } else if (data.status === "Duplicate") {
+                        //        Swal.fire({
+                        //            icon: "warning",
+                        //            title: "Validation Alert!",
+                        //            text: data.responseMsg,
+                        //        }).then(function () {
+                        //            location.reload(); // Refresh the page
+                        //        });
+                        //    } else if (data.status === "error") {
+                        //        Swal.fire({
+                        //            icon: "warning",
+                        //            title: "Validation Alert!",
+                        //            text: data.responseMsg,
+                        //        }).then(function () {
+                        //            location.reload(); // Refresh the page
+                        //        });
+                        //    } else {
+                        //        Swal.fire({
+                        //            icon: "warning",
+                        //            title: "Validation Alert!",
+                        //            text: "Something unexpected!",
+                        //        }).then(function () {
+                        //            location.reload(); // Refresh the page
+                        //        });
+                        //    }
+                        //    preloader.addClass("d-none");
+                        //},
+
+						}
+
+						console.log(data)
+                        error: function (data) {
+                            if (data.status == 401) {
+                                window.location.replace('/Message/TokenExpire');
+                            } else if (data.status == 403) {
+                                window.location.replace('/Message/Unauthorize');
+                            } else if (data.status == 400) {
+                                sweetAlert("Validation Alert!", "Please check input data!", "warning");
+                            }
+                        }
+                    });
+                }
+            });
+        });
+
+
+		//GetUser()
+		//function GetUser() {
+		//	var opt = '';
+		//	$.ajax({
+		//		type: "GET",
+		//		url: "/WareHouse/Sector/GetSectorList",
+		//		contentType: "application/json; charset=utf-8",
+		//		dataType: "json",
+		//		success: function (res) {
+		//			console.log(res)
+		//			var options = [];
+		//			options.push('<option value="">Please Select </option>');
+		//			for (var i = 0; i < res.data.length; i++) {
+		//				//if (Id == res.data[i].userId) {
+		//				//	opt = 'selected'
+		//				//} else {
+		//				//	opt = '';
+		//				//}
+		//				options.push('<option value="' + res.data[i].sectorId + '" ' + opt + '>' + res.data[i].sectorName + '</option>');
+		//			}
+		//			$("#SectorId").html(options.join(''));
+		//		},
+		//		error: function (data) {
+		//			if (data.status == 401) {
+		//				window.location.replace('/Message/TokenExpire');
+		//			} else if (data.status == 403) {
+		//				window.location.replace('/Message/Unauthorize');
+		//			}
+		//		}
+		//	});
+		//}
+
+		//GetState()
+		//function GetState(Id) {
+		//	var opt = '';
+		//	$.ajax({
+		//		type: "GET",
+		//		url: "/WareHouse/Sector/GetCategoryList",
+		//		contentType: "application/json; charset=utf-8",				
+		//		dataType: "json",
+		//		success: function (res) {
+		//			console.log(res)
+		//			var options = [];
+		//			options.push('<option value="">Please Select </option>');
+		//			for (var i = 0; i < res.data.length; i++) {
+		//				if (Id == res.data[i].stateId) {
+		//					opt = 'selected'
+		//				} else {
+		//					opt = '';
+		//				}
+		//				options.push('<option value="' + res.data[i].stateId + '" ' + opt + '>' + res.data[i].stateName + '</option>');
+		//			}
+		//			$("#CategoryId").html(options.join(''));
+		//		},
+		//		error: function (data) {
+		//			if (data.status == 401) {
+		//				window.location.replace('/Message/TokenExpire');
+		//			} else if (data.status == 403) {
+		//				window.location.replace('/Message/Unauthorize');
+		//			}
+		//		}
+		//	});
+		//}
+
+
+    //        $("#Add_Target").click(function (e) {
+    //            var SectorValue = $('#SectorId').val();
+				//var SectorText = $('#SectorId option:selected').text();
+    //            var CategoryValue = $('#CategoryId').val();
+				//var CategoryText = $('#CategoryId option:selected').text();
+
+				//var row = "<tr><td data-value='" + SectorValue + "'>" + SectorText + "</td><td data-value='" + CategoryValue + "'>" + CategoryText + "</td><td><button class='delRowBtn'><i class='ion-trash-b' style='color: red;'></i></button></td></tr>";
+
+    //            $('#Target_tb').append(row);
+    //        });
+
+
+    //        $(document).on("click", ".delRowBtn", function () {
+    //            $(this).closest("tr").remove();
+    //        });        
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+	@*<script>
+		$(document).ready(function () {
+			$("#Add_Target").click(function (e) {
+				var SectorValue = $('#SectorId').val();
+				var SectorText = $('#SectorId option:selected').text();
+				var CategoryValue = $('#CategoryId').val();
+				var CategoryText = $('#CategoryId option:selected').text();
+				var CategoryWiseValue = $('#CategoryWiseTarget').val();
+
+				if (SectorValue && CategoryValue && CategoryWiseValue) {
+					var row = "<tr><td data-value='" + SectorValue + "'>" + SectorValue + "</td><td data-value='" + CategoryValue + "'>" + CategoryValue + "</td><td data-value='" + CategoryWiseValue + "'>" + CategoryWiseValue + "</td><td><button class='delRowBtn'><i class='ion-trash-b' style='color: red;'></i></button></td></tr>";
+
+					$('#Target_tb').append(row);
+				} else {
+					// Handle empty values or show an error message
+					console.error("Sector, Category, and Category Wise values cannot be empty.");
 				}
-			},
-			error: function () {
-				// Handle error
-			}
+			});
+
+			$(document).on("click", ".delRowBtn", function () {
+				$(this).closest("tr").remove();
+			});
 		});
-	}
-
-	function createDynamicFields(category) {
-		// Create a div to hold each set of dynamic fields
-		var dynamicFieldsDiv = $("<div class='form-group col-md-3'>");
-
-		// Create the Category dropdown
-		dynamicFieldsDiv.append("<label for='CategoryId" + category.categoryId + "' class='form-label'>Category Name</label>");
-		dynamicFieldsDiv.append("<ejs-dropdownlist id='CategoryId" + category.categoryId + "' allowFiltering='true' placeholder='Select SubCategory' popupHeight='220px'></ejs-dropdownlist>");
-		dynamicFieldsDiv.append("<span asp-validation-for='CategoryId'></span>");
-
-		// Create the MonthlyCategoryWiseTarget textbox
-		dynamicFieldsDiv.append("<label for='MonthlyCategoryWiseTarget" + category.categoryId + "' class='form-label'>Monthly CategoryWise Target &nbsp;<span style='color:red;'><b>*</b></span></label>");
-		dynamicFieldsDiv.append("<input asp-for='MonthlyCategoryWiseTarget' type='text' class='form-control' autofocus='autofocus' placeholder='Monthly CategoryWise Target' id='MonthlyCategoryWiseTarget" + category.categoryId + "' />");
-		dynamicFieldsDiv.append("<span asp-validation-for='MonthlyCategoryWiseTarget'></span>");
-
-		// Append the dynamic fields to the container
-		$("#dynamicFieldsContainer").append(dynamicFieldsDiv);
-
-		// Initialize the Category dropdown with data
-		var categoryDropdown = document.getElementById("CategoryId" + category.categoryId).ej2_instances[0];
-		categoryDropdown.dataSource = category.items; // Assuming 'items' property contains the data for the dropdown
-		categoryDropdown.fields = { text: "categoryName", value: "categoryId" }; // Set the display text field
-		categoryDropdown.dataBind();
-	}
-</script>*@
+	</script>*@
 
 
 
+
+
+}
 
