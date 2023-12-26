@@ -286,14 +286,9 @@
 
 
 				itemTextbox.value = result.itemName;
-				wareHouseTextbox.value = result.wareHouseName;
-				districtTextbox.value = result.districtName;
-				venderTextbox.value = result.vendorName;
-				employeeTextbox.value = result.employeeName;
 				companyTextbox.value = result.companyName;
 				brandTextbox.value = result.brandName;
 				productWeightTextbox.value = result.productWeight;
-				unitTextbox.value = result.unitId;
 				caseWeightTextbox.value = result.caseWeight;
 				unitPerCaseTextbox.value = result.unitPerCase;
 				mrpTextbox.value = result.mrp;
@@ -301,8 +296,22 @@
 				salesCostTextbox.value = result.salesCost;
 				cgstTextbox.value = result.cgst;
 				sgstTextbox.value = result.sgst;
-				handlingTypeTextbox.value = result.handlingType;
 				invoiceTextbox.value = result.invoiceNo;
+
+				//wareHouseTextbox.value = result.wareHuoseId;
+				//districtTextbox.value = result.addDistrictId;
+				//venderTextbox.value = result.vendorId;
+				//employeeTextbox.value = result.employeeId;
+				//unitTextbox.value = result.unitId;
+				//handlingTypeTextbox.value = result.handlingTypeId;
+
+
+				wareHouseTextbox.value = result.wareHouseName;
+				districtTextbox.value = result.districtName;
+				venderTextbox.value = result.vendorName;
+				employeeTextbox.value = result.employeeName;
+				unitTextbox.value = result.shortName;
+				handlingTypeTextbox.value = result.handlingType;
 
 
 				var receivedDate = result.receivedDate;
@@ -332,6 +341,9 @@
 
 			}
 		});
+
+
+
 	}
 </script>
 

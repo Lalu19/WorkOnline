@@ -474,7 +474,7 @@ namespace Warehouse.Management.Controllers
 
 		public JsonResult GetItemById(int ItemId)
 		{
-			return Json(_itemService.GetItemByItemId(ItemId));
+			return Json(_itemService.GetItemById(ItemId));
 		}
 	}
 }
