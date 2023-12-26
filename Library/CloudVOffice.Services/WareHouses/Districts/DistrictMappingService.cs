@@ -29,40 +29,88 @@ namespace CloudVOffice.Services.WareHouses.Districts
             _districtMappingRepo = districtMappingRepo;
 
 		}
+        //public MessageEnum DistrictMappingCreate(DistrictMappingDTO districtMappingDTO)
+        //{
+        //    try
+        //    {
+
+        //        var objcheck = _dbContext.DistrictMappings.Where(opt => opt.Deleted == false && opt.AddDistrictId == districtMappingDTO.AddDistrictId).SingleOrDefault();
+
+        //        if (objcheck == null)
+        //        {
+        //            foreach (var districtMappingId in districtMappingDTO.PinCodeId)
+        //            {
+        //                DistrictMapping districtMapping = new DistrictMapping();
+
+        //                districtMapping.PinCodeId = districtMappingId;
+        //                districtMapping.AddDistrictId = (long)districtMappingDTO.AddDistrictId;
+        //                districtMapping.CreatedBy = districtMappingDTO.CreatedBy;
+        //                districtMapping.CreatedDate = System.DateTime.Now;
+        //                var obj = _districtMappingRepo.Insert(districtMapping);
+
+        //            }
+        //            return MessageEnum.Success;
+        //        }
+        //        else if (objcheck != null)
+        //        {
+        //            return MessageEnum.Duplicate;
+        //        }
+
+        //        return MessageEnum.UnExpectedError;
+        //    }
+        //    catch
+        //    {
+        //        throw;
+        //    }
+        //}
+
         public MessageEnum DistrictMappingCreate(DistrictMappingDTO districtMappingDTO)
         {
             try
             {
+                var districtExists = _dbContext.DistrictMappings.Any(opt => opt.Deleted == false && opt.AddDistrictId == districtMappingDTO.AddDistrictId);
 
-                var objcheck = _dbContext.DistrictMappings.Where(opt => opt.Deleted == false && opt.AddDistrictId==districtMappingDTO.AddDistrictId).SingleOrDefault();
-
-                if (objcheck == null)
+                if (!districtExists)
                 {
                     foreach (var districtMappingId in districtMappingDTO.PinCodeId)
                     {
-                        DistrictMapping districtMapping = new DistrictMapping();
+                        var pinCodeExists = _dbContext.DistrictMappings.Any(opt => opt.Deleted == false && opt.PinCodeId == districtMappingId);
 
-                        districtMapping.PinCodeId = districtMappingId;
-                        districtMapping.AddDistrictId = (long)districtMappingDTO.AddDistrictId;
-                        districtMapping.CreatedBy = districtMappingDTO.CreatedBy;
-                        districtMapping.CreatedDate = System.DateTime.Now;
-                        var obj = _districtMappingRepo.Insert(districtMapping);
+                        if (!pinCodeExists)
+                        {
+                            DistrictMapping districtMapping = new DistrictMapping
+                            {
+                                PinCodeId = districtMappingId,
+                                AddDistrictId = (long)districtMappingDTO.AddDistrictId,
+                                CreatedBy = districtMappingDTO.CreatedBy,
+                                CreatedDate = DateTime.UtcNow // Use UTC time
+                            };
 
+                            _districtMappingRepo.Insert(districtMapping);
+                        }
+                        else
+                        {
+                            return MessageEnum.Duplicate;
+                        }
                     }
+
                     return MessageEnum.Success;
                 }
-                else if (objcheck != null)
+                else
                 {
                     return MessageEnum.Duplicate;
                 }
-
+            }
+            catch (SpecificException ex)
+            {
+                // Handle specific exception
                 return MessageEnum.UnExpectedError;
             }
-            catch
-            {
-                throw;
-            }
         }
+
+
+
+
         public List<DistrictMapping> GetDistrictMappingList()
 		{
             try
