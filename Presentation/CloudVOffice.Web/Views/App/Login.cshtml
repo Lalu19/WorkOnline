@@ -265,13 +265,10 @@
             var passwordInput = document.getElementById("inputPassword");
             var loginForm = document.getElementById("loginForm");
 
-            // Check if there's a saved value in the "rememberMe" cookie
             var rememberMeValue = getCookie("rememberMe");
 
-            // Set the checkbox state based on the cookie value
             rememberCheckbox.checked = rememberMeValue === "true";
 
-            // If "Remember me" is checked, populate email and password fields from cookies
             if (rememberCheckbox.checked) {
                 var storedEmail = getCookie("storedEmail");
                 var storedPassword = getCookie("storedPassword");
@@ -285,19 +282,15 @@
                 }
             }
 
-            // Add an event listener to the form submission
             loginForm.addEventListener("submit", function () {
-                // Save the checkbox state in a cookie when the form is submitted
                 setCookie("rememberMe", rememberCheckbox.checked, 7); // 7 days expiration
 
-                // If "Remember me" is checked, save email and password in cookies
                 if (rememberCheckbox.checked) {
                     setCookie("storedEmail", emailInput.value, 7);
                     setCookie("storedPassword", passwordInput.value, 7);
                 }
             });
 
-          // Function to set a cookie
           function setCookie(name, value, days) {
             var expires = "";
             if (days) {
@@ -306,9 +299,8 @@
                 expires = "; expires=" + date.toUTCString();
             }
             document.cookie = name + "=" + (value || "") + expires + "; path=/";
-        }
+          }
 
-          // Function to get the value of a cookie
           function getCookie(name) {
             var nameEQ = name + "=";
             var ca = document.cookie.split(';');
