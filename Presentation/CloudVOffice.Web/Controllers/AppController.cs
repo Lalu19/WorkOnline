@@ -150,9 +150,34 @@ namespace CloudVOffice.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> LogOut()
         {
-            //SignOutAsync is Extension method for SignOut    
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-			//Redirect to home page			
+
+			//SignOutAsync is Extension method for SignOut    
+			await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+			//Redirect to home page
+
+			var activityLog = new ActivityLog
+			{
+				UserId = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString()),
+			    CreatedOn = DateTime.Now,
+				EntityName = "Logout",
+				LogOutTime = DateTime.Now,
+				// Add other properties as needed
+			};
+
+			// Save the activity log
+			try
+			{
+				_dbContext.ActivityLogs.Add(activityLog);
+				await _dbContext.SaveChangesAsync();
+			}
+			catch (Exception ex)
+			{
+				// Log or handle the exception
+				Console.WriteLine(ex.Message);
+				throw; // rethrow the exception to propagate it further if needed
+			}
+
+						
 
 			return LocalRedirect("/App/Login");
         }

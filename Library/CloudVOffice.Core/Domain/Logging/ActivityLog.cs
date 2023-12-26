@@ -35,6 +35,7 @@
         /// </summary>
         public DateTime? CreatedOn { get; set; }
         public DateTime? LogInTime { get; set; }
+        public DateTime? LogOutTime { get; set; }
 
         /// <summary>
         /// Gets or sets the IP address
