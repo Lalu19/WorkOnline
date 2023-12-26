@@ -12,7 +12,7 @@ namespace CloudVOffice.Data.DTO.ProductCategories
         public int SectorId { get; set; }
         public int CategoryId { get; set; }
 		public string SubCategory1Name { get; set; }
-        public double? GST { get; set; }
+        public Int64? GSTId { get; set; }
         public string? HSN { get; set; }
         public Int64 CreatedBy { get; set; }
 	}

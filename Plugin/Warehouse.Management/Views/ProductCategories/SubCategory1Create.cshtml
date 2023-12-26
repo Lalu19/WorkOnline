@@ -89,12 +89,18 @@
 
                         <div class="form-row">
 
-                            <div class="form-group col-md-3">
+                            @*<div class="form-group col-md-3">
                                 <label for="GST" class="form-label">GST</label>
                                 <input asp-for="@Model.GST" type="text" class="form-control" autofocus="autofocus" placeholder="GST" />
                                 <span asp-validation-for="GST"></span>
+                            </div>*@
+                            <div class="form-group col-md-3">
+                                <label for="GSTId" class="form-label">GST&nbsp;</label>
+                                <ejs-dropdownlist id="GSTId" allowFiltering="true" ejs-for="@Model.GSTId" filtering="onGSTValuefiltering" dataSource="@(new SelectList((IEnumerable)ViewBag.GstList, "GSTId", "GSTValue").Items)" placeholder="Select GST" popupHeight="220px">
+                                    <e-dropdownlist-fields text="GSTValue" value="GSTId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="GSTId"></span>
                             </div>
-
                             <div class="form-group col-md-3">
                                 <label for="HSN" class="form-label">HSN</label>
                                 <input asp-for="@Model.HSN" type="text" class="form-control" autofocus="autofocus" placeholder="HSN" />
@@ -115,7 +121,13 @@
     </div>
 </div>
 
-
+<script>
+    function onGSTValuefiltering(e) {
+        var query = new ej.data.Query();
+        query = (e.text !== '') ? query.where('GSTValue', 'startswith', e.text, true) : query;
+        e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.GstList)), query);
+    }
+</script>
 <script>
     function onSectorNamefiltering(e) {
         var query = new ej.data.Query();

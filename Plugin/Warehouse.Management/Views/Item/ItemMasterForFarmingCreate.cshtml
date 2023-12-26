@@ -5,11 +5,6 @@
 @*@model CloudVOffice.Data.DTO.WareHouses.Items.ItemMasterForFarmingDTO;*@
 @model CloudVOffice.Data.DTO.WareHouses.ViewModel.ViewForItemMasterFarming ;
 
-@if (Model != null && Model.CreatedItemMasterFarmingDTO.ItemMasterForFarmingId.HasValue)
-{
-    <!-- Display the ItemId if available -->
-    <p>ItemMasterForFarmingId: @Model.CreatedItemMasterFarmingDTO.ItemMasterForFarmingId</p>
-}
 
 @{
     Layout = "_MainAppLayout";
@@ -107,34 +102,34 @@
 
                             <div class="form-group col-md-3">
                                 <label for="WareHuoseId" class="form-label">WareHouse Name</label>
-                                <ejs-dropdownlist id="WareHuoseId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.WareHouseName" allowFiltering="true"  dataSource="@(new SelectList(Model.WareHouses, "WareHuoseId", "WareHouseName").Items)" placeholder="Select WareHouse" popupHeight="220px">
+                                <ejs-dropdownlist id="WareHuoseId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.WareHuoseId" allowFiltering="true" dataSource="@(new SelectList(Model.WareHouses, "WareHuoseId", "WareHouseName").Items)" placeholder="Select WareHouse" popupHeight="220px">
                                     <e-dropdownlist-fields text="WareHouseName" value="WareHuoseId"></e-dropdownlist-fields>
                                 </ejs-dropdownlist>
-                                <span asp-validation-for="CreatedItemMasterFarmingDTO.WareHouseName"></span>
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.WareHuoseId"></span>
                             </div>
 
                             <div class="form-group col-md-3">
                                 <label for="EmployeeId" class="form-label">Employee Name</label>
-                                <ejs-dropdownlist id="EmployeeId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.EmployeeName" allowFiltering="true" dataSource="@(new SelectList(Model.Employees, "EmployeeId", "EmployeeName").Items)" placeholder="Select Employee" popupHeight="220px">
+                                <ejs-dropdownlist id="EmployeeId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.EmployeeId" allowFiltering="true" dataSource="@(new SelectList(Model.Employees, "EmployeeId", "EmployeeName").Items)" placeholder="Select Employee" popupHeight="220px">
                                     <e-dropdownlist-fields text="EmployeeName" value="EmployeeId"></e-dropdownlist-fields>
                                 </ejs-dropdownlist>
-                                <span asp-validation-for="CreatedItemMasterFarmingDTO.EmployeeName"></span>
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.EmployeeId"></span>
                             </div>
 
                             <div class="form-group col-md-3">
                                 <label for="VendorId" class="form-label">Vendor Name</label>
-                                <ejs-dropdownlist id="VendorId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.VendorName" allowFiltering="true" dataSource="@(new SelectList(Model.Vendors, "VendorId", "VendorName").Items)" placeholder="Select Vendor" popupHeight="220px">
+                                <ejs-dropdownlist id="VendorId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.VendorId" allowFiltering="true" dataSource="@(new SelectList(Model.Vendors, "VendorId", "VendorName").Items)" placeholder="Select Vendor" popupHeight="220px">
                                     <e-dropdownlist-fields text="VendorName" value="VendorId"></e-dropdownlist-fields>
                                 </ejs-dropdownlist>
-                                <span asp-validation-for="CreatedItemMasterFarmingDTO.VendorName"></span>
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.VendorId"></span>
                             </div>
 
                             <div class="form-group col-md-3">
-                                <label for="DistrictId" class="form-label">District Name</label>
-                                <ejs-dropdownlist id="DistrictId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.DistrictName" allowFiltering="true" dataSource="@(new SelectList(Model.Districts, "DistrictId", "DistrictName").Items)" placeholder="Select District" popupHeight="220px">
-                                    <e-dropdownlist-fields text="DistrictName" value="DistrictId"></e-dropdownlist-fields>
+                                <label for="AddDistrictId" class="form-label">District Name</label>
+                                <ejs-dropdownlist id="AddDistrictId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.AddDistrictId" allowFiltering="true" dataSource="@(new SelectList(Model.AddDistricts, "AddDistrictId", "DistrictName").Items)" placeholder="Select District" popupHeight="220px">
+                                    <e-dropdownlist-fields text="DistrictName" value="AddDistrictId"></e-dropdownlist-fields>
                                 </ejs-dropdownlist>
-                                <span asp-validation-for="CreatedItemMasterFarmingDTO.DistrictName"></span>
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.AddDistrictId"></span>
                             </div>
 
                         </div>
@@ -147,15 +142,22 @@
                                 <span asp-validation-for="CreatedItemMasterFarmingDTO.ProductName"></span>
                             </div>
 
+
                             <div class="form-group col-md-3">
-                                <label for="UnitId" class="form-label">Unit Id&nbsp;</label>
-                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.UnitId" type="text" id="UnitId" class="form-control" autofocus="autofocus" placeholder="UnitId" />
+                                <label for="UnitId" class="form-label">Unit Name</label>
+                                <ejs-dropdownlist id="UnitId" allowFiltering="true" name="CreatedItemMasterFarmingDTO.UnitId"
+                                                  dataSource="@(new SelectList(Model.Units, "UnitId", "ShortName").Items)"
+                                                  placeholder="Select Unit" popupHeight="220px"
+                                                  value="@Model.CreatedItemMasterFarmingDTO.UnitId">
+                                    <e-dropdownlist-fields text="ShortName" value="UnitId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
                                 <span asp-validation-for="CreatedItemMasterFarmingDTO.UnitId"></span>
                             </div>
 
+
                             <div class="form-group col-md-3">
-                                <label for="QtyPerKg" class="form-label">Qty Per Kg&nbsp;</label>
-                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.QtyPerKg" type="number" id="QtyPerKg" class="form-control" autofocus="autofocus" placeholder="Qty Per Kg" />
+                                <label for="QtyPerKg" class="form-label">Quantity&nbsp;</label>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.QtyPerKg" type="number" id="QtyPerKg" class="form-control" autofocus="autofocus" placeholder="Quantity" />
                                 <span asp-validation-for="CreatedItemMasterFarmingDTO.QtyPerKg"></span>
                             </div>
 
@@ -431,11 +433,28 @@
             success: function (result) {
                 console.log(result);
 
-                var gstTextbox = document.getElementById("GST");
                 var hsnTextbox = document.getElementById("HSN");
-
-                gstTextbox.value = result.gst;
                 hsnTextbox.value = result.hsn;
+
+                // Third API call
+                $.ajax({
+                    type: "GET",
+                    url: "/WareHouse/GST/GetGSTByGSTId",
+                    data: { gstId: result.gstId }, // Adjust the parameter accordingly
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (gstResult) {
+                        console.log(gstResult);
+
+                        var gstTextbox = document.getElementById("GST");
+                        gstTextbox.value = gstResult.gstValue;
+
+                        // Do something with the GST result
+                    },
+                    error: function () {
+                        // Handle error for the third API call
+                    }
+                });
 
                 // Second API call
                 $.ajax({
@@ -611,7 +630,7 @@
             reviewHtml += "<b>Vendor Name:</b> " + vendorName + "<br>";
             reviewHtml += "<b>District Name:</b> " + districtName + "<br>";
             reviewHtml += "<b>Product Name:</b> " + productName + "<br>";
-            reviewHtml += "<b>UOM:</b> " + unitId + "<br>";
+            reviewHtml += "<b>Unit Name:</b> " + unitId + "<br>";
             reviewHtml += "<b>Qty Per Kg:</b> " + qtyPerKg + "<br>";
             reviewHtml += "<b>Price:</b> " + price + "<br>";
             reviewHtml += "<b>Min Qty:</b> " + minQty + "<br>";

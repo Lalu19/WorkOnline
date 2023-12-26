@@ -12,6 +12,7 @@ using CloudVOffice.Core.Domain.WareHouses.Employees;
 using CloudVOffice.Core.Domain.WareHouses.GST;
 using CloudVOffice.Core.Domain.WareHouses.HandlingTypes;
 using CloudVOffice.Core.Domain.WareHouses.Items;
+using CloudVOffice.Core.Domain.WareHouses.Months;
 using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Core.Domain.WareHouses.UOMs;
 using CloudVOffice.Core.Domain.WareHouses.Vehicles;
@@ -84,10 +85,11 @@ namespace CloudVOffice.Data.Persistence
 		public virtual DbSet<UnitGroup> UnitGroups { get; set; }
 		public virtual DbSet<Unit> Units { get; set; }
 		public virtual DbSet<UnitConversionFactors> UnitConversionFactors { get; set; }
-		public virtual DbSet<District> Districts { get; set; }
+		public virtual DbSet<DistrictMapping> DistrictMappings { get; set; }
 		public virtual DbSet<DamageItem> DamageItems { get; set; }
 		public virtual DbSet<DamageItemForFarming> DamageItemForFarmings { get; set; }
 		public virtual DbSet<AddDistrict> AddDistricts { get; set; }
+        public virtual DbSet<Month> Months { get; set; }
 
         #endregion
 
@@ -415,11 +417,11 @@ namespace CloudVOffice.Data.Persistence
 			 .HasDefaultValue(false)
 			 .ValueGeneratedNever();
 
-			modelBuilder.Entity<District>()
+			modelBuilder.Entity<DistrictMapping>()
  .Property(s => s.CreatedDate)
  .HasDefaultValueSql("getdate()");
 
-			modelBuilder.Entity<District>()
+			modelBuilder.Entity<DistrictMapping>()
 			 .Property(s => s.Deleted)
 			 .HasDefaultValue(false)
 			 .ValueGeneratedNever();
@@ -448,6 +450,16 @@ namespace CloudVOffice.Data.Persistence
 .HasDefaultValueSql("getdate()");
 
             modelBuilder.Entity<AddDistrict>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
+
+
+            modelBuilder.Entity<Month>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<Month>()
              .Property(s => s.Deleted)
              .HasDefaultValue(false)
              .ValueGeneratedNever();
@@ -466,10 +478,10 @@ namespace CloudVOffice.Data.Persistence
              .HasDefaultValue(false)
              .ValueGeneratedNever();
 
-            #endregion
+			#endregion
 
 
-            modelBuilder.Seed();
+			modelBuilder.Seed();
         }
     }
 }

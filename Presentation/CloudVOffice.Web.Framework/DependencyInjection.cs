@@ -28,6 +28,7 @@ using CloudVOffice.Services.WareHouses.HandlingTypes;
 using CloudVOffice.Services.WareHouses.UOMs;
 using CloudVOffice.Services.WareHouses.Districts;
 using CloudVOffice.Services.Sales;
+using CloudVOffice.Services.WareHouses.Months;
 
 namespace CloudVOffice.Web.Framework
 {
@@ -81,12 +82,15 @@ namespace CloudVOffice.Web.Framework
 
             services.AddScoped<IUnitConversionFactors, UnitConversionFactorsService>();
 
-            services.AddScoped<IDistrictService, DistrictService>();
+            services.AddScoped<IDistrictMappingService, DistrictMappingService>();
             services.AddScoped<ISalesAdminService, SalesAdminService>();
 
             services.AddScoped<IDamageItemService, DamageItemService>();
 
             services.AddScoped<IDamageItemForFarmingService, DamageItemForFarmingService>();
+			services.AddScoped<IAddDistrictService, AddDistrictService>();
+
+            services.AddScoped<IMonthService, MonthService>();
 
 
 

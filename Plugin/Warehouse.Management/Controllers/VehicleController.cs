@@ -31,7 +31,7 @@ namespace Warehouse.Management.Controllers
                 vehicleDTO.BrandName = d.BrandName;
                 vehicleDTO.ChasisNo = d.ChasisNo;
                 vehicleDTO.FuelType = d.FuelType;
-                vehicleDTO.NoC = d.NoC;
+                vehicleDTO.DL = d.DL;
                 vehicleDTO.RC = d.RC;
                 vehicleDTO.InsuranceDetails = d.InsuranceDetails;
                 vehicleDTO.PurchaseYear = d.PurchaseYear;

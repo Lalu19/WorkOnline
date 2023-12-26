@@ -49,26 +49,24 @@
                               allowExcelExport="true" allowGrouping="true"
                               allowMultiSorting="true"
                               allowPdfExport="true"
-                              height="600" rowHeight="38"
+                              height="340" rowHeight="38"
                               enableHover="false" enableHeaderFocus="true"
                               allowResizing="true" autoFit="true" dataBound="dataBound"
                               enableVirtualization="true" allowSelection="true"
-                              toolbarClick="toolbarClick" toolbar="@(new List<string>() {"ExcelExport", "PdfExport", "CsvExport" ,"Search"})">
+                              toolbarClick="toolbarClick" toolbar="@(new List<string>() {"ExcelExport", "PdfExport", "CsvExport" ,"Search"})" allowPaging="true">
 
                         <e-grid-filtersettings type="Menu"></e-grid-filtersettings>
-
-                        <e-grid-selectionsettings persistSelection="true" type="Multiple" checkboxOnly="true"></e-grid-selectionsettings>
+                        <e-grid-pagesettings pageCount="4" pageSizes="true"></e-grid-pagesettings>
                         <e-grid-columns>
 
-                            <e-grid-column field="" type="checkbox" width="20" allowFiltering="false" allowSorting="false"></e-grid-column>
                             <e-grid-column field="VehicleName" headerText="Vehicle Name" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column field="VehicleNumber" headerText="Vehicle Number" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column field="BrandName" headerText="Brand Name" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column field="ChasisNo" headerText="Chasis No" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column field="FuelType" headerText="Fuel Type" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="NoC" headerText="NoC" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="DL" headerText="DL" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column field="RC" headerText="RC" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="InsuranceDetails" headerText="Insurance Details" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="InsuranceDetails" headerText="Insurance Number" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column field="PurchaseYear" headerText="Purchase Year" textAlign="Left" width="120"></e-grid-column>
 
                             <e-grid-column headerText="Action" template="#Actions" width="100"></e-grid-column>
