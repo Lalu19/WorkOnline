@@ -49,7 +49,9 @@ namespace CloudVOffice.Services.ProductCategories
         {
             try
             {
-                return _dbContext.Sectors.Where(x => x.Deleted == false).ToList();
+                var a = _dbContext.Sectors.Where(x => x.Deleted == false).ToList();
+
+                return a;
 
             }
             catch

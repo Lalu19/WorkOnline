@@ -23,7 +23,7 @@
         /// <summary>
         /// Gets or sets the customer identifier
         /// </summary>
-        public Int64 UserId { get; set; }
+        public Int64? UserId { get; set; }
 
         public DateTime? LogInTime { get; set; }
         public DateTime? LogOutTime { get; set; }
@@ -36,7 +36,9 @@
         /// <summary>
         /// Gets or sets the date and time of instance creation
         /// </summary>
-        public DateTime CreatedOn { get; set; }
+        public DateTime? CreatedOn { get; set; }
+        public DateTime? LogInTime { get; set; }
+        public DateTime? LogOutTime { get; set; }
 
         /// <summary>
         /// Gets or sets the IP address
