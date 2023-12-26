@@ -9,7 +9,7 @@ namespace CloudVOffice.Data.DTO.Sales
     public class SalesAdminDTO
     {
         public Int64? SalesAdminTargetId { get; set; }
-		public double? SalesAdminTargetName { get; set; }
+		public string? SalesAdminTargetName { get; set; }
 		public string? Month { get; set; }
 		public Int64? SectorId { get; set; }
 		public Int64? CategoryId { get; set; }
