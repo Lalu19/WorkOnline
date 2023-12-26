@@ -21,5 +21,7 @@ namespace CloudVOffice.Services.Sales
         public List<SalesAdminTarget> GetTargetsByMonthBySalesAdmin(Int64 monthId);
         public MessageEnum UpdateTargetsBySalesAdmin(SalesAdminDTO salesAdminDTO);
         public MessageEnum DeleteTargetsBySalesAdmin(Int64 gstId, Int64 DeletedBy);
-    }
+        public string GetCategoryIdByName(string categoryName);
+
+	}
 }

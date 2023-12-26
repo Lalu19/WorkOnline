@@ -157,7 +157,7 @@
 
                             <div class="d-flex flex-column h-100">
                                 <div class="mb-4 mb-md-5">
-                                    <a href="index.html" class="d-block auth-logo">
+                                    <a href="#" class="d-block auth-logo">
                                         <img src="~/login/images/WO_Logo.png" alt="" height="75" class="auth-logo-dark logoht" id="wologo">
                                         <img src="~/login/images/WO_Logo.png" alt="" height="75" class="auth-logo-light logoht" id="wologo">
                                     </a>
@@ -173,7 +173,7 @@
 
 
 
-                                        <form asp-route="App/Login" asp-route-returnurl="@Context.Request.Query["ReturnUrl"]" method="post" autocomplete="off">
+                                        <form id="loginForm" asp-route="App/Login" asp-route-returnurl="@Context.Request.Query["ReturnUrl"]" method="post" autocomplete="off">
                                             <div asp-validation-summary="ModelOnly" class="message-error">Invalid Password</div>
 
                                             <div class="mb-3">
@@ -245,6 +245,47 @@
         </div>
         <!-- end container-fluid -->
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var rememberCheckbox = document.getElementById("remember-check");
+            var loginForm = document.getElementById("loginForm");
+
+            // Check if there's a saved value in the cookie
+            var rememberMeValue = getCookie("rememberMe");
+
+            // Set the checkbox state based on the cookie value
+            rememberCheckbox.checked = rememberMeValue === "true";
+
+            loginForm.addEventListener("submit", function () {
+                setCookie("rememberMe", rememberCheckbox.checked, 7); // 7 days expiration
+            });
+        });
+
+        // Function to set a cookie
+        function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+
+        // Function to get the value of a cookie
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+    </script>
+
 
     <!-- JAVASCRIPT -->
     <script src="~/login/libs/jquery/jquery.min.js"></script>

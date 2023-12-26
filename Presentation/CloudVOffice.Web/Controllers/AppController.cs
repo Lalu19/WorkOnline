@@ -1,5 +1,7 @@
 ﻿using CloudVOffice.Core.Domain.Common;
+using CloudVOffice.Core.Domain.Logging;
 using CloudVOffice.Core.Domain.Users;
+using CloudVOffice.Data.Persistence;
 using CloudVOffice.Services.Authentication;
 using CloudVOffice.Services.Company;
 using CloudVOffice.Services.Users;
@@ -17,16 +19,20 @@ namespace CloudVOffice.Web.Controllers
         private readonly IUserAuthenticationService _userauthenticationService;
         private readonly IUserService _userService;
         private readonly ICompanyDetailsService _companyDetailsService;
-        public AppController(IUserAuthenticationService userauthenticationService,
+		private readonly ApplicationDBContext _dbContext;
+		public AppController(IUserAuthenticationService userauthenticationService,
             IUserService userService,
+			ApplicationDBContext dbContext,
 
-            ICompanyDetailsService companyDetailsService
+
+			ICompanyDetailsService companyDetailsService
             )
         {
             _userauthenticationService = userauthenticationService;
             _userService = userService;
 
             _companyDetailsService = companyDetailsService;
+            _dbContext = dbContext;
 
         }
         public IActionResult Login()
@@ -93,7 +99,19 @@ namespace CloudVOffice.Web.Controllers
                                 new Claim("UserId",userDetails.UserId.ToString()),
 								//  new Claim("Menu",menujson),
 							};
-                            var a = userDetails.UserRoleMappings;
+
+							var activityLogs = new ActivityLog
+							{
+
+								UserId = userDetails.UserId,
+								CreatedOn = DateTime.Now,
+								LogInTime = DateTime.Now,
+								EntityName = "Login"
+							};
+							_dbContext.ActivityLogs.Add(activityLogs);
+							await _dbContext.SaveChangesAsync();
+
+							var a = userDetails.UserRoleMappings;
 
                             if (companyDetails != null)
                             {
@@ -132,10 +150,36 @@ namespace CloudVOffice.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> LogOut()
         {
-            //SignOutAsync is Extension method for SignOut    
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            //Redirect to home page    
-            return LocalRedirect("/App/Login");
+
+			//SignOutAsync is Extension method for SignOut    
+			await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+			//Redirect to home page
+
+			var activityLog = new ActivityLog
+			{
+				UserId = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString()),
+			    CreatedOn = DateTime.Now,
+				EntityName = "Logout",
+				LogOutTime = DateTime.Now,
+				// Add other properties as needed
+			};
+
+			// Save the activity log
+			try
+			{
+				_dbContext.ActivityLogs.Add(activityLog);
+				await _dbContext.SaveChangesAsync();
+			}
+			catch (Exception ex)
+			{
+				// Log or handle the exception
+				Console.WriteLine(ex.Message);
+				throw; // rethrow the exception to propagate it further if needed
+			}
+
+						
+
+			return LocalRedirect("/App/Login");
         }
 
         [HttpGet("/Applications")]

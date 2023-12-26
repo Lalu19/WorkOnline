@@ -4,6 +4,7 @@ using CloudVOffice.Data.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CloudVOffice.Data.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20231226070257_Inloginnullisadded")]
+    partial class Inloginnullisadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -104,7 +107,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("CompanyDetailsId");
 
-                    b.ToTable("CompanyDetails", (string)null);
+                    b.ToTable("CompanyDetails");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.Company.LetterHead", b =>
@@ -171,7 +174,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("LetterHeadId");
 
-                    b.ToTable("LetterHeads", (string)null);
+                    b.ToTable("LetterHeads");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.Comunication.EmailAccount", b =>
@@ -234,7 +237,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasIndex("Domain");
 
-                    b.ToTable("EmailAccounts", (string)null);
+                    b.ToTable("EmailAccounts");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.Comunication.EmailDomain", b =>
@@ -298,7 +301,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("EmailDomainId");
 
-                    b.ToTable("EmailDomains", (string)null);
+                    b.ToTable("EmailDomains");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.EmailTemplates.EmailTemplate", b =>
@@ -344,7 +347,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("EmailTemplateId");
 
-                    b.ToTable("EmailTemplates", (string)null);
+                    b.ToTable("EmailTemplates");
 
                     b.HasData(
                         new
@@ -406,7 +409,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ActivityLogs", (string)null);
+                    b.ToTable("ActivityLogs");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.Logging.ActivityLogType", b =>
@@ -430,7 +433,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ActivityLogTypes", (string)null);
+                    b.ToTable("ActivityLogTypes");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.Logging.Log", b =>
@@ -475,7 +478,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Logs", (string)null);
+                    b.ToTable("Logs");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.Pemission.Application", b =>
@@ -534,7 +537,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasIndex("ApplicationId1");
 
-                    b.ToTable("Applications", (string)null);
+                    b.ToTable("Applications");
 
                     b.HasData(
                         new
@@ -662,7 +665,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("InstalledApplicationId");
 
-                    b.ToTable("InstalledApplications", (string)null);
+                    b.ToTable("InstalledApplications");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.Pemission.RoleAndApplicationWisePermission", b =>
@@ -703,7 +706,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("RoleAndApplicationWisePermissions", (string)null);
+                    b.ToTable("RoleAndApplicationWisePermissions");
 
                     b.HasData(
                         new
@@ -836,7 +839,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserWiseViewMappers", (string)null);
+                    b.ToTable("UserWiseViewMappers");
 
                     b.HasData(
                         new
@@ -966,7 +969,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.ProductCategories.Sector", b =>
@@ -1001,7 +1004,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("SectorId");
 
-                    b.ToTable("Sectors", (string)null);
+                    b.ToTable("Sectors");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.ProductCategories.SubCategory1", b =>
@@ -1048,7 +1051,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("SubCategory1Id");
 
-                    b.ToTable("SubCategories1", (string)null);
+                    b.ToTable("SubCategories1");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.ProductCategories.SubCategory2", b =>
@@ -1092,7 +1095,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("SubCategory2Id");
 
-                    b.ToTable("SubCategories2", (string)null);
+                    b.ToTable("SubCategories2");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.Sales.SalesAdminTarget", b =>
@@ -1153,7 +1156,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("SalesAdminTargetId");
 
-                    b.ToTable("SalesAdminTargets", (string)null);
+                    b.ToTable("SalesAdminTargets");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.Users.RefreshToken", b =>
@@ -1202,7 +1205,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("RefreshTokenId");
 
-                    b.ToTable("RefreshTokens", (string)null);
+                    b.ToTable("RefreshTokens");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.Users.Role", b =>
@@ -1237,7 +1240,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("RoleId");
 
-                    b.ToTable("Roles", (string)null);
+                    b.ToTable("Roles");
 
                     b.HasData(
                         new
@@ -1328,7 +1331,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
 
                     b.HasData(
                         new
@@ -1369,7 +1372,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserRoleMappings", (string)null);
+                    b.ToTable("UserRoleMappings");
 
                     b.HasData(
                         new
@@ -1412,7 +1415,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("AddDistrictId");
 
-                    b.ToTable("AddDistricts", (string)null);
+                    b.ToTable("AddDistricts");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Districts.DistrictMapping", b =>
@@ -1509,7 +1512,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("EmployeeId");
 
-                    b.ToTable("Employees", (string)null);
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.GST.GST", b =>
@@ -1543,7 +1546,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("GSTId");
 
-                    b.ToTable("GSTs", (string)null);
+                    b.ToTable("GSTs");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.HandlingTypes.HandlingType", b =>
@@ -1578,7 +1581,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("HandlingTypeId");
 
-                    b.ToTable("HandlingTypes", (string)null);
+                    b.ToTable("HandlingTypes");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Items.DamageItem", b =>
@@ -1685,7 +1688,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("DamageItemId");
 
-                    b.ToTable("DamageItems", (string)null);
+                    b.ToTable("DamageItems");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Items.DamageItemForFarming", b =>
@@ -1771,7 +1774,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("DamageItemForFarmingId");
 
-                    b.ToTable("DamageItemForFarmings", (string)null);
+                    b.ToTable("DamageItemForFarmings");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Items.Item", b =>
@@ -1935,7 +1938,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("ItemId");
 
-                    b.ToTable("Items", (string)null);
+                    b.ToTable("Items");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Items.ItemMasterForFarming", b =>
@@ -2060,7 +2063,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("ItemMasterForFarmingId");
 
-                    b.ToTable("ItemMasterForFarmings", (string)null);
+                    b.ToTable("ItemMasterForFarmings");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Months.Month", b =>
@@ -2139,7 +2142,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("PinCodeId");
 
-                    b.ToTable("PinCodes", (string)null);
+                    b.ToTable("PinCodes");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.PinCodes.PinCodeMapping", b =>
@@ -2180,7 +2183,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasIndex("WareHuoseId");
 
-                    b.ToTable("PinCodeMappings", (string)null);
+                    b.ToTable("PinCodeMappings");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.UOMs.Unit", b =>
@@ -2221,7 +2224,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasIndex("UnitGroupId");
 
-                    b.ToTable("Units", (string)null);
+                    b.ToTable("Units");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.UOMs.UnitConversionFactors", b =>
@@ -2263,7 +2266,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasIndex("FromUnitId");
 
-                    b.ToTable("UnitConversionFactors", (string)null);
+                    b.ToTable("UnitConversionFactors");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.UOMs.UnitGroup", b =>
@@ -2298,7 +2301,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("UnitGroupId");
 
-                    b.ToTable("UnitGroups", (string)null);
+                    b.ToTable("UnitGroups");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Vehicles.Vehicle", b =>
@@ -2357,7 +2360,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("VehicleId");
 
-                    b.ToTable("Vehicles", (string)null);
+                    b.ToTable("Vehicles");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Vendors.Vendor", b =>
@@ -2427,7 +2430,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("VendorId");
 
-                    b.ToTable("Vendors", (string)null);
+                    b.ToTable("Vendors");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Vendors.VendorOnboarding", b =>
@@ -2464,7 +2467,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("VendorOnboardingId");
 
-                    b.ToTable("VendorOnboardings", (string)null);
+                    b.ToTable("VendorOnboardings");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.WareHuose", b =>
@@ -2519,7 +2522,7 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasKey("WareHuoseId");
 
-                    b.ToTable("WareHouses", (string)null);
+                    b.ToTable("WareHouses");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.Comunication.EmailAccount", b =>
