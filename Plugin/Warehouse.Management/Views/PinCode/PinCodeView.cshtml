@@ -3,6 +3,13 @@
     ViewData["Title"] = "Pin Code";
 }
 @addTagHelper *, Syncfusion.EJ2
+
+<style>
+    .e-virtualtable{
+        transform: translate(0px, 0px) !important;
+    }
+</style>
+
 @using CloudVOffice.Core.Domain.Common;
 <header class="main-heading">
     <div class="container-fluid">
@@ -49,23 +56,20 @@
                               allowExcelExport="true" allowGrouping="true"
                               allowMultiSorting="true"
                               allowPdfExport="true"
-                              height="340" rowHeight="38"
                               enableHover="false" enableHeaderFocus="true"
                               allowResizing="true" autoFit="true" dataBound="dataBound"
                               enableVirtualization="true" allowSelection="true"
                               toolbarClick="toolbarClick" toolbar="@(new List<string>() {"ExcelExport", "PdfExport", "CsvExport" ,"Search"})" allowPaging="true">
 
                         <e-grid-filtersettings type="Menu"></e-grid-filtersettings>
-                        <e-grid-pagesettings pageCount="4" pageSizes="true"></e-grid-pagesettings>
-                       
-                        <e-grid-columns>
 
+                        <e-grid-pagesettings pageCount="4" pageSizes="true"></e-grid-pagesettings>
+                        <e-grid-columns>
                             <e-grid-column field="Pin" headerText="Pin Code" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column field="Lat" headerText="Latitude" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column field="Long" headerText="Longitude" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column field="IsActive" headerText="Is Active" textAlign="Left" template="#statusTemplate" width="120"></e-grid-column>
-
-                            <e-grid-column headerText="Action" template="#Actions" width="100"></e-grid-column>
+                            <e-grid-column headerText="Action" template="#Actions" width="50"></e-grid-column>
                         </e-grid-columns>
                     </ejs-grid>
 
@@ -166,7 +170,7 @@
     <div class="link">
         <a href="../../WareHouse/PinCode/PinCodeCreate?PinCodeId=${PinCodeId}"><i class="icon-pencil3" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp;
 
-        <button onClick="Delete(${PinCodeId})" style="background: transparent;border: none;"><i class="icon-trash" style="font-size:22px"></i></button>   
+        <button onClick="Delete(${PinCodeId})" style="background: transparent;border: none;"><i class="icon-trash" style="font-size:22px"></i></button>
     </div>
 </script>
 
@@ -208,15 +212,15 @@
         this.autoFitColumns();
     }
 
-    function statusDetail(e) {
+        function statusDetail(e) {
 
-        if (e.IsActive == true) {
-            return '<span class="badge badge-pill badge-success" > True </span>';
-        } else {
-            return '<span class="badge badge-pill badge-dark"> False </span>';
+            if (e.IsActive == true) {
+                return '<span class="badge badge-pill badge-success" > True </span>';
+            } else {
+                return '<span class="badge badge-pill badge-dark"> False </span>';
+            }
+
         }
-
-    }
 
 
 </script>
