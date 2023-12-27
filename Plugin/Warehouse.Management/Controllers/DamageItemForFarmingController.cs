@@ -4,6 +4,7 @@ using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Data.DTO.Company;
 using CloudVOffice.Data.DTO.WareHouses.Items;
 using CloudVOffice.Data.DTO.WareHouses.PinCodes;
+using CloudVOffice.Data.Persistence;
 using CloudVOffice.Services.WareHouses.Itemss;
 using CloudVOffice.Web.Framework;
 using CloudVOffice.Web.Framework.Controllers;
@@ -24,14 +25,18 @@ namespace Warehouse.Management.Controllers
         private readonly IDamageItemForFarmingService _damageItemForFarmingService;
         private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly IItemMasterForFarmingService _itemMasterForFarmingService;
-        public DamageItemForFarmingController(IDamageItemForFarmingService damageItemForFarmingService,
+		private readonly ApplicationDBContext _dbContext;
+		public DamageItemForFarmingController(IDamageItemForFarmingService damageItemForFarmingService,
                                               IWebHostEnvironment hostingEnvironment,
-                                              IItemMasterForFarmingService itemMasterForFarmingService)
+                                              IItemMasterForFarmingService itemMasterForFarmingService,
+											  ApplicationDBContext dbContext
+											  )
         {
             _damageItemForFarmingService = damageItemForFarmingService;
             _hostingEnvironment = hostingEnvironment;
             _itemMasterForFarmingService = itemMasterForFarmingService;
-        }
+			_dbContext = dbContext;
+		}
 
         [HttpGet]
         public IActionResult DamageItemForFarmingCreate(Int64? damageItemForFarmingId)
@@ -44,12 +49,26 @@ namespace Warehouse.Management.Controllers
             {
                 DamageItemForFarming d = _damageItemForFarmingService.GetDamageItemForFarmingById(int.Parse(damageItemForFarmingId.ToString()));
 
-                damageItemForFarmingDTO.ItemMasterForFarmingId = d.ItemMasterForFarmingId;
-                damageItemForFarmingDTO.WareHouseName = d.WareHouseName;
-                damageItemForFarmingDTO.EmployeeName = d.EmployeeName;
-                damageItemForFarmingDTO.VendorName = d.VendorName;
-                damageItemForFarmingDTO.DistrictName = d.DistrictName;
-                damageItemForFarmingDTO.UnitId = d.UnitId;
+				var wh = _dbContext.WareHouses.FirstOrDefault(wh => wh.WareHuoseId == Convert.ToInt32(d.WareHouseName));
+				var dis = _dbContext.AddDistricts.FirstOrDefault(di => di.AddDistrictId == Convert.ToInt32(d.DistrictName));
+				var ven = _dbContext.Vendors.FirstOrDefault(v => v.VendorId == Convert.ToInt32(d.VendorName));
+				var emp = _dbContext.Employees.FirstOrDefault(v => v.EmployeeId == Convert.ToInt32(d.EmployeeName));
+				var unit = _dbContext.Units.FirstOrDefault(v => v.UnitId == Convert.ToInt32(d.ShortName));
+
+				damageItemForFarmingDTO.WareHouseName = wh.WareHouseName;
+				damageItemForFarmingDTO.DistrictName = dis.DistrictName;
+				damageItemForFarmingDTO.VendorName = ven.VendorName;
+				damageItemForFarmingDTO.EmployeeName = emp.EmployeeName;
+				damageItemForFarmingDTO.ShortName = unit.ShortName;
+
+				damageItemForFarmingDTO.ItemMasterForFarmingId = d.ItemMasterForFarmingId;
+
+                //damageItemForFarmingDTO.WareHouseName = d.WareHouseName;
+                //damageItemForFarmingDTO.EmployeeName = d.EmployeeName;
+                //damageItemForFarmingDTO.VendorName = d.VendorName;
+                //damageItemForFarmingDTO.DistrictName = d.DistrictName;
+                //damageItemForFarmingDTO.UnitId = d.UnitId;
+
                 damageItemForFarmingDTO.ProductName = d.ProductName;
                 damageItemForFarmingDTO.QtyPerKg = d.QtyPerKg;
                 damageItemForFarmingDTO.Price = d.Price;
