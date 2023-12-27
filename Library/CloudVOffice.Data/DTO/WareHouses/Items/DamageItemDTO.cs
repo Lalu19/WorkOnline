@@ -16,10 +16,12 @@ namespace CloudVOffice.Data.DTO.WareHouses.Items
         public string? DistrictName { get; set; }
         public string? VendorName { get; set; }
         public string? EmployeeName { get; set; }
-        public string? CompanyName { get; set; }
+		public Int64? UnitId { get; set; }
+		public string? ShortName { get; set; }
+		public string? CompanyName { get; set; }
         public string? BrandName { get; set; }
         public double ProductWeight { get; set; }
-        public Int64? UnitId { get; set; }
+	
         public double? CaseWeight { get; set; }
         public double? UnitPerCase { get; set; }
         public DateTime? ManufactureDate { get; set; }

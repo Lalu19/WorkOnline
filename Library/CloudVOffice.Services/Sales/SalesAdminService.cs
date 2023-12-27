@@ -154,5 +154,15 @@ namespace CloudVOffice.Services.Sales
                 throw;
             }
         }
+
+        public string GetCategoryIdByName(string categoryName)
+        {
+            var category = _dbContext.Categories.FirstOrDefault(x => x.CategoryName == categoryName);
+            if (category != null)
+            {
+                return category.CategoryId.ToString();
+            }
+            else { return null; }
+        }
     }
 }

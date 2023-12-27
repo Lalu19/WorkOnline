@@ -348,7 +348,49 @@ namespace CloudVOffice.Services.WareHouses.Itemss
             }
         }
 
-        public MessageEnum DeleteItem(Int64 itemId, Int64 DeletedBy)
+
+		public Item GetItemById(Int64 itemId)
+		{
+			try
+			{
+
+				List<WareHuose> wareHuoses = _dbContext.WareHouses.Where(x => x.Deleted == false).ToList();
+				List<Employee> employees = _dbContext.Employees.Where(x => x.Deleted == false).ToList();
+				List<Vendor> venders = _dbContext.Vendors.Where(x => x.Deleted == false).ToList();
+				List<AddDistrict> districts = _dbContext.AddDistricts.Where(x => x.Deleted == false).ToList();
+				List<Unit> units = _dbContext.Units.Where(x => x.Deleted == false).ToList();
+				List<HandlingType> handlingTypes = _dbContext.HandlingTypes.Where(h => h.Deleted == false).ToList();
+
+				Item item = _dbContext.Items.Where(i => i.Deleted == false && i.ItemId == itemId).FirstOrDefault();
+
+
+				WareHuose wareHuose = wareHuoses.FirstOrDefault(s => s.WareHuoseId == Convert.ToInt32(item.WareHuoseId));
+				Employee employee = employees.FirstOrDefault(s => s.EmployeeId == Convert.ToInt32(item.EmployeeId));
+				Vendor vendor = venders.FirstOrDefault(s => s.VendorId == Convert.ToInt32(item.VendorId));
+				AddDistrict addDistrict = districts.FirstOrDefault(s => s.AddDistrictId == Convert.ToInt32(item.AddDistrictId));
+				Unit unit = units.FirstOrDefault(s => s.UnitId == Convert.ToInt32(item.UnitId));
+				HandlingType handlingType = handlingTypes.FirstOrDefault(s => s.HandlingTypeId == Convert.ToInt32(item.HandlingTypeId));
+
+
+				item.WareHouseName = wareHuose != null ? wareHuose.WareHouseName : null;
+				item.EmployeeName = employee != null ? employee.EmployeeName : null;
+				item.VendorName = vendor != null ? vendor.VendorName : null;
+				item.DistrictName = addDistrict != null ? addDistrict.DistrictName : null;
+				item.ShortName = unit != null ? unit.ShortName : null;
+				item.HandlingType = handlingType != null ? handlingType.HandlingTypeName : null;
+
+
+				return item;
+
+			}
+			catch
+			{
+				throw;
+			}
+		}
+
+
+		public MessageEnum DeleteItem(Int64 itemId, Int64 DeletedBy)
         {
             try
             {

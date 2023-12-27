@@ -305,31 +305,32 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 		{
 			try
 			{
+				
+				List<WareHuose> wareHuoses = _dbContext.WareHouses.Where(x => x.Deleted == false).ToList();
+				List<Employee> employees = _dbContext.Employees.Where(x => x.Deleted == false).ToList();
+				List<Vendor> venders = _dbContext.Vendors.Where(x => x.Deleted == false).ToList();
+				List<AddDistrict> districts = _dbContext.AddDistricts.Where(x => x.Deleted == false).ToList();
+				List<Unit> units = _dbContext.Units.Where(x => x.Deleted == false).ToList();
 
-				ItemMasterForFarming items = _dbContext.ItemMasterForFarmings.Where(i => i.Deleted == false && i.ItemMasterForFarmingId == itemMasterForFarmingId).FirstOrDefault();
+				ItemMasterForFarming item = _dbContext.ItemMasterForFarmings.Where(i => i.Deleted == false && i.ItemMasterForFarmingId == itemMasterForFarmingId).FirstOrDefault();
+
+				
+					WareHuose wareHuose = wareHuoses.FirstOrDefault(s => s.WareHuoseId == Convert.ToInt32(item.WareHuoseId));
+					Employee employee = employees.FirstOrDefault(s => s.EmployeeId == Convert.ToInt32(item.EmployeeId));
+					Vendor vendor = venders.FirstOrDefault(s => s.VendorId == Convert.ToInt32(item.VendorId));
+					AddDistrict addDistrict = districts.FirstOrDefault(s => s.AddDistrictId == Convert.ToInt32(item.AddDistrictId));
+					Unit unit = units.FirstOrDefault(s => s.UnitId == Convert.ToInt32(item.UnitId));
 
 
-				WareHuose wareHuose = _dbContext.WareHouses.FirstOrDefault(s => s.WareHuoseId == Convert.ToInt32(items.WareHuoseId));
-				Employee employee = _dbContext.Employees.FirstOrDefault(s => s.EmployeeId == Convert.ToInt32(items.EmployeeId));
-				Vendor vendor = _dbContext.Vendors.FirstOrDefault(s => s.VendorId == Convert.ToInt32(items.VendorId));
-                AddDistrict addDistrict = _dbContext.AddDistricts.FirstOrDefault(s => s.AddDistrictId == Convert.ToInt32(items.AddDistrictId));
-				Unit unit = _dbContext.Units.FirstOrDefault(s => s.UnitId == Convert.ToInt32(items.UnitId));
+					item.WareHouseName = wareHuose != null ? wareHuose.WareHouseName : null;
+					item.EmployeeName = employee != null ? employee.EmployeeName : null;
+					item.VendorName = vendor != null ? vendor.VendorName : null;
+					item.DistrictName = addDistrict != null ? addDistrict.DistrictName : null;
+					item.ShortName = unit != null ? unit.ShortName : null;
+				
 
+				return item;
 
-				items.WareHouseName = wareHuose != null ? wareHuose.WareHouseName : null;
-				items.EmployeeName = employee != null ? employee.EmployeeName : null;
-				items.VendorName = vendor != null ? vendor.VendorName : null;
-				items.DistrictName = addDistrict != null ? addDistrict.DistrictName : null;
-				items.ShortName = unit != null ? unit.ShortName : null;
-
-
-				items.WareHuoseId = wareHuose != null ? Convert.ToInt32(wareHuose.WareHouseName) : (int?)null;
-				items.EmployeeId = employee != null ? Convert.ToInt32(employee.EmployeeName) : (int?)null;
-				items.VendorId = vendor != null ? Convert.ToInt32(vendor.VendorName) : (int?)null;
-				items.AddDistrictId = addDistrict != null ? Convert.ToInt32(addDistrict.DistrictName) : (int?)null;
-				items.UnitId = unit != null ? Convert.ToInt32(unit.ShortName) : (int?)null;
-
-				return items;
 			}
 			catch
 			{

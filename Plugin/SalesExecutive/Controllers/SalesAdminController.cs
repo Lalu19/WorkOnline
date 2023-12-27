@@ -38,10 +38,11 @@ namespace SalesExecutive.Controllers
 		{
 
 			ViewBag.Sectors = _sectorService.GetSectorList();
+			ViewBag.Categories = _categoryService.GetCategoryList();
 
 			SalesAdminDTO salesAdminDTO = new SalesAdminDTO();
 
-			if(salesAdminTargetId != null)
+			if (salesAdminTargetId != null)
 			{
 				var target = _salesAdminService.GetSalesAdminTargetBySalesAdminId(int.Parse(salesAdminTargetId.ToString()));
 
@@ -61,54 +62,61 @@ namespace SalesExecutive.Controllers
 		}
 
 
+		//[HttpPost]
+		//public IActionResult CreateTargetBySalesAdmin(SalesAdminTargetMasterDTO Targets)
+		//{
+
 		[HttpPost]
-		public IActionResult CreateTargetBySalesAdmin(SalesAdminDTO salesAdminDTO)
+		public IActionResult CreateTargetBySalesAdmin([FromBody] SalesAdminTargetMasterDTO model)
 		{
-			salesAdminDTO.CreatedBy = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
+
+			//salesAdminDTO.CreatedBy = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
 
 
-			
-			if (salesAdminDTO.SalesAdminTargetId == null)
-			{
-				var a = _salesAdminService.CreateTargetsBySalesAdmin(salesAdminDTO);
-				if (a == MessageEnum.Success)
-				{
-					TempData["msg"] = MessageEnum.Success;
-					return Redirect("/SalesExecutive/SalesAdmin/SalesAdminTargetView");
-				}
-				else if (a == MessageEnum.Duplicate)
-				{
 
-					TempData["msg"] = MessageEnum.Duplicate;
-					ModelState.AddModelError("", "PinCode Already Exists");
-				}
-				else
-				{
-					TempData["msg"] = MessageEnum.UnExpectedError;
-					ModelState.AddModelError("", "Un-Expected Error");
-				}
-			}
-			else
-			{
-				var a = _salesAdminService.UpdateTargetsBySalesAdmin(salesAdminDTO);
-				if (a == MessageEnum.Updated)
-				{
-					TempData["msg"] = MessageEnum.Updated;
-					return Redirect("/SalesExecutive/SalesAdmin/SalesAdminTargetView");
-				}
-				else if (a == MessageEnum.Duplicate)
-				{
-					TempData["msg"] = MessageEnum.Duplicate;
-					ModelState.AddModelError("", "PinCode Already Exists");
-				}
-				else
-				{
-					TempData["msg"] = MessageEnum.UnExpectedError;
-					ModelState.AddModelError("", "Un-Expected Error");
-				}
-			}
-			
-			return View("~/Plugins/SalesExecutive/Views/SalesAdmins/SalesAdminCreate.cshtml", salesAdminDTO);
+			//if (salesAdminDTO.SalesAdminTargetId == null)
+			//{
+			//	var a = _salesAdminService.CreateTargetsBySalesAdmin(salesAdminDTO);
+			//	if (a == MessageEnum.Success)
+			//	{
+			//		TempData["msg"] = MessageEnum.Success;
+			//		return Redirect("/SalesExecutive/SalesAdmin/SalesAdminTargetView");
+			//	}
+			//	else if (a == MessageEnum.Duplicate)
+			//	{
+
+			//		TempData["msg"] = MessageEnum.Duplicate;
+			//		ModelState.AddModelError("", "PinCode Already Exists");
+			//	}
+			//	else
+			//	{
+			//		TempData["msg"] = MessageEnum.UnExpectedError;
+			//		ModelState.AddModelError("", "Un-Expected Error");
+			//	}
+			//}
+			//else
+			//{
+			//	var a = _salesAdminService.UpdateTargetsBySalesAdmin(salesAdminDTO);
+			//	if (a == MessageEnum.Updated)
+			//	{
+			//		TempData["msg"] = MessageEnum.Updated;
+			//		return Redirect("/SalesExecutive/SalesAdmin/SalesAdminTargetView");
+			//	}
+			//	else if (a == MessageEnum.Duplicate)
+			//	{
+			//		TempData["msg"] = MessageEnum.Duplicate;
+			//		ModelState.AddModelError("", "PinCode Already Exists");
+			//	}
+			//	else
+			//	{
+			//		TempData["msg"] = MessageEnum.UnExpectedError;
+			//		ModelState.AddModelError("", "Un-Expected Error");
+			//	}
+			//}
+
+			//return View("~/Plugins/SalesExecutive/Views/SalesAdmins/SalesAdminCreate.cshtml", salesAdminDTO);
+
+			return View("~/Plugins/SalesExecutive/Views/SalesAdmins/SalesAdminCreate.cshtml");
 		}
 
 		public IActionResult SalesAdminTargetView()
@@ -128,5 +136,11 @@ namespace SalesExecutive.Controllers
             return Redirect("/SalesExecutive/SalesAdmin/SalesAdminTargetView");
         }
 
-    }
+
+		public string GetCategoryIdByName(string categoryName)
+		{
+			return _salesAdminService.GetCategoryIdByName(categoryName);
+		}
+
+	}
 }

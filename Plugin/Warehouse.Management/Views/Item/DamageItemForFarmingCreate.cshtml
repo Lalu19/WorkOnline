@@ -97,10 +97,16 @@
 								<span asp-validation-for="DistrictName"></span>
 							</div>
 
-							<div class="form-group col-md-3">
+							@*<div class="form-group col-md-3">
 								<label for="UnitId" class="form-label">Unit Id&nbsp;</label>
 								<input asp-for="@Model.UnitId" type="text" id="UnitId" class="form-control" autofocus="autofocus" placeholder="UnitId" readonly />
 								<span asp-validation-for="UnitId"></span>
+							</div>*@
+
+							<div class="form-group col-md-3">
+								<label for="ShortName" class="form-label">Unit Name</label>
+								<input asp-for="@Model.ShortName" type="text" id="ShortName" class="form-control" autofocus="autofocus" placeholder="ShortName" />
+								<span asp-validation-for="ShortName"></span>
 							</div>
 
 							<div class="form-group col-md-3">
@@ -241,7 +247,7 @@
                 var hsnTextbox = document.getElementById("HSN");
 				var productTextbox = document.getElementById("ProductName");
 				var priceTextbox = document.getElementById("Price");
-				var unitTextbox = document.getElementById("UnitId");
+				var unitTextbox = document.getElementById("ShortName");
 				var qtyPerKgTextbox = document.getElementById("QtyPerKg");
 				var minQtyTextbox = document.getElementById("MinQty");
 				var invoiceNoTextbox = document.getElementById("InvoiceNo");
@@ -262,11 +268,17 @@
 				invoiceNoTextbox.value = result.invoiceNo;
 
 
-				wareHouseTextbox.value = result.wareHuoseId;
-				employeeTextbox.value = result.employeeId;
-				venderTextbox.value = result.vendorId;
-				districtTextbox.value = result.addDistrictId;
-				unitTextbox.value = result.unitId;
+				//wareHouseTextbox.value = result.wareHuoseId;
+				//employeeTextbox.value = result.employeeId;
+				//venderTextbox.value = result.vendorId;
+				//districtTextbox.value = result.addDistrictId;
+				//unitTextbox.value = result.unitId;
+
+				wareHouseTextbox.value = result.wareHouseName;
+				employeeTextbox.value = result.employeeName;
+				venderTextbox.value = result.vendorName;
+				districtTextbox.value = result.districtName;
+				unitTextbox.value = result.shortName;
 
 
 				var receivedDate = result.receivedDate;

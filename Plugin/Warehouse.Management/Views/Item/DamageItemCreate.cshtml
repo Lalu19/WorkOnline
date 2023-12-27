@@ -66,12 +66,6 @@
 								<span asp-validation-for="ItemId"></span>
 							</div>
 
-							@*<div class="form-group col-md-3">
-								<label for="ItemId" class="form-label">ItemId</label>
-								<input asp-for="@Model.ItemId" type="text" class="form-control" autofocus="autofocus" placeholder="ItemId " />
-								<span asp-validation-for="ItemId"></span>
-							</div>*@
-
 							<div class="form-group col-md-3">
 								<label for="ItemName" class="form-label">ItemName</label>
 								<input asp-for="@Model.ItemName" type="text" id="ItemName" class="form-control" autofocus="autofocus" placeholder="ItemName" />
@@ -124,10 +118,16 @@
 								<span asp-validation-for="ProductWeight"></span>
 							</div>
 
-							<div class="form-group col-md-3">
+							@*<div class="form-group col-md-3">
 								<label for="UnitId" class="form-label">UnitId</label>
 								<input asp-for="@Model.UnitId" type="text" id="UnitId" class="form-control" autofocus="autofocus" placeholder="UnitId" />
 								<span asp-validation-for="UnitId"></span>
+							</div>*@
+
+							<div class="form-group col-md-3">
+								<label for="ShortName" class="form-label">Unit Name</label>
+								<input asp-for="@Model.ShortName" type="text" id="ShortName" class="form-control" autofocus="autofocus" placeholder="ShortName" />
+								<span asp-validation-for="ShortName"></span>
 							</div>
 							<div class="form-group col-md-3">
 								<label for="CaseWeight" class="form-label">CaseWeight</label>
@@ -273,7 +273,7 @@
 				var companyTextbox = document.getElementById("CompanyName");
 				var brandTextbox = document.getElementById("BrandName");
 				var productWeightTextbox = document.getElementById("ProductWeight");
-				var unitTextbox = document.getElementById("UnitId");
+				var unitTextbox = document.getElementById("ShortName");
 				var caseWeightTextbox = document.getElementById("CaseWeight");
 				var unitPerCaseTextbox = document.getElementById("UnitPerCase");
 				var mrpTextbox = document.getElementById("MRP");
@@ -286,14 +286,9 @@
 
 
 				itemTextbox.value = result.itemName;
-				wareHouseTextbox.value = result.wareHouseName;
-				districtTextbox.value = result.districtName;
-				venderTextbox.value = result.vendorName;
-				employeeTextbox.value = result.employeeName;
 				companyTextbox.value = result.companyName;
 				brandTextbox.value = result.brandName;
 				productWeightTextbox.value = result.productWeight;
-				unitTextbox.value = result.unitId;
 				caseWeightTextbox.value = result.caseWeight;
 				unitPerCaseTextbox.value = result.unitPerCase;
 				mrpTextbox.value = result.mrp;
@@ -301,8 +296,22 @@
 				salesCostTextbox.value = result.salesCost;
 				cgstTextbox.value = result.cgst;
 				sgstTextbox.value = result.sgst;
-				handlingTypeTextbox.value = result.handlingType;
 				invoiceTextbox.value = result.invoiceNo;
+
+				//wareHouseTextbox.value = result.wareHuoseId;
+				//districtTextbox.value = result.addDistrictId;
+				//venderTextbox.value = result.vendorId;
+				//employeeTextbox.value = result.employeeId;
+				//unitTextbox.value = result.unitId;
+				//handlingTypeTextbox.value = result.handlingTypeId;
+
+
+				wareHouseTextbox.value = result.wareHouseName;
+				districtTextbox.value = result.districtName;
+				venderTextbox.value = result.vendorName;
+				employeeTextbox.value = result.employeeName;
+				unitTextbox.value = result.shortName;
+				handlingTypeTextbox.value = result.handlingType;
 
 
 				var receivedDate = result.receivedDate;
@@ -332,6 +341,9 @@
 
 			}
 		});
+
+
+
 	}
 </script>
 
