@@ -56,7 +56,7 @@ namespace Warehouse.Management.Controllers
 				var ven = _dbContext.Vendors.FirstOrDefault(v => v.VendorId == Convert.ToInt32(d.VendorName));
 				var emp = _dbContext.Employees.FirstOrDefault(v => v.EmployeeId == Convert.ToInt32(d.EmployeeName));
 				var han = _dbContext.HandlingTypes.FirstOrDefault(v => v.HandlingTypeId == Convert.ToInt32(d.HandlingType));
-				var unit = _dbContext.Units.FirstOrDefault(v => v.UnitId == Convert.ToInt32(d.UnitId));
+				var unit = _dbContext.Units.FirstOrDefault(v => v.UnitId == Convert.ToInt32(d.ShortName));
 
 				damageItemDTO.ItemId = d.ItemId;
 				damageItemDTO.ItemName = d.ItemName;
@@ -65,12 +65,12 @@ namespace Warehouse.Management.Controllers
 				damageItemDTO.VendorName = ven.VendorName;
 				damageItemDTO.EmployeeName = emp.EmployeeName;
 				damageItemDTO.HandlingType = han.HandlingTypeName;
-				//damageItemDTO.UnitId = unit.ShortName;
+				damageItemDTO.ShortName = unit.ShortName;
 
 				damageItemDTO.CompanyName = d.CompanyName;
 				damageItemDTO.BrandName = d.BrandName;
 				damageItemDTO.ProductWeight = d.ProductWeight;
-				damageItemDTO.UnitId = d.UnitId;
+				//damageItemDTO.UnitId = d.UnitId;
 				damageItemDTO.CaseWeight = d.CaseWeight;
 				damageItemDTO.UnitPerCase = d.UnitPerCase;
 				damageItemDTO.ManufactureDate = d.ManufactureDate;
