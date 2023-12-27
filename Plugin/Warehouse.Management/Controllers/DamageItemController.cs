@@ -2,6 +2,7 @@
 using CloudVOffice.Core.Domain.WareHouses.Items;
 using CloudVOffice.Data.DTO.Company;
 using CloudVOffice.Data.DTO.WareHouses.Items;
+using CloudVOffice.Data.Persistence;
 using CloudVOffice.Services.WareHouses.Itemss;
 using CloudVOffice.Web.Framework;
 using CloudVOffice.Web.Framework.Controllers;
@@ -23,14 +24,18 @@ namespace Warehouse.Management.Controllers
 		private readonly IDamageItemService _damageItemService;
 		private readonly IWebHostEnvironment _hostingEnvironment;
 		private readonly IItemService _itemService;
+		private readonly ApplicationDBContext _dbContext;
+
 
 		public DamageItemController(IDamageItemService damageItemService,
 			                        IWebHostEnvironment hostingEnvironment,
-									IItemService itemService)
+									IItemService itemService, ApplicationDBContext dbContext)
+
 		{
 			_damageItemService = damageItemService;
 			_hostingEnvironment = hostingEnvironment;
 			_itemService = itemService;
+			_dbContext = dbContext;
 		}
 
 		[HttpGet]
@@ -45,12 +50,23 @@ namespace Warehouse.Management.Controllers
 
 				DamageItem d = _damageItemService.GetDamageItemByDamageItemId(int.Parse(damageItemId.ToString()));
 
+
+				var wh = _dbContext.WareHouses.FirstOrDefault(wh => wh.WareHuoseId == Convert.ToInt32(d.WareHouseName));
+				var dis = _dbContext.AddDistricts.FirstOrDefault(di => di.AddDistrictId == Convert.ToInt32(d.DistrictName));
+				var ven = _dbContext.Vendors.FirstOrDefault(v => v.VendorId == Convert.ToInt32(d.VendorName));
+				var emp = _dbContext.Employees.FirstOrDefault(v => v.EmployeeId == Convert.ToInt32(d.EmployeeName));
+				var han = _dbContext.HandlingTypes.FirstOrDefault(v => v.HandlingTypeId == Convert.ToInt32(d.HandlingType));
+				var unit = _dbContext.Units.FirstOrDefault(v => v.UnitId == Convert.ToInt32(d.UnitId));
+
 				damageItemDTO.ItemId = d.ItemId;
 				damageItemDTO.ItemName = d.ItemName;
-				damageItemDTO.WareHouseName = d.WareHouseName;
-				damageItemDTO.DistrictName = d.DistrictName;
-				damageItemDTO.VendorName = d.VendorName;
-				damageItemDTO.EmployeeName = d.EmployeeName;
+				damageItemDTO.WareHouseName = wh.WareHouseName;
+				damageItemDTO.DistrictName = dis.DistrictName;
+				damageItemDTO.VendorName = ven.VendorName;
+				damageItemDTO.EmployeeName = emp.EmployeeName;
+				damageItemDTO.HandlingType = han.HandlingTypeName;
+				//damageItemDTO.UnitId = unit.ShortName;
+
 				damageItemDTO.CompanyName = d.CompanyName;
 				damageItemDTO.BrandName = d.BrandName;
 				damageItemDTO.ProductWeight = d.ProductWeight;
@@ -64,7 +80,6 @@ namespace Warehouse.Management.Controllers
 				damageItemDTO.SalesCost = d.SalesCost;
 				damageItemDTO.CGST = d.CGST;
 				damageItemDTO.SGST = d.SGST;
-				damageItemDTO.HandlingType = d.HandlingType;
 				damageItemDTO.ReceivedDate = d.ReceivedDate;
 				damageItemDTO.Reason = d.Reason;
 				damageItemDTO.DamagePics = d.DamagePics;
