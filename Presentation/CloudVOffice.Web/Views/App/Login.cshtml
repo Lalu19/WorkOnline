@@ -179,7 +179,7 @@
                                             <div class="mb-3">
 
                                                 <label for="Email" class="form-label">Email</label>
-                                                <input asp-for="Email" class="form-control" autofocus="autofocus" placeholder="Enter Email Id" />
+                                                <input id="inputEmail" asp-for="Email" class="form-control" autofocus="autofocus" placeholder="Enter Email Id" />
                                                 <span asp-validation-for="Email"></span>
                                             </div>
 
@@ -192,7 +192,7 @@
                                                 <div class="input-group auth-pass-inputgroup">
 
 
-                                                    <input asp-for="Password" class="form-control" autofocus="autofocus" placeholder="Enter Password" aria-label="Password" aria-describedby="password-addon" />
+                                                    <input id="inputPassword" asp-for="Password" class="form-control" autofocus="autofocus" placeholder="Enter Password" aria-label="Password" aria-describedby="password-addon" />
                                                     <button class="btn btn-light " type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
                                                 </div>
                                                 <span asp-validation-for="Password"></span>
@@ -248,22 +248,50 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+            //var rememberCheckbox = document.getElementById("remember-check");
+            //var loginForm = document.getElementById("loginForm");
+
+            //// Check if there's a saved value in the cookie
+            //var rememberMeValue = getCookie("rememberMe");
+
+            //// Set the checkbox state based on the cookie value
+            //rememberCheckbox.checked = rememberMeValue === "true";
+
+            //loginForm.addEventListener("submit", function () {
+            //    setCookie("rememberMe", rememberCheckbox.checked, 7); // 7 days expiration
+            //});
             var rememberCheckbox = document.getElementById("remember-check");
+            var emailInput = document.getElementById("inputEmail");
+            var passwordInput = document.getElementById("inputPassword");
             var loginForm = document.getElementById("loginForm");
 
-            // Check if there's a saved value in the cookie
             var rememberMeValue = getCookie("rememberMe");
 
-            // Set the checkbox state based on the cookie value
             rememberCheckbox.checked = rememberMeValue === "true";
+
+            if (rememberCheckbox.checked) {
+                var storedEmail = getCookie("storedEmail");
+                var storedPassword = getCookie("storedPassword");
+
+                if (storedEmail) {
+                    emailInput.value = storedEmail;
+                }
+
+                if (storedPassword) {
+                    passwordInput.value = storedPassword;
+                }
+            }
 
             loginForm.addEventListener("submit", function () {
                 setCookie("rememberMe", rememberCheckbox.checked, 7); // 7 days expiration
-            });
-        });
 
-        // Function to set a cookie
-        function setCookie(name, value, days) {
+                if (rememberCheckbox.checked) {
+                    setCookie("storedEmail", emailInput.value, 7);
+                    setCookie("storedPassword", passwordInput.value, 7);
+                }
+            });
+
+          function setCookie(name, value, days) {
             var expires = "";
             if (days) {
                 var date = new Date();
@@ -271,10 +299,9 @@
                 expires = "; expires=" + date.toUTCString();
             }
             document.cookie = name + "=" + (value || "") + expires + "; path=/";
-        }
+          }
 
-        // Function to get the value of a cookie
-        function getCookie(name) {
+          function getCookie(name) {
             var nameEQ = name + "=";
             var ca = document.cookie.split(';');
             for (var i = 0; i < ca.length; i++) {
@@ -284,6 +311,7 @@
             }
             return null;
         }
+        });
     </script>
 
 

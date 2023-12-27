@@ -6,6 +6,7 @@ using CloudVOffice.Services.Authentication;
 using CloudVOffice.Services.Company;
 using CloudVOffice.Services.Users;
 using CloudVOffice.Web.Model.User;
+using LinqToDB;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -147,40 +148,80 @@ namespace CloudVOffice.Web.Controllers
         }
 
 
+        //     [HttpGet]
+        //     public async Task<IActionResult> LogOut()
+        //     {
+
+        ////SignOutAsync is Extension method for SignOut    
+        //await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        ////Redirect to home page
+
+        //var activityLog = new ActivityLog
+        //{
+        //	UserId = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString()),
+        //    CreatedOn = DateTime.Now,
+        //	EntityName = "Logout",
+        //	LogOutTime = DateTime.Now,
+        //	// Add other properties as needed
+        //};
+
+        //// Save the activity log
+        //try
+        //{
+        //	_dbContext.ActivityLogs.Add(activityLog);
+        //	await _dbContext.SaveChangesAsync();
+        //}
+        //catch (Exception ex)
+        //{
+        //	// Log or handle the exception
+        //	Console.WriteLine(ex.Message);
+        //	throw; // rethrow the exception to propagate it further if needed
+        //}
+
+
+
+        //return LocalRedirect("/App/Login");
+        //     }
+
         [HttpGet]
         public async Task<IActionResult> LogOut()
         {
+            // Find the user ID from the claims
+            var userIdClaim = User.Claims.FirstOrDefault(x => x.Type == "UserId");
+            if (userIdClaim != null && Int64.TryParse(userIdClaim.Value, out var userId))
+            {
+                // Find the corresponding login activity log
+                var loginActivityLog = await _dbContext.ActivityLogs
+                    .Where(log => log.UserId == userId && log.EntityName == "Login")
+                    .OrderByDescending(log => log.CreatedOn)
+                    .FirstOrDefaultAsync();
 
-			//SignOutAsync is Extension method for SignOut    
-			await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-			//Redirect to home page
+                if (loginActivityLog != null)
+                {
+                    // Update the existing login activity log with the logout time
+                    loginActivityLog.LogOutTime = DateTime.Now;
 
-			var activityLog = new ActivityLog
-			{
-				UserId = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString()),
-			    CreatedOn = DateTime.Now,
-				EntityName = "Logout",
-				LogOutTime = DateTime.Now,
-				// Add other properties as needed
-			};
+                    // Save the changes
+                    try
+                    {
+                        await _dbContext.SaveChangesAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        // Log or handle the exception
+                        Console.WriteLine(ex.Message);
+                        throw; // rethrow the exception to propagate it further if needed
+                    }
+                }
+            }
 
-			// Save the activity log
-			try
-			{
-				_dbContext.ActivityLogs.Add(activityLog);
-				await _dbContext.SaveChangesAsync();
-			}
-			catch (Exception ex)
-			{
-				// Log or handle the exception
-				Console.WriteLine(ex.Message);
-				throw; // rethrow the exception to propagate it further if needed
-			}
+            // Sign out the user
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-						
-
-			return LocalRedirect("/App/Login");
+            // Redirect to the login page
+            return LocalRedirect("/App/Login");
         }
+
 
         [HttpGet("/Applications")]
         [Authorize]
