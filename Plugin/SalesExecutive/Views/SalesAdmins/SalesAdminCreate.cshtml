@@ -10,9 +10,6 @@
 
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<style>
-
-</style>
 <header class="main-heading">
 	<div class="container-fluid">
 		<div class="row">
@@ -162,9 +159,9 @@
 							</div>
 						</div>
 
-
-						<div class="table-responsive">
-							<table id="Statee" class="table table-bordered table-hover mb-0">
+						
+						<div class="table-responsive mb-5">
+							<table id="Statee" class="table table-bordered table-hover">
 								<thead>
 									<tr>
 										<th>Sector</th>
@@ -178,6 +175,21 @@
 							</table>
 						</div>
 
+						<div class="table-responsive col-md-3 mt-5">
+							<table id="Sector" class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<th>Sector</th>
+										<!-- Add additional headers as needed -->
+										<th>Total Target</th>
+									</tr>
+								</thead>
+								<tbody id="Sector_tb">
+									<!-- You can populate this tbody dynamically with sector information -->
+								</tbody>
+							</table>
+						</div>
+						
 
 						<br />
 						<br />
@@ -338,54 +350,145 @@
 	
 
 
-	$(document).ready(function () {
-		$("#Add_Target").click(function (e) {
+	//$(document).ready(function () {
+	//	$("#Add_Target").click(function (e) {
 
+	//		GetCategoryId();
+
+	//		var secId = selectedSectorValue;
+	//		var SectorValue = $('#SectorId').val();		
+	//		var CategoryValue = $('#CategoryId').val();
+	//		var CategoryId = selectedCategoryValue;
+	//		var CategoryText = $('#CategoryId option:selected').text();
+	//		var CategoryWiseValue = $('#CategoryWiseTarget').val();
+
+	//		if (SectorValue && CategoryValue && CategoryWiseValue) {
+	//			var row = "<tr><td data-value='" + secId + "'>" + SectorValue + "</td><td data-value='" + CategoryId + "'>" + CategoryValue + "</td><td data-value='" + CategoryWiseValue + "'>" + CategoryWiseValue + "</td><td><button class='delRowBtn'><i class='ion-trash-b' style='color: red;'></i></button></td></tr>";
+
+	//			$('#Target_tb').append(row);
+	//		} else {
+	//			// Handle empty values or show an error message
+	//			console.error("Sector, Category, and Category Wise values cannot be empty.");
+	//		}
+	//	});
+
+	//	$(document).on("click", ".delRowBtn", function () {
+	//		$(this).closest("tr").remove();
+	//	});
+	//});
+
+
+
+	$(document).ready(function () {
+		// Create an object to store sums for each secId
+		var sectorSums = {};
+
+		$("#Add_Target").click(function (e) {
 			GetCategoryId();
 
 			var secId = selectedSectorValue;
-			var SectorValue = $('#SectorId').val();		
+			var SectorValue = $('#SectorId').val();
 			var CategoryValue = $('#CategoryId').val();
 			var CategoryId = selectedCategoryValue;
 			var CategoryText = $('#CategoryId option:selected').text();
-			var CategoryWiseValue = $('#CategoryWiseTarget').val();
+			var CategoryWiseValue = parseFloat($('#CategoryWiseTarget').val()) || 0; // Parse as float, default to 0 if not a valid number
 
-			if (SectorValue && CategoryValue && CategoryWiseValue) {
+			if (SectorValue && CategoryValue && !isNaN(CategoryWiseValue)) {
+				// Check if the secId already exists in the sums object
+				if (sectorSums.hasOwnProperty(SectorValue)) {
+					// If exists, add the CategoryWiseValue to the existing sum
+					sectorSums[SectorValue] += CategoryWiseValue;
+				} else {
+					// If not exists, create a new entry with the CategoryWiseValue
+					sectorSums[SectorValue] = CategoryWiseValue;
+				}
+
+				updateFloatingTextboxes();
+
 				var row = "<tr><td data-value='" + secId + "'>" + SectorValue + "</td><td data-value='" + CategoryId + "'>" + CategoryValue + "</td><td data-value='" + CategoryWiseValue + "'>" + CategoryWiseValue + "</td><td><button class='delRowBtn'><i class='ion-trash-b' style='color: red;'></i></button></td></tr>";
 
 				$('#Target_tb').append(row);
 			} else {
 				// Handle empty values or show an error message
-				console.error("Sector, Category, and Category Wise values cannot be empty.");
-			}
+				console.error("Sector, Category, and Category Wise values cannot be empty or Category Wise value must be a valid number.");
+			}			
+
 		});
+
+		// Example function to retrieve the sum for a specific secId
+		function getSumForSecId(SectorValue) {
+			return sectorSums[SectorValue] || 0; // Return 0 if secId not found
+		}
 
 		$(document).on("click", ".delRowBtn", function () {
-			$(this).closest("tr").remove();
+			var row = $(this).closest("tr");
+			var SectorValue = row.find('td:first').text();
+
+			// Subtract the CategoryWiseValue from the corresponding sector sum
+			var CategoryWiseValue = parseFloat(row.find('td[data-value]').last().text()) || 0;
+			if (sectorSums.hasOwnProperty(SectorValue)) {
+				sectorSums[SectorValue] -= CategoryWiseValue;
+				updateFloatingTextboxes();
+			}
+
+			row.remove();
 		});
+
+
+
+		//function updateFloatingTextboxes() {
+		//	var stateeDiv = $('#Statee');
+		//	stateeDiv.empty(); // Clear existing content
+
+		//	// Iterate through each sector and create/update a floating textbox
+		//	for (var sector in sectorSums) {
+		//		if (sectorSums.hasOwnProperty(sector)) {
+		//			var sumValue = sectorSums[sector];
+		//			var textbox = '<div class="floating-textbox"><p>' + sector + ': ' + sumValue + '</p></div>';
+		//			stateeDiv.append(textbox);
+		//		}
+		//	}
+		//}
+		
+
+
+		// Function to update or create floating textboxes below the table
+		function updateFloatingTextboxes() {
+			var sectorTableBody = $('#Sector_tb'); // Get the tbody of the Sector table
+
+			// Iterate through each sector and create/update a row in the #Sector table
+			for (var sector in sectorSums) {
+				if (sectorSums.hasOwnProperty(sector)) {
+					var sumValue = sectorSums[sector];
+
+					// Update or create rows in the #Sector table
+					var existingRow = sectorTableBody.find('tr[data-sector="' + sector + '"]');
+					if (existingRow.length) {
+						// Update existing row
+						existingRow.find('td[data-value="Total Target"]').text(sumValue);
+					} else {
+						// Create new row
+						var newRow = '<tr data-sector="' + sector + '"><td>' + sector + '</td><td data-value="Total Target">' + sumValue + '</td></tr>';
+						sectorTableBody.append(newRow);
+					}
+				}
+			}
+		}
 	});
 
+	
 
-	//function{
-	//	$.ajax({
-	//		type: "GET",
-	//		url: "/SalesExecutive/SalesAdmin/GetCategoryBySectorId",
-	//		data: { sectorId: args.value },
-	//		contentType: "application/json",
-	//		dataType: "json",
-	//		success: function (result) {
-	//			console.log(result);
-	//			var categoryDropDown = document.getElementById("CategoryId").ej2_instances[0];
-	//			categoryDropDown.dataSource = result;
-	//			categoryDropDown.dataBind();
 
-	//			categoryDropDown.value = null;
-	//		},
-	//		error: function () {
 
-	//		}
-	//	});
-	//}
+
+
+
+
+
+
+
+
+
 
 </script>
 
