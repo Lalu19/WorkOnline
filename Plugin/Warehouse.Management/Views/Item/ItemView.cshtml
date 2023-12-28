@@ -4,6 +4,12 @@
 }
 @addTagHelper *, Syncfusion.EJ2
 @using CloudVOffice.Core.Domain.Common;
+
+<style>
+    .e-virtualtable {
+        transform: translate(0px, 0px) !important;
+    }
+</style>
 <header class="main-heading">
     <div class="container-fluid">
         <div class="row">
@@ -49,7 +55,7 @@
                               allowExcelExport="true" allowGrouping="true"
                               allowMultiSorting="true"
                               allowPdfExport="true"
-                              height="340" rowHeight="38"
+                              height="500" 
                               enableHover="false" enableHeaderFocus="true"
                               allowResizing="true" autoFit="true" dataBound="dataBound"
                               enableVirtualization="true" allowSelection="true"
@@ -101,7 +107,7 @@
                             
 
                           
-                            <e-grid-column headerText="Action" template="#Actions" width="100"></e-grid-column>
+                            <e-grid-column headerText="Action" template="#Actions" width="50"></e-grid-column>
 
 
 

@@ -123,42 +123,104 @@ namespace CloudVOffice.Services.WareHouses.Districts
             }
 
         }
+        //public MessageEnum DistrictMappingUpdate(DistrictMappingDTO districtMappingDTO)
+        //{
+        //    try
+        //    {
+        //        var updatedistrict = _dbContext.DistrictMappings.Where(x => x.DistrictMappingId != districtMappingDTO.DistrictMappingId && districtMappingDTO.PinCodeId.Contains(x.PinCodeId) && x.AddDistrictId == districtMappingDTO.AddDistrictId && x.Deleted == false).FirstOrDefault();
+
+        //        if (updatedistrict == null)
+        //        {
+        //            var a = _dbContext.DistrictMappings.Where(x => x.DistrictMappingId == districtMappingDTO.DistrictMappingId).FirstOrDefault();
+        //            if (a != null)
+        //            {
+        //                foreach (var districtMappingId in districtMappingDTO.PinCodeId)
+        //                {
+        //                    a.AddDistrictId = (long)districtMappingDTO.AddDistrictId;
+        //                    a.PinCodeId = districtMappingId;
+        //                    a.UpdatedBy = districtMappingDTO.CreatedBy;
+        //                    a.UpdatedDate = DateTime.Now;
+        //                    _dbContext.SaveChanges();
+
+        //                }
+        //                return MessageEnum.Updated;
+        //            }
+        //            else
+        //                return MessageEnum.Invalid;
+        //        }
+        //        else
+        //        {
+        //            return MessageEnum.Duplicate;
+        //        }
+
+        //    }
+        //    catch
+        //    {
+        //        throw;
+        //    }
+        //}
+
         public MessageEnum DistrictMappingUpdate(DistrictMappingDTO districtMappingDTO)
         {
             try
             {
-                var updatedistrict = _dbContext.DistrictMappings.Where(x => x.DistrictMappingId != districtMappingDTO.DistrictMappingId && districtMappingDTO.PinCodeId.Contains(x.PinCodeId) && x.AddDistrictId == districtMappingDTO.AddDistrictId && x.Deleted == false).FirstOrDefault();
 
-                if (updatedistrict == null)
+                var duplicateCheck = _dbContext.DistrictMappings
+                    .Any(x => x.DistrictMappingId != districtMappingDTO.DistrictMappingId &&
+                              districtMappingDTO.PinCodeId.Contains(x.PinCodeId) &&
+                              x.AddDistrictId == districtMappingDTO.AddDistrictId &&
+                              !x.Deleted);
+
+                if (!duplicateCheck)
                 {
-                    var a = _dbContext.DistrictMappings.Where(x => x.DistrictMappingId == districtMappingDTO.DistrictMappingId).FirstOrDefault();
-                    if (a != null)
-                    {
-                        foreach (var districtMappingId in districtMappingDTO.PinCodeId)
-                        {
-                            a.AddDistrictId = (long)districtMappingDTO.AddDistrictId;
-                            a.PinCodeId = districtMappingId;
-                            a.UpdatedBy = districtMappingDTO.CreatedBy;
-                            a.UpdatedDate = DateTime.Now;
-                            _dbContext.SaveChanges();
+                    var existingMappings = _dbContext.DistrictMappings
+                        .Where(x => x.DistrictMappingId == districtMappingDTO.DistrictMappingId);
 
+
+                    _dbContext.DistrictMappings.RemoveRange(existingMappings);
+
+
+                    foreach (var newPinCodeId in districtMappingDTO.PinCodeId)
+                    {
+
+                        var existingMapping = _dbContext.DistrictMappings
+                            .FirstOrDefault(x => x.PinCodeId == newPinCodeId && x.AddDistrictId != districtMappingDTO.AddDistrictId && !x.Deleted);
+
+                        if (existingMapping == null)
+                        {
+                            DistrictMapping newMapping = new DistrictMapping
+                            {
+                                AddDistrictId = (long)districtMappingDTO.AddDistrictId,
+                                PinCodeId = newPinCodeId,
+                                CreatedBy = districtMappingDTO.CreatedBy,
+                                CreatedDate = DateTime.Now
+                            };
+
+                            _dbContext.DistrictMappings.Add(newMapping);
                         }
-                        return MessageEnum.Updated;
+                        else
+                        {
+
+                            return MessageEnum.Duplicate;
+                        }
                     }
-                    else
-                        return MessageEnum.Invalid;
+
+                    _dbContext.SaveChanges();
+
+                    return MessageEnum.Updated;
                 }
                 else
                 {
                     return MessageEnum.Duplicate;
                 }
-
             }
-            catch
+            catch (Exception ex)
             {
+
                 throw;
             }
         }
+
         public DistrictMapping GetDistrictMappingById(Int64 districtMappingId)
 		{
 			return _dbContext.DistrictMappings.Where(x => x.DistrictMappingId == districtMappingId && x.Deleted == false).SingleOrDefault();
