@@ -23,7 +23,7 @@ namespace CloudVOffice.Data.DTO.Buyers
         public string? GSTNumber { get; set; }
         public Int64? WareHuoseId { get; set; }
         public string? Password { get; set; }
-		public Int64 SectorId { get; set; }
+		public int? SectorId { get; set; }
 		public string? ShopImage { get; set; }
 		public Int64 CreatedBy { get; set; }
     }
