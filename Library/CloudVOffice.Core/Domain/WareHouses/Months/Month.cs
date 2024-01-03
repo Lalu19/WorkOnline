@@ -14,6 +14,6 @@ namespace CloudVOffice.Core.Domain.WareHouses.Months
         public Int64? UpdatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public bool Deleted { get; set; }
-        public long CreatedBy { get; set; }
+        public Int64 CreatedBy { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using CloudVOffice.Core.Domain.Company;
+﻿using CloudVOffice.Core.Domain.Buyers;
+using CloudVOffice.Core.Domain.Company;
 using CloudVOffice.Core.Domain.Comunication;
 using CloudVOffice.Core.Domain.EmailTemplates;
 using CloudVOffice.Core.Domain.Logging;
@@ -6,6 +7,7 @@ using CloudVOffice.Core.Domain.Pemission;
 using CloudVOffice.Core.Domain.ProductCategories;
 using CloudVOffice.Core.Domain.RetailerModel;
 using CloudVOffice.Core.Domain.Sales;
+using CloudVOffice.Core.Domain.Sellers;
 using CloudVOffice.Core.Domain.Users;
 using CloudVOffice.Core.Domain.WareHouses;
 using CloudVOffice.Core.Domain.WareHouses.Districts;
@@ -98,10 +100,15 @@ namespace CloudVOffice.Data.Persistence
 
         public virtual DbSet<SalesAdminTarget> SalesAdminTargets { get; set; }
 
-        #endregion
+		#endregion
+
+		public virtual DbSet<RetailLogin> RetailLogins { get; set; }
+		public virtual DbSet<BuyerRegistration> BuyerRegistrations { get; set; }
+		public virtual DbSet<SellerRegistration> SellerRegistrations { get; set; }
 
         public virtual DbSet<RetailModel> RetailModels { get; set; }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
             #region Base
@@ -480,18 +487,47 @@ namespace CloudVOffice.Data.Persistence
 			 .ValueGeneratedNever();
 
 
+	//		modelBuilder.Entity<SalesAdminTarget>()
+	//.Property(s => s.CreatedDate)
             #endregion
-
+	//			.HasOne(s => s.Month)
             modelBuilder.Entity<RetailModel>()
            .Property(s => s.CreatedDate)
            .HasDefaultValueSql("getdate()");
-
+			modelBuilder.Seed();
             modelBuilder.Entity<RetailModel>()
              .Property(s => s.Deleted)
              .HasDefaultValue(false)
              .ValueGeneratedNever();
+	.Property(s => s.CreatedDate)
+	.HasDefaultValueSql("getdate()");
 
-            modelBuilder.Seed();
+			modelBuilder.Entity<RetailLogin>()
+			 .Property(s => s.Deleted)
+			 .HasDefaultValue(false)
+			 .ValueGeneratedNever();
+
+
+
+			modelBuilder.Entity<BuyerRegistration>()
+        }
+	.HasDefaultValueSql("getdate()");
+
+			modelBuilder.Entity<BuyerRegistration>()
+			 .Property(s => s.Deleted)
+			 .HasDefaultValue(false)
+			 .ValueGeneratedNever();
+
+			modelBuilder.Entity<SellerRegistration>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
+
+			modelBuilder.Entity<SellerRegistration>()
+			 .Property(s => s.Deleted)
+			 .HasDefaultValue(false)
+			 .ValueGeneratedNever();
+
+			modelBuilder.Seed();
         }
     }
 }
