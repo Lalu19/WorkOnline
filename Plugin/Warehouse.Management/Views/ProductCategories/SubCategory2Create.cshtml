@@ -99,6 +99,7 @@
                                 <label for="SubCategory2Name" class="form-label">SubCategory2 Name</label>
                                 <input asp-for="@Model.SubCategory2Name" type="text" class="form-control" autofocus="autofocus" placeholder="SubCategory2 Name" />
                                 <span asp-validation-for="SubCategory2Name"></span>
+                                <div asp-validation-summary="ModelOnly" class="message-error"></div>
                             </div>
 
                         </div>

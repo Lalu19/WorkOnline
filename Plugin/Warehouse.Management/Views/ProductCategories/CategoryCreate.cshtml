@@ -65,6 +65,7 @@
                                 <label for="CategoryName" class="form-label">Category Name</label>
                                 <input asp-for="@Model.CategoryName" type="text" class="form-control" autofocus="autofocus" placeholder="Category Name" />
                                 <span asp-validation-for="CategoryName"></span>
+                                <div asp-validation-summary="ModelOnly" class="message-error"></div>
                             </div>
 
                         </div>
