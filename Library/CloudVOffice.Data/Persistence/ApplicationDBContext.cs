@@ -4,6 +4,7 @@ using CloudVOffice.Core.Domain.EmailTemplates;
 using CloudVOffice.Core.Domain.Logging;
 using CloudVOffice.Core.Domain.Pemission;
 using CloudVOffice.Core.Domain.ProductCategories;
+using CloudVOffice.Core.Domain.RetailerModel;
 using CloudVOffice.Core.Domain.Sales;
 using CloudVOffice.Core.Domain.Users;
 using CloudVOffice.Core.Domain.WareHouses;
@@ -99,7 +100,7 @@ namespace CloudVOffice.Data.Persistence
 
         #endregion
 
-
+        public virtual DbSet<RetailModel> RetailModels { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -479,23 +480,18 @@ namespace CloudVOffice.Data.Persistence
 			 .ValueGeneratedNever();
 
 
-	//		modelBuilder.Entity<SalesAdminTarget>()
-	//.Property(s => s.CreatedDate)
-	//.HasDefaultValueSql("getdate()");
+            #endregion
 
-	//		modelBuilder.Entity<SalesAdminTarget>()
-	//			.HasOne(s => s.Month)
-	//			.WithMany()
-	//			.HasForeignKey(s => s.MonthId)
-	//			.OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<RetailModel>()
+           .Property(s => s.CreatedDate)
+           .HasDefaultValueSql("getdate()");
 
+            modelBuilder.Entity<RetailModel>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
 
-
-
-			#endregion
-
-
-			modelBuilder.Seed();
+            modelBuilder.Seed();
         }
     }
 }
