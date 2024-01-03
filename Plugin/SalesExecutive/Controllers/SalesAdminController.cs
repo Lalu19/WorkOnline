@@ -13,6 +13,7 @@ using CloudVOffice.Core.Domain.Common;
 using CloudVOffice.Data.DTO.WareHouses.PinCodes;
 using Microsoft.AspNetCore.Authorization;
 using CloudVOffice.Services.ProductCategories;
+using CloudVOffice.Services.WareHouses.Months;
 
 namespace SalesExecutive.Controllers
 {
@@ -22,13 +23,15 @@ namespace SalesExecutive.Controllers
 		private readonly ISalesAdminService _salesAdminService;
 		private readonly ISectorService _sectorService;
 		private readonly ICategoryService _categoryService;
+		private readonly IMonthService _monthService;
 		
 
-		public SalesAdminController(ISalesAdminService salesAdminService, ISectorService sectorService, ICategoryService categoryService)
+		public SalesAdminController(ISalesAdminService salesAdminService, ISectorService sectorService, ICategoryService categoryService,IMonthService monthService)
 		{
 			_salesAdminService = salesAdminService;
 			_sectorService = sectorService;
 			_categoryService = categoryService;
+			_monthService = monthService;
 		}
 
 
@@ -39,6 +42,7 @@ namespace SalesExecutive.Controllers
 
 			ViewBag.Sectors = _sectorService.GetSectorList();
 			ViewBag.Categories = _categoryService.GetCategoryList();
+			ViewBag.months = _monthService.GetMonthList();
 
 			SalesAdminDTO salesAdminDTO = new SalesAdminDTO();
 
@@ -47,7 +51,7 @@ namespace SalesExecutive.Controllers
 				var target = _salesAdminService.GetSalesAdminTargetBySalesAdminId(int.Parse(salesAdminTargetId.ToString()));
 
 				salesAdminDTO.SalesAdminTargetName = target.SalesAdminTargetName;
-				salesAdminDTO.Month = target.Month;
+				salesAdminDTO.MonthId = target.MonthId;
 				salesAdminDTO.SectorId = target.SectorId;
 				salesAdminDTO.CategoryId = target.CategoryId;
 				salesAdminDTO.MonthlyCategoryWiseTarget = target.MonthlyCategoryWiseTarget;

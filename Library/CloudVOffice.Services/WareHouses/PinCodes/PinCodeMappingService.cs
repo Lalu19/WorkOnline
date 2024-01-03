@@ -110,10 +110,13 @@ namespace CloudVOffice.Services.WareHouses.PinCodes
 
         public List<PinCodeMapping> GetPinCodeMappingList()
 		{
-			return _dbContext.PinCodeMappings
+                var a = _dbContext.PinCodeMappings
 				.Include(s => s.WareHuose)
 				.Include(s => s.PinCode)
 				.Where(x => x.Deleted == false).ToList();
+
+             return a;
+
 		}
         //public MessageEnum PinCodeMappingUpdate(PinCodeMappingDTO pinCodeMappingDTO)
         //{

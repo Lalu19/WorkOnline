@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CloudVOffice.Core.Domain.Common;
 using CloudVOffice.Core.Domain.Sales;
 using CloudVOffice.Core.Domain.WareHouses.GST;
+using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Data.DTO.Sales;
 using CloudVOffice.Data.DTO.WareHouses.GSTs;
 using CloudVOffice.Data.DTO.WareHouses.PinCodes;
@@ -13,6 +14,7 @@ using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
 using LinqToDB;
 using LinqToDB.Tools;
+using Microsoft.EntityFrameworkCore;
 
 namespace CloudVOffice.Services.Sales
 {
@@ -38,7 +40,7 @@ namespace CloudVOffice.Services.Sales
 					SalesAdminTarget target = new SalesAdminTarget();
 
 					target.SalesAdminTargetName = salesAdminDTO.SalesAdminTargetName;
-					target.Month = salesAdminDTO.Month;
+					target.MonthId = salesAdminDTO.MonthId;
 					target.SectorId = salesAdminDTO.SectorId;
 					target.CategoryId = salesAdminDTO.CategoryId;
 					target.MonthlyCategoryWiseTarget = salesAdminDTO.MonthlyCategoryWiseTarget;
@@ -69,12 +71,20 @@ namespace CloudVOffice.Services.Sales
             return _dbContext.SalesAdminTargets.Where(s => s.SalesAdminTargetId == salesAdminId).FirstOrDefault();
 		}
 
-		public List<SalesAdminTarget> GetAllTargetsBySalesAdmin()
-		{
-            return _dbContext.SalesAdminTargets.Where(s => s.Deleted == false).ToList();
-		}
+		//public List<SalesAdminTarget> GetAllTargetsBySalesAdmin()
+		//{
+  //          return _dbContext.SalesAdminTargets.Where(s => s.Deleted == false).ToList();
+		//}
+        public List<SalesAdminTarget> GetAllTargetsBySalesAdmin()
+        {
+            var a = _dbContext.SalesAdminTargets
+            .Include(s => s.Month)
+            .Where(x => x.Deleted == false).ToList();
 
-		public List<SalesAdminTarget> GetTargetsByCategoryIdBySalesAdmin(Int64 categoryId)
+            return a;
+
+        }
+        public List<SalesAdminTarget> GetTargetsByCategoryIdBySalesAdmin(Int64 categoryId)
 		{
 			throw new NotImplementedException();
 		}		
@@ -124,7 +134,7 @@ namespace CloudVOffice.Services.Sales
                     if(target != null)
                     {
 						target.SalesAdminTargetName = salesAdminDTO.SalesAdminTargetName;
-						target.Month = salesAdminDTO.Month;
+						target.MonthId = salesAdminDTO.MonthId;
 						target.SectorId = salesAdminDTO.SectorId;
 						target.CategoryId = salesAdminDTO.CategoryId;
 						target.MonthlyCategoryWiseTarget = salesAdminDTO.MonthlyCategoryWiseTarget;

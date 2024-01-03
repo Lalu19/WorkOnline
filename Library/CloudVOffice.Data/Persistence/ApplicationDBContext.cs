@@ -463,20 +463,34 @@ namespace CloudVOffice.Data.Persistence
              .Property(s => s.Deleted)
              .HasDefaultValue(false)
              .ValueGeneratedNever();
-            #endregion
+			#endregion
 
 
 
-            #region Sales
+			#region Sales
 
-            modelBuilder.Entity<SalesAdminTarget>()
-.Property(s => s.CreatedDate)
-.HasDefaultValueSql("getdate()");
+			modelBuilder.Entity<SalesAdminTarget>()
+	.Property(s => s.CreatedDate)
+	.HasDefaultValueSql("getdate()");
 
-            modelBuilder.Entity<SalesAdminTarget>()
-             .Property(s => s.Deleted)
-             .HasDefaultValue(false)
-             .ValueGeneratedNever();
+			modelBuilder.Entity<SalesAdminTarget>()
+			 .Property(s => s.Deleted)
+			 .HasDefaultValue(false)
+			 .ValueGeneratedNever();
+
+
+	//		modelBuilder.Entity<SalesAdminTarget>()
+	//.Property(s => s.CreatedDate)
+	//.HasDefaultValueSql("getdate()");
+
+	//		modelBuilder.Entity<SalesAdminTarget>()
+	//			.HasOne(s => s.Month)
+	//			.WithMany()
+	//			.HasForeignKey(s => s.MonthId)
+	//			.OnDelete(DeleteBehavior.Restrict);
+
+
+
 
 			#endregion
 

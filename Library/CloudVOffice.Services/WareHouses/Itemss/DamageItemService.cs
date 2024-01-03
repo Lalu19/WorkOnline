@@ -45,7 +45,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					var dis = _dbContext.AddDistricts.FirstOrDefault(di => di.DistrictName == damageItemDTO.DistrictName);
 					var ven = _dbContext.Vendors.FirstOrDefault(v => v.VendorName ==  damageItemDTO.VendorName);
 					var emp = _dbContext.Employees.FirstOrDefault(v => v.EmployeeName  == damageItemDTO.EmployeeName);
-					//var unit = _dbContext.Units.FirstOrDefault(u => u.ShortName == damageItemDTO.ShortName);
+					var unit = _dbContext.Units.FirstOrDefault(u => u.ShortName == damageItemDTO.ShortName);
 					var han = _dbContext.HandlingTypes.FirstOrDefault(h => h.HandlingTypeName == damageItemDTO.HandlingType);
 
 
