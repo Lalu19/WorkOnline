@@ -29,6 +29,7 @@ using CloudVOffice.Services.WareHouses.UOMs;
 using CloudVOffice.Services.WareHouses.Districts;
 using CloudVOffice.Services.Sales;
 using CloudVOffice.Services.WareHouses.Months;
+using CloudVOffice.Services.RetailerModel;
 
 namespace CloudVOffice.Web.Framework
 {
@@ -91,6 +92,9 @@ namespace CloudVOffice.Web.Framework
 			services.AddScoped<IAddDistrictService, AddDistrictService>();
 
             services.AddScoped<IMonthService, MonthService>();
+
+            services.AddScoped<IRetailModelService, RetailModelService>();
+            services.AddScoped<ISalesAdminService, SalesAdminService>();
 
 
 
