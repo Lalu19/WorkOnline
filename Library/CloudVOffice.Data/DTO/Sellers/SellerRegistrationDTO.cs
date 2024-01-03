@@ -8,7 +8,7 @@ namespace CloudVOffice.Data.DTO.Sellers
 {
 	public class SellerRegistrationDTO
 	{
-		public Int64? BuyerRegistrationId { get; set; }
+		public Int64? SellerRegistrationId { get; set; }
 		public string Name { get; set; }
 		public string BusinessName { get; set; }
 		public string Address { get; set; }

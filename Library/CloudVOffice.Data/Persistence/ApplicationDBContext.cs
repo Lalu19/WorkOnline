@@ -7,6 +7,7 @@ using CloudVOffice.Core.Domain.Pemission;
 using CloudVOffice.Core.Domain.ProductCategories;
 using CloudVOffice.Core.Domain.RetailerModel;
 using CloudVOffice.Core.Domain.Sales;
+using CloudVOffice.Core.Domain.Sellers;
 using CloudVOffice.Core.Domain.Users;
 using CloudVOffice.Core.Domain.WareHouses;
 using CloudVOffice.Core.Domain.WareHouses.Districts;
@@ -103,6 +104,7 @@ namespace CloudVOffice.Data.Persistence
 
 		public virtual DbSet<RetailLogin> RetailLogins { get; set; }
 		public virtual DbSet<BuyerRegistration> BuyerRegistrations { get; set; }
+		public virtual DbSet<SellerRegistration> SellerRegistrations { get; set; }
 
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -520,7 +522,14 @@ namespace CloudVOffice.Data.Persistence
 			 .HasDefaultValue(false)
 			 .ValueGeneratedNever();
 
+			modelBuilder.Entity<SellerRegistration>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
 
+			modelBuilder.Entity<SellerRegistration>()
+			 .Property(s => s.Deleted)
+			 .HasDefaultValue(false)
+			 .ValueGeneratedNever();
 
 			modelBuilder.Seed();
         }
