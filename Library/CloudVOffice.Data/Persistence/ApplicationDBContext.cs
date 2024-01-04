@@ -113,8 +113,8 @@ namespace CloudVOffice.Data.Persistence
 		public virtual DbSet<SellerRegistration> SellerRegistrations { get; set; }
 
         public virtual DbSet<RetailModel> RetailModels { get; set; }
-
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
+        public virtual DbSet<ChangePassword> ChangePasswords { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
             #region Base
@@ -540,6 +540,15 @@ namespace CloudVOffice.Data.Persistence
              .HasDefaultValue(false)
              .ValueGeneratedNever();
 
+            modelBuilder.Entity<ChangePassword>()
+                .Property(s => s.CreatedDate)
+                .HasDefaultValueSql("getdate()");
+
+
+            modelBuilder.Entity<ChangePassword>()
+              .Property(s => s.Deleted)
+              .HasDefaultValue(false)
+              .ValueGeneratedNever();
 
             modelBuilder.Seed();
         }

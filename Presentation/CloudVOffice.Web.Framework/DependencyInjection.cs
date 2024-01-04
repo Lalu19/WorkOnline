@@ -31,6 +31,7 @@ using CloudVOffice.Services.Sales;
 using CloudVOffice.Services.WareHouses.Months;
 using CloudVOffice.Services.RetailerModel;
 using CloudVOffice.Services.Buyers;
+using CloudVOffice.Services.Sellers;
 using CloudVOffice.Services.WareHouses.Brands;
 
 namespace CloudVOffice.Web.Framework
@@ -98,18 +99,10 @@ namespace CloudVOffice.Web.Framework
 
             services.AddScoped<IMonthService, MonthService>();
             services.AddScoped<IBuyerRegistrationService, BuyerRegistrationService>();
+            services.AddScoped<ISellerRegistrationService, SellerRegistrationService>();
 
             services.AddScoped<IRetailModelService, RetailModelService>();
             services.AddScoped<ISalesAdminService, SalesAdminService>();
-
-
-
-
-
-
-
-
-
 
 
             return services;
