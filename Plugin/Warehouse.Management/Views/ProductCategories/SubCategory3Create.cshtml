@@ -1,0 +1,203 @@
+﻿@model CloudVOffice.Data.DTO.ProductCategories.SubCategory3DTO;
+@using System.Collections;
+@using Newtonsoft.Json;
+
+@{
+    Layout = "_MainAppLayout";
+    ViewData["Title"] = "Sub Category3";
+}
+@addTagHelper *, Syncfusion.EJ2
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+<header class="main-heading">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+                <div class="page-icon">
+                    <i class="icon-laptop_windows"></i>
+                </div>
+                <div class="page-title">
+                    <h5>WareHouse Dashboard</h5>
+                    <h6 class="sub-heading">Welcome to WareHouse Admin</h6>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                <div class="right-actions">
+                    <span class="last-login"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="main-content">
+    <div class="row gutters">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <div class="card">
+                <form asp-route="/WareHouse/SubCategory3/SubCategory3Create" method="post" autocomplete="off" enctype="multipart/form-data" onsubmit="prepareFormData(event)">
+
+                    <div class="card-header">
+
+                        <div class="row">
+                            <div class="col-md-10">
+                                <b>SubCategory2 Create</b>
+                            </div>
+                            <div class="col-md-2 ">
+                                <a href="/WareHouse/SubCategory3/SubCategory3View" class="btn btn-primary btn-sm float-right"><i class="icon-list2"></i> List</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card-body">
+                        <div class="form-row">
+                            <input asp-for="@Model.SubCategory3Id" type="hidden" />
+
+                            <div class="form-group col-md-3">
+                                <label for="SectorId" class="form-label">Sector Name</label>
+                                <ejs-dropdownlist id="SectorId" allowFiltering="true" ejs-for="@Model.SectorId" filtering="onSectorNamefiltering" change="onChangeSector" dataSource="@(new SelectList((IEnumerable)ViewBag.SectorList, "SectorId", "SectorName").Items)" placeholder="Select Sector" popupHeight="220px">
+                                    <e-dropdownlist-fields text="SectorName" value="SectorId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="SectorId"></span>
+                            </div>
+
+
+                            <div class="form-group col-md-3">
+                                <label for="CategoryId" class="form-label">Category Name</label>
+                                <ejs-dropdownlist id="CategoryId" allowFiltering="true" ejs-for="@Model.CategoryId" change="onChangeCategory" placeholder="Select Category" popupHeight="220px">
+                                    <e-dropdownlist-fields text="categoryName" value="categoryId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="CategoryId"></span>
+                            </div>
+
+
+                            <div class="form-group col-md-3">
+                                <label for="SubCategory1Id" class="form-label">SubCategory1 Name</label>
+                                <ejs-dropdownlist id="SubCategory1Id" allowFiltering="true" ejs-for="@Model.SubCategory1Id" change="onChangeSubCategory1" placeholder="Select SubCategory" popupHeight="220px">
+                                    <e-dropdownlist-fields text="subCategory1Name" value="subCategory1Id"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="SubCategory1Id"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="SubCategory2Id" class="form-label">SubCategory2 Name</label>
+                                <ejs-dropdownlist id="SubCategory2Id" allowFiltering="true" ejs-for="@Model.SubCategory2Id" placeholder="Select SubCategory" popupHeight="220px">
+                                    <e-dropdownlist-fields text="subCategory2Name" value="subCategory2Id"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="SubCategory2Id"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="SubCategory3Name" class="form-label">SubCategory3 Name</label>
+                                <input asp-for="@Model.SubCategory3Name" type="text" class="form-control" autofocus="autofocus" placeholder="SubCategory3 Name" />
+                                <span asp-validation-for="SubCategory3Name"></span>
+                                <div asp-validation-summary="ModelOnly" class="message-error"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-lg-2 col-md-2 col-sm-12">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function onSectorNamefiltering(e) {
+        var query = new ej.data.Query();
+        query = (e.text !== '') ? query.where('SectorName', 'startswith', e.text, true) : query;
+        e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.SectorList)), query);
+    }
+</script>
+
+<script>
+    function onCategoryNamefiltering(e) {
+        var query = new ej.data.Query();
+        query = (e.text !== '') ? query.where('CategoryName', 'startswith', e.text, true) : query;
+        e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.CategoryList)), query);
+    }
+</script>
+<script>
+    function onSubCategoryNamefiltering(e) {
+        var query = new ej.data.Query();
+        query = (e.text !== '') ? query.where('SubCategory1Name', 'startswith', e.text, true) : query;
+        e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.categoryList)), query);
+    }
+</script>
+
+
+<script>
+    function onChangeSector(args) {
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/Category/GetCategoryBySectorId",
+            data: { sectorId: args.value },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                var categoryDropDown = document.getElementById("CategoryId").ej2_instances[0];
+                categoryDropDown.dataSource = result;
+                categoryDropDown.dataBind();
+
+                categoryDropDown.value = null;
+            },
+            error: function () {
+
+            }
+        });
+    }
+</script>
+
+<script>
+    function onChangeCategory(args) {
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/SubCategory1/GetSubCategoryByCategoeyId",
+            data: { categoryId: args.value },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                var subcategoryDropDown = document.getElementById("SubCategory1Id").ej2_instances[0];
+                subcategoryDropDown.dataSource = result;
+                subcategoryDropDown.dataBind();
+
+                subcategoryDropDown.value = null;
+            },
+            error: function () {
+
+            }
+        });
+    }
+</script>
+
+<script>
+    function onChangeSubCategory1(args) {
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/SubCategory2/GetSubCategory2BySubCategory1Id",
+            data: { SubCategory1Id: args.value },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                var subcategoryDropDown = document.getElementById("SubCategory2Id").ej2_instances[0];
+                subcategoryDropDown.dataSource = result;
+                subcategoryDropDown.dataBind();
+
+                subcategoryDropDown.value = null;
+            },
+            error: function () {
+
+            }
+        });
+    }
+</script>
+

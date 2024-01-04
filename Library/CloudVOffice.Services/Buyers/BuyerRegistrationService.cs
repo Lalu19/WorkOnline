@@ -51,7 +51,10 @@ namespace CloudVOffice.Services.Buyers
 					buy.SalesRepresentativeContact = buyerRegistrationDTO.SalesRepresentativeContact;
 					buy.GSTNumber = buyerRegistrationDTO.GSTNumber;
 					buy.WareHuoseId = buyerRegistrationDTO.WareHuoseId;
-					buy.Password = buyerRegistrationDTO.Password;
+
+					buy.FirstLogin = false;
+					buy.Password = GenerateRandomPassword(6);
+
 					buy.SectorId = buyerRegistrationDTO.SectorId;
 					buy.ShopImage = buyerRegistrationDTO.ShopImage;
 					buy.CreatedBy = buyerRegistrationDTO.CreatedBy;
@@ -71,6 +74,19 @@ namespace CloudVOffice.Services.Buyers
 				throw;
 			}
 		}
+
+		public string GenerateRandomPassword(int length)
+		{
+			Random random = new Random();
+
+			int randomNumber = random.Next((int)Math.Pow(10, length - 1), (int)Math.Pow(10, length));
+
+			return randomNumber.ToString();
+		}
+
+		//		throw;
+		//	}
+		//}
 
 		public List<BuyerRegistration> GetBuyerRegistrationList()
 		{
@@ -157,6 +173,7 @@ namespace CloudVOffice.Services.Buyers
 						buy.GSTNumber = buyerRegistrationDTO.GSTNumber;
 						buy.WareHuoseId = buyerRegistrationDTO.WareHuoseId;
 						buy.Password = buyerRegistrationDTO.Password;
+						buy.FirstLogin = buyerRegistrationDTO.FirstLogin;
 						buy.SectorId = buyerRegistrationDTO.SectorId;
 						buy.ShopImage = buyerRegistrationDTO.ShopImage;
 
