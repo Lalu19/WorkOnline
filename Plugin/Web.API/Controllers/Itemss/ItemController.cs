@@ -67,5 +67,11 @@ namespace Web.API.Controllers.Itemss
             var a = _itemService.DeleteItem(itemId, DeletedBy);
             return Ok(a);
         }
+        [HttpGet("{brandName}")]
+        public IActionResult GetSubCategoryByCategoryId(string brandName)
+        {
+            var a = _itemService.GetItemlistByBrandname(brandName);
+            return Ok(a);
+        }
     }
 }

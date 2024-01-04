@@ -27,7 +27,8 @@ namespace CloudVOffice.Core.Domain.Sellers
 		public string? GSTNumber { get; set; }
 		public Int64? WareHuoseId { get; set; }
 		public string? Password { get; set; }
-		public int? SectorId { get; set; }
+        public bool FirstLogin { get; set; }
+        public int? SectorId { get; set; }
 		public string? Image { get; set; }
 		public Int64 CreatedBy { get; set; }
 		public DateTime CreatedDate { get; set; }

@@ -10,6 +10,7 @@ using CloudVOffice.Core.Domain.Sales;
 using CloudVOffice.Core.Domain.Sellers;
 using CloudVOffice.Core.Domain.Users;
 using CloudVOffice.Core.Domain.WareHouses;
+using CloudVOffice.Core.Domain.WareHouses.Brands;
 using CloudVOffice.Core.Domain.WareHouses.Districts;
 using CloudVOffice.Core.Domain.WareHouses.Employees;
 using CloudVOffice.Core.Domain.WareHouses.GST;
@@ -85,6 +86,7 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<SubCategory1> SubCategories1 { get; set; }
         public virtual DbSet<SubCategory2> SubCategories2 { get; set; }
         public virtual DbSet<SubCategory3> SubCategories3 { get; set; }
+        public virtual DbSet<SubCategory4> SubCategories4 { get; set; }
         public virtual DbSet<GST> GSTs { get; set; }
 		public virtual DbSet<HandlingType> HandlingTypes { get; set; }
 		public virtual DbSet<UnitGroup> UnitGroups { get; set; }
@@ -95,6 +97,7 @@ namespace CloudVOffice.Data.Persistence
 		public virtual DbSet<DamageItemForFarming> DamageItemForFarmings { get; set; }
 		public virtual DbSet<AddDistrict> AddDistricts { get; set; }
         public virtual DbSet<Month> Months { get; set; }
+        public virtual DbSet<Brand> Brands { get; set; }
 
         #endregion
 
@@ -399,6 +402,15 @@ namespace CloudVOffice.Data.Persistence
              .HasDefaultValue(false)
              .ValueGeneratedNever();
 
+            modelBuilder.Entity<SubCategory4>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<SubCategory4>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
+
             modelBuilder.Entity<GST>()
            .Property(s => s.CreatedDate)
            .HasDefaultValueSql("getdate()");
@@ -482,11 +494,20 @@ namespace CloudVOffice.Data.Persistence
              .Property(s => s.Deleted)
              .HasDefaultValue(false)
              .ValueGeneratedNever();
-			#endregion
 
-			#region Sales
+            modelBuilder.Entity<Brand>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
 
-			modelBuilder.Entity<SalesAdminTarget>()
+            modelBuilder.Entity<Brand>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
+            #endregion
+
+            #region Sales
+
+            modelBuilder.Entity<SalesAdminTarget>()
 	.Property(s => s.CreatedDate)
 	.HasDefaultValueSql("getdate()");
 

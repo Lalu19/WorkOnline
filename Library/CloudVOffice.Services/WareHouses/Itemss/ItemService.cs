@@ -335,7 +335,6 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 			}
 		}
 
-
 		public Item GetItemByItemId(Int64 itemId)
         {
             try
@@ -347,7 +346,6 @@ namespace CloudVOffice.Services.WareHouses.Itemss
                 throw;
             }
         }
-
 
 		public Item GetItemById(Int64 itemId)
 		{
@@ -388,7 +386,6 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 				throw;
 			}
 		}
-
 
 		public MessageEnum DeleteItem(Int64 itemId, Int64 DeletedBy)
         {
@@ -471,5 +468,11 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 				throw;
 			}
 		}
+
+        public List<Item> GetItemlistByBrandname(string brandName)
+        {
+            return _dbContext.Items.Where(x => x.BrandName == brandName && x.Deleted == false).ToList();
+        } 
+
     }
 }
