@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace CloudVOffice.Core.Domain.ProductCategories
 {
-	public class SubCategory2
-	{
+	public class SubCategory2 : IAuditEntity, ISoftDeletedEntity
+    {
 		public int SubCategory2Id { get; set; }
 		public int SectorId { get; set; }
 		public int CategoryId { get; set; }
