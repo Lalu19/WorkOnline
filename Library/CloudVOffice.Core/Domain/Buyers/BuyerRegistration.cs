@@ -27,6 +27,7 @@ namespace CloudVOffice.Core.Domain.Buyers
         public string? GSTNumber { get; set; }
         public Int64? WareHuoseId { get; set; }
         public string? Password { get; set; }
+        public bool FirstLogin { get; set; }
 		public int? SectorId { get; set; }
 		public string? ShopImage { get; set; }
         public Int64 CreatedBy { get; set; }
@@ -34,14 +35,6 @@ namespace CloudVOffice.Core.Domain.Buyers
         public Int64? UpdatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public bool Deleted { get; set; }
-
-        [ForeignKey("WareHuoseId")]
-        public WareHuose WareHuose { get; set; }
-
-        [ForeignKey("PinCodeId")]
-        public PinCode PinCode { get; set; }
-
-		[ForeignKey("SectorId")]
-		public Sector Sector { get; set; }
+       
 	}
 }

@@ -84,7 +84,8 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<Category> Categories { get; set; }        
         public virtual DbSet<SubCategory1> SubCategories1 { get; set; }
         public virtual DbSet<SubCategory2> SubCategories2 { get; set; }
-		public virtual DbSet<GST> GSTs { get; set; }
+        public virtual DbSet<SubCategory3> SubCategories3 { get; set; }
+        public virtual DbSet<GST> GSTs { get; set; }
 		public virtual DbSet<HandlingType> HandlingTypes { get; set; }
 		public virtual DbSet<UnitGroup> UnitGroups { get; set; }
 		public virtual DbSet<Unit> Units { get; set; }
@@ -385,6 +386,15 @@ namespace CloudVOffice.Data.Persistence
 .HasDefaultValueSql("getdate()");
 
             modelBuilder.Entity<SubCategory2>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
+
+            modelBuilder.Entity<SubCategory3>()
+.Property(s => s.CreatedDate)
+.HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<SubCategory3>()
              .Property(s => s.Deleted)
              .HasDefaultValue(false)
              .ValueGeneratedNever();
