@@ -37,6 +37,37 @@ namespace Web.API.Controllers.ProductCategories
             var a = _sectorService.GetSectorList();
             return Ok(a);
         }
+        [HttpGet("{SectorId}")]
+        public IActionResult SingleSectorListbyId(int SectorId)
+        {
+            var a = _sectorService.GetSectorById(SectorId);
+            return Ok(a);
+        }
+        [HttpPost]
+        public IActionResult UpdateSector(SectorDTO sectorDTO)
+        {
+            try
+            {
+                var a = _sectorService.SectorUpdate(sectorDTO);
+                return Ok(a);
+            }
+            catch (Exception ex)
+            {
+                return Accepted(new { Status = "error", ResponseMsg = ex.Message });
+            }
+        }
 
+        [HttpGet("{SectorId}/{DeletedBy}")]
+        public ActionResult DeleteCity(int SectorId, int DeletedBy)
+        {
+            var a = _sectorService.DeleteSector(SectorId, DeletedBy);
+            return Ok(a);
+        }
+        [HttpGet]
+        public IActionResult GetSectorListforFarmerProduces()
+        {
+            var a = _sectorService.GetSectorListforFarmerProduces();
+            return Ok(a);
+        }
     }
 }

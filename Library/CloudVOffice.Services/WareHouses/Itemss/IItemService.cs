@@ -12,22 +12,13 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 {
     public interface IItemService
     {
-        //public MessageEnum CreateItem(ItemDTO itemDTO);
-
         public ItemDTO CreateItem(ItemDTO itemDTO);
-
 		public MessageEnum UpdateItem(ItemDTO itemDTO);
         public void GenerateAndSaveBarcodeImage(string itemId);
-
-
 		public Item GetItemByItemId(Int64 itemId);
 		public Item GetItemById(Int64 itemId);
-
         public List<Item> GetItemList();
         public MessageEnum DeleteItem(Int64 itemId, Int64 DeletedBy);
-
-
-
 
     }
 }
