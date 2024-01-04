@@ -34,5 +34,6 @@ namespace CloudVOffice.Core.Domain.Sellers
 		public Int64? UpdatedBy { get; set; }
 		public DateTime? UpdatedDate { get; set; }
 		public bool Deleted { get; set; }
+
 	}
 }

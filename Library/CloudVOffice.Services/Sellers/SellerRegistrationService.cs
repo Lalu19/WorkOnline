@@ -27,10 +27,11 @@ namespace CloudVOffice.Services.Sellers
         {
             try
             {
-                var seller = _dbContext.SellerRegistrations.Where(x => x.SellerRegistrationId == sellerRegistrationDTO.SellerRegistrationId && x.Deleted == false).FirstOrDefault();
-                if (seller == null)
+                var sellerr = _dbContext.SellerRegistrations.Where(x => x.SellerRegistrationId == sellerRegistrationDTO.SellerRegistrationId && x.Deleted == false).FirstOrDefault();
+                if (sellerr == null)
                 {
                     SellerRegistration sr = new SellerRegistration();
+
                     sr.Name = sellerRegistrationDTO.Name;
                     sr.BusinessName = sellerRegistrationDTO.BusinessName;
                     sr.Address = sellerRegistrationDTO.Address;
@@ -48,7 +49,9 @@ namespace CloudVOffice.Services.Sellers
                     sr.SectorId = sellerRegistrationDTO.SectorId;
                     sr.Image = sellerRegistrationDTO.Image;
                     sr.CreatedBy = sellerRegistrationDTO.CreatedBy;
+
                     var obj = _sellerRegistrationRepo.Insert(sr);
+                    _dbContext.SaveChanges();
 
                     return MessageEnum.Success;
                 }
@@ -66,18 +69,20 @@ namespace CloudVOffice.Services.Sellers
         {
             try
             {
-                return _dbContext.SellerRegistrations.Where(x => x.Deleted == false).ToList();
+                var a = _dbContext.SellerRegistrations.Where(x => x.Deleted == false).ToList();
+                return a;
             }
             catch
             {
                 throw;
             }
         }
-        public SellerRegistration GetSellerRegistrationById(Int64 SellerRegistrationId)
+        public SellerRegistration GetSellerRegistrationById(Int64 sellerRegistrationId)
         {
             try
             {
-                return _dbContext.SellerRegistrations.Where(x => x.SellerRegistrationId == SellerRegistrationId && x.Deleted == false).SingleOrDefault();
+                var a = _dbContext.SellerRegistrations.Where(x => x.SellerRegistrationId == sellerRegistrationId && x.Deleted == false).SingleOrDefault();
+                return a;
             }
             catch
             {
@@ -127,11 +132,11 @@ namespace CloudVOffice.Services.Sellers
                 throw;
             }
         }
-        public MessageEnum DeleteSellerRegistration(Int64 SellerRegistrationId, Int64 DeletedBy)
+        public MessageEnum DeleteSellerRegistration(Int64 sellerRegistrationId, Int64 DeletedBy)
         {
             try
             {
-                var a = _dbContext.SellerRegistrations.Where(x => x.SellerRegistrationId == SellerRegistrationId).FirstOrDefault();
+                var a = _dbContext.SellerRegistrations.Where(x => x.SellerRegistrationId == sellerRegistrationId).FirstOrDefault();
                 if (a != null)
                 {
                     a.Deleted = true;
