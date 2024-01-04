@@ -88,7 +88,7 @@ namespace CloudVOffice.Services.Buyers
 		{
 			try
 			{
-				var a = _dbContext.BuyerRegistrations.Where(x => x.BuyerRegistrationId == buyerRegistrationId).FirstOrDefault();
+				var a = _dbContext.BuyerRegistrations.Where(x => x.BuyerRegistrationId == buyerRegistrationId && x.Deleted == false).FirstOrDefault();
 				return a;
 			}
 			catch
@@ -97,7 +97,7 @@ namespace CloudVOffice.Services.Buyers
 			}
 		}
 
-		public MessageEnum PinDelete(Int64 buyerRegistrationId, Int64 DeletedBy)
+		public MessageEnum BuyerRegistrationDelete(Int64 buyerRegistrationId, Int64 DeletedBy)
 		{
 			try
 			{
