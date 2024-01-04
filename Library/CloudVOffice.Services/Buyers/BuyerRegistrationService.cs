@@ -51,7 +51,10 @@ namespace CloudVOffice.Services.Buyers
 					buy.SalesRepresentativeContact = buyerRegistrationDTO.SalesRepresentativeContact;
 					buy.GSTNumber = buyerRegistrationDTO.GSTNumber;
 					buy.WareHuoseId = buyerRegistrationDTO.WareHuoseId;
-					buy.Password = buyerRegistrationDTO.Password;
+
+					buy.FirstLogin = false;
+					buy.Password = GenerateRandomPassword(6);
+
 					buy.SectorId = buyerRegistrationDTO.SectorId;
 					buy.ShopImage = buyerRegistrationDTO.ShopImage;
 					buy.CreatedBy = buyerRegistrationDTO.CreatedBy;
@@ -72,29 +75,38 @@ namespace CloudVOffice.Services.Buyers
 			}
 		}
 
-		//public List<BuyerRegistration> GetBuyerRegistrationList()
-		//{
-		//	try
-		//	{
-		//		var a = _dbContext.BuyerRegistrations.Where(x => x.Deleted == false).ToList();
-		//		return a;
-		//	}
-		//	catch
-		//	{
-		//		throw;
-		//	}
-		//}
+		public string GenerateRandomPassword(int length)
+		{
+			Random random = new Random();
+
+			int randomNumber = random.Next((int)Math.Pow(10, length - 1), (int)Math.Pow(10, length));
+
+			return randomNumber.ToString();
+		}
 
 		public List<BuyerRegistration> GetBuyerRegistrationList()
 		{
-			var a = _dbContext.BuyerRegistrations
-			.Include(s => s.Sector)
-			.Include(s => s.WareHuose)
-			.Include(s => s.PinCode)
-			.Where(x => x.Deleted == false).ToList();
-
-			return a;
+			try
+			{
+				var a = _dbContext.BuyerRegistrations.Where(x => x.Deleted == false).ToList();
+				return a;
+			}
+			catch
+			{
+				throw;
+			}
 		}
+
+		//public List<BuyerRegistration> GetBuyerRegistrationList()
+		//{
+		//	var a = _dbContext.BuyerRegistrations
+		//	.Include(s => s.Sector)
+		//	.Include(s => s.WareHuose)
+		//	.Include(s => s.PinCode)
+		//	.Where(x => x.Deleted == false).ToList();
+
+		//	return a;
+		//}
 
 		public BuyerRegistration GetRegistrationByBuyerRegistrationId(Int64 buyerRegistrationId)
 		{
@@ -157,6 +169,7 @@ namespace CloudVOffice.Services.Buyers
 						buy.GSTNumber = buyerRegistrationDTO.GSTNumber;
 						buy.WareHuoseId = buyerRegistrationDTO.WareHuoseId;
 						buy.Password = buyerRegistrationDTO.Password;
+						buy.FirstLogin = buyerRegistrationDTO.FirstLogin;
 						buy.SectorId = buyerRegistrationDTO.SectorId;
 						buy.ShopImage = buyerRegistrationDTO.ShopImage;
 

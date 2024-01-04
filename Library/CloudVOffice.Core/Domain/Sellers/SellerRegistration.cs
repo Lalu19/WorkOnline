@@ -34,14 +34,5 @@ namespace CloudVOffice.Core.Domain.Sellers
 		public Int64? UpdatedBy { get; set; }
 		public DateTime? UpdatedDate { get; set; }
 		public bool Deleted { get; set; }
-
-		[ForeignKey("WareHuoseId")]
-		public WareHuose WareHuose { get; set; }
-
-		[ForeignKey("PinCodeId")]
-		public PinCode PinCode { get; set; }
-
-		[ForeignKey("SectorId")]
-		public Sector Sector { get; set; }
 	}
 }

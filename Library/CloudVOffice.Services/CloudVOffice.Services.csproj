@@ -25,8 +25,4 @@
     <ProjectReference Include="..\CloudVOffice.Data\CloudVOffice.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="RetailerModel\" />
-  </ItemGroup>
-
 </Project>
