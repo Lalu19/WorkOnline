@@ -72,29 +72,29 @@ namespace CloudVOffice.Services.Buyers
 			}
 		}
 
-		//public List<BuyerRegistration> GetBuyerRegistrationList()
-		//{
-		//	try
-		//	{
-		//		var a = _dbContext.BuyerRegistrations.Where(x => x.Deleted == false).ToList();
-		//		return a;
-		//	}
-		//	catch
-		//	{
-		//		throw;
-		//	}
-		//}
-
 		public List<BuyerRegistration> GetBuyerRegistrationList()
 		{
-			var a = _dbContext.BuyerRegistrations
-			.Include(s => s.Sector)
-			.Include(s => s.WareHuose)
-			.Include(s => s.PinCode)
-			.Where(x => x.Deleted == false).ToList();
-
-			return a;
+			try
+			{
+				var a = _dbContext.BuyerRegistrations.Where(x => x.Deleted == false).ToList();
+				return a;
+			}
+			catch
+			{
+				throw;
+			}
 		}
+
+		//public List<BuyerRegistration> GetBuyerRegistrationList()
+		//{
+		//	var a = _dbContext.BuyerRegistrations
+		//	.Include(s => s.Sector)
+		//	.Include(s => s.WareHuose)
+		//	.Include(s => s.PinCode)
+		//	.Where(x => x.Deleted == false).ToList();
+
+		//	return a;
+		//}
 
 		public BuyerRegistration GetRegistrationByBuyerRegistrationId(Int64 buyerRegistrationId)
 		{

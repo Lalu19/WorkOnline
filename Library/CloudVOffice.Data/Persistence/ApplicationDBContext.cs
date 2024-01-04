@@ -10,6 +10,7 @@ using CloudVOffice.Core.Domain.Sales;
 using CloudVOffice.Core.Domain.Sellers;
 using CloudVOffice.Core.Domain.Users;
 using CloudVOffice.Core.Domain.WareHouses;
+using CloudVOffice.Core.Domain.WareHouses.Brands;
 using CloudVOffice.Core.Domain.WareHouses.Districts;
 using CloudVOffice.Core.Domain.WareHouses.Employees;
 using CloudVOffice.Core.Domain.WareHouses.GST;
@@ -95,6 +96,9 @@ namespace CloudVOffice.Data.Persistence
 		public virtual DbSet<DamageItemForFarming> DamageItemForFarmings { get; set; }
 		public virtual DbSet<AddDistrict> AddDistricts { get; set; }
         public virtual DbSet<Month> Months { get; set; }
+        public virtual DbSet<Brand> Brands { get; set; }
+        //public virtual DbSet<Brand> Brands { get; set; }
+
 
         #endregion
 
