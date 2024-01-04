@@ -20,4 +20,4 @@ namespace CloudVOffice.Services.Buyers
 		public MessageEnum PinDelete(Int64 buyerRegistrationId, Int64 DeletedBy);
 	}
 }
-}
+

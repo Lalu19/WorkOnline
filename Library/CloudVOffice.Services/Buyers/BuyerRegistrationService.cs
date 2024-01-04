@@ -11,6 +11,7 @@ using CloudVOffice.Data.DTO.WareHouses.PinCodes;
 using CloudVOffice.Data.Migrations;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace CloudVOffice.Services.Buyers
 {
@@ -71,17 +72,28 @@ namespace CloudVOffice.Services.Buyers
 			}
 		}
 
+		//public List<BuyerRegistration> GetBuyerRegistrationList()
+		//{
+		//	try
+		//	{
+		//		var a = _dbContext.BuyerRegistrations.Where(x => x.Deleted == false).ToList();
+		//		return a;
+		//	}
+		//	catch
+		//	{
+		//		throw;
+		//	}
+		//}
+
 		public List<BuyerRegistration> GetBuyerRegistrationList()
 		{
-			try
-			{
-				var a = _dbContext.BuyerRegistrations.Where(x => x.Deleted == false).ToList();
-				return a;
-			}
-			catch
-			{
-				throw;
-			}
+			var a = _dbContext.BuyerRegistrations
+			.Include(s => s.Sector)
+			.Include(s => s.WareHuose)
+			.Include(s => s.PinCode)
+			.Where(x => x.Deleted == false).ToList();
+
+			return a;
 		}
 
 		public BuyerRegistration GetRegistrationByBuyerRegistrationId(Int64 buyerRegistrationId)
