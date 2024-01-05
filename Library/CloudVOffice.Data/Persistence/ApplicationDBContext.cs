@@ -1,4 +1,5 @@
-﻿using CloudVOffice.Core.Domain.Buyers;
+﻿using CloudVOffice.Core.Domain.Banners;
+using CloudVOffice.Core.Domain.Buyers;
 using CloudVOffice.Core.Domain.Company;
 using CloudVOffice.Core.Domain.Comunication;
 using CloudVOffice.Core.Domain.EmailTemplates;
@@ -113,6 +114,7 @@ namespace CloudVOffice.Data.Persistence
 
         public virtual DbSet<RetailModel> RetailModels { get; set; }
         public virtual DbSet<ChangePassword> ChangePasswords { get; set; }
+        public virtual DbSet<Banner> Banners { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -567,7 +569,17 @@ namespace CloudVOffice.Data.Persistence
               .HasDefaultValue(false)
               .ValueGeneratedNever();
 
-            modelBuilder.Seed();
+			modelBuilder.Entity<Banner>()
+			.Property(s => s.CreatedDate)
+			.HasDefaultValueSql("getdate()");
+
+
+			modelBuilder.Entity<Banner>()
+			  .Property(s => s.Deleted)
+			  .HasDefaultValue(false)
+			  .ValueGeneratedNever();
+
+			modelBuilder.Seed();
         }
     }
 }

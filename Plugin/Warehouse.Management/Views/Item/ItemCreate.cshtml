@@ -203,11 +203,22 @@
 								<span asp-validation-for="CreatedItemDTO.CaseWeight"></span>
 							</div>
 
-							<div class="form-group col-md-3">
+						@*	<div class="form-group col-md-3">
 
 								<label for="BrandName" class="form-label">Brand Name &nbsp;</label>
 								<input asp-for="@Model.CreatedItemDTO.BrandName" type="text" id="BrandName" class="form-control" autofocus="autofocus" placeholder="Brand Name" />
 								<span asp-validation-for="CreatedItemDTO.BrandName"></span>
+							</div>*@
+
+							<div class="form-group col-md-3">
+								<label for="BrandName" class="form-label">Brand Name</label>
+								<ejs-dropdownlist id="BrandName" allowFiltering="true" name="CreatedItemDTO.BrandId"
+												  dataSource="@(new SelectList(Model.Brand, "BrandId", "DistrictName").Items)"
+												  placeholder="Brand Name " popupHeight="220px"
+												  value="@Model.CreatedItemDTO.BrandId">
+									<e-dropdownlist-fields text="BrandName" value="BrandId"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="CreatedItemDTO.BrandId"></span>
 							</div>
 
 							<div class="form-group col-md-3">

@@ -6,547 +6,480 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CloudVOffice.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Insellerregforeignkeyexcluded : Migration
+    public partial class bANNERIMAGEe : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_SellerRegistrations_PinCodes_PinCodeId",
-                table: "SellerRegistrations");
+            migrationBuilder.AddColumn<string>(
+                name: "UserMobileNumber",
+                table: "ChangePasswords",
+                type: "nvarchar(max)",
+                nullable: true);
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_SellerRegistrations_Sectors_SectorId",
-                table: "SellerRegistrations");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_SellerRegistrations_WareHouses_WareHuoseId",
-                table: "SellerRegistrations");
-
-            migrationBuilder.DropIndex(
-                name: "IX_SellerRegistrations_PinCodeId",
-                table: "SellerRegistrations");
-
-            migrationBuilder.DropIndex(
-                name: "IX_SellerRegistrations_SectorId",
-                table: "SellerRegistrations");
-
-            migrationBuilder.DropIndex(
-                name: "IX_SellerRegistrations_WareHuoseId",
-                table: "SellerRegistrations");
-
-            migrationBuilder.AlterColumn<long>(
-                name: "WareHuoseId",
-                table: "SellerRegistrations",
-                type: "bigint",
-                nullable: true,
-                oldClrType: typeof(long),
-                oldType: "bigint");
-
-            migrationBuilder.AlterColumn<int>(
-                name: "SectorId",
-                table: "SellerRegistrations",
-                type: "int",
-                nullable: true,
-                oldClrType: typeof(int),
-                oldType: "int");
+            migrationBuilder.CreateTable(
+                name: "Banners",
+                columns: table => new
+                {
+                    BannerId = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BannerName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BannerImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()"),
+                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Banners", x => x.BannerId);
+                });
 
             migrationBuilder.UpdateData(
                 table: "Applications",
                 keyColumn: "ApplicationId",
                 keyValue: 1,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(944));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(6986));
 
             migrationBuilder.UpdateData(
                 table: "Applications",
                 keyColumn: "ApplicationId",
                 keyValue: 2,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(949));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(6988));
 
             migrationBuilder.UpdateData(
                 table: "Applications",
                 keyColumn: "ApplicationId",
                 keyValue: 3,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(952));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(6991));
 
             migrationBuilder.UpdateData(
                 table: "Applications",
                 keyColumn: "ApplicationId",
                 keyValue: 4,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(954));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(6993));
 
             migrationBuilder.UpdateData(
                 table: "Applications",
                 keyColumn: "ApplicationId",
                 keyValue: 5,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(956));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(6995));
 
             migrationBuilder.UpdateData(
                 table: "Applications",
                 keyColumn: "ApplicationId",
                 keyValue: 6,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(957));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(6996));
 
             migrationBuilder.UpdateData(
                 table: "Applications",
                 keyColumn: "ApplicationId",
                 keyValue: 7,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(959));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(6998));
 
             migrationBuilder.UpdateData(
                 table: "EmailTemplates",
                 keyColumn: "EmailTemplateId",
                 keyValue: 1,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(1692));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(7531));
 
             migrationBuilder.UpdateData(
                 table: "EmailTemplates",
                 keyColumn: "EmailTemplateId",
                 keyValue: 7,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(1694));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(7533));
 
             migrationBuilder.UpdateData(
                 table: "RoleAndApplicationWisePermissions",
                 keyColumn: "RoleAndApplicationWisePermissionId",
                 keyValue: 1L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(1286));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(7257));
 
             migrationBuilder.UpdateData(
                 table: "RoleAndApplicationWisePermissions",
                 keyColumn: "RoleAndApplicationWisePermissionId",
                 keyValue: 2L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(1288));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(7258));
 
             migrationBuilder.UpdateData(
                 table: "RoleAndApplicationWisePermissions",
                 keyColumn: "RoleAndApplicationWisePermissionId",
                 keyValue: 3L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(1290));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(7259));
 
             migrationBuilder.UpdateData(
                 table: "RoleAndApplicationWisePermissions",
                 keyColumn: "RoleAndApplicationWisePermissionId",
                 keyValue: 4L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(1291));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(7261));
 
             migrationBuilder.UpdateData(
                 table: "RoleAndApplicationWisePermissions",
                 keyColumn: "RoleAndApplicationWisePermissionId",
                 keyValue: 5L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(1293));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(7262));
 
             migrationBuilder.UpdateData(
                 table: "RoleAndApplicationWisePermissions",
                 keyColumn: "RoleAndApplicationWisePermissionId",
                 keyValue: 6L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(1294));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(7263));
 
             migrationBuilder.UpdateData(
                 table: "RoleAndApplicationWisePermissions",
                 keyColumn: "RoleAndApplicationWisePermissionId",
                 keyValue: 7L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(1296));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(7264));
 
             migrationBuilder.UpdateData(
                 table: "RoleAndApplicationWisePermissions",
                 keyColumn: "RoleAndApplicationWisePermissionId",
                 keyValue: 8L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(1297));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(7265));
 
             migrationBuilder.UpdateData(
                 table: "RoleAndApplicationWisePermissions",
                 keyColumn: "RoleAndApplicationWisePermissionId",
                 keyValue: 9L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(1298));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(7266));
 
             migrationBuilder.UpdateData(
                 table: "RoleAndApplicationWisePermissions",
                 keyColumn: "RoleAndApplicationWisePermissionId",
                 keyValue: 10L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(1300));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(7267));
 
             migrationBuilder.UpdateData(
                 table: "Roles",
                 keyColumn: "RoleId",
                 keyValue: 1,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 990, DateTimeKind.Local).AddTicks(9384));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 153, DateTimeKind.Local).AddTicks(9789));
 
             migrationBuilder.UpdateData(
                 table: "UserWiseViewMappers",
                 keyColumn: "UserWiseViewMapperId",
                 keyValue: 1L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(1558));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(7426));
 
             migrationBuilder.UpdateData(
                 table: "UserWiseViewMappers",
                 keyColumn: "UserWiseViewMapperId",
                 keyValue: 2L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(1590));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(7428));
 
             migrationBuilder.UpdateData(
                 table: "UserWiseViewMappers",
                 keyColumn: "UserWiseViewMapperId",
                 keyValue: 3L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(1592));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(7430));
 
             migrationBuilder.UpdateData(
                 table: "UserWiseViewMappers",
                 keyColumn: "UserWiseViewMapperId",
                 keyValue: 4L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(1593));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(7431));
 
             migrationBuilder.UpdateData(
                 table: "UserWiseViewMappers",
                 keyColumn: "UserWiseViewMapperId",
                 keyValue: 5L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(1595));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(7432));
 
             migrationBuilder.UpdateData(
                 table: "UserWiseViewMappers",
                 keyColumn: "UserWiseViewMapperId",
                 keyValue: 6L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(1597));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(7433));
 
             migrationBuilder.UpdateData(
                 table: "UserWiseViewMappers",
                 keyColumn: "UserWiseViewMapperId",
                 keyValue: 7L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(1598));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(7435));
 
             migrationBuilder.UpdateData(
                 table: "UserWiseViewMappers",
                 keyColumn: "UserWiseViewMapperId",
                 keyValue: 8L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(1600));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(7436));
 
             migrationBuilder.UpdateData(
                 table: "UserWiseViewMappers",
                 keyColumn: "UserWiseViewMapperId",
                 keyValue: 9L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(1601));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(7437));
 
             migrationBuilder.UpdateData(
                 table: "UserWiseViewMappers",
                 keyColumn: "UserWiseViewMapperId",
                 keyValue: 10L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(1603));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(7439));
 
             migrationBuilder.UpdateData(
                 table: "Users",
                 keyColumn: "UserId",
                 keyValue: 1L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 11, 28, 7, 991, DateTimeKind.Local).AddTicks(418));
+                value: new DateTime(2024, 1, 5, 10, 25, 34, 154, DateTimeKind.Local).AddTicks(6087));
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterColumn<long>(
-                name: "WareHuoseId",
-                table: "SellerRegistrations",
-                type: "bigint",
-                nullable: false,
-                defaultValue: 0L,
-                oldClrType: typeof(long),
-                oldType: "bigint",
-                oldNullable: true);
+            migrationBuilder.DropTable(
+                name: "Banners");
 
-            migrationBuilder.AlterColumn<int>(
-                name: "SectorId",
-                table: "SellerRegistrations",
-                type: "int",
-                nullable: false,
-                defaultValue: 0,
-                oldClrType: typeof(int),
-                oldType: "int",
-                oldNullable: true);
+            migrationBuilder.DropColumn(
+                name: "UserMobileNumber",
+                table: "ChangePasswords");
 
             migrationBuilder.UpdateData(
                 table: "Applications",
                 keyColumn: "ApplicationId",
                 keyValue: 1,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 0, DateTimeKind.Local).AddTicks(8486));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(3722));
 
             migrationBuilder.UpdateData(
                 table: "Applications",
                 keyColumn: "ApplicationId",
                 keyValue: 2,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 0, DateTimeKind.Local).AddTicks(8500));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(3725));
 
             migrationBuilder.UpdateData(
                 table: "Applications",
                 keyColumn: "ApplicationId",
                 keyValue: 3,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 0, DateTimeKind.Local).AddTicks(8505));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(3727));
 
             migrationBuilder.UpdateData(
                 table: "Applications",
                 keyColumn: "ApplicationId",
                 keyValue: 4,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 0, DateTimeKind.Local).AddTicks(8507));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(3729));
 
             migrationBuilder.UpdateData(
                 table: "Applications",
                 keyColumn: "ApplicationId",
                 keyValue: 5,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 0, DateTimeKind.Local).AddTicks(8509));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(3731));
 
             migrationBuilder.UpdateData(
                 table: "Applications",
                 keyColumn: "ApplicationId",
                 keyValue: 6,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 0, DateTimeKind.Local).AddTicks(8511));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(3732));
 
             migrationBuilder.UpdateData(
                 table: "Applications",
                 keyColumn: "ApplicationId",
                 keyValue: 7,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 0, DateTimeKind.Local).AddTicks(8513));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(3734));
 
             migrationBuilder.UpdateData(
                 table: "EmailTemplates",
                 keyColumn: "EmailTemplateId",
                 keyValue: 1,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 1, DateTimeKind.Local).AddTicks(1024));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(4153));
 
             migrationBuilder.UpdateData(
                 table: "EmailTemplates",
                 keyColumn: "EmailTemplateId",
                 keyValue: 7,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 1, DateTimeKind.Local).AddTicks(1027));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(4155));
 
             migrationBuilder.UpdateData(
                 table: "RoleAndApplicationWisePermissions",
                 keyColumn: "RoleAndApplicationWisePermissionId",
                 keyValue: 1L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 0, DateTimeKind.Local).AddTicks(9757));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(3905));
 
             migrationBuilder.UpdateData(
                 table: "RoleAndApplicationWisePermissions",
                 keyColumn: "RoleAndApplicationWisePermissionId",
                 keyValue: 2L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 0, DateTimeKind.Local).AddTicks(9760));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(3907));
 
             migrationBuilder.UpdateData(
                 table: "RoleAndApplicationWisePermissions",
                 keyColumn: "RoleAndApplicationWisePermissionId",
                 keyValue: 3L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 0, DateTimeKind.Local).AddTicks(9762));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(3908));
 
             migrationBuilder.UpdateData(
                 table: "RoleAndApplicationWisePermissions",
                 keyColumn: "RoleAndApplicationWisePermissionId",
                 keyValue: 4L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 0, DateTimeKind.Local).AddTicks(9764));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(3910));
 
             migrationBuilder.UpdateData(
                 table: "RoleAndApplicationWisePermissions",
                 keyColumn: "RoleAndApplicationWisePermissionId",
                 keyValue: 5L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 0, DateTimeKind.Local).AddTicks(9765));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(3911));
 
             migrationBuilder.UpdateData(
                 table: "RoleAndApplicationWisePermissions",
                 keyColumn: "RoleAndApplicationWisePermissionId",
                 keyValue: 6L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 0, DateTimeKind.Local).AddTicks(9767));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(3916));
 
             migrationBuilder.UpdateData(
                 table: "RoleAndApplicationWisePermissions",
                 keyColumn: "RoleAndApplicationWisePermissionId",
                 keyValue: 7L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 0, DateTimeKind.Local).AddTicks(9768));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(3917));
 
             migrationBuilder.UpdateData(
                 table: "RoleAndApplicationWisePermissions",
                 keyColumn: "RoleAndApplicationWisePermissionId",
                 keyValue: 8L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 0, DateTimeKind.Local).AddTicks(9770));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(3918));
 
             migrationBuilder.UpdateData(
                 table: "RoleAndApplicationWisePermissions",
                 keyColumn: "RoleAndApplicationWisePermissionId",
                 keyValue: 9L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 0, DateTimeKind.Local).AddTicks(9772));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(3920));
 
             migrationBuilder.UpdateData(
                 table: "RoleAndApplicationWisePermissions",
                 keyColumn: "RoleAndApplicationWisePermissionId",
                 keyValue: 10L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 0, DateTimeKind.Local).AddTicks(9774));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(3921));
 
             migrationBuilder.UpdateData(
                 table: "Roles",
                 keyColumn: "RoleId",
                 keyValue: 1,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 5, 999, DateTimeKind.Local).AddTicks(1911));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(2559));
 
             migrationBuilder.UpdateData(
                 table: "UserWiseViewMappers",
                 keyColumn: "UserWiseViewMapperId",
                 keyValue: 1L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 1, DateTimeKind.Local).AddTicks(671));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(4060));
 
             migrationBuilder.UpdateData(
                 table: "UserWiseViewMappers",
                 keyColumn: "UserWiseViewMapperId",
                 keyValue: 2L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 1, DateTimeKind.Local).AddTicks(674));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(4062));
 
             migrationBuilder.UpdateData(
                 table: "UserWiseViewMappers",
                 keyColumn: "UserWiseViewMapperId",
                 keyValue: 3L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 1, DateTimeKind.Local).AddTicks(675));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(4064));
 
             migrationBuilder.UpdateData(
                 table: "UserWiseViewMappers",
                 keyColumn: "UserWiseViewMapperId",
                 keyValue: 4L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 1, DateTimeKind.Local).AddTicks(677));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(4065));
 
             migrationBuilder.UpdateData(
                 table: "UserWiseViewMappers",
                 keyColumn: "UserWiseViewMapperId",
                 keyValue: 5L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 1, DateTimeKind.Local).AddTicks(679));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(4067));
 
             migrationBuilder.UpdateData(
                 table: "UserWiseViewMappers",
                 keyColumn: "UserWiseViewMapperId",
                 keyValue: 6L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 1, DateTimeKind.Local).AddTicks(680));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(4068));
 
             migrationBuilder.UpdateData(
                 table: "UserWiseViewMappers",
                 keyColumn: "UserWiseViewMapperId",
                 keyValue: 7L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 1, DateTimeKind.Local).AddTicks(682));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(4069));
 
             migrationBuilder.UpdateData(
                 table: "UserWiseViewMappers",
                 keyColumn: "UserWiseViewMapperId",
                 keyValue: 8L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 1, DateTimeKind.Local).AddTicks(683));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(4070));
 
             migrationBuilder.UpdateData(
                 table: "UserWiseViewMappers",
                 keyColumn: "UserWiseViewMapperId",
                 keyValue: 9L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 1, DateTimeKind.Local).AddTicks(685));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(4072));
 
             migrationBuilder.UpdateData(
                 table: "UserWiseViewMappers",
                 keyColumn: "UserWiseViewMapperId",
                 keyValue: 10L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 1, DateTimeKind.Local).AddTicks(686));
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(4073));
 
             migrationBuilder.UpdateData(
                 table: "Users",
                 keyColumn: "UserId",
                 keyValue: 1L,
                 column: "CreatedDate",
-                value: new DateTime(2024, 1, 4, 10, 23, 6, 0, DateTimeKind.Local).AddTicks(5390));
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SellerRegistrations_PinCodeId",
-                table: "SellerRegistrations",
-                column: "PinCodeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SellerRegistrations_SectorId",
-                table: "SellerRegistrations",
-                column: "SectorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SellerRegistrations_WareHuoseId",
-                table: "SellerRegistrations",
-                column: "WareHuoseId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_SellerRegistrations_PinCodes_PinCodeId",
-                table: "SellerRegistrations",
-                column: "PinCodeId",
-                principalTable: "PinCodes",
-                principalColumn: "PinCodeId",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_SellerRegistrations_Sectors_SectorId",
-                table: "SellerRegistrations",
-                column: "SectorId",
-                principalTable: "Sectors",
-                principalColumn: "SectorId",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_SellerRegistrations_WareHouses_WareHuoseId",
-                table: "SellerRegistrations",
-                column: "WareHuoseId",
-                principalTable: "WareHouses",
-                principalColumn: "WareHuoseId",
-                onDelete: ReferentialAction.Cascade);
+                value: new DateTime(2024, 1, 4, 18, 43, 47, 955, DateTimeKind.Local).AddTicks(3374));
         }
     }
 }
