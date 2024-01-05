@@ -479,9 +479,9 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 			}
 		}
 
-        public List<Item> GetItemlistByBrandname(string brandName)
-        {
-            return _dbContext.Items.Where(x => x.BrandName == brandName && x.Deleted == false).ToList();
+		public List<Item> GetItemlistByBrandId(Int64 BrandId)
+		{
+            return _dbContext.Items.Where(x => x.BrandId == BrandId && x.Deleted == false).ToList();
         } 
 
     }

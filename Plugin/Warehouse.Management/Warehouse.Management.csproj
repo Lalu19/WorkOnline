@@ -16,6 +16,8 @@
 		<None Remove="logo.png" />
 		<None Remove="plugin.json" />
 		<None Remove="roles.json" />
+		<None Remove="Views\Banner\BannerCreate.cshtml" />
+		<None Remove="Views\Banner\BannerView.cshtml" />
 		<None Remove="Views\Brand\BrandCreate.cshtml" />
 		<None Remove="Views\Brand\BrandView.cshtml" />
 		<None Remove="Views\Dashboard.cshtml" />

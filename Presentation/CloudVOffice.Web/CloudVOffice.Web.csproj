@@ -26,6 +26,7 @@
 		<Folder Include="wwwroot\uploads\damageproduct\" />
 		<Folder Include="wwwroot\uploads\damagefarmigproduct\" />
 		<Folder Include="wwwroot\uploads\Brandimages\" />
+		<Folder Include="wwwroot\uploads\Bannerimages\" />
 
 
 	</ItemGroup>

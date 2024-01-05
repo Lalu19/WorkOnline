@@ -1,6 +1,6 @@
 ﻿@{
     Layout = "_MainAppLayout";
-    ViewData["Title"] = "Brand";
+    ViewData["Title"] = "Banner";
 }
 @addTagHelper *, Syncfusion.EJ2
 @using CloudVOffice.Core.Domain.Common;
@@ -12,13 +12,13 @@
                     <i class="icon-laptop_windows"></i>
                 </div>
                 <div class="page-title">
-                    <h5>WareHouse</h5>
-                    <h6 class="sub-heading">  </h6>
+                    <h5> Banner </h5>
+                    <h6 class="sub-heading"> </h6>
                 </div>
             </div>
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                 <div class="right-actions">
-                    <span class="last-login">  </span>
+                    <span class="last-login"> </span>
                 </div>
             </div>
         </div>
@@ -34,17 +34,19 @@
 
                     <div class="row">
                         <div class="col-md-8">
-                            Month
+                            Banner
                         </div>
                         <div class="col-md-4 text-right float-right">
-                            <a href="/WareHouse/Brand/BrandCreate" class="btn btn-success btn-sm"><i class="icon icon-add"></i> Add</a>
+                            <a href="/WareHouse/Banner/BannerCreate" class="btn btn-success btn-sm">
+                                <i class="icon icon-add"></i> Add
+                            </a>
 
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
 
-                    <ejs-grid id="GridOverview" dataSource="ViewBag.Brands"
+                    <ejs-grid id="GridOverview" dataSource="ViewBag.Banners"
                               allowFiltering="true" allowSorting="true"
                               allowExcelExport="true" allowGrouping="true"
                               allowMultiSorting="true"
@@ -60,9 +62,10 @@
                         <e-grid-pagesettings pageCount="4" pageSizes="true"></e-grid-pagesettings>
                         <e-grid-columns>
 
-
-                            <e-grid-column field="BrandName" headerText="Brand Name" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="BrandImage" template="#ImageTemplate" headerText="Brand Image" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="BannerName" headerText="Banner Name" textAlign="Left"
+                                           width="120"></e-grid-column>
+                            <e-grid-column field="BannerImage" template="#ImageTemplate" headerText="Banner Image"
+                                           textAlign="Left" width="120"></e-grid-column>
 
                             <e-grid-column headerText="Action" template="#Actions" width="50"></e-grid-column>
                         </e-grid-columns>
@@ -86,7 +89,7 @@
                 sweetAlert({
                     html: true,
                     icon: "success",
-                    title: "Brand",
+                    title: "Banner",
                     text: "Successfully created.",
                     type: "success"
                 });
@@ -95,7 +98,7 @@
                 sweetAlert({
                     html: true,
                     icon: "success",
-                    title: "Brand",
+                    title: "Banner",
                     text: "Successfully updated.",
                     type: "success"
                 });
@@ -104,7 +107,7 @@
                 sweetAlert({
                     html: true,
                     icon: "success",
-                    title: "Brand",
+                    title: "Banner",
                     text: "Successfully Deleted.",
                     type: "success"
                 });
@@ -122,7 +125,7 @@
                 sweetAlert({
                     html: true,
                     icon: "error",
-                    title: "Brand",
+                    title: "Banner",
                     text: "There is somthing going wrong.",
                     type: "error"
                 });
@@ -131,7 +134,7 @@
                 sweetAlert({
                     html: true,
                     icon: "error",
-                    title: "Brand",
+                    title: "Banner",
                     text: message,
                     type: "error"
                 });
@@ -154,7 +157,7 @@
             dangerMode: true,
         }).then(function (isConfirm) {
             if (isConfirm) {
-                window.location.href = "../../WareHouse/Brand/BrandDelete?BrandId=" + Id;
+                window.location.href = "../../WareHouse/Banner/BannerDelete?bannerId=" + Id;
             }
         })
     }
@@ -163,17 +166,17 @@
 
 <script id="Actions" type="text/x-template">
     <div class="link">
-        <a href="../../WareHouse/Brand/BrandCreate?BrandId=${BrandId}"><i class="icon-pencil3" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp;
+        <a href= "../../WareHouse/Banner/BannerCreate?BannerId=${BannerId}" ><i class="icon-pencil3" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp;
 
-        <button onClick="Delete(${BrandId})" style="background: transparent;border: none;"><i class="icon-trash" style="font-size:22px"></i></button>
+        <button onClick= "Delete(${BannerId})" style ="background: transparent;border: none;"><i class="icon-trash" style="font-size:22px"></i></button>
     </div>
 </script>
 
-<script id = "ImageTemplate" type = "text/x-template" >${ imageTemplate(data)}</script>
+    <script id="ImageTemplate" type="text/x-template">${ imageTemplate(data)}</script>
 
-<script id="statusTemplate" type="text/x-template">
-    ${statusDetail(data)}
-</script>
+    <script id="statusTemplate" type="text/x-template">
+        ${statusDetail(data)}
+        </script>
 
 <script>
     function toolbarClick(args) {
@@ -210,8 +213,8 @@
     }
     function imageTemplate(i) {
 
-        if (i.BrandImage != null) {
-            return ' <img src="/uploads/Brandimages/' + i.BrandImage + '" style="height:100px; width:100px ;padding: 5px 0px 5px 0;" />';
+        if (i.BannerImage != null) {
+            return ' <img src="/uploads/Bannerimages/' + i.BannerImage + '" style="height:100px; width:100px ;padding: 5px 0px 5px 0;" />';
         }
         else {
             return 'No Image';
