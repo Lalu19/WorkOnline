@@ -20,7 +20,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 		public Item GetItemById(Int64 itemId);
         public List<Item> GetItemList();
         public MessageEnum DeleteItem(Int64 itemId, Int64 DeletedBy);
-        public List<Item> GetItemlistByBrandname(string brandName);
+        public List<Item> GetItemlistByBrandId(Int64 BrandId);
 
     }
 }
