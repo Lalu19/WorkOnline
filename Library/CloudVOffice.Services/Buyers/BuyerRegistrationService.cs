@@ -147,35 +147,35 @@ namespace CloudVOffice.Services.Buyers
 			}
 		}
 
-		public MessageEnum UpdateBuyerRegistration(BuyerRegistrationDTO buyerRegistrationDTO)
+		public MessageEnum UpdateBuyerRegistration(BuyerUpdateDTO buyerUpdateDTO)
 		{
 			try
 			{
-				var a = _dbContext.BuyerRegistrations.Where(x => x.BuyerRegistrationId != buyerRegistrationDTO.BuyerRegistrationId && x.Name == buyerRegistrationDTO.Name && x.Deleted == false).FirstOrDefault();
+				var a = _dbContext.BuyerRegistrations.Where(x => x.BuyerRegistrationId != buyerUpdateDTO.BuyerRegistrationId && x.Name == buyerUpdateDTO.Name && x.Deleted == false).FirstOrDefault();
 
 				if (a == null)
 				{
-					var buy = _dbContext.BuyerRegistrations.Where(x => x.BuyerRegistrationId == buyerRegistrationDTO.BuyerRegistrationId).FirstOrDefault();
+					var buy = _dbContext.BuyerRegistrations.Where(x => x.BuyerRegistrationId == buyerUpdateDTO.BuyerRegistrationId).FirstOrDefault();
 
 					if (buy != null)
 					{
-						buy.Name = buyerRegistrationDTO.Name;
-						buy.DateOfBirth = buyerRegistrationDTO.DateOfBirth;
-						buy.Address = buyerRegistrationDTO.Address;
-						buy.PinCodeId = buyerRegistrationDTO.PinCodeId;
-						buy.Country = buyerRegistrationDTO.Country;
-						buy.State = buyerRegistrationDTO.State;
-						buy.PrimaryPhone = buyerRegistrationDTO.PrimaryPhone;
-						buy.AlternatePhone = buyerRegistrationDTO.AlternatePhone;
-						buy.MailId = buyerRegistrationDTO.MailId;
-						buy.SalesRepresentativeId = buyerRegistrationDTO.SalesRepresentativeId;
-						buy.SalesRepresentativeContact = buyerRegistrationDTO.SalesRepresentativeContact;
-						buy.GSTNumber = buyerRegistrationDTO.GSTNumber;
-						buy.WareHuoseId = buyerRegistrationDTO.WareHuoseId;
-						buy.Password = buyerRegistrationDTO.Password;
-						buy.FirstLogin = buyerRegistrationDTO.FirstLogin;
-						buy.SectorId = buyerRegistrationDTO.SectorId;
-						buy.ShopImage = buyerRegistrationDTO.ShopImage;
+						buy.Name = buyerUpdateDTO.Name;
+						buy.DateOfBirth = buyerUpdateDTO.DateOfBirth;
+						buy.Address = buyerUpdateDTO.Address;
+						buy.PinCodeId = buyerUpdateDTO.PinCodeId;
+						buy.Country = buyerUpdateDTO.Country;
+						buy.State = buyerUpdateDTO.State;
+						buy.PrimaryPhone = buyerUpdateDTO.PrimaryPhone;
+						buy.AlternatePhone = buyerUpdateDTO.AlternatePhone;
+						buy.MailId = buyerUpdateDTO.MailId;
+						buy.SalesRepresentativeId = buyerUpdateDTO.SalesRepresentativeId;
+						buy.SalesRepresentativeContact = buyerUpdateDTO.SalesRepresentativeContact;
+						buy.GSTNumber = buyerUpdateDTO.GSTNumber;
+						buy.WareHuoseId = buyerUpdateDTO.WareHuoseId;
+						buy.Password = buyerUpdateDTO.Password;
+						buy.FirstLogin = buyerUpdateDTO.FirstLogin;
+						buy.SectorId = buyerUpdateDTO.SectorId;
+						buy.ShopImage = buyerUpdateDTO.ShopImage;
 
 
 						buy.UpdatedDate = DateTime.Now;

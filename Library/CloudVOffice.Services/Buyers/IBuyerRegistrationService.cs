@@ -16,7 +16,7 @@ namespace CloudVOffice.Services.Buyers
 		public MessageEnum CreateBuyerRegistration(BuyerRegistrationDTO buyerRegistrationDTO);
 		public BuyerRegistration GetRegistrationByBuyerRegistrationId(Int64 buyerRegistrationId);
 		public List<BuyerRegistration> GetBuyerRegistrationList();
-		public MessageEnum UpdateBuyerRegistration(BuyerRegistrationDTO buyerRegistrationDTO);
+		public MessageEnum UpdateBuyerRegistration(BuyerUpdateDTO buyerUpdateDTO);
 		public MessageEnum BuyerRegistrationDelete(Int64 buyerRegistrationId, Int64 DeletedBy);
 	}
 }
