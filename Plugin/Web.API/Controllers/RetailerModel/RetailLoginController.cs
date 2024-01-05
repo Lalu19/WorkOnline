@@ -38,12 +38,26 @@ namespace Web.API.Controllers.RetailerModel
 
 			else if (buyer != null)
 			{
-				return Ok(new { Buyer = buyer });
+				if (buyer.Password == Password)
+				{
+					return Ok(new { Buyer = buyer });
+				}
+				else
+				{
+					return BadRequest("Mobile Number is correct but the Password is wrong");
+				}
 			}
 
 			else if (seller != null)
 			{
-				return Ok(new { Seller = seller });
+				if (seller.Password == Password)
+				{
+					return Ok(new { Seller = seller });
+				}
+				else
+				{
+					return BadRequest("Mobile Number is correct but the Password is wrong");
+				}
 			}
 
 			else
@@ -55,10 +69,10 @@ namespace Web.API.Controllers.RetailerModel
 
 
 
-		[HttpPost("{UserMobileNumber}")]
-		public IActionResult ChangePassword(string UserMobileNumber, ChangePasswordDTO changePasswordDTO)
+		[HttpPost]
+		public IActionResult ChangePassword(ChangePasswordDTO changePasswordDTO)
 		{
-			var a = _dbContext.BuyerRegistrations.FirstOrDefault(x => x.PrimaryPhone == UserMobileNumber);
+			var a = _dbContext.BuyerRegistrations.FirstOrDefault(x => x.PrimaryPhone == changePasswordDTO.UserMobileNumber);
 
 			if (a == null)
 			{
