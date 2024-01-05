@@ -45,8 +45,9 @@ namespace CloudVOffice.Services.Sellers
                     sr.SalesRepresentativeContact = sellerRegistrationDTO.SalesRepresentativeContact;
                     sr.GSTNumber = sellerRegistrationDTO.GSTNumber;
                     sr.WareHuoseId = sellerRegistrationDTO.WareHuoseId;
-                    sr.Password = sellerRegistrationDTO.Password;
-                    sr.SectorId = sellerRegistrationDTO.SectorId;
+                    sr.Password = GenerateRandomPassword(6);
+                    sr.FirstLogin = false;
+					sr.SectorId = sellerRegistrationDTO.SectorId;
                     sr.Image = sellerRegistrationDTO.Image;
                     sr.CreatedBy = sellerRegistrationDTO.CreatedBy;
 
@@ -65,7 +66,17 @@ namespace CloudVOffice.Services.Sellers
                 throw;
             }
         }
-        public List<SellerRegistration> GetSellerRegistrationList()
+
+		public string GenerateRandomPassword(int length)
+		{
+			Random random = new Random();
+
+			int randomNumber = random.Next((int)Math.Pow(10, length - 1), (int)Math.Pow(10, length));
+
+			return randomNumber.ToString();
+		}
+
+		public List<SellerRegistration> GetSellerRegistrationList()
         {
             try
             {
@@ -89,32 +100,32 @@ namespace CloudVOffice.Services.Sellers
                 throw;
             }
         }
-        public MessageEnum SellerRegistrationUpdate(SellerRegistrationDTO sellerRegistrationDTO)
+        public MessageEnum SellerRegistrationUpdate(SellerUpdateDTO sellerUpdateDTO)
         {
             try
             {
-                var sel = _dbContext.SellerRegistrations.Where(x => x.SellerRegistrationId != sellerRegistrationDTO.SellerRegistrationId && x.Name == sellerRegistrationDTO.Name && x.Deleted == false).FirstOrDefault();
+                var sel = _dbContext.SellerRegistrations.Where(x => x.SellerRegistrationId != sellerUpdateDTO.SellerRegistrationId && x.Name == sellerUpdateDTO.Name && x.Deleted == false).FirstOrDefault();
                 if (sel == null)
                 {
-                    var a = _dbContext.SellerRegistrations.Where(x => x.SellerRegistrationId == sellerRegistrationDTO.SellerRegistrationId).FirstOrDefault();
+                    var a = _dbContext.SellerRegistrations.Where(x => x.SellerRegistrationId == sellerUpdateDTO.SellerRegistrationId).FirstOrDefault();
                     if (a != null)
                     {
-                        a.Name = sellerRegistrationDTO.Name;
-                        a.BusinessName = sellerRegistrationDTO.BusinessName;
-                        a.Address = sellerRegistrationDTO.Address;
-                        a.PinCodeId = sellerRegistrationDTO.PinCodeId;
-                        a.Country = sellerRegistrationDTO.Country;
-                        a.State = sellerRegistrationDTO.State;
-                        a.PrimaryPhone = sellerRegistrationDTO.PrimaryPhone;
-                        a.AlternatePhone = sellerRegistrationDTO.AlternatePhone;
-                        a.MailId = sellerRegistrationDTO.MailId;
-                        a.SalesRepresentativeId = sellerRegistrationDTO.SalesRepresentativeId;
-                        a.SalesRepresentativeContact = sellerRegistrationDTO.SalesRepresentativeContact;
-                        a.GSTNumber = sellerRegistrationDTO.GSTNumber;
-                        a.WareHuoseId = sellerRegistrationDTO.WareHuoseId;
-                        a.Password = sellerRegistrationDTO.Password;
-                        a.SectorId = sellerRegistrationDTO.SectorId;
-                        a.Image = sellerRegistrationDTO.Image;
+                        a.Name = sellerUpdateDTO.Name;
+                        a.BusinessName = sellerUpdateDTO.BusinessName;
+                        a.Address = sellerUpdateDTO.Address;
+                        a.PinCodeId = sellerUpdateDTO.PinCodeId;
+                        a.Country = sellerUpdateDTO.Country;
+                        a.State = sellerUpdateDTO.State;
+                        a.PrimaryPhone = sellerUpdateDTO.PrimaryPhone;
+                        a.AlternatePhone = sellerUpdateDTO.AlternatePhone;
+                        a.MailId = sellerUpdateDTO.MailId;
+                        a.SalesRepresentativeId = sellerUpdateDTO.SalesRepresentativeId;
+                        a.SalesRepresentativeContact = sellerUpdateDTO.SalesRepresentativeContact;
+                        a.GSTNumber = sellerUpdateDTO.GSTNumber;
+                        a.WareHuoseId = sellerUpdateDTO.WareHuoseId;
+                        a.Password = sellerUpdateDTO.Password;
+                        a.SectorId = sellerUpdateDTO.SectorId;
+                        a.Image = sellerUpdateDTO.Image;
                         a.UpdatedDate = DateTime.Now;
                         _dbContext.SaveChanges();
                         return MessageEnum.Updated;

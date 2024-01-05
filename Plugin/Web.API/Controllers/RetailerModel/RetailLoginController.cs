@@ -28,34 +28,30 @@ namespace Web.API.Controllers.RetailerModel
 		[HttpGet("{UserMobileNumber}/{Password}")]
 		public IActionResult BuyerLogin(string UserMobileNumber, string Password)
 		{
-			var a = _dbContext.BuyerRegistrations.FirstOrDefault(x => x.PrimaryPhone ==  UserMobileNumber);
-			var b = _dbContext.SellerRegistrations.FirstOrDefault(x => x.PrimaryPhone == UserMobileNumber);
+			var buyer = _dbContext.BuyerRegistrations.FirstOrDefault(x => x.PrimaryPhone ==  UserMobileNumber);
+			var seller = _dbContext.SellerRegistrations.FirstOrDefault(x => x.PrimaryPhone == UserMobileNumber);
 
-			if (a == null || b==null)
+			if (buyer == null && seller == null)
 			{
 				return BadRequest("UserMobileNumber is incorrect or Number not in use");
 			}
+
+			else if (buyer != null)
+			{
+				return Ok(new { Buyer = buyer });
+			}
+
+			else if (seller != null)
+			{
+				return Ok(new { Seller = seller });
+			}
+
 			else
 			{
-				if(a.FirstLogin == false)
-				{
-					//return Redirect("/RetailLogin/ChangePassword");
-					//return Redirect($"/RetailLogin/ChangePassword?UserMobileNumber={UserMobileNumber}");
-
-					return RedirectToAction("ChangePassword", new { UserMobileNumber = UserMobileNumber });
-				}
-
-
-				 if (a.Password == Password)
-				 {
-					return Ok(new { Buyer = a, Seller = b });
-				}
-				else
-				{
-					return BadRequest("Mobile Number is correct but the Password is wrong");
-				}
+				return BadRequest("Mobile Number is correct but the Password is wrong");
 			}
 		}
+		
 
 
 
