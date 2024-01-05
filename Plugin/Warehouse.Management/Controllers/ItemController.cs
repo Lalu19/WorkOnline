@@ -25,6 +25,7 @@ using CloudVOffice.Services.WareHouses.Vendors;
 using CloudVOffice.Services.WareHouses.Employees;
 using CloudVOffice.Services.WareHouses.Districts;
 using CloudVOffice.Services.WareHouses.UOMs;
+using CloudVOffice.Services.WareHouses.Brands;
 
 namespace Warehouse.Management.Controllers
 {
@@ -44,10 +45,11 @@ namespace Warehouse.Management.Controllers
 		private readonly IVendorService _vendorService;
 		private readonly IEmployeeService _employeeService;
 		private readonly IUnit _unitService;
+		private readonly IBrandService _brandService;
 
 
 
-		public ItemController(IItemService itemService, IWebHostEnvironment hostingEnvironment, IHandlingTypeService handlingTypeService/*, IGSTService gSTService*/, ISectorService sectorService, ICategoryService categoryService, ISubCategory1Service subCategory1Service, ISubCategory2Service subCategory2Service, IWareHouseService warehouseService, IVendorService vendorService, IEmployeeService employeeService, IAddDistrictService addDistrictService, IUnit unitService)
+		public ItemController(IItemService itemService, IWebHostEnvironment hostingEnvironment, IHandlingTypeService handlingTypeService/*, IGSTService gSTService*/, ISectorService sectorService, ICategoryService categoryService, ISubCategory1Service subCategory1Service, ISubCategory2Service subCategory2Service, IWareHouseService warehouseService, IVendorService vendorService, IEmployeeService employeeService, IAddDistrictService addDistrictService, IUnit unitService,IBrandService brandService)
         {
 			_hostingEnvironment = hostingEnvironment;
 			_itemService = itemService;
@@ -62,6 +64,7 @@ namespace Warehouse.Management.Controllers
 			_vendorService = vendorService;
 			_employeeService = employeeService;
 			_unitService = unitService;
+			_brandService = brandService;
 		}
 
         [HttpGet]
@@ -87,6 +90,7 @@ namespace Warehouse.Management.Controllers
 				SubCategory1 = _subCategory1Service.GetSubCategory1List(),
 				SubCategory2 = _subCategory2Service.GetSubCategory2List(),
 				Unit = _unitService.GetUnit(),
+				Brand = _brandService.GetBrandList(),
 				CreatedItemDTO = new ItemDTO()
 			};
 
@@ -103,7 +107,8 @@ namespace Warehouse.Management.Controllers
 				viewForItem.CreatedItemDTO.SubCategory1Id = item1.SubCategory1Id;
 				viewForItem.CreatedItemDTO.SubCategory2Id = item1.SubCategory2Id;
 				viewForItem.CreatedItemDTO.CompanyName = item1.CompanyName;
-				viewForItem.CreatedItemDTO.BrandName = item1.BrandName;
+				viewForItem.CreatedItemDTO.BrandId = item1.BrandId;
+				//viewForItem.CreatedItemDTO.BrandName = item1.BrandName;
 				viewForItem.CreatedItemDTO.UnitId = item1.UnitId;
 				//viewForItem.CreatedItemDTO.UnitOfMeasurement = item1.UnitOfMeasurement;
 				viewForItem.CreatedItemDTO.ProductWeight = item1.ProductWeight;
@@ -371,7 +376,8 @@ namespace Warehouse.Management.Controllers
 							AddDistrict = _addDistrictService.GetAddDistrictList(),
 							Employee = _employeeService.GetEmployees(),
 							Vendor = _vendorService.GetVendorList(),
-							Unit = _unitService.GetUnit()
+							Unit = _unitService.GetUnit(),
+							Brand = _brandService.GetBrandList()
 						};
 
 						return View("~/Plugins/Warehouse.Management/Views/Item/ItemCreate.cshtml", viewForItem1);
@@ -447,7 +453,8 @@ namespace Warehouse.Management.Controllers
 					AddDistrict = _addDistrictService.GetAddDistrictList(),
 					Employee = _employeeService.GetEmployees(),
 					Vendor = _vendorService.GetVendorList(),
-					Unit = _unitService.GetUnit()
+					Unit = _unitService.GetUnit(),
+					Brand = _brandService.GetBrandList()
 				};
 
 				return View("~/Plugins/Warehouse.Management/Views/Item/ItemCreate.cshtml", viewForItem1);

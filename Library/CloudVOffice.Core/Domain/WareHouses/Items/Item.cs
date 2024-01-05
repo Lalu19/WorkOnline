@@ -14,7 +14,6 @@ namespace CloudVOffice.Core.Domain.WareHouses.Items
         public int? CategoryId { get; set; }
         public int? SubCategory1Id { get; set; }
         public int? SubCategory2Id { get; set; }
-
         public int? WareHuoseId { get; set; }
         public string? WareHouseName { get; set; }
         public int? AddDistrictId { get; set; }
@@ -23,7 +22,6 @@ namespace CloudVOffice.Core.Domain.WareHouses.Items
         public string? VendorName { get; set; }
         public int? EmployeeId { get; set; }
         public string? EmployeeName { get; set; }
-
 		public string? SectorName { get; set; }
         public string? CategoryName { get; set; }
         public string? SubCategory1Name { get; set; }
@@ -31,6 +29,7 @@ namespace CloudVOffice.Core.Domain.WareHouses.Items
         public string? HSN { get; set; }
         public string ItemName { get; set; }
         public string? CompanyName { get; set; }
+        public Int64? BrandId { get; set; }
         public string? BrandName { get; set; }
         public double ProductWeight { get; set; }
         public Int64? UnitId { get; set; }

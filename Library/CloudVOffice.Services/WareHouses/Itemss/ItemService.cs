@@ -26,6 +26,7 @@ using CloudVOffice.Core.Domain.ProductCategories;
 using CloudVOffice.Core.Domain.WareHouses.Vendors;
 using CloudVOffice.Core.Domain.WareHouses.Districts;
 using CloudVOffice.Core.Domain.WareHouses.UOMs;
+using CloudVOffice.Core.Domain.WareHouses.Brands;
 
 namespace CloudVOffice.Services.WareHouses.Itemss
 {
@@ -65,9 +66,10 @@ namespace CloudVOffice.Services.WareHouses.Itemss
                     item.AddDistrictId = itemDTO.AddDistrictId;
                     item.VendorId = itemDTO.VendorId;
                     item.EmployeeId = itemDTO.EmployeeId;
+                    item.BrandId = itemDTO.BrandId;
 
                     item.CompanyName = itemDTO.CompanyName;
-					item.BrandName = itemDTO.BrandName;
+					//item.BrandName = itemDTO.BrandName;
 					item.ProductWeight = itemDTO.ProductWeight;
 					item.UnitId = itemDTO.UnitId;
 					item.CaseWeight = itemDTO.CaseWeight;
@@ -132,7 +134,8 @@ namespace CloudVOffice.Services.WareHouses.Itemss
                         EmployeeId = item.EmployeeId,
 
                         CompanyName = item.CompanyName,
-						BrandName = item.BrandName,
+						BrandId = item.BrandId,
+						//BrandName = item.BrandName,
 						UnitId = item.UnitId,
                         ProductWeight = item.ProductWeight,
 						CaseWeight = item.CaseWeight,
@@ -272,7 +275,8 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 
 
                         item.CompanyName = itemDTO.CompanyName;
-                        item.BrandName = itemDTO.BrandName;
+                        item.BrandId = itemDTO.BrandId;
+                       // item.BrandName = itemDTO.BrandName;
 						item.ProductWeight = itemDTO.ProductWeight;
 						item.UnitId = itemDTO.UnitId;
                         item.CaseWeight = itemDTO.CaseWeight;
@@ -335,7 +339,6 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 			}
 		}
 
-
 		public Item GetItemByItemId(Int64 itemId)
         {
             try
@@ -348,7 +351,6 @@ namespace CloudVOffice.Services.WareHouses.Itemss
             }
         }
 
-
 		public Item GetItemById(Int64 itemId)
 		{
 			try
@@ -360,6 +362,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 				List<AddDistrict> districts = _dbContext.AddDistricts.Where(x => x.Deleted == false).ToList();
 				List<Unit> units = _dbContext.Units.Where(x => x.Deleted == false).ToList();
 				List<HandlingType> handlingTypes = _dbContext.HandlingTypes.Where(h => h.Deleted == false).ToList();
+				List<Brand> brands = _dbContext.Brands.Where(h => h.Deleted == false).ToList();
 
 				Item item = _dbContext.Items.Where(i => i.Deleted == false && i.ItemId == itemId).FirstOrDefault();
 
@@ -370,6 +373,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 				AddDistrict addDistrict = districts.FirstOrDefault(s => s.AddDistrictId == Convert.ToInt32(item.AddDistrictId));
 				Unit unit = units.FirstOrDefault(s => s.UnitId == Convert.ToInt32(item.UnitId));
 				HandlingType handlingType = handlingTypes.FirstOrDefault(s => s.HandlingTypeId == Convert.ToInt32(item.HandlingTypeId));
+				Brand brand = brands.FirstOrDefault(s => s.BrandId == Convert.ToInt32(item.BrandId));
 
 
 				item.WareHouseName = wareHuose != null ? wareHuose.WareHouseName : null;
@@ -378,6 +382,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 				item.DistrictName = addDistrict != null ? addDistrict.DistrictName : null;
 				item.ShortName = unit != null ? unit.ShortName : null;
 				item.HandlingType = handlingType != null ? handlingType.HandlingTypeName : null;
+				item.BrandName = brand != null ? brand.BrandName : null;
 
 
 				return item;
@@ -388,7 +393,6 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 				throw;
 			}
 		}
-
 
 		public MessageEnum DeleteItem(Int64 itemId, Int64 DeletedBy)
         {
@@ -434,6 +438,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 				//List<GST> gsts = _dbContext.GSTs.Where(g => g.Deleted == false).ToList();
 				List<Item> items = _dbContext.Items.Where(i  => i.Deleted == false).ToList();
 				List<Unit> units = _dbContext.Units.Where(i  => i.Deleted == false).ToList();
+				List<Brand> brands = _dbContext.Brands.Where(i  => i.Deleted == false).ToList();
 
 
 				foreach (var item in items)
@@ -449,6 +454,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					SubCategory1 subCategory1 = subCategory1s.FirstOrDefault(y => y.SubCategory1Id == Convert.ToInt32(item.SubCategory1Id));
 					SubCategory2 subCategory2 = subCategory2s.FirstOrDefault(y => y.SubCategory2Id == Convert.ToInt32(item.SubCategory2Id));
 					Unit unit = units.FirstOrDefault(h => h.UnitId == Convert.ToInt32(item.UnitId));
+					Brand brand = brands.FirstOrDefault(h => h.BrandId == Convert.ToInt32(item.BrandId));
 
 
 					item.HandlingType = handlingType != null ? handlingType.HandlingTypeName : null;
@@ -462,6 +468,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					item.VendorName = vendor != null ? vendor.VendorName : null;
 					item.EmployeeName = emp != null ? emp.EmployeeName : null;
 					item.ShortName = unit != null ? unit.ShortName : null;
+					item.BrandName = brand != null ? brand.BrandName : null;
 				}
 
 					return items;
@@ -471,5 +478,11 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 				throw;
 			}
 		}
+
+        public List<Item> GetItemlistByBrandname(string brandName)
+        {
+            return _dbContext.Items.Where(x => x.BrandName == brandName && x.Deleted == false).ToList();
+        } 
+
     }
 }
