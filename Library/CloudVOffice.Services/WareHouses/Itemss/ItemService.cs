@@ -482,7 +482,15 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 		public List<Item> GetItemlistByBrandId(Int64 BrandId)
 		{
             return _dbContext.Items.Where(x => x.BrandId == BrandId && x.Deleted == false).ToList();
-        } 
+        }
+        public List<Item> GetItemlistByCategoryId(int CategoryId)
+        {
+            return _dbContext.Items.Where(x => x.CategoryId == CategoryId && x.Deleted == false).ToList();
+        }
+        public List<Item> GetItemlistBySectorId(int SectorId)
+        {
+            return _dbContext.Items.Where(x => x.SectorId == SectorId && x.Deleted == false).ToList();
+        }
 
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CloudVOffice.Core.Domain.Buyers;
+using CloudVOffice.Core.Domain.Sellers;
 using CloudVOffice.Data.DTO.RetailerModel;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Services.Buyers;
@@ -65,35 +67,52 @@ namespace Web.API.Controllers.RetailerModel
 				return BadRequest("Mobile Number is correct but the Password is wrong");
 			}
 		}
-		
 
 
 
-		[HttpPost]
-		public IActionResult ChangePassword(ChangePasswordDTO changePasswordDTO)
-		{
-			var a = _dbContext.BuyerRegistrations.FirstOrDefault(x => x.PrimaryPhone == changePasswordDTO.UserMobileNumber);
+        [HttpPost]
+        public IActionResult ChangePassword(ChangePasswordDTO changePasswordDTO)
+        {
+            var buyer = _dbContext.BuyerRegistrations.FirstOrDefault(x => x.PrimaryPhone == changePasswordDTO.UserMobileNumber);
+            var seller = _dbContext.SellerRegistrations.FirstOrDefault(x => x.PrimaryPhone == changePasswordDTO.UserMobileNumber);
 
-			if (a == null)
-			{
-				return BadRequest("User not found");
-			}
+            if (buyer == null && seller == null)
+            {
+                return BadRequest("User not found");
+            }
 
-			if (a.Password != changePasswordDTO.OldPassword)
-			{
-				return BadRequest("Old password is incorrect");
-			}
-			if (changePasswordDTO.NewPassword != changePasswordDTO.RetypePassword)
-			{
-				return BadRequest("New password and retype password do not match");
-			}
+            var user = (buyer != null) ? (object)buyer : seller;
 
-			a.Password = changePasswordDTO.NewPassword;
-			a.FirstLogin = true;
+            if (user is BuyerRegistration && ((BuyerRegistration)user).Password != changePasswordDTO.OldPassword)
+            {
+                return BadRequest("Old password is incorrect");
+            }
+            else if (user is SellerRegistration && ((SellerRegistration)user).Password != changePasswordDTO.OldPassword)
+            {
+                return BadRequest("Old password is incorrect");
+            }
 
-			_dbContext.SaveChanges();
+            if (changePasswordDTO.NewPassword != changePasswordDTO.RetypePassword)
+            {
+                return BadRequest("New password and retype password do not match");
+            }
 
-			return Ok("Password changed successfully");
-		}
-	}
+            if (user is BuyerRegistration)
+            {
+                var buyerToUpdate = (BuyerRegistration)user;
+                buyerToUpdate.Password = changePasswordDTO.NewPassword;
+                buyerToUpdate.FirstLogin = true;
+            }
+            else if (user is SellerRegistration)
+            {
+                var sellerToUpdate = (SellerRegistration)user;
+                sellerToUpdate.Password = changePasswordDTO.NewPassword;
+            }
+
+            _dbContext.SaveChanges();
+
+            return Ok("Password changed successfully");
+        }
+
+    }
 }
