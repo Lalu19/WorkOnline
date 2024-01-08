@@ -73,5 +73,17 @@ namespace Web.API.Controllers.Itemss
             var a = _itemService.GetItemlistByBrandId(BrandId);
             return Ok(a);
         }
+        [HttpGet("{CategoryId}")]
+        public IActionResult GetItemsByCategoryId(int CategoryId)
+        {
+            var a = _itemService.GetItemlistByCategoryId(CategoryId);
+            return Ok(a);
+        }
+        [HttpGet("{SectorId}")]
+        public IActionResult GetItemsBySectorId(int SectorId)
+        {
+            var a = _itemService.GetItemlistBySectorId(SectorId);
+            return Ok(a);
+        }
     }
 }
