@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CloudVOffice.Core.Domain.Buyers;
+using CloudVOffice.Core.Domain.Sellers;
 using CloudVOffice.Data.DTO.RetailerModel;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Services.Buyers;
@@ -28,62 +30,89 @@ namespace Web.API.Controllers.RetailerModel
 		[HttpGet("{UserMobileNumber}/{Password}")]
 		public IActionResult BuyerLogin(string UserMobileNumber, string Password)
 		{
-			var a = _dbContext.BuyerRegistrations.FirstOrDefault(x => x.PrimaryPhone ==  UserMobileNumber);
-			var b = _dbContext.SellerRegistrations.FirstOrDefault(x => x.PrimaryPhone == UserMobileNumber);
+			var buyer = _dbContext.BuyerRegistrations.FirstOrDefault(x => x.PrimaryPhone ==  UserMobileNumber);
+			var seller = _dbContext.SellerRegistrations.FirstOrDefault(x => x.PrimaryPhone == UserMobileNumber);
 
-			if (a == null || b==null)
+			if (buyer == null && seller == null)
 			{
 				return BadRequest("UserMobileNumber is incorrect or Number not in use");
 			}
-			else
+
+			else if (buyer != null)
 			{
-				if(a.FirstLogin == false)
+				if (buyer.Password == Password)
 				{
-					//return Redirect("/RetailLogin/ChangePassword");
-					//return Redirect($"/RetailLogin/ChangePassword?UserMobileNumber={UserMobileNumber}");
-
-					return RedirectToAction("ChangePassword", new { UserMobileNumber = UserMobileNumber });
-				}
-
-
-				 if (a.Password == Password)
-				 {
-					return Ok(new { Buyer = a, Seller = b });
+					return Ok(new { Buyer = buyer });
 				}
 				else
 				{
 					return BadRequest("Mobile Number is correct but the Password is wrong");
 				}
 			}
+
+			else if (seller != null)
+			{
+				if (seller.Password == Password)
+				{
+					return Ok(new { Seller = seller });
+				}
+				else
+				{
+					return BadRequest("Mobile Number is correct but the Password is wrong");
+				}
+			}
+
+			else
+			{
+				return BadRequest("Mobile Number is correct but the Password is wrong");
+			}
 		}
 
 
 
-		[HttpPost("{UserMobileNumber}")]
-		public IActionResult ChangePassword(string UserMobileNumber, ChangePasswordDTO changePasswordDTO)
-		{
-			var a = _dbContext.BuyerRegistrations.FirstOrDefault(x => x.PrimaryPhone == UserMobileNumber);
+        [HttpPost]
+        public IActionResult ChangePassword(ChangePasswordDTO changePasswordDTO)
+        {
+            var buyer = _dbContext.BuyerRegistrations.FirstOrDefault(x => x.PrimaryPhone == changePasswordDTO.UserMobileNumber);
+            var seller = _dbContext.SellerRegistrations.FirstOrDefault(x => x.PrimaryPhone == changePasswordDTO.UserMobileNumber);
 
-			if (a == null)
-			{
-				return BadRequest("User not found");
-			}
+            if (buyer == null && seller == null)
+            {
+                return BadRequest("User not found");
+            }
 
-			if (a.Password != changePasswordDTO.OldPassword)
-			{
-				return BadRequest("Old password is incorrect");
-			}
-			if (changePasswordDTO.NewPassword != changePasswordDTO.RetypePassword)
-			{
-				return BadRequest("New password and retype password do not match");
-			}
+            var user = (buyer != null) ? (object)buyer : seller;
 
-			a.Password = changePasswordDTO.NewPassword;
-			a.FirstLogin = true;
+            if (user is BuyerRegistration && ((BuyerRegistration)user).Password != changePasswordDTO.OldPassword)
+            {
+                return BadRequest("Old password is incorrect");
+            }
+            else if (user is SellerRegistration && ((SellerRegistration)user).Password != changePasswordDTO.OldPassword)
+            {
+                return BadRequest("Old password is incorrect");
+            }
 
-			_dbContext.SaveChanges();
+            if (changePasswordDTO.NewPassword != changePasswordDTO.RetypePassword)
+            {
+                return BadRequest("New password and retype password do not match");
+            }
 
-			return Ok("Password changed successfully");
-		}
-	}
+            if (user is BuyerRegistration)
+            {
+                var buyerToUpdate = (BuyerRegistration)user;
+                buyerToUpdate.Password = changePasswordDTO.NewPassword;
+                buyerToUpdate.FirstLogin = true;
+            }
+            else if (user is SellerRegistration)
+            {
+                var sellerToUpdate = (SellerRegistration)user;
+                sellerToUpdate.Password = changePasswordDTO.NewPassword;
+            }
+
+            _dbContext.SaveChanges();
+
+            return Ok("Password changed successfully");
+        }
+
+    }
 }

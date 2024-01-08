@@ -58,7 +58,7 @@ namespace Web.API.Controllers.ProductCategories
         }
 
         [HttpGet("{SectorId}/{DeletedBy}")]
-        public ActionResult DeleteCity(int SectorId, int DeletedBy)
+        public ActionResult DeleteSector(int SectorId, int DeletedBy)
         {
             var a = _sectorService.DeleteSector(SectorId, DeletedBy);
             return Ok(a);

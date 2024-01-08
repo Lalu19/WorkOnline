@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CloudVOffice.Core.Domain.Common;
+using CloudVOffice.Core.Domain.ProductCategories;
 using CloudVOffice.Core.Domain.WareHouses.Items;
 using CloudVOffice.Data.DTO.WareHouses.Items;
 
@@ -19,6 +20,9 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 		public Item GetItemById(Int64 itemId);
         public List<Item> GetItemList();
         public MessageEnum DeleteItem(Int64 itemId, Int64 DeletedBy);
+        public List<Item> GetItemlistByBrandId(Int64 BrandId);
+        public List<Item> GetItemlistByCategoryId(int CategoryId);
+        public List<Item> GetItemlistBySectorId(int SectorId);
 
     }
 }

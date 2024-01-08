@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CloudVOffice.Core.Domain.ProductCategories;
 using CloudVOffice.Core.Domain.WareHouses;
+using CloudVOffice.Core.Domain.WareHouses.Brands;
 using CloudVOffice.Core.Domain.WareHouses.Districts;
 using CloudVOffice.Core.Domain.WareHouses.Employees;
 using CloudVOffice.Core.Domain.WareHouses.GST;
@@ -29,5 +30,6 @@ namespace Warehouse.Management.ViewModel
 		public List<Vendor> Vendor { get; set; }
 		public List<Employee> Employee { get; set; }
 		public List<Unit> Unit { get; set; }
-	}
+        public List<Brand> Brand { get; set; }
+    }
 }

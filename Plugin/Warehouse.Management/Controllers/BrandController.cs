@@ -23,19 +23,16 @@ namespace Warehouse.Management.Controllers
     public class BrandController : BasePluginController
     {
         private readonly IBrandService _brandService;
-        private readonly IItemService _itemService;
 		private readonly IWebHostEnvironment _hostingEnvironment;
-		public BrandController(IBrandService brandService, IItemService itemService, IWebHostEnvironment hostingEnvironment)
+		public BrandController(IBrandService brandService, IWebHostEnvironment hostingEnvironment)
         {
             _brandService = brandService;
-            _itemService = itemService;
 			_hostingEnvironment = hostingEnvironment;
 		}
         [HttpGet]
         public IActionResult BrandCreate(Int64? BrandId)
         {
 
-            ViewBag.Items = _itemService.GetItemList();
             BrandDTO brandDTO = new BrandDTO();
             if (BrandId != null)
             {
@@ -113,7 +110,6 @@ namespace Warehouse.Management.Controllers
                     }
                 }
             }
-            ViewBag.ItemList = _itemService.GetItemList();
             return View("~/Plugins/Warehouse.Management/Views/Brand/BrandCreate.cshtml", brandDTO);
 
         }

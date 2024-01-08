@@ -49,6 +49,7 @@
                               allowExcelExport="true" allowGrouping="true"
                               allowMultiSorting="true"
                               allowPdfExport="true"
+                              height="400"
                               enableHover="false" enableHeaderFocus="true"
                               allowResizing="true" autoFit="true" dataBound="dataBound"
                               enableVirtualization="true" allowSelection="true"
@@ -61,7 +62,7 @@
 
 
                             <e-grid-column field="BrandName" headerText="Brand Name" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="BrandImage" headerText="Brand Image" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="BrandImage" template="#ImageTemplate" headerText="Brand Image" textAlign="Left" width="120"></e-grid-column>
 
                             <e-grid-column headerText="Action" template="#Actions" width="50"></e-grid-column>
                         </e-grid-columns>
@@ -168,6 +169,8 @@
     </div>
 </script>
 
+<script id = "ImageTemplate" type = "text/x-template" >${ imageTemplate(data)}</script>
+
 <script id="statusTemplate" type="text/x-template">
     ${statusDetail(data)}
 </script>
@@ -205,5 +208,13 @@
     function dataBound(args) {
         this.autoFitColumns();
     }
+    function imageTemplate(i) {
 
+        if (i.BrandImage != null) {
+            return ' <img src="/uploads/Brandimages/' + i.BrandImage + '" style="height:100px; width:100px ;padding: 5px 0px 5px 0;" />';
+        }
+        else {
+            return 'No Image';
+        }
+    }
 </script>

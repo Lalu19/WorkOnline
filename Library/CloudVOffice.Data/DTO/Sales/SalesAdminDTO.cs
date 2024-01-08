@@ -28,7 +28,8 @@ namespace CloudVOffice.Data.DTO.Sales
 		public Int64? SalesAdminTargetId { get; set; }
 		public string? Sector { get; set; }
 		public string? Category { get; set; }
-        public Int64 MonthId { get; set; }
+        //public Int64 MonthId { get; set; }
+        public string? Month { get; set; }
         public double? MonthlyCategoryWiseTarget { get; set; }
 		public Int64 CreatedBy { get; set; }
 	}

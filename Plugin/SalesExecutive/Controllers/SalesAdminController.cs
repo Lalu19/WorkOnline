@@ -143,7 +143,8 @@ namespace SalesExecutive.Controllers
 
 		public string GetCategoryIdByName(string categoryName)
 		{
-			return _salesAdminService.GetCategoryIdByName(categoryName);
+			var a = _salesAdminService.GetCategoryIdByName(categoryName);
+			return a;
 		}
 
 	}
