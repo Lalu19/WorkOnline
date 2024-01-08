@@ -209,14 +209,14 @@ namespace Warehouse.Management.Controllers
 
 
 
-            if (btnGenerateBarcode != null)
-            {
-                var barcodeResult = GenerateBarcodeButton(viewForItemMasterFarming, btnGenerateBarcode);
-                if (barcodeResult is ViewResult)
-                {
-                    return barcodeResult;
-                }
-            }
+            //if (btnGenerateBarcode != null)
+            //{
+            //    var barcodeResult = GenerateBarcodeButton(viewForItemMasterFarming, btnGenerateBarcode);
+            //    if (barcodeResult is ViewResult)
+            //    {
+            //        return barcodeResult;
+            //    }
+            //}
 
 
             if (viewForItemMasterFarming.CreatedItemMasterFarmingDTO.ItemMasterForFarmingId == null)
@@ -227,25 +227,36 @@ namespace Warehouse.Management.Controllers
 
                     if (createdItemMasterFarmingDTO != null && viewForItemMasterFarming.CreatedItemMasterFarmingDTO.BarCodeNotAvailable == true)
                     {
-                        //TempData["msg"] = MessageEnum.Success;
+						//TempData["msg"] = MessageEnum.Success;
 
-
-                        var viewForItemMasterFarming1 = new ViewForItemMasterFarming
+						var barcodeResult = GenerateBarcodeButton(createdItemMasterFarmingDTO.ItemMasterForFarmingId);
+						if (barcodeResult is ViewResult)
                         {
-                            CreatedItemMasterFarmingDTO = createdItemMasterFarmingDTO,
-                            Sectors = _sectorService.GetSectorListforFarmerProduces(),
-                            Categories = _categoryService.GetCategoryList(),
-                            SubCategories1 = _subCategory1Service.GetSubCategory1List(),
-							SubCategories2 = _subCategory2Service.GetSubCategory2List(),
-							WareHouses = _wareHouseService.GetWareHouseList(),
-                            Employees = _employeeService.GetEmployees(),
-                            Vendors = _vendorService.GetVendorList(),
-                            Units = _unitService.GetUnit(),
-                            AddDistricts = _addDistrictService.GetAddDistrictList(),
-                        };
+							//return barcodeResult;
+							return Redirect("/WareHouse/ItemMasterForFarming/ItemMasterForFarmingView");
+						}
 
-                        return View("~/Plugins/Warehouse.Management/Views/Item/ItemMasterForFarmingCreate.cshtml", viewForItemMasterFarming1);
-                    }
+
+
+
+						//var viewForItemMasterFarming1 = new ViewForItemMasterFarming
+						//{
+						//    CreatedItemMasterFarmingDTO = createdItemMasterFarmingDTO,
+						//    Sectors = _sectorService.GetSectorListforFarmerProduces(),
+						//    Categories = _categoryService.GetCategoryList(),
+						//    SubCategories1 = _subCategory1Service.GetSubCategory1List(),
+						//    SubCategories2 = _subCategory2Service.GetSubCategory2List(),
+						//    WareHouses = _wareHouseService.GetWareHouseList(),
+						//    Employees = _employeeService.GetEmployees(),
+						//    Vendors = _vendorService.GetVendorList(),
+						//    Units = _unitService.GetUnit(),
+						//    AddDistricts = _addDistrictService.GetAddDistrictList(),
+						//};
+
+						//return View("~/Plugins/Warehouse.Management/Views/Item/ItemMasterForFarmingCreate.cshtml", viewForItemMasterFarming1);
+
+						return Redirect("/WareHouse/ItemMasterForFarming/ItemMasterForFarmingView");
+					}
                     else if (createdItemMasterFarmingDTO != null && viewForItemMasterFarming.CreatedItemMasterFarmingDTO.BarCodeNotAvailable == false)
                     {
                         TempData["msg"] = MessageEnum.Success;
@@ -295,39 +306,48 @@ namespace Warehouse.Management.Controllers
 
 
         [HttpPost]
-        public IActionResult GenerateBarcodeButton(ViewForItemMasterFarming viewForItemMasterFarming, string btnGenerateBarcode)
+        public IActionResult GenerateBarcodeButton(Int64? btnGenerateBarcode)
         {
-            if (btnGenerateBarcode != "btnGenerateBarcode")
-            {
-                // Logic for handling barcode generation
-                _itemMasterForFarmingService.GenerateAndSaveBarcodeImage(btnGenerateBarcode);
+			//if (btnGenerateBarcode != "btnGenerateBarcode")
+			//{
+			//    // Logic for handling barcode generation
+			//    _itemMasterForFarmingService.GenerateAndSaveBarcodeImage(btnGenerateBarcode);
 
 
-                TempData["msg"] = "Barcode generated and Item saved successfully";
-                return RedirectToAction("ItemMasterForFarmingView");
-            }
-            else
-            {
-                TempData["msg"] = "Kindly Save the data first";
-                var viewForItemMasterFarming1 = new ViewForItemMasterFarming
-                {
-                    CreatedItemMasterFarmingDTO = viewForItemMasterFarming.CreatedItemMasterFarmingDTO,
-                    Sectors = _sectorService.GetSectorListforFarmerProduces(),
-                    Categories = _categoryService.GetCategoryList(),
-                    SubCategories1 = _subCategory1Service.GetSubCategory1List(),
-					SubCategories2 = _subCategory2Service.GetSubCategory2List(),
-					WareHouses = _wareHouseService.GetWareHouseList(),
-                    Employees = _employeeService.GetEmployees(),
-                    Vendors = _vendorService.GetVendorList(),
-                    Units = _unitService.GetUnit(),
-                    AddDistricts = _addDistrictService.GetAddDistrictList(),
+			//    TempData["msg"] = "Barcode generated and Item saved successfully";
+			//    return RedirectToAction("ItemMasterForFarmingView");
+			//}
 
-                };
+			_itemMasterForFarmingService.GenerateAndSaveBarcodeImage(btnGenerateBarcode.ToString());
+			TempData["msg"] = "Barcode generated and Item saved successfully";
 
 
-                return View("~/Plugins/Warehouse.Management/Views/Item/ItemMasterForFarmingCreate.cshtml", viewForItemMasterFarming1);
-            }
-        }
+			ViewBag.Items = _itemMasterForFarmingService.GetItemMasterForFarmingList();
+			return View("~/Plugins/Warehouse.Management/Views/Item/ItemMasterForFarmingView.cshtml", ViewBag.Items);
+
+
+			//else
+			//{
+			//    TempData["msg"] = "Kindly Save the data first";
+			//    var viewForItemMasterFarming1 = new ViewForItemMasterFarming
+			//    {
+			//        CreatedItemMasterFarmingDTO = viewForItemMasterFarming.CreatedItemMasterFarmingDTO,
+			//        Sectors = _sectorService.GetSectorListforFarmerProduces(),
+			//        Categories = _categoryService.GetCategoryList(),
+			//        SubCategories1 = _subCategory1Service.GetSubCategory1List(),
+			//        SubCategories2 = _subCategory2Service.GetSubCategory2List(),
+			//        WareHouses = _wareHouseService.GetWareHouseList(),
+			//        Employees = _employeeService.GetEmployees(),
+			//        Vendors = _vendorService.GetVendorList(),
+			//        Units = _unitService.GetUnit(),
+			//        AddDistricts = _addDistrictService.GetAddDistrictList(),
+
+			//    };
+
+
+			//    return View("~/Plugins/Warehouse.Management/Views/Item/ItemMasterForFarmingCreate.cshtml", viewForItemMasterFarming1);
+			//}
+		}
 
 
         [HttpGet]

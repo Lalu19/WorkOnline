@@ -196,7 +196,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 				Options = new ZXing.Common.EncodingOptions
 				{
 					Height = 50,
-					Width = 190,
+					Width = 240,
 					PureBarcode = false,
 					Margin = 10
 				}

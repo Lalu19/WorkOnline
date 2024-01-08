@@ -215,23 +215,6 @@ namespace Warehouse.Management.Controllers
 
 
 
-			//if (itemDTO.ImagesUp != null)
-			//{
-			//    FileInfo fileInfo = new FileInfo(itemDTO.ImagesUp.FileName);
-			//    string extn = fileInfo.Extension.ToLower();
-			//    Guid id = Guid.NewGuid();
-			//    string filename = id.ToString() + extn;
-
-			//    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads/itemimage");
-			//    if (!Directory.Exists(uploadsFolder))
-			//    {
-			//        Directory.CreateDirectory(uploadsFolder);
-			//    }
-			//    string uniqueFileName = Guid.NewGuid().ToString() + "_" + filename;
-			//    string imagePath = Path.Combine(uploadsFolder, uniqueFileName);
-			//    itemDTO.ImagesUp.CopyTo(new FileStream(imagePath, FileMode.Create));
-			//    itemDTO.Images = uniqueFileName;
-			//}
 
 			if (viewForItem.CreatedItemDTO.ThumbnailUp != null)
 			{
@@ -289,63 +272,14 @@ namespace Warehouse.Management.Controllers
 
 
 
-			//if (ModelState.IsValid)
+			//if (btnGenerateBarcode != null)
 			//{
-
-
-			//if (itemDTO.ItemId == null)
-			//{
-			//    var a = _itemService.CreateItem(itemDTO);
-			//    if (a == MessageEnum.Success)
-			//    {
-			//        TempData["msg"] = MessageEnum.Success;
-			//        return Redirect("/WareHouse/Item/ItemView");
-			//    }
-			//    else if (a == MessageEnum.Duplicate)
-			//    {
-
-			//        TempData["msg"] = MessageEnum.Duplicate;
-			//        ModelState.AddModelError("", "WareHouse Already Exists");
-			//    }
-			//    else
-			//    {
-			//        TempData["msg"] = MessageEnum.UnExpectedError;
-			//        ModelState.AddModelError("", "Un-Expected Error");
-			//    }
-
+			//	var barcodeResult = GenerateBarcodeButton(viewForItem, btnGenerateBarcode);
+			//	if (barcodeResult is ViewResult)
+			//	{
+			//		return barcodeResult;
+			//	}
 			//}
-			//else
-			//{
-			//    var a = _itemService.UpdateItem(itemDTO);
-			//    if (a == MessageEnum.Updated)
-			//    {
-			//        TempData["msg"] = MessageEnum.Updated;
-			//        return Redirect("/WareHouse/Item/ItemView");
-			//    }
-			//    else if (a == MessageEnum.Duplicate)
-			//    {
-			//        TempData["msg"] = MessageEnum.Duplicate;
-			//        ModelState.AddModelError("", "Item Already Exists");
-			//    }
-			//    else
-			//    {
-			//        TempData["msg"] = MessageEnum.UnExpectedError;
-			//        ModelState.AddModelError("", "Un-Expected Error");
-			//    }
-			//}
-			////}
-			//return View("~/Plugins/Warehouse.Management/Views/Item/ItemCreate.cshtml", itemDTO);
-
-
-
-			if (btnGenerateBarcode != null)
-			{
-				var barcodeResult = GenerateBarcodeButton(viewForItem, btnGenerateBarcode);
-				if (barcodeResult is ViewResult)
-				{
-					return barcodeResult;
-				}
-			}
 
 
 			if (viewForItem.CreatedItemDTO.ItemId == null)
@@ -357,30 +291,34 @@ namespace Warehouse.Management.Controllers
 
 					if (createdItemDTO != null && viewForItem.CreatedItemDTO.BarCodeNotAvailable == true)
 					{
-						//TempData["msg"] = MessageEnum.Success;
-
-						//ViewBag.Sectors = _sectorService.GetSectorList();
-
-
-						var viewForItem1 = new ViewForItem
+						var barcodeResult = GenerateBarcodeButton(createdItemDTO.ItemId);
+						if (barcodeResult is ViewResult)
 						{
-							//CreatedItemDTO = _itemService.CreateItem(viewForItem.CreatedItemDTO),
-							CreatedItemDTO = createdItemDTO,
-							Sectors = _sectorService.GetSectorList(),
-							HandlingTypes = _handlingTypeService.GetHandlingTypeList(),
-							//GST = _gSTService.GetGSTList(),
-							Category = _categoryService.GetCategoryList(),
-							SubCategory1 = _subCategory1Service.GetSubCategory1List(),
-							SubCategory2 = _subCategory2Service.GetSubCategory2List(),
-							WareHuose = _warehouseService.GetWareHouseList(),
-							AddDistrict = _addDistrictService.GetAddDistrictList(),
-							Employee = _employeeService.GetEmployees(),
-							Vendor = _vendorService.GetVendorList(),
-							Unit = _unitService.GetUnit(),
-							Brand = _brandService.GetBrandList()
-						};
+							//return barcodeResult;
+							return Redirect("/WareHouse/Item/ItemView");
+						}
 
-						return View("~/Plugins/Warehouse.Management/Views/Item/ItemCreate.cshtml", viewForItem1);
+						//var viewForItem1 = new ViewForItem
+						//{
+						//	//CreatedItemDTO = _itemService.CreateItem(viewForItem.CreatedItemDTO),
+						//	CreatedItemDTO = createdItemDTO,
+						//	Sectors = _sectorService.GetSectorList(),
+						//	HandlingTypes = _handlingTypeService.GetHandlingTypeList(),
+						//	//GST = _gSTService.GetGSTList(),
+						//	Category = _categoryService.GetCategoryList(),
+						//	SubCategory1 = _subCategory1Service.GetSubCategory1List(),
+						//	SubCategory2 = _subCategory2Service.GetSubCategory2List(),
+						//	WareHuose = _warehouseService.GetWareHouseList(),
+						//	AddDistrict = _addDistrictService.GetAddDistrictList(),
+						//	Employee = _employeeService.GetEmployees(),
+						//	Vendor = _vendorService.GetVendorList(),
+						//	Unit = _unitService.GetUnit(),
+						//	Brand = _brandService.GetBrandList()
+						//};
+
+						//return View("~/Plugins/Warehouse.Management/Views/Item/ItemCreate.cshtml", viewForItem1);
+
+						return Redirect("/WareHouse/Item/ItemView");
 					}
 					else if (createdItemDTO != null && viewForItem.CreatedItemDTO.BarCodeNotAvailable == false)
 					{
@@ -426,40 +364,49 @@ namespace Warehouse.Management.Controllers
 
 
 		[HttpPost]
-		public IActionResult GenerateBarcodeButton(ViewForItem viewForItem, string btnGenerateBarcode)
+		public IActionResult GenerateBarcodeButton(Int64? btnGenerateBarcode)
 		{
-			if (btnGenerateBarcode != "btnGenerateBarcode")
-			{				
-				// Logic for handling barcode generation
-				_itemService.GenerateAndSaveBarcodeImage(btnGenerateBarcode);
+			//if (btnGenerateBarcode != "btnGenerateBarcode")
+			//{				
+			//	// Logic for handling barcode generation
+			//	_itemService.GenerateAndSaveBarcodeImage(ItemId.ToString());
 
-				TempData["msg"] = "Barcode generated and Item saved successfully";
-				return RedirectToAction("ItemView");
-			}
-			else
-			{
-				TempData["msg"] = "Kindly Save the data first";
-				var viewForItem1 = new ViewForItem
-				{
-					//CreatedItemDTO = _itemService.CreateItem(viewForItem.CreatedItemDTO),
-					CreatedItemDTO = viewForItem.CreatedItemDTO,
-					Sectors = _sectorService.GetSectorList(),
-					HandlingTypes = _handlingTypeService.GetHandlingTypeList(),
-					//GST = _gSTService.GetGSTList(),
-					Category = _categoryService.GetCategoryList(),
-					SubCategory1 = _subCategory1Service.GetSubCategory1List(),
-					SubCategory2 = _subCategory2Service.GetSubCategory2List(),
-					WareHuose = _warehouseService.GetWareHouseList(),
-					AddDistrict = _addDistrictService.GetAddDistrictList(),
-					Employee = _employeeService.GetEmployees(),
-					Vendor = _vendorService.GetVendorList(),
-					Unit = _unitService.GetUnit(),
-					Brand = _brandService.GetBrandList()
-				};
+			//	TempData["msg"] = "Barcode generated and Item saved successfully";
+			//	return RedirectToAction("ItemView");
+			//}
 
-				return View("~/Plugins/Warehouse.Management/Views/Item/ItemCreate.cshtml", viewForItem1);
-			}
+			_itemService.GenerateAndSaveBarcodeImage(btnGenerateBarcode.ToString());
+			TempData["msg"] = "Barcode generated and Item saved successfully";
+			//return RedirectToAction("ItemView");
+
+			ViewBag.Items = _itemService.GetItemList();
+			return View("~/Plugins/Warehouse.Management/Views/Item/ItemView.cshtml", ViewBag.Items);
+
+
+			//else
+			//{
+			//	TempData["msg"] = "Kindly Save the data first";
+			//	var viewForItem1 = new ViewForItem
+			//	{
+			//		//CreatedItemDTO = _itemService.CreateItem(viewForItem.CreatedItemDTO),
+			//		CreatedItemDTO = viewForItem.CreatedItemDTO,
+			//		Sectors = _sectorService.GetSectorList(),
+			//		HandlingTypes = _handlingTypeService.GetHandlingTypeList(),
+			//		//GST = _gSTService.GetGSTList(),
+			//		Category = _categoryService.GetCategoryList(),
+			//		SubCategory1 = _subCategory1Service.GetSubCategory1List(),
+			//		SubCategory2 = _subCategory2Service.GetSubCategory2List(),
+			//		WareHuose = _warehouseService.GetWareHouseList(),
+			//		AddDistrict = _addDistrictService.GetAddDistrictList(),
+			//		Employee = _employeeService.GetEmployees(),
+			//		Vendor = _vendorService.GetVendorList(),
+			//		Unit = _unitService.GetUnit(),
+			//		Brand = _brandService.GetBrandList()
+			//	};
+
+			//return View("~/Plugins/Warehouse.Management/Views/Item/ItemCreate.cshtml", viewForItem1);
 		}
+	
 
 		[HttpGet]
         public IActionResult ItemView()

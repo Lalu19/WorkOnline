@@ -73,8 +73,9 @@ namespace Web.API.Controllers.RetailerModel
 		public IActionResult ChangePassword(ChangePasswordDTO changePasswordDTO)
 		{
 			var a = _dbContext.BuyerRegistrations.FirstOrDefault(x => x.PrimaryPhone == changePasswordDTO.UserMobileNumber);
+			var seller = _dbContext.SellerRegistrations.FirstOrDefault(x => x.PrimaryPhone == changePasswordDTO.UserMobileNumber);
 
-			if (a == null)
+			if (a == null && seller == null)
 			{
 				return BadRequest("User not found");
 			}

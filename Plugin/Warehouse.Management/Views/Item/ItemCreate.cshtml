@@ -447,7 +447,7 @@
 								</div>
 							</div>
 
-							<div class="form-group col-md-3">
+							@*<div class="form-group col-md-3">
 								@if (Model != null && Model.CreatedItemDTO.ItemId.HasValue)
 								{
 									<!-- Display the ItemId if available -->
@@ -461,7 +461,7 @@
 									<!-- Default value for the button if ItemId is not available -->
 									<button id="generateBarcodeButton" type="submit" class="btn btn-secondary" value="btnGenerateBarcode" name="btnGenerateBarcode" style="margin-top: 5px;">Generate BarCode</button>
 								}
-							</div>
+							</div>*@
 
 						</div>
 					</div>
@@ -724,30 +724,30 @@
 		});
 
 
-		$(document).ready(function () {
-			// Function to update the button text and visibility based on the checkbox state
-			function updateButtonsVisibility() {
-				var checkBox = $('#BarCodeNotAvailable');
-				var saveButton = $('#saveButton');
-				var generateBarcodeButton = $('#generateBarcodeButton');
+		//$(document).ready(function () {
+		//	// Function to update the button text and visibility based on the checkbox state
+		//	function updateButtonsVisibility() {
+		//		var checkBox = $('#BarCodeNotAvailable');
+		//		var saveButton = $('#saveButton');
+		//		var generateBarcodeButton = $('#generateBarcodeButton');
 
-				if (checkBox.prop('checked')) {
-					saveButton.text('Save');
-					generateBarcodeButton.show();
-				} else {
-					saveButton.text('Save');
-					generateBarcodeButton.hide();
-				}
-			}
+		//		if (checkBox.prop('checked')) {
+		//			saveButton.text('Save');
+		//			generateBarcodeButton.show();
+		//		} else {
+		//			saveButton.text('Save');
+		//			generateBarcodeButton.hide();
+		//		}
+		//	}
 
-			// Attach change event handler to the checkbox
-			$('#BarCodeNotAvailable').change(function () {
-				updateButtonsVisibility();
-			});
+		//	// Attach change event handler to the checkbox
+		//	$('#BarCodeNotAvailable').change(function () {
+		//		updateButtonsVisibility();
+		//	});
 
-			// Initial call to set the initial button text and visibility
-			updateButtonsVisibility();
-		});
+		//	// Initial call to set the initial button text and visibility
+		//	updateButtonsVisibility();
+		//});
 
 	</script>
 
