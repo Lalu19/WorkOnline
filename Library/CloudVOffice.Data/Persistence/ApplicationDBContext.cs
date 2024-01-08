@@ -86,7 +86,8 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<SubCategory1> SubCategories1 { get; set; }
         public virtual DbSet<SubCategory2> SubCategories2 { get; set; }
         public virtual DbSet<SubCategory3> SubCategories3 { get; set; }
-        public virtual DbSet<GST> GSTs { get; set; }
+		public virtual DbSet<SubCategory4> SubCategories4 { get; set; }
+		public virtual DbSet<GST> GSTs { get; set; }
 		public virtual DbSet<HandlingType> HandlingTypes { get; set; }
 		public virtual DbSet<UnitGroup> UnitGroups { get; set; }
 		public virtual DbSet<Unit> Units { get; set; }
