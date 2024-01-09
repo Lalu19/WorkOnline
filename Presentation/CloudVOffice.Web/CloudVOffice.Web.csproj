@@ -19,6 +19,7 @@
 		<Folder Include="Areas\WareHouse\Controllers\" />
 		<Folder Include="Areas\WareHouse\Views\" />
 		<Folder Include="Plugins\" />
+		<Folder Include="wwwroot\images\" />
 		<Folder Include="wwwroot\uploads\employee\" />
 		<Folder Include="wwwroot\uploads\Category\" />
 		<Folder Include="wwwroot\uploads\farmingimage\" />

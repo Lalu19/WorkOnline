@@ -18,5 +18,7 @@ namespace CloudVOffice.Services.WareHouses.Months
         public List<Month> GetMonthList();
         public MessageEnum MonthUpdate(MonthDTO monthDTO);
         public MessageEnum MonthDelete(Int64 MonthId, Int64 DeletedBy);
-    }
+        public Int64 GetMonthIdByName(string Name);
+
+	}
 }
