@@ -118,5 +118,12 @@ namespace CloudVOffice.Services.WareHouses.Months
                 throw;
             }
         }
-    }
+
+        public Int64 GetMonthIdByName(string Name)
+        {
+            var a = _dbContext.Months.FirstOrDefault(mon => mon.MonthName == Name);
+            return a.MonthId;
+        }
+
+	}
 }
