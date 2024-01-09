@@ -19,6 +19,7 @@ using CloudVOffice.Core.Domain.WareHouses.HandlingTypes;
 using CloudVOffice.Core.Domain.WareHouses.Items;
 using CloudVOffice.Core.Domain.WareHouses.Months;
 using CloudVOffice.Core.Domain.WareHouses.PinCodes;
+using CloudVOffice.Core.Domain.WareHouses.States;
 using CloudVOffice.Core.Domain.WareHouses.UOMs;
 using CloudVOffice.Core.Domain.WareHouses.Vehicles;
 using CloudVOffice.Core.Domain.WareHouses.Vendors;
@@ -99,12 +100,13 @@ namespace CloudVOffice.Data.Persistence
 		public virtual DbSet<AddDistrict> AddDistricts { get; set; }
         public virtual DbSet<Month> Months { get; set; }
         public virtual DbSet<Brand> Brands { get; set; }
+		public virtual DbSet<State> States { get; set; }
 
-        #endregion
+		#endregion
 
-        #region Sales
+		#region Sales
 
-        public virtual DbSet<SalesAdminTarget> SalesAdminTargets { get; set; }
+		public virtual DbSet<SalesAdminTarget> SalesAdminTargets { get; set; }
 
 		#endregion
 
@@ -579,7 +581,17 @@ namespace CloudVOffice.Data.Persistence
 			  .HasDefaultValue(false)
 			  .ValueGeneratedNever();
 
-			modelBuilder.Seed();
+            modelBuilder.Entity<State>()
+               .Property(s => s.CreatedDate)
+               .HasDefaultValueSql("getdate()");
+
+
+            modelBuilder.Entity<State>()
+              .Property(s => s.Deleted)
+              .HasDefaultValue(false)
+              .ValueGeneratedNever();
+
+            modelBuilder.Seed();
         }
     }
 }

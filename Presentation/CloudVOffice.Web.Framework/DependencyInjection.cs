@@ -34,6 +34,7 @@ using CloudVOffice.Services.Buyers;
 using CloudVOffice.Services.Sellers;
 using CloudVOffice.Services.WareHouses.Brands;
 using CloudVOffice.Services.Banners;
+using CloudVOffice.Services.WareHouses.States;
 
 namespace CloudVOffice.Web.Framework
 {
@@ -110,6 +111,7 @@ namespace CloudVOffice.Web.Framework
             services.AddScoped<IRetailModelService, RetailModelService>();
             services.AddScoped<ISalesAdminService, SalesAdminService>();
             services.AddScoped<IBannerService, BannerService>();
+            services.AddScoped<IStateService, StateService>();
 
 
             return services;
