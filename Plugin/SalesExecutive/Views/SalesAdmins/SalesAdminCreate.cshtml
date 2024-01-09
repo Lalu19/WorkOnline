@@ -77,7 +77,7 @@
 
 							<div class="form-group col-md-3">
 								<label for="MonthId" class="form-label">Month Name</label>
-								<ejs-dropdownlist id="MonthId" allowFiltering="true" ejs-for="@Model.MonthId" dataSource="@(new SelectList((IEnumerable)ViewBag.months, "MonthId", "MonthName").Items)" placeholder="Select Month" popupHeight="220px">
+								<ejs-dropdownlist id="MonthId" allowFiltering="true" ejs-for="@Model.MonthId" dataSource="@(new SelectList((IEnumerable)ViewBag.months, "MonthId", "MonthName").Items)" placeholder="Select Month" popupHeight="220px" autofocus="autofocus">
 									<e-dropdownlist-fields text="MonthName" value="MonthId"></e-dropdownlist-fields>
 								</ejs-dropdownlist>
 								<span asp-validation-for="MonthId"></span>
@@ -88,7 +88,7 @@
 								<ejs-dropdownlist id="SectorId" name="SectorId" allowFiltering="true" change="onChangeSector"
 												  dataSource="@(new SelectList((IEnumerable)ViewBag.Sectors, "SectorId", "SectorName").Items)"
 												  placeholder="Select Sector" popupHeight="220px"
-												  value="@Model.SectorId" autofocus="autofocus">
+												  value="@Model.SectorId">
 									<e-dropdownlist-fields text="SectorName" value="SectorId"></e-dropdownlist-fields>
 								</ejs-dropdownlist>
 								<span asp-validation-for="SectorId"></span>
@@ -302,8 +302,14 @@
 	//	});
 	//}
 
+
+
+
+
+
 	var selectedSectorValue;
 	var selectedCategoryValue;
+	var selectedMonthValue;
 
 	function onChangeSector(args) {
 		$.ajax({
@@ -329,22 +335,68 @@
 	}
 
 
-	GetCategoryId()
+	
+	//function GetCategoryId() {
+
+	//	var categoryIdValue = $('#CategoryId').val();
+
+	//	$.ajax({
+	//		type: "GET",
+	//		url: "/SalesExecutive/SalesAdmin/GetCategoryIdByName",
+	//		data: { categoryName: categoryIdValue },
+	//		contentType: "application/json",
+	//		dataType: "json",
+	//		success: function (result) {
+	//			console.log(result);
+
+	//			selectedCategoryValue = result;
+	//		}
+	//	});
+	//}
+
 	function GetCategoryId() {
+		return new Promise(function (resolve, reject) {
+			var categoryIdValue = $('#CategoryId').val();
 
-		var categoryIdValue = $('#CategoryId').val();
+			$.ajax({
+				type: "GET",
+				url: "/SalesExecutive/SalesAdmin/GetCategoryIdByName",
+				data: { categoryName: categoryIdValue },
+				contentType: "application/json",
+				dataType: "json",
+				success: function (result) {
+					console.log(result);
 
-		$.ajax({
-			type: "GET",
-			url: "/SalesExecutive/SalesAdmin/GetCategoryIdByName",
-			data: { categoryName: categoryIdValue },
-			contentType: "application/json",
-			dataType: "json",
-			success: function (result) {
-				console.log(result);
+					selectedCategoryValue = result;
+					resolve(result);
+				},
+				error: function () {
+					reject("Error in GetCategoryId AJAX call");
+				}
+			});
+		});
+	}
 
-				selectedCategoryValue = result;
-			}
+	function GetMonthId() {
+		return new Promise(function (resolve, reject) {
+			var monthIdValue = $('#MonthId').val();
+
+			$.ajax({
+				type: "GET",
+				url: "/SalesExecutive/SalesAdmin/GetMonthIdByName",
+				data: { monthName: monthIdValue },
+				contentType: "application/json",
+				dataType: "json",
+				success: function (result) {
+					console.log(result);
+
+					selectedMonthValue = result;
+					resolve(result);
+				},
+				error: function () {
+					reject("Error in GetCategoryId AJAX call");
+				}
+			});
 		});
 	}
 
@@ -356,40 +408,49 @@
 		// Create an object to store sums for each secId
 		var sectorSums = {};
 
-		$("#Add_Target").click(function (e) {
-			GetCategoryId();
+		$("#Add_Target").click( async function (e) {
+			try{
+				await GetCategoryId();
+				await GetMonthId();
 
-			var secId = selectedSectorValue;
-			var SectorValue = $('#SectorId').val();
-			var CategoryValue = $('#CategoryId').val();
-			var CategoryId = selectedCategoryValue;
-			var CategoryText = $('#CategoryId option:selected').text();
-			var CategoryWiseValue = parseFloat($('#CategoryWiseTarget').val()) || 0; // Parse as float, default to 0 if not a valid number
-			var MonthId = $('#MonthId').val();
+				var secId = selectedSectorValue;
+				var SectorValue = $('#SectorId').val();
+				var CategoryValue = $('#CategoryId').val();
+				var CategoryId = selectedCategoryValue;
+				var CategoryText = $('#CategoryId option:selected').text();
+				var CategoryWiseValue = parseFloat($('#CategoryWiseTarget').val()) || 0; // Parse as float, default to 0 if not a valid number
+				var MonthValue = $('#MonthId').val();
+				var MonthId = selectedMonthValue;
 
-			if (SectorValue && CategoryValue && !isNaN(CategoryWiseValue)) {
-				// Check if the secId already exists in the sums object
-				if (sectorSums.hasOwnProperty(SectorValue)) {
-					// If exists, add the CategoryWiseValue to the existing sum
-					sectorSums[SectorValue] += CategoryWiseValue;
+
+				if (SectorValue && CategoryValue && !isNaN(CategoryWiseValue)) {
+					// Check if the secId already exists in the sums object
+					if (sectorSums.hasOwnProperty(SectorValue)) {
+						// If exists, add the CategoryWiseValue to the existing sum
+						sectorSums[SectorValue] += CategoryWiseValue;
+					} else {
+						// If not exists, create a new entry with the CategoryWiseValue
+						sectorSums[SectorValue] = CategoryWiseValue;
+					}
+
+					updateFloatingTextboxes();
+
+					//var row = "<tr><td data-value='" + secId + "'>" + SectorValue + "</td><td data-value='" + CategoryId + "'>" + CategoryValue + "</td><td data-value='" + CategoryWiseValue + "'>" + CategoryWiseValue + "</td><td><button class='delRowBtn'><i class='ion-trash-b' style='color: red;'></i></button></td></tr>";
+
+					var row = "<tr><td data-value='" + MonthId + "'>" + MonthValue + "</td><td data-value='" + secId + "'>" + SectorValue + "</td><td data-value='" + CategoryId + "'>" + CategoryValue + "</td><td data-value='" + CategoryWiseValue + "'>" + CategoryWiseValue + "</td><td><button class='delRowBtn'><i class='ion-trash-b' style='color: red;'></i></button></td></tr>";
+
+
+
+					$('#Target_tb').append(row);
 				} else {
-					// If not exists, create a new entry with the CategoryWiseValue
-					sectorSums[SectorValue] = CategoryWiseValue;
+					// Handle empty values or show an error message
+					console.error("Sector, Category, and Category Wise values cannot be empty or Category Wise value must be a valid number.");
 				}
-
-				updateFloatingTextboxes();
-
-				//var row = "<tr><td data-value='" + secId + "'>" + SectorValue + "</td><td data-value='" + CategoryId + "'>" + CategoryValue + "</td><td data-value='" + CategoryWiseValue + "'>" + CategoryWiseValue + "</td><td><button class='delRowBtn'><i class='ion-trash-b' style='color: red;'></i></button></td></tr>";
-
-				var row = "<tr><td data-value='" + MonthId + "'>" + MonthId + "</td><td data-value='" + secId + "'>" + SectorValue + "</td><td data-value='" + CategoryId + "'>" + CategoryValue + "</td><td data-value='" + CategoryWiseValue + "'>" + CategoryWiseValue + "</td><td><button class='delRowBtn'><i class='ion-trash-b' style='color: red;'></i></button></td></tr>";
-
-
-
-				$('#Target_tb').append(row);
-			} else {
-				// Handle empty values or show an error message
-				console.error("Sector, Category, and Category Wise values cannot be empty or Category Wise value must be a valid number.");
-			}			
+			}
+			
+			catch (error) {
+				console.error(error);
+			}
 
 		});
 
@@ -441,8 +502,6 @@
 		}
 	});
 
-	
-
 
 
 
@@ -471,14 +530,14 @@
 				//var CategoryId = $irow.find("td:eq(1)").data("value");
 				//var MonthlyCategoryWiseTarget = $irow.find("td:eq(2)").data("value");
 
-				var Month = ($irow.find("td:eq(0)").data("value"));
+				var Month = parseInt($irow.find("td:eq(0)").data("value"));
 				var SectorId = parseInt($irow.find("td:eq(1)").data("value"));
 				var CategoryId = $irow.find("td:eq(2)").data("value");
 				var MonthlyCategoryWiseTarget = $irow.find("td:eq(3)").data("value");
 
 
 				var a = {
-					"month": Month,
+					"monthId": Month,
 					"sector": SectorId,
 					"category": CategoryId,
 					"monthlyCategoryWiseTarget": MonthlyCategoryWiseTarget,

@@ -14,6 +14,7 @@ using CloudVOffice.Data.DTO.WareHouses.PinCodes;
 using Microsoft.AspNetCore.Authorization;
 using CloudVOffice.Services.ProductCategories;
 using CloudVOffice.Services.WareHouses.Months;
+using CloudVOffice.Core.Domain.Sales;
 
 namespace SalesExecutive.Controllers
 {
@@ -70,60 +71,132 @@ namespace SalesExecutive.Controllers
 		//public IActionResult CreateTargetBySalesAdmin(SalesAdminTargetMasterDTO Targets)
 		//{
 
+		//[HttpPost]
+		//public IActionResult CreateTargetBySalesAdmin([FromBody] SalesAdminTargetMasterDTO model)
+		//{
+
+		//	//model.CreatedBy = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
+
+		//	SalesAdminTarget 
+
+		//	foreach(var target in model.Targets)
+		//	{
+
+		//	}
+
+
+
+		//	if (salesAdminDTO.SalesAdminTargetId == null)
+		//	{
+		//		var a = _salesAdminService.CreateTargetsBySalesAdmin(salesAdminDTO);
+		//		if (a == MessageEnum.Success)
+		//		{
+		//			TempData["msg"] = MessageEnum.Success;
+		//			return Redirect("/SalesExecutive/SalesAdmin/SalesAdminTargetView");
+		//		}
+		//		else if (a == MessageEnum.Duplicate)
+		//		{
+
+		//			TempData["msg"] = MessageEnum.Duplicate;
+		//			ModelState.AddModelError("", "PinCode Already Exists");
+		//		}
+		//		else
+		//		{
+		//			TempData["msg"] = MessageEnum.UnExpectedError;
+		//			ModelState.AddModelError("", "Un-Expected Error");
+		//		}
+		//	}
+		//	else
+		//	{
+		//		var a = _salesAdminService.UpdateTargetsBySalesAdmin(salesAdminDTO);
+		//		if (a == MessageEnum.Updated)
+		//		{
+		//			TempData["msg"] = MessageEnum.Updated;
+		//			return Redirect("/SalesExecutive/SalesAdmin/SalesAdminTargetView");
+		//		}
+		//		else if (a == MessageEnum.Duplicate)
+		//		{
+		//			TempData["msg"] = MessageEnum.Duplicate;
+		//			ModelState.AddModelError("", "PinCode Already Exists");
+		//		}
+		//		else
+		//		{
+		//			TempData["msg"] = MessageEnum.UnExpectedError;
+		//			ModelState.AddModelError("", "Un-Expected Error");
+		//		}
+		//	}
+
+		//	//return View("~/Plugins/SalesExecutive/Views/SalesAdmins/SalesAdminCreate.cshtml", salesAdminDTO);
+
+		//	return View("~/Plugins/SalesExecutive/Views/SalesAdmins/SalesAdminCreate.cshtml");
+		//}
+
+
 		[HttpPost]
 		public IActionResult CreateTargetBySalesAdmin([FromBody] SalesAdminTargetMasterDTO model)
 		{
+			foreach (var target in model.Targets)
+			{
+				target.CreatedBy = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
 
-			//salesAdminDTO.CreatedBy = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
+				if (target.SalesAdminTargetId == null)
+				{
+					// It's a new target, create it
+					var result = _salesAdminService.CreateTargetsBySalesAdmin(target);
+
+					// Handle the result accordingly
+					if (result == MessageEnum.Success)
+					{
+						TempData["msg"] = MessageEnum.Success;
+					}
+					else if (result == MessageEnum.Duplicate)
+					{
+						TempData["msg"] = MessageEnum.Duplicate;
+						ModelState.AddModelError("", "PinCode Already Exists");
+					}
+					else
+					{
+						TempData["msg"] = MessageEnum.UnExpectedError;
+						ModelState.AddModelError("", "Un-Expected Error");
+					}
+				}
+				else
+				{
+					// It's an existing target, update it
+					var result = _salesAdminService.UpdateTargetsBySalesAdmin(target);
+
+					// Handle the result accordingly
+					if (result == MessageEnum.Updated)
+					{
+						TempData["msg"] = MessageEnum.Updated;
+						return Redirect("/SalesExecutive/SalesAdmin/SalesAdminTargetView");
+					}
+					else if (result == MessageEnum.Duplicate)
+					{
+						TempData["msg"] = MessageEnum.Duplicate;
+						ModelState.AddModelError("", "PinCode Already Exists");
+					}
+					else
+					{
+						TempData["msg"] = MessageEnum.UnExpectedError;
+						ModelState.AddModelError("", "Un-Expected Error");
+					}
+				}
+			}
 
 
 
-			//if (salesAdminDTO.SalesAdminTargetId == null)
-			//{
-			//	var a = _salesAdminService.CreateTargetsBySalesAdmin(salesAdminDTO);
-			//	if (a == MessageEnum.Success)
-			//	{
-			//		TempData["msg"] = MessageEnum.Success;
-			//		return Redirect("/SalesExecutive/SalesAdmin/SalesAdminTargetView");
-			//	}
-			//	else if (a == MessageEnum.Duplicate)
-			//	{
+			ViewBag.SalesTarget = _salesAdminService.GetAllTargetsBySalesAdmin();
+			// Redirect or return the appropriate view
+			//return Redirect("/SalesExecutive/SalesAdmin/SalesAdminTargetView");
 
-			//		TempData["msg"] = MessageEnum.Duplicate;
-			//		ModelState.AddModelError("", "PinCode Already Exists");
-			//	}
-			//	else
-			//	{
-			//		TempData["msg"] = MessageEnum.UnExpectedError;
-			//		ModelState.AddModelError("", "Un-Expected Error");
-			//	}
-			//}
-			//else
-			//{
-			//	var a = _salesAdminService.UpdateTargetsBySalesAdmin(salesAdminDTO);
-			//	if (a == MessageEnum.Updated)
-			//	{
-			//		TempData["msg"] = MessageEnum.Updated;
-			//		return Redirect("/SalesExecutive/SalesAdmin/SalesAdminTargetView");
-			//	}
-			//	else if (a == MessageEnum.Duplicate)
-			//	{
-			//		TempData["msg"] = MessageEnum.Duplicate;
-			//		ModelState.AddModelError("", "PinCode Already Exists");
-			//	}
-			//	else
-			//	{
-			//		TempData["msg"] = MessageEnum.UnExpectedError;
-			//		ModelState.AddModelError("", "Un-Expected Error");
-			//	}
-			//}
-
-			//return View("~/Plugins/SalesExecutive/Views/SalesAdmins/SalesAdminCreate.cshtml", salesAdminDTO);
-
-			return View("~/Plugins/SalesExecutive/Views/SalesAdmins/SalesAdminCreate.cshtml");
+			return View("~/Plugins/SalesExecutive/Views/SalesAdmins/SalesAdminView.cshtml", ViewBag.SalesTarget);
 		}
 
+
+
 		public IActionResult SalesAdminTargetView()
+		
 		{
 			ViewBag.SalesTarget = _salesAdminService.GetAllTargetsBySalesAdmin();
 
@@ -144,6 +217,12 @@ namespace SalesExecutive.Controllers
 		public string GetCategoryIdByName(string categoryName)
 		{
 			var a = _salesAdminService.GetCategoryIdByName(categoryName);
+			return a;
+		}
+
+		public Int64 GetMonthIdByName(string monthName)
+		{
+			var a = _monthService.GetMonthIdByName(monthName);
 			return a;
 		}
 
