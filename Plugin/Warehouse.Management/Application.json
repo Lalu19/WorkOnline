@@ -107,6 +107,24 @@
           "IconClass": "icon-clipboard2",
           "AreaName": "WareHouse",
           "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ]
+        },
+        {
+          "ApplicationName": "SubCategory3 List",
+          "Url": "/WareHouse/SubCategory3/SubCategory3View",
+          "IsGroup": true,
+          "IconImageUrl": "",
+          "IconClass": "icon-clipboard2",
+          "AreaName": "WareHouse",
+          "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ]
+        },
+        {
+          "ApplicationName": "SubCategory4 List",
+          "Url": "/WareHouse/SubCategory4/SubCategory4View",
+          "IsGroup": true,
+          "IconImageUrl": "",
+          "IconClass": "icon-clipboard2",
+          "AreaName": "WareHouse",
+          "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ]
         }
       ]
     },
