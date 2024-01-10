@@ -190,7 +190,7 @@ namespace SalesExecutive.Controllers
 			// Redirect or return the appropriate view
 			return Redirect("/SalesExecutive/SalesAdmin/SalesAdminTargetView");
 
-			//return View("~/Plugins/SalesExecutive/Views/SalesAdmins/SalesAdminView.cshtml");
+			//return View("~/Plugins/SalesExecutive/Views/SalesAdmins/SalesAdminView.cshtml", ViewBag.SalesTarget);
 		}
 
 

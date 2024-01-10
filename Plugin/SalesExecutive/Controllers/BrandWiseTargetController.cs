@@ -124,8 +124,8 @@ namespace SalesExecutive.Controllers
 
         //    ViewBag.BrandTarget = _brandWiseTargetService.GetBrandWiseTargetList();
 
-        //    return View("~/Plugins/SalesExecutive/Views/BrandWiseTargets/BrandWiseTargetView.cshtml", ViewBag.BrandTarget);
-        //}
+            return View("~/Plugins/SalesExecutive/Views/BrandWiseTargets/BrandWiseTargetView.cshtml");
+        }
 
         public IActionResult BrandWiseTargetView()
 

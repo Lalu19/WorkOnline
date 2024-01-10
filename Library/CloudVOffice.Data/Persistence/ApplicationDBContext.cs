@@ -107,10 +107,10 @@ namespace CloudVOffice.Data.Persistence
 		#region Sales
 
 		public virtual DbSet<SalesAdminTarget> SalesAdminTargets { get; set; }
+        public virtual DbSet<SalesManagerTarget> SalesManagerTargets { get; set; }
+        #endregion
 
-		#endregion
-
-		public virtual DbSet<RetailLogin> RetailLogins { get; set; }
+        public virtual DbSet<RetailLogin> RetailLogins { get; set; }
 		public virtual DbSet<BuyerRegistration> BuyerRegistrations { get; set; }
 		public virtual DbSet<SellerRegistration> SellerRegistrations { get; set; }
 
@@ -508,6 +508,16 @@ namespace CloudVOffice.Data.Persistence
              .Property(s => s.Deleted)
              .HasDefaultValue(false)
              .ValueGeneratedNever();
+
+            modelBuilder.Entity<State>()
+              .Property(s => s.CreatedDate)
+              .HasDefaultValueSql("getdate()");
+
+
+            modelBuilder.Entity<State>()
+              .Property(s => s.Deleted)
+              .HasDefaultValue(false)
+              .ValueGeneratedNever();
             #endregion
 
             #region Sales
@@ -571,6 +581,15 @@ namespace CloudVOffice.Data.Persistence
              .HasDefaultValue(false)
              .ValueGeneratedNever();
 
+            modelBuilder.Entity<SalesManagerTarget>()
+                .Property(s => s.CreatedDate)
+                .HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<SalesManagerTarget>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
+
             modelBuilder.Entity<ChangePassword>()
                 .Property(s => s.CreatedDate)
                 .HasDefaultValueSql("getdate()");
@@ -591,15 +610,7 @@ namespace CloudVOffice.Data.Persistence
 			  .HasDefaultValue(false)
 			  .ValueGeneratedNever();
 
-            modelBuilder.Entity<State>()
-               .Property(s => s.CreatedDate)
-               .HasDefaultValueSql("getdate()");
-
-
-            modelBuilder.Entity<State>()
-              .Property(s => s.Deleted)
-              .HasDefaultValue(false)
-              .ValueGeneratedNever();
+           
 
             modelBuilder.Seed();
         }
