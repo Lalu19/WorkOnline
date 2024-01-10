@@ -10,466 +10,466 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CloudVOffice.Data.Migrations
 {
-    [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
-    {
-        protected override void BuildModel(ModelBuilder modelBuilder)
-        {
+	[DbContext(typeof(ApplicationDBContext))]
+	partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+	{
+		protected override void BuildModel(ModelBuilder modelBuilder)
+		{
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.4")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+			modelBuilder
+				.HasAnnotation("ProductVersion", "7.0.4")
+				.HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+			SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Banners.Banner", b =>
-                {
-                    b.Property<long>("BannerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+			modelBuilder.Entity("CloudVOffice.Core.Domain.Banners.Banner", b =>
+			{
+				b.Property<long>("BannerId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("BannerId"));
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("BannerId"));
 
-                    b.Property<string>("BannerImage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("BannerImage")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("BannerName")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("BannerName")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
 
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
 
-                    b.HasKey("BannerId");
+				b.HasKey("BannerId");
 
-                    b.ToTable("Banners");
-                });
+				b.ToTable("Banners");
+			});
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Buyers.BuyerRegistration", b =>
-                {
-                    b.Property<long>("BuyerRegistrationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+			modelBuilder.Entity("CloudVOffice.Core.Domain.Buyers.BuyerRegistration", b =>
+			{
+				b.Property<long>("BuyerRegistrationId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("BuyerRegistrationId"));
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("BuyerRegistrationId"));
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("Address")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AlternatePhone")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("AlternatePhone")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("Country")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
 
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime>("DateOfBirth")
+					.HasColumnType("datetime2");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
 
-                    b.Property<bool>("FirstLogin")
-                        .HasColumnType("bit");
+				b.Property<bool>("FirstLogin")
+					.HasColumnType("bit");
 
-                    b.Property<string>("GSTNumber")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("GSTNumber")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MailId")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("MailId")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("Name")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("Password")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("PinCodeId")
-                        .HasColumnType("bigint");
+				b.Property<long>("PinCodeId")
+					.HasColumnType("bigint");
 
-                    b.Property<string>("PrimaryPhone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("PrimaryPhone")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SalesRepresentativeContact")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("SalesRepresentativeContact")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SalesRepresentativeId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("SalesRepresentativeId")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SectorId")
-                        .HasColumnType("int");
+				b.Property<int?>("SectorId")
+					.HasColumnType("int");
 
-                    b.Property<string>("ShopImage")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("ShopImage")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("State")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("State")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
 
-                    b.Property<long?>("WareHuoseId")
-                        .HasColumnType("bigint");
+				b.Property<long?>("WareHuoseId")
+					.HasColumnType("bigint");
 
-                    b.HasKey("BuyerRegistrationId");
+				b.HasKey("BuyerRegistrationId");
 
-                    b.ToTable("BuyerRegistrations");
-                });
+				b.ToTable("BuyerRegistrations");
+			});
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Company.CompanyDetails", b =>
-                {
-                    b.Property<int>("CompanyDetailsId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+			modelBuilder.Entity("CloudVOffice.Core.Domain.Company.CompanyDetails", b =>
+			{
+				b.Property<int>("CompanyDetailsId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CompanyDetailsId"));
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CompanyDetailsId"));
 
-                    b.Property<string>("ABBR")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("ABBR")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AddressLine1")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("AddressLine1")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AddressLine2")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("AddressLine2")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("City")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CompanyLogo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("CompanyLogo")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("CompanyName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("Country")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
 
-                    b.Property<DateTime?>("DateOfEstablishment")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime?>("DateOfEstablishment")
+					.HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DateOfIncorporation")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime?>("DateOfIncorporation")
+					.HasColumnType("datetime2");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
 
-                    b.Property<string>("Domain")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("Domain")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EmailAddress")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("EmailAddress")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Fax")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("Fax")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("PhoneNumber")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PostalCode")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("PostalCode")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("State")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("State")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TaxId")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("TaxId")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
 
-                    b.Property<string>("Website")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("Website")
+					.HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CompanyDetailsId");
+				b.HasKey("CompanyDetailsId");
 
-                    b.ToTable("CompanyDetails");
-                });
+				b.ToTable("CompanyDetails");
+			});
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Company.LetterHead", b =>
-                {
-                    b.Property<int>("LetterHeadId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+			modelBuilder.Entity("CloudVOffice.Core.Domain.Company.LetterHead", b =>
+			{
+				b.Property<int>("LetterHeadId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LetterHeadId"));
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LetterHeadId"));
 
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
 
-                    b.Property<string>("LetterHeadAlign")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("LetterHeadAlign")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LetterHeadFooterAlign")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("LetterHeadFooterAlign")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LetterHeadFooterImage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("LetterHeadFooterImage")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LetterHeadImage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("LetterHeadImage")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LetterHeadImageFooterHeight")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("LetterHeadImageFooterHeight")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LetterHeadImageFooterWidth")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("LetterHeadImageFooterWidth")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LetterHeadImageHeight")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("LetterHeadImageHeight")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LetterHeadImageWidth")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("LetterHeadImageWidth")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LetterHeadName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("LetterHeadName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
 
-                    b.HasKey("LetterHeadId");
+				b.HasKey("LetterHeadId");
 
-                    b.ToTable("LetterHeads");
-                });
+				b.ToTable("LetterHeads");
+			});
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Comunication.EmailAccount", b =>
-                {
-                    b.Property<int>("EmailAccountId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+			modelBuilder.Entity("CloudVOffice.Core.Domain.Comunication.EmailAccount", b =>
+			{
+				b.Property<int>("EmailAccountId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmailAccountId"));
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmailAccountId"));
 
-                    b.Property<string>("AlternativeEmailAddress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("AlternativeEmailAddress")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
 
-                    b.Property<int>("Domain")
-                        .HasColumnType("int");
+				b.Property<int>("Domain")
+					.HasColumnType("int");
 
-                    b.Property<string>("EmailAccountName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("EmailAccountName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EmailAddress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("EmailAddress")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EmailLogo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("EmailLogo")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EmailPassword")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("EmailPassword")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EmailSignature")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("EmailSignature")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsDefaultSending")
-                        .HasColumnType("bit");
+				b.Property<bool>("IsDefaultSending")
+					.HasColumnType("bit");
 
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
 
-                    b.HasKey("EmailAccountId");
+				b.HasKey("EmailAccountId");
 
-                    b.HasIndex("Domain");
+				b.HasIndex("Domain");
 
-                    b.ToTable("EmailAccounts");
-                });
+				b.ToTable("EmailAccounts");
+			});
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Comunication.EmailDomain", b =>
-                {
-                    b.Property<int>("EmailDomainId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+			modelBuilder.Entity("CloudVOffice.Core.Domain.Comunication.EmailDomain", b =>
+			{
+				b.Property<int>("EmailDomainId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmailDomainId"));
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmailDomainId"));
 
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
 
-                    b.Property<string>("DomainName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("DomainName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IncomingIsIMAP")
-                        .HasColumnType("bit");
+				b.Property<bool>("IncomingIsIMAP")
+					.HasColumnType("bit");
 
-                    b.Property<bool>("IncomingIsSsl")
-                        .HasColumnType("bit");
+				b.Property<bool>("IncomingIsSsl")
+					.HasColumnType("bit");
 
-                    b.Property<bool>("IncomingIsStartTLs")
-                        .HasColumnType("bit");
+				b.Property<bool>("IncomingIsStartTLs")
+					.HasColumnType("bit");
 
-                    b.Property<int>("IncomingPort")
-                        .HasColumnType("int");
+				b.Property<int>("IncomingPort")
+					.HasColumnType("int");
 
-                    b.Property<string>("IncomingServer")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("IncomingServer")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("OutgoingIsSsl")
-                        .HasColumnType("bit");
+				b.Property<bool>("OutgoingIsSsl")
+					.HasColumnType("bit");
 
-                    b.Property<bool>("OutgoingIsTLs")
-                        .HasColumnType("bit");
+				b.Property<bool>("OutgoingIsTLs")
+					.HasColumnType("bit");
 
-                    b.Property<int>("OutgoingPort")
-                        .HasColumnType("int");
+				b.Property<int>("OutgoingPort")
+					.HasColumnType("int");
 
-                    b.Property<string>("OutingServer")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("OutingServer")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
 
-                    b.HasKey("EmailDomainId");
+				b.HasKey("EmailDomainId");
 
-                    b.ToTable("EmailDomains");
-                });
+				b.ToTable("EmailDomains");
+			});
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.EmailTemplates.EmailTemplate", b =>
-                {
-                    b.Property<int>("EmailTemplateId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+			modelBuilder.Entity("CloudVOffice.Core.Domain.EmailTemplates.EmailTemplate", b =>
+			{
+				b.Property<int>("EmailTemplateId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmailTemplateId"));
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmailTemplateId"));
 
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
 
-                    b.Property<int?>("DefaultSendingAccount")
-                        .HasColumnType("int");
+				b.Property<int?>("DefaultSendingAccount")
+					.HasColumnType("int");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
 
-                    b.Property<string>("EmailTemplateDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("EmailTemplateDescription")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EmailTemplateName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("EmailTemplateName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Subject")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("Subject")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
 
-                    b.HasKey("EmailTemplateId");
+				b.HasKey("EmailTemplateId");
 
-                    b.ToTable("EmailTemplates");
+				b.ToTable("EmailTemplates");
 
                     b.HasData(
                         new
@@ -494,172 +494,172 @@ namespace CloudVOffice.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Logging.ActivityLog", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+			modelBuilder.Entity("CloudVOffice.Core.Domain.Logging.ActivityLog", b =>
+			{
+				b.Property<long>("Id")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<int?>("ActivityLogTypeId")
-                        .HasColumnType("int");
+				b.Property<int?>("ActivityLogTypeId")
+					.HasColumnType("int");
 
-                    b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("Comment")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime>("CreatedOn")
+					.HasColumnType("datetime2");
 
-                    b.Property<int?>("EntityId")
-                        .HasColumnType("int");
+				b.Property<int?>("EntityId")
+					.HasColumnType("int");
 
-                    b.Property<string>("EntityName")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("EntityName")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("IpAddress")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("IpAddress")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("LogInTime")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime?>("LogInTime")
+					.HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("LogOutTime")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime?>("LogOutTime")
+					.HasColumnType("datetime2");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+				b.Property<long>("UserId")
+					.HasColumnType("bigint");
 
-                    b.HasKey("Id");
+				b.HasKey("Id");
 
-                    b.ToTable("ActivityLogs");
-                });
+				b.ToTable("ActivityLogs");
+			});
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Logging.ActivityLogType", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+			modelBuilder.Entity("CloudVOffice.Core.Domain.Logging.ActivityLogType", b =>
+			{
+				b.Property<long>("Id")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("bit");
+				b.Property<bool>("Enabled")
+					.HasColumnType("bit");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("Name")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SystemKeyword")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("SystemKeyword")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+				b.HasKey("Id");
 
-                    b.ToTable("ActivityLogTypes");
-                });
+				b.ToTable("ActivityLogTypes");
+			});
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Logging.Log", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+			modelBuilder.Entity("CloudVOffice.Core.Domain.Logging.Log", b =>
+			{
+				b.Property<long>("Id")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime>("CreatedOn")
+					.HasColumnType("datetime2");
 
-                    b.Property<string>("FullMessage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("FullMessage")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("IpAddress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("IpAddress")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("LogLevel")
-                        .HasColumnType("int");
+				b.Property<int>("LogLevel")
+					.HasColumnType("int");
 
-                    b.Property<int>("LogLevelId")
-                        .HasColumnType("int");
+				b.Property<int>("LogLevelId")
+					.HasColumnType("int");
 
-                    b.Property<string>("PageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("PageUrl")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ReferrerUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("ReferrerUrl")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ShortMessage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("ShortMessage")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("UserId")
-                        .HasColumnType("bigint");
+				b.Property<long?>("UserId")
+					.HasColumnType("bigint");
 
-                    b.HasKey("Id");
+				b.HasKey("Id");
 
-                    b.ToTable("Logs");
-                });
+				b.ToTable("Logs");
+			});
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Pemission.Application", b =>
-                {
-                    b.Property<int>("ApplicationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+			modelBuilder.Entity("CloudVOffice.Core.Domain.Pemission.Application", b =>
+			{
+				b.Property<int>("ApplicationId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ApplicationId"), 10000L);
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ApplicationId"), 10000L);
 
-                    b.Property<int?>("ApplicationId1")
-                        .HasColumnType("int");
+				b.Property<int?>("ApplicationId1")
+					.HasColumnType("int");
 
-                    b.Property<string>("ApplicationName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("ApplicationName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AreaName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("AreaName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
 
-                    b.Property<string>("IconClass")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("IconClass")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("IconImageUrl")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("IconImageUrl")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsGroup")
-                        .HasColumnType("bit");
+				b.Property<bool>("IsGroup")
+					.HasColumnType("bit");
 
-                    b.Property<int?>("Parent")
-                        .HasColumnType("int");
+				b.Property<int?>("Parent")
+					.HasColumnType("int");
 
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
 
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("Url")
+					.HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ApplicationId");
+				b.HasKey("ApplicationId");
 
-                    b.HasIndex("ApplicationId1");
+				b.HasIndex("ApplicationId1");
 
-                    b.ToTable("Applications");
+				b.ToTable("Applications");
 
                     b.HasData(
                         new
@@ -752,83 +752,83 @@ namespace CloudVOffice.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Pemission.InstalledApplication", b =>
-                {
-                    b.Property<int>("InstalledApplicationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+			modelBuilder.Entity("CloudVOffice.Core.Domain.Pemission.InstalledApplication", b =>
+			{
+				b.Property<int>("InstalledApplicationId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InstalledApplicationId"));
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InstalledApplicationId"));
 
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
 
-                    b.Property<string>("PackageName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("PackageName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
 
-                    b.Property<double>("Version")
-                        .HasColumnType("float");
+				b.Property<double>("Version")
+					.HasColumnType("float");
 
-                    b.HasKey("InstalledApplicationId");
+				b.HasKey("InstalledApplicationId");
 
-                    b.ToTable("InstalledApplications");
-                });
+				b.ToTable("InstalledApplications");
+			});
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Pemission.RoleAndApplicationWisePermission", b =>
-                {
-                    b.Property<long>("RoleAndApplicationWisePermissionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+			modelBuilder.Entity("CloudVOffice.Core.Domain.Pemission.RoleAndApplicationWisePermission", b =>
+			{
+				b.Property<long>("RoleAndApplicationWisePermissionId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("RoleAndApplicationWisePermissionId"), 10000L);
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("RoleAndApplicationWisePermissionId"), 10000L);
 
-                    b.Property<int>("ApplicationId")
-                        .HasColumnType("int");
+				b.Property<int>("ApplicationId")
+					.HasColumnType("int");
 
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
+				b.Property<int>("RoleId")
+					.HasColumnType("int");
 
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
 
-                    b.HasKey("RoleAndApplicationWisePermissionId");
+				b.HasKey("RoleAndApplicationWisePermissionId");
 
-                    b.HasIndex("ApplicationId");
+				b.HasIndex("ApplicationId");
 
-                    b.HasIndex("RoleId");
+				b.HasIndex("RoleId");
 
-                    b.ToTable("RoleAndApplicationWisePermissions");
+				b.ToTable("RoleAndApplicationWisePermissions");
 
                     b.HasData(
                         new
@@ -923,45 +923,45 @@ namespace CloudVOffice.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Pemission.UserWiseViewMapper", b =>
-                {
-                    b.Property<long>("UserWiseViewMapperId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+			modelBuilder.Entity("CloudVOffice.Core.Domain.Pemission.UserWiseViewMapper", b =>
+			{
+				b.Property<long>("UserWiseViewMapperId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("UserWiseViewMapperId"), 10000L);
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("UserWiseViewMapperId"), 10000L);
 
-                    b.Property<int>("ApplicationId")
-                        .HasColumnType("int");
+				b.Property<int>("ApplicationId")
+					.HasColumnType("int");
 
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
 
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
 
-                    b.Property<long?>("UserId")
-                        .HasColumnType("bigint");
+				b.Property<long?>("UserId")
+					.HasColumnType("bigint");
 
-                    b.HasKey("UserWiseViewMapperId");
+				b.HasKey("UserWiseViewMapperId");
 
-                    b.HasIndex("ApplicationId");
+				b.HasIndex("ApplicationId");
 
-                    b.HasIndex("UserId");
+				b.HasIndex("UserId");
 
-                    b.ToTable("UserWiseViewMappers");
+				b.ToTable("UserWiseViewMappers");
 
                     b.HasData(
                         new
@@ -1056,226 +1056,402 @@ namespace CloudVOffice.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.ProductCategories.Category", b =>
+			modelBuilder.Entity("CloudVOffice.Core.Domain.ProductCategories.Category", b =>
+			{
+				b.Property<int>("CategoryId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("int");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
+
+				b.Property<string>("CategoryName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<int>("SectorId")
+					.HasColumnType("int");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.HasKey("CategoryId");
+
+				b.ToTable("Categories");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.ProductCategories.Sector", b =>
+			{
+				b.Property<int>("SectorId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("int");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SectorId"));
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<string>("SectorName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.HasKey("SectorId");
+
+				b.ToTable("Sectors");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.ProductCategories.SubCategory1", b =>
+			{
+				b.Property<int>("SubCategory1Id")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("int");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubCategory1Id"));
+
+				b.Property<int>("CategoryId")
+					.HasColumnType("int");
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<long?>("GSTId")
+					.HasColumnType("bigint");
+
+				b.Property<string>("HSN")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<int>("SectorId")
+					.HasColumnType("int");
+
+				b.Property<string>("SubCategory1Name")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.HasKey("SubCategory1Id");
+
+				b.ToTable("SubCategories1");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.ProductCategories.SubCategory2", b =>
+			{
+				b.Property<int>("SubCategory2Id")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("int");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubCategory2Id"));
+
+				b.Property<int>("CategoryId")
+					.HasColumnType("int");
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<int>("SectorId")
+					.HasColumnType("int");
+
+				b.Property<int>("SubCategory1Id")
+					.HasColumnType("int");
+
+				b.Property<string>("SubCategory2Name")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.HasKey("SubCategory2Id");
+
+				b.ToTable("SubCategories2");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.ProductCategories.SubCategory3", b =>
+			{
+				b.Property<int>("SubCategory3Id")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("int");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubCategory3Id"));
+
+				b.Property<int>("CategoryId")
+					.HasColumnType("int");
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<int>("SectorId")
+					.HasColumnType("int");
+
+				b.Property<int>("SubCategory1Id")
+					.HasColumnType("int");
+
+				b.Property<int>("SubCategory2Id")
+					.HasColumnType("int");
+
+				b.Property<string>("SubCategory3Name")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.HasKey("SubCategory3Id");
+
+				b.ToTable("SubCategories3");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.ProductCategories.SubCategory4", b =>
+			{
+				b.Property<int>("SubCategory4Id")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("int");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubCategory4Id"));
+
+				b.Property<int?>("CategoryId")
+					.HasColumnType("int");
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<int?>("SectorId")
+					.HasColumnType("int");
+
+				b.Property<int?>("SubCategory1Id")
+					.HasColumnType("int");
+
+				b.Property<int?>("SubCategory2Id")
+					.HasColumnType("int");
+
+				b.Property<int?>("SubCategory3Id")
+					.HasColumnType("int");
+
+				b.Property<string>("SubCategory4Name")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.HasKey("SubCategory4Id");
+
+				b.ToTable("SubCategories4");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.RetailerModel.ChangePassword", b =>
+			{
+				b.Property<long>("ChangePasswordId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ChangePasswordId"));
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<string>("NewPassword")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("OldPassword")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("RetypePassword")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.Property<string>("UserMobileNumber")
+					.HasColumnType("nvarchar(max)");
+
+				b.HasKey("ChangePasswordId");
+
+				b.ToTable("ChangePasswords");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.RetailerModel.RetailLogin", b =>
+			{
+				b.Property<long>("RetailLoginId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("RetailLoginId"));
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<bool>("FirstLogin")
+					.HasColumnType("bit");
+
+				b.Property<string>("Password")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.Property<string>("UserMobileNumber")
+					.HasColumnType("nvarchar(max)");
+
+				b.HasKey("RetailLoginId");
+
+				b.ToTable("RetailLogins");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.RetailerModel.RetailModel", b =>
+			{
+				b.Property<int>("RetailModelId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("int");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RetailModelId"));
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<string>("RetailerName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.HasKey("RetailModelId");
+
+				b.ToTable("RetailModels");
+			});
+
+            modelBuilder.Entity("CloudVOffice.Core.Domain.Sales.BrandWiseTarget", b =>
                 {
-                    b.Property<int>("CategoryId")
+                    b.Property<long>("BrandWiseTargetId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("BrandWiseTargetId"));
 
-                    b.Property<string>("CategoryName")
+                    b.Property<long?>("BrandId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("CreatedBy")
                         .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<int>("SectorId")
-                        .HasColumnType("int");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("CategoryId");
-
-                    b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.ProductCategories.Sector", b =>
-                {
-                    b.Property<int>("SectorId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SectorId"));
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<string>("SectorName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("SectorId");
-
-                    b.ToTable("Sectors");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.ProductCategories.SubCategory1", b =>
-                {
-                    b.Property<int>("SubCategory1Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubCategory1Id"));
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<long?>("GSTId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("HSN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SectorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SubCategory1Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("SubCategory1Id");
-
-                    b.ToTable("SubCategories1");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.ProductCategories.SubCategory2", b =>
-                {
-                    b.Property<int>("SubCategory2Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubCategory2Id"));
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<int>("SectorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SubCategory1Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SubCategory2Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("SubCategory2Id");
-
-                    b.ToTable("SubCategories2");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.ProductCategories.SubCategory3", b =>
-                {
-                    b.Property<int>("SubCategory3Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubCategory3Id"));
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<int>("SectorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SubCategory1Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SubCategory2Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SubCategory3Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("SubCategory3Id");
-
-                    b.ToTable("SubCategories3");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.ProductCategories.SubCategory4", b =>
-                {
-                    b.Property<int>("SubCategory4Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubCategory4Id"));
 
                     b.Property<int?>("CategoryId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<long>("CreatedBy")
@@ -1289,22 +1465,21 @@ namespace CloudVOffice.Data.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
+
+                    b.Property<long?>("MonthId")
+                        .IsRequired()
+                        .HasColumnType("bigint");
+
+                    b.Property<double?>("MonthlyBrandWiseTarget")
+                        .HasColumnType("float");
 
                     b.Property<int?>("SectorId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SubCategory1Id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SubCategory2Id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SubCategory3Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SubCategory4Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("int");
+
+                    b.Property<long?>("UnitId")
+                        .IsRequired()
+                        .HasColumnType("bigint");
 
                     b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");
@@ -1312,130 +1487,19 @@ namespace CloudVOffice.Data.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("SubCategory4Id");
+                    b.HasKey("BrandWiseTargetId");
 
-                    b.ToTable("SubCategories4");
-                });
+                    b.HasIndex("BrandId");
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.RetailerModel.ChangePassword", b =>
-                {
-                    b.Property<long>("ChangePasswordId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                    b.HasIndex("CategoryId");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ChangePasswordId"));
+                    b.HasIndex("MonthId");
 
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
+                    b.HasIndex("SectorId");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+                    b.HasIndex("UnitId");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<string>("NewPassword")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OldPassword")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RetypePassword")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserMobileNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ChangePasswordId");
-
-                    b.ToTable("ChangePasswords");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.RetailerModel.RetailLogin", b =>
-                {
-                    b.Property<long>("RetailLoginId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("RetailLoginId"));
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<bool>("FirstLogin")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserMobileNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("RetailLoginId");
-
-                    b.ToTable("RetailLogins");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.RetailerModel.RetailModel", b =>
-                {
-                    b.Property<int>("RetailModelId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RetailModelId"));
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<string>("RetailerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("RetailModelId");
-
-                    b.ToTable("RetailModels");
+                    b.ToTable("BrandWiseTargets");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.Sales.SalesAdminTarget", b =>
@@ -1444,7 +1508,7 @@ namespace CloudVOffice.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("SalesAdminTargetId"));
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("SalesAdminTargetId"));
 
                     b.Property<long?>("BrandId")
                         .IsRequired()
@@ -1453,59 +1517,59 @@ namespace CloudVOffice.Data.Migrations
                     b.Property<string>("Category")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("CategoryId")
-                        .HasColumnType("bigint");
+				b.Property<long?>("CategoryId")
+					.HasColumnType("bigint");
 
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
 
-                    b.Property<long>("MonthId")
-                        .HasColumnType("bigint");
+				b.Property<long>("MonthId")
+					.HasColumnType("bigint");
 
-                    b.Property<double?>("MonthlyBrandWiseTarget")
-                        .HasColumnType("float");
+				b.Property<double?>("MonthlyBrandWiseTarget")
+					.HasColumnType("float");
 
-                    b.Property<double?>("MonthlyCategoryWiseTarget")
-                        .HasColumnType("float");
+				b.Property<double?>("MonthlyCategoryWiseTarget")
+					.HasColumnType("float");
 
-                    b.Property<double?>("MonthlySectorWiseTarget")
-                        .HasColumnType("float");
+				b.Property<double?>("MonthlySectorWiseTarget")
+					.HasColumnType("float");
 
-                    b.Property<string>("SalesAdminTargetName")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("SalesAdminTargetName")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Sector")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("Sector")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("SectorId")
-                        .HasColumnType("bigint");
+				b.Property<long?>("SectorId")
+					.HasColumnType("bigint");
 
-                    b.Property<long?>("UnitId")
-                        .HasColumnType("bigint");
+				b.Property<long?>("UnitId")
+					.HasColumnType("bigint");
 
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
 
-                    b.HasKey("SalesAdminTargetId");
+				b.HasKey("SalesAdminTargetId");
 
                     b.HasIndex("BrandId");
 
                     b.HasIndex("MonthId");
 
-                    b.ToTable("SalesAdminTargets");
-                });
+				b.ToTable("SalesAdminTargets");
+			});
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.Sales.SalesManagerTarget", b =>
                 {
@@ -1589,169 +1653,169 @@ namespace CloudVOffice.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("SellerRegistrationId"));
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("SellerRegistrationId"));
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("Address")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AlternatePhone")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("AlternatePhone")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("BusinessName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("BusinessName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("Country")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
 
-                    b.Property<bool>("FirstLogin")
-                        .HasColumnType("bit");
+				b.Property<bool>("FirstLogin")
+					.HasColumnType("bit");
 
-                    b.Property<string>("GSTNumber")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("GSTNumber")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("Image")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MailId")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("MailId")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("Name")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("Password")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("PinCodeId")
-                        .HasColumnType("bigint");
+				b.Property<long>("PinCodeId")
+					.HasColumnType("bigint");
 
-                    b.Property<string>("PrimaryPhone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("PrimaryPhone")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SalesRepresentativeContact")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("SalesRepresentativeContact")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SalesRepresentativeId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("SalesRepresentativeId")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SectorId")
-                        .HasColumnType("int");
+				b.Property<int?>("SectorId")
+					.HasColumnType("int");
 
-                    b.Property<string>("State")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("State")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
 
-                    b.Property<long?>("WareHuoseId")
-                        .HasColumnType("bigint");
+				b.Property<long?>("WareHuoseId")
+					.HasColumnType("bigint");
 
-                    b.HasKey("SellerRegistrationId");
+				b.HasKey("SellerRegistrationId");
 
-                    b.ToTable("SellerRegistrations");
-                });
+				b.ToTable("SellerRegistrations");
+			});
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Users.RefreshToken", b =>
-                {
-                    b.Property<long>("RefreshTokenId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+			modelBuilder.Entity("CloudVOffice.Core.Domain.Users.RefreshToken", b =>
+			{
+				b.Property<long>("RefreshTokenId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("RefreshTokenId"));
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("RefreshTokenId"));
 
-                    b.Property<string>("ClientId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("ClientId")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ClientName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("ClientName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
 
-                    b.Property<DateTime?>("RefreshTokenExpiryTime")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime?>("RefreshTokenExpiryTime")
+					.HasColumnType("datetime2");
 
-                    b.Property<string>("Refresh_Token")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("Refresh_Token")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+				b.Property<long>("UserId")
+					.HasColumnType("bigint");
 
-                    b.HasKey("RefreshTokenId");
+				b.HasKey("RefreshTokenId");
 
-                    b.ToTable("RefreshTokens");
-                });
+				b.ToTable("RefreshTokens");
+			});
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Users.Role", b =>
-                {
-                    b.Property<int>("RoleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+			modelBuilder.Entity("CloudVOffice.Core.Domain.Users.Role", b =>
+			{
+				b.Property<int>("RoleId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"));
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"));
 
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
 
-                    b.Property<string>("RoleName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("RoleName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
 
-                    b.HasKey("RoleId");
+				b.HasKey("RoleId");
 
-                    b.ToTable("Roles");
+				b.ToTable("Roles");
 
                     b.HasData(
                         new
@@ -1764,85 +1828,85 @@ namespace CloudVOffice.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Users.User", b =>
-                {
-                    b.Property<long>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+			modelBuilder.Entity("CloudVOffice.Core.Domain.Users.User", b =>
+			{
+				b.Property<long>("UserId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("UserId"));
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("UserId"));
 
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
 
-                    b.Property<DateTime?>("DateOfBirth")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime?>("DateOfBirth")
+					.HasColumnType("datetime2");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("Email")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("FailedLoginAttempts")
-                        .HasColumnType("int");
+				b.Property<int?>("FailedLoginAttempts")
+					.HasColumnType("int");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("FirstName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+				b.Property<bool>("IsActive")
+					.HasColumnType("bit");
 
-                    b.Property<DateTime>("LastActivityDate")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime>("LastActivityDate")
+					.HasColumnType("datetime2");
 
-                    b.Property<string>("LastIpAddress")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("LastIpAddress")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("LastLoginDate")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime?>("LastLoginDate")
+					.HasColumnType("datetime2");
 
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("LastName")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MiddleName")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("MiddleName")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("Password")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhoneNo")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("PhoneNo")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ResetPasswordToken")
-                        .HasColumnType("nvarchar(max)");
+				b.Property<string>("ResetPasswordToken")
+					.HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("ResetPasswordTokenExpirey")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime?>("ResetPasswordTokenExpirey")
+					.HasColumnType("datetime2");
 
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
 
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
 
-                    b.Property<int>("UserType")
-                        .HasColumnType("int");
+				b.Property<int>("UserType")
+					.HasColumnType("int");
 
-                    b.Property<int>("UserTypeId")
-                        .HasColumnType("int");
+				b.Property<int>("UserTypeId")
+					.HasColumnType("int");
 
-                    b.HasKey("UserId");
+				b.HasKey("UserId");
 
-                    b.ToTable("Users");
+				b.ToTable("Users");
 
                     b.HasData(
                         new
@@ -1863,1314 +1927,1357 @@ namespace CloudVOffice.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Users.UserRoleMapping", b =>
+			modelBuilder.Entity("CloudVOffice.Core.Domain.Users.UserRoleMapping", b =>
+			{
+				b.Property<int>("UserRoleMappingId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("int");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserRoleMappingId"));
+
+				b.Property<int>("RoleId")
+					.HasColumnType("int");
+
+				b.Property<long>("UserId")
+					.HasColumnType("bigint");
+
+				b.HasKey("UserRoleMappingId");
+
+				b.HasIndex("RoleId");
+
+				b.HasIndex("UserId");
+
+				b.ToTable("UserRoleMappings");
+
+				b.HasData(
+					new
+					{
+						UserRoleMappingId = 1,
+						RoleId = 1,
+						UserId = 1L
+					});
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Brands.Brand", b =>
+			{
+				b.Property<long>("BrandId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("BrandId"));
+
+				b.Property<string>("BrandImage")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("BrandName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.HasKey("BrandId");
+
+				b.ToTable("Brands");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Districts.AddDistrict", b =>
+			{
+				b.Property<long>("AddDistrictId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("AddDistrictId"));
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<string>("DistrictName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.HasKey("AddDistrictId");
+
+				b.ToTable("AddDistricts");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Districts.DistrictMapping", b =>
+			{
+				b.Property<long>("DistrictMappingId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("DistrictMappingId"));
+
+				b.Property<long>("AddDistrictId")
+					.HasColumnType("bigint");
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<long>("PinCodeId")
+					.HasColumnType("bigint");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.HasKey("DistrictMappingId");
+
+				b.ToTable("DistrictMappings");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Employees.Employee", b =>
+			{
+				b.Property<long>("EmployeeId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("EmployeeId"));
+
+				b.Property<string>("AssignedWareHouse")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<DateTime?>("DateOfBirth")
+					.HasColumnType("datetime2");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<string>("EmployeeName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<bool>("IsActive")
+					.HasColumnType("bit");
+
+				b.Property<string>("Mobile")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("Position")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("Priority")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.Property<string>("VehicleNumber")
+					.HasColumnType("nvarchar(max)");
+
+				b.HasKey("EmployeeId");
+
+				b.ToTable("Employees");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.GST.GST", b =>
+			{
+				b.Property<long>("GSTId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("GSTId"));
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<double>("GSTValue")
+					.HasColumnType("float");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.HasKey("GSTId");
+
+				b.ToTable("GSTs");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.HandlingTypes.HandlingType", b =>
+			{
+				b.Property<int>("HandlingTypeId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("int");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HandlingTypeId"));
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<string>("HandlingTypeName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.HasKey("HandlingTypeId");
+
+				b.ToTable("HandlingTypes");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Items.DamageItem", b =>
+			{
+				b.Property<long>("DamageItemId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("DamageItemId"));
+
+				b.Property<string>("BrandName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<double?>("CGST")
+					.HasColumnType("float");
+
+				b.Property<double?>("CaseWeight")
+					.HasColumnType("float");
+
+				b.Property<string>("CompanyName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<string>("DamagePics")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<double?>("DamageUnits")
+					.HasColumnType("float");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<string>("DistrictName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("EmployeeName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<DateTime?>("ExpiryDate")
+					.HasColumnType("datetime2");
+
+				b.Property<string>("HandlingType")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("InvoiceNo")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long>("ItemId")
+					.HasColumnType("bigint");
+
+				b.Property<string>("ItemName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<double>("MRP")
+					.HasColumnType("float");
+
+				b.Property<DateTime?>("ManufactureDate")
+					.HasColumnType("datetime2");
+
+				b.Property<double>("ProductWeight")
+					.HasColumnType("float");
+
+				b.Property<double>("PurchaseCost")
+					.HasColumnType("float");
+
+				b.Property<string>("Reason")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<DateTime?>("ReceivedDate")
+					.HasColumnType("datetime2");
+
+				b.Property<double?>("SGST")
+					.HasColumnType("float");
+
+				b.Property<double>("SalesCost")
+					.HasColumnType("float");
+
+				b.Property<string>("ShortName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long?>("UnitId")
+					.HasColumnType("bigint");
+
+				b.Property<double?>("UnitPerCase")
+					.HasColumnType("float");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.Property<string>("VendorName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("WareHouseName")
+					.HasColumnType("nvarchar(max)");
+
+				b.HasKey("DamageItemId");
+
+				b.ToTable("DamageItems");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Items.DamageItemForFarming", b =>
+			{
+				b.Property<long>("DamageItemForFarmingId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("DamageItemForFarmingId"));
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<string>("DamagePic")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<double?>("DamageUnits")
+					.HasColumnType("float");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<string>("DistrictName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("EmployeeName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<double?>("GST")
+					.HasColumnType("float");
+
+				b.Property<string>("HSN")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<DateTime?>("HarvestDate")
+					.HasColumnType("datetime2");
+
+				b.Property<string>("InvoiceNo")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long?>("ItemMasterForFarmingId")
+					.HasColumnType("bigint");
+
+				b.Property<double?>("MinQty")
+					.HasColumnType("float");
+
+				b.Property<double?>("Price")
+					.HasColumnType("float");
+
+				b.Property<string>("ProductName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<double?>("QtyPerKg")
+					.HasColumnType("float");
+
+				b.Property<string>("Reason")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<DateTime?>("ReceivedDate")
+					.HasColumnType("datetime2");
+
+				b.Property<string>("ShortName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long?>("UnitId")
+					.HasColumnType("bigint");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.Property<string>("VendorName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("WareHouseName")
+					.HasColumnType("nvarchar(max)");
+
+				b.HasKey("DamageItemForFarmingId");
+
+				b.ToTable("DamageItemForFarmings");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Items.Item", b =>
+			{
+				b.Property<long>("ItemId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ItemId"));
+
+				b.Property<int?>("AddDistrictId")
+					.HasColumnType("int");
+
+				b.Property<bool>("BarCodeNotAvailable")
+					.HasColumnType("bit");
+
+				b.Property<string>("Barcode")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long?>("BrandId")
+					.HasColumnType("bigint");
+
+				b.Property<string>("BrandName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<double?>("CGST")
+					.HasColumnType("float");
+
+				b.Property<double?>("CaseWeight")
+					.HasColumnType("float");
+
+				b.Property<int?>("CategoryId")
+					.HasColumnType("int");
+
+				b.Property<string>("CategoryName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("CompanyName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<string>("DistrictName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<int?>("EmployeeId")
+					.HasColumnType("int");
+
+				b.Property<string>("EmployeeName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<DateTime?>("ExpiryDate")
+					.HasColumnType("datetime2");
+
+				b.Property<string>("HSN")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("HandlingType")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<int?>("HandlingTypeId")
+					.HasColumnType("int");
+
+				b.Property<string>("Images")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("InvoiceNo")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("ItemName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<double>("MRP")
+					.HasColumnType("float");
+
+				b.Property<double?>("MRPCaseCost")
+					.HasColumnType("float");
+
+				b.Property<DateTime?>("ManufactureDate")
+					.HasColumnType("datetime2");
+
+				b.Property<double>("ProductWeight")
+					.HasColumnType("float");
+
+				b.Property<double?>("PurchaseCaseCost")
+					.HasColumnType("float");
+
+				b.Property<double>("PurchaseCost")
+					.HasColumnType("float");
+
+				b.Property<DateTime?>("ReceivedDate")
+					.HasColumnType("datetime2");
+
+				b.Property<double?>("SGST")
+					.HasColumnType("float");
+
+				b.Property<double?>("SalesCaseCost")
+					.HasColumnType("float");
+
+				b.Property<double>("SalesCost")
+					.HasColumnType("float");
+
+				b.Property<int?>("SectorId")
+					.HasColumnType("int");
+
+				b.Property<string>("SectorName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("ShortName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<int?>("SubCategory1Id")
+					.HasColumnType("int");
+
+				b.Property<string>("SubCategory1Name")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<int?>("SubCategory2Id")
+					.HasColumnType("int");
+
+				b.Property<string>("SubCategory2Name")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("Thumbnail")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long?>("UnitId")
+					.HasColumnType("bigint");
+
+				b.Property<double?>("UnitPerCase")
+					.HasColumnType("float");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.Property<int?>("VendorId")
+					.HasColumnType("int");
+
+				b.Property<string>("VendorName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("Videos")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("WareHouseName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<int?>("WareHuoseId")
+					.HasColumnType("int");
+
+				b.HasKey("ItemId");
+
+				b.ToTable("Items");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Items.ItemMasterForFarming", b =>
+			{
+				b.Property<long>("ItemMasterForFarmingId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ItemMasterForFarmingId"));
+
+				b.Property<int?>("AddDistrictId")
+					.HasColumnType("int");
+
+				b.Property<bool>("BarCodeNotAvailable")
+					.HasColumnType("bit");
+
+				b.Property<string>("Barcode")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("Category")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<int?>("CategoryId")
+					.HasColumnType("int");
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<string>("DistrictName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<int?>("EmployeeId")
+					.HasColumnType("int");
+
+				b.Property<string>("EmployeeName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<double?>("GST")
+					.HasColumnType("float");
+
+				b.Property<string>("HSN")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<DateTime?>("HarvestDate")
+					.HasColumnType("datetime2");
+
+				b.Property<string>("Images")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("InvoiceNo")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<double?>("MinQty")
+					.HasColumnType("float");
+
+				b.Property<double?>("Price")
+					.HasColumnType("float");
+
+				b.Property<string>("ProductName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<double?>("QtyPerKg")
+					.HasColumnType("float");
+
+				b.Property<DateTime?>("ReceivedDate")
+					.HasColumnType("datetime2");
+
+				b.Property<string>("Sector")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<int?>("SectorId")
+					.HasColumnType("int");
+
+				b.Property<string>("ShortName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("SubCategory1")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<int?>("SubCategory1Id")
+					.HasColumnType("int");
+
+				b.Property<string>("SubCategory2")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<int?>("SubCategory2Id")
+					.HasColumnType("int");
+
+				b.Property<string>("Thumbnail")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long?>("UnitId")
+					.HasColumnType("bigint");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.Property<int?>("VendorId")
+					.HasColumnType("int");
+
+				b.Property<string>("VendorName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("WareHouseName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<int?>("WareHuoseId")
+					.HasColumnType("int");
+
+				b.HasKey("ItemMasterForFarmingId");
+
+				b.ToTable("ItemMasterForFarmings");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Months.Month", b =>
+			{
+				b.Property<long>("MonthId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("MonthId"));
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<string>("MonthName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.HasKey("MonthId");
+
+				b.ToTable("Months");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.PinCodes.PinCode", b =>
+			{
+				b.Property<long>("PinCodeId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("PinCodeId"));
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<bool>("IsActive")
+					.HasColumnType("bit");
+
+				b.Property<double?>("Lat")
+					.HasColumnType("float");
+
+				b.Property<double?>("Long")
+					.HasColumnType("float");
+
+				b.Property<string>("Pin")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.HasKey("PinCodeId");
+
+				b.ToTable("PinCodes");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.PinCodes.PinCodeMapping", b =>
+			{
+				b.Property<long>("PinCodeMappingId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("PinCodeMappingId"));
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<long>("PinCodeId")
+					.HasColumnType("bigint");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.Property<long>("WareHuoseId")
+					.HasColumnType("bigint");
+
+				b.HasKey("PinCodeMappingId");
+
+				b.HasIndex("PinCodeId");
+
+				b.HasIndex("WareHuoseId");
+
+				b.ToTable("PinCodeMappings");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.States.State", b =>
+			{
+				b.Property<long>("StateId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("StateId"));
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<string>("StateName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.HasKey("StateId");
+
+				b.ToTable("States");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.UOMs.Unit", b =>
+			{
+				b.Property<long>("UnitId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("UnitId"));
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.HasColumnType("datetime2");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit");
+
+				b.Property<string>("ShortName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long>("UnitGroupId")
+					.HasColumnType("bigint");
+
+				b.Property<string>("UnitName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.HasKey("UnitId");
+
+				b.HasIndex("UnitGroupId");
+
+				b.ToTable("Units");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.UOMs.UnitConversionFactors", b =>
+			{
+				b.Property<long>("UnitConversionFactorsId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("UnitConversionFactorsId"));
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<long>("FromUnitId")
+					.HasColumnType("bigint");
+
+				b.Property<long>("ToUnitId")
+					.HasColumnType("bigint");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.Property<double>("Value")
+					.HasColumnType("float");
+
+				b.HasKey("UnitConversionFactorsId");
+
+				b.HasIndex("FromUnitId");
+
+				b.ToTable("UnitConversionFactors");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.UOMs.UnitGroup", b =>
+			{
+				b.Property<long>("UnitGroupId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("UnitGroupId"));
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<string>("UnitGroupName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.HasKey("UnitGroupId");
+
+				b.ToTable("UnitGroups");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Vehicles.Vehicle", b =>
+			{
+				b.Property<long>("VehicleId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("VehicleId"));
+
+				b.Property<string>("BrandName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("ChasisNo")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<string>("DL")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<string>("FuelType")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("InsuranceDetails")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<DateTime?>("PurchaseYear")
+					.HasColumnType("datetime2");
+
+				b.Property<string>("RC")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.Property<string>("VehicleName")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("VehicleNumber")
+					.HasColumnType("nvarchar(max)");
+
+				b.HasKey("VehicleId");
+
+				b.ToTable("Vehicles");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Vendors.Vendor", b =>
+			{
+				b.Property<long>("VendorId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("VendorId"));
+
+				b.Property<string>("Address")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<int?>("CategoryId")
+					.HasColumnType("int");
+
+				b.Property<string>("CompanyName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<string>("GSTNumber")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<bool>("IsActive")
+					.HasColumnType("bit");
+
+				b.Property<string>("MailId")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("Mobile1")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("Mobile2")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("PoCName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<int>("SectorId")
+					.HasColumnType("int");
+
+				b.Property<string>("Telephone")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.Property<string>("VendorName")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long>("WareHuoseId")
+					.HasColumnType("bigint");
+
+				b.HasKey("VendorId");
+
+				b.ToTable("Vendors");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Vendors.VendorOnboarding", b =>
+			{
+				b.Property<int>("VendorOnboardingId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("int");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VendorOnboardingId"));
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<int>("SectorId")
+					.HasColumnType("int");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.Property<long>("VendorId")
+					.HasColumnType("bigint");
+
+				b.HasKey("VendorOnboardingId");
+
+				b.ToTable("VendorOnboardings");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.WareHuose", b =>
+			{
+				b.Property<long>("WareHuoseId")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("bigint");
+
+				SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("WareHuoseId"));
+
+				b.Property<string>("Address")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("Area")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long>("CreatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime>("CreatedDate")
+					.ValueGeneratedOnAdd()
+					.HasColumnType("datetime2")
+					.HasDefaultValueSql("getdate()");
+
+				b.Property<bool>("Deleted")
+					.HasColumnType("bit")
+					.HasDefaultValue(false);
+
+				b.Property<string>("GSTNumber")
+					.IsRequired()
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<bool>("IsActive")
+					.HasColumnType("bit");
+
+				b.Property<string>("Mobile")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<string>("Telephone")
+					.HasColumnType("nvarchar(max)");
+
+				b.Property<long?>("UpdatedBy")
+					.HasColumnType("bigint");
+
+				b.Property<DateTime?>("UpdatedDate")
+					.HasColumnType("datetime2");
+
+				b.Property<string>("WareHouseName")
+					.HasColumnType("nvarchar(max)");
+
+				b.HasKey("WareHuoseId");
+
+				b.ToTable("WareHouses");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.Comunication.EmailAccount", b =>
+			{
+				b.HasOne("CloudVOffice.Core.Domain.Comunication.EmailDomain", "EmailDomain")
+					.WithMany()
+					.HasForeignKey("Domain")
+					.OnDelete(DeleteBehavior.Cascade)
+					.IsRequired();
+
+				b.Navigation("EmailDomain");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.Pemission.Application", b =>
+			{
+				b.HasOne("CloudVOffice.Core.Domain.Pemission.Application", null)
+					.WithMany("Children")
+					.HasForeignKey("ApplicationId1");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.Pemission.RoleAndApplicationWisePermission", b =>
+			{
+				b.HasOne("CloudVOffice.Core.Domain.Pemission.Application", "Application")
+					.WithMany("RoleAndModuleWisePermission")
+					.HasForeignKey("ApplicationId")
+					.OnDelete(DeleteBehavior.Cascade)
+					.IsRequired();
+
+				b.HasOne("CloudVOffice.Core.Domain.Users.Role", "Role")
+					.WithMany("RoleAndApplicationWisePermission")
+					.HasForeignKey("RoleId")
+					.OnDelete(DeleteBehavior.Cascade)
+					.IsRequired();
+
+				b.Navigation("Application");
+
+				b.Navigation("Role");
+			});
+
+			modelBuilder.Entity("CloudVOffice.Core.Domain.Pemission.UserWiseViewMapper", b =>
+			{
+				b.HasOne("CloudVOffice.Core.Domain.Pemission.Application", "Application")
+					.WithMany("UserWiseViewMapper")
+					.HasForeignKey("ApplicationId")
+					.OnDelete(DeleteBehavior.Cascade)
+					.IsRequired();
+
+				b.HasOne("CloudVOffice.Core.Domain.Users.User", "User")
+					.WithMany("UserWiseViewMapper")
+					.HasForeignKey("UserId");
+
+				b.Navigation("Application");
+
+				b.Navigation("User");
+			});
+
+            modelBuilder.Entity("CloudVOffice.Core.Domain.Sales.BrandWiseTarget", b =>
                 {
-                    b.Property<int>("UserRoleMappingId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserRoleMappingId"));
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("UserRoleMappingId");
-
-                    b.HasIndex("RoleId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserRoleMappings");
-
-                    b.HasData(
-                        new
-                        {
-                            UserRoleMappingId = 1,
-                            RoleId = 1,
-                            UserId = 1L
-                        });
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Brands.Brand", b =>
-                {
-                    b.Property<long>("BrandId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("BrandId"));
-
-                    b.Property<string>("BrandImage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BrandName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("BrandId");
-
-                    b.ToTable("Brands");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Districts.AddDistrict", b =>
-                {
-                    b.Property<long>("AddDistrictId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("AddDistrictId"));
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<string>("DistrictName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("AddDistrictId");
-
-                    b.ToTable("AddDistricts");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Districts.DistrictMapping", b =>
-                {
-                    b.Property<long>("DistrictMappingId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("DistrictMappingId"));
-
-                    b.Property<long>("AddDistrictId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<long>("PinCodeId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("DistrictMappingId");
-
-                    b.ToTable("DistrictMappings");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Employees.Employee", b =>
-                {
-                    b.Property<long>("EmployeeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("EmployeeId"));
-
-                    b.Property<string>("AssignedWareHouse")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<DateTime?>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<string>("EmployeeName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Mobile")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Position")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Priority")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("VehicleNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("EmployeeId");
-
-                    b.ToTable("Employees");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.GST.GST", b =>
-                {
-                    b.Property<long>("GSTId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("GSTId"));
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<double>("GSTValue")
-                        .HasColumnType("float");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("GSTId");
-
-                    b.ToTable("GSTs");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.HandlingTypes.HandlingType", b =>
-                {
-                    b.Property<int>("HandlingTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HandlingTypeId"));
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<string>("HandlingTypeName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("HandlingTypeId");
-
-                    b.ToTable("HandlingTypes");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Items.DamageItem", b =>
-                {
-                    b.Property<long>("DamageItemId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("DamageItemId"));
-
-                    b.Property<string>("BrandName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("CGST")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("CaseWeight")
-                        .HasColumnType("float");
-
-                    b.Property<string>("CompanyName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<string>("DamagePics")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("DamageUnits")
-                        .HasColumnType("float");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<string>("DistrictName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EmployeeName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ExpiryDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("HandlingType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("InvoiceNo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("ItemId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("ItemName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("MRP")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime?>("ManufactureDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double>("ProductWeight")
-                        .HasColumnType("float");
-
-                    b.Property<double>("PurchaseCost")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Reason")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ReceivedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double?>("SGST")
-                        .HasColumnType("float");
-
-                    b.Property<double>("SalesCost")
-                        .HasColumnType("float");
-
-                    b.Property<string>("ShortName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("UnitId")
-                        .HasColumnType("bigint");
-
-                    b.Property<double?>("UnitPerCase")
-                        .HasColumnType("float");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("VendorName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WareHouseName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("DamageItemId");
-
-                    b.ToTable("DamageItems");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Items.DamageItemForFarming", b =>
-                {
-                    b.Property<long>("DamageItemForFarmingId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("DamageItemForFarmingId"));
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<string>("DamagePic")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("DamageUnits")
-                        .HasColumnType("float");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<string>("DistrictName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EmployeeName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("GST")
-                        .HasColumnType("float");
-
-                    b.Property<string>("HSN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("HarvestDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("InvoiceNo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("ItemMasterForFarmingId")
-                        .HasColumnType("bigint");
-
-                    b.Property<double?>("MinQty")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("Price")
-                        .HasColumnType("float");
-
-                    b.Property<string>("ProductName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("QtyPerKg")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Reason")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ReceivedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ShortName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("UnitId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("VendorName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WareHouseName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("DamageItemForFarmingId");
-
-                    b.ToTable("DamageItemForFarmings");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Items.Item", b =>
-                {
-                    b.Property<long>("ItemId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ItemId"));
-
-                    b.Property<int?>("AddDistrictId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("BarCodeNotAvailable")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Barcode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("BrandId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("BrandName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("CGST")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("CaseWeight")
-                        .HasColumnType("float");
-
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CategoryName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CompanyName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<string>("DistrictName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("EmployeeName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ExpiryDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("HSN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("HandlingType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("HandlingTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Images")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("InvoiceNo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ItemName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("MRP")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("MRPCaseCost")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime?>("ManufactureDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double>("ProductWeight")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("PurchaseCaseCost")
-                        .HasColumnType("float");
-
-                    b.Property<double>("PurchaseCost")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime?>("ReceivedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double?>("SGST")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("SalesCaseCost")
-                        .HasColumnType("float");
-
-                    b.Property<double>("SalesCost")
-                        .HasColumnType("float");
-
-                    b.Property<int?>("SectorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SectorName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShortName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("SubCategory1Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SubCategory1Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("SubCategory2Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SubCategory2Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Thumbnail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("UnitId")
-                        .HasColumnType("bigint");
-
-                    b.Property<double?>("UnitPerCase")
-                        .HasColumnType("float");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("VendorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("VendorName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Videos")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WareHouseName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("WareHuoseId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ItemId");
-
-                    b.ToTable("Items");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Items.ItemMasterForFarming", b =>
-                {
-                    b.Property<long>("ItemMasterForFarmingId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ItemMasterForFarmingId"));
-
-                    b.Property<int?>("AddDistrictId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("BarCodeNotAvailable")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Barcode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Category")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<string>("DistrictName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("EmployeeName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("GST")
-                        .HasColumnType("float");
-
-                    b.Property<string>("HSN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("HarvestDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Images")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("InvoiceNo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("MinQty")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("Price")
-                        .HasColumnType("float");
-
-                    b.Property<string>("ProductName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("QtyPerKg")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime?>("ReceivedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Sector")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("SectorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ShortName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SubCategory1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("SubCategory1Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SubCategory2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("SubCategory2Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Thumbnail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("UnitId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("VendorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("VendorName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WareHouseName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("WareHuoseId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ItemMasterForFarmingId");
-
-                    b.ToTable("ItemMasterForFarmings");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Months.Month", b =>
-                {
-                    b.Property<long>("MonthId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("MonthId"));
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<string>("MonthName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("MonthId");
-
-                    b.ToTable("Months");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.PinCodes.PinCode", b =>
-                {
-                    b.Property<long>("PinCodeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("PinCodeId"));
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<double?>("Lat")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("Long")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Pin")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("PinCodeId");
-
-                    b.ToTable("PinCodes");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.PinCodes.PinCodeMapping", b =>
-                {
-                    b.Property<long>("PinCodeMappingId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("PinCodeMappingId"));
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<long>("PinCodeId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long>("WareHuoseId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("PinCodeMappingId");
-
-                    b.HasIndex("PinCodeId");
-
-                    b.HasIndex("WareHuoseId");
-
-                    b.ToTable("PinCodeMappings");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.States.State", b =>
-                {
-                    b.Property<long>("StateId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("StateId"));
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<string>("StateName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("StateId");
-
-                    b.ToTable("States");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.UOMs.Unit", b =>
-                {
-                    b.Property<long>("UnitId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("UnitId"));
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ShortName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("UnitGroupId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("UnitName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("UnitId");
-
-                    b.HasIndex("UnitGroupId");
-
-                    b.ToTable("Units");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.UOMs.UnitConversionFactors", b =>
-                {
-                    b.Property<long>("UnitConversionFactorsId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("UnitConversionFactorsId"));
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<long>("FromUnitId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("ToUnitId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double>("Value")
-                        .HasColumnType("float");
-
-                    b.HasKey("UnitConversionFactorsId");
-
-                    b.HasIndex("FromUnitId");
-
-                    b.ToTable("UnitConversionFactors");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.UOMs.UnitGroup", b =>
-                {
-                    b.Property<long>("UnitGroupId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("UnitGroupId"));
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<string>("UnitGroupName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("UnitGroupId");
-
-                    b.ToTable("UnitGroups");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Vehicles.Vehicle", b =>
-                {
-                    b.Property<long>("VehicleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("VehicleId"));
-
-                    b.Property<string>("BrandName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ChasisNo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<string>("DL")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<string>("FuelType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("InsuranceDetails")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("PurchaseYear")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("RC")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("VehicleName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VehicleNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("VehicleId");
-
-                    b.ToTable("Vehicles");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Vendors.Vendor", b =>
-                {
-                    b.Property<long>("VendorId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("VendorId"));
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CompanyName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<string>("GSTNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("MailId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Mobile1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Mobile2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PoCName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SectorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Telephone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("VendorName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("WareHuoseId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("VendorId");
-
-                    b.ToTable("Vendors");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Vendors.VendorOnboarding", b =>
-                {
-                    b.Property<int>("VendorOnboardingId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VendorOnboardingId"));
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<int>("SectorId")
-                        .HasColumnType("int");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long>("VendorId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("VendorOnboardingId");
-
-                    b.ToTable("VendorOnboardings");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.WareHuose", b =>
-                {
-                    b.Property<long>("WareHuoseId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("WareHuoseId"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Area")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<string>("GSTNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Mobile")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Telephone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("WareHouseName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("WareHuoseId");
-
-                    b.ToTable("WareHouses");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Comunication.EmailAccount", b =>
-                {
-                    b.HasOne("CloudVOffice.Core.Domain.Comunication.EmailDomain", "EmailDomain")
+                    b.HasOne("CloudVOffice.Core.Domain.WareHouses.Brands.Brand", "Brand")
                         .WithMany()
-                        .HasForeignKey("Domain")
+                        .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("EmailDomain");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Pemission.Application", b =>
-                {
-                    b.HasOne("CloudVOffice.Core.Domain.Pemission.Application", null)
-                        .WithMany("Children")
-                        .HasForeignKey("ApplicationId1");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Pemission.RoleAndApplicationWisePermission", b =>
-                {
-                    b.HasOne("CloudVOffice.Core.Domain.Pemission.Application", "Application")
-                        .WithMany("RoleAndModuleWisePermission")
-                        .HasForeignKey("ApplicationId")
+                    b.HasOne("CloudVOffice.Core.Domain.ProductCategories.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CloudVOffice.Core.Domain.Users.Role", "Role")
-                        .WithMany("RoleAndApplicationWisePermission")
-                        .HasForeignKey("RoleId")
+                    b.HasOne("CloudVOffice.Core.Domain.WareHouses.Months.Month", "Month")
+                        .WithMany()
+                        .HasForeignKey("MonthId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Application");
-
-                    b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Pemission.UserWiseViewMapper", b =>
-                {
-                    b.HasOne("CloudVOffice.Core.Domain.Pemission.Application", "Application")
-                        .WithMany("UserWiseViewMapper")
-                        .HasForeignKey("ApplicationId")
+                    b.HasOne("CloudVOffice.Core.Domain.ProductCategories.Sector", "Sector")
+                        .WithMany()
+                        .HasForeignKey("SectorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CloudVOffice.Core.Domain.Users.User", "User")
-                        .WithMany("UserWiseViewMapper")
-                        .HasForeignKey("UserId");
+                    b.HasOne("CloudVOffice.Core.Domain.WareHouses.UOMs.Unit", "Unit")
+                        .WithMany()
+                        .HasForeignKey("UnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Application");
+                    b.Navigation("Brand");
 
-                    b.Navigation("User");
+                    b.Navigation("Category");
+
+                    b.Navigation("Month");
+
+                    b.Navigation("Sector");
+
+                    b.Navigation("Unit");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.Sales.SalesAdminTarget", b =>
@@ -3251,81 +3358,81 @@ namespace CloudVOffice.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CloudVOffice.Core.Domain.Users.User", "User")
-                        .WithMany("UserRoleMappings")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+				b.HasOne("CloudVOffice.Core.Domain.Users.User", "User")
+					.WithMany("UserRoleMappings")
+					.HasForeignKey("UserId")
+					.OnDelete(DeleteBehavior.Cascade)
+					.IsRequired();
 
-                    b.Navigation("Role");
+				b.Navigation("Role");
 
-                    b.Navigation("User");
-                });
+				b.Navigation("User");
+			});
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.PinCodes.PinCodeMapping", b =>
-                {
-                    b.HasOne("CloudVOffice.Core.Domain.WareHouses.PinCodes.PinCode", "PinCode")
-                        .WithMany()
-                        .HasForeignKey("PinCodeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+			modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.PinCodes.PinCodeMapping", b =>
+			{
+				b.HasOne("CloudVOffice.Core.Domain.WareHouses.PinCodes.PinCode", "PinCode")
+					.WithMany()
+					.HasForeignKey("PinCodeId")
+					.OnDelete(DeleteBehavior.Cascade)
+					.IsRequired();
 
-                    b.HasOne("CloudVOffice.Core.Domain.WareHouses.WareHuose", "WareHuose")
-                        .WithMany()
-                        .HasForeignKey("WareHuoseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+				b.HasOne("CloudVOffice.Core.Domain.WareHouses.WareHuose", "WareHuose")
+					.WithMany()
+					.HasForeignKey("WareHuoseId")
+					.OnDelete(DeleteBehavior.Cascade)
+					.IsRequired();
 
-                    b.Navigation("PinCode");
+				b.Navigation("PinCode");
 
-                    b.Navigation("WareHuose");
-                });
+				b.Navigation("WareHuose");
+			});
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.UOMs.Unit", b =>
-                {
-                    b.HasOne("CloudVOffice.Core.Domain.WareHouses.UOMs.UnitGroup", "UnitGroup")
-                        .WithMany()
-                        .HasForeignKey("UnitGroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+			modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.UOMs.Unit", b =>
+			{
+				b.HasOne("CloudVOffice.Core.Domain.WareHouses.UOMs.UnitGroup", "UnitGroup")
+					.WithMany()
+					.HasForeignKey("UnitGroupId")
+					.OnDelete(DeleteBehavior.Cascade)
+					.IsRequired();
 
-                    b.Navigation("UnitGroup");
-                });
+				b.Navigation("UnitGroup");
+			});
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.UOMs.UnitConversionFactors", b =>
-                {
-                    b.HasOne("CloudVOffice.Core.Domain.WareHouses.UOMs.Unit", "Unit")
-                        .WithMany()
-                        .HasForeignKey("FromUnitId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+			modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.UOMs.UnitConversionFactors", b =>
+			{
+				b.HasOne("CloudVOffice.Core.Domain.WareHouses.UOMs.Unit", "Unit")
+					.WithMany()
+					.HasForeignKey("FromUnitId")
+					.OnDelete(DeleteBehavior.Cascade)
+					.IsRequired();
 
-                    b.Navigation("Unit");
-                });
+				b.Navigation("Unit");
+			});
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Pemission.Application", b =>
-                {
-                    b.Navigation("Children");
+			modelBuilder.Entity("CloudVOffice.Core.Domain.Pemission.Application", b =>
+			{
+				b.Navigation("Children");
 
-                    b.Navigation("RoleAndModuleWisePermission");
+				b.Navigation("RoleAndModuleWisePermission");
 
-                    b.Navigation("UserWiseViewMapper");
-                });
+				b.Navigation("UserWiseViewMapper");
+			});
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Users.Role", b =>
-                {
-                    b.Navigation("RoleAndApplicationWisePermission");
+			modelBuilder.Entity("CloudVOffice.Core.Domain.Users.Role", b =>
+			{
+				b.Navigation("RoleAndApplicationWisePermission");
 
-                    b.Navigation("UserRoleMappings");
-                });
+				b.Navigation("UserRoleMappings");
+			});
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Users.User", b =>
-                {
-                    b.Navigation("UserRoleMappings");
+			modelBuilder.Entity("CloudVOffice.Core.Domain.Users.User", b =>
+			{
+				b.Navigation("UserRoleMappings");
 
-                    b.Navigation("UserWiseViewMapper");
-                });
+				b.Navigation("UserWiseViewMapper");
+			});
 #pragma warning restore 612, 618
-        }
-    }
+		}
+	}
 }

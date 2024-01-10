@@ -284,9 +284,17 @@ namespace CloudVOffice.Services.Users
                 user.FirstName = userCreateDTO.FirstName;
                 user.MiddleName = userCreateDTO.MiddleName;
                 user.LastName = userCreateDTO.LastName;
-                //user.Password = Encrypt.EncryptPassword(userCreateDTO.Password, userCreateDTO.Email);
-                user.Password = userCreateDTO.Password;
-                user.DateOfBirth = userCreateDTO.DateOfBirth;
+				////user.Password = Encrypt.EncryptPassword(userCreateDTO.Password, userCreateDTO.Email);
+				//user.Password = userCreateDTO.Password;
+				if (user.Password != userCreateDTO.Password)
+				{
+					user.Password = Encrypt.EncryptPassword(userCreateDTO.Password, userCreateDTO.Email);
+				}
+				else
+				{
+					user.Password = userCreateDTO.Password;
+				}
+				user.DateOfBirth = userCreateDTO.DateOfBirth;
                 user.PhoneNo = userCreateDTO.PhoneNo;
                 user.UserTypeId = userCreateDTO.UserTypeId;
                 user.UpdatedBy = userCreateDTO.CreatedBy;

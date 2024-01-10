@@ -28,6 +28,7 @@
         public const string Recruitment = "Recruitment";
         public const string WareHouse = "WareHouse";
         public const string SalesExecutive = "SalesExecutive";
+        public const string Seller = "Seller";
 
 
     }

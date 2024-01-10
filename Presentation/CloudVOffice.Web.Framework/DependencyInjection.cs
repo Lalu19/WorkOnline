@@ -115,6 +115,9 @@ namespace CloudVOffice.Web.Framework
             services.AddScoped<IStateService, StateService>();
 
 
+            services.AddScoped<IBrandWiseTargetService, BrandWiseTargetService>();
+
+
             return services;
 
         }
