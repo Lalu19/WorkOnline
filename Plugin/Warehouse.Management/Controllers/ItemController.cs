@@ -128,6 +128,7 @@ namespace Warehouse.Management.Controllers
 				viewForItem.CreatedItemDTO.CGST = item1.CGST;
 				viewForItem.CreatedItemDTO.SGST = item1.SGST;
 				viewForItem.CreatedItemDTO.HSN = item1.HSN;
+				viewForItem.CreatedItemDTO.SellerMargin = item1.SellerMargin;
 
                 //viewForItem.CreatedItemDTO.HandlingType = item1.HandlingType;
                 //viewForItem.CreatedItemDTO.WareHouseName = item1.WareHouseName;
