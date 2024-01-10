@@ -7,10 +7,10 @@ namespace CloudVOffice.Services.Sales
 {
     public interface IBrandWiseTargetService
     {
-        public MessageEnum BrandWiseTargetCreate(BrandWiseTargetDTO brandWiseTargetDTO);
+        public MessageEnum BrandWiseTargetCreate(BrandWiseTargetsDTO brandWiseTargetDTO);
         public BrandWiseTarget GetBrandWiseTargetById(Int64 brandWiseTargetId);
         public List<BrandWiseTarget> GetBrandWiseTargetList();
-        public MessageEnum BrandWiseTargetUpdate(BrandWiseTargetDTO brandWiseTargetDTO);
+        public MessageEnum BrandWiseTargetUpdate(BrandWiseTargetsDTO brandWiseTargetDTO);
         public MessageEnum BrandWiseTargetDelete(Int64 brandWiseTargetId, Int64 DeletedBy);
     }
 }

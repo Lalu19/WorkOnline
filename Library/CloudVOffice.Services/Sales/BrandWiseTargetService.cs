@@ -25,7 +25,7 @@ namespace CloudVOffice.Services.Sales
             _dbContext = dbContext;
             _brandWiseTargetRepo = brandWiseTargetRepo;
         }
-        public MessageEnum BrandWiseTargetCreate(BrandWiseTargetDTO brandWiseTargetDTO)
+        public MessageEnum BrandWiseTargetCreate(BrandWiseTargetsDTO brandWiseTargetDTO)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace CloudVOffice.Services.Sales
                         };
 
                         _brandWiseTargetRepo.Insert(target);
-                        _dbContext.SaveChanges(); 
+                        _dbContext.SaveChanges();
                     }
                     else
                     {
@@ -68,7 +68,7 @@ namespace CloudVOffice.Services.Sales
             }
         }
 
-        public MessageEnum BrandWiseTargetUpdate(BrandWiseTargetDTO brandWiseTargetDTO)
+        public MessageEnum BrandWiseTargetUpdate(BrandWiseTargetsDTO brandWiseTargetDTO)
         {
             try
             {
