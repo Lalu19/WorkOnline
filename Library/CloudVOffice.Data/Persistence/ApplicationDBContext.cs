@@ -117,6 +117,7 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<RetailModel> RetailModels { get; set; }
         public virtual DbSet<ChangePassword> ChangePasswords { get; set; }
         public virtual DbSet<Banner> Banners { get; set; }
+        public virtual DbSet<BrandWiseTarget> BrandWiseTargets { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -520,11 +521,20 @@ namespace CloudVOffice.Data.Persistence
 			 .HasDefaultValue(false)
 			 .ValueGeneratedNever();
 
+            modelBuilder.Entity<BrandWiseTarget>()
+   .Property(s => s.CreatedDate)
+   .HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<BrandWiseTarget>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
+
 
             #endregion
 
 
-	
+
             modelBuilder.Entity<RetailModel>()
            .Property(s => s.CreatedDate)
            .HasDefaultValueSql("getdate()");
