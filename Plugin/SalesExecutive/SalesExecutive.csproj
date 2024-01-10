@@ -19,6 +19,8 @@
 		<None Remove="roles.json" />
 		<None Remove="Views\SalesAdmins\SalesAdminCreate.cshtml" />
 		<None Remove="Views\SalesAdmins\SalesAdminView.cshtml" />
+		<None Remove="Views\SalesAdmins\SalesManagerTargetCreate.cshtml" />
+		<None Remove="Views\SalesAdmins\SalesManagerTargetView.cshtml" />
 		<None Remove="Views\SalesExecutiveDashboard\Dashboard.cshtml" />
 	</ItemGroup>
 
