@@ -110,6 +110,7 @@ namespace CloudVOffice.Web.Framework
 
             services.AddScoped<IRetailModelService, RetailModelService>();
             services.AddScoped<ISalesAdminService, SalesAdminService>();
+            services.AddScoped<ISalesManagerTargetService, SalesManagerTargetService>();
             services.AddScoped<IBannerService, BannerService>();
             services.AddScoped<IStateService, StateService>();
 
