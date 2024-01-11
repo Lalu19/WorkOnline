@@ -34,7 +34,7 @@
 
                     <div class="row">
                         <div class="col-md-8">
-                            Sales Target
+                            Sales Manager Target
                         </div>
                         <div class="col-md-4 text-right float-right">
                             <a href="/SalesExecutive/SalesManagerTarget/CreateSalesManagerTarget" class="btn btn-success btn-sm"><i class="icon icon-add"></i> Add </a>
@@ -161,7 +161,7 @@
             dangerMode: true,
         }).then(function (isConfirm) {
             if (isConfirm) {
-                window.location.href = "../../SalesExecutive/SalesAdmins/SalesManagerTargetDelete?SalesManagerTargetId=" + Id;
+                window.location.href = "../../SalesExecutive/SalesManagerTarget/SalesManagerTargetDelete?SalesManagerTargetId=" + Id;
             }
         })
     }
