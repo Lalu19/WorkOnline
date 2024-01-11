@@ -578,8 +578,33 @@
 </script>
 
 
+@* <script>
+	$(document).ready(function () {
+		$('#btnSave').on('click', function () {
+			window.location.href = "/SalesExecutive/SalesAdmin/SalesAdminTargetView";
+		});
+	});
+</script> *@
 
 
+<script>
+	$(document).ready(function () {
+		$('#btnSave').on('click', function () {
+			// Check if any value is present in the four fields
+			var monthIdValue = $('#MonthId').val();
+			var sectorIdValue = $('#SectorId').val();
+			var categoryIdValue = $('#CategoryId').val();
+			var categoryWiseTargetValue = $('#CategoryWiseTarget').val();
+
+			if (monthIdValue && sectorIdValue && categoryIdValue && categoryWiseTargetValue) {
+				// All fields have values, proceed with redirection
+				window.location.href = "/SalesExecutive/SalesAdmin/SalesAdminTargetView";
+			} else {
+				alert("Please Add Sales Admin Target");
+			}
+		});
+	});
+</script>
 
 
 @section scripts{

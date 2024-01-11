@@ -60,7 +60,7 @@ namespace SalesExecutive.Controllers
 
             }
 
-            return View("~/Plugins/SalesExecutive/Views/SalesAdmins/SalesManagerTargetCreate.cshtml", salesManagerTargetDTO);
+            return View("~/Plugins/SalesExecutive/Views/SalesManagerTargets/SalesManagerTargetCreate.cshtml", salesManagerTargetDTO);
         }
 
 
@@ -125,7 +125,7 @@ namespace SalesExecutive.Controllers
             // Redirect or return the appropriate view
             //return Redirect("/SalesExecutive/SalesAdmin/SalesAdminTargetView");
 
-            return View("~/Plugins/SalesExecutive/Views/SalesAdmins/SalesManagerTargetView.cshtml", ViewBag.SalesTarget);
+            return View("~/Plugins/SalesExecutive/Views/SalesManagerTargets/SalesManagerTargetView.cshtml", ViewBag.SalesTarget);
         }
 
 
@@ -135,7 +135,7 @@ namespace SalesExecutive.Controllers
         {
             ViewBag.SalesTarget = _salesManagerTargetService.GetAllTargetsBySalesManagerTarget();
 
-            return View("~/Plugins/SalesExecutive/Views/SalesAdmins/SalesManagerTargetView.cshtml");
+            return View("~/Plugins/SalesExecutive/Views/SalesManagerTargets/SalesManagerTargetView.cshtml");
         }
 
 
