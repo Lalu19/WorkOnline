@@ -177,6 +177,7 @@ namespace CloudVOffice.Services.Sales
         {
             var a = _dbContext.SalesAdminTargets
             .Include(s => s.Month)
+			.Include(q => q.Brand)
             .Where(x => x.Deleted == false).ToList();
 
             return a;
