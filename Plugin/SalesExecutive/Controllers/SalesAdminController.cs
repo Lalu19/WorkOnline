@@ -186,11 +186,11 @@ namespace SalesExecutive.Controllers
 
 
 
-			ViewBag.SalesTarget = _salesAdminService.GetAllTargetsBySalesAdmin();
+			//ViewBag.SalesTarget = _salesAdminService.GetAllTargetsBySalesAdmin();
 			// Redirect or return the appropriate view
-			//return Redirect("/SalesExecutive/SalesAdmin/SalesAdminTargetView");
+			return Redirect("/SalesExecutive/SalesAdmin/SalesAdminTargetView");
 
-			return View("~/Plugins/SalesExecutive/Views/SalesAdmins/SalesAdminView.cshtml", ViewBag.SalesTarget);
+			//return View("~/Plugins/SalesExecutive/Views/SalesAdmins/SalesAdminView.cshtml", ViewBag.SalesTarget);
 		}
 
 

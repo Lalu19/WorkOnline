@@ -87,6 +87,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 					item.SalesCaseCost = itemDTO.SalesCaseCost;
 					item.SGST = itemDTO.SGST;
 					item.CGST = itemDTO.CGST;
+					item.SellerMargin = itemDTO.SellerMargin;
 
                     //item.HandlingType = itemDTO.HandlingType;
 
@@ -153,6 +154,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						SGST = item.SGST,
 						HSN = item.HSN,
 						CGST = item.CGST,
+						SellerMargin = item.SellerMargin,
 
                         //HandlingType = item.HandlingType,
                         HandlingTypeId = item.HandlingTypeId,
@@ -294,6 +296,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
                         item.SalesCaseCost = itemDTO.SalesCaseCost;
                         item.SGST = itemDTO.SGST;
                         item.CGST = itemDTO.CGST;
+						item.SellerMargin=itemDTO.SellerMargin;
 
                         //item.HandlingType = itemDTO.HandlingType;
                         item.HandlingTypeId = itemDTO.HandlingTypeId;

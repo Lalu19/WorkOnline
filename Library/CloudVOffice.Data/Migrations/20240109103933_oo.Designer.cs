@@ -4,6 +4,7 @@ using CloudVOffice.Data.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CloudVOffice.Data.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240109103933_oo")]
+    partial class oo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1438,70 +1441,6 @@ namespace CloudVOffice.Data.Migrations
                     b.ToTable("RetailModels");
                 });
 
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Sales.BrandWiseTarget", b =>
-                {
-                    b.Property<long>("BrandWiseTargetId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("BrandWiseTargetId"));
-
-                    b.Property<long?>("BrandId")
-                        .IsRequired()
-                        .HasColumnType("bigint");
-
-                    b.Property<int?>("CategoryId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<long?>("MonthId")
-                        .IsRequired()
-                        .HasColumnType("bigint");
-
-                    b.Property<double?>("MonthlyBrandWiseTarget")
-                        .HasColumnType("float");
-
-                    b.Property<int?>("SectorId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.Property<long?>("UnitId")
-                        .IsRequired()
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("BrandWiseTargetId");
-
-                    b.HasIndex("BrandId");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("MonthId");
-
-                    b.HasIndex("SectorId");
-
-                    b.HasIndex("UnitId");
-
-                    b.ToTable("BrandWiseTargets");
-                });
-
             modelBuilder.Entity("CloudVOffice.Core.Domain.Sales.SalesAdminTarget", b =>
                 {
                     b.Property<long>("SalesAdminTargetId")
@@ -2514,9 +2453,6 @@ namespace CloudVOffice.Data.Migrations
                     b.Property<string>("SectorName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SellerMargin")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ShortName")
                         .HasColumnType("nvarchar(max)");
 
@@ -3238,49 +3174,6 @@ namespace CloudVOffice.Data.Migrations
                     b.Navigation("Application");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Sales.BrandWiseTarget", b =>
-                {
-                    b.HasOne("CloudVOffice.Core.Domain.WareHouses.Brands.Brand", "Brand")
-                        .WithMany()
-                        .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CloudVOffice.Core.Domain.ProductCategories.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CloudVOffice.Core.Domain.WareHouses.Months.Month", "Month")
-                        .WithMany()
-                        .HasForeignKey("MonthId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CloudVOffice.Core.Domain.ProductCategories.Sector", "Sector")
-                        .WithMany()
-                        .HasForeignKey("SectorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CloudVOffice.Core.Domain.WareHouses.UOMs.Unit", "Unit")
-                        .WithMany()
-                        .HasForeignKey("UnitId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Brand");
-
-                    b.Navigation("Category");
-
-                    b.Navigation("Month");
-
-                    b.Navigation("Sector");
-
-                    b.Navigation("Unit");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.Sales.SalesAdminTarget", b =>
