@@ -1,0 +1,14 @@
+{
+  "Group": "WareHouse",
+  "FriendlyName": "Warehouse Management",
+  "SystemName": "Warehouse.Management",
+  "Version": 0.3,
+  "SupportedVersions": [ "0.3" ],
+  "Author": "Appman team",
+  "DisplayOrder": 1,
+  "FileName": "Warehouse.Management.dll",
+  "Description": "Point Of Storage",
+  "InstallationUrl": "/WareHouse/WareHouseInstall/Install",
+  "UnInstallationUrl": "/WareHouse/WareHouseInstall/UnInstall",
+  "Dependency": []
+}

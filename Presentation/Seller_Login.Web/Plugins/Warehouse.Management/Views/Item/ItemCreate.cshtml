@@ -1,0 +1,830 @@
+﻿
+@*@model CloudVOffice.Data.DTO.WareHouses.Items.ItemDTO;*@
+@model CloudVOffice.Data.DTO.WareHouses.ViewModel.ViewForItem ;
+
+
+@using System.Collections;
+@using Newtonsoft.Json;
+@{
+	Layout = "_MainAppLayout";
+	ViewData["Title"] = "Item";
+}
+@addTagHelper *, Syncfusion.EJ2
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<header class="main-heading">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+				<div class="page-icon">
+					<i class="icon-laptop_windows"></i>
+				</div>
+				<div class="page-title">
+					<h5>Ware House</h5>
+					<h6 class="sub-heading">  </h6>
+				</div>
+			</div>
+			<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+				<div class="right-actions">
+					<span class="last-login">  </span>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+
+<div class="main-content">
+	<div class="row gutters">
+		<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
+			<div class="card">
+
+				<div class="card-header">
+
+					<div class="row">
+						<div class="col-md-8">
+							Item
+						</div>
+						<div class="col-md-4 text-right float-right">
+							<a href="/WareHouse/Item/ItemView" class="btn btn-success btn-sm float-right"><i class="icon-list2"></i> List </a>
+
+						</div>
+					</div>
+				</div>
+
+				<form asp-route="WareHouse/Item/ItemCreate" method="post" autocomplete="off" enctype="multipart/form-data" onsubmit="prepareFormData(event)">
+					<div asp-action-summary="ModelOnly" class="message-error"></div>
+
+					<div class="card-body">
+
+						<div class="form-row">
+							<div class="form-group col-md-3">
+								<input asp-for="@Model.CreatedItemDTO.ItemId" type="hidden" />
+							</div>
+						</div>
+
+
+						<div class="form-row">
+
+							<div class="form-group col-md-3">
+								<label for="SectorId" class="form-label">Sector &nbsp</label>
+								<ejs-dropdownlist id="SectorId" name="CreatedItemDTO.SectorId" allowFiltering="true" change="onChangeSector"
+												  dataSource="@(new SelectList(Model.Sectors, "SectorId", "SectorName").Items)"
+												  placeholder="Select Sector" popupHeight="220px" 
+												  value="@Model.CreatedItemDTO.SectorId" autofocus="autofocus">
+									<e-dropdownlist-fields text="SectorName" value="SectorId"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="CreatedItemDTO.SectorId"></span>
+							</div>
+
+
+							<div class="form-group col-md-3">
+								<label for="CategoryId" class="form-label">Category Name</label>
+								<ejs-dropdownlist id="CategoryId" allowFiltering="true" ejs-for="@Model.CreatedItemDTO.CategoryId" change="onChangeCategory" placeholder="Select Category" popupHeight="220px">
+									<e-dropdownlist-fields text="categoryName" value="categoryId"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="CreatedItemDTO.CategoryId"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="SubCategory1Id" class="form-label">SubCategory1 Name</label>
+								<ejs-dropdownlist id="SubCategory1Id" allowFiltering="true" ejs-for="@Model.CreatedItemDTO.SubCategory1Id" change="onChangeSubCategory" placeholder="Select SubCategory1" popupHeight="220px">
+									<e-dropdownlist-fields text="subCategory1Name" value="subCategory1Id"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="CreatedItemDTO.SubCategory1Id"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="SubCategory2Id" class="form-label">SubCategory2 Name</label>
+								<ejs-dropdownlist id="SubCategory2Id" allowFiltering="true" ejs-for="@Model.CreatedItemDTO.SubCategory2Id" placeholder="Select SubCategory2" popupHeight="220px">
+									<e-dropdownlist-fields text="subCategory2Name" value="subCategory2Id"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="CreatedItemDTO.SubCategory2Id"></span>
+							</div>
+
+						</div>
+						
+
+						<div class="form-row">
+							<div class="form-group col-md-3">
+								<label for="WareHouseName" class="form-label">WareHouse Name</label>
+								<ejs-dropdownlist id="WareHouseName" allowFiltering="true" name="CreatedItemDTO.WareHuoseId"
+												  dataSource="@(new SelectList(Model.WareHuose, "WareHuoseId", "WareHouseName").Items)"
+												  placeholder="WareHouse Name " popupHeight="220px"
+												  value="@Model.CreatedItemDTO.WareHuoseId">
+									<e-dropdownlist-fields text="WareHouseName" value="WareHuoseId"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="CreatedItemDTO.WareHuoseId"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="DistrictName" class="form-label">District Name</label>
+								<ejs-dropdownlist id="DistrictName" allowFiltering="true" name="CreatedItemDTO.AddDistrictId"
+												  dataSource="@(new SelectList(Model.AddDistrict, "AddDistrictId", "DistrictName").Items)"
+												  placeholder="District Name " popupHeight="220px"
+												  value="@Model.CreatedItemDTO.AddDistrictId">
+									<e-dropdownlist-fields text="DistrictName" value="AddDistrictId"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="CreatedItemDTO.AddDistrictId"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="EmployeeName" class="form-label">Employee Name</label>
+								<ejs-dropdownlist id="EmployeeName" allowFiltering="true" name="CreatedItemDTO.EmployeeId"
+												  dataSource="@(new SelectList(Model.Employee, "EmployeeId", "EmployeeName").Items)"
+												  placeholder="Employee Name " popupHeight="220px"
+												  value="@Model.CreatedItemDTO.EmployeeId">
+									<e-dropdownlist-fields text="EmployeeName" value="EmployeeId"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="CreatedItemDTO.EmployeeName"></span>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="VendorName" class="form-label">Vendor Name</label>
+								<ejs-dropdownlist id="VendorName" allowFiltering="true" name="CreatedItemDTO.VendorId"
+												  dataSource="@(new SelectList(Model.Vendor, "VendorId", "VendorName").Items)"
+												  placeholder="Vendor Name " popupHeight="220px"
+												  value="@Model.CreatedItemDTO.VendorId">
+									<e-dropdownlist-fields text="VendorName" value="VendorId"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="CreatedItemDTO.VendorId"></span>
+							</div>
+
+						
+						
+
+						</div>
+
+						<div class="form-row">
+
+							<div class="form-group col-md-3">
+
+								<label for="CompanyName" class="form-label">Company Name &nbsp;</label>
+								<input asp-for="@Model.CreatedItemDTO.CompanyName" type="text" id="CompanyName" class="form-control" autofocus="autofocus" placeholder="Company Name" />
+								<span asp-validation-for="CreatedItemDTO.CompanyName"></span>
+							</div>
+
+							@*<div class="form-group col-md-3">
+								<label for="UnitId" class="form-label">Unit&nbsp;</label>
+								<input asp-for="@Model.CreatedItemDTO.UnitId" type="text" id="UnitId" class="form-control" autofocus="autofocus" placeholder="Unit" />
+								<span asp-validation-for="CreatedItemDTO.UnitId"></span>
+							</div>*@
+
+							<div class="form-group col-md-3">
+								<label for="UnitId" class="form-label">Unit</label>
+								<ejs-dropdownlist id="UnitId" allowFiltering="true" name="CreatedItemDTO.UnitId"
+												  dataSource="@(new SelectList(Model.Unit, "UnitId", "ShortName").Items)"
+												  placeholder="Select Unit" popupHeight="220px"
+												  value="@Model.CreatedItemDTO.UnitId">
+									<e-dropdownlist-fields text="ShortName" value="UnitId"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="CreatedItemDTO.UnitId"></span>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="ProductWeight" class="form-label">Product Weight&nbsp;</label>
+								<input asp-for="@Model.CreatedItemDTO.ProductWeight" type="text" class="form-control" autofocus="autofocus" placeholder="ProductWeight" oninput="calculateCaseWeight()" id="ProductWeight" />
+								<span asp-validation-for="CreatedItemDTO.ProductWeight"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="UnitPerCase" class="form-label">Unit Per Case&nbsp;</label>
+								<input asp-for="@Model.CreatedItemDTO.UnitPerCase" type="number" class="form-control" autofocus="autofocus" placeholder="Unit Per Case" oninput="calculateCaseWeight()" id="UnitPerCase" />
+								<span asp-validation-for="CreatedItemDTO.UnitPerCase"></span>
+							</div>
+
+						
+
+						</div>
+
+						<div class="form-row">
+							<div class="form-group col-md-3">
+								<label for="CaseWeight" class="form-label">Case Weight &nbsp;</label>
+								<input asp-for="@Model.CreatedItemDTO.CaseWeight" type="text" class="form-control" autofocus="autofocus" placeholder="Case Weight" id="CaseWeight" readonly />
+								<span asp-validation-for="CreatedItemDTO.CaseWeight"></span>
+							</div>
+
+						@*	<div class="form-group col-md-3">
+
+								<label for="BrandName" class="form-label">Brand Name &nbsp;</label>
+								<input asp-for="@Model.CreatedItemDTO.BrandName" type="text" id="BrandName" class="form-control" autofocus="autofocus" placeholder="Brand Name" />
+								<span asp-validation-for="CreatedItemDTO.BrandName"></span>
+							</div>*@
+
+							<div class="form-group col-md-3">
+								<label for="BrandName" class="form-label">Brand Name</label>
+								<ejs-dropdownlist id="BrandName" allowFiltering="true" name="CreatedItemDTO.BrandId"
+												  dataSource="@(new SelectList(Model.Brand, "BrandId", "DistrictName").Items)"
+												  placeholder="Brand Name " popupHeight="220px"
+												  value="@Model.CreatedItemDTO.BrandId">
+									<e-dropdownlist-fields text="BrandName" value="BrandId"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="CreatedItemDTO.BrandId"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+
+								<label for="ItemName" class="form-label">Item Name&nbsp;<span style="color:red;"><b>*</b></span></label>
+								<input asp-for="@Model.CreatedItemDTO.ItemName" type="text" id="ItemName" class="form-control" autofocus="autofocus" placeholder="Item Name" />
+								<span asp-validation-for="CreatedItemDTO.ItemName"></span>
+								<div asp-validation-summary="ModelOnly" class="message-error"></div>
+							</div>
+
+
+							<div class="form-group col-md-3">
+
+								<label for="ManufactureDate" class="form-label">Manufacture Date&nbsp;</label>
+								<input asp-for="@Model.CreatedItemDTO.ManufactureDate" type="date" id="ManufactureDate" class="form-control" autofocus="autofocus" placeholder="Manufacture Date" />
+								<span asp-validation-for="CreatedItemDTO.ManufactureDate"></span>
+							</div>
+
+						
+						</div>
+
+						<div class="form-row">
+							<div class="form-group col-md-3">
+
+								<label for="ExpiryDate" class="form-label">Expiry Date&nbsp;</label>
+								<input asp-for="@Model.CreatedItemDTO.ExpiryDate" type="date" id="ExpiryDate" class="form-control" autofocus="autofocus" placeholder="Expiry Date" />
+								<span asp-validation-for="CreatedItemDTO.ExpiryDate"></span>
+							</div>
+
+
+							<div class="form-group col-md-3">
+
+								<label for="ReceivedDate" class="form-label">Received Date&nbsp;</label>
+								<input asp-for="@Model.CreatedItemDTO.ReceivedDate" type="date" id="ReceivedDate" class="form-control" autofocus="autofocus" placeholder="Received Date" />
+								<span asp-validation-for="CreatedItemDTO.ReceivedDate"></span>
+							</div>
+
+
+							<div class="form-group col-md-3">
+								<label for="HandlingType" class="form-label">Handling Type</label>
+								<ejs-dropdownlist id="HandlingType" allowFiltering="true" name="CreatedItemDTO.HandlingTypeId"
+												  dataSource="@(new SelectList(Model.HandlingTypes, "HandlingTypeId", "HandlingTypeName").Items)"
+												  placeholder="Handling Type " popupHeight="220px"
+												  value="@Model.CreatedItemDTO.HandlingTypeId">
+									<e-dropdownlist-fields text="HandlingTypeName" value="HandlingTypeId"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="CreatedItemDTO.HandlingTypeId"></span>
+							</div>
+							<div class="form-group col-md-3">
+
+								<label for="InvoiceNo" class="form-label">Invoice No &nbsp;</label>
+								<input asp-for="@Model.CreatedItemDTO.InvoiceNo" type="text" id="InvoiceNo" class="form-control" autofocus="autofocus" placeholder="Invoice No" />
+								<span asp-validation-for="CreatedItemDTO.InvoiceNo"></span>
+							</div>
+
+							
+							
+							
+						</div>
+
+						<div class="form-row">
+							<div class="form-group col-md-3">
+
+								<label for="MRP" class="form-label">MRP &nbsp;</label>
+								<input asp-for="@Model.CreatedItemDTO.MRP" type="number" id="MRP" class="form-control" autofocus="autofocus" placeholder="MRP" />
+								<span asp-validation-for="CreatedItemDTO.MRP"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+
+								<label for="MRPCaseCost" class="form-label">MRP Case Cost &nbsp;</label>
+								<input asp-for="@Model.CreatedItemDTO.MRPCaseCost" type="number" id="MRPCaseCost" class="form-control" autofocus="autofocus" placeholder="MRP Case Cost" readonly />
+								<span asp-validation-for="CreatedItemDTO.MRPCaseCost"></span>
+							</div>
+							<div class="form-group col-md-3">
+
+								<label for="PurchaseCost" class="form-label">Purchase Cost &nbsp;</label>
+								<input asp-for="@Model.CreatedItemDTO.PurchaseCost" type="number" id="PurchaseCost" class="form-control" autofocus="autofocus" placeholder="Purchase Cost" />
+								<span asp-validation-for="CreatedItemDTO.PurchaseCost"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+
+								<label for="PurchaseCaseCost" class="form-label">Purchase Case Cost &nbsp;</label>
+								<input asp-for="@Model.CreatedItemDTO.PurchaseCaseCost" type="number" id="PurchaseCaseCost" class="form-control" autofocus="autofocus" placeholder="Purchase Case Cost" readonly />
+								<span asp-validation-for="CreatedItemDTO.PurchaseCaseCost"></span>
+							</div>
+
+							
+
+						</div>
+
+						<div class="form-row">
+							<div class="form-group col-md-3">
+
+								<label for="SalesCost" class="form-label">Sales Cost &nbsp;</label>
+								<input asp-for="@Model.CreatedItemDTO.SalesCost" type="number" id="SalesCost" class="form-control" autofocus="autofocus" placeholder="Sales Cost" />
+								<span asp-validation-for="CreatedItemDTO.SalesCost"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+
+								<label for="SalesCaseCost" class="form-label">Sales Case Cost &nbsp;</label>
+								<input asp-for="@Model.CreatedItemDTO.SalesCaseCost" type="number" id="SalesCaseCost" class="form-control" autofocus="autofocus" placeholder="Sales Case Cost" readonly />
+								<span asp-validation-for="CreatedItemDTO.SalesCaseCost"></span>
+							</div>
+							@*<div class="form-group col-md-3">
+								<label for="CGST" class="form-label">CGST</label>
+								<ejs-dropdownlist id="GSTValue" allowFiltering="true" name="CreatedItemDTO.CGST"
+												  dataSource="@(new SelectList(Model.GST, "GSTId", "GSTValue").Items)"
+												  placeholder="Select CGST" popupHeight="220px" name="CGST"
+												  value="@Model.CreatedItemDTO.CGST">
+									<e-dropdownlist-fields text="GSTValue" value="GSTId"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="CreatedItemDTO.CGST"></span>
+							</div>*@
+							<div class="form-group col-md-3">
+
+								<label for="CGST" class="form-label">CGST &nbsp;</label>
+								<input asp-for="@Model.CreatedItemDTO.CGST" type="number" id="CGST" class="form-control" autofocus="autofocus" placeholder="CGST" readonly />
+								<span asp-validation-for="CreatedItemDTO.CGST"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+
+								<label for="SGST" class="form-label">SGST &nbsp;</label>
+								<input asp-for="@Model.CreatedItemDTO.SGST" type="number" id="SGST" class="form-control" autofocus="autofocus" placeholder="SGST" readonly />
+								<span asp-validation-for="CreatedItemDTO.SGST"></span>
+							</div>
+
+						</div>
+
+						<div class="form-row">
+							<div class="form-group col-md-3">
+
+								<label for="HSN" class="form-label">HSN &nbsp;</label>
+								<input asp-for="@Model.CreatedItemDTO.HSN" type="text" id="HSN" class="form-control" autofocus="autofocus" placeholder="HSN" readonly />
+								<span asp-validation-for="CreatedItemDTO.HSN"></span>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="Thumbnail" class="form-label">Thumbnail</label>
+								<input asp-for="@Model.CreatedItemDTO.ThumbnailUp" type="file" id="ThumbnailUp" class="form-control" autofocus="autofocus" placeholder="Upload Image" />
+								<span asp-validation-for="CreatedItemDTO.Thumbnail"></span>
+								@{
+									if (Model.CreatedItemDTO.Thumbnail != null)
+									{
+										<img src="/uploads/itemimage/@Model.CreatedItemDTO.Thumbnail" style="height:100px; width:100px" />
+										<input type="hidden" asp-for="@Model.CreatedItemDTO.Thumbnail" value="@Model.CreatedItemDTO.Thumbnail">
+									}
+								}
+							</div>
+							<div class="form-group col-md-3">
+								<label for="Images" class="form-label">Images</label>
+								<input asp-for="@Model.CreatedItemDTO.ImagesUp" type="file" id="ImagesUp" class="form-control" multiple />
+								<span asp-validation-for="CreatedItemDTO.Images"></span>
+
+								@if (Model.CreatedItemDTO.Images != null && Model.CreatedItemDTO.Images.Count > 0)
+								{
+									for (int i = 0; i < Model.CreatedItemDTO.Images.Count; i++)
+									{
+										<img src="/uploads/itemimage/@Model.CreatedItemDTO.Images[i]" style="height:100px; width:100px" />
+										<input type="hidden" value="@Model.CreatedItemDTO.Images[i]" />
+									}
+								}
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="Barcode" class="form-label">Barcode &nbsp;</label>
+								<input asp-for="@Model.CreatedItemDTO.Barcode" type="text" class="form-control" autofocus="autofocus" placeholder="Barcode" readonly />
+								<span asp-validation-for="CreatedItemDTO.Barcode"></span>
+
+								@if (!string.IsNullOrEmpty(Model.CreatedItemDTO.Barcode))
+								{
+									<!-- Display the barcode image -->
+									<img src="data:image/png;base64,@(Model.CreatedItemDTO.Barcode)" alt="Barcode Image" />
+								}
+							</div>
+						
+
+						@*	<div class="form-group col-md-3">
+
+								<label for="IsActive" class="form-label">Is Active</label>
+								<br>
+								<input asp-for="@Model.CreatedItemDTO.IsActive" type="checkbox" />
+								<span asp-validation-for="CreatedItemDTO.IsActive"></span>
+							</div>*@
+
+						</div>
+						<div class="form-row">
+					    	<div class="form-group col-md-3">
+
+							<label for="BarCodeNotAvailable" class="form-label">Generate Barcode</label>
+							<br>
+							<input asp-for="@Model.CreatedItemDTO.BarCodeNotAvailable" type="checkbox" id="BarCodeNotAvailable" />
+							<span asp-validation-for="CreatedItemDTO.BarCodeNotAvailable"></span>
+						</div>
+						</div>
+						<br /><br />
+
+						<div class="form-row">
+							<div class="form-group col-md-3">
+								<button id="saveButton" type="submit" name="btnSave" value="btnSave" class="btn btn-primary">Save</button>
+							</div>
+
+
+							<div class="form-group col-md-3">
+								<button id="reviewButton" type="button" class="btn btn-info" style="margin-top: 5px;">Review</button>
+							</div>
+
+							<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="reviewModalLabel">Review Data</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body" id="reviewModalBody">
+											<!-- Review data will be displayed here -->
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							@*<div class="form-group col-md-3">
+								@if (Model != null && Model.CreatedItemDTO.ItemId.HasValue)
+								{
+									<!-- Display the ItemId if available -->
+									<p>ItemId: @Model.CreatedItemDTO.ItemId</p>
+
+									<!-- Set the value of the button to ItemId if available -->
+									<button id="generateBarcodeButton" type="submit" class="btn btn-secondary" value="@Model.CreatedItemDTO.ItemId" name="btnGenerateBarcode" style="margin-top: 5px;">Generate BarCode</button>
+								}
+								else
+								{
+									<!-- Default value for the button if ItemId is not available -->
+									<button id="generateBarcodeButton" type="submit" class="btn btn-secondary" value="btnGenerateBarcode" name="btnGenerateBarcode" style="margin-top: 5px;">Generate BarCode</button>
+								}
+							</div>*@
+
+						</div>
+					</div>
+
+				</form>
+
+			</div>
+
+		</div>
+	</div>
+
+</div>
+
+
+@{
+
+    if (TempData["msg"] != null)
+    {
+        <script type="text/javascript">
+
+
+			var message = "@TempData["msg"]";
+			if (message == "Kindly Save the data first") {
+				sweetAlert({
+					html: true,
+					icon: "danger",
+					title: "Process Error",
+					text: "Kindly Save the data first.",
+					type: "danger"
+				});
+			}
+
+		</script>
+	}
+}
+
+<script>
+	function onChangeSector(args) {
+		$.ajax({
+			type: "GET",
+			url: "/WareHouse/Category/GetCategoryBySectorId",
+			data: { sectorId: args.value },
+			contentType: "application/json",
+			dataType: "json",
+			success: function (result) {
+				console.log(result);
+				var categoryDropDown = document.getElementById("CategoryId").ej2_instances[0];
+				categoryDropDown.dataSource = result;
+				categoryDropDown.dataBind();
+
+				categoryDropDown.value = null;
+			},
+			error: function () {
+
+			}
+		});
+	}
+</script>
+
+<script>
+	function onChangeCategory(args) {
+		$.ajax({
+			type: "GET",
+			url: "/WareHouse/SubCategory1/GetSubCategoryByCategoeyId",
+			data: { categoryId: args.value },
+			contentType: "application/json",
+			dataType: "json",
+			success: function (result) {
+				console.log(result);
+				var subcategoryDropDown = document.getElementById("SubCategory1Id").ej2_instances[0];
+				subcategoryDropDown.dataSource = result;
+				subcategoryDropDown.dataBind();
+
+				subcategoryDropDown.value = null;
+			},
+			error: function () {
+
+			}
+		});
+	}
+</script>
+
+@*<script>
+	function onChangeSubCategory(args) {
+		$.ajax({
+			type: "GET",
+			url: "/WareHouse/SubCategory2/GetSubCategory2BySubCategory1Id",
+			data: { subCategory1Id: args.value },
+			contentType: "application/json",
+			dataType: "json",
+			success: function (result) {
+				console.log(result);
+				var subcategory2DropDown = document.getElementById("SubCategory2Id").ej2_instances[0];
+				subcategory2DropDown.dataSource = result;
+				subcategory2DropDown.dataBind();
+
+				subcategory2DropDown.value = null;
+			},
+			error: function () {
+
+			}
+		});
+	}
+</script>*@
+
+<script>
+	function onChangeSubCategory(args) {
+		// First API call
+		$.ajax({
+			type: "GET",
+			url: "/WareHouse/SubCategory1/GetSubCategory1ById",
+			data: { subCategory1Id: args.value },
+			contentType: "application/json",
+			dataType: "json",
+			success: function (result) {
+				console.log(result);
+
+				var hsnTextbox = document.getElementById("HSN");
+				hsnTextbox.value = result.hsn;
+
+				// Third API call
+				$.ajax({
+					type: "GET",
+					url: "/WareHouse/GST/GetGSTByGSTId",
+					data: { gstId: result.gstId }, // Adjust the parameter accordingly
+					contentType: "application/json",
+					dataType: "json",
+					success: function (gstResult) {
+						console.log(gstResult);
+						var cgstTextbox = document.getElementById("CGST");
+						cgstTextbox.value = (gstResult.gstValue) / 2;
+
+						var sgstTextbox = document.getElementById("SGST");
+						sgstTextbox.value = (gstResult.gstValue) / 2;
+
+					},
+					error: function () {
+						// Handle error for the third API call
+					}
+				});
+
+				// Second API call
+				$.ajax({
+					type: "GET",
+					url: "/WareHouse/SubCategory2/GetSubCategory2BySubCategory1Id",
+					data: { subCategory1Id: args.value },
+					contentType: "application/json",
+					dataType: "json",
+					success: function (result) {
+						console.log(result);
+						var subcategory2DropDown = document.getElementById("SubCategory2Id").ej2_instances[0];
+						subcategory2DropDown.dataSource = result;
+						subcategory2DropDown.dataBind();
+
+						subcategory2DropDown.value = null;
+					},
+					error: function () {
+						// Handle error for the second API call
+					}
+				});
+
+			},
+			error: function () {
+				// Handle error for the first API call
+			}
+		});
+	}
+</script>
+
+<script>
+	function calculateCaseWeight() {
+		var unitOfMeasurementValue = parseFloat(document.getElementById('ProductWeight').value) || 0;
+		var unitPerCaseValue = parseFloat(document.getElementById('UnitPerCase').value) || 0;
+		var caseWeight = unitOfMeasurementValue * unitPerCaseValue;
+
+		document.getElementById('CaseWeight').value = caseWeight.toFixed(2); // Adjust the number of decimal places as needed
+	}
+</script>
+
+<!-- Add this script block after the existing script block in your HTML -->
+
+<script>
+	function calculateCaseCosts() {
+		var unitPerCaseValue = parseFloat(document.getElementById('UnitPerCase').value) || 0;
+
+		// MRPCaseCost calculation
+		var MRPValue = parseFloat(document.getElementById('MRP').value) || 0;
+		var MRPCaseCost = unitPerCaseValue * MRPValue;
+		document.getElementById('MRPCaseCost').value = MRPCaseCost.toFixed(2);
+
+		// PurchaseCaseCost calculation
+		var purchaseCostValue = parseFloat(document.getElementById('PurchaseCost').value) || 0;
+		var purchaseCaseCost = unitPerCaseValue * purchaseCostValue;
+		document.getElementById('PurchaseCaseCost').value = purchaseCaseCost.toFixed(2);
+
+		// SalesCaseCost calculation
+		var salesCostValue = parseFloat(document.getElementById('SalesCost').value) || 0;
+		var salesCaseCost = unitPerCaseValue * salesCostValue;
+		document.getElementById('SalesCaseCost').value = salesCaseCost.toFixed(2);
+	}
+
+	// Call the function whenever UnitPerCase, MRP, PurchaseCost, or SalesCost changes
+	document.getElementById('UnitPerCase').addEventListener('input', calculateCaseCosts);
+	document.getElementById('MRP').addEventListener('input', calculateCaseCosts);
+	document.getElementById('PurchaseCost').addEventListener('input', calculateCaseCosts);
+	document.getElementById('SalesCost').addEventListener('input', calculateCaseCosts);
+</script>
+
+@section scripts{
+	@*<script>
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					$('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+					$('#imagePreview').hide();
+					$('#imagePreview').fadeIn(650);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+		$("#ImagesUp").change(function () {
+			readURL(this);
+		
+			});
+		});
+	</script>*@
+
+	<script>
+		function readThumbnailURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					$('#thumbnailPreview').attr('src', e.target.result);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+
+		function readImagesURL(input) {
+			if (input.files && input.files.length > 0) {
+				for (var i = 0; i < input.files.length; i++) {
+					var reader = new FileReader();
+					reader.onload = function (e) {
+						// Create an img element for each image and append it to a container
+						var img = $('<img>').attr('src', e.target.result).css({ 'height': '100px', 'width': '100px' });
+						$('#imagesPreview').append(img);
+					}
+					reader.readAsDataURL(input.files[i]);
+				}
+			}
+		}
+
+		$("#ThumbnailUp").change(function () {
+			readThumbnailURL(this);
+		});
+
+		$("#ImagesUp").change(function () {
+			readImagesURL(this);
+		});
+
+
+		//$(document).ready(function () {
+		//	// Function to update the button text and visibility based on the checkbox state
+		//	function updateButtonsVisibility() {
+		//		var checkBox = $('#BarCodeNotAvailable');
+		//		var saveButton = $('#saveButton');
+		//		var generateBarcodeButton = $('#generateBarcodeButton');
+
+		//		if (checkBox.prop('checked')) {
+		//			saveButton.text('Save');
+		//			generateBarcodeButton.show();
+		//		} else {
+		//			saveButton.text('Save');
+		//			generateBarcodeButton.hide();
+		//		}
+		//	}
+
+		//	// Attach change event handler to the checkbox
+		//	$('#BarCodeNotAvailable').change(function () {
+		//		updateButtonsVisibility();
+		//	});
+
+		//	// Initial call to set the initial button text and visibility
+		//	updateButtonsVisibility();
+		//});
+
+	</script>
+
+
+
+	<script>
+		// Function to gather filled data and display in a popup
+		function reviewData() {
+			// Collect data from form fields
+			var sectorName = $("#SectorId").val() || '';
+			var categoryName = $("#CategoryId").val() || '';
+			var subCategory1Name = $("#SubCategory1Id").val() || '';
+			var subCategory2Name = $("#SubCategory2Id").val() || '';
+			var WareHouseName = $("#WareHouseName").val() || '';
+			var DistrictName = $("#DistrictName").val() || '';
+			var VendorName = $("#VendorName").val() || '';
+			var EmployeeName = $("#EmployeeName").val() || '';
+			var itemName = $("#ItemName").val() || '';
+			var companyName = $("#CompanyName").val() || '';
+			var brandName = $("#BrandName").val() || '';
+			var productWeight = $("#ProductWeight ").val() || '';
+			var unitPerCase = $("#UnitPerCase").val() || '';
+			var caseWeight = $("#CaseWeight").val() || '';
+			var manufactureDate = $("#ManufactureDate").val() || '';
+			var expiryDate = $("#ExpiryDate").val() || '';
+			var handlingType = $("#HandlingType").val() || '';
+			var mrp = $("#MRP").val() || '';
+			var mRPCaseCost = $("#MRPCaseCost").val() || '';
+			var purchaseCost = $("#PurchaseCost").val() || '';
+			var purchaseCaseCost = $("#PurchaseCaseCost").val() || '';
+			var salesCost = $("#SalesCost").val() || '';
+			var salesCaseCost = $("#SalesCaseCost").val() || '';
+			var cgst = $("#CGST").val() || '';
+			var sgst = $("#SGST").val() || '';
+			var hsn = $("#HSN").val() || '';
+			
+			// Create HTML for displaying in the modal
+			var reviewHtml = "<b>Sector Name:</b> " + sectorName + "<br>";
+			reviewHtml += "<b>Category Name:</b> " + categoryName + "<br>";
+			reviewHtml += "<b>SubCategory1 Name:</b> " + subCategory1Name + "<br>";
+			reviewHtml += "<b>SubCategory2 Name:</b> " + subCategory2Name + "<br>";
+			reviewHtml += "<b>WareHouse Name:</b> " + WareHouseName + "<br>";
+			reviewHtml += "<b>District Name:</b> " + DistrictName + "<br>";
+			reviewHtml += "<b>Vendor Name:</b> " + VendorName + "<br>";
+			reviewHtml += "<b>Employee Name:</b> " + EmployeeName + "<br>";
+			reviewHtml += "<b>ItemName:</b> " + itemName + "<br>";
+			reviewHtml += "<b>CompanyName:</b> " + companyName + "<br>";
+			reviewHtml += "<b>BrandName:</b> " + brandName + "<br>";
+			reviewHtml += "<b>ProductWeight:</b> " + productWeight + "<br>";
+			reviewHtml += "<b>UnitPerCase:</b> " + unitPerCase + "<br>";
+			reviewHtml += "<b>CaseWeight:</b> " + caseWeight + "<br>";
+			reviewHtml += "<b>ManufactureDate:</b> " + manufactureDate + "<br>";
+			reviewHtml += "<b>ExpiryDate:</b> " + expiryDate + "<br>";
+			reviewHtml += "<b>HandlingType:</b> " + handlingType + "<br>";
+			reviewHtml += "<b>MRP:</b> " + mrp + "<br>";
+			reviewHtml += "<b>MRPCaseCost:</b> " + mRPCaseCost + "<br>";
+			reviewHtml += "<b>PurchaseCost:</b> " + purchaseCost + "<br>";
+			reviewHtml += "<b>PurchaseCaseCost:</b> " + purchaseCaseCost + "<br>";
+			reviewHtml += "<b>SalesCost:</b> " + salesCost + "<br>";
+			reviewHtml += "<b>SalesCaseCost:</b> " + salesCaseCost + "<br>";
+			reviewHtml += "<b>CGST:</b> " + cgst + "<br>";
+			reviewHtml += "<b>SGST:</b> " + sgst + "<br>";
+			reviewHtml += "<b>HSN:</b> " + hsn + "<br>";
+		
+
+			// Display the data in the modal
+			$("#reviewModalBody").html(reviewHtml);
+
+			// Show the modal
+			$("#reviewModal").modal("show");
+		}
+
+		// Attach click event handler to the "Review" button
+		$('#reviewButton').click(function () {
+			reviewData();
+		});
+	</script>
+
+
+}

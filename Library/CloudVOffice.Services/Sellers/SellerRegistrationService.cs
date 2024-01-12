@@ -164,5 +164,23 @@ namespace CloudVOffice.Services.Sellers
                 throw;
             }
         }
+
+		public async Task<SellerRegistration> GetSellerLoginAsync(string UserMobileNumber, string Password)
+		{
+			//string hashedPassword = EncryptPassword(Password, UserMobileNumber);
+			var SellerUser = _dbContext.SellerRegistrations
+
+				.Where(x => x.PrimaryPhone == UserMobileNumber && x.Password == Password).SingleOrDefault();
+
+			return SellerUser;
+		}
+
+        public async Task<SellerRegistration> GetSellerAsyncss(string UserMobileNumber)
+        {
+            var SellerUser = _dbContext.SellerRegistrations
+
+               .Where(x => x.PrimaryPhone == UserMobileNumber).SingleOrDefault();
+            return SellerUser;
+        }
     }
 }

@@ -1,0 +1,336 @@
+﻿@model CloudVOffice.Data.DTO.WareHouses.Items.DamageItemForFarmingDTO;
+@using System.Collections;
+@using Newtonsoft.Json;
+@{
+	Layout = "_MainAppLayout";
+	ViewData["Title"] = "DamageItem For Farming";
+}
+@addTagHelper *, Syncfusion.EJ2
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<header class="main-heading">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+				<div class="page-icon">
+					<i class="icon-laptop_windows"></i>
+				</div>
+				<div class="page-title">
+					<h5>Ware House</h5>
+					<h6 class="sub-heading">  </h6>
+				</div>
+			</div>
+			<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+				<div class="right-actions">
+					<span class="last-login">  </span>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+
+<div class="main-content">
+	<div class="row gutters">
+		<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
+			<div class="card">
+				<form asp-route="WareHouse/DamageItemForFarming/DamageItemForFarmingCreate" method="post" autocomplete="off" enctype="multipart/form-data">
+				    <div class="card-header">
+
+					<div class="row">
+						<div class="col-md-8">
+							Damage Product For Farming
+						</div>
+						<div class="col-md-4 text-right float-right">
+							<a href="/WareHouse/DamageItemForFarming/DamageItemForFarmingView" class="btn btn-success btn-sm float-right"><i class="icon-list2"></i> List </a>
+
+						</div>
+					</div>
+				</div>
+
+					<div class="card-body">
+
+						<div class="form-row">
+
+							<input asp-for="@Model.DamageItemForFarmingId" type="hidden" />
+
+							<div class="form-group col-md-3">
+								<label for="ItemMasterForFarmingId" class="form-label">ItemMasterForFarming Id</label>
+								<ejs-dropdownlist id="ItemMasterForFarmingId" allowFiltering="true" change="onChangeItemMasterFarming" ejs-for="@Model.ItemMasterForFarmingId" filtering="onItemMasterFarmingfiltering" dataSource="@(new SelectList((IEnumerable)ViewBag.ItemMasterFarmingList, "ItemMasterForFarmingId", "ItemMasterForFarmingId").Items)" placeholder="Select ItemMasterForFarmingId" popupHeight="220px">
+									<e-dropdownlist-fields text="ItemMasterForFarmingId" value="ItemMasterForFarmingId"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="ItemMasterForFarmingId"></span>
+							</div>
+
+							@*<div class="form-group col-md-3">
+								<label for="ItemMasterForFarmingId" class="form-label">ItemMasterForFarmingId &nbsp;<span style="color:red;"><b>*</b></span></label>
+								<input asp-for="@Model.ItemMasterForFarmingId" type="text" class="form-control" autofocus="autofocus" placeholder="ItemMasterForFarmingId" />
+								<span asp-validation-for="ItemMasterForFarmingId"></span>
+							</div>*@
+
+							<div class="form-group col-md-3">
+								<label for="WareHouseName" class="form-label">WareHouse Name&nbsp;</label>
+								<input asp-for="@Model.WareHouseName" type="text" id="WareHouseName" class="form-control" autofocus="autofocus" placeholder="WareHouse Name" readonly />
+								<span asp-validation-for="WareHouseName"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="EmployeeName" class="form-label">Employee Name&nbsp;</label>
+								<input asp-for="@Model.EmployeeName" type="text" id="EmployeeName" class="form-control" autofocus="autofocus" placeholder="Employee Name" readonly />
+								<span asp-validation-for="EmployeeName"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="VendorName" class="form-label">Vendor Name&nbsp;</label>
+								<input asp-for="@Model.VendorName" type="text" id="VendorName" class="form-control" autofocus="autofocus" placeholder="Vendor Name" readonly />
+								<span asp-validation-for="VendorName"></span>
+							</div>
+							
+						</div>
+
+						<div class="form-row">
+
+							<div class="form-group col-md-3">
+								<label for="DistrictName" class="form-label">District Name&nbsp;</label>
+								<input asp-for="@Model.DistrictName" type="text" id="DistrictName" class="form-control" autofocus="autofocus" placeholder="District Name" readonly />
+								<span asp-validation-for="DistrictName"></span>
+							</div>
+
+							@*<div class="form-group col-md-3">
+								<label for="UnitId" class="form-label">Unit Id&nbsp;</label>
+								<input asp-for="@Model.UnitId" type="text" id="UnitId" class="form-control" autofocus="autofocus" placeholder="UnitId" readonly />
+								<span asp-validation-for="UnitId"></span>
+							</div>*@
+
+							<div class="form-group col-md-3">
+								<label for="ShortName" class="form-label">Unit Name</label>
+								<input asp-for="@Model.ShortName" type="text" id="ShortName" class="form-control" autofocus="autofocus" placeholder="ShortName" />
+								<span asp-validation-for="ShortName"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="ProductName" class="form-label">Product Name&nbsp;</label>
+								<input asp-for="@Model.ProductName" type="text" id="ProductName" class="form-control" autofocus="autofocus" placeholder="ProductName" readonly />
+								<span asp-validation-for="ProductName"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="QtyPerKg" class="form-label">QtyPerKg&nbsp;</label>
+								<input asp-for="@Model.QtyPerKg" type="number" id="QtyPerKg" class="form-control" autofocus="autofocus" placeholder="QtyPerKg" readonly />
+								<span asp-validation-for="QtyPerKg"></span>
+							</div>
+
+						</div>
+
+						<div class="form-row">
+
+							<div class="form-group col-md-3">
+								<label for="Price" class="form-label">Price&nbsp;</label>
+								<input asp-for="@Model.Price" type="number" id="Price" class="form-control" autofocus="autofocus" placeholder="Price" readonly />
+								<span asp-validation-for="Price"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="MinQty" class="form-label">MinQty&nbsp;</label>
+								<input asp-for="@Model.MinQty" type="number" id="MinQty" class="form-control" autofocus="autofocus" placeholder="Min Qty" readonly />
+								<span asp-validation-for="MinQty"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="GST" class="form-label">GST&nbsp;</label>
+								<input asp-for="@Model.GST" type="number" id="GST" class="form-control" autofocus="autofocus" placeholder="GST" readonly />
+								<span asp-validation-for="GST"></span> 
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="HSN" class="form-label">HSN&nbsp;</label>
+								<input asp-for="@Model.HSN" type="text" id="HSN" class="form-control" autofocus="autofocus" placeholder="HSN" readonly />
+								<span asp-validation-for="HSN"></span>
+							</div>
+
+						</div>
+
+						<div class="form-row">
+
+							<div class="form-group col-md-3">
+								<label for="HarvestDate" class="form-label">Harvest Date&nbsp;</label>
+								<input asp-for="@Model.HarvestDate" type="date" id="HarvestDate" class="form-control" autofocus="autofocus" placeholder="HarvestDate" readonly />
+								<span asp-validation-for="HarvestDate"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="ReceivedDate" class="form-label">Received Date&nbsp;</label>
+								<input asp-for="@Model.ReceivedDate" type="date" id="ReceivedDate" class="form-control" autofocus="autofocus" placeholder="Received Date" readonly />
+								<span asp-validation-for="ReceivedDate"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="InvoiceNo" class="form-label">Invoice No&nbsp;</label>
+								<input asp-for="@Model.InvoiceNo" type="text" id="InvoiceNo" class="form-control" autofocus="autofocus" placeholder="Invoice No" readonly />
+								<span asp-validation-for="InvoiceNo"></span>
+							</div>
+
+						</div>
+
+
+						<div class="form-row">
+
+							<div class="form-group col-md-3">
+								<label for="DamageUnits" class="form-label">Damage Units&nbsp;</label>
+								<input asp-for="@Model.DamageUnits" type="number" id="DamageUnits" class="form-control" autofocus="autofocus" placeholder="Damage Units" />
+								<span asp-validation-for="DamageUnits"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="DamagePic" class="form-label">Damage Picture</label>
+								<input asp-for="@Model.DamagePicUp" type="file" id="DamagePicUp" class="form-control" autofocus="autofocus" placeholder="DamagePic" />
+								<span asp-validation-for="DamagePic"></span>
+								@{
+									if (Model.DamagePic != null)
+									{
+										<img src="/uploads/damagefarmigproduct/@Model.DamagePic" style="height:100px; width:100px" />
+										<input type="hidden" asp-for="@Model.DamagePic">
+									}
+								}
+							</div>
+
+							<div class="form-group col-md-6">
+								<label for="Reason" class="form-label">Reason&nbsp;</label>
+								<textarea asp-for="@Model.Reason" id="Reason" class="form-control" autofocus="autofocus" placeholder="Reason"></textarea>
+								<span asp-validation-for="Reason"></span>
+							</div>
+
+
+							@*<div class="form-group col-md-6">
+								<label for="Reason" class="form-label">Reason&nbsp;</label>
+								<input asp-for="@Model.Reason" type="text" id="Reason" class="form-control" autofocus="autofocus" placeholder="Reason" />
+								<span asp-validation-for="Reason"></span>
+							</div>*@
+
+						</div>
+
+						<div asp-validation-summary="ModelOnly" class="message-error"></div>
+
+					</div>
+
+
+					<div class="card-body">
+
+						<div class="col-lg-2 col-md-2 col-sm-12">
+							<button type="submit" class="btn btn-primary">Save</button>
+						</div>
+					</div>
+
+				</form>
+
+			</div>
+
+		</div>
+	</div>
+
+</div>
+
+
+<script>
+	function onChangeItemMasterFarming(args) {
+        $.ajax({
+            type: "GET",
+			url: "/WareHouse/ItemMasterForFarming/GetItemMasterFarmingById",
+			data: { itemMasterForFarmingId: args.value },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+
+                var gstTextbox = document.getElementById("GST");
+                var hsnTextbox = document.getElementById("HSN");
+				var productTextbox = document.getElementById("ProductName");
+				var priceTextbox = document.getElementById("Price");
+				var unitTextbox = document.getElementById("ShortName");
+				var qtyPerKgTextbox = document.getElementById("QtyPerKg");
+				var minQtyTextbox = document.getElementById("MinQty");
+				var invoiceNoTextbox = document.getElementById("InvoiceNo");
+
+
+				var wareHouseTextbox = document.getElementById("WareHouseName");
+				var employeeTextbox = document.getElementById("EmployeeName");
+				var venderTextbox = document.getElementById("VendorName");
+				var districtTextbox = document.getElementById("DistrictName");
+			
+
+                gstTextbox.value = result.gst;
+                hsnTextbox.value = result.hsn;
+				productTextbox.value = result.productName;
+				priceTextbox.value = result.price;
+				qtyPerKgTextbox.value = result.qtyPerKg;
+				minQtyTextbox.value = result.minQty;
+				invoiceNoTextbox.value = result.invoiceNo;
+
+
+				//wareHouseTextbox.value = result.wareHuoseId;
+				//employeeTextbox.value = result.employeeId;
+				//venderTextbox.value = result.vendorId;
+				//districtTextbox.value = result.addDistrictId;
+				//unitTextbox.value = result.unitId;
+
+				wareHouseTextbox.value = result.wareHouseName;
+				employeeTextbox.value = result.employeeName;
+				venderTextbox.value = result.vendorName;
+				districtTextbox.value = result.districtName;
+				unitTextbox.value = result.shortName;
+
+
+				var receivedDate = result.receivedDate;
+				console.log("Received Date:", receivedDate);
+				var formattedReceivedDate = receivedDate.split('T')[0];
+				console.log("Formatted Date:", formattedReceivedDate);
+				var receivedDateInput = document.getElementById("ReceivedDate");
+				receivedDateInput.value = formattedReceivedDate;
+
+
+				var harvestDate = result.harvestDate;
+				console.log("Harvest Date:", harvestDate);
+				var formattedHarvestDate = harvestDate.split('T')[0];
+				console.log("Formatted Date:", formattedHarvestDate);
+				var harvestDateInput = document.getElementById("HarvestDate");
+				harvestDateInput.value = formattedHarvestDate;
+			
+				
+
+            },
+            error: function () {
+
+            }
+        });
+    }
+</script>
+
+
+
+<script>
+	function onItemMasterFarmingfiltering(e) {
+		var query = new ej.data.Query();
+		query = (e.text !== '') ? query.where('ItemMasterForFarmingId', 'startswith', e.text, true) : query;
+		e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.ItemMasterFarmingList)), query);
+	}
+</script>
+
+@section scripts{
+	<script>
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					$('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+					$('#imagePreview').hide();
+					$('#imagePreview').fadeIn(650);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+		$("#DamagePicUp").change(function () {
+			readURL(this);
+		});
+	</script>
+}
