@@ -42,7 +42,7 @@ namespace CloudVOffice.Services.Sales
                             CategoryId = brandWiseTargetDTO.CategoryId,
                             BrandId = brandWiseTargetDTO.BrandId,
                             MonthId = brandWiseTargetDTO.MonthId,
-                            UnitId=brandWiseTargetDTO.UnitId,
+                            //UnitId=brandWiseTargetDTO.UnitId,
                             MonthlyBrandWiseTarget = brandWiseTargetDTO.MonthlyBrandWiseTarget,
                             CreatedBy = brandWiseTargetDTO.CreatedBy,
                         };
@@ -86,7 +86,7 @@ namespace CloudVOffice.Services.Sales
                         targetToUpdate.CategoryId = brandWiseTargetDTO.CategoryId;
                         targetToUpdate.BrandId = brandWiseTargetDTO.BrandId;
                         targetToUpdate.MonthId = brandWiseTargetDTO.MonthId;
-                        targetToUpdate.UnitId=brandWiseTargetDTO.UnitId;
+                        //targetToUpdate.UnitId=brandWiseTargetDTO.UnitId;
                         targetToUpdate.MonthlyBrandWiseTarget = brandWiseTargetDTO.MonthlyBrandWiseTarget;
 
                         _dbContext.SaveChanges();

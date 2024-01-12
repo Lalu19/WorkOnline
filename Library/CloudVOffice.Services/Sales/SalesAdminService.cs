@@ -176,11 +176,10 @@ namespace CloudVOffice.Services.Sales
         public List<SalesAdminTarget> GetAllTargetsBySalesAdmin()
         {
             var a = _dbContext.SalesAdminTargets
-            .Include(s => s.Month)
+            .Include(s => s.Month)			
             .Where(x => x.Deleted == false).ToList();
 
             return a;
-
         }
         public List<SalesAdminTarget> GetTargetsByCategoryIdBySalesAdmin(Int64 categoryId)
 		{
