@@ -180,7 +180,6 @@ namespace CloudVOffice.Services.Sales
             .Where(x => x.Deleted == false).ToList();
 
             return a;
-
         }
         public List<SalesAdminTarget> GetTargetsByCategoryIdBySalesAdmin(Int64 categoryId)
 		{

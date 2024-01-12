@@ -1,0 +1,160 @@
+﻿@model CloudVOffice.Data.DTO.WareHouses.Employees.EmployeeDTO;
+@using System.Collections;
+@using Newtonsoft.Json;
+
+@{
+    Layout = "_MainAppLayout";
+    ViewData["Title"] = "Employee";
+}
+@addTagHelper *, Syncfusion.EJ2
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<header class="main-heading">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+                <div class="page-icon">
+                    <i class="icon-laptop_windows"></i>
+                </div>
+                <div class="page-title">
+                    <h5>Ware House</h5>
+                    <h6 class="sub-heading">Employee Creation</h6>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                <div class="right-actions">
+                    <span class="last-login"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="main-content">
+    <div class="row gutters">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <div class="card">
+                <form asp-route="WareHouse/Employee/EmployeeCreate" method="post" autocomplete="off" enctype="multipart/form-data">
+
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <b>Employee Create</b>
+                            </div>
+                            <div class="col-md-2 ">
+                                <a href="/WareHouse/Employee/EmployeeView" class="btn btn-primary btn-sm float-right"><i class="icon-list2"></i>List</a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-body">                        
+                        <input asp-for="@Model.EmployeeId" type="hidden" />                       
+
+                        <div class="form-row">
+
+                            @*<div class="form-group col-md-4">
+                                <label for="AssignedWareHouse" class="form-label">Assigned WareHouse</label>
+                                <ejs-dropdownlist id="WareHouseName" allowFiltering="true" dataSource="@(new SelectList((IEnumerable)ViewBag.WareHouses, "WareHuoseId", "WareHouseName").Items)" placeholder="Select WareHouse" popupHeight="220px" name="AssignedWareHouse" value="@Model.AssignedWareHouse">
+                                    <e-dropdownlist-fields text="WareHouseName" value="WareHuoseId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="AssignedWareHouse"></span>
+                            </div>*@
+
+                            <div class="form-group col-md-4">
+                                <label for="AssignedWareHouse" class="form-label">Assigned WareHouse</label>
+                                <ejs-dropdownlist id="WareHouseName" allowFiltering="true"
+                                                  dataSource="@(new SelectList((IEnumerable)ViewBag.WareHouses, "WareHuoseId", "WareHouseName").Items)"
+                                                  placeholder="Select WareHouse" popupHeight="220px"
+                                                  name="AssignedWareHouse"
+                                                  value="@Model.AssignedWareHouse">
+                                    <e-dropdownlist-fields text="WareHouseName" value="WareHuoseId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="AssignedWareHouse"></span>
+                            </div>
+
+
+                            <div class="form-group col-md-4">
+                                <label for="EmployeeName" class="form-label">Employee Name &nbsp;<span style="color:red;"><b>*</b></span></label>
+                                <input asp-for="@Model.EmployeeName" type="text" class="form-control" autofocus="autofocus" placeholder="Employee Name" />
+                                <span asp-validation-for="EmployeeName"></span>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="DateOfBirth" class="form-label">Date of Birth &nbsp;<span style="color:red;"><b>*</b></span></label>
+                                <input asp-for="@Model.DateOfBirth" type="date" class="form-control" autofocus="autofocus" placeholder="Date Of Birth" />
+                                <span asp-validation-for="DateOfBirth"></span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-4">
+                                <label for="VehicleNumber" class="form-label">Vehicle Number &nbsp;</label>
+                                <ejs-dropdownlist id="VehicleNumber" allowFiltering="true" dataSource="@(new SelectList((IEnumerable)ViewBag.Vehicles, "VehicleId", "VehicleNumber").Items)" placeholder="Select Vehicle" popupHeight="220px" value="@Model.VehicleNumber">
+                                    <e-dropdownlist-fields text="VehicleNumber" value="VehicleId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="VehicleNumber"></span>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="Position" class="form-label">Position &nbsp;<span style="color:red;"><b>*</b></span></label>
+                                <input asp-for="@Model.Position" type="text" class="form-control" autofocus="autofocus" placeholder="Position" />
+                                <span asp-validation-for="Position"></span>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="Mobile" class="form-label">Mobile &nbsp;<span style="color:red;"><b>*</b></span></label>
+                                <input asp-for="@Model.Mobile" type="text" class="form-control" autofocus="autofocus" placeholder="Mobile" />
+                                <span asp-validation-for="Mobile"></span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-4">
+
+                                <label for="Priority" class="form-label">Priority &nbsp;<span style="color:red;"><b>*</b></span></label>
+                                <input asp-for="@Model.Priority" type="text" class="form-control" autofocus="autofocus" placeholder="Priority" />
+                                <span asp-validation-for="Priority"></span>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="IsActive" class="form-label">Is Active</label>
+                                <br>
+                                <input asp-for="@Model.IsActive" type="checkbox" />
+                                <span asp-validation-for="IsActive"></span>
+
+                            </div>
+                        </div>
+
+
+                        <div asp-validation-summary="ModelOnly" class="message-error"></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-lg-2 col-md-2 col-sm-12">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    //function onWareHouseNamefiltering(e) {
+    //    var query = new ej.data.Query();
+    //    query = (e.text !== '') ? query.where('WareHouseName', 'startswith', e.text, true) : query;
+    //    e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.WareHouses)), query);
+    //}
+
+    //function onPinCodefiltering(e) {
+    //    var query = new ej.data.Query();
+    //    query = (e.text !== '') ? query.where('Pin', 'startswith', e.text, true) : query;
+    //    e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.PinCodeList)), query);
+    //}
+</script>
+

@@ -75,7 +75,7 @@ namespace Seller_Login.Web
 				};
 			}).AddCookie(x =>
 			{
-				x.LoginPath = "/App/Login";
+				x.LoginPath = "/SellerUser/SellerLogin";
 
 				x.ExpireTimeSpan = TimeSpan.FromMinutes(60);
 				x.SlidingExpiration = true;
@@ -163,12 +163,12 @@ namespace Seller_Login.Web
 			
 			app.MapControllerRoute(
 			name: "default",
-			pattern: "{controller=App}/{action=Login}/{id?}");
+			pattern: "{controller=SellerUser}/{action=SellerLogin}/{id?}");
 
 			app.MapControllerRoute(
 			  name: "areas",
-			  pattern: "{area:exists}/{controller=App}/{action=Login}/{id?}"
-			);
+			  pattern: "{area:exists}/{controller=SellerUser}/{action=SellerLogin}/{id?}"
+            );
 
 
 			app.MapRazorPages();

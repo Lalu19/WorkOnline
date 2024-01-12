@@ -1,7 +1,9 @@
-﻿using CloudVOffice.Core.Domain.Users;
+﻿using CloudVOffice.Core.Domain.Sellers;
+using CloudVOffice.Core.Domain.Users;
 using CloudVOffice.Core.Security;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
+using CloudVOffice.Services.Sellers;
 using CloudVOffice.Services.Users;
 
 namespace CloudVOffice.Services.Authentication
@@ -10,12 +12,16 @@ namespace CloudVOffice.Services.Authentication
     {
         private readonly ApplicationDBContext _context;
         private readonly ISqlRepository<User> _userRepo;
+        private readonly ISqlRepository<SellerRegistration> _sellerRegistrationRepo;
         private readonly IUserService _userService;
-        public UserAuthenticationService(ApplicationDBContext context, ISqlRepository<User> userRepo, IUserService userService)
+        private readonly ISellerRegistrationService _sellerRegistrationService;
+        public UserAuthenticationService(ApplicationDBContext context, ISqlRepository<User> userRepo, IUserService userService, ISqlRepository<SellerRegistration> sellerRegistrationRepo, ISellerRegistrationService sellerRegistrationService)
         {
             _context = context;
             _userRepo = userRepo;
             _userService = userService;
+            _sellerRegistrationService = sellerRegistrationService;
+            _sellerRegistrationRepo = sellerRegistrationRepo;
         }
 
 
@@ -34,6 +40,19 @@ namespace CloudVOffice.Services.Authentication
             user.FailedLoginAttempts = 0;
             user.LastLoginDate = DateTime.Now;
             await _context.SaveChangesAsync();
+            return UserLoginResults.Successful;
+        }
+        public async Task<UserLoginResults> SellerValidateUserAsync(string UserMobileNumber, string Password)
+        {
+            var users = await _sellerRegistrationService.GetSellerAsyncss(UserMobileNumber);
+
+            if (users == null)
+                return UserLoginResults.UserNotExist;
+            if (users.Deleted)
+                return UserLoginResults.Deleted;
+
+            await _context.SaveChangesAsync();
+
             return UserLoginResults.Successful;
         }
     }

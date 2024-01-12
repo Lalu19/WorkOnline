@@ -121,5 +121,6 @@ namespace Warehouse.Management.Controllers
         {
             return Json(_categoryService.GetCategoryBySectorId(SectorId));
         }
+
     }
 }

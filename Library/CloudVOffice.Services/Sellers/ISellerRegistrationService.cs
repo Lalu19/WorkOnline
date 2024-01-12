@@ -18,5 +18,7 @@ namespace CloudVOffice.Services.Sellers
         public MessageEnum SellerRegistrationUpdate(SellerUpdateDTO sellerUpdateDTO);
         public MessageEnum DeleteSellerRegistration(Int64 sellerRegistrationId, Int64 DeletedBy);
         public SellerRegistration GetSellerRegistrationById(Int64 sellerRegistrationId);
+        public Task<SellerRegistration> GetSellerLoginAsync(string UserMobileNumber, string Password);
+        public Task<SellerRegistration> GetSellerAsyncss(string UserMobileNumber);
     }
 }

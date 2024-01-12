@@ -1,0 +1,14 @@
+{
+  "Group": "Seller",
+  "FriendlyName": "Seller Web",
+  "SystemName": "Seller.Web",
+  "Version": 0.3,
+  "SupportedVersions": [ "0.3" ],
+  "Author": "Appman team",
+  "DisplayOrder": 1,
+  "FileName": "Seller.Web.dll",
+  "Description": "Point Of Storage",
+  "InstallationUrl": "/Seller/SellerInstall/Install",
+  "UnInstallationUrl": "/Seller/SellerInstall/UnInstall",
+  "Dependency": []
+}
