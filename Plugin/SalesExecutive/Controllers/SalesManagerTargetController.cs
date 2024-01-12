@@ -35,7 +35,7 @@ namespace SalesExecutive.Controllers
 
 
         [HttpGet]
-        public IActionResult CreateSalesManagerTarget(int? salesManagerTargetId)
+        public IActionResult CreateSalesManagerTargets(int? salesManagerTargetId)
         {
 
             ViewBag.Sectors = _sectorService.GetSectorList();
@@ -68,7 +68,7 @@ namespace SalesExecutive.Controllers
 
 
         [HttpPost]
-        public IActionResult CreateSalesManagerTarget([FromBody] SalesManagerTargetMasterDTO model)
+        public IActionResult CreateSalesManagerTargets([FromBody] SalesManagerTargetMasterDTO model)
         {
             foreach (var target in model.Targets)
             {

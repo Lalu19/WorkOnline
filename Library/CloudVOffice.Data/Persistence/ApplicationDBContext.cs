@@ -118,7 +118,8 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<ChangePassword> ChangePasswords { get; set; }
         public virtual DbSet<Banner> Banners { get; set; }
         public virtual DbSet<BrandWiseTarget> BrandWiseTargets { get; set; }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+		public virtual DbSet<SalesManager> SalesManagers { get; set; }
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
             #region Base
@@ -610,9 +611,19 @@ namespace CloudVOffice.Data.Persistence
 			  .HasDefaultValue(false)
 			  .ValueGeneratedNever();
 
-           
+			modelBuilder.Entity<SalesManager>()
+			.Property(s => s.CreatedDate)
+			.HasDefaultValueSql("getdate()");
 
-            modelBuilder.Seed();
+
+			modelBuilder.Entity<SalesManager>()
+			  .Property(s => s.Deleted)
+			  .HasDefaultValue(false)
+			  .ValueGeneratedNever();
+
+
+
+			modelBuilder.Seed();
         }
     }
 }
