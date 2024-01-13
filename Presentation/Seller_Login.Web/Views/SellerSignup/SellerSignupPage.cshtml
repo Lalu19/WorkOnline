@@ -1,0 +1,249 @@
+﻿@using System.Collections;
+@using Newtonsoft.Json;
+@model CloudVOffice.Data.DTO.Sellers.SellerRegistrationDTO
+@{
+    Layout = null;
+}
+@addTagHelper *, Syncfusion.EJ2
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!doctype html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <title>Seller Signup | OneWholesale</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Work Online" name="description" />
+    <meta content="Appman Technologies Pvt Ltd" name="author" />
+    <!-- App favicon -->
+    @* <link rel="shortcut icon" href="~/app/img/favicon.ico">*@
+    <link rel="shortcut icon" href="~/app/img/Wo_Icon.ico">
+
+    <!-- owl.carousel css -->
+    <link rel="stylesheet" href="~/login/libs/owl.carousel/assets/owl.carousel.min.css">
+
+    <link rel="stylesheet" href="~/login/libs/owl.carousel/assets/owl.theme.default.min.css">
+
+    <!-- Bootstrap Css -->
+    <link href="~/login/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="~/login/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="~/login/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+
+    <!-- Common CSS -->
+    <link rel="stylesheet" href="~/app/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/app/fonts/icomoon/icomoon.css">
+
+    <!-- Mian and Login css -->
+    <link rel="stylesheet" href="~/app/css/main.css">
+
+    <style>
+        .login-screen {
+            padding-top:6px;
+        }
+
+    </style>
+
+</head>
+
+<body class="login-bg">
+
+    <div class="container">
+
+        <div class="login-screen row align-items-center">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
+                <form class="custom-form" asp-route="/Seller/SellerSignup/SellerSignupPage" method="post" autocomplete="off" enctype="multipart/form-data">
+
+                    <div class="login-container">
+
+                        <div class="row no-gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
+
+                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-6 col-4">
+                                    <a href="#" class="logo">
+                                        <img src="~/uimages/wo_login.png" alt="One Wholesale">
+                                    </a>
+                                </div>
+
+
+                                <div class="card-body">
+                                  
+                                    <input asp-for="@Model.SellerRegistrationId" type="hidden" />
+
+                                    <div class="form-row">
+
+                                        <div class="form-group col-md-3">
+                                            <label for="Name" class="form-label">Name</label>
+                                            <input type="text" id="Name" asp-for="@Model.Name" class="form-control" placeholder="Name" required>
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            <label for="BusinessName" class="form-label">Business Name</label>
+                                            <input type="text" id="BusinessName" asp-for="@Model.BusinessName" class="form-control" placeholder="Business Name" required>
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            <label for="Address" class="form-label">Address</label>
+                                            <input type="text" id="Address" asp-for="@Model.Address" class="form-control" placeholder="Address" required>
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            <label for="PinCodeId" class="form-label">PinCode</label>
+                                            <select id="PinCodeId" asp-for="@Model.PinCodeId" class="form-control">
+                                                <option value="">Please Select Pincode</option>
+                                                @foreach (var item in ViewBag.PinList)
+                                                {
+                                                    <option value="@item.PinCodeId">@item.Pin</option>
+                                                }
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-row">
+
+                                        <div class="form-group col-md-3">
+                                            <label for="Country" class="form-label">Country</label>
+                                            <input type="text" id="Country" asp-for="@Model.Country" class="form-control" placeholder="Country" required>
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            <label for="State" class="form-label">State</label>
+                                            <input type="text" id="State" asp-for="@Model.State" class="form-control" placeholder="State" required>
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            <label for="PrimaryPhone" class="form-label">Primary Phone</label>
+                                            <input type="number" id="PrimaryPhone" asp-for="@Model.PrimaryPhone" class="form-control" placeholder="Primary Phone">
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            <label for="AlternatePhone" class="form-label">Alternate Phone</label>
+                                            <input type="number" id="AlternatePhone" asp-for="@Model.AlternatePhone" class="form-control" placeholder="Alternate Phone">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-row">
+
+                                        <div class="form-group col-md-3">
+                                            <label for="MailId" class="form-label">Mail Id</label>
+                                            <input type="email" id="MailId" asp-for="@Model.MailId" class="form-control" placeholder="Email ID" required>
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            <label for="SalesRepresentativeId" class="form-label">Sales RepresentativeId</label>
+                                            <input type="number" id="SalesRepresentativeId" asp-for="@Model.SalesRepresentativeId" class="form-control" placeholder="Alternate Phone" required>
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            <label for="SalesRepresentativeContact" class="form-label">Sales Representative Contact</label>
+                                            <input type="number" id="SalesRepresentativeContact" asp-for="@Model.SalesRepresentativeContact" class="form-control" placeholder="SalesRepresentative Contact" required>
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            <label for="GSTNumber" class="form-label">GST Number</label>
+                                            <input type="text" id="GSTNumber" asp-for="@Model.GSTNumber" class="form-control" placeholder="GSTNumber" required>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="form-row">
+
+                                        <div class="form-group col-md-3">
+                                            <label for="WareHuoseId" class="form-label">WareHouse Name</label>
+                                            <select id="WareHuoseId" asp-for="@Model.WareHuoseId" class="form-control">
+                                                <option value="">Please Select WareHouse</option>
+                                                @foreach (var item in ViewBag.WareHouseList)
+                                                {
+                                                    <option value="@item.WareHuoseId">@item.WareHouseName</option>
+                                                }
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            <label for="SectorId" class="form-label">Sector Name</label>
+                                            <select id="SectorId" asp-for="@Model.SectorId" class="form-control">
+                                                <option value="">Please Select Sector</option>
+                                                @foreach (var item in ViewBag.SectorList)
+                                                {
+                                                    <option value="@item.SectorId">@item.SectorName</option>
+                                                }
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            <label for="Image" class="form-label">Image</label>
+                                            <input asp-for="@Model.ImageUp" type="file" class="form-control" autofocus="autofocus" placeholder="Image" / required>
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+
+                                           
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="form-row">
+
+                                        <div class="form-group col-md-3"></div>
+                                        <div class="form-group col-md-3"></div>
+                                        <div class="form-group col-md-3"></div>
+                                        <div class="form-group col-md-3">
+
+                                            <div class="actions clearfix">
+                                                <button type="submit" class="btn btn-primary">Signup</button> <br />
+                                                <a href="/SellerUser/SellerLogin" class="additional-link">Already have an Account? <span>Login Now</span></a>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+
+
+
+
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="~/login/libs/jquery/jquery.min.js"></script>
+    <script src="~/login/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/login/libs/metismenu/metisMenu.min.js"></script>
+    <script src="~/login/libs/simplebar/simplebar.min.js"></script>
+    <script src="~/login/libs/node-waves/waves.min.js"></script>
+
+    <!-- owl.carousel js -->
+    <script src="~/login/libs/owl.carousel/owl.carousel.min.js"></script>
+
+    <!-- auth-2-carousel init -->
+    <script src="~/login/js/pages/auth-2-carousel.init.js"></script>
+
+    <!-- App js -->
+    <script src="~/login/js/app.js"></script>
+
+
+</body>
+</html>
+
+
+
+
