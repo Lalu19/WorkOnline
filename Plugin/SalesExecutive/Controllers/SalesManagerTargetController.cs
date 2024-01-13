@@ -55,7 +55,7 @@ namespace SalesExecutive.Controllers
                 salesManagerTargetDTO.MonthlyCategoryWiseTarget = target.MonthlyCategoryWiseTarget;
                 salesManagerTargetDTO.MonthlySectorWiseTargetByAdmin = target.MonthlySectorWiseTargetByAdmin;
                 salesManagerTargetDTO.MonthlyBrandWiseTarget = target.MonthlyBrandWiseTarget;
-                salesManagerTargetDTO.UnitId = target.UnitId;
+                //salesManagerTargetDTO.UnitId = target.UnitId;
                 //salesAdminDTO.Districts = target.Districts;
 
             }
