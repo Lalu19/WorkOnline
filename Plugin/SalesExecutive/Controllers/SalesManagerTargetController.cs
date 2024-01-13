@@ -35,7 +35,7 @@ namespace SalesExecutive.Controllers
 
 
         [HttpGet]
-        public IActionResult CreateSalesManagerTarget(int? salesManagerTargetId)
+        public IActionResult CreateSalesManagerTargets(int? salesManagerTargetId)
         {
 
             ViewBag.Sectors = _sectorService.GetSectorList();
@@ -55,7 +55,7 @@ namespace SalesExecutive.Controllers
                 salesManagerTargetDTO.MonthlyCategoryWiseTarget = target.MonthlyCategoryWiseTarget;
                 salesManagerTargetDTO.MonthlySectorWiseTargetByAdmin = target.MonthlySectorWiseTargetByAdmin;
                 salesManagerTargetDTO.MonthlyBrandWiseTarget = target.MonthlyBrandWiseTarget;
-                salesManagerTargetDTO.UnitId = target.UnitId;
+                //salesManagerTargetDTO.UnitId = target.UnitId;
                 //salesAdminDTO.Districts = target.Districts;
 
             }
@@ -68,7 +68,7 @@ namespace SalesExecutive.Controllers
 
 
         [HttpPost]
-        public IActionResult CreateSalesManagerTarget([FromBody] SalesManagerTargetMasterDTO model)
+        public IActionResult CreateSalesManagerTargets([FromBody] SalesManagerTargetMasterDTO model)
         {
             foreach (var target in model.Targets)
             {

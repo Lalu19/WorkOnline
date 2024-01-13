@@ -18,5 +18,9 @@ namespace CloudVOffice.Services.WareHouses.Brands
         public List<Brand> GetBrandList();
         public MessageEnum BrandUpdate(BrandDTO brandDTO);
         public MessageEnum BrandDelete(Int64 BrandId, Int64 DeletedBy);
-    }
+        public List<Brand> GetBrandsBySectorId(Int64 sectorId);
+
+        public Int64 GetBrandIdByBrandName(string brandName);
+
+	}
 }

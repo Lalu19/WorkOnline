@@ -22,6 +22,8 @@
 		<None Remove="Views\SalesAdmins\SalesAdminCreate.cshtml" />
 		<None Remove="Views\SalesAdmins\SalesAdminView.cshtml" />
 		<None Remove="Views\SalesExecutiveDashboard\Dashboard.cshtml" />
+		<None Remove="Views\SalesManagers\SalesManagerCreate.cshtml" />
+		<None Remove="Views\SalesManagers\SalesManagerView.cshtml" />
 	</ItemGroup>
 
 	<ItemGroup>

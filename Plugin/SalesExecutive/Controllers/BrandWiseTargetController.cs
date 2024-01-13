@@ -29,7 +29,7 @@ namespace SalesExecutive.Controllers
 
         public BrandWiseTargetController(IBrandWiseTargetService brandWiseTargetService,
                                          ISectorService sectorService,
-                                         ICategoryService categoryService, 
+                                         ICategoryService categoryService,
                                          IBrandService brandService,
                                          IMonthService monthService,
                                          IUnit unitService

@@ -1,6 +1,6 @@
 ﻿@{
     Layout = "_MainAppLayout";
-    ViewData["Title"] = "SalesManagerTargetView";
+    ViewData["Title"] = "SalesManager";
 }
 @addTagHelper *, Syncfusion.EJ2
 @using CloudVOffice.Core.Domain.Common;
@@ -34,43 +34,37 @@
 
                     <div class="row">
                         <div class="col-md-8">
-                            Sales Manager Target
+                            SalesManager
                         </div>
                         <div class="col-md-4 text-right float-right">
-                            <a href="/SalesExecutive/SalesManagerTarget/CreateSalesManagerTargets" class="btn btn-success btn-sm"><i class="icon icon-add"></i> Add </a>
+                            <a href="/SalesExecutive/SalesManager/SalesManagerCreate" class="btn btn-success btn-sm"><i class="icon icon-add"></i> Add</a>
 
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
 
-                    <ejs-grid id="GridOverview" dataSource="ViewBag.SalesTarget"
+                    <ejs-grid id="GridOverview" dataSource="ViewBag.SalesManagers"
                               allowFiltering="true" allowSorting="true"
                               allowExcelExport="true" allowGrouping="true"
                               allowMultiSorting="true"
                               allowPdfExport="true"
-                              height="600" rowHeight="38"
                               enableHover="false" enableHeaderFocus="true"
                               allowResizing="true" autoFit="true" dataBound="dataBound"
                               enableVirtualization="true" allowSelection="true"
-                              toolbarClick="toolbarClick" toolbar="@(new List<string>() {"ExcelExport", "PdfExport", "CsvExport" ,"Search"})">
+                              toolbarClick="toolbarClick" toolbar="@(new List<string>() {"ExcelExport", "PdfExport", "CsvExport" ,"Search"})" allowPaging="true">
 
                         <e-grid-filtersettings type="Menu"></e-grid-filtersettings>
 
-                        <e-grid-selectionsettings persistSelection="true" type="Multiple" checkboxOnly="true"></e-grid-selectionsettings>
+                        <e-grid-pagesettings pageCount="4" pageSizes="true"></e-grid-pagesettings>
                         <e-grid-columns>
 
-                            @*<e-grid-column field="SalesAdminTargetName" headerText="SalesAdmin Target Name" textAlign="Left" width="120"></e-grid-column>*@
-                            <e-grid-column field="Month.MonthName" headerText="Month" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="SectorId" headerText="Sector" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="CategoryId" headerText="Category" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="MonthlyCategoryWiseTarget" headerText="Monthly CategoryWise Target" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="MonthlySectorWiseTarget" headerText="Monthly SectorWise Target" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="MonthlyBrandWiseTarget" headerText="Monthly BrandWise Target" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="UnitId" headerText="UnitId" textAlign="Left" width="120"></e-grid-column>
 
-
-
+                            <e-grid-column field="SalesManagerName" headerText="SalesManager Name" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="StateId" headerText="State Name" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="Telephone" headerText="Telephone Number" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="Address" headerText="Address" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="EmailId" headerText="EmailId" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column headerText="Action" template="#Actions" width="50"></e-grid-column>
                         </e-grid-columns>
                     </ejs-grid>
@@ -93,7 +87,7 @@
                 sweetAlert({
                     html: true,
                     icon: "success",
-                    title: "WareHouse",
+                    title: "SalesManager",
                     text: "Successfully created.",
                     type: "success"
                 });
@@ -102,7 +96,7 @@
                 sweetAlert({
                     html: true,
                     icon: "success",
-                    title: "WareHouse",
+                    title: "SalesManager",
                     text: "Successfully updated.",
                     type: "success"
                 });
@@ -111,7 +105,7 @@
                 sweetAlert({
                     html: true,
                     icon: "success",
-                    title: "WareHouse",
+                    title: "SalesManager",
                     text: "Successfully Deleted.",
                     type: "success"
                 });
@@ -120,7 +114,7 @@
                 sweetAlert({
                     html: true,
                     icon: "danger",
-                    title: "WareHouse",
+                    title: "Designation",
                     text: "There is somthing going wrong.",
                     type: "danger"
                 });
@@ -129,7 +123,7 @@
                 sweetAlert({
                     html: true,
                     icon: "error",
-                    title: "WareHouse",
+                    title: "SalesManager",
                     text: "There is somthing going wrong.",
                     type: "error"
                 });
@@ -138,7 +132,7 @@
                 sweetAlert({
                     html: true,
                     icon: "error",
-                    title: "WareHouse",
+                    title: "SalesManager",
                     text: message,
                     type: "error"
                 });
@@ -161,7 +155,7 @@
             dangerMode: true,
         }).then(function (isConfirm) {
             if (isConfirm) {
-                window.location.href = "../../SalesExecutive/SalesManagerTarget/SalesManagerTargetDelete?SalesManagerTargetId=" + Id;
+                window.location.href = "../../SalesExecutive/SalesManager/SalesManagerDelete?SalesManagerId=" + Id;
             }
         })
     }
@@ -170,9 +164,9 @@
 
 <script id="Actions" type="text/x-template">
     <div class="link">
-        <a href="../../SalesExecutive/SalesManagerTarget/CreateSalesManagerTargets?SalesManagerTargetId=${SalesManagerTargetId}"><i class="icon-pencil3" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp;
+        <a href="../../SalesExecutive/SalesManager/SalesManagerCreate?SalesManagerId=${SalesManagerId}"><i class="icon-pencil3" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp;
 
-        <button onClick="Delete(${SalesManagerTargetId})" style="background: transparent;border: none;"><i class="icon-trash" style="font-size:22px"></i></button>
+        <button onClick="Delete(${SalesManagerId})" style="background: transparent;border: none;"><i class="icon-trash" style="font-size:22px"></i></button>
     </div>
 </script>
 
@@ -181,7 +175,6 @@
 </script>
 
 <script>
-
     function toolbarClick(args) {
         var gridObj = document.getElementById("GridOverview").ej2_instances[0];
         if (args.item.id === 'GridOverview_pdfexport') {
@@ -194,7 +187,6 @@
             gridObj.csvExport();
         }
     }
-
     function exportQueryCellInfo(args) {
         if (args.column.headerText === 'Employee Image') {
             if (args.name === "excelQueryCellInfo") {
@@ -216,15 +208,4 @@
         this.autoFitColumns();
     }
 
-    function statusDetail(e) {
-
-        if (e.IsActive == true) {
-            return '<span class="badge badge-pill badge-success" > True </span>';
-        } else {
-            return '<span class="badge badge-pill badge-dark"> False </span>';
-        }
-    }
-
 </script>
-
-

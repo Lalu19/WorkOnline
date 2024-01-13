@@ -120,5 +120,36 @@ namespace CloudVOffice.Services.WareHouses.Brands
                 throw;
             }
         }
+
+        public List<Brand> GetBrandsBySectorId(Int64 sectorId)
+        {
+            var sectors = _dbContext.Items.Where(sec => sec.SectorId == sectorId).ToList();
+            List<Int64?> list = new List<Int64?>();
+            List<Brand> brands = new List<Brand>();
+
+            foreach (var Idbrand in sectors)
+            {
+                Int64? brandId = Idbrand.BrandId;
+                list.Add(brandId);
+            }
+
+
+            foreach (var brandId in list)
+            {
+                Brand brand = _dbContext.Brands.FirstOrDefault(i => i.BrandId == brandId);
+                brands.Add(brand);
+            }
+
+            return brands;
+        }
+
+
+        public Int64 GetBrandIdByBrandName(string brandName)
+        {
+            var brand = _dbContext.Brands.FirstOrDefault(x=> x.BrandName == brandName);
+
+            Int64 id = brand.BrandId;
+            return id;
+        }
     }
 }

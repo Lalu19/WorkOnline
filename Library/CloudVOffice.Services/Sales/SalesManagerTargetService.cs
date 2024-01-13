@@ -21,24 +21,24 @@ namespace CloudVOffice.Services.Sales
             _dbContext = dbContext;
             _salesManagerTarget = salesManagerTarget;
         }
-        public MessageEnum CreateSalesManagerTarget(SalesManagerTargetDTO salesManagerTargetDTO)
+        public MessageEnum CreateSalesManagerTarget(SalesManagerrTargetDTO salesManagerrTargetDTO)
         {
             try
             {
-                if (salesManagerTargetDTO != null)
+                if (salesManagerrTargetDTO != null)
                 {
                     var objcheck = _dbContext.SalesManagerTargets
-                        .FirstOrDefault(s => s.SalesManagerTargetId == salesManagerTargetDTO.SalesManagerTargetId && s.Deleted == false);
+                        .FirstOrDefault(s => s.SalesManagerTargetId == salesManagerrTargetDTO.SalesManagerTargetId && s.Deleted == false);
 
                     if (objcheck == null)
                     {
                         SalesManagerTarget target = new SalesManagerTarget
                         {
-                            MonthId = salesManagerTargetDTO.MonthId,
-                            SectorId =(int?) Convert.ToInt64(salesManagerTargetDTO.SectorId),
-                            CategoryId =(int?) Convert.ToInt64(salesManagerTargetDTO.CategoryId),
-                            MonthlyCategoryWiseTarget = salesManagerTargetDTO.MonthlyCategoryWiseTarget,
-                            CreatedBy = salesManagerTargetDTO.CreatedBy,
+                            MonthId = salesManagerrTargetDTO.MonthId,
+                            SectorId =(int?) Convert.ToInt64(salesManagerrTargetDTO.Sector),
+                            CategoryId =(int?) Convert.ToInt64(salesManagerrTargetDTO.Category),
+                            MonthlyCategoryWiseTarget = salesManagerrTargetDTO.MonthlyCategoryWiseTarget,
+                            CreatedBy = salesManagerrTargetDTO.CreatedBy,
                             // Set other properties for new targets
                         };
 
@@ -115,7 +115,7 @@ namespace CloudVOffice.Services.Sales
             }
         }
 
-        public MessageEnum UpdateTargetsBySalesManagerTarget(SalesManagerTargetDTO salesManagerTargetDTO)
+        public MessageEnum UpdateTargetsBySalesManagerTarget(SalesManagerrTargetDTO salesManagerTargetDTO)
         {
             try
             {
@@ -133,8 +133,8 @@ namespace CloudVOffice.Services.Sales
                     {
                         // Update properties of the existing target
                         targetToUpdate.MonthId = salesManagerTargetDTO.MonthId;
-                        targetToUpdate.SectorId =(int?) Convert.ToInt64(salesManagerTargetDTO.SectorId);
-                        targetToUpdate.CategoryId =(int?) Convert.ToInt64(salesManagerTargetDTO.CategoryId);
+                        targetToUpdate.SectorId =(int?) Convert.ToInt64(salesManagerTargetDTO.Sector);
+                        targetToUpdate.CategoryId =(int?) Convert.ToInt64(salesManagerTargetDTO.Category);
                         targetToUpdate.MonthlyCategoryWiseTarget = salesManagerTargetDTO.MonthlyCategoryWiseTarget;
                         // Update other properties for existing targets
 
@@ -173,14 +173,14 @@ namespace CloudVOffice.Services.Sales
             throw new NotImplementedException();
         }
 
-        public MessageEnum CreateSalesManagerTarget(object target)
-        {
-            throw new NotImplementedException();
-        }
+        //public MessageEnum CreateSalesManagerTarget(object target)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public MessageEnum UpdateTargetsBySalesManagerTarget(object target)
-        {
-            throw new NotImplementedException();
-        }
+        //public MessageEnum UpdateTargetsBySalesManagerTarget(object target)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
