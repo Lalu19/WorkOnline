@@ -306,8 +306,8 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="Views\Shared\" />
+    <Folder Include="wwwroot\uploads\SellerRegistration\" />
   </ItemGroup>
 
   <ItemGroup>
