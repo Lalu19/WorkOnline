@@ -3,6 +3,7 @@ using CloudVOffice.Core.Domain.RetailerModel;
 using CloudVOffice.Core.Domain.Sellers;
 using CloudVOffice.Data.DTO.RetailerModel;
 using CloudVOffice.Data.DTO.Sellers;
+using CloudVOffice.Data.DTO.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,5 +21,7 @@ namespace CloudVOffice.Services.Sellers
         public SellerRegistration GetSellerRegistrationById(Int64 sellerRegistrationId);
         public Task<SellerRegistration> GetSellerLoginAsync(string UserMobileNumber, string Password);
         public Task<SellerRegistration> GetSellerAsyncss(string UserMobileNumber);
-    }
+        public Task<MessageEnum> UpdateSellerRegUser(SellerRegistrationDTO sellerRegistrationDTO);
+
+	}
 }

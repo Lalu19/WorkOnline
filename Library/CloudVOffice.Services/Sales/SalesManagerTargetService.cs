@@ -63,7 +63,7 @@ namespace CloudVOffice.Services.Sales
             }
         }
 
-        SalesManagerTarget GetSalesManagerTargetBySalesManagerTargetId(Int64 salesManagerTargetId)
+        public SalesManagerTarget GetSalesManagerTargetBySalesManagerTargetId(Int64 salesManagerTargetId)
         {
             return _dbContext.SalesManagerTargets.Where(s => s.SalesManagerTargetId == salesManagerTargetId).FirstOrDefault();
         }
@@ -168,10 +168,10 @@ namespace CloudVOffice.Services.Sales
             else { return null; }
         }
 
-        SalesManagerTarget ISalesManagerTargetService.GetSalesManagerTargetBySalesManagerTargetId(long salesManagerTargetId)
-        {
-            throw new NotImplementedException();
-        }
+        //SalesManagerTarget ISalesManagerTargetService.GetSalesManagerTargetBySalesManagerTargetId(long salesManagerTargetId)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         //public MessageEnum CreateSalesManagerTarget(object target)
         //{

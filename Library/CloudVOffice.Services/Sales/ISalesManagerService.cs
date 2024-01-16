@@ -17,7 +17,7 @@ namespace CloudVOffice.Services.Sales
 		public SalesManager GetSalesManagerById(Int64 SalesManagerId);
 		public List<SalesManager> GetSalesManagerList();
 		public MessageEnum SalesManagerUpdate(SalesManagerDTO salesManagerDTO);
-		public MessageEnum MontSalesManagerDelete(Int64 SalesManagerId, Int64 DeletedBy);
+		public MessageEnum SalesManagerDelete(Int64 SalesManagerId, Int64 DeletedBy);
 		public Int64 GetSalesManagerIdByName(string Name);
 	}
 }

@@ -10,6 +10,10 @@ using System.Security.Claims;
 using Seller_Login.Web.Model.SellerUsers;
 using CloudVOffice.Data.Persistence;
 using Microsoft.AspNetCore.Authorization;
+using CloudVOffice.Core.Domain.Common;
+using CloudVOffice.Data.DTO.Users;
+using CloudVOffice.Data.DTO.Sellers;
+using CloudVOffice.Data.DTO.Banners;
 
 namespace Seller_Login.Web.Controllers
 {
@@ -20,25 +24,28 @@ namespace Seller_Login.Web.Controllers
 		private readonly ISellerRegistrationService _sellerRegistrationService;
 		private readonly ICategoryService _categoryService;
         private readonly ApplicationDBContext _dbContext;
+		private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public SellerUserController(IUserAuthenticationService userauthenticationService,
+		public SellerUserController(IUserAuthenticationService userauthenticationService,
 			ISellerRegistrationService sellerRegistrationService,
 			ICompanyDetailsService companyDetailsService,
-			ICategoryService categoryService, ApplicationDBContext dbContext
+			ICategoryService categoryService, ApplicationDBContext dbContext, IWebHostEnvironment hostingEnvironment
 
 
-            )
+			)
 		{
 			_userauthenticationService = userauthenticationService;
 			_companyDetailsService = companyDetailsService;
 			_sellerRegistrationService = sellerRegistrationService;
 			_categoryService = categoryService;
             _dbContext = dbContext;
-        }
+			_hostingEnvironment = hostingEnvironment;
+		}
 		public IActionResult SellerLogin()
 		{
 			return View();
 		}
+
 		[HttpPost]
 		public async Task<IActionResult> SellerLogin(LoginModel model, string? ReturnUrl)
 		{
@@ -58,7 +65,7 @@ namespace Seller_Login.Web.Controllers
 								{
 									new Claim(ClaimTypes.MobilePhone, SelleruserDetails.PrimaryPhone),
 									new Claim("SellerName",SelleruserDetails.Name),
-									new Claim("PrimaryPhoneeNumber",SelleruserDetails.PrimaryPhone),
+									new Claim("PrimaryPhoneNumber",SelleruserDetails.PrimaryPhone),
 									new Claim("Address",SelleruserDetails.Address),
 									new Claim("Country",SelleruserDetails.Country),
 									new Claim("State",SelleruserDetails.State),
@@ -75,7 +82,7 @@ namespace Seller_Login.Web.Controllers
 							await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
 
 
-							return Redirect(ReturnUrl == null ? "/SellerLogin" : ReturnUrl);
+							return Redirect(ReturnUrl == null ? "/SellerHome" : ReturnUrl);
 						}
 					case UserLoginResults.UserNotExist:
 						ModelState.AddModelError("MobileNumber", "User Not Exists.");
@@ -98,6 +105,26 @@ namespace Seller_Login.Web.Controllers
 			return View(model);
 		}
 
+		[HttpGet("/SellerHome")]
+		[Authorize]
+		public IActionResult SellerHome()
+		{
+			Int64 SellerRegistrationId = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "SellerRegistrationId").Value.ToString());
+			string Name = User.Claims.FirstOrDefault(x => x.Type == "SellerName").ToString();
+			string PrimaryPhone = User.Claims.FirstOrDefault(x => x.Type == "PrimaryPhoneNumber").ToString();
+			string Address = User.Claims.FirstOrDefault(x => x.Type == "Address").ToString();
+			string Country = User.Claims.FirstOrDefault(x => x.Type == "Country").ToString();
+			string State = User.Claims.FirstOrDefault(x => x.Type == "State").ToString();
+			string MailId = User.Claims.FirstOrDefault(x => x.Type == "MailId").ToString();
+			string GSTNumber = User.Claims.FirstOrDefault(x => x.Type == "GSTNumber").ToString();
+			int WareHuoseId = int.Parse(User.Claims.FirstOrDefault(x => x.Type == "WareHuoseId").Value.ToString());
+			int PinCodeId = int.Parse(User.Claims.FirstOrDefault(x => x.Type == "PinCodeId").Value.ToString());
+			int SectorId = int.Parse(User.Claims.FirstOrDefault(x => x.Type == "SectorId").Value.ToString());
+
+
+			return View();
+		}
+
 
 		[HttpGet]
 		public async Task<IActionResult> SellerLogOut()
@@ -107,6 +134,50 @@ namespace Seller_Login.Web.Controllers
 			//Redirect to home page    
 			return LocalRedirect("/SellerUser/SellerLogin");
 		}
-       
-    }
+
+        public IActionResult UpdateSellerProfile()
+        {
+            Int64 SellerRegistrationId = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "SellerRegistrationId").Value.ToString());
+            ViewBag.Sellerdetails = _sellerRegistrationService.GetSellerRegistrationById(SellerRegistrationId);
+            return View();
+        }
+		[HttpPost]
+		public async Task<IActionResult> UpdateSellerProfile(SellerRegistrationDTO sellerRegistrationDTO)
+		{
+			if (sellerRegistrationDTO.ImageUp != null)
+			{
+				FileInfo fileInfo = new FileInfo(sellerRegistrationDTO.ImageUp.FileName);
+				string extn = fileInfo.Extension.ToLower();
+				Guid id = Guid.NewGuid();
+				string filename = id.ToString() + extn;
+
+				string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads/SellerRegistration");
+				if (!Directory.Exists(uploadsFolder))
+				{
+					Directory.CreateDirectory(uploadsFolder);
+				}
+				string uniqueFileName = Guid.NewGuid().ToString() + "_" + filename;
+				string imagePath = Path.Combine(uploadsFolder, uniqueFileName);
+				sellerRegistrationDTO.ImageUp.CopyTo(new FileStream(imagePath, FileMode.Create));
+				sellerRegistrationDTO.Image = uniqueFileName;
+			}
+			if (sellerRegistrationDTO.SellerRegistrationId != null)
+			{
+				var result = await _sellerRegistrationService.UpdateSellerRegUser(sellerRegistrationDTO);
+				if (result == MessageEnum.Updated)
+				{
+					TempData["updateSuccessMessage"] = "Your page has been updated successfully!";
+					return RedirectToAction("SellerHome");
+				}
+				else
+				{
+					TempData["errorMessage"] = "An unexpected error occurred. Please try again.";
+					ModelState.AddModelError("", "Un-Expected Error");
+				}
+			}
+
+			return View(sellerRegistrationDTO);
+		}
+
+	}
 }

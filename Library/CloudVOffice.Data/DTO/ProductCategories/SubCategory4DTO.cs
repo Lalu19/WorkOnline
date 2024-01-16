@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,9 @@ namespace CloudVOffice.Data.DTO.ProductCategories
 		public int? SubCategory1Id { get; set; }
 		public int? SubCategory2Id { get; set; }
 		public int? SubCategory3Id { get; set; }
-		public string SubCategory4Name { get; set; }
-		public Int64 CreatedBy { get; set; }
-	}
+		public string? SubCategory4Name { get; set; }
+        public string? SubCategory4Image { get; set; }
+        public Int64 CreatedBy { get; set; }
+        public IFormFile? SubCategory4ImageUp { get; set; }
+    }
 }

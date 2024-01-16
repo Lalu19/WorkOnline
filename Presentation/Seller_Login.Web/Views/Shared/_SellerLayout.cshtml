@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="Unify Admin Panel">
+	<meta name="keywords" content="Admin, Dashboard, Bootstrap4, Sass, CSS3, HTML5, Responsive Dashboard, Responsive Admin Template, Admin Template, Best Admin Template, Bootstrap Template, Themeforest">
+	<meta name="author" content="Bootstrap Gallery">
+	<link rel="shortcut icon" href="img/favicon.ico">
+	<title>Seller Admin Dashboard</title>
+
+	<link href="../../../css?family=Open+Sans:300,400,700" rel="stylesheet">
+
+	<!-- Common CSS -->
+	<link rel="stylesheet" href="~/app/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/app/fonts/icomoon/icomoon.css">
+	<link rel="stylesheet" href="~/app/css/main.css">
+
+	<!-- Other CSS includes plugins - Cleanedup unnecessary CSS -->
+	<!-- Chartist css -->
+	<link href="~/app/vendor/chartist/css/chartist.min.css" rel="stylesheet">
+	<link href="~/app/vendor/chartist/css/chartist-custom.css" rel="stylesheet">
+</head>
+<body>
+	<header class="app-header">
+		<div class="container-fluid">
+			<div class="row gutters">
+				<div class="col-xl-5 col-lg-5 col-md-5 col-sm-3 col-4">
+					<a class="mini-nav-btn" href="#" id="app-side-mini-toggler">
+						<i class="icon-menu5"></i>
+					</a>
+					<a href="#app-side" data-toggle="onoffcanvas" class="onoffcanvas-toggler" aria-expanded="true">
+						<i class="icon-chevron-thin-left"></i>
+					</a>
+				</div>
+				<div class="col-xl-2 col-lg-2 col-md-2 col-sm-6 col-4">
+					<a href="index.html" class="logo">
+						<img src="~/app/OWLayout_Logo.png" alt="Seller Admin Dashboard">
+					</a>
+					
+				</div>
+				<div class="col-xl-5 col-lg-5 col-md-5 col-sm-3 col-4">
+					<ul class="header-actions">
+						<li class="dropdown">
+							<a href="#" id="userSettings" class="user-settings" data-toggle="dropdown" aria-haspopup="true">
+								<img class="avatar" src="~/app/img/user.png" alt="User Thumb">
+								<span class="user-name">Katy Perry</span>
+								<i class="icon-chevron-small-down"></i>
+							</a>
+							<div class="dropdown-menu lg dropdown-menu-right" aria-labelledby="userSettings">
+								<ul class="user-settings-list">
+									<li>
+										<a href="#">
+											<div class="icon">
+												<i class="icon-account_circle"></i>
+											</div>
+											<p>Profile</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<div class="icon red">
+												<i class="icon-cog3"></i>
+											</div>
+											<p>Settings</p>
+										</a>
+									</li>
+									<li>
+										<a href="filters.html">
+											<div class="icon yellow">
+												<i class="icon-schedule"></i>
+											</div>
+											<p>Activity</p>
+										</a>
+									</li>
+								</ul>
+								<div class="logout-btn">
+									@*<a href="/SellerUser/SellerLogin" class="btn btn-primary">Logout</a>*@
+									<a href="/SellerUser/SellerLogOut" class="btn btn-primary">Logout</a>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- BEGIN .app-side -->
+	<aside class="app-side" id="app-side">
+		<!-- BEGIN .side-content -->
+		<div class="side-content ">
+			<!-- BEGIN .user-actions -->
+			<ul class="user-actions">
+				<li style="border-bottom:none">
+					<a href="#">
+						<i class="icon-th-small-outline" style="font-size:42px"></i>
+					</a>
+				</li>
+			</ul>
+			<!-- END .user-actions -->
+			<!-- BEGIN .side-nav -->
+			<nav class="side-nav">
+				<!-- BEGIN: side-nav-content -->
+				<ul class="unifyMenu" id="unifyMenu">
+					<li class="active selected">
+						<a href="#" class="has-arrow" aria-expanded="false">
+							<span class="has-icon">
+								<i class="icon-laptop_windows"></i>
+							</span>
+							<span class="nav-title">Dashboards</span>
+						</a>
+						<ul aria-expanded="false" class="collapse in">
+							<li>
+								<a href='#' class="current-page">Dashboard</a>
+							</li>
+						</ul>
+					</li>
+					
+					<li>
+						<a href="#" class="has-arrow" aria-expanded="false">
+							<span class="has-icon">
+								<i class="icon-tabs-outline"></i>
+							</span>
+							<span class="nav-title">Pages</span>
+						</a>
+						<ul aria-expanded="false">
+							<li>
+								<a href='#'>Profile</a>
+							</li>
+							
+						</ul>
+					</li>
+				</ul>
+				<!-- END: side-nav-content -->
+			</nav>
+			<!-- END: .side-nav -->
+		</div>
+		<!-- END: .side-content -->
+	</aside>
+	<!-- END: .app-side -->
+
+
+        @RenderBody()
+
+	<footer class="main-footer fixed-btm">
+		Copyright Work Online @System.DateTime.Today.Year.
+	</footer>
+
+	<!-- jQuery first, then Tether, then other JS. -->
+	<script src="~/app/js/jquery.js"></script>
+	<script src="~/app/js/tether.min.js"></script>
+	<script src="~/app/js/bootstrap.min.js"></script>
+	<script src="~/app/vendor/unifyMenu/unifyMenu.js"></script>
+	<script src="~/app/vendor/onoffcanvas/onoffcanvas.js"></script>
+	<script src="~/app/js/moment.js"></script>
+
+	<!-- Slimscroll JS -->
+	<script src="~/app/vendor/slimscroll/slimscroll.min.js"></script>
+	<script src="~/app/vendor/slimscroll/custom-scrollbar.js"></script>
+
+	<!-- Chartist JS -->
+	<script src="~/app/vendor/chartist/js/chartist.min.js"></script>
+	<script src="~/app/vendor/chartist/js/chartist-tooltip.js"></script>
+	<script src="~/app/vendor/chartist/js/custom/custom-line-chart.js"></script>
+	<script src="~/app/vendor/chartist/js/custom/custom-line-chart1.js"></script>
+	<script src="~/app/vendor/chartist/js/custom/custom-area-chart.js"></script>
+	<script src="~/app/vendor/chartist/js/custom/donut-chart2.js"></script>
+	<script src="~/app/vendor/chartist/js/custom/custom-line-chart4.js"></script>
+
+	<!-- Common JS -->
+	<script src="~/app/js/common.js"></script>
+</body>
+</html>

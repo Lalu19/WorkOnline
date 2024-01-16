@@ -11,12 +11,13 @@ namespace CloudVOffice.Data.DTO.ProductCategories
     {
         public int? CategoryId { get; set; }
         public int SectorId { get; set; }
-        public string CategoryName { get; set; }
-
+        public string? CategoryName { get; set; }
+        public string? CategoryImage { get; set; }
         //public string? IconPicture { get; set; }
         //public int? Parent { get; set; }
         //public bool IsActive { get; set; }
         public Int64 CreatedBy { get; set; }
+        public IFormFile? CategoryImageUp { get; set; }
         //public IFormFile? IconPictureUp { get; set; }
         //public List<CategoryDTO> CategoryDTOs { get; set; }
     }

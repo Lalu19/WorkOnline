@@ -4,6 +4,7 @@ using CloudVOffice.Data.DTO.ProductCategories;
 using CloudVOffice.Services.ProductCategories;
 using CloudVOffice.Web.Framework;
 using CloudVOffice.Web.Framework.Controllers;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,11 +20,13 @@ namespace Warehouse.Management.Controllers
         private readonly ISubCategory2Service _subcategory2Service;
         private readonly ISubCategory1Service _subcategory1Service;
         private readonly ISectorService _sectorService;
-        public SubCategory2Controller(ISubCategory2Service subcategory2Service, ISubCategory1Service subcategory1Service, ISectorService sectorService)
+        private readonly IWebHostEnvironment _hostingEnvironment;
+        public SubCategory2Controller(ISubCategory2Service subcategory2Service, ISubCategory1Service subcategory1Service, ISectorService sectorService, IWebHostEnvironment hostingEnvironment)
         {
             _subcategory2Service = subcategory2Service;
             _subcategory1Service = subcategory1Service;
             _sectorService = sectorService;
+            _hostingEnvironment = hostingEnvironment;
         }
         [HttpGet]
         public IActionResult SubCategory2Create(int? SubCategory2Id)
@@ -41,6 +44,7 @@ namespace Warehouse.Management.Controllers
                 subcategory2DTO.CategoryId = d.CategoryId;
                 subcategory2DTO.SubCategory1Id = d.SubCategory1Id;
                 subcategory2DTO.SubCategory2Name = d.SubCategory2Name;
+                subcategory2DTO.SubCategory2Image = d.SubCategory2Image;
 
             }
             return View("~/Plugins/Warehouse.Management/Views/ProductCategories/SubCategory2Create.cshtml", subcategory2DTO);
@@ -51,6 +55,23 @@ namespace Warehouse.Management.Controllers
             subcategory2DTO.CreatedBy = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
             if (ModelState.IsValid)
             {
+                if (subcategory2DTO.SubCategory2ImageUp != null)
+                {
+                    FileInfo fileInfo = new FileInfo(subcategory2DTO.SubCategory2ImageUp.FileName);
+                    string extn = fileInfo.Extension.ToLower();
+                    Guid id = Guid.NewGuid();
+                    string filename = id.ToString() + extn;
+
+                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads/Subcategory2");
+                    if (!Directory.Exists(uploadsFolder))
+                    {
+                        Directory.CreateDirectory(uploadsFolder);
+                    }
+                    string uniqueFileName = Guid.NewGuid().ToString() + "_" + filename;
+                    string imagePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    subcategory2DTO.SubCategory2ImageUp.CopyTo(new FileStream(imagePath, FileMode.Create));
+                    subcategory2DTO.SubCategory2Image = uniqueFileName;
+                }
                 if (subcategory2DTO.SubCategory2Id == null)
                 {
                     var a = _subcategory2Service.SubCategory2Create(subcategory2DTO);

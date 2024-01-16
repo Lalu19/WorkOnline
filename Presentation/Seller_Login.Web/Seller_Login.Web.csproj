@@ -15,6 +15,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Content Remove="Views\Shared\_SellerLayout.cshtml" />
 	  <Content Remove="wwwroot\app\fonts\icomoon\icomoon.svg" />
 	  <Content Remove="wwwroot\app\fonts\opensans\opensans-bold-webfont.woff2" />
 	  <Content Remove="wwwroot\app\fonts\opensans\opensans-regular-webfont.woff2" />
@@ -306,11 +307,12 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="Views\Shared\" />
+    <Folder Include="wwwroot\uploads\SellerRegistration\" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Shared\_SellerLayout.cshtml" />
     <None Include="wwwroot\app\fonts\icomoon\icomoon.svg" />
     <None Include="wwwroot\app\fonts\opensans\opensans-bold-webfont.woff2" />
     <None Include="wwwroot\app\fonts\opensans\opensans-regular-webfont.woff2" />
@@ -634,6 +636,12 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\CloudVOffice.Web.Framework\CloudVOffice.Web.Framework.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Views\Shared\_SellerLayout.cshtml" />
+	</ItemGroup>
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="Views\Shared\_SellerLayout.cshtml" />
 	</ItemGroup>
 
 </Project>

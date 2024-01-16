@@ -28,6 +28,10 @@
 		<Folder Include="wwwroot\uploads\damagefarmigproduct\" />
 		<Folder Include="wwwroot\uploads\Brandimages\" />
 		<Folder Include="wwwroot\uploads\Bannerimages\" />
+		<Folder Include="wwwroot\uploads\SubCategory3\" />
+		<Folder Include="wwwroot\uploads\SubCategory4\" />
+		<Folder Include="wwwroot\uploads\Subcategory2\" />
+		<Folder Include="wwwroot\uploads\Subcategory1\" />
 
 
 	</ItemGroup>

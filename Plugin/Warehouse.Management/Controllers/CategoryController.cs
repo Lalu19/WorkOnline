@@ -22,13 +22,15 @@ namespace Warehouse.Management.Controllers
     {
         private readonly ICategoryService _categoryService;
         private readonly ISectorService _sectorService;
-       // private readonly IWebHostEnvironment _hostingEnvironment;
-        public CategoryController(ICategoryService categoryService, ISectorService sectorService)
+        private readonly IWebHostEnvironment _hostingEnvironment;
+        
+        public CategoryController(ICategoryService categoryService, ISectorService sectorService, IWebHostEnvironment hostingEnvironment)
         {
 
             _categoryService = categoryService;
             _sectorService = sectorService;
-           // _hostingEnvironment = hostingEnvironment;
+            _hostingEnvironment = hostingEnvironment;
+           
         }
 
         [HttpGet]
@@ -43,6 +45,7 @@ namespace Warehouse.Management.Controllers
 
                 categoryDTO.SectorId = d.SectorId;
                 categoryDTO.CategoryName = d.CategoryName;
+                categoryDTO.CategoryImage = d.CategoryImage;
               
             }
             return View("~/Plugins/Warehouse.Management/Views/ProductCategories/CategoryCreate.cshtml", categoryDTO);
@@ -54,7 +57,24 @@ namespace Warehouse.Management.Controllers
             categoryDTO.CreatedBy = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
 			if (ModelState.IsValid)
 			{
-				if (categoryDTO.CategoryId == null)
+                if (categoryDTO.CategoryImageUp != null)
+                {
+                    FileInfo fileInfo = new FileInfo(categoryDTO.CategoryImageUp.FileName);
+                    string extn = fileInfo.Extension.ToLower();
+                    Guid id = Guid.NewGuid();
+                    string filename = id.ToString() + extn;
+
+                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads/Category");
+                    if (!Directory.Exists(uploadsFolder))
+                    {
+                        Directory.CreateDirectory(uploadsFolder);
+                    }
+                    string uniqueFileName = Guid.NewGuid().ToString() + "_" + filename;
+                    string imagePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    categoryDTO.CategoryImageUp.CopyTo(new FileStream(imagePath, FileMode.Create));
+                    categoryDTO.CategoryImage = uniqueFileName;
+                }
+                if (categoryDTO.CategoryId == null)
 				{
 					var a = _categoryService.CategoryCreate(categoryDTO);
 
