@@ -12,7 +12,7 @@ namespace CloudVOffice.Services.Sales
 {
     public interface ISalesManagerTargetService
     {
-        public MessageEnum CreateSalesManagerTarget(SalesManagerTargetDTO salesManagerTargetDTO);
+        public MessageEnum CreateSalesManagerTarget(SalesManagerrTargetDTO salesManagerTargetDTO);
 
         public List<SalesManagerTarget> GetTargetsBySectorIdBySalesManagerTarget(Int64 sectorId);
         public SalesManagerTarget GetSalesManagerTargetBySalesManagerTargetId(Int64 salesManagerTargetId);
@@ -20,12 +20,12 @@ namespace CloudVOffice.Services.Sales
         public List<SalesManagerTarget> GetTargetsByCategoryIdBySalesManagerTarget(Int64 categoryId);
         public List<SalesManagerTarget> GetTargetsByMonthBySalesManagerTarget(Int64 monthId);
         //public MessageEnum UpdateTargetsBySalesAdmin(SalesAdminDTO salesAdminDTO);
-        public MessageEnum UpdateTargetsBySalesManagerTarget(SalesManagerTargetDTO salesManagerTargetDTO);
+        public MessageEnum UpdateTargetsBySalesManagerTarget(SalesManagerrTargetDTO salesManagerTargetDTO);
 
 
         public MessageEnum DeleteTargetsBySalesManagerTarget(Int64 salesManagerTargetId, Int64 DeletedBy);
         public string GetCategoryIdByName(string categoryName);
-        MessageEnum CreateSalesManagerTarget(object target);
-        MessageEnum UpdateTargetsBySalesManagerTarget(object target);
+        //MessageEnum CreateSalesManagerTarget(object target);
+        //MessageEnum UpdateTargetsBySalesManagerTarget(object target);
     }
 }

@@ -15,11 +15,11 @@ namespace CloudVOffice.Core.Domain.Sales
     public class SalesManagerTarget : IAuditEntity, ISoftDeletedEntity
     {
         public Int64 SalesManagerTargetId { get; set; }
-        public Int64? StateId { get; set; }
+        //public Int64? StateId { get; set; }
         public Int64? MonthId { get; set; }
         public int? SectorId { get; set; }
         public int? CategoryId { get; set; }
-        public Int64? UnitId { get; set; }
+        //public Int64? UnitId { get; set; }
         public Int64? BrandId { get; set; }
         public double? MonthlyCategoryWiseTarget { get; set; }
         public double? MonthlySectorWiseTargetByAdmin { get; set; }
@@ -38,14 +38,5 @@ namespace CloudVOffice.Core.Domain.Sales
 
         [ForeignKey("CategoryId")]
         public Category Category { get; set; }
-
-        [ForeignKey("StateId")]
-        public State State { get; set; }
-
-        [ForeignKey("UnitId")]
-        public Unit Unit { get; set; }
-
-        [ForeignKey("BrandId")]
-        public Brand Brand { get; set; }
     }
 }

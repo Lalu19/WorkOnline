@@ -45,6 +45,7 @@ namespace Seller_Login.Web.Controllers
 		{
 			return View();
 		}
+
 		[HttpPost]
 		public async Task<IActionResult> SellerLogin(LoginModel model, string? ReturnUrl)
 		{

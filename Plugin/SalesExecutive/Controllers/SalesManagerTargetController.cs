@@ -1,8 +1,10 @@
 ﻿using CloudVOffice.Core.Domain.Common;
 using CloudVOffice.Core.Domain.Sales;
+using CloudVOffice.Core.Domain.WareHouses.Brands;
 using CloudVOffice.Data.DTO.Sales;
 using CloudVOffice.Services.ProductCategories;
 using CloudVOffice.Services.Sales;
+using CloudVOffice.Services.WareHouses.Brands;
 using CloudVOffice.Services.WareHouses.Months;
 using CloudVOffice.Web.Framework;
 using CloudVOffice.Web.Framework.Controllers;
@@ -22,23 +24,26 @@ namespace SalesExecutive.Controllers
         private readonly ISectorService _sectorService;
         private readonly ICategoryService _categoryService;
         private readonly IMonthService _monthService;
+		private readonly IBrandService _brandService;
 
 
-        public SalesManagerTargetController(ISalesManagerTargetService salesManagerTargetService, ISectorService sectorService, ICategoryService categoryService, IMonthService monthService)
+		public SalesManagerTargetController(ISalesManagerTargetService salesManagerTargetService, ISectorService sectorService, ICategoryService categoryService, IMonthService monthService, IBrandService brandService)
         {
             _salesManagerTargetService = salesManagerTargetService;
             _sectorService = sectorService;
             _categoryService = categoryService;
             _monthService = monthService;
-        }
+			_brandService= brandService;
+
+		}
 
 
 
         [HttpGet]
-        public IActionResult CreateSalesManagerTarget(int? salesManagerTargetId)
+        public IActionResult CreateSalesManagerTargets(int? salesManagerTargetId)
         {
-
-            ViewBag.Sectors = _sectorService.GetSectorList();
+			ViewBag.Brands = _brandService.GetBrandList();
+			ViewBag.Sectors = _sectorService.GetSectorList();
             ViewBag.Categories = _categoryService.GetCategoryList();
             ViewBag.months = _monthService.GetMonthList();
 
@@ -55,7 +60,7 @@ namespace SalesExecutive.Controllers
                 salesManagerTargetDTO.MonthlyCategoryWiseTarget = target.MonthlyCategoryWiseTarget;
                 salesManagerTargetDTO.MonthlySectorWiseTargetByAdmin = target.MonthlySectorWiseTargetByAdmin;
                 salesManagerTargetDTO.MonthlyBrandWiseTarget = target.MonthlyBrandWiseTarget;
-                salesManagerTargetDTO.UnitId = target.UnitId;
+                //salesManagerTargetDTO.UnitId = target.UnitId;
                 //salesAdminDTO.Districts = target.Districts;
 
             }
@@ -68,7 +73,7 @@ namespace SalesExecutive.Controllers
 
 
         [HttpPost]
-        public IActionResult CreateSalesManagerTarget([FromBody] SalesManagerTargetMasterDTO model)
+        public IActionResult CreateSalesManagerTargets([FromBody] SalesManagerTargetMasterDTO model)
         {
             foreach (var target in model.Targets)
             {
@@ -160,5 +165,18 @@ namespace SalesExecutive.Controllers
             var a = _monthService.GetMonthIdByName(monthName);
             return a;
         }
-    }
+		public List<Brand> BrandsBySectorId(Int64 sectorId)
+		{
+			var brands = _brandService.GetBrandsBySectorId(sectorId);
+			var uniqueBrands = brands.GroupBy(b => b.BrandId).Select(g => g.First()).ToList();
+
+			return uniqueBrands;
+		}
+
+		public Int64 GetBrandIdByName(string brandName)
+		{
+			var a = _brandService.GetBrandIdByBrandName(brandName);
+			return a;
+		}
+	}
 }

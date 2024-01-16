@@ -14,6 +14,7 @@ namespace CloudVOffice.Data.DTO.Sales
         public Int64 MonthId { get; set; }
         public Int64? SectorId { get; set; }
 		public Int64? CategoryId { get; set; }
+		public Int64? BrandId { get; set; }
 		public string? Sector { get; set; }
 		public string? Category { get; set; }
 		public double? MonthlyCategoryWiseTarget { get; set; }

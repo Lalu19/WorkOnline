@@ -35,9 +35,6 @@ namespace CloudVOffice.Core.Domain.Sales
         [ForeignKey("CategoryId")]
         public Category Category { get; set; }
 
-        [ForeignKey("UnitId")]
-        public Unit Unit { get; set; }
-
         [ForeignKey("BrandId")]
         public Brand Brand { get; set; }
     }

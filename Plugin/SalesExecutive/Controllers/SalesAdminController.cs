@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Authorization;
 using CloudVOffice.Services.ProductCategories;
 using CloudVOffice.Services.WareHouses.Months;
 using CloudVOffice.Core.Domain.Sales;
+using CloudVOffice.Services.WareHouses.Brands;
+using CloudVOffice.Core.Domain.WareHouses.Brands;
 
 namespace SalesExecutive.Controllers
 {
@@ -25,14 +27,16 @@ namespace SalesExecutive.Controllers
 		private readonly ISectorService _sectorService;
 		private readonly ICategoryService _categoryService;
 		private readonly IMonthService _monthService;
+		private readonly IBrandService _brandService;
 		
 
-		public SalesAdminController(ISalesAdminService salesAdminService, ISectorService sectorService, ICategoryService categoryService,IMonthService monthService)
+		public SalesAdminController(ISalesAdminService salesAdminService, ISectorService sectorService, ICategoryService categoryService,IMonthService monthService,IBrandService brandService)
 		{
 			_salesAdminService = salesAdminService;
 			_sectorService = sectorService;
 			_categoryService = categoryService;
 			_monthService = monthService;
+			_brandService = brandService;
 		}
 
 
@@ -44,6 +48,7 @@ namespace SalesExecutive.Controllers
 			ViewBag.Sectors = _sectorService.GetSectorList();
 			ViewBag.Categories = _categoryService.GetCategoryList();
 			ViewBag.months = _monthService.GetMonthList();
+			ViewBag.Brands = _brandService.GetBrandList();
 
 			SalesAdminDTO salesAdminDTO = new SalesAdminDTO();
 
@@ -188,15 +193,16 @@ namespace SalesExecutive.Controllers
 
 			//ViewBag.SalesTarget = _salesAdminService.GetAllTargetsBySalesAdmin();
 			// Redirect or return the appropriate view
-			return Redirect("/SalesExecutive/SalesAdmin/SalesAdminTargetView");
+			//return Redirect("/SalesExecutive/SalesAdmin/SalesAdminTargetView");
 
 			//return View("~/Plugins/SalesExecutive/Views/SalesAdmins/SalesAdminView.cshtml", ViewBag.SalesTarget);
+
+			return Ok();
 		}
 
 
-
+		[HttpGet]
 		public IActionResult SalesAdminTargetView()
-		
 		{
 			ViewBag.SalesTarget = _salesAdminService.GetAllTargetsBySalesAdmin();
 
@@ -204,7 +210,7 @@ namespace SalesExecutive.Controllers
 		}
 
 
-        [HttpGet]
+		[HttpGet]
         public IActionResult SalesAdminTargetDelete(int SalesAdminTargetId)
         {
             Int64 DeletedBy = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
@@ -226,5 +232,19 @@ namespace SalesExecutive.Controllers
 			return a;
 		}
 
+
+		public List<Brand> BrandsBySectorId(Int64 sectorId)
+		{
+			var brands = _brandService.GetBrandsBySectorId(sectorId);
+			var uniqueBrands = brands.GroupBy(b => b.BrandId).Select(g => g.First()).ToList();
+
+			return uniqueBrands;
+		}
+
+		public Int64 GetBrandIdByName(string brandName)
+		{
+			var a = _brandService.GetBrandIdByBrandName(brandName);
+			return a;
+		}
 	}
 }
