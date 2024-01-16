@@ -71,61 +71,59 @@ namespace SalesExecutive.Controllers
             return View("~/Plugins/SalesExecutive/Views/BrandWiseTargets/BrandWiseTargetCreate.cshtml", brandWiseTargetDTO);
         }
 
-        //[HttpPost]
-        //public IActionResult BrandWiseTargetCreate([FromBody] BrandWiseTargetMasterDTO model)
-        //{
-        //    foreach (var target in model.Targetss)
-        //    {
-        //        target.CreatedBy = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
+        [HttpPost]
+        public IActionResult BrandWiseTargetCreate([FromBody] BrandWiseTargetMasterDTO model)
+        {
+            foreach (var target in model.Targetss)
+            {
+                target.CreatedBy = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
 
-        //        if (target.BrandWiseTargetId == null)
-        //        {
+                if (target.BrandWiseTargetId == null)
+                {
 
-        //            var result = _brandWiseTargetService.BrandWiseTargetCreate(target);
+                    var result = _brandWiseTargetService.BrandWiseTargetCreate(target);
 
-        //            if (result == MessageEnum.Success)
-        //            {
-        //                TempData["msg"] = MessageEnum.Success;
-        //            }
-        //            else if (result == MessageEnum.Duplicate)
-        //            {
-        //                TempData["msg"] = MessageEnum.Duplicate;
-        //                ModelState.AddModelError("", "Already Exists");
-        //            }
-        //            else
-        //            {
-        //                TempData["msg"] = MessageEnum.UnExpectedError;
-        //                ModelState.AddModelError("", "Un-Expected Error");
-        //            }
-        //        }
-        //        else
-        //        {
-        //            var result = _brandWiseTargetService.BrandWiseTargetUpdate(target);
+                    if (result == MessageEnum.Success)
+                    {
+                        TempData["msg"] = MessageEnum.Success;
+                    }
+                    else if (result == MessageEnum.Duplicate)
+                    {
+                        TempData["msg"] = MessageEnum.Duplicate;
+                        ModelState.AddModelError("", "Already Exists");
+                    }
+                    else
+                    {
+                        TempData["msg"] = MessageEnum.UnExpectedError;
+                        ModelState.AddModelError("", "Un-Expected Error");
+                    }
+                }
+                else
+                {
+                    var result = _brandWiseTargetService.BrandWiseTargetUpdate(target);
 
-        //            if (result == MessageEnum.Updated)
-        //            {
-        //                TempData["msg"] = MessageEnum.Updated;
-        //                return Redirect("/SalesExecutive/BrandWiseTarget/BrandWiseTargetView");
-        //            }
-        //            else if (result == MessageEnum.Duplicate)
-        //            {
-        //                TempData["msg"] = MessageEnum.Duplicate;
-        //                ModelState.AddModelError("", "Already Exists");
-        //            }
-        //            else
-        //            {
-        //                TempData["msg"] = MessageEnum.UnExpectedError;
-        //                ModelState.AddModelError("", "Un-Expected Error");
-        //            }
-        //        }
-        //    }
+                    if (result == MessageEnum.Updated)
+                    {
+                        TempData["msg"] = MessageEnum.Updated;
+                        return Redirect("/SalesExecutive/BrandWiseTarget/BrandWiseTargetView");
+                    }
+                    else if (result == MessageEnum.Duplicate)
+                    {
+                        TempData["msg"] = MessageEnum.Duplicate;
+                        ModelState.AddModelError("", "Already Exists");
+                    }
+                    else
+                    {
+                        TempData["msg"] = MessageEnum.UnExpectedError;
+                        ModelState.AddModelError("", "Un-Expected Error");
+                    }
+                }
+            }
 
+            ViewBag.BrandTarget = _brandWiseTargetService.GetBrandWiseTargetList();
 
-
-        //    ViewBag.BrandTarget = _brandWiseTargetService.GetBrandWiseTargetList();
-
-        //    return View("~/Plugins/SalesExecutive/Views/BrandWiseTargets/BrandWiseTargetView.cshtml");
-        //}
+            return View("~/Plugins/SalesExecutive/Views/BrandWiseTargets/BrandWiseTargetView.cshtml");
+        }
 
         public IActionResult BrandWiseTargetView()
 
