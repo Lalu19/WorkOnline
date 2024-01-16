@@ -4,6 +4,7 @@ using CloudVOffice.Data.DTO.ProductCategories;
 using CloudVOffice.Services.ProductCategories;
 using CloudVOffice.Web.Framework;
 using CloudVOffice.Web.Framework.Controllers;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -21,14 +22,16 @@ namespace Warehouse.Management.Controllers
 		private readonly ISubCategory2Service _subcategory2Service;
 		private readonly ISubCategory1Service _subcategory1Service;
 		private readonly ISectorService _sectorService;
-		public SubCategory4Controller(ISubCategory2Service subcategory2Service, ISubCategory1Service subcategory1Service, ISectorService sectorService, ISubCategory3Service subcategory3Service, ISubCategory4Service subcategory4Service)
+        private readonly IWebHostEnvironment _hostingEnvironment;
+        public SubCategory4Controller(ISubCategory2Service subcategory2Service, ISubCategory1Service subcategory1Service, ISectorService sectorService, ISubCategory3Service subcategory3Service, ISubCategory4Service subcategory4Service, IWebHostEnvironment hostingEnvironment)
 		{
 			_subcategory2Service = subcategory2Service;
 			_subcategory1Service = subcategory1Service;
 			_sectorService = sectorService;
 			_subcategory3Service = subcategory3Service;
 			_subcategory4Service = subcategory4Service;
-		}
+            _hostingEnvironment = hostingEnvironment;
+        }
 		[HttpGet]
 		public IActionResult SubCategory4Create(int? SubCategory4Id)
 		{
@@ -48,6 +51,7 @@ namespace Warehouse.Management.Controllers
 				subcategory4DTO.SubCategory2Id = d.SubCategory2Id;
 				subcategory4DTO.SubCategory3Id=d.SubCategory3Id;
 				subcategory4DTO.SubCategory4Name = d.SubCategory4Name;
+				subcategory4DTO.SubCategory4Image = d.SubCategory4Image;
 
 			}
 			return View("~/Plugins/Warehouse.Management/Views/ProductCategories/SubCategory4Create.cshtml", subcategory4DTO);
@@ -57,8 +61,25 @@ namespace Warehouse.Management.Controllers
 		{
 			subcategory4DTO.CreatedBy = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
 			if (ModelState.IsValid)
-			{
-				if (subcategory4DTO.SubCategory4Id == null)
+            {
+                if (subcategory4DTO.SubCategory4ImageUp != null)
+                {
+                    FileInfo fileInfo = new FileInfo(subcategory4DTO.SubCategory4ImageUp.FileName);
+                    string extn = fileInfo.Extension.ToLower();
+                    Guid id = Guid.NewGuid();
+                    string filename = id.ToString() + extn;
+
+                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads/Subcategory4");
+                    if (!Directory.Exists(uploadsFolder))
+                    {
+                        Directory.CreateDirectory(uploadsFolder);
+                    }
+                    string uniqueFileName = Guid.NewGuid().ToString() + "_" + filename;
+                    string imagePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    subcategory4DTO.SubCategory4ImageUp.CopyTo(new FileStream(imagePath, FileMode.Create));
+                    subcategory4DTO.SubCategory4Image = uniqueFileName;
+                }
+                if (subcategory4DTO.SubCategory4Id == null)
 				{
 					var a = _subcategory4Service.SubCategory4Create(subcategory4DTO);
 
