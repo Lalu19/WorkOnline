@@ -1,7 +1,9 @@
 ﻿using CloudVOffice.Core.Domain.Common;
 using CloudVOffice.Core.Domain.Sellers;
 using CloudVOffice.Core.Domain.WareHouses.PinCodes;
+using CloudVOffice.Core.Security;
 using CloudVOffice.Data.DTO.Sellers;
+using CloudVOffice.Data.DTO.Users;
 using CloudVOffice.Data.DTO.WareHouses.PinCodes;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
@@ -182,5 +184,42 @@ namespace CloudVOffice.Services.Sellers
                .Where(x => x.PrimaryPhone == UserMobileNumber).SingleOrDefault();
             return SellerUser;
         }
-    }
+
+		public async Task<MessageEnum> UpdateSellerRegUser(SellerRegistrationDTO sellerRegistrationDTO)
+		{
+			var seller = _dbContext.SellerRegistrations.SingleOrDefault(opt => opt.SellerRegistrationId == sellerRegistrationDTO.SellerRegistrationId && opt.Deleted == false);
+
+			if (seller != null)
+			{
+				seller.Name = sellerRegistrationDTO.Name;
+				seller.BusinessName = sellerRegistrationDTO.BusinessName;
+				seller.Address = sellerRegistrationDTO.Address;
+				//seller.PinCodeId = sellerRegistrationDTO.PinCodeId;
+				seller.Country = sellerRegistrationDTO.Country;
+				//seller.State = sellerRegistrationDTO.State;
+				//seller.PrimaryPhone = sellerRegistrationDTO.PrimaryPhone;
+				//seller.AlternatePhone = sellerRegistrationDTO.AlternatePhone;
+				//seller.MailId = sellerRegistrationDTO.MailId;
+				//seller.SalesRepresentativeId = sellerRegistrationDTO.SalesRepresentativeId;
+				//seller.SalesRepresentativeContact = sellerRegistrationDTO.SalesRepresentativeContact;
+				//seller.GSTNumber = sellerRegistrationDTO.GSTNumber;
+				//seller.WareHuoseId = sellerRegistrationDTO.WareHuoseId;
+				////seller.Password = sellerRegistrationDTO.Password;
+				//seller.SectorId = sellerRegistrationDTO.SectorId;
+				//seller.Image = sellerRegistrationDTO.Image;
+				seller.UpdatedBy = sellerRegistrationDTO.CreatedBy;
+				seller.UpdatedDate = DateTime.Now;
+
+				_dbContext.SaveChanges();
+
+				return MessageEnum.Updated;
+			}
+			else
+			{
+				return MessageEnum.Invalid;
+			}
+		}
+
+
+	}
 }
