@@ -67,6 +67,18 @@
                                 <span asp-validation-for="CategoryName"></span>
                                 <div asp-validation-summary="ModelOnly" class="message-error"></div>
                             </div>
+                            <div class="form-group col-md-3">
+                                <label for="CategoryImage" class="form-label">Category Image</label>
+                                <input asp-for="@Model.CategoryImageUp" type="file" class="form-control" autofocus="autofocus" placeholder="Category Image" />
+                                <span asp-validation-for="CategoryImage"></span>
+                                @{
+                                    if (Model.CategoryImage != null)
+                                    {
+                                        <img src="/uploads/setup/@Model.CategoryImage" style="height:100px; width:100px" />
+                                        <input type="hidden" asp-for="@Model.CategoryImage">
+                                    }
+                                }
+                            </div>
 
                         </div>
                     </div>

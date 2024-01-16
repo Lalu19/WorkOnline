@@ -15,6 +15,7 @@ namespace CloudVOffice.Core.Domain.ProductCategories
         public int? SubCategory2Id { get; set; }
         public int? SubCategory3Id { get; set; }
         public string SubCategory4Name { get; set; }
+        public string SubCategory4Image { get; set; }
         public Int64 CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
         public Int64? UpdatedBy { get; set; }

@@ -101,6 +101,18 @@
                                 <span asp-validation-for="SubCategory2Name"></span>
                                 <div asp-validation-summary="ModelOnly" class="message-error"></div>
                             </div>
+                            <div class="form-group col-md-3">
+                                <label for="SubCategory2Image" class="form-label">SubCategory2 Image</label>
+                                <input asp-for="@Model.SubCategory2ImageUp" type="file" class="form-control" autofocus="autofocus" placeholder="SubCategory2 Image" />
+                                <span asp-validation-for="SubCategory2Image"></span>
+                                @{
+                                    if (Model.SubCategory2Image != null)
+                                    {
+                                        <img src="/uploads/setup/@Model.SubCategory2Image" style="height:100px; width:100px" />
+                                        <input type="hidden" asp-for="@Model.SubCategory2Image">
+                                    }
+                                }
+                            </div>
 
                         </div>
                     </div>

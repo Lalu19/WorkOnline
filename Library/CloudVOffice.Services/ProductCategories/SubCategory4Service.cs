@@ -34,6 +34,7 @@ namespace CloudVOffice.Services.ProductCategories
 					ct.SubCategory2Id = subCategory4DTO.SubCategory2Id;
 					ct.SubCategory3Id= subCategory4DTO .SubCategory3Id;
 					ct.SubCategory4Name = subCategory4DTO.SubCategory4Name;
+					ct.SubCategory4Image = subCategory4DTO.SubCategory4Image;
 
 					ct.CreatedBy = subCategory4DTO.CreatedBy;
 					ct.CreatedDate = System.DateTime.Now;
@@ -84,6 +85,7 @@ namespace CloudVOffice.Services.ProductCategories
 						a.SubCategory2Id = subCategory4DTO.SubCategory2Id;
 						a.SubCategory3Id=subCategory4DTO.SubCategory3Id;
 						a.SubCategory4Name = subCategory4DTO.SubCategory4Name;
+						a.SubCategory4Image = subCategory4DTO.SubCategory4Image;
 						a.UpdatedBy = subCategory4DTO.CreatedBy;
 						a.UpdatedDate = DateTime.Now;
 

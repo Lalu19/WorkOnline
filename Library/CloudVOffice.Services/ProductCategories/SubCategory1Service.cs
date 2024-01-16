@@ -31,6 +31,7 @@ namespace CloudVOffice.Services.ProductCategories
                     ct.SectorId = subCategory1DTO.SectorId;
                     ct.CategoryId = subCategory1DTO.CategoryId;
                     ct.SubCategory1Name = subCategory1DTO.SubCategory1Name;
+                    ct.SubCategory1Image= subCategory1DTO.SubCategory1Image;
                     ct.GSTId = subCategory1DTO.GSTId;
                     ct.HSN = subCategory1DTO.HSN;
 
@@ -80,6 +81,7 @@ namespace CloudVOffice.Services.ProductCategories
                         a.SectorId = subCategory1DTO.SectorId;
                         a.CategoryId = subCategory1DTO.CategoryId;
                         a.SubCategory1Name = subCategory1DTO.SubCategory1Name;
+                        a.SubCategory1Image = subCategory1DTO.SubCategory1Image;
                         a.GSTId = subCategory1DTO.GSTId;
                         a.HSN = subCategory1DTO.HSN;
                         a.UpdatedBy = subCategory1DTO.CreatedBy;

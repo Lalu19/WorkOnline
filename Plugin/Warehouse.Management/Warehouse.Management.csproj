@@ -55,6 +55,8 @@
 		<None Remove="Views\ProductCategories\SubCategory3View.cshtml" />
 		<None Remove="Views\ProductCategories\SubCategory4Create.cshtml" />
 		<None Remove="Views\ProductCategories\SubCategory4View.cshtml" />
+		<None Remove="Views\PurchaseOrder\PurchaseOrderCreate.cshtml" />
+		<None Remove="Views\PurchaseOrder\PurchaseOrderView.cshtml" />
 		<None Remove="Views\State\StateCreate.cshtml" />
 		<None Remove="Views\State\StateView.cshtml" />
 		<None Remove="Views\UnitConversionFactors\UnitConversionFactorsCreate.cshtml" />
