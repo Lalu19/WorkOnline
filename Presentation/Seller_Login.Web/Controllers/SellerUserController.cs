@@ -144,9 +144,9 @@ namespace Seller_Login.Web.Controllers
 		[HttpPost]
 		public async Task<IActionResult> UpdateSellerProfile(SellerRegistrationDTO sellerRegistrationDTO)
 		{
-			if (sellerRegistrationDTO.SellerImageUp != null)
+			if (sellerRegistrationDTO.ImageUp != null)
 			{
-				FileInfo fileInfo = new FileInfo(sellerRegistrationDTO.SellerImageUp.FileName);
+				FileInfo fileInfo = new FileInfo(sellerRegistrationDTO.ImageUp.FileName);
 				string extn = fileInfo.Extension.ToLower();
 				Guid id = Guid.NewGuid();
 				string filename = id.ToString() + extn;
@@ -158,7 +158,7 @@ namespace Seller_Login.Web.Controllers
 				}
 				string uniqueFileName = Guid.NewGuid().ToString() + "_" + filename;
 				string imagePath = Path.Combine(uploadsFolder, uniqueFileName);
-				sellerRegistrationDTO.SellerImageUp.CopyTo(new FileStream(imagePath, FileMode.Create));
+				sellerRegistrationDTO.ImageUp.CopyTo(new FileStream(imagePath, FileMode.Create));
 				sellerRegistrationDTO.Image = uniqueFileName;
 			}
 			if (sellerRegistrationDTO.SellerRegistrationId != null)

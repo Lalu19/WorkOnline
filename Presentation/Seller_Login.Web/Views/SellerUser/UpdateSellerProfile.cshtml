@@ -87,7 +87,7 @@
 								</div>
 								<div class="form-group col-md-3">
 									<label for="Image" class="form-label">Seller Image</label>
-									<input asp-for="@Model.SellerImageUp" type="file" class="form-control" autofocus="autofocus" placeholder="Seller Image" value="@Profiledetails.Image" />
+									<input asp-for="@Model.ImageUp" type="file" class="form-control" autofocus="autofocus" placeholder="Seller Image" value="@Profiledetails.Image" />
 									<span asp-validation-for="Image"></span>
 									@{
 										if (Model.Image != null)
