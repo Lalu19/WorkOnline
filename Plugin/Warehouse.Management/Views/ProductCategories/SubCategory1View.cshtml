@@ -67,13 +67,12 @@
                         <e-grid-pagesettings pageCount="4" pageSizes="true"></e-grid-pagesettings>
                         <e-grid-columns>
 
-
                             <e-grid-column field="SectorName" headerText="Sector Name" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column field="CategoryName" headerText="Category Name" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column field="SubCategory1Name" headerText="SubCategory1 Name" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="SubCategory1Image" template="#ImageTemplate" headerText="SubCategory1  Image" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column field="GSTValue" headerText="GST" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column field="HSN" headerText="HSN" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="SubCategory1Image" template="#ImageTemplate" headerText="SubCategory1 Image" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column headerText="Action" template="#Actions" width="50"></e-grid-column>
                         </e-grid-columns>
                     </ejs-grid>
@@ -183,6 +182,9 @@
     ${statusDetail(data)}
 </script>
 
+<script id="ImageTemplate" type="text/x-template">${ imageTemplate(data)}</script>
+
+
 <script>
     function toolbarClick(args) {
         var gridObj = document.getElementById("GridOverview").ej2_instances[0];
@@ -215,6 +217,16 @@
 
     function dataBound(args) {
         this.autoFitColumns();
+    }
+
+    function imageTemplate(i) {
+
+        if (i.SubCategory1Image != null) {
+            return ' <img src="/uploads/Subcategory1/' + i.SubCategory1Image + '" style="height:100px; width:100px ;padding: 5px 0px 5px 0;" />';
+        }
+        else {
+            return 'No Image';
+        }
     }
 
 </script>
