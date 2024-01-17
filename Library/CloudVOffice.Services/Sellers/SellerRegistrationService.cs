@@ -226,6 +226,26 @@ namespace CloudVOffice.Services.Sellers
             }
         }
 
+        public async Task<MessageEnum> UpdateSellerPassword(SellerUpdateDTO sellerUpdateDTO)
+        {
+            var seller = _dbContext.SellerRegistrations.SingleOrDefault(opt => opt.SellerRegistrationId == sellerUpdateDTO.SellerRegistrationId && opt.Deleted == false);
 
-	}
+            if (seller != null)
+            {
+               
+                seller.PrimaryPhone = sellerUpdateDTO.PrimaryPhone;
+                seller.Password = sellerUpdateDTO.Password;
+              
+                seller.UpdatedBy = sellerUpdateDTO.CreatedBy;
+                seller.UpdatedDate = DateTime.Now;
+                _dbContext.SaveChanges();
+
+                return MessageEnum.Updated;
+            }
+            else
+            {
+                return MessageEnum.Invalid;
+            }
+        }
+    }
 }

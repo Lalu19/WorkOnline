@@ -7,7 +7,6 @@
 
 }
 @addTagHelper *, Syncfusion.EJ2
-
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <header class="main-heading">
@@ -1158,44 +1157,6 @@
     //        });        
 
     </script>
-
-
-
-
-
-
-
-
-
-
-	@*<script>
-		$(document).ready(function () {
-			$("#Add_Target").click(function (e) {
-				var SectorValue = $('#SectorId').val();
-				var SectorText = $('#SectorId option:selected').text();
-				var CategoryValue = $('#CategoryId').val();
-				var CategoryText = $('#CategoryId option:selected').text();
-				var CategoryWiseValue = $('#CategoryWiseTarget').val();
-
-				if (SectorValue && CategoryValue && CategoryWiseValue) {
-					var row = "<tr><td data-value='" + SectorValue + "'>" + SectorValue + "</td><td data-value='" + CategoryValue + "'>" + CategoryValue + "</td><td data-value='" + CategoryWiseValue + "'>" + CategoryWiseValue + "</td><td><button class='delRowBtn'><i class='ion-trash-b' style='color: red;'></i></button></td></tr>";
-
-					$('#Target_tb').append(row);
-				} else {
-					// Handle empty values or show an error message
-					console.error("Sector, Category, and Category Wise values cannot be empty.");
-				}
-			});
-
-			$(document).on("click", ".delRowBtn", function () {
-				$(this).closest("tr").remove();
-			});
-		});
-	</script>*@
-
-
-
-
 
 }
 

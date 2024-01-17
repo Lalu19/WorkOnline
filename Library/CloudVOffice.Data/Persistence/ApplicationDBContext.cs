@@ -19,6 +19,7 @@ using CloudVOffice.Core.Domain.WareHouses.HandlingTypes;
 using CloudVOffice.Core.Domain.WareHouses.Items;
 using CloudVOffice.Core.Domain.WareHouses.Months;
 using CloudVOffice.Core.Domain.WareHouses.PinCodes;
+using CloudVOffice.Core.Domain.WareHouses.PurchaseOrders;
 using CloudVOffice.Core.Domain.WareHouses.States;
 using CloudVOffice.Core.Domain.WareHouses.UOMs;
 using CloudVOffice.Core.Domain.WareHouses.Vehicles;
@@ -101,6 +102,8 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<Month> Months { get; set; }
         public virtual DbSet<Brand> Brands { get; set; }
 		public virtual DbSet<State> States { get; set; }
+		public virtual DbSet<PurchaseOrder> PurchaseOrders { get; set; }
+
 
 		#endregion
 
@@ -118,7 +121,7 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<ChangePassword> ChangePasswords { get; set; }
         public virtual DbSet<Banner> Banners { get; set; }
         public virtual DbSet<BrandWiseTarget> BrandWiseTargets { get; set; }
-		public virtual DbSet<SalesManager> SalesManagers { get; set; }
+		public virtual DbSet<SalesManager> SalesManagers { get; set; }		
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -519,11 +522,23 @@ namespace CloudVOffice.Data.Persistence
               .Property(s => s.Deleted)
               .HasDefaultValue(false)
               .ValueGeneratedNever();
-            #endregion
 
-            #region Sales
+			modelBuilder.Entity<PurchaseOrder>()
+			.Property(s => s.CreatedDate)
+			.HasDefaultValueSql("getdate()");
 
-            modelBuilder.Entity<SalesAdminTarget>()
+
+			modelBuilder.Entity<PurchaseOrder>()
+			  .Property(s => s.Deleted)
+			  .HasDefaultValue(false)
+			  .ValueGeneratedNever();
+
+
+			#endregion
+
+			#region Sales
+
+			modelBuilder.Entity<SalesAdminTarget>()
 	.Property(s => s.CreatedDate)
 	.HasDefaultValueSql("getdate()");
 
@@ -620,7 +635,7 @@ namespace CloudVOffice.Data.Persistence
 			  .Property(s => s.Deleted)
 			  .HasDefaultValue(false)
 			  .ValueGeneratedNever();
-
+			
 
 
 			modelBuilder.Seed();

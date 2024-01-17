@@ -65,6 +65,7 @@
                             <e-grid-column field="SubCategory2Name" headerText="SubCategory2 Name" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column field="SubCategory3Name" headerText="SubCategory3 Name" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column field="SubCategory4Name" headerText="SubCategory4 Name" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="SubCategory4Image" template="#ImageTemplate" headerText="SubCategory4  Image" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column headerText="Action" template="#Actions" width="50"></e-grid-column>
 
                         </e-grid-columns>
@@ -174,7 +175,7 @@
 <script id="statusTemplate" type="text/x-template">
     ${statusDetail(data)}
 </script>
-
+<script id="ImageTemplate" type="text/x-template">${ imageTemplate(data)}</script>
 <script>
     function toolbarClick(args) {
         var gridObj = document.getElementById("GridOverview").ej2_instances[0];
@@ -208,5 +209,13 @@
     function dataBound(args) {
         this.autoFitColumns();
     }
+    function imageTemplate(i) {
 
+        if (i.SubCategory4Image != null) {
+            return ' <img src="/uploads/Subcategory4/' + i.SubCategory4Image + '" style="height:100px; width:100px ;padding: 5px 0px 5px 0;" />';
+        }
+        else {
+            return 'No Image';
+        }
+    }
 </script>

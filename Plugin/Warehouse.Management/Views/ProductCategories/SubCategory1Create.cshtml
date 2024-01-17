@@ -96,6 +96,18 @@
                                 <span asp-validation-for="GST"></span>
                             </div>*@
                             <div class="form-group col-md-3">
+                                <label for="SubCategory1Image" class="form-label">SubCategory1 Image</label>
+                                <input asp-for="@Model.SubCategory1ImageUp" type="file" class="form-control" autofocus="autofocus" placeholder="SubCategory1 Image" />
+                                <span asp-validation-for="SubCategory1Image"></span>
+                                @{
+                                    if (Model.SubCategory1Image != null)
+                                    {
+                                        <img src="/uploads/setup/@Model.SubCategory1Image" style="height:100px; width:100px" />
+                                        <input type="hidden" asp-for="@Model.SubCategory1Image">
+                                    }
+                                }
+                            </div>
+                            <div class="form-group col-md-3">
                                 <label for="GSTId" class="form-label">GST&nbsp;</label>
                                 <ejs-dropdownlist id="GSTId" allowFiltering="true" ejs-for="@Model.GSTId" filtering="onGSTValuefiltering" dataSource="@(new SelectList((IEnumerable)ViewBag.GstList, "GSTId", "GSTValue").Items)" placeholder="Select GST" popupHeight="220px">
                                     <e-dropdownlist-fields text="GSTValue" value="GSTId"></e-dropdownlist-fields>

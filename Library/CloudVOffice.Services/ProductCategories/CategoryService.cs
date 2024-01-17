@@ -31,7 +31,7 @@ namespace CloudVOffice.Services.ProductCategories
                     Category ct = new Category();
                     ct.SectorId = categoryDTO.SectorId;
                     ct.CategoryName = categoryDTO.CategoryName;
-                  
+                    ct.CategoryImage = categoryDTO.CategoryImage;
                     ct.CreatedBy = categoryDTO.CreatedBy;
                     ct.CreatedDate = System.DateTime.Now;
                     var obj = _CategoryRepo.Insert(ct);
@@ -77,6 +77,7 @@ namespace CloudVOffice.Services.ProductCategories
                     {
                         a.SectorId = categoryDTO.SectorId;
                         a.CategoryName = categoryDTO.CategoryName;
+                        a.CategoryImage = categoryDTO.CategoryImage;
                         a.UpdatedBy = categoryDTO.CreatedBy;
                         a.UpdatedDate = DateTime.Now;
 

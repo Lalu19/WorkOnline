@@ -1,0 +1,362 @@
+﻿@model CloudVOffice.Data.DTO.WareHouses.PurchaseOrders.PurchaseOrderDTO;
+@using System.Collections;
+@using Newtonsoft.Json;
+@{
+	Layout = "_MainAppLayout";
+	ViewData["Title"] = "Purchase Order";
+}
+@addTagHelper *, Syncfusion.EJ2
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<header class="main-heading">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+				<div class="page-icon">
+					<i class="icon-laptop_windows"></i>
+				</div>
+				<div class="page-title">
+					<h5>Ware House</h5>
+					<h6 class="sub-heading">  </h6>
+				</div>
+			</div>
+			<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+				<div class="right-actions">
+					<span class="last-login">  </span>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+
+<div class="main-content">
+	<div class="row gutters">
+		<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
+			<div class="card">
+
+				<div class="card-header">
+
+					<div class="row">
+						<div class="col-md-8">
+							Purchase Order
+						</div>
+						<div class="col-md-4 text-right float-right">
+							<a href="/WareHouse/PurchaseOrder/PurchaseOrderView" class="btn btn-success btn-sm float-right"><i class="icon-list2"></i> List </a>
+
+						</div>
+					</div>
+				</div>
+
+				<form id="formPost" asp-route="WareHouse/PurchaseOrder/CreatePurchaseOrder" method="post" autocomplete="off">
+					<div asp-ation-summary="ModelOnly" class="message-error"></div>
+
+					<div class="card-body">
+
+						<div class="form-row">							
+								<input asp-for="@Model.PurchaseOrderId" type="hidden" />
+						</div>
+
+
+						<div class="form-row">
+
+							<div class="form-group col-md-3">
+								<label for="SellerRegistrationId" class="form-label">Seller &nbsp</label>
+								<ejs-dropdownlist id="SellerRegistrationId" allowFiltering="true" change="onChangeSector"
+												  dataSource="@(new SelectList(ViewBag.Sellers, "SellerRegistrationId", "Name").Items)"
+												  placeholder="Select Seller" popupHeight="220px"
+												  value="@Model.SellerRegistrationId" autofocus="autofocus">
+									<e-dropdownlist-fields text="Name" value="SellerRegistrationId"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="SellerRegistrationId"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="ItemId" class="form-label">Item Name</label>
+								<ejs-dropdownlist id="ItemId" allowFiltering="true" ejs-for="@Model.ItemId" placeholder="Select Item" popupHeight="220px">
+									<e-dropdownlist-fields text="itemName" value="itemId"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="ItemId"></span>
+							</div>
+
+
+							<div class="form-group col-md-3">
+
+								<label for="Quantity" class="form-label">Quantity &nbsp;<span style="color:red;"><b>*</b></span></label>
+								<input asp-for="@Model.Quantity" id="Quantity" type="text" class="form-control"  placeholder="Enter Quantity" />
+								<span asp-validation-for="Quantity"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+
+								<label for="Quantity" class="form-label">Quantity &nbsp;<span style="color:red;"><b>*</b></span></label>
+								<input asp-for="@Model.Quantity" id="Quantity" type="text" class="form-control" placeholder="Enter Quantity" />
+								<span asp-validation-for="Quantity"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+
+								<label for="Quantity" class="form-label">Quantity &nbsp;<span style="color:red;"><b>*</b></span></label>
+								<input asp-for="@Model.Quantity" id="Quantity" type="text" class="form-control" placeholder="Enter Quantity" />
+								<span asp-validation-for="Quantity"></span>
+							</div>
+
+
+						</div>
+
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<button type="button" id="Add_Target" class="btn btn-radius btn-info">Add</button>
+						</div>
+					</div>
+
+						<br />
+						
+					<div class="table-responsive mb-5">
+						<table id="Statee" class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>Seller</th>
+									<th>Item</th>
+									<th>Quantity</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody id="Target_tb">
+							</tbody>
+						</table>
+					</div>
+
+
+					@*<div class="card-body">
+
+						<div class="col-lg-2 col-md-2 col-sm-12">
+							<button type="submit" class="btn btn-primary">Save</button>
+						</div>
+					</div>*@
+
+					<div class="row">
+						<div class="col-md-6">
+
+							<button type="button" id="btnSave" class="btn btn-radius btn-success">Save</button>
+
+						</div>
+					</div>
+
+				</form>
+
+			</div>
+
+
+
+		</div>
+	</div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+<script>
+
+
+	var sellerRegisId;
+	var selectedItemValue;
+
+	function onChangeSector(args) {
+		$.ajax({
+			type: "GET",
+			url: "/WareHouse/PurchaseOrder/ItemsFromSellerRegisteredSector",
+			data: { sellerRegistrationId: args.value },
+			contentType: "application/json",
+			dataType: "json",
+			success: function (result) {
+				console.log(result);
+				var itemDropDown = document.getElementById("ItemId").ej2_instances[0];
+				itemDropDown.dataSource = result;
+				itemDropDown.dataBind();
+
+				itemDropDown.value = null;
+
+				sellerRegisId = args.value;
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+	function GetItemId() {
+		return new Promise(function (resolve, reject) {
+			var itemIdValue = $('#ItemId').val();
+
+			$.ajax({
+				type: "GET",
+				url: "/WareHouse/PurchaseOrder/ItemIdFromItemName",
+				data: { itemName: itemIdValue },
+				contentType: "application/json",
+				dataType: "json",
+				success: function (result) {
+					console.log(result);
+					console.log("GetItemId Success:", result);
+
+					selectedItemValue = result;
+					resolve(result);
+				},
+				error: function () {
+					console.error("Error in GetItemId AJAX call:", error);
+					reject("Error in GetCategoryId AJAX call");
+				}
+			});
+		});
+	}
+
+
+	$(document).ready(function () {
+		// Create an object to store sums for each secId
+		//var sectorSums = {};
+
+		$("#Add_Target").click( async function (e) {
+			try{
+
+				await GetItemId();
+
+
+				var SellerId = sellerRegisId;
+				var SellerValue = $('#SellerRegistrationId').val();
+				var ItemValue = $('#ItemId').val();
+				var ItemId = selectedItemValue;
+
+				var Quantity = parseFloat($('#Quantity').val()) || 0; // Parse as float, default to 0 if not a valid number
+				//var MonthValue = $('#MonthId').val();
+				//var MonthId = selectedMonthValue;
+
+
+				if (SellerValue && ItemValue && !isNaN(Quantity)) {
+
+					var row = "<tr><td data-value='" + SellerId + "'>" + SellerValue + "</td><td data-value='" + ItemId + "'>" + ItemValue + "</td><td data-value='" + Quantity + "'>" + Quantity + "</td><td><button class='delRowBtn'><i class='ion-trash-b' style='color: red;'></i></button></td></tr>";
+
+
+
+					$('#Target_tb').append(row);
+				} else {
+
+				}
+			}
+			
+			catch (error) {
+				console.error(error);
+			}
+
+		});
+
+		$(document).on("click", ".delRowBtn", function () {
+			$(this).closest("tr").remove();
+		});
+
+	});
+
+</script>
+
+<script>
+	$(document).ready(function () {
+		$("#btnSave").click(function (e) {
+			var itemDetails = [];
+
+
+			function redirectToPurchaseOrderView() {
+				// Check if any value is present in the three fields
+				var Seller = $('#SellerRegistrationId').val();
+				var Item = $('#ItemId').val();
+				var Quantity = $('#Quantity').val();
+
+				if (Seller && Item && Quantity) {
+					// All fields have values, proceed with redirection
+					window.location.href = "/WareHouse/PurchaseOrder/PurchaseOrderView";
+				} else {
+					alert("Please Add the missing value");
+				}
+			}
+
+
+			$.each($("#Statee tbody tr"), function () {
+				var $irow = $(this),
+					rowObj = {};
+
+				//var SellerId = parseInt($irow.find("td:eq(0)").data("value"));
+				//var ItemId = parseInt($irow.find("td:eq(1)").data("value"));
+				////var CategoryId = $irow.find("td:eq(2)").data("value");
+				//var Quantity = parseFloat($irow.find("td:eq(2)").data("value"));
+
+				var SellerId = parseInt($irow.find("td:eq(0)").data("value"));
+				var ItemId = parseInt($irow.find("td:eq(1)").data("value"));
+				// var CategoryId = $irow.find("td:eq(2)").data("value");
+				var Quantity = parseFloat($irow.find("td:eq(2)").data("value"));
+
+
+
+				var a = {
+					"SellerRegistrationId": SellerId,
+					"ItemId": ItemId,
+					//"category": CategoryId,
+					"Quantity": Quantity,
+					"CreatedBy": @(Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value))
+				};
+
+				itemDetails.push(a);
+			});
+
+			console.log("itemDetails:", itemDetails);
+
+			console.log(itemDetails);
+
+			var model = {
+				"Orders": itemDetails
+
+			};
+
+			$.ajax({
+				type: "POST",
+				url: "/WareHouse/PurchaseOrder/CreatePurchaseOrder",
+				data: JSON.stringify(model),
+				//data: JSON.stringify(model),
+				contentType: "application/json",
+				dataType: "json",
+				success: function (result) {
+					//console.log("Data saved successfully:", result);
+
+					redirectToPurchaseOrderView();
+				},
+				error: function (error) {
+					//console.log("Error saving data:", error);
+					// Handle the error or provide feedback to the user
+
+					redirectToPurchaseOrderView();
+				}
+			});
+		});		
+	});
+</script>
+
+@*<script>
+	$(document).ready(function () {
+		$('#btnSave').on('click', function () {
+			// Check if any value is present in the four fields
+			var Seller = $('#SellerRegistrationId').val();
+			var Item = $('#ItemId').val();
+			var Quantity = $('#Quantity').val();
+
+			if (Seller && Item && Quantity) {
+				// All fields have values, proceed with redirection
+				window.location.href = "/WareHouse/PurchaseOrder/PurchaseOrderView";
+			} else {
+				alert("Please Add the missing value");
+			}
+		});
+	});
+</script>*@
+

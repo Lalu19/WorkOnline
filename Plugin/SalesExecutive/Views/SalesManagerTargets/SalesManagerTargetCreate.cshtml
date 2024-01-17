@@ -322,7 +322,7 @@
         });
         $.ajax({
             type: "GET",
-            url: "/SalesExecutive/SalesAdmin/BrandsBySectorId",
+            url: "/SalesExecutive/SalesManagerTarget/BrandsBySectorId",
             data: { sectorId: args.value },
             contentType: "application/json",
             dataType: "json",
@@ -433,13 +433,14 @@
             });
         });
     }
+
     function GetBrandIdd() {
         return new Promise(function (resolve, reject) {
             var brandIdValue = $('#BrandIdd').val();
 
             $.ajax({
                 type: "GET",
-                url: "/SalesExecutive/SalesAdmin/GetBrandIdByName",
+                url: "/SalesExecutive/SalesManagerTarget/GetBrandIdByName",
                 data: { brandName: brandIdValue },
                 contentType: "application/json",
                 dataType: "json",
@@ -502,7 +503,7 @@
                     updateFloatingTextboxes();
 
 
-                    var row = "<tr><td data-value='" + MonthId + "'>" + MonthValue + "</td><td data-value='" + secId + "'>" + SectorValue + "</td><td data-value='" + CategoryId + "'>" + CategoryValue + "</td><td data-value='" + CategoryWiseValue + "'>" + CategoryWiseValue + "</td><td><button class='delRowBtn'><i class='ion-trash-b' style='color: red;'></i></button></td></tr>";
+                    var row = "<tr><td data-value='" + MonthId + "'>" + MonthValue + "</td><td data-value='" + secId + "'>" + SectorValue + "</td><td data-value='" + CategoryId + "'>" + CategoryValue + "</td><td data-value='" + CategoryWiseValue + "'>" + CategoryWiseValue + "</td><td><button class='delRowBtn'><i class='icon-trash' style='color: red;'></i></button></td></tr>";
 
 
 
@@ -619,7 +620,7 @@
 
                     //var row = "<tr><td data-value='" + secId + "'>" + SectorValue + "</td><td data-value='" + CategoryId + "'>" + CategoryValue + "</td><td data-value='" + CategoryWiseValue + "'>" + CategoryWiseValue + "</td><td><button class='delRowBtn'><i class='ion-trash-b' style='color: red;'></i></button></td></tr>";
 
-                    var row = "<tr><td data-value='" + MonthId + "'>" + MonthValue + "</td><td data-value='" + secId + "'>" + SectorValue + "</td><td data-value='" + BrandId + "'>" + BrandValue + "</td><td data-value='" + CategoryId + "'>" + CategoryValue + "</td><td data-value='" + CategoryWiseValue + "'>" + CategoryWiseValue + "</td><td><button class='delRowBtnd'><i class='ion-trash-b' style='color: red;'></i></button></td></tr>";
+                    var row = "<tr><td data-value='" + MonthId + "'>" + MonthValue + "</td><td data-value='" + secId + "'>" + SectorValue + "</td><td data-value='" + BrandId + "'>" + BrandValue + "</td><td data-value='" + CategoryId + "'>" + CategoryValue + "</td><td data-value='" + CategoryWiseValue + "'>" + CategoryWiseValue + "</td><td><button class='delRowBtnd'><i class='icon-trash' style='color: red;'></i></button></td></tr>";
 
 
 
@@ -675,7 +676,7 @@
                     "category": CategoryId,
                     "monthlyCategoryWiseTarget": MonthlyCategoryWiseTarget,
                     "createdBy": @(Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value))
-                        };
+                };
 
                 itemDetails.push(a);
             });
@@ -698,8 +699,7 @@
                 dataType: "json",
                 success: function (result) {
                     console.log("Data saved successfully:", result);
-                    // You might want to handle success feedback here
-                    
+                    // You might want to handle success feedback here                   
                 },
                 error: function (error) {
                     console.log("Error saving data:", error);
@@ -763,7 +763,6 @@
                     // Handle the error or provide feedback to the user
                 }
             });
-
         });
     });
 </script>
@@ -787,6 +786,69 @@
         });
     });
 </script>
+
+@section scripts{
+    <script>
+        $(function () {
+            $("#btttnSaved").click(function (e) {
+                if (!document.getElementById("formPost").checkValidity()) {
+                    e.preventDefault();
+                }
+                else {
+                    var itemDetails = [];
+
+                    $.each($("#Statee tbody tr"), function () {
+                        var $irow = $(this),
+                            rowObj = {};
+
+                        // Retrieve the data-value attributes
+                        var Sector = parseInt($irow.find("td:eq(0)").data("value"));
+                        var Category = parseInt($irow.find("td:eq(1)").data("value"));
+
+                        var a = {
+                            "userId": Sector,
+                            "stateId": Category
+                        }
+                        itemDetails.push(a);
+                    });
+                    console.log("itemDetails:", itemDetails);
+
+                    // Show preloader
+                    var preloader = $("#preloader");
+                    preloader.removeClass("d-none");
+                    var model = {
+                        "sectorId": parseInt($("#SectorId").val()),
+                        "categoryId": parseInt($("#CategoryId").val()),
+                        stateUserDTOs: itemDetails,
+                    }
+                    console.log(model)
+
+                }
+
+                console.log(data)
+                error: function (data) {
+                    if (data.status == 401) {
+                        window.location.replace('/Message/TokenExpire');
+                    } else if (data.status == 403) {
+                        window.location.replace('/Message/Unauthorize');
+                    } else if (data.status == 400) {
+                        sweetAlert("Validation Alert!", "Please check input data!", "warning");
+                    }
+                }
+            });
+        }
+       });
+     });
+
+
+                
+
+    </script>
+
+
+
+}
+
 
 
 
