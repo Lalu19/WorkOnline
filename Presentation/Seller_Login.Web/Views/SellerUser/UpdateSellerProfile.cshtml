@@ -51,56 +51,58 @@
 			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 
 				<div class="card">
-					<form asp-route="Seller/SellerUser/UpdateSellerProfile" method="post" autocomplete="off">
+					<form asp-route="/SellerUser/UpdateSellerProfile" method="post" autocomplete="off" enctype="multipart/form-data">
 						<div asp-validation-summary="ModelOnly" class="message-error"></div>
 
 						<div class="card-header"><b>Basic Info</b></div>
 						<div class="card-body">
 							<div class="form-row">
+								<div class="col-md-9">
+									<div class="form-group col-md-9">
+										<input asp-for="@Model.SellerRegistrationId" type="hidden" value="@Profiledetails.SellerRegistrationId" />
 
-								<div class="form-group col-md-3">
-									<input asp-for="@Model.SellerRegistrationId" type="hidden" value="@Profiledetails.SellerRegistrationId" />
+										<label for="Name" class="form-label">Name</label>
+										<input asp-for="@Model.Name" type="text" class="form-control" autofocus="autofocus" placeholder="Name" value="@Profiledetails.Name" />
+										<span asp-validation-for="Name"></span>
+									</div>
+									<div class="form-group col-md-9">
 
-									<label for="Name" class="form-label">Name&nbsp;<span style="color:red;"><b>*</b></span></label>
-									<input asp-for="@Model.Name" type="text" class="form-control" autofocus="autofocus" placeholder="Name" value="@Profiledetails.Name"/>
-									<span asp-validation-for="Name"></span>
+										<label for="BusinessName" class="form-label">Business Name</label>
+										<input asp-for="@Model.BusinessName" type="text" class="form-control" autofocus="autofocus" placeholder="Business Name" value="@Profiledetails.BusinessName" />
+										<span asp-validation-for="BusinessName"></span>
+									</div>
+									<div class="form-group col-md-9">
+
+										<label for="Address" class="form-label">Address</label>
+										<input asp-for="@Model.Address" type="text" class="form-control" autofocus="autofocus" placeholder="Address" value="@Profiledetails.Address" />
+										<span asp-validation-for="Address"></span>
+									</div>
+									<div class="form-group col-md-9">
+
+										<label for="Country" class="form-label">Country Name</label>
+										<input asp-for="@Model.Country" type="text" class="form-control" autofocus="autofocus" placeholder="Country Name" value="@Profiledetails.Country" />
+										<span asp-validation-for="Country"></span>
+									</div>
 								</div>
 
-
 								<div class="form-group col-md-3">
 
-									<label for="BusinessName" class="form-label">Business Name&nbsp;<span style="color:red;"><b>*</b></span></label>
-									<input asp-for="@Model.BusinessName" type="text" class="form-control" autofocus="autofocus" placeholder="Business Name" value="@Profiledetails.BusinessName" />
-									<span asp-validation-for="BusinessName"></span>
-								</div>
-								<div class="form-group col-md-3">
-
-									<label for="Address" class="form-label">Address</label>
-									<input asp-for="@Model.Address" type="text" class="form-control" autofocus="autofocus" placeholder="Address" value="@Profiledetails.Address" />
-									<span asp-validation-for="Address"></span>
-								</div>
-								<div class="form-group col-md-3">
-
-									<label for="Country" class="form-label">Country Name</label>
-									<input asp-for="@Model.Country" type="text" class="form-control" autofocus="autofocus" placeholder="Country Name" value="@Profiledetails.Country" />
-									<span asp-validation-for="Country"></span>
-								</div>
-								<div class="form-group col-md-3">
-									<label for="Image" class="form-label">Seller Image</label>
+									@if (@Profiledetails.Image != null)
+									{
+										<div style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden; margin-bottom: 10px;">
+											<img src="/uploads/SellerRegistration/@Profiledetails.Image" style="width: 100%; height: 100%; object-fit: cover;" />
+										</div>
+										<input type="hidden" asp-for="@Model.Image">
+									}
 									<input asp-for="@Model.ImageUp" type="file" class="form-control" autofocus="autofocus" placeholder="Seller Image" value="@Profiledetails.Image" />
 									<span asp-validation-for="Image"></span>
-									@{
-										if (Model.Image != null)
-										{
-											<img src="/uploads/SellerRegistration/@Model.Image" style="height:100px; width:100px" />
-											<input type="hidden" asp-for="@Model.Image">
-										}
-									}
-								</div>
-							</div>
-							
-						</div>
 
+								</div>
+
+							</div>
+
+						</div>
+						
 						<div class="card-body">
 							<div class="col-lg-2 col-md-2 col-sm-12">
 								<button type="submit" class="btn btn-primary">Update</button>
