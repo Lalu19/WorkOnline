@@ -53,7 +53,7 @@ namespace Seller_Login.Web.Controllers
 			{
 				var MobileNumber = model.UserMobileNumber?.Trim();
 				// var Password = model.Password?.Trim();
-				var loginResult = await _userauthenticationService.SellerValidateUserAsync(MobileNumber, ReturnUrl);
+				var loginResult = await _userauthenticationService.SellerValidateUserAsync(MobileNumber, model.Password);
 				switch (loginResult)
 				{
 					case UserLoginResults.Successful:
@@ -85,7 +85,7 @@ namespace Seller_Login.Web.Controllers
 							return Redirect(ReturnUrl == null ? "/SellerHome" : ReturnUrl);
 						}
 					case UserLoginResults.UserNotExist:
-						ModelState.AddModelError("MobileNumber", "User Not Exists.");
+						ModelState.AddModelError("UserMobileNumber", "User Not Exists.");
 						break;
 					case UserLoginResults.Deleted:
 						ModelState.AddModelError("", "Account Has Been Deleted.");
