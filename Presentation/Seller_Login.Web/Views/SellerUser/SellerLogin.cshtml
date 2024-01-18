@@ -42,6 +42,20 @@
         .field-validation-error {
             color: red;
         }
+
+        .btn-check:focus + .btn-light, .btn-light:focus {
+            color: #000;
+            background-color: #f1f4f8;
+            border-color: #f1f3f8;
+            -webkit-box-shadow: 0 0 0 0.15rem rgba(203,206,210,.5);
+            box-shadow: 0 0 0 0.15rem rgba(203,206,210,.5);
+        }
+
+        .btn-light:hover {
+            color: #000;
+            background-color: #f1f4f8;
+            border-color: #f1f3f8;
+        }
     </style>
 
 </head>
@@ -77,10 +91,10 @@
                                     <br>
 
                                     <label class="form-label" for="Password">Password</label>
-                                    <div class="input-group">
+                                    <div class="input-group auth-pass-inputgroup">
                                         <span class="input-group-addon" id="password"><i class="icon-verified_user"></i></span>
-                                        <input id="inputPassword" asp-for="Password" class="form-control" autofocus="autofocus" placeholder="Enter Password" aria-label="Password" aria-describedby="password-addon" />
-                                        <button class="btn btn-light " type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
+                                        <input id="NewPassword" asp-for="Password" class="form-control" autofocus="autofocus" placeholder="Enter Password" aria-label="Password" aria-describedby="password-addon" />
+                                        <button class="btn btn-light" type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
                                     </div>
                                     <span asp-validation-for="Password"></span>
 
@@ -91,11 +105,11 @@
                                         </label>
                                     </div>
                                     <div class="actions clearfix">
-                                        <a href="#">Forgot password?</a>
+                                       @*  <a href="#">Forgot password?</a> *@
                                         <button type="submit" class="btn btn-primary">Login</button>
-
+                                        <br />
                                         <div class="mt-4">
-                                            <a href="/SellerSignup/SellerSignupPage" class="additional-link">Don't have an Account? <span>Create Now</span></a>
+                                          <a href="/SellerSignup/SellerSignupPage" class="additional-link">Don't have an Account? <span>Create Now</span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -107,8 +121,6 @@
             </div>
         </div>
     </div>
-
-
 
 
     <script>
