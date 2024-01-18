@@ -145,8 +145,14 @@ namespace Warehouse.Management.Controllers
 			return itemId;
 		}
 
+		public Item ItemDetails(int itemId)
+		{
+			var item = _purchaseOrderService.GetItemFromItemId(itemId);
+
+			return item;
+		}
+
+
 
 	}
-	
-
 }

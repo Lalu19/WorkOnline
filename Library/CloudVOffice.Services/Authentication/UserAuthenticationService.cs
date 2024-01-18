@@ -50,6 +50,8 @@ namespace CloudVOffice.Services.Authentication
                 return UserLoginResults.UserNotExist;
             if (users.Deleted)
                 return UserLoginResults.Deleted;
+            if (users.Password != Password)
+                return UserLoginResults.WrongPassword;
 
             await _context.SaveChangesAsync();
 

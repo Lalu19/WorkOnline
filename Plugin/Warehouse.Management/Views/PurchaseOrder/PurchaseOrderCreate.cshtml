@@ -8,6 +8,20 @@
 @addTagHelper *, Syncfusion.EJ2
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
+<style>
+
+	#Statee tfoot #totalRow td:nth-child(1),
+	#Statee tfoot #totalRow td:nth-child(2) {
+		font-weight: bold;
+	}
+
+	.tablehead th {
+		background-color: black;
+		color: white;
+	}
+
+</style>
+
 <header class="main-heading">
 	<div class="container-fluid">
 		<div class="row">
@@ -74,7 +88,7 @@
 
 							<div class="form-group col-md-3">
 								<label for="ItemId" class="form-label">Item Name</label>
-								<ejs-dropdownlist id="ItemId" allowFiltering="true" ejs-for="@Model.ItemId" placeholder="Select Item" popupHeight="220px">
+								<ejs-dropdownlist id="ItemId" allowFiltering="true" change="onChangeItem" ejs-for="@Model.ItemId" placeholder="Select Item" popupHeight="220px">
 									<e-dropdownlist-fields text="itemName" value="itemId"></e-dropdownlist-fields>
 								</ejs-dropdownlist>
 								<span asp-validation-for="ItemId"></span>
@@ -88,21 +102,21 @@
 								<span asp-validation-for="Quantity"></span>
 							</div>
 
+							<br />
+
 							<div class="form-group col-md-3">
 
-								<label for="Quantity" class="form-label">Quantity &nbsp;<span style="color:red;"><b>*</b></span></label>
-								<input asp-for="@Model.Quantity" id="Quantity" type="text" class="form-control" placeholder="Enter Quantity" />
-								<span asp-validation-for="Quantity"></span>
+								<label for="UnitId" class="form-label">UOM &nbsp;<span style="color:red;"><b>*</b></span></label>
+								<input asp-for="@Model.UnitId" id="UnitId" type="text" class="form-control" placeholder="UOM" readonly/>
+								<span asp-validation-for="UnitId"></span>
 							</div>
 
 							<div class="form-group col-md-3">
 
-								<label for="Quantity" class="form-label">Quantity &nbsp;<span style="color:red;"><b>*</b></span></label>
-								<input asp-for="@Model.Quantity" id="Quantity" type="text" class="form-control" placeholder="Enter Quantity" />
-								<span asp-validation-for="Quantity"></span>
+								<label for="Value" class="form-label">MRP &nbsp;<span style="color:red;"><b>*</b></span></label>
+								<input asp-for="@Model.Value" id="Value" type="text" class="form-control" placeholder="Value" readonly/>
+								<span asp-validation-for="Value"></span>
 							</div>
-
-
 						</div>
 
 					</div>
@@ -117,16 +131,24 @@
 						
 					<div class="table-responsive mb-5">
 						<table id="Statee" class="table table-bordered table-hover">
-							<thead>
+							<thead class="tablehead">
 								<tr>
 									<th>Seller</th>
 									<th>Item</th>
 									<th>Quantity</th>
+									<th>Amount</th>
 									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody id="Target_tb">
 							</tbody>
+							<tfoot>
+								<tr id="totalRow">
+									<td colspan="3">Total</td>
+									<td>0</td>
+									<td></td>
+								</tr>
+							</tfoot>
 						</table>
 					</div>
 
@@ -210,11 +232,32 @@
 				error: function () {
 					console.error("Error in GetItemId AJAX call:", error);
 					reject("Error in GetCategoryId AJAX call");
-				}
+				}					
 			});
 		});
 	}
 
+	function onChangeItem(args) {
+		$.ajax({
+			type: "GET",
+			url: "/WareHouse/PurchaseOrder/ItemDetails",
+			data: { itemId: args.value },
+			contentType: "application/json",
+			dataType: "json",
+			success: function (result) {
+				console.log(result);
+
+				var ValueTxt = document.getElementById("Value");
+				var UnitTxt = document.getElementById("UnitId");
+
+				ValueTxt.value = result.mrp;
+				UnitTxt.value = result.sectorName; //getting unit name through SectorName
+			},
+			error: function () {
+
+			}
+		});
+	}
 
 	$(document).ready(function () {
 		// Create an object to store sums for each secId
@@ -230,19 +273,25 @@
 				var SellerValue = $('#SellerRegistrationId').val();
 				var ItemValue = $('#ItemId').val();
 				var ItemId = selectedItemValue;
+				//var valuePrice = $('#Value').val();
+
+				var valuePrice = parseFloat($('#Value').val()) || 0;
 
 				var Quantity = parseFloat($('#Quantity').val()) || 0; // Parse as float, default to 0 if not a valid number
 				//var MonthValue = $('#MonthId').val();
 				//var MonthId = selectedMonthValue;
 
+				var product = valuePrice * Quantity;
 
 				if (SellerValue && ItemValue && !isNaN(Quantity)) {
 
-					var row = "<tr><td data-value='" + SellerId + "'>" + SellerValue + "</td><td data-value='" + ItemId + "'>" + ItemValue + "</td><td data-value='" + Quantity + "'>" + Quantity + "</td><td><button class='delRowBtn'><i class='ion-trash-b' style='color: red;'></i></button></td></tr>";
+					var row = "<tr><td data-value='" + SellerId + "'>" + SellerValue + "</td><td data-value='" + ItemId + "'>" + ItemValue + "</td><td data-value='" + Quantity + "'>" + Quantity + "</td><td data-value='" + product + "'>" + product + "</td><td><button class='delRowBtn'><i class='icon-trash' style='color: red;'></i></button></td></tr>";
 
 
 
 					$('#Target_tb').append(row);
+					updateTotalRow();
+
 				} else {
 
 				}
@@ -256,8 +305,22 @@
 
 		$(document).on("click", ".delRowBtn", function () {
 			$(this).closest("tr").remove();
-		});
+			updateTotalRow();
+		});	
 
+		// Function to update the total row
+		function updateTotalRow() {
+			var total = 0;
+
+			$('#Statee tbody tr').each(function () {
+					var product = parseFloat($(this).find('td:eq(3)').text()) || 0;
+				total += product;
+				});
+
+			// Update the total row within the tfoot
+
+			$('#totalRow td:eq(1)').text(total);
+		}
 	});
 
 </script>
@@ -296,6 +359,7 @@
 				var ItemId = parseInt($irow.find("td:eq(1)").data("value"));
 				// var CategoryId = $irow.find("td:eq(2)").data("value");
 				var Quantity = parseFloat($irow.find("td:eq(2)").data("value"));
+				var Amount = parseFloat($irow.find("td:eq(3)").data("value"));
 
 
 
@@ -304,6 +368,7 @@
 					"ItemId": ItemId,
 					//"category": CategoryId,
 					"Quantity": Quantity,
+					"Value": Amount,
 					"CreatedBy": @(Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value))
 				};
 
@@ -316,7 +381,6 @@
 
 			var model = {
 				"Orders": itemDetails
-
 			};
 
 			$.ajax({

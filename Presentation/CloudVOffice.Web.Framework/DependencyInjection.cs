@@ -120,7 +120,8 @@ namespace CloudVOffice.Web.Framework
 
             services.AddScoped<IBrandWiseTargetService, BrandWiseTargetService>();
             services.AddScoped<IPurchaseOrderService, PurchaseOrderService>();
-		
+            services.AddScoped<IPurchaseOrderParentService, PurchaseOrderParentService>();
+
 
 			return services;
 
