@@ -19,6 +19,8 @@ using Syncfusion.Licensing;
 using System.Reflection;
 using System.Text;
 
+
+
 namespace CloudVOffice.Web
 {
     public class Startup
@@ -93,8 +95,9 @@ namespace CloudVOffice.Web
 
             });
             IdentityModelEventSource.ShowPII = true;
-            // Add Hangfire services.
-            services.AddHangfire(configuration => configuration
+
+			// Add Hangfire services.
+			services.AddHangfire(configuration => configuration
                 .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
                 .UseSimpleAssemblyNameTypeSerializer()
                 .UseRecommendedSerializerSettings()
