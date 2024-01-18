@@ -36,6 +36,7 @@ using CloudVOffice.Services.WareHouses.Brands;
 using CloudVOffice.Services.Banners;
 using CloudVOffice.Services.WareHouses.States;
 using CloudVOffice.Services.WareHouses.PurchaseOrders;
+using CloudVOffice.Services.Orders;
 
 namespace CloudVOffice.Web.Framework
 {
@@ -121,9 +122,10 @@ namespace CloudVOffice.Web.Framework
             services.AddScoped<IBrandWiseTargetService, BrandWiseTargetService>();
             services.AddScoped<IPurchaseOrderService, PurchaseOrderService>();
             services.AddScoped<IPurchaseOrderParentService, PurchaseOrderParentService>();
+            services.AddScoped<ICheckoutService, CheckoutService>();
 
 
-            return services;
+			return services;
 
         }
     }

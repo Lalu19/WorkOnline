@@ -94,7 +94,7 @@ namespace Seller_Login.Web.Controllers
                 {
 
                     TempData["msg"] = MessageEnum.Duplicate;
-                    ModelState.AddModelError("", "Customer Already Exists");
+                    ModelState.AddModelError("", "Mobile Number Already Exists");
 
                 }
                 else
