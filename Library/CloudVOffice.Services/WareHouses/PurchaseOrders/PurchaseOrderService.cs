@@ -12,6 +12,7 @@ using CloudVOffice.Data.DTO.WareHouses.PurchaseOrders;
 using CloudVOffice.Data.Migrations;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 
 namespace CloudVOffice.Services.WareHouses.PurchaseOrders
@@ -23,14 +24,11 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
 
 		public PurchaseOrderService(ApplicationDBContext dbContext,
 								   ISqlRepository<PurchaseOrder> purchaseOrderRepo
-
 									)
 		{
 			_dbContext = dbContext;
 			_purchaseRepo = purchaseOrderRepo;
-
 		}
-
 
 		public MessageEnum PurchaseOrderCreate(PurchaseOrderDTO purchaseOrderDTO)
 		{
@@ -50,7 +48,6 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
 
 					_purchaseRepo.Insert(purchaseOrder);
 					 return MessageEnum.Success;
-
 				}
 				else
 				{
@@ -67,7 +64,6 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
 		{
 			try
 			{
-
 				PurchaseOrder a = _dbContext.PurchaseOrders.FirstOrDefault(p => p.PurchaseOrderId == purchaseOrderId);
 				return a;
 			}
@@ -75,7 +71,6 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
 			{
 				throw;
 			}
-
 		}
 
 		public List<PurchaseOrder> GetPurchaseOrderList()
@@ -91,7 +86,6 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
             .Where(x => x.Deleted == false).ToList();
                 return a;
             }
-
 			catch
 			{
 				throw;
@@ -149,20 +143,61 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
 		}
 
 		public List<Item> ItemsFromSellerRegisteredSector(Int64 sellerRegistrationId)
-		{
-			var sellerSectorId = _dbContext.SellerRegistrations.Where(s => s.SellerRegistrationId == sellerRegistrationId).Select(s => s.SectorId)
+		{			
+			try
+			{
+				var sellerSectorId = _dbContext.SellerRegistrations.Where(s => s.SellerRegistrationId == sellerRegistrationId).Select(s => s.SectorId)
 						  .FirstOrDefault();
 
-			var items = _dbContext.Items.Where(i => i.SectorId == sellerSectorId).ToList();
+				var items = _dbContext.Items.Where(i => i.SectorId == sellerSectorId).ToList();
 
-			return items;
+				return items;
+			}
+			catch
+			{
+				throw;
+			}
+
 		}
 
 		public Int64 ItemIdFromItemName(string itemName)
 		{
-			var itemId = _dbContext.Items.Where(i=> i.ItemName == itemName).Select(i => i.ItemId).FirstOrDefault();
-			return itemId;
+			try
+			{
+				var itemId = _dbContext.Items.Where(i => i.ItemName == itemName).Select(i => i.ItemId).FirstOrDefault();
+				return itemId;
+			}
+			catch
+			{
+				throw;
+			}			
 		}
+
+		public Item GetItemFromItemId(int itemId)
+		{
+			try
+			{
+				if(itemId != null && itemId != 0)
+				{
+					var item = _dbContext.Items.FirstOrDefault(i => i.ItemId == itemId);
+
+					var unit = _dbContext.Units.FirstOrDefault(u => u.UnitId == item.UnitId);
+					item.SectorName = unit.ShortName;
+
+					return item;
+				}
+				else
+				{
+					return null;
+				}				
+			}
+			catch
+			{
+				throw;
+			}
+		}
+
+
 
 	}
 }
