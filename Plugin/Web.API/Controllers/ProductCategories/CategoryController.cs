@@ -73,6 +73,7 @@ namespace Web.API.Controllers.ProductCategories
             var a = _categoryService.GetCategoryBySectorId(SectorId);
             return Ok(a);
         }
+	
 		[HttpGet("{CategoryId}")]
 		public IActionResult AllItemListByCategory(int CategoryId)
 		{
