@@ -4,6 +4,7 @@ using CloudVOffice.Data.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CloudVOffice.Data.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240117091557_PurchaseOrderParenttt")]
+    partial class PurchaseOrderParenttt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2888,26 +2891,17 @@ namespace CloudVOffice.Data.Migrations
                         .IsRequired()
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("UnitId")
-                        .IsRequired()
-                        .HasColumnType("bigint");
-
                     b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("Value")
-                        .HasColumnType("float");
-
                     b.HasKey("PurchaseOrderId");
 
                     b.HasIndex("ItemId");
 
                     b.HasIndex("SellerRegistrationId");
-
-                    b.HasIndex("UnitId");
 
                     b.ToTable("PurchaseOrders");
                 });
@@ -3511,17 +3505,9 @@ namespace CloudVOffice.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CloudVOffice.Core.Domain.WareHouses.UOMs.Unit", "Unit")
-                        .WithMany()
-                        .HasForeignKey("UnitId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Item");
 
                     b.Navigation("SellerRegistration");
-
-                    b.Navigation("Unit");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.PurchaseOrders.PurchaseOrderParent", b =>

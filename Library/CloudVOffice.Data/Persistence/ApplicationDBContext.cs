@@ -103,13 +103,15 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<Brand> Brands { get; set; }
 		public virtual DbSet<State> States { get; set; }
 		public virtual DbSet<PurchaseOrder> PurchaseOrders { get; set; }
+        public virtual DbSet<PurchaseOrderParent> PurchaseOrderParents { get; set; }
+        
 
 
-		#endregion
+        #endregion
 
-		#region Sales
+        #region Sales
 
-		public virtual DbSet<SalesAdminTarget> SalesAdminTargets { get; set; }
+        public virtual DbSet<SalesAdminTarget> SalesAdminTargets { get; set; }
         public virtual DbSet<SalesManagerTarget> SalesManagerTargets { get; set; }
         #endregion
 
@@ -533,12 +535,22 @@ namespace CloudVOffice.Data.Persistence
 			  .HasDefaultValue(false)
 			  .ValueGeneratedNever();
 
+            modelBuilder.Entity<PurchaseOrderParent>()
+            .Property(s => s.CreatedDate)
+            .HasDefaultValueSql("getdate()");
 
-			#endregion
 
-			#region Sales
+            modelBuilder.Entity<PurchaseOrderParent>()
+              .Property(s => s.Deleted)
+              .HasDefaultValue(false)
+              .ValueGeneratedNever();
 
-			modelBuilder.Entity<SalesAdminTarget>()
+
+            #endregion
+
+            #region Sales
+
+            modelBuilder.Entity<SalesAdminTarget>()
 	.Property(s => s.CreatedDate)
 	.HasDefaultValueSql("getdate()");
 

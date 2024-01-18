@@ -21,5 +21,6 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
 		public MessageEnum PurchaseOrderDelete(Int64 purchaseOrderId, Int64 DeletedBy);
 		public List<Item> ItemsFromSellerRegisteredSector(Int64 sellerRegistrationId);
 		public Int64 ItemIdFromItemName(string itemName);
+		public Item GetItemFromItemId(int itemId);
 	}
 }
