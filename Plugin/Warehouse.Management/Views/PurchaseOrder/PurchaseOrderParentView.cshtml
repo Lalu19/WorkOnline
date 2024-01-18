@@ -1,6 +1,6 @@
 ﻿@{
     Layout = "_MainAppLayout";
-    ViewData["Title"] = "Sub Category 4 ";
+    ViewData["Title"] = "PurchaseOrderParent";
 }
 @addTagHelper *, Syncfusion.EJ2
 @using CloudVOffice.Core.Domain.Common;
@@ -34,40 +34,37 @@
 
                     <div class="row">
                         <div class="col-md-8">
-                            Sub Category4
+                            PurchaseOrderParent
                         </div>
                         <div class="col-md-4 text-right float-right">
-                            <a href="/WareHouse/SubCategory4/SubCategory4Create" class="btn btn-success btn-sm"><i class="icon icon-add"></i> Add</a>
+                            <a href="/WareHouse/PurchaseOrderParent/CreatePurchaseOrderParent" class="btn btn-success btn-sm"><i class="icon icon-add"></i> Add</a>
 
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
 
-                    <ejs-grid id="GridOverview" dataSource="ViewBag.SubCategories4"
+                    <ejs-grid id="GridOverview" dataSource="ViewBag.PurchaseOrderParents"
                               allowFiltering="true" allowSorting="true"
                               allowExcelExport="true" allowGrouping="true"
                               allowMultiSorting="true"
                               allowPdfExport="true"
-                              height="340" rowHeight="38"
                               enableHover="false" enableHeaderFocus="true"
                               allowResizing="true" autoFit="true" dataBound="dataBound"
                               enableVirtualization="true" allowSelection="true"
                               toolbarClick="toolbarClick" toolbar="@(new List<string>() {"ExcelExport", "PdfExport", "CsvExport" ,"Search"})" allowPaging="true">
 
                         <e-grid-filtersettings type="Menu"></e-grid-filtersettings>
+
                         <e-grid-pagesettings pageCount="4" pageSizes="true"></e-grid-pagesettings>
                         <e-grid-columns>
 
-                            <e-grid-column field="SectorName" headerText="Sector Name" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="CategoryName" headerText="Category Name" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="SubCategory1Name" headerText="SubCategory1 Name" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="SubCategory2Name" headerText="SubCategory2 Name" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="SubCategory3Name" headerText="SubCategory3 Name" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="SubCategory4Name" headerText="SubCategory4 Name" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="SubCategory4Image" template="#ImageTemplate" headerText="SubCategory4  Image" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column headerText="Action" template="#Actions" width="50"></e-grid-column>
 
+                            <e-grid-column field="TotalAmount" headerText="Total Amount" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="TotalQuantity" headerText="Total Quantity" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="SellerRegistrationId" headerText="SellerRegistrationId" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="OrderShipped" headerText="OrderShipped" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column headerText="Action" template="#Actions" width="50"></e-grid-column>
                         </e-grid-columns>
                     </ejs-grid>
 
@@ -89,7 +86,7 @@
                 sweetAlert({
                     html: true,
                     icon: "success",
-                    title: "SubCategory",
+                    title: "PurchaseOrderParent",
                     text: "Successfully created.",
                     type: "success"
                 });
@@ -98,7 +95,7 @@
                 sweetAlert({
                     html: true,
                     icon: "success",
-                    title: "SubCategory",
+                    title: "PurchaseOrderParent",
                     text: "Successfully updated.",
                     type: "success"
                 });
@@ -107,7 +104,7 @@
                 sweetAlert({
                     html: true,
                     icon: "success",
-                    title: "SubCategory",
+                    title: "PurchaseOrderParent",
                     text: "Successfully Deleted.",
                     type: "success"
                 });
@@ -125,7 +122,7 @@
                 sweetAlert({
                     html: true,
                     icon: "error",
-                    title: "SubCategory",
+                    title: "PurchaseOrderParent",
                     text: "There is somthing going wrong.",
                     type: "error"
                 });
@@ -134,7 +131,7 @@
                 sweetAlert({
                     html: true,
                     icon: "error",
-                    title: "SubCategory",
+                    title: "PurchaseOrderParent",
                     text: message,
                     type: "error"
                 });
@@ -157,7 +154,7 @@
             dangerMode: true,
         }).then(function (isConfirm) {
             if (isConfirm) {
-                window.location.href = "../../WareHouse/SubCategory4/DeleteSubCategory4?SubCategory4Id=" + Id;
+                window.location.href = "../../WareHouse/PurchaseOrderParent/PurchaseOrderParentDelete?PurchaseOrderParentId=" + Id;
             }
         })
     }
@@ -166,16 +163,16 @@
 
 <script id="Actions" type="text/x-template">
     <div class="link">
-        <a href="../../WareHouse/SubCategory4/SubCategory4Create?SubCategory4Id=${SubCategory4Id}"><i class="icon-pencil3" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp;
+        <a href="../../WareHouse/PurchaseOrderParent/CreatePurchaseOrderParent?PurchaseOrderParentId=${PurchaseOrderParentId}"><i class="icon-pencil3" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp;
 
-        <button onClick="Delete(${SubCategory4Id})" style="background: transparent;border: none;"><i class="icon-trash" style="font-size:22px"></i></button>
+        <button onClick="Delete(${PurchaseOrderParentId})" style="background: transparent;border: none;"><i class="icon-trash" style="font-size:22px"></i></button>
     </div>
 </script>
 
 <script id="statusTemplate" type="text/x-template">
     ${statusDetail(data)}
 </script>
-<script id="ImageTemplate" type="text/x-template">${ imageTemplate(data)}</script>
+
 <script>
     function toolbarClick(args) {
         var gridObj = document.getElementById("GridOverview").ej2_instances[0];
@@ -209,13 +206,13 @@
     function dataBound(args) {
         this.autoFitColumns();
     }
-    function imageTemplate(i) {
+    function statusDetail(e) {
 
-        if (i.SubCategory4Image != null) {
-            return ' <img src="/uploads/Subcategory4/' + i.SubCategory4Image + '" style="height:100px; width:100px ;padding: 5px 0px 5px 0;" />';
-        }
-        else {
-            return 'No Image';
+        if (e.IsActive == true) {
+            return '<span class="badge badge-pill badge-success" > True </span>';
+        } else {
+            return '<span class="badge badge-pill badge-dark"> False </span>';
         }
     }
+
 </script>

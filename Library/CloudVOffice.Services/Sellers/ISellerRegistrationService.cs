@@ -23,5 +23,7 @@ namespace CloudVOffice.Services.Sellers
         public Task<SellerRegistration> GetSellerAsyncss(string UserMobileNumber);
         public Task<MessageEnum> UpdateSellerRegUser(SellerRegistrationDTO sellerRegistrationDTO);
 
-	}
+        public Task<MessageEnum> UpdateSellerPassword(SellerUpdateDTO sellerUpdateDTO);
+
+    }
 }
