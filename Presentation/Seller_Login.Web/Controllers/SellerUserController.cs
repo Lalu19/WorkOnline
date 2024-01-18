@@ -53,7 +53,7 @@ namespace Seller_Login.Web.Controllers
 			{
 				var MobileNumber = model.UserMobileNumber?.Trim();
 				// var Password = model.Password?.Trim();
-				var loginResult = await _userauthenticationService.SellerValidateUserAsync(MobileNumber, ReturnUrl);
+				var loginResult = await _userauthenticationService.SellerValidateUserAsync(MobileNumber, model.Password);
 				switch (loginResult)
 				{
 					case UserLoginResults.Successful:
@@ -85,7 +85,7 @@ namespace Seller_Login.Web.Controllers
 							return Redirect(ReturnUrl == null ? "/SellerHome" : ReturnUrl);
 						}
 					case UserLoginResults.UserNotExist:
-						ModelState.AddModelError("MobileNumber", "User Not Exists.");
+						ModelState.AddModelError("UserMobileNumber", "User Not Exists.");
 						break;
 					case UserLoginResults.Deleted:
 						ModelState.AddModelError("", "Account Has Been Deleted.");
@@ -144,26 +144,28 @@ namespace Seller_Login.Web.Controllers
 		[HttpPost]
 		public async Task<IActionResult> UpdateSellerProfile(SellerRegistrationDTO sellerRegistrationDTO)
 		{
-			if (sellerRegistrationDTO.ImageUp != null)
-			{
-				FileInfo fileInfo = new FileInfo(sellerRegistrationDTO.ImageUp.FileName);
-				string extn = fileInfo.Extension.ToLower();
-				Guid id = Guid.NewGuid();
-				string filename = id.ToString() + extn;
-
-				string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads/SellerRegistration");
-				if (!Directory.Exists(uploadsFolder))
-				{
-					Directory.CreateDirectory(uploadsFolder);
-				}
-				string uniqueFileName = Guid.NewGuid().ToString() + "_" + filename;
-				string imagePath = Path.Combine(uploadsFolder, uniqueFileName);
-				sellerRegistrationDTO.ImageUp.CopyTo(new FileStream(imagePath, FileMode.Create));
-				sellerRegistrationDTO.Image = uniqueFileName;
-			}
+			
 			if (sellerRegistrationDTO.SellerRegistrationId != null)
 			{
+				if (sellerRegistrationDTO.ImageUp != null)
+				{
+					FileInfo fileInfo = new FileInfo(sellerRegistrationDTO.ImageUp.FileName);
+					string extn = fileInfo.Extension.ToLower();
+					Guid id = Guid.NewGuid();
+					string filename = id.ToString() + extn;
+
+					string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads/SellerRegistration");
+					if (!Directory.Exists(uploadsFolder))
+					{
+						Directory.CreateDirectory(uploadsFolder);
+					}
+					string uniqueFileName = Guid.NewGuid().ToString() + "_" + filename;
+					string imagePath = Path.Combine(uploadsFolder, uniqueFileName);
+					sellerRegistrationDTO.ImageUp.CopyTo(new FileStream(imagePath, FileMode.Create));
+					sellerRegistrationDTO.Image = uniqueFileName;
+				}
 				var result = await _sellerRegistrationService.UpdateSellerRegUser(sellerRegistrationDTO);
+				
 				if (result == MessageEnum.Updated)
 				{
 					TempData["updateSuccessMessage"] = "Your page has been updated successfully!";

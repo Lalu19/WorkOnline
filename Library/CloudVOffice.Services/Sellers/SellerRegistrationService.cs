@@ -1,7 +1,9 @@
 ﻿using CloudVOffice.Core.Domain.Common;
 using CloudVOffice.Core.Domain.Sellers;
+using CloudVOffice.Core.Domain.Users;
 using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Core.Security;
+using CloudVOffice.Data.DTO.Banners;
 using CloudVOffice.Data.DTO.Sellers;
 using CloudVOffice.Data.DTO.Users;
 using CloudVOffice.Data.DTO.WareHouses.PinCodes;
@@ -187,15 +189,15 @@ namespace CloudVOffice.Services.Sellers
 
 		public async Task<MessageEnum> UpdateSellerRegUser(SellerRegistrationDTO sellerRegistrationDTO)
 		{
-			var seller = _dbContext.SellerRegistrations.SingleOrDefault(opt => opt.SellerRegistrationId == sellerRegistrationDTO.SellerRegistrationId && opt.Deleted == false);
+            var seller = _dbContext.SellerRegistrations.SingleOrDefault(opt => opt.SellerRegistrationId == sellerRegistrationDTO.SellerRegistrationId && opt.Deleted == false);
 
-			if (seller != null)
-			{
-				seller.Name = sellerRegistrationDTO.Name;
-				seller.BusinessName = sellerRegistrationDTO.BusinessName;
-				seller.Address = sellerRegistrationDTO.Address;
-				//seller.PinCodeId = sellerRegistrationDTO.PinCodeId;
-				seller.Country = sellerRegistrationDTO.Country;
+            if (seller != null)
+            {
+                seller.Name = sellerRegistrationDTO.Name;
+                seller.BusinessName = sellerRegistrationDTO.BusinessName;
+                seller.Address = sellerRegistrationDTO.Address;
+                //seller.PinCodeId = sellerRegistrationDTO.PinCodeId;
+                seller.Country = sellerRegistrationDTO.Country;
 				//seller.State = sellerRegistrationDTO.State;
 				//seller.PrimaryPhone = sellerRegistrationDTO.PrimaryPhone;
 				//seller.AlternatePhone = sellerRegistrationDTO.AlternatePhone;
@@ -206,19 +208,23 @@ namespace CloudVOffice.Services.Sellers
 				//seller.WareHuoseId = sellerRegistrationDTO.WareHuoseId;
 				////seller.Password = sellerRegistrationDTO.Password;
 				//seller.SectorId = sellerRegistrationDTO.SectorId;
-				//seller.Image = sellerRegistrationDTO.Image;
+				if (sellerRegistrationDTO.Image != null)
+				{
+					seller.Image = sellerRegistrationDTO.Image;
+				}
+
 				seller.UpdatedBy = sellerRegistrationDTO.CreatedBy;
-				seller.UpdatedDate = DateTime.Now;
+                seller.UpdatedDate = DateTime.Now;
 
-				_dbContext.SaveChanges();
+                _dbContext.SaveChanges();
 
-				return MessageEnum.Updated;
-			}
-			else
-			{
-				return MessageEnum.Invalid;
-			}
-		}
+                return MessageEnum.Updated;
+            }
+            else
+            {
+                return MessageEnum.Invalid;
+            }
+        }
 
         public async Task<MessageEnum> UpdateSellerPassword(SellerUpdateDTO sellerUpdateDTO)
         {
