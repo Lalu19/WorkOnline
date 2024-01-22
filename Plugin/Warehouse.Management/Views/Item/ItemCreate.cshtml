@@ -221,7 +221,7 @@
 
                             <div class="form-group col-md-3">
                                 <label for="ItemName" class="form-label">Item Name&nbsp;<span style="color:red;"><b>*</b></span></label>
-                                <input asp-for="@Model.CreatedItemDTO.ItemName" type="text" id="ItemName" class="form-control" autofocus="autofocus" placeholder="Item Name" />
+                                <input asp-for="@Model.CreatedItemDTO.ItemName" type="text" id="ItemName" class="form-control" autofocus="autofocus" placeholder="Item Name" required />
                                 <span asp-validation-for="CreatedItemDTO.ItemName"></span>
                                 <div asp-validation-summary="ModelOnly" class="message-error"></div>
                             </div>
