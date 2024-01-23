@@ -65,6 +65,7 @@ namespace Seller_Login.Web.Controllers
 								{
 									new Claim(ClaimTypes.MobilePhone, SelleruserDetails.PrimaryPhone),
 									new Claim("SellerName",SelleruserDetails.Name),
+									new Claim("Image",SelleruserDetails.Image),
 									new Claim("PrimaryPhoneNumber",SelleruserDetails.PrimaryPhone),
 									new Claim("Address",SelleruserDetails.Address),
 									new Claim("Country",SelleruserDetails.Country),
@@ -111,6 +112,7 @@ namespace Seller_Login.Web.Controllers
 		{
 			Int64 SellerRegistrationId = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "SellerRegistrationId").Value.ToString());
 			string Name = User.Claims.FirstOrDefault(x => x.Type == "SellerName").ToString();
+			string Image = User.Claims.FirstOrDefault(x => x.Type == "Image").ToString();
 			string PrimaryPhone = User.Claims.FirstOrDefault(x => x.Type == "PrimaryPhoneNumber").ToString();
 			string Address = User.Claims.FirstOrDefault(x => x.Type == "Address").ToString();
 			string Country = User.Claims.FirstOrDefault(x => x.Type == "Country").ToString();

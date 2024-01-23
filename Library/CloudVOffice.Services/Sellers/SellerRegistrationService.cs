@@ -31,7 +31,7 @@ namespace CloudVOffice.Services.Sellers
         {
             try
             {
-                var sellerr = _dbContext.SellerRegistrations.Where(x => x.SellerRegistrationId == sellerRegistrationDTO.SellerRegistrationId && x.Deleted == false).FirstOrDefault();
+                var sellerr = _dbContext.SellerRegistrations.Where(x => x.PrimaryPhone == sellerRegistrationDTO.PrimaryPhone && x.Deleted == false).FirstOrDefault();
                 if (sellerr == null)
                 {
                     SellerRegistration sr = new SellerRegistration();
@@ -108,7 +108,7 @@ namespace CloudVOffice.Services.Sellers
         {
             try
             {
-                var sel = _dbContext.SellerRegistrations.Where(x => x.SellerRegistrationId != sellerUpdateDTO.SellerRegistrationId && x.Name == sellerUpdateDTO.Name && x.Deleted == false).FirstOrDefault();
+                var sel = _dbContext.SellerRegistrations.Where(x => x.SellerRegistrationId != sellerUpdateDTO.SellerRegistrationId && x.PrimaryPhone == sellerUpdateDTO.PrimaryPhone && x.Deleted == false).FirstOrDefault();
                 if (sel == null)
                 {
                     var a = _dbContext.SellerRegistrations.Where(x => x.SellerRegistrationId == sellerUpdateDTO.SellerRegistrationId).FirstOrDefault();

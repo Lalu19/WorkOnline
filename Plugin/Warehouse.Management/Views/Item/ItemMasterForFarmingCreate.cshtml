@@ -137,8 +137,8 @@
                         <div class="form-row">
 
                             <div class="form-group col-md-3">
-                                <label for="ProductName" class="form-label">Product Name &nbsp;</label>
-                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.ProductName" type="text" id="ProductName" class="form-control" autofocus="autofocus" placeholder="Product Name" />
+                                <label for="ProductName" class="form-label">Product Name &nbsp;<span style="color:red;"><b>*</b></span></label>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.ProductName" type="text" id="ProductName" class="form-control" autofocus="autofocus" placeholder="Product Name" required />
                                 <span asp-validation-for="CreatedItemMasterFarmingDTO.ProductName"></span>
                             </div>
 
@@ -253,7 +253,7 @@
 
                             <div class="form-group col-md-3">
                                 <label for="Barcode" class="form-label">Barcode &nbsp;</label>
-                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.Barcode" type="text" class="form-control" autofocus="autofocus" placeholder="Barcode" readonly />
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.Barcode" type="text" class="form-control" autofocus="autofocus" placeholder="Barcode" style="display:none;  />
                                 <span asp-validation-for="CreatedItemMasterFarmingDTO.Barcode"></span>
 
                                 @if (!string.IsNullOrEmpty(Model.CreatedItemMasterFarmingDTO.Barcode))

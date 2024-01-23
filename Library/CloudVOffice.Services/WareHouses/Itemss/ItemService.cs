@@ -44,14 +44,8 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 		{
 			try
 			{
-				var itemm = _dbContext.Items
-					.Where(i => i.ItemId != itemDTO.ItemId && i.ItemName == itemDTO.ItemName && !i.Deleted)
-					.FirstOrDefault();
-
-				if (itemm == null)
-				{
-					var existingItem = _dbContext.Items
-					.Where(i => i.ItemId == itemDTO.ItemId && !i.Deleted)
+				var existingItem = _dbContext.Items
+					.Where(i => i.ItemName == itemDTO.ItemName && !i.Deleted)
 					.FirstOrDefault();
 
 					if (existingItem == null)

@@ -61,6 +61,8 @@
 		<None Remove="Views\PurchaseOrder\PurchaseOrderView.cshtml" />
 		<None Remove="Views\State\StateCreate.cshtml" />
 		<None Remove="Views\State\StateView.cshtml" />
+		<None Remove="Views\Stocks\StockCreate.cshtml" />
+		<None Remove="Views\Stocks\StockView.cshtml" />
 		<None Remove="Views\UnitConversionFactors\UnitConversionFactorsCreate.cshtml" />
 		<None Remove="Views\UnitConversionFactors\UnitConversionFactorsView.cshtml" />
 		<None Remove="Views\UnitGroup\UnitGroupCreate.cshtml" />
