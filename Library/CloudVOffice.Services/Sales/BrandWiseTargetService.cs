@@ -1,8 +1,10 @@
 ﻿using CloudVOffice.Core.Domain.Common;
 using CloudVOffice.Core.Domain.Sales;
+using CloudVOffice.Core.Domain.WareHouses;
 using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Data.DTO.Sales;
 using CloudVOffice.Data.DTO.WareHouses.PinCodes;
+using CloudVOffice.Data.Migrations;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -38,7 +40,10 @@ namespace CloudVOffice.Services.Sales
                     {
                         BrandWiseTarget target = new BrandWiseTarget
                         {
-                            SectorId = brandWiseTargetDTO.SectorId,
+							SalesManagerID = brandWiseTargetDTO.SalesManagerID,
+                            WareHuoseId = brandWiseTargetDTO.WareHuoseId,
+							SalesExecutiveId = brandWiseTargetDTO.SalesExecutiveId,
+							SectorId = brandWiseTargetDTO.SectorId,
                             CategoryId = brandWiseTargetDTO.CategoryId,
                             BrandId = brandWiseTargetDTO.BrandId,
                             MonthId = brandWiseTargetDTO.MonthId,
@@ -82,6 +87,9 @@ namespace CloudVOffice.Services.Sales
 
                     if (targetToUpdate != null)
                     {
+						targetToUpdate.SalesManagerID = brandWiseTargetDTO.SalesManagerID;
+						targetToUpdate.WareHuoseId = brandWiseTargetDTO.WareHuoseId;
+						targetToUpdate.SalesExecutiveId = brandWiseTargetDTO.SalesExecutiveId;
                         targetToUpdate.SectorId = brandWiseTargetDTO.SectorId;
                         targetToUpdate.CategoryId = brandWiseTargetDTO.CategoryId;
                         targetToUpdate.BrandId = brandWiseTargetDTO.BrandId;

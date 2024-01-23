@@ -44,135 +44,148 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 		{
 			try
 			{
-				var existingItem = _dbContext.Items
+				var itemm = _dbContext.Items
+					.Where(i => i.ItemId != itemDTO.ItemId && i.ItemName == itemDTO.ItemName && !i.Deleted)
+					.FirstOrDefault();
+
+				if (itemm == null)
+				{
+					var existingItem = _dbContext.Items
 					.Where(i => i.ItemId == itemDTO.ItemId && !i.Deleted)
 					.FirstOrDefault();
 
-				if (existingItem == null)
-				{
-					Item item = new Item();
-					item.ItemName = itemDTO.ItemName;
-					item.SectorId = itemDTO.SectorId;
-					item.CategoryId = itemDTO.CategoryId;
-					item.SubCategory1Id = itemDTO.SubCategory1Id;
-					item.SubCategory2Id = itemDTO.SubCategory2Id;
-
-                    //item.WareHouseName = itemDTO.WareHouseName;
-                    //item.DistrictName = itemDTO.DistrictName;
-                    //item.VendorName = itemDTO.VendorName;
-                    //item.EmployeeName = itemDTO.EmployeeName;
-
-                    item.WareHuoseId = itemDTO.WareHuoseId;
-                    item.AddDistrictId = itemDTO.AddDistrictId;
-                    item.VendorId = itemDTO.VendorId;
-                    item.EmployeeId = itemDTO.EmployeeId;
-                    item.BrandId = itemDTO.BrandId;
-
-                    item.CompanyName = itemDTO.CompanyName;
-					//item.BrandName = itemDTO.BrandName;
-					item.ProductWeight = itemDTO.ProductWeight;
-					item.UnitId = itemDTO.UnitId;
-					item.CaseWeight = itemDTO.CaseWeight;
-					item.UnitPerCase = itemDTO.UnitPerCase;
-					item.ManufactureDate = itemDTO.ManufactureDate;
-					item.ExpiryDate = itemDTO.ExpiryDate;
-					item.Barcode = itemDTO.Barcode;
-					item.BarCodeNotAvailable = itemDTO.BarCodeNotAvailable;
-					item.MRP = itemDTO.MRP;
-					item.MRPCaseCost = itemDTO.MRPCaseCost;
-					item.HSN = itemDTO.HSN;
-					item.PurchaseCost = itemDTO.PurchaseCost;
-					item.PurchaseCaseCost = itemDTO.PurchaseCaseCost;
-					item.SalesCost = itemDTO.SalesCost;
-					item.SalesCaseCost = itemDTO.SalesCaseCost;
-					item.SGST = itemDTO.SGST;
-					item.CGST = itemDTO.CGST;
-					item.SellerMargin = itemDTO.SellerMargin;
-
-                    //item.HandlingType = itemDTO.HandlingType;
-
-                    item.HandlingTypeId = itemDTO.HandlingTypeId;
-
-                    item.InvoiceNo = itemDTO.InvoiceNo;
-					item.ReceivedDate = itemDTO.ReceivedDate;
-                    item.CreatedBy = itemDTO.CreatedBy;
-
-                    if (itemDTO.Images != null && itemDTO.Images.Any())
-                    {
-                        // Join the list of images into a comma-separated string
-                        item.Images = string.Join(",", itemDTO.Images);
-                    }
-                    else
-                    {
-                        item.Images = null; // or an empty string depending on your database schema
-                    }
-
-                    item.Thumbnail = itemDTO.Thumbnail;
-
-
-
-                    _itemRepo.Insert(item);
-					_dbContext.SaveChangesAsync();
-
-					return new ItemDTO
+					if (existingItem == null)
 					{
-						ItemId = item.ItemId,
+						Item item = new Item();
+						item.ItemName = itemDTO.ItemName;
+						item.SectorId = itemDTO.SectorId;
+						item.CategoryId = itemDTO.CategoryId;
+						item.SubCategory1Id = itemDTO.SubCategory1Id;
+						item.SubCategory2Id = itemDTO.SubCategory2Id;
 
-						ItemName = item.ItemName,
-						SectorId = item.SectorId,
-						CategoryId = item.CategoryId,
-						SubCategory1Id = item.SubCategory1Id,
-						SubCategory2Id = item.SubCategory2Id,
+						//item.WareHouseName = itemDTO.WareHouseName;
+						//item.DistrictName = itemDTO.DistrictName;
+						//item.VendorName = itemDTO.VendorName;
+						//item.EmployeeName = itemDTO.EmployeeName;
 
-                        //WareHouseName = item.WareHouseName,
-                        //DistrictName = item.DistrictName,
-                        //VendorName = item.VendorName,
-                        //EmployeeName = item.EmployeeName,
+						item.WareHuoseId = itemDTO.WareHuoseId;
+						item.AddDistrictId = itemDTO.AddDistrictId;
+						item.VendorId = itemDTO.VendorId;
+						item.EmployeeId = itemDTO.EmployeeId;
+						item.BrandId = itemDTO.BrandId;
 
-                        WareHuoseId = item.WareHuoseId,
-                        AddDistrictId = item.AddDistrictId,
-                        VendorId = item.VendorId,
-                        EmployeeId = item.EmployeeId,
+						item.CompanyName = itemDTO.CompanyName;
+						//item.BrandName = itemDTO.BrandName;
+						item.ProductWeight = itemDTO.ProductWeight;
+						item.UnitId = itemDTO.UnitId;
+						item.CaseWeight = itemDTO.CaseWeight;
+						item.UnitPerCase = itemDTO.UnitPerCase;
+						item.ManufactureDate = itemDTO.ManufactureDate;
+						item.ExpiryDate = itemDTO.ExpiryDate;
+						item.Barcode = itemDTO.Barcode;
+						item.BarCodeNotAvailable = itemDTO.BarCodeNotAvailable;
+						item.MRP = itemDTO.MRP;
+						item.MRPCaseCost = itemDTO.MRPCaseCost;
+						item.HSN = itemDTO.HSN;
+						item.PurchaseCost = itemDTO.PurchaseCost;
+						item.PurchaseCaseCost = itemDTO.PurchaseCaseCost;
+						item.SalesCost = itemDTO.SalesCost;
+						item.SalesCaseCost = itemDTO.SalesCaseCost;
+						item.SGST = itemDTO.SGST;
+						item.CGST = itemDTO.CGST;
+						item.SellerMargin = itemDTO.SellerMargin;
 
-                        CompanyName = item.CompanyName,
-						BrandId = item.BrandId,
-						//BrandName = item.BrandName,
-						UnitId = item.UnitId,
-                        ProductWeight = item.ProductWeight,
-						CaseWeight = item.CaseWeight,
-						UnitPerCase = item.UnitPerCase,
-						ManufactureDate = item.ManufactureDate,
-						ExpiryDate = item.ExpiryDate,
-						Barcode = item.Barcode,
-						BarCodeNotAvailable = item.BarCodeNotAvailable,
-						MRP = item.MRP,
-						MRPCaseCost = item.MRPCaseCost,
-						PurchaseCost = item.PurchaseCost,
-						PurchaseCaseCost = item.PurchaseCaseCost,
-						SalesCost = item.SalesCost,
-						SalesCaseCost = item.SalesCaseCost,
-						SGST = item.SGST,
-						HSN = item.HSN,
-						CGST = item.CGST,
-						SellerMargin = item.SellerMargin,
+						//item.HandlingType = itemDTO.HandlingType;
 
-                        //HandlingType = item.HandlingType,
-                        HandlingTypeId = item.HandlingTypeId,
+						item.HandlingTypeId = itemDTO.HandlingTypeId;
 
-                        InvoiceNo = item.InvoiceNo,
-						ReceivedDate = item.ReceivedDate,
-						CreatedBy = item.CreatedBy,
+						item.InvoiceNo = itemDTO.InvoiceNo;
+						item.ReceivedDate = itemDTO.ReceivedDate;
+						item.CreatedBy = itemDTO.CreatedBy;
 
-                        Images = !string.IsNullOrEmpty(item.Images) ? item.Images.Split(',').ToList() : new List<string>(),
-                        Thumbnail = item.Thumbnail
+						if (itemDTO.Images != null && itemDTO.Images.Any())
+						{
+							// Join the list of images into a comma-separated string
+							item.Images = string.Join(",", itemDTO.Images);
+						}
+						else
+						{
+							item.Images = null; // or an empty string depending on your database schema
+						}
 
-                    };
+						item.Thumbnail = itemDTO.Thumbnail;
+
+
+
+						_itemRepo.Insert(item);
+						_dbContext.SaveChangesAsync();
+
+						return new ItemDTO
+						{
+							ItemId = item.ItemId,
+
+							ItemName = item.ItemName,
+							SectorId = item.SectorId,
+							CategoryId = item.CategoryId,
+							SubCategory1Id = item.SubCategory1Id,
+							SubCategory2Id = item.SubCategory2Id,
+
+							//WareHouseName = item.WareHouseName,
+							//DistrictName = item.DistrictName,
+							//VendorName = item.VendorName,
+							//EmployeeName = item.EmployeeName,
+
+							WareHuoseId = item.WareHuoseId,
+							AddDistrictId = item.AddDistrictId,
+							VendorId = item.VendorId,
+							EmployeeId = item.EmployeeId,
+
+							CompanyName = item.CompanyName,
+							BrandId = item.BrandId,
+							//BrandName = item.BrandName,
+							UnitId = item.UnitId,
+							ProductWeight = item.ProductWeight,
+							CaseWeight = item.CaseWeight,
+							UnitPerCase = item.UnitPerCase,
+							ManufactureDate = item.ManufactureDate,
+							ExpiryDate = item.ExpiryDate,
+							Barcode = item.Barcode,
+							BarCodeNotAvailable = item.BarCodeNotAvailable,
+							MRP = item.MRP,
+							MRPCaseCost = item.MRPCaseCost,
+							PurchaseCost = item.PurchaseCost,
+							PurchaseCaseCost = item.PurchaseCaseCost,
+							SalesCost = item.SalesCost,
+							SalesCaseCost = item.SalesCaseCost,
+							SGST = item.SGST,
+							HSN = item.HSN,
+							CGST = item.CGST,
+							SellerMargin = item.SellerMargin,
+
+							//HandlingType = item.HandlingType,
+							HandlingTypeId = item.HandlingTypeId,
+
+							InvoiceNo = item.InvoiceNo,
+							ReceivedDate = item.ReceivedDate,
+							CreatedBy = item.CreatedBy,
+
+							Images = !string.IsNullOrEmpty(item.Images) ? item.Images.Split(',').ToList() : new List<string>(),
+							Thumbnail = item.Thumbnail
+
+						};
+					}
+					else
+					{
+						// Handle the duplicate case as needed
+						return null;
+					}
 				}
 				else
 				{
-					// Handle the duplicate case as needed
 					return null;
 				}
+
+				
 			}
 			catch (Exception ex)
 			{

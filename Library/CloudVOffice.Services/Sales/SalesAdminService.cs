@@ -10,6 +10,7 @@ using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Data.DTO.Sales;
 using CloudVOffice.Data.DTO.WareHouses.GSTs;
 using CloudVOffice.Data.DTO.WareHouses.PinCodes;
+using CloudVOffice.Data.Migrations;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
 using LinqToDB;
@@ -132,6 +133,7 @@ namespace CloudVOffice.Services.Sales
 					{
 						SalesAdminTarget target = new SalesAdminTarget
 						{
+							SalesManagerId = salesAdminTargetDTO.SalesManagerId,
 							MonthId = salesAdminTargetDTO.MonthId,
 							SectorId = Convert.ToInt64(salesAdminTargetDTO.Sector),
 							CategoryId = Convert.ToInt64(salesAdminTargetDTO.Category),
@@ -160,9 +162,6 @@ namespace CloudVOffice.Services.Sales
 				throw; // Handle the exception appropriately
 			}
 		}
-
-
-
 
 		public SalesAdminTarget GetSalesAdminTargetBySalesAdminId(Int64 salesAdminId)
         {
@@ -280,6 +279,7 @@ namespace CloudVOffice.Services.Sales
 					if (targetToUpdate != null)
 					{
 						// Update properties of the existing target
+						targetToUpdate.SalesManagerId = salesAdminTargetDTO.SalesManagerId;
 						targetToUpdate.MonthId = salesAdminTargetDTO.MonthId;
 						targetToUpdate.SectorId = Convert.ToInt64(salesAdminTargetDTO.Sector);
 						targetToUpdate.CategoryId = Convert.ToInt64(salesAdminTargetDTO.Category);

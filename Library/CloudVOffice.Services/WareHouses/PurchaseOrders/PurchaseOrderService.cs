@@ -40,6 +40,9 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
 				{
 					PurchaseOrder purchaseOrder = new PurchaseOrder();
 
+
+					purchaseOrder.Value = purchaseOrderDTO.Value;
+					purchaseOrder.PurchaseOrderParentId = purchaseOrderDTO.PurchaseOrderParentId;
 					purchaseOrder.SellerRegistrationId = purchaseOrderDTO.SellerRegistrationId;
 					purchaseOrder.ItemId = purchaseOrderDTO.ItemId;
 					purchaseOrder.Quantity = purchaseOrderDTO.Quantity;
@@ -123,6 +126,7 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
 				if (order != null)
 				{
 					order.SellerRegistrationId = purchaseOrderDTO.SellerRegistrationId;
+					//order.Value = purchaseOrderDTO.Value;
 					order.Quantity = purchaseOrderDTO.Quantity;
 					order.ItemId = purchaseOrderDTO.ItemId;
 					order.UpdatedDate = DateTime.Now;
@@ -196,8 +200,5 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
 				throw;
 			}
 		}
-
-
-
 	}
 }

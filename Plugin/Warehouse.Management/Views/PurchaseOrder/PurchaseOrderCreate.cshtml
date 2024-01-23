@@ -11,14 +11,15 @@
 <style>
 
 	#Statee tfoot #totalRow td:nth-child(1),
-	#Statee tfoot #totalRow td:nth-child(2) {
+	#Statee tfoot #totalRow td:nth-child(2),
+	#Statee tfoot #totalRow td:nth-child(3) {
 		font-weight: bold;
 	}
 
-	.tablehead th {
-		background-color: black;
+	/*.tablehead th {
+		background-color: #e10bb2;
 		color: white;
-	}
+	}*/
 
 </style>
 
@@ -144,7 +145,8 @@
 							</tbody>
 							<tfoot>
 								<tr id="totalRow">
-									<td colspan="3">Total</td>
+									<td colspan="2">Total</td>
+									<td>0</td>
 									<td>0</td>
 									<td></td>
 								</tr>
@@ -204,6 +206,9 @@
 				itemDropDown.value = null;
 
 				sellerRegisId = args.value;
+
+				var dropdown = document.getElementById('SellerRegistrationId').ej2_instances[0];
+				dropdown.enabled = false;
 			},
 			error: function () {
 
@@ -273,7 +278,7 @@
 				var SellerValue = $('#SellerRegistrationId').val();
 				var ItemValue = $('#ItemId').val();
 				var ItemId = selectedItemValue;
-				//var valuePrice = $('#Value').val();
+				var valuePrice = $('#Value').val();
 
 				var valuePrice = parseFloat($('#Value').val()) || 0;
 
@@ -285,7 +290,7 @@
 
 				if (SellerValue && ItemValue && !isNaN(Quantity)) {
 
-					var row = "<tr><td data-value='" + SellerId + "'>" + SellerValue + "</td><td data-value='" + ItemId + "'>" + ItemValue + "</td><td data-value='" + Quantity + "'>" + Quantity + "</td><td data-value='" + product + "'>" + product + "</td><td><button class='delRowBtn'><i class='icon-trash' style='color: red;'></i></button></td></tr>";
+					var row = "<tr><td data-value='" + SellerId + "'>" + SellerValue + "</td><td data-value='" + ItemId + "'>" + ItemValue + "</td><td data-value='" + Quantity + "'>" + Quantity + "</td><td data-value='" + product + "'>" + product + "</td><td style='display: none;' data-value='" + valuePrice + "'>" + valuePrice + "</td><td><button class='delRowBtn'><i class='icon-trash' style='color: red;'></i></button></td></tr>";
 
 
 
@@ -310,16 +315,23 @@
 
 		// Function to update the total row
 		function updateTotalRow() {
-			var total = 0;
+			var totalAmount = 0;
+			var totalQuantity = 0;
 
 			$('#Statee tbody tr').each(function () {
 					var product = parseFloat($(this).find('td:eq(3)').text()) || 0;
-				total += product;
+				totalAmount += product;
 				});
+					
+			$('#Statee tbody tr').each(function () {
+				var quantity = parseFloat($(this).find('td:eq(2)').text()) || 0;
+				totalQuantity += quantity;
+			});
 
 			// Update the total row within the tfoot
-
-			$('#totalRow td:eq(1)').text(total);
+			$('#totalRow td:eq(1)').text(totalQuantity);
+			$('#totalRow td:eq(2)').text(totalAmount);
+			
 		}
 	});
 
@@ -328,7 +340,10 @@
 <script>
 	$(document).ready(function () {
 		$("#btnSave").click(function (e) {
+
+			var SellerId;
 			var itemDetails = [];
+			var PurchaseOrderParent = [];
 
 
 			function redirectToPurchaseOrderView() {
@@ -355,20 +370,24 @@
 				////var CategoryId = $irow.find("td:eq(2)").data("value");
 				//var Quantity = parseFloat($irow.find("td:eq(2)").data("value"));
 
-				var SellerId = parseInt($irow.find("td:eq(0)").data("value"));
+				SellerId = parseInt($irow.find("td:eq(0)").data("value"));
 				var ItemId = parseInt($irow.find("td:eq(1)").data("value"));
 				// var CategoryId = $irow.find("td:eq(2)").data("value");
 				var Quantity = parseFloat($irow.find("td:eq(2)").data("value"));
 				var Amount = parseFloat($irow.find("td:eq(3)").data("value"));
+				var itemValue = parseFloat($irow.find("td:eq(4)").data("value"));
 
 
 
 				var a = {
+					"Value": itemValue,
 					"SellerRegistrationId": SellerId,
 					"ItemId": ItemId,
 					//"category": CategoryId,
 					"Quantity": Quantity,
 					"Value": Amount,
+					"TotalQuantity": totalQuantity,
+					"TotalValue": totalAmount,
 					"CreatedBy": @(Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value))
 				};
 
@@ -379,8 +398,27 @@
 
 			console.log(itemDetails);
 
+
+
+			var totalQuantity = parseFloat($('#totalRow td:eq(1)').text());
+			var totalAmount = parseFloat($('#totalRow td:eq(2)').text());
+			//var SellerRegId = SellerId;
+
+			var b = {
+				"TotalQuantity": totalQuantity,
+				"TotalAmount": totalAmount,
+				"SellerRegistrationId": SellerId,
+				"CreatedBy": @(Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value))
+						};
+
+			PurchaseOrderParent.push(b);
+
+
 			var model = {
-				"Orders": itemDetails
+				"Orders": itemDetails,
+				//"Parent": PurchaseOrderParent
+				"Parent": b
+
 			};
 
 			$.ajax({
@@ -402,7 +440,7 @@
 					redirectToPurchaseOrderView();
 				}
 			});
-		});		
+		});
 	});
 </script>
 

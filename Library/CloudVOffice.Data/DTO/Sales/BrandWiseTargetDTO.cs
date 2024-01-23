@@ -12,7 +12,10 @@ namespace CloudVOffice.Data.DTO.Sales
         public int? SectorId { get; set; }
         public int? CategoryId { get; set; }
         public Int64? BrandId { get; set; }
-        public Int64? MonthId { get; set; }
+		public Int64? SalesManagerID { get; set; }
+		public Int64? WareHuoseId { get; set; }
+		public Int64? SalesExecutiveId { get; set; }
+		public Int64? MonthId { get; set; }
         public Int64? UnitId { get; set; }
         public double? MonthlyBrandWiseTarget { get; set; }
         public Int64 CreatedBy { get; set; }
@@ -21,7 +24,10 @@ namespace CloudVOffice.Data.DTO.Sales
     public class BrandWiseTargetsDTO
     {
         public Int64? BrandWiseTargetId { get; set; }
-        public int? SectorId { get; set; }
+		public Int64? SalesManagerID { get; set; }
+		public Int64? WareHuoseId { get; set; }
+		public Int64? SalesExecutiveId { get; set; }
+		public int? SectorId { get; set; }
         public int? CategoryId { get; set; }
         public int? BrandId { get; set; }
         public int? MonthId { get; set; }

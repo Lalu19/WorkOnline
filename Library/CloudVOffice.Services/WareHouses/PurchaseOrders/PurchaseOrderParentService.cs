@@ -29,36 +29,71 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
             _purchaseOrderParentRepo = purchaseOrderParentRepo;
 
         }
-        public MessageEnum PurchaseOrderParentCreate(PurchaseOrderParentDTO purchaseOrderParentDTO)
-        {
-            try
-            {
-               // var objcheck = _dbContext.PurchaseOrderParents.SingleOrDefault(opt => opt.Deleted == false && opt.PurchaseOrderParentId == purchaseOrderParentDTO.PurchaseOrderParentId);
+		//    public MessageEnum PurchaseOrderParentCreate(PurchaseOrderParentDTO purchaseOrderParentDTO)
+		//    {
+		//        try
+		//        {
+		//           // var objcheck = _dbContext.PurchaseOrderParents.SingleOrDefault(opt => opt.Deleted == false && opt.PurchaseOrderParentId == purchaseOrderParentDTO.PurchaseOrderParentId);
+		//var objCheck = _dbContext.PurchaseOrderParents.FirstOrDefault(p => p.PurchaseOrderParentId == purchaseOrderParentDTO.PurchaseOrderParentId);
+
+		//if (objCheck == null)
+		//            {
+		//                PurchaseOrderParent purchaseOrderParent = new PurchaseOrderParent();
+		//	purchaseOrderParent.TotalAmount = purchaseOrderParentDTO.TotalAmount;
+		//	purchaseOrderParent.TotalQuantity = purchaseOrderParentDTO.TotalQuantity;
+		//	purchaseOrderParent.SellerRegistrationId = purchaseOrderParentDTO.SellerRegistrationId;
+		//	purchaseOrderParent.OrderShipped = purchaseOrderParentDTO.OrderShipped;
+		//	purchaseOrderParent.CreatedBy = purchaseOrderParentDTO.CreatedBy;
+		//	purchaseOrderParent.CreatedDate = System.DateTime.Now;
+		//                var obj = _purchaseOrderParentRepo.Insert(purchaseOrderParent);
+		//                return MessageEnum.Success;
+		//            }
+		//            else
+		//            {
+		//                return MessageEnum.Duplicate;
+		//            }
+		//        }
+		//        catch
+		//        {
+		//            throw;
+		//        }
+		//    }
+
+
+		public PurchaseOrderParent PurchaseOrderParentCreate(PurchaseOrderParentDTO purchaseOrderParentDTO)
+		{
+			try
+			{
 				var objCheck = _dbContext.PurchaseOrderParents.FirstOrDefault(p => p.PurchaseOrderParentId == purchaseOrderParentDTO.PurchaseOrderParentId);
 
 				if (objCheck == null)
-                {
-                    PurchaseOrderParent purchaseOrderParent = new PurchaseOrderParent();
+				{
+					PurchaseOrderParent purchaseOrderParent = new PurchaseOrderParent();
 					purchaseOrderParent.TotalAmount = purchaseOrderParentDTO.TotalAmount;
 					purchaseOrderParent.TotalQuantity = purchaseOrderParentDTO.TotalQuantity;
 					purchaseOrderParent.SellerRegistrationId = purchaseOrderParentDTO.SellerRegistrationId;
 					purchaseOrderParent.OrderShipped = purchaseOrderParentDTO.OrderShipped;
 					purchaseOrderParent.CreatedBy = purchaseOrderParentDTO.CreatedBy;
 					purchaseOrderParent.CreatedDate = System.DateTime.Now;
-                    var obj = _purchaseOrderParentRepo.Insert(purchaseOrderParent);
-                    return MessageEnum.Success;
-                }
-                else
-                {
-                    return MessageEnum.Duplicate;
-                }
-            }
-            catch
-            {
-                throw;
-            }
-        }
-        public List<PurchaseOrderParent> GetPurchaseOrderParentList()
+					
+					var obj = _purchaseOrderParentRepo.Insert(purchaseOrderParent);
+
+					return obj;
+				}
+				else
+				{
+					// You may want to throw an exception or handle this case differently based on your requirements
+					throw new Exception("Duplicate entry found");
+				}
+			}
+			catch
+			{
+				throw;
+			}
+		}
+
+
+		public List<PurchaseOrderParent> GetPurchaseOrderParentList()
         {
             try
             {

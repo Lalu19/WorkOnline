@@ -4,6 +4,7 @@ using CloudVOffice.Core.Domain.Company;
 using CloudVOffice.Core.Domain.Comunication;
 using CloudVOffice.Core.Domain.EmailTemplates;
 using CloudVOffice.Core.Domain.Logging;
+using CloudVOffice.Core.Domain.Orders;
 using CloudVOffice.Core.Domain.Pemission;
 using CloudVOffice.Core.Domain.ProductCategories;
 using CloudVOffice.Core.Domain.RetailerModel;
@@ -21,6 +22,7 @@ using CloudVOffice.Core.Domain.WareHouses.Months;
 using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Core.Domain.WareHouses.PurchaseOrders;
 using CloudVOffice.Core.Domain.WareHouses.States;
+using CloudVOffice.Core.Domain.WareHouses.Stocks;
 using CloudVOffice.Core.Domain.WareHouses.UOMs;
 using CloudVOffice.Core.Domain.WareHouses.Vehicles;
 using CloudVOffice.Core.Domain.WareHouses.Vendors;
@@ -104,6 +106,7 @@ namespace CloudVOffice.Data.Persistence
 		public virtual DbSet<State> States { get; set; }
 		public virtual DbSet<PurchaseOrder> PurchaseOrders { get; set; }
         public virtual DbSet<PurchaseOrderParent> PurchaseOrderParents { get; set; }
+        public virtual DbSet<Stock> Stocks { get; set; }
         
 
 
@@ -113,9 +116,14 @@ namespace CloudVOffice.Data.Persistence
 
         public virtual DbSet<SalesAdminTarget> SalesAdminTargets { get; set; }
         public virtual DbSet<SalesManagerTarget> SalesManagerTargets { get; set; }
-        #endregion
+		#endregion
 
-        public virtual DbSet<RetailLogin> RetailLogins { get; set; }
+		#region Orders
+		public virtual DbSet<Checkout> Checkouts { get; set; }
+
+		#endregion
+
+		public virtual DbSet<RetailLogin> RetailLogins { get; set; }
 		public virtual DbSet<BuyerRegistration> BuyerRegistrations { get; set; }
 		public virtual DbSet<SellerRegistration> SellerRegistrations { get; set; }
 
@@ -545,12 +553,23 @@ namespace CloudVOffice.Data.Persistence
               .HasDefaultValue(false)
               .ValueGeneratedNever();
 
+			modelBuilder.Entity<Stock>()
+			.Property(s => s.CreatedDate)
+			.HasDefaultValueSql("getdate()");
 
-            #endregion
 
-            #region Sales
+			modelBuilder.Entity<Stock>()
+			  .Property(s => s.Deleted)
+			  .HasDefaultValue(false)
+			  .ValueGeneratedNever();
 
-            modelBuilder.Entity<SalesAdminTarget>()
+
+
+			#endregion
+
+			#region Sales
+
+			modelBuilder.Entity<SalesAdminTarget>()
 	.Property(s => s.CreatedDate)
 	.HasDefaultValueSql("getdate()");
 
@@ -569,11 +588,22 @@ namespace CloudVOffice.Data.Persistence
              .ValueGeneratedNever();
 
 
-            #endregion
+			#endregion
+
+			#region Orders
+			modelBuilder.Entity<Checkout>()
+	   .Property(s => s.CreatedDate)
+	   .HasDefaultValueSql("getdate()");
+
+			modelBuilder.Entity<Checkout>()
+			 .Property(s => s.Deleted)
+			 .HasDefaultValue(false)
+			.ValueGeneratedNever();
+			#endregion
 
 
 
-            modelBuilder.Entity<RetailModel>()
+			modelBuilder.Entity<RetailModel>()
            .Property(s => s.CreatedDate)
            .HasDefaultValueSql("getdate()");
 	

@@ -93,6 +93,13 @@
 								<span asp-validation-for="SectorId"></span>
 							</div>
 
+							<div class="form-group col-md-3">
+								<label for="SalesManagerId" class="form-label">SalesManager Name</label>
+								<ejs-dropdownlist id="SalesManagerId" allowFiltering="true" change="onChangeSalesManager" ejs-for="@Model.SalesManagerId" dataSource="@(new SelectList((IEnumerable)ViewBag.SalesManager, "SalesManagerId", "SalesManagerName").Items)" placeholder="Select SalesManager" popupHeight="220px">
+									<e-dropdownlist-fields text="SalesManagerName" value="SalesManagerId"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="SalesManagerId"></span>
+							</div>
 
 
 							<div class="form-group col-md-3">
@@ -103,19 +110,22 @@
 								<span asp-validation-for="CategoryId"></span>
 							</div>
 
+						</div>
+
+						<div class="form-row">
+
 							<div class="form-group col-md-3">
 
 								<label for="MonthlyCategoryWiseTarget" class="form-label">Monthly CategoryWise Target &nbsp;<span style="color:red;"><b>*</b></span></label>
-								<input asp-for="@Model.MonthlyCategoryWiseTarget" id="CategoryWiseTarget" type="text" class="form-control"  placeholder="Monthly CategoryWise Target" />
+								<input asp-for="@Model.MonthlyCategoryWiseTarget" id="CategoryWiseTarget" type="text" class="form-control" placeholder="Monthly CategoryWise Target" />
 								<span asp-validation-for="MonthlyCategoryWiseTarget"></span>
 							</div>
 
-
 						</div>
 
+
+
 						@*<div class="form-row">
-
-
 
 							<div class="col-md-3">
 								<div class="form-group">
@@ -166,6 +176,7 @@
 									<tr>
 										<th>Month</th>
 										<th>Sector</th>
+										<th>Sales Manager</th>
 										<th>Category</th>
 										<th>Target</th>
 										<th>Action</th>
@@ -232,6 +243,15 @@
 							</div>
 
 							<div class="form-group col-md-3">
+								<label for="SalesManagerId" class="form-label">SalesManager Name</label>
+								<ejs-dropdownlist id="SalesManagerIdd" allowFiltering="true" change="onChangeSalesManagerd" ejs-for="@Model.SalesManagerId" dataSource="@(new SelectList((IEnumerable)ViewBag.SalesManager, "SalesManagerId", "SalesManagerName").Items)" placeholder="Select SalesManager" popupHeight="220px">
+									<e-dropdownlist-fields text="SalesManagerName" value="SalesManagerId"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="SalesManagerId"></span>
+							</div>
+
+
+							<div class="form-group col-md-3">
 								<label for="SectorId" class="form-label">Sector &nbsp</label>
 								<ejs-dropdownlist id="SectorIdd" name="SectorId" allowFiltering="true" change="onChangeSectord"
 													dataSource="@(new SelectList((IEnumerable)ViewBag.Sectors, "SectorId", "SectorName").Items)"
@@ -241,6 +261,7 @@
 								</ejs-dropdownlist>
 								<span asp-validation-for="SectorId"></span>
 							</div>
+
 
 							@*<div class="form-group col-md-3">
 								<label for="BrandId" class="form-label">Brand &nbsp</label>
@@ -258,6 +279,10 @@
 								<span asp-validation-for="BrandId"></span>
 							</div>
 
+						</div>
+
+						<div class="form-row">
+
 							<div class="form-group col-md-3">
 								<label for="CategoryId" class="form-label">Category Name</label>
 								<ejs-dropdownlist id="CategoryIdd" allowFiltering="true" ejs-for="@Model.CategoryId" placeholder="Select SubCategory1" popupHeight="220px" required>
@@ -265,10 +290,7 @@
 								</ejs-dropdownlist>
 								<span asp-validation-for="CategoryId"></span>
 							</div>
-							
-						</div>
 
-						<div class="form-row">
 							<div class="form-group col-md-3">
 
 								<label for="MonthlyCategoryWiseTarget" class="form-label">Monthly CategoryWise Target &nbsp;<span style="color:red;"><b>*</b></span></label>
@@ -292,6 +314,7 @@
 							<thead>
 								<tr>
 									<th>Month</th>
+									<th>Sales Manager</th>
 									<th>Sector</th>
 									<th>Brand</th>
 									<th>Category</th>
@@ -584,13 +607,32 @@
 	}
 
 
+	var SalesManagerIdd;
+	var SalesManagerIddd;
 
+	function onChangeSalesManager(args) {
 
+		var selectedSalesManagerId = args.value;
+
+		console.log('Selected SalesManagerId:', selectedSalesManagerId);
+
+		SalesManagerIdd = selectedSalesManagerId;
+	}
+
+	function onChangeSalesManagerd(args) {
+
+		var selectedSalesManagerId = args.value;
+
+		console.log('Selected SalesManagerId:', selectedSalesManagerId);
+
+		SalesManagerIddd = selectedSalesManagerId;
+	}
 
 
 	$(document).ready(function () {
 		// Create an object to store sums for each secId
 		var sectorSums = {};
+
 
 		$("#Add_Target").click( async function (e) {
 			try{
@@ -598,7 +640,9 @@
 				var SectorValue = $('#SectorId').val();
 				var CategoryValue = $('#CategoryId').val();
 				var MonthValue = $('#MonthId').val();
+				var SalesManValue = $('#SalesManagerId').val();
 				var CategoryWiseValue = parseFloat($('#CategoryWiseTarget').val()) || 0;
+
 
 				if (SectorValue == null || CategoryValue == null || MonthValue == null || isNaN(CategoryWiseValue)) {
 					alert("Month, Sector, Category, CategoryWiseValue can't be empty");
@@ -636,7 +680,7 @@
 
 					//var row = "<tr><td data-value='" + secId + "'>" + SectorValue + "</td><td data-value='" + CategoryId + "'>" + CategoryValue + "</td><td data-value='" + CategoryWiseValue + "'>" + CategoryWiseValue + "</td><td><button class='delRowBtn'><i class='ion-trash-b' style='color: red;'></i></button></td></tr>";
 
-					var row = "<tr><td data-value='" + MonthId + "'>" + MonthValue + "</td><td data-value='" + secId + "'>" + SectorValue + "</td><td data-value='" + CategoryId + "'>" + CategoryValue + "</td><td data-value='" + CategoryWiseValue + "'>" + CategoryWiseValue + "</td><td><button class='delRowBtn'><i class='icon-trash' style='color: red;'></i></button></td></tr>";
+					var row = "<tr><td data-value='" + MonthId + "'>" + MonthValue + "</td><td data-value='" + secId + "'>" + SectorValue + "</td><td data-value='" + SalesManagerIdd + "'>" + SalesManValue + "</td><td data-value='" + CategoryId + "'>" + CategoryValue + "</td><td data-value='" + CategoryWiseValue + "'>" + CategoryWiseValue + "</td><td><button class='delRowBtn'><i class='icon-trash' style='color: red;'></i></button></td></tr>";
 
 
 
@@ -713,6 +757,7 @@
 				var BrandValue = $('#BrandIdd').val();
 				var CategoryValue = $('#CategoryIdd').val();
 				var MonthValue = $('#MonthIdd').val();
+				var SalesManValue = $('#SalesManagerIdd').val();
 				var CategoryWiseValue = parseFloat($('#CategoryWiseTargetd').val()) || 0;
 
 				if (SectorValue == null || BrandValue == null || CategoryValue == null || MonthValue == null || isNaN(CategoryWiseValue)) {
@@ -755,7 +800,10 @@
 
 					//var row = "<tr><td data-value='" + secId + "'>" + SectorValue + "</td><td data-value='" + CategoryId + "'>" + CategoryValue + "</td><td data-value='" + CategoryWiseValue + "'>" + CategoryWiseValue + "</td><td><button class='delRowBtn'><i class='ion-trash-b' style='color: red;'></i></button></td></tr>";
 
-					var row = "<tr><td data-value='" + MonthId + "'>" + MonthValue + "</td><td data-value='" + secId + "'>" + SectorValue + "</td><td data-value='" + BrandId + "'>" + BrandValue + "</td><td data-value='" + CategoryId + "'>" + CategoryValue + "</td><td data-value='" + CategoryWiseValue + "'>" + CategoryWiseValue + "</td><td><button class='delRowBtnd'><i class='icon-trash' style='color: red;'></i></button></td></tr>";
+
+					///*<td data-value='" + SalesManagerIdd + "'>" + SalesManValue + "</td>*/
+
+					var row = "<tr><td data-value='" + MonthId + "'>" + MonthValue + "</td><td data-value='" + SalesManagerIddd + "'>" + SalesManValue + "</td><td data-value='" + secId + "'>" + SectorValue + "</td><td data-value='" + BrandId + "'>" + BrandValue + "</td><td data-value='" + CategoryId + "'>" + CategoryValue + "</td><td data-value='" + CategoryWiseValue + "'>" + CategoryWiseValue + "</td><td><button class='delRowBtnd'><i class='icon-trash' style='color: red;'></i></button></td></tr>";
 
 
 
@@ -854,13 +902,15 @@
 
 				var Month = parseInt($irow.find("td:eq(0)").data("value"));
 				var SectorId = parseInt($irow.find("td:eq(1)").data("value"));
-				var CategoryId = $irow.find("td:eq(2)").data("value");
-				var MonthlyCategoryWiseTarget = $irow.find("td:eq(3)").data("value");
+				var SalesMan = parseInt($irow.find("td:eq(2)").data("value"));
+				var CategoryId = $irow.find("td:eq(3)").data("value");
+				var MonthlyCategoryWiseTarget = $irow.find("td:eq(4)").data("value");
 
 
 				var a = {
 					"monthId": Month,
 					"sector": SectorId,
+					"salesManagerId": SalesMan,
 					"category": CategoryId,
 					"monthlyCategoryWiseTarget": MonthlyCategoryWiseTarget,
 					"createdBy": @(Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value))
@@ -908,13 +958,15 @@
 				//var MonthlyCategoryWiseTarget = $irow.find("td:eq(2)").data("value");
 
 				var Month = parseInt($irow.find("td:eq(0)").data("value"));
-				var SectorId = parseInt($irow.find("td:eq(1)").data("value"));
-				var BrandId = parseInt($irow.find("td:eq(2)").data("value"));
-				var CategoryId = $irow.find("td:eq(3)").data("value");
-				var MonthlyCategoryWiseTarget = $irow.find("td:eq(4)").data("value");
+				var SalesManId = parseInt($irow.find("td:eq(1)").data("value"));
+				var SectorId = parseInt($irow.find("td:eq(2)").data("value"));
+				var BrandId = parseInt($irow.find("td:eq(3)").data("value"));
+				var CategoryId = $irow.find("td:eq(4)").data("value");
+				var MonthlyCategoryWiseTarget = $irow.find("td:eq(5)").data("value");
 
 
 				var a = {
+					"salesManagerID": SalesManId,
 					"brandId": BrandId,
 					"monthId": Month,
 					"sectorId": SectorId,

@@ -59,7 +59,8 @@ namespace CloudVOffice.Services.Sales
 		{
 			try
 			{
-				return _dbContext.SalesManagers.Where(x => x.Deleted == false).ToList();
+				var a = _dbContext.SalesManagers.Where(x => x.Deleted == false).ToList();
+				return a;
 			}
 			catch
 			{

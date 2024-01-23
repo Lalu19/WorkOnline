@@ -150,6 +150,16 @@
                 });
             }
 
+            else if (message == "@((int)MessageEnum.Duplicate)") {
+                sweetAlert({
+                    html: true,
+                    icon: "Duplicate",
+                    title: "Item",
+                    text: "Item Already Exists.",
+                    type: "Duplicate"
+                });
+            }
+
             else if (message == "Barcode generated and Item saved successfully") {
 
                 sweetAlert({

@@ -326,7 +326,7 @@ namespace Warehouse.Management.Controllers
 						TempData["msg"] = MessageEnum.Success;
 						return Redirect("/WareHouse/Item/ItemView");
 					}
-					else
+					else if (createdItemDTO == null)
 					{
 						TempData["msg"] = MessageEnum.Duplicate;
 						ModelState.AddModelError("", "Item Already Exists");

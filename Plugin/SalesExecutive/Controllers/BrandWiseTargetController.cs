@@ -59,6 +59,11 @@ namespace SalesExecutive.Controllers
             {
                 var target = _brandWiseTargetService.GetBrandWiseTargetById(int.Parse(brandWiseTargetId.ToString()));
 
+
+                brandWiseTargetDTO.SalesManagerID = target.SalesManagerID;
+                //brandWiseTargetDTO.WareHuoseId = target.WareHuoseId;
+                //brandWiseTargetDTO.SalesExecutiveId = target.SalesExecutiveId;
+
                 brandWiseTargetDTO.SectorId = target.SectorId;
                 brandWiseTargetDTO.CategoryId = target.CategoryId;
                 brandWiseTargetDTO.BrandId =target.BrandId;
