@@ -15,6 +15,7 @@ namespace CloudVOffice.Core.Domain.WareHouses.PurchaseOrders
         public double? TotalAmount { get; set; }
         public double? TotalQuantity { get; set; }
         public Int64? SellerRegistrationId { get; set; }
+        public string? POPUniqueNumber { get; set; }
         public bool OrderShipped { get; set; }
         public Int64 CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
@@ -24,8 +25,6 @@ namespace CloudVOffice.Core.Domain.WareHouses.PurchaseOrders
 
         [ForeignKey("SellerRegistrationId")]
         public SellerRegistration SellerRegistration { get; set; }
-
         public ICollection<PurchaseOrder> PurchaseOrders { get; set; }
-
     }
 }

@@ -12,7 +12,7 @@ namespace CloudVOffice.Data.DTO.WareHouses.PurchaseOrders
 		public Int64? SellerRegistrationId { get; set; }
 		public Int64? PurchaseOrderParentId { get; set; }
 		public Int64? ItemId { get; set; }
-		public double? Quantity { get; set; }
+        public double? Quantity { get; set; }
 		public double? TotalQuantity { get; set; }
 		public double? TotalValue { get; set; }
 		//public Int64? UnitId { get; set; }
