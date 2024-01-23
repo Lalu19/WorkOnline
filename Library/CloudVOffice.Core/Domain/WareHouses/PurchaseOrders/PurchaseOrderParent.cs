@@ -25,5 +25,7 @@ namespace CloudVOffice.Core.Domain.WareHouses.PurchaseOrders
         [ForeignKey("SellerRegistrationId")]
         public SellerRegistration SellerRegistration { get; set; }
 
+        public ICollection<PurchaseOrder> PurchaseOrders { get; set; }
+
     }
 }
