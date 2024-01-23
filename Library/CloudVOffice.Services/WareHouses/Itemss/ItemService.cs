@@ -173,13 +173,6 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						// Handle the duplicate case as needed
 						return null;
 					}
-				}
-				else
-				{
-					return null;
-				}
-
-				
 			}
 			catch (Exception ex)
 			{

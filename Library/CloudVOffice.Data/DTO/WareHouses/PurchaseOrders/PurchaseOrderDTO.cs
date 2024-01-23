@@ -15,7 +15,7 @@ namespace CloudVOffice.Data.DTO.WareHouses.PurchaseOrders
 		public double? Quantity { get; set; }
 		public double? TotalQuantity { get; set; }
 		public double? TotalValue { get; set; }
-		public Int64? UnitId { get; set; }
+		//public Int64? UnitId { get; set; }
 		public double Value { get; set; }
 		public Int64 CreatedBy { get; set; }
 	}
