@@ -13,6 +13,7 @@ namespace CloudVOffice.Data.DTO.WareHouses.PurchaseOrders
         public double? TotalQuantity { get; set; }
         public Int64? SellerRegistrationId { get; set; }
         public bool OrderShipped { get; set; }
+        public string? POPUniqueNumber { get; set; }
         public Int64 CreatedBy { get; set; }
         
     }
