@@ -31,9 +31,6 @@ namespace CloudVOffice.Core.Domain.WareHouses.PurchaseOrders
 		public Item Item { get; set; }
 
 		[ForeignKey("SellerRegistrationId")]
-		public SellerRegistration SellerRegistration {  get; set; }
-
-		//[ForeignKey("UnitId")]
-		//public Unit Unit { get; set; }
+		public SellerRegistration SellerRegistration { get; set; }
 	}
 }

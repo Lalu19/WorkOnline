@@ -14,8 +14,11 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
 {
     public interface IPurchaseOrderParentService
     {
-        public MessageEnum PurchaseOrderParentCreate(PurchaseOrderParentDTO purchaseOrderParentDTO);
-        public PurchaseOrderParent GetPurchaseOrderParentById(Int64 purchaseOrderParentId);
+		//public MessageEnum PurchaseOrderParentCreate(PurchaseOrderParentDTO purchaseOrderParentDTO);
+
+		public PurchaseOrderParent PurchaseOrderParentCreate(PurchaseOrderParentDTO purchaseOrderParentDTO);
+
+		public PurchaseOrderParent GetPurchaseOrderParentById(Int64 purchaseOrderParentId);
         public List<PurchaseOrderParent> GetPurchaseOrderParentList();
         public MessageEnum PurchaseOrderParentUpdate(PurchaseOrderParentDTO purchaseOrderParentDTO);
         public MessageEnum PurchaseOrderParentDelete(Int64 purchaseOrderParentId, Int64 DeletedBy);

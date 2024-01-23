@@ -25,12 +25,16 @@ namespace Warehouse.Management.Controllers
 	{
 		private readonly IPurchaseOrderService _purchaseOrderService;
 		private readonly ISellerRegistrationService _sellerRegistrationService;
+		private readonly IPurchaseOrderParentService _purchaseOrderParentService;
 
 
-		public PurchaseOrderController(IPurchaseOrderService purchaseOrderService, ISellerRegistrationService sellerRegistrationService)
+		public PurchaseOrderController(IPurchaseOrderService purchaseOrderService, ISellerRegistrationService sellerRegistrationService,
+									   IPurchaseOrderParentService purchaseOrderParentService
+										)
 		{
 			_purchaseOrderService = purchaseOrderService;
 			_sellerRegistrationService = sellerRegistrationService;
+			_purchaseOrderParentService = purchaseOrderParentService;
 		}
 
 
@@ -40,7 +44,6 @@ namespace Warehouse.Management.Controllers
 			PurchaseOrderDTO purchaseOrderDTO = new PurchaseOrderDTO();
 
 			ViewBag.Sellers = _sellerRegistrationService.GetSellerRegistrationList();
-
 
 			if(purchaseOrderId != null)
 			{
@@ -61,6 +64,8 @@ namespace Warehouse.Management.Controllers
 		{
 			//purchaseOrderDTO.CreatedBy = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
 
+			var a = _purchaseOrderParentService.PurchaseOrderParentCreate(model.Parent);
+
 			foreach (var order in model.Orders)
 			{
 				order.CreatedBy = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
@@ -68,6 +73,8 @@ namespace Warehouse.Management.Controllers
 				if (order.PurchaseOrderId == null)
 				{
 					// It's a new target, create it
+
+					order.PurchaseOrderParentId = a.PurchaseOrderParentId;
 					var result = _purchaseOrderService.PurchaseOrderCreate(order);
 
 					// Handle the result accordingly

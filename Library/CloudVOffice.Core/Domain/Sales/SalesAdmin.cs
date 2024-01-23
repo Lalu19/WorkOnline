@@ -14,6 +14,7 @@ namespace CloudVOffice.Core.Domain.Sales
     public class SalesAdminTarget : IAuditEntity, ISoftDeletedEntity
     {
         public Int64 SalesAdminTargetId { get; set; }
+        public Int64? SalesManagerId { get; set; }
         public string? SalesAdminTargetName { get; set; }
         public Int64 MonthId { get; set; }
         public Int64? SectorId { get; set; }
@@ -34,5 +35,9 @@ namespace CloudVOffice.Core.Domain.Sales
 
         [ForeignKey("MonthId")]
         public Month Month { get; set; }
+
+		[ForeignKey("SalesManagerId")]
+		public SalesManager SalesManager { get; set; }
+
 	}
 }

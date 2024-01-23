@@ -28,15 +28,17 @@ namespace SalesExecutive.Controllers
 		private readonly ICategoryService _categoryService;
 		private readonly IMonthService _monthService;
 		private readonly IBrandService _brandService;
+		private readonly ISalesManagerService _salesManagerService;
 		
 
-		public SalesAdminController(ISalesAdminService salesAdminService, ISectorService sectorService, ICategoryService categoryService,IMonthService monthService,IBrandService brandService)
+		public SalesAdminController(ISalesAdminService salesAdminService, ISectorService sectorService, ICategoryService categoryService,IMonthService monthService,IBrandService brandService,ISalesManagerService salesManagerService)
 		{
 			_salesAdminService = salesAdminService;
 			_sectorService = sectorService;
 			_categoryService = categoryService;
 			_monthService = monthService;
 			_brandService = brandService;
+			_salesManagerService = salesManagerService;
 		}
 
 
@@ -46,9 +48,10 @@ namespace SalesExecutive.Controllers
 		{
 
 			ViewBag.Sectors = _sectorService.GetSectorList();
-			ViewBag.Categories = _categoryService.GetCategoryList();
+			//ViewBag.Categories = _categoryService.GetCategoryList();
 			ViewBag.months = _monthService.GetMonthList();
 			ViewBag.Brands = _brandService.GetBrandList();
+			ViewBag.SalesManager = _salesManagerService.GetSalesManagerList();
 
 			SalesAdminDTO salesAdminDTO = new SalesAdminDTO();
 
@@ -56,6 +59,7 @@ namespace SalesExecutive.Controllers
 			{
 				var target = _salesAdminService.GetSalesAdminTargetBySalesAdminId(int.Parse(salesAdminTargetId.ToString()));
 
+				salesAdminDTO.SalesManagerId = target.SalesManagerId;
 				salesAdminDTO.SalesAdminTargetName = target.SalesAdminTargetName;
 				salesAdminDTO.MonthId = target.MonthId;
 				salesAdminDTO.SectorId = target.SectorId;
