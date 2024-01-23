@@ -3035,6 +3035,49 @@ namespace CloudVOffice.Data.Migrations
                     b.ToTable("States");
                 });
 
+            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Stocks.Stock", b =>
+                {
+                    b.Property<long>("StockId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("StockId"));
+
+                    b.Property<long>("CreatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<long?>("ItemId")
+                        .HasColumnType("bigint");
+
+                    b.Property<double?>("Quantity")
+                        .HasColumnType("float");
+
+                    b.Property<long?>("UnitId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("WareHuoseId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("StockId");
+
+                    b.ToTable("Stocks");
+                });
+
             modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.UOMs.Unit", b =>
                 {
                     b.Property<long>("UnitId")

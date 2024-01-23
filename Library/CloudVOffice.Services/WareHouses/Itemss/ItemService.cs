@@ -45,7 +45,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 			try
 			{
 				var existingItem = _dbContext.Items
-					.Where(i => i.ItemId == itemDTO.ItemId && !i.Deleted)
+					.Where(i => i.ItemName == itemDTO.ItemName && !i.Deleted)
 					.FirstOrDefault();
 
 				if (existingItem == null)

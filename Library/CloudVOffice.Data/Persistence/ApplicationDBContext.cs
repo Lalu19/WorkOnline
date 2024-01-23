@@ -22,6 +22,7 @@ using CloudVOffice.Core.Domain.WareHouses.Months;
 using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Core.Domain.WareHouses.PurchaseOrders;
 using CloudVOffice.Core.Domain.WareHouses.States;
+using CloudVOffice.Core.Domain.WareHouses.Stocks;
 using CloudVOffice.Core.Domain.WareHouses.UOMs;
 using CloudVOffice.Core.Domain.WareHouses.Vehicles;
 using CloudVOffice.Core.Domain.WareHouses.Vendors;
@@ -105,6 +106,8 @@ namespace CloudVOffice.Data.Persistence
 		public virtual DbSet<State> States { get; set; }
 		public virtual DbSet<PurchaseOrder> PurchaseOrders { get; set; }
         public virtual DbSet<PurchaseOrderParent> PurchaseOrderParents { get; set; }
+
+        public virtual DbSet<Stock> Stocks { get; set; }
         
 
 
@@ -547,6 +550,17 @@ namespace CloudVOffice.Data.Persistence
 
 
             modelBuilder.Entity<PurchaseOrderParent>()
+              .Property(s => s.Deleted)
+              .HasDefaultValue(false)
+              .ValueGeneratedNever();
+
+
+            modelBuilder.Entity<Stock>()
+         .Property(s => s.CreatedDate)
+         .HasDefaultValueSql("getdate()");
+
+
+            modelBuilder.Entity<Stock>()
               .Property(s => s.Deleted)
               .HasDefaultValue(false)
               .ValueGeneratedNever();

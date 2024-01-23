@@ -329,8 +329,9 @@ namespace Warehouse.Management.Controllers
 					else
 					{
 						TempData["msg"] = MessageEnum.Duplicate;
-						ModelState.AddModelError("", "Item Already Exists");
-						return Redirect("/WareHouse/Item/ItemView");
+						//ModelState.AddModelError("", "Item Already Exists");
+						//return Redirect("/WareHouse/Item/ItemView");
+						TempData["msg"] = "Item Already Exists";
 					}
 				}
 			}
@@ -354,11 +355,7 @@ namespace Warehouse.Management.Controllers
 				}
 			}
 
-
-
 			ViewBag.Items = _itemService.GetItemList();
-
-			//Continue with the rest of your logic or return the view as needed
 			return View("~/Plugins/Warehouse.Management/Views/Item/ItemView.cshtml", ViewBag.Items);
 
 		}
