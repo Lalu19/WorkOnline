@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CloudVOffice.Core.Domain.Common;
+using CloudVOffice.Core.Domain.ProductCategories;
 using CloudVOffice.Core.Domain.Sellers;
 using CloudVOffice.Core.Domain.WareHouses.Items;
 using CloudVOffice.Core.Domain.WareHouses.PurchaseOrders;
@@ -14,6 +15,7 @@ using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Utilities;
 
 namespace CloudVOffice.Services.WareHouses.PurchaseOrders
 {
@@ -192,12 +194,23 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
 				}				
 			}
 			catch
-			{
-				throw;
-			}
+            {
+                throw;
+            }
 		}
+        public List<PurchaseOrder> GetItemsByPurchaseOrderParentId(Int64 PurchaseOrderParentId)
+        {
+            try
+            {
+                var a = _dbContext.PurchaseOrders.Where(x => x.PurchaseOrderParentId == PurchaseOrderParentId && x.Deleted == false).ToList();
+				return a;
+            }
+            catch
+            {
+                throw;
+            }
+        }
 
 
-
-	}
+    }
 }

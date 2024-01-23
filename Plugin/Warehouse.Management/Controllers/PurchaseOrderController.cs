@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CloudVOffice.Core.Domain.Common;
+using CloudVOffice.Core.Domain.ProductCategories;
 using CloudVOffice.Core.Domain.WareHouses.Items;
 using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Data.DTO.ProductCategories;
@@ -152,7 +153,12 @@ namespace Warehouse.Management.Controllers
 			return item;
 		}
 
+        public JsonResult GetItemsByPurchaseOrderParentId(Int64 PurchaseOrderParentId)
+        {
+            Int64 UserId = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
 
+            return Json(_purchaseOrderService.GetItemsByPurchaseOrderParentId(PurchaseOrderParentId));
+        }
 
-	}
+    }
 }

@@ -19,7 +19,7 @@ namespace CloudVOffice.Core.Domain.WareHouses.PurchaseOrders
 		public Int64? SellerRegistrationId { get; set; }
 		public Int64? ItemId { get; set; }
 		public double? Quantity { get; set; }
-		public Int64? UnitId { get; set; }
+		//public Int64? UnitId { get; set; }
 		public double Value { get; set; }
 		public Int64 CreatedBy { get; set; }
 		public DateTime CreatedDate { get; set; }
@@ -31,9 +31,9 @@ namespace CloudVOffice.Core.Domain.WareHouses.PurchaseOrders
 		public Item Item { get; set; }
 
 		[ForeignKey("SellerRegistrationId")]
-		public SellerRegistration SellerRegistration { get; set; }
+		public SellerRegistration SellerRegistration {  get; set; }
 
-		[ForeignKey("UnitId")]
-		public Unit Unit { get; set; }
+		//[ForeignKey("UnitId")]
+		//public Unit Unit { get; set; }
 	}
 }

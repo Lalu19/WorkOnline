@@ -9,6 +9,7 @@ using CloudVOffice.Core.Domain.WareHouses.PurchaseOrders;
 using CloudVOffice.Core.Domain.WareHouses.States;
 using CloudVOffice.Data.DTO.WareHouses.PurchaseOrders;
 using CloudVOffice.Data.DTO.WareHouses.States;
+using Org.BouncyCastle.Utilities;
 
 namespace CloudVOffice.Services.WareHouses.PurchaseOrders
 {
@@ -22,5 +23,6 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
 		public List<Item> ItemsFromSellerRegisteredSector(Int64 sellerRegistrationId);
 		public Int64 ItemIdFromItemName(string itemName);
 		public Item GetItemFromItemId(int itemId);
-	}
+        public List<PurchaseOrder> GetItemsByPurchaseOrderParentId(Int64 PurchaseOrderParentId);
+    }
 }
