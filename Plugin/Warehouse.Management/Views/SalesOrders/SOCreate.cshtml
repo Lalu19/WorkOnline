@@ -232,6 +232,13 @@
         overflow-y: auto;
     }
 </style>
+<style>
+    .action-buttons button {
+        margin-right: 5px;
+        padding: 5px 10px;
+        font-size: 10px; 
+    }
+</style>
 <header class="main-heading">
     <div class="container-fluid">
         <div class="row">
@@ -266,7 +273,7 @@
         <br>
         <div class="card ">
             <div class="card-header itemorderheder">
-                MENU
+                Order
             </div>
             <div class="card-body">
                 <nav class="side-nav">
@@ -288,7 +295,7 @@
   <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7">
         <br />
         <div class="card">
-            <div class="card-header" id="categoryname"></div>
+            <div class="card-header" id="categoryname"> Items</div>
             <div class="card-body">
                 <div class="row " id="itemboxes">
                 </div>
@@ -300,29 +307,82 @@
 </div>
 
 <script>
+    //function POId(Id) {
+    //    $.ajax({
+    //        type: "GET",
+    //        url: "/WareHouse/PurchaseOrder/GetItemsByPurchaseOrderParentId", 
+    //        data: { PurchaseOrderParentId: Id },
+    //        contentType: "application/json",
+    //        dataType: "json",
+    //        success: function (data) {
+    //            console.log(data);
+    //            var x = '';
+    //            var z = '';
+
+
+    //            for (var i = 0; i < data.length; i++) {
+
+
+    //                //x = x + '<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 itembox"><div class="box" id="iitombox" onclick="ItemID(' + data[i]["itemId"] + ')"><div class="row itemboxdetails" ><div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"></div></div><div class="row itemboxdetails"><div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"><div class="item-name"> ' + data[i]["itemId"] + ' </div></div></div><div class="row itemboxdetails"><div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"></div></div></div></div>'
+
+    //                x = x + '<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 itembox"><div class="box" id="iitombox" style="background-color:' + data[i].item["itemId"] + ';cursor:pointer;" onclick="ItemID(' + data[i].item["itemId"] + ')"><div class="row itemboxdetails" ><div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"><div class="image"><img src="/uploads/itemimage/' + data[i].item["itemimage"] + '" class="itemimagess"/></div></div></div><div class="row itemboxdetails"><div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"><div class="item-name"> ' + data[i].item["itemName"] + ' </div></div></div><div class="row itemboxdetails"><div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"><div class="price"> ₹' + data[i].item["itemId"] + '</div></div></div></div></div>'
+
+    //            }
+    //            $('#itemboxes').html(x);
+    //            //$('#categoryname').html(z);
+    //            if (Id) {
+    //                localStorage.setItem('selectedCategoryId', Id);
+    //            }
+    //        },
+    //        error: function () {
+
+    //        }
+    //    });
+    //}
+    //$(document).ready(function () {
+    //    var selectedCategoryId = localStorage.getItem('selectedCategoryId');
+    //    if (selectedCategoryId) {
+    //        POId(selectedCategoryId);
+    //    }
+
+    //});
+
     function POId(Id) {
         $.ajax({
             type: "GET",
-            url: "/WareHouse/PurchaseOrder/GetItemsByPurchaseOrderParentId", 
+            url: "/WareHouse/PurchaseOrder/GetItemsByPurchaseOrderParentId",
             data: { PurchaseOrderParentId: Id },
             contentType: "application/json",
             dataType: "json",
             success: function (data) {
                 console.log(data);
-                var x = '';
-                var z = '';
-
+                var table = '<table class="table"><thead><tr><th>Sl No.</th><th>Product Name</th><th>Selling Price</th><th>Quantity</th><th>Amount</th><th>GST</th><th>HSN</th><th>Final Amount</th><th>Action</th></tr></thead><tbody>';
 
                 for (var i = 0; i < data.length; i++) {
+                    table += '<tr onclick="ItemID(' + data[i].item["itemId"] + ')">';
+                    table += '<td>' + (i + 1) + '</td>';
+                    table += '<td>' + data[i].item["itemName"] + '</td>';
+                    table += '<td>₹' + data[i].item["salesCost"] + '</td>';
+                    table += '<td>' + data[i]["quantity"] + '</td>';
+                    table += '<td>' + data[i]["value"] + '</td>';
+                   // table += '<td>' + data[i].item["sgst"] + '</td>';
+                    var gstSum = data[i].item["cgst"] + data[i].item["sgst"];
+                    table += '<td>' + gstSum + '</td>';
+                    table += '<td>' + data[i].item["hsn"] + '</td>';
+                    var finalAmount = data[i]["quantity"] * data[i]["value"];
+                    table += '<td>' + finalAmount + '</td>';
 
+                    table += '<td class="action-buttons">';
+                    table += '<button onclick="acceptAction(' + data[i].item["itemId"] + ')">Accept</button>';
+                    table += '<button onclick="rejectAction(' + data[i].item["itemId"] + ')">Reject</button>';
+                    table += '</td>';
 
-                    //x = x + '<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 itembox"><div class="box" id="iitombox" onclick="ItemID(' + data[i]["itemId"] + ')"><div class="row itemboxdetails" ><div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"></div></div><div class="row itemboxdetails"><div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"><div class="item-name"> ' + data[i]["itemId"] + ' </div></div></div><div class="row itemboxdetails"><div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"></div></div></div></div>'
-
-                    x = x + '<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 itembox"><div class="box" id="iitombox" style="background-color:' + data[i]["itemId"] + ';cursor:pointer;" onclick="ItemID(' + data[i]["itemId"] + ')"><div class="row itemboxdetails" ><div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"><div class="image"><img src="/uploads/itemimage/' + data[i].item["itemimage"] + '" class="itemimagess"/></div></div></div><div class="row itemboxdetails"><div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"><div class="item-name"> ' + data[i]["itemId"] + ' </div></div></div><div class="row itemboxdetails"><div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"><div class="price"> ₹' + data[i]["itemId"] + '</div></div></div></div></div>'
-
+                    table += '</tr>';
                 }
-                $('#itemboxes').html(x);
-                //$('#categoryname').html(z);
+
+                table += '</tbody></table>';
+                $('#itemboxes').html(table);
+
                 if (Id) {
                     localStorage.setItem('selectedCategoryId', Id);
                 }
@@ -332,11 +392,12 @@
             }
         });
     }
+
     $(document).ready(function () {
         var selectedCategoryId = localStorage.getItem('selectedCategoryId');
         if (selectedCategoryId) {
             POId(selectedCategoryId);
         }
-
     });
+
 </script>
