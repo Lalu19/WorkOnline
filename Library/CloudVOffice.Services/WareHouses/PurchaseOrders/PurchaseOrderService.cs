@@ -42,12 +42,11 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
 				{
 					PurchaseOrder purchaseOrder = new PurchaseOrder();
 
-
 					purchaseOrder.Value = purchaseOrderDTO.Value;
 					purchaseOrder.PurchaseOrderParentId = purchaseOrderDTO.PurchaseOrderParentId;
 					purchaseOrder.SellerRegistrationId = purchaseOrderDTO.SellerRegistrationId;
 					purchaseOrder.ItemId = purchaseOrderDTO.ItemId;
-					purchaseOrder.Quantity = purchaseOrderDTO.Quantity;
+					purchaseOrder.Quantity = purchaseOrderDTO.Quantity;					
 					purchaseOrder.CreatedBy = purchaseOrderDTO.CreatedBy;
 					purchaseOrder.CreatedDate = DateTime.Now;
 
@@ -127,7 +126,8 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
 
 				if (order != null)
 				{
-					order.SellerRegistrationId = purchaseOrderDTO.SellerRegistrationId;
+
+                    order.SellerRegistrationId = purchaseOrderDTO.SellerRegistrationId;
 					//order.Value = purchaseOrderDTO.Value;
 					order.Quantity = purchaseOrderDTO.Quantity;
 					order.ItemId = purchaseOrderDTO.ItemId;
@@ -206,7 +206,9 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
         {
             try
             {
-                var a = _dbContext.PurchaseOrders.Where(x => x.PurchaseOrderParentId == PurchaseOrderParentId && x.Deleted == false).ToList();
+                var a = _dbContext.PurchaseOrders
+                .Include(x => x.Item)
+                    .Where(x => x.PurchaseOrderParentId == PurchaseOrderParentId && x.Deleted == false).ToList();
 				return a;
             }
             catch

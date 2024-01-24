@@ -68,11 +68,13 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
 
 				if (objCheck == null)
 				{
+					Random random=new Random();
 					PurchaseOrderParent purchaseOrderParent = new PurchaseOrderParent();
 					purchaseOrderParent.TotalAmount = purchaseOrderParentDTO.TotalAmount;
 					purchaseOrderParent.TotalQuantity = purchaseOrderParentDTO.TotalQuantity;
 					purchaseOrderParent.SellerRegistrationId = purchaseOrderParentDTO.SellerRegistrationId;
 					purchaseOrderParent.OrderShipped = purchaseOrderParentDTO.OrderShipped;
+					purchaseOrderParent.POPUniqueNumber = random.Next(100000, 1000000).ToString();
 					purchaseOrderParent.CreatedBy = purchaseOrderParentDTO.CreatedBy;
 					purchaseOrderParent.CreatedDate = System.DateTime.Now;
 					

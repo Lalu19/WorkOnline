@@ -50,12 +50,14 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 
 					if (existingItem == null)
 					{
+					Random random = new Random();
 						Item item = new Item();
 						item.ItemName = itemDTO.ItemName;
+					    item.ItemCode = random.Next(1000000, 10000000).ToString();
 						item.SectorId = itemDTO.SectorId;
 						item.CategoryId = itemDTO.CategoryId;
 						item.SubCategory1Id = itemDTO.SubCategory1Id;
-						item.SubCategory2Id = itemDTO.SubCategory2Id;
+						item.SubCategory2Id = itemDTO.SubCategory2Id;						
 
 						//item.WareHouseName = itemDTO.WareHouseName;
 						//item.DistrictName = itemDTO.DistrictName;
@@ -117,6 +119,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						return new ItemDTO
 						{
 							ItemId = item.ItemId,
+							ItemCode=item.ItemCode,
 
 							ItemName = item.ItemName,
 							SectorId = item.SectorId,
@@ -173,13 +176,6 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						// Handle the duplicate case as needed
 						return null;
 					}
-				}
-				else
-				{
-					return null;
-				}
-
-				
 			}
 			catch (Exception ex)
 			{
@@ -187,6 +183,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 				throw;
 			}
 		}
+	
 
 		public void GenerateAndSaveBarcodeImage(string itemId)
         {
