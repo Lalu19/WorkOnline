@@ -1,5 +1,6 @@
 ﻿using CloudVOffice.Core.Domain.Common;
 using CloudVOffice.Core.Domain.Users;
+using CloudVOffice.Data.DTO.Sellers;
 using CloudVOffice.Data.DTO.Users;
 using CloudVOffice.Services.Roles;
 using CloudVOffice.Services.Users;
@@ -192,5 +193,112 @@ namespace CloudVOffice.Web.Areas.Setup.Controllers
         {
             return View();
         }
-    }
+
+
+
+
+
+        public IActionResult Profile(Int64? UserId)
+        {
+			UserCreateDTO userCreateDTO;
+
+			var roles = _roleService.GetAllRoles();
+
+			if (UserId == null)
+			{
+				userCreateDTO = new UserCreateDTO();
+				userCreateDTO.roles = new List<UserRolesDTO>();
+				for (int i = 0; i < roles.Count; i++)
+				{
+					UserRolesDTO userRolesDTO = new UserRolesDTO();
+
+					userRolesDTO.IsSelected = false;
+					userRolesDTO.RoleId = roles[i].RoleId;
+					userRolesDTO.RoleName = roles[i].RoleName;
+					userCreateDTO.roles.Add(userRolesDTO);
+
+				}
+			}
+			else
+			{
+				User user = _userService.GetUserByUserId(int.Parse(UserId.ToString()));
+				userCreateDTO = new UserCreateDTO();
+				userCreateDTO.UserId = user.UserId;
+				userCreateDTO.FirstName = user.FirstName;
+				userCreateDTO.MiddleName = user.MiddleName;
+				userCreateDTO.LastName = user.LastName;
+				userCreateDTO.Email = user.Email;
+				userCreateDTO.PhoneNo = user.PhoneNo;
+				userCreateDTO.Password = user.Password;
+
+				userCreateDTO.DateOfBirth = user.DateOfBirth;
+				userCreateDTO.UserTypeId = user.UserTypeId;
+				userCreateDTO.roles = new List<UserRolesDTO>();
+				for (int i = 0; i < roles.Count; i++)
+				{
+					UserRolesDTO userRolesDTO = new UserRolesDTO();
+					userRolesDTO.IsSelected = false;
+					for (int j = 0; j < user.UserRoleMappings.Count; j++)
+					{
+						if (user.UserRoleMappings[j].RoleId == roles[i].RoleId)
+						{
+							userRolesDTO.IsSelected = true;
+						}
+
+					}
+
+					userRolesDTO.RoleId = roles[i].RoleId;
+					userRolesDTO.RoleName = roles[i].RoleName;
+					userCreateDTO.roles.Add(userRolesDTO);
+
+				}
+
+			}
+
+
+			ViewBag.UserTypeList = new SelectList((System.Collections.IEnumerable)_userService.GetUserTypes(), "ID", "Name");
+
+
+
+
+
+			return View(userCreateDTO);
+		}
+
+
+		[HttpPost]
+		public async Task<IActionResult> Profile(UserCreateDTO createUserDTO)
+		{
+
+			createUserDTO.CreatedBy = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
+			createUserDTO.UserTypeId = 1;
+			if (ModelState.IsValid)
+			{
+				if (createUserDTO.UserId != null)
+				{
+					var a = await _userService.UpdateUser(createUserDTO);
+					if (a != null)
+					{
+						if (a == MessageEnum.Updated)
+						{
+							TempData["msg"] = MessageEnum.Updated;
+
+							return Redirect("/Applications");
+						}
+					}
+					else
+					{
+						TempData["msg"] = MessageEnum.UnExpectedError;
+						ModelState.AddModelError("", "Un-Expected Error");
+					}
+				}
+			
+
+			}
+			ViewBag.UserTypeList = new SelectList((System.Collections.IEnumerable)_userService.GetUserTypes(), "ID", "Name");
+
+			return View(createUserDTO);
+		}
+
+	}
 }
