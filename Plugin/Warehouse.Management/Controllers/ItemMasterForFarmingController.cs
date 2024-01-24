@@ -17,6 +17,7 @@ using CloudVOffice.Services.WareHouses.Employees;
 using CloudVOffice.Services.WareHouses.Vendors;
 using CloudVOffice.Services.WareHouses.Districts;
 using CloudVOffice.Services.WareHouses.UOMs;
+using Warehouse.Management.ViewModel;
 
 namespace Warehouse.Management.Controllers
 {
@@ -270,23 +271,66 @@ namespace Warehouse.Management.Controllers
                     }
                 }
             }
+            //else
+            //{
+            //    var a = _itemMasterForFarmingService.UpdateItemMasterForFarming(viewForItemMasterFarming.CreatedItemMasterFarmingDTO);
+            //    if (a == MessageEnum.Updated)
+            //    {
+            //        TempData["msg"] = MessageEnum.Updated;
+            //        return Redirect("/WareHouse/ItemMasterForFarming/ItemMasterForFarmingView");
+            //    }
+            //    else if (a == MessageEnum.Duplicate)
+            //    {
+            //        TempData["msg"] = MessageEnum.Duplicate;
+            //        ModelState.AddModelError("", "Item Already Exists");
+            //    }
+            //    else
+            //    {
+            //        TempData["msg"] = MessageEnum.UnExpectedError;
+            //        ModelState.AddModelError("", "Un-Expected Error");
+            //    }
+            //}
+
             else
             {
-                var a = _itemMasterForFarmingService.UpdateItemMasterForFarming(viewForItemMasterFarming.CreatedItemMasterFarmingDTO);
-                if (a == MessageEnum.Updated)
+                if (viewForItemMasterFarming.CreatedItemMasterFarmingDTO.BarCodeNotAvailable == false)
                 {
-                    TempData["msg"] = MessageEnum.Updated;
-                    return Redirect("/WareHouse/ItemMasterForFarming/ItemMasterForFarmingView");
-                }
-                else if (a == MessageEnum.Duplicate)
-                {
-                    TempData["msg"] = MessageEnum.Duplicate;
-                    ModelState.AddModelError("", "Item Already Exists");
+                    var a = _itemMasterForFarmingService.UpdateItemMasterForFarming(viewForItemMasterFarming.CreatedItemMasterFarmingDTO);
+                    if (a == MessageEnum.Updated)
+                    {
+                        TempData["msg"] = MessageEnum.Updated;
+                        return Redirect("/WareHouse/Item/ItemView");
+                    }
+                    else if (a == MessageEnum.Duplicate)
+                    {
+                        TempData["msg"] = MessageEnum.Duplicate;
+                        ModelState.AddModelError("", "Item Already Exists");
+                    }
+                    else
+                    {
+                        TempData["msg"] = MessageEnum.UnExpectedError;
+                        ModelState.AddModelError("", "Un-Expected Error");
+                    }
                 }
                 else
                 {
-                    TempData["msg"] = MessageEnum.UnExpectedError;
-                    ModelState.AddModelError("", "Un-Expected Error");
+                    var a = _itemMasterForFarmingService.UpdateItemMasterForFarming(viewForItemMasterFarming.CreatedItemMasterFarmingDTO);
+                    var barcodeResult = GenerateBarcodeButton(viewForItemMasterFarming.CreatedItemMasterFarmingDTO.ItemMasterForFarmingId);
+                    if (a == MessageEnum.Updated)
+                    {
+                        TempData["msg"] = MessageEnum.Updated;
+                        return Redirect("/WareHouse/Item/ItemView");
+                    }
+                    else if (a == MessageEnum.Duplicate)
+                    {
+                        TempData["msg"] = MessageEnum.Duplicate;
+                        ModelState.AddModelError("", "Item Already Exists");
+                    }
+                    else
+                    {
+                        TempData["msg"] = MessageEnum.UnExpectedError;
+                        ModelState.AddModelError("", "Un-Expected Error");
+                    }
                 }
             }
 
@@ -300,8 +344,6 @@ namespace Warehouse.Management.Controllers
 
             //Continue with the rest of your logic or return the view as needed
             return View("~/Plugins/Warehouse.Management/Views/Item/ItemMasterForFarmingView.cshtml", ViewBag.Items);
-
-
         }
 
 

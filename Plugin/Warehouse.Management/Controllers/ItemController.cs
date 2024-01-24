@@ -337,22 +337,45 @@ namespace Warehouse.Management.Controllers
 			}
 			else
 			{
-				var a = _itemService.UpdateItem(viewForItem.CreatedItemDTO);
-				if (a == MessageEnum.Updated)
+				if (viewForItem.CreatedItemDTO.BarCodeNotAvailable == false)
 				{
-					TempData["msg"] = MessageEnum.Updated;
-					return Redirect("/WareHouse/Item/ItemView");
-				}
-				else if (a == MessageEnum.Duplicate)
-				{
-					TempData["msg"] = MessageEnum.Duplicate;
-					ModelState.AddModelError("", "Item Already Exists");
-				}
+                    var a = _itemService.UpdateItem(viewForItem.CreatedItemDTO);                    
+                    if (a == MessageEnum.Updated)
+                    {
+                        TempData["msg"] = MessageEnum.Updated;
+                        return Redirect("/WareHouse/Item/ItemView");
+                    }
+                    else if (a == MessageEnum.Duplicate)
+                    {
+                        TempData["msg"] = MessageEnum.Duplicate;
+                        ModelState.AddModelError("", "Item Already Exists");
+                    }
+                    else
+                    {
+                        TempData["msg"] = MessageEnum.UnExpectedError;
+                        ModelState.AddModelError("", "Un-Expected Error");
+                    }
+                }
 				else
 				{
-					TempData["msg"] = MessageEnum.UnExpectedError;
-					ModelState.AddModelError("", "Un-Expected Error");
-				}
+                    var a = _itemService.UpdateItem(viewForItem.CreatedItemDTO);
+                    var barcodeResult = GenerateBarcodeButton(viewForItem.CreatedItemDTO.ItemId);
+                    if (a == MessageEnum.Updated)
+                    {
+                        TempData["msg"] = MessageEnum.Updated;
+                        return Redirect("/WareHouse/Item/ItemView");
+                    }
+                    else if (a == MessageEnum.Duplicate)
+                    {
+                        TempData["msg"] = MessageEnum.Duplicate;
+                        ModelState.AddModelError("", "Item Already Exists");
+                    }
+                    else
+                    {
+                        TempData["msg"] = MessageEnum.UnExpectedError;
+                        ModelState.AddModelError("", "Un-Expected Error");
+                    }
+                }				
 			}
 
 			ViewBag.Items = _itemService.GetItemList();
