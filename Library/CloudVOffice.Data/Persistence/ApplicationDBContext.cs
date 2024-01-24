@@ -107,7 +107,9 @@ namespace CloudVOffice.Data.Persistence
 		public virtual DbSet<PurchaseOrder> PurchaseOrders { get; set; }
         public virtual DbSet<PurchaseOrderParent> PurchaseOrderParents { get; set; }
         public virtual DbSet<Stock> Stocks { get; set; }
-        
+        public virtual DbSet<SellerProductEntry> SellerProductEntrys { get; set; }
+        public virtual DbSet<SellerFarmingProduct> SellerFarmingProducts { get; set; }
+
 
 
         #endregion
@@ -677,10 +679,28 @@ namespace CloudVOffice.Data.Persistence
 			  .Property(s => s.Deleted)
 			  .HasDefaultValue(false)
 			  .ValueGeneratedNever();
-			
+
+            modelBuilder.Entity<SellerProductEntry>()
+            .Property(s => s.CreatedDate)
+            .HasDefaultValueSql("getdate()");
 
 
-			modelBuilder.Seed();
+            modelBuilder.Entity<SellerProductEntry>()
+              .Property(s => s.Deleted)
+              .HasDefaultValue(false)
+              .ValueGeneratedNever();
+
+            modelBuilder.Entity<SellerFarmingProduct>()
+            .Property(s => s.CreatedDate)
+            .HasDefaultValueSql("getdate()");
+
+
+            modelBuilder.Entity<SellerFarmingProduct>()
+              .Property(s => s.Deleted)
+              .HasDefaultValue(false)
+              .ValueGeneratedNever();
+
+            modelBuilder.Seed();
         }
     }
 }
