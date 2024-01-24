@@ -57,7 +57,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						item.SectorId = itemDTO.SectorId;
 						item.CategoryId = itemDTO.CategoryId;
 						item.SubCategory1Id = itemDTO.SubCategory1Id;
-						item.SubCategory2Id = itemDTO.SubCategory2Id;
+						item.SubCategory2Id = itemDTO.SubCategory2Id;						
 
 						//item.WareHouseName = itemDTO.WareHouseName;
 						//item.DistrictName = itemDTO.DistrictName;
@@ -183,6 +183,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 				throw;
 			}
 		}
+	
 
 		public void GenerateAndSaveBarcodeImage(string itemId)
         {
