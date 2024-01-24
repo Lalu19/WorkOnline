@@ -18,7 +18,8 @@ namespace CloudVOffice.Core.Domain.WareHouses.PurchaseOrders
 		public Int64? PurchaseOrderParentId { get; set; }
 		public Int64? SellerRegistrationId { get; set; }
 		public Int64? ItemId { get; set; }
-		public double? Quantity { get; set; }
+        //public string? PurchaseOrderUniqueNumber { get; set; }
+        public double? Quantity { get; set; }
 		//public Int64? UnitId { get; set; }
 		public double Value { get; set; }
 		public Int64 CreatedBy { get; set; }

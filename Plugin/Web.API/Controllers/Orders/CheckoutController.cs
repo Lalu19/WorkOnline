@@ -1,6 +1,7 @@
 ﻿using CloudVOffice.Core.Domain.Orders;
 using CloudVOffice.Data.DTO.Orders;
 using CloudVOffice.Services.Orders;
+using CloudVOffice.Services.WareHouses.PurchaseOrders;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,11 @@ namespace Web.API.Controllers.Orders
 	public class CheckoutController : Controller
 	{
 		private readonly ICheckoutService _checkoutService;
-		public CheckoutController(ICheckoutService checkoutService)
+		private readonly IPurchaseOrderService _purchaseOrderService;
+		public CheckoutController(ICheckoutService checkoutService,IPurchaseOrderService purchaseOrderService)
 		{
 			_checkoutService = checkoutService;
+			_purchaseOrderService = purchaseOrderService;
 		}
 		[HttpPost]
 		public IActionResult CheckOutCreate(CheckoutDTO checkoutDTO)
@@ -89,5 +92,12 @@ namespace Web.API.Controllers.Orders
 			var a = _checkoutService.CheckoutDelete(CheckoutId, DeletedBy);
 			return Ok(a);
 		}
-	}
+
+        [HttpGet("{PurchaseOrderParentId}")]
+        public IActionResult GetItemsByPurchaseOrderParentId(Int64 PurchaseOrderParentId)
+        {
+            var a = _purchaseOrderService.GetItemsByPurchaseOrderParentId(PurchaseOrderParentId);
+            return Ok(a);
+        }
+    }
 }
