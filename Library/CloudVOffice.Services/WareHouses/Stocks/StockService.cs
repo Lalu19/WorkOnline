@@ -1,8 +1,10 @@
 ﻿using CloudVOffice.Core.Domain.Common;
+using CloudVOffice.Core.Domain.ProductCategories;
 using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Core.Domain.WareHouses.Stocks;
 using CloudVOffice.Data.DTO.WareHouses.PinCodes;
 using CloudVOffice.Data.DTO.WareHouses.Stocks;
+using CloudVOffice.Data.DTO.WareHouses.ViewModel;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -142,6 +144,73 @@ namespace CloudVOffice.Services.WareHouses.Stocks
                 throw;
             }
         }
+
+        public double? TotalStock()
+        {
+            var a = _dbContext.Stocks.Where(i => i.Deleted == false).ToList();
+            double? totalQuantity = 0;
+
+            foreach(var x in a)
+            {
+                totalQuantity =  totalQuantity + x.Quantity;
+            }
+            return totalQuantity;
+        }
+
+        public double TotalValue()
+        {
+            try
+            {
+                var stocks = _dbContext.Stocks.Where(i => !i.Deleted).ToList();
+                double TotalAmount = 0.0;
+
+                foreach (var stock in stocks)
+                {
+                    var quantity = (double)stock.Quantity;  // Convert quantity to double
+
+                    var mrp = _dbContext.Items
+                        .Where(q => q.ItemId == stock.ItemId && !q.Deleted)
+                        .Select(z => z.MRP)
+                        .FirstOrDefault();
+
+
+                    if (mrp != null)
+                    {
+                        var product = quantity * mrp;
+                        TotalAmount += product;
+                    }
+                }
+
+                return TotalAmount;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        //public List<StockManagementSectorWise> SectorViewPage()
+        //{
+
+        //    var itemIds = _dbContext.Stocks.Where(s => s.Deleted ==false).Select(i=> i.ItemId).ToList();
+
+        //    List<string> sectors = new List<string>();
+        //    List<double> Quantity = new List<double>();
+        //    List<double> Amount = new List<double>();
+
+        //    foreach (var itemId in itemIds)
+        //    {
+        //        var item = _dbContext.Items.FirstOrDefault(z => z.ItemId == itemId);
+
+        //        if (item != null && !sectors.Contains(item.SectorName))
+        //        {
+        //            sectors.Add(item.SectorName);
+        //        }
+
+
+
+        //    }
+        //}
 
     }
 }
