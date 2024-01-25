@@ -208,6 +208,7 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
             {
                 var a = _dbContext.PurchaseOrders
                 .Include(x => x.Item)
+                .Include(x => x.SellerRegistration)
                     .Where(x => x.PurchaseOrderParentId == PurchaseOrderParentId && x.Deleted == false).ToList();
 				return a;
             }
