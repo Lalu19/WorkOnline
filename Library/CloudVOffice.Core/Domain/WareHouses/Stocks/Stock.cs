@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CloudVOffice.Core.Domain.WareHouses.Items;
 using CloudVOffice.Core.Domain.WareHouses.UOMs;
+using CloudVOffice.Core.Domain.ProductCategories;
 
 namespace CloudVOffice.Core.Domain.WareHouses.Stocks
 {
@@ -16,10 +17,10 @@ namespace CloudVOffice.Core.Domain.WareHouses.Stocks
     {
 		public Int64 StockId { get; set; }
         public Int64? ItemId { get; set; }
+        public int? SectorId { get; set; }
         public Int64? WareHuoseId { get; set; }
         public Int64? UnitId { get; set; }
         public double? Quantity { get; set; }
-
 
         public Int64 CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
@@ -35,6 +36,9 @@ namespace CloudVOffice.Core.Domain.WareHouses.Stocks
 
         [ForeignKey("UnitId")]
         public Unit Unit { get; set; }
+
+        [ForeignKey("SectorId")]
+        public Sector Sector { get; set; }
 
 
     }
