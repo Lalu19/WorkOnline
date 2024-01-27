@@ -2,16 +2,11 @@
 using CloudVOffice.Core.Domain.WareHouses.Brands;
 using CloudVOffice.Core.Domain.WareHouses.GST;
 using CloudVOffice.Core.Domain.WareHouses.UOMs;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CloudVOffice.Core.Domain.Sellers
 {
-    public class SellerFarmingProduct : IAuditEntity, ISoftDeletedEntity
+	public class SellerFarmingProduct : IAuditEntity, ISoftDeletedEntity
     {
         public Int64 SellerFarmingProductId { get; set; }
         public int? CategoryId { get; set; }

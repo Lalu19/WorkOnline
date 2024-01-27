@@ -308,6 +308,8 @@
 
   <ItemGroup>
     <Folder Include="Views\Shared\" />
+    <Folder Include="wwwroot\uploads\SellerFarmingImages\" />
+    <Folder Include="wwwroot\uploads\SellerFarmingThumbnail\" />
     <Folder Include="wwwroot\uploads\SellerRegistration\" />
   </ItemGroup>
 
