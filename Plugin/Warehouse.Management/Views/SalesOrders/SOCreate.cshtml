@@ -244,7 +244,7 @@
         <div class="row">
             <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
                 <div class="page-icon">
-                    <a href="/POS/DashBoard/Dashboard"><i class="icon-home4"></i></a>
+                    <a href="/WareHouse/WareHouseDashboard/Dashboard"><i class="icon-home4"></i></a>
                 </div>
 
             </div>
@@ -283,13 +283,14 @@
                             <li class="categorymenu" onclick="POId(@PO.PurchaseOrderParentId)">
                                 <a class="has-arrow" style="cursor:pointer;">
 
-                                    <span class="nav-title">@PO.PurchaseOrderParentId</span>
+                                    <span class="nav-title">@PO.POPUniqueNumber</span>
                                 </a>
                             </li>
                         }
                     </ul>
                 </nav>
             </div>
+           
         </div>
   </div>
   <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7">
@@ -298,7 +299,21 @@
             <div class="card-header" id="categoryname"> Items</div>
             <div class="card-body">
                 <div class="row " id="itemboxes">
+                    <div id="orderInfo">
+                      
+                    </div>
+                    <div id="itemsTable">
+                      
+                    </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+        <br />
+        <div class="card">
+            <div class="card-header">Billing Section</div>
+            <div class="card-body" id="acceptedItemContainer">
             </div>
         </div>
     </div>
@@ -307,46 +322,8 @@
 </div>
 
 <script>
-    //function POId(Id) {
-    //    $.ajax({
-    //        type: "GET",
-    //        url: "/WareHouse/PurchaseOrder/GetItemsByPurchaseOrderParentId", 
-    //        data: { PurchaseOrderParentId: Id },
-    //        contentType: "application/json",
-    //        dataType: "json",
-    //        success: function (data) {
-    //            console.log(data);
-    //            var x = '';
-    //            var z = '';
-
-
-    //            for (var i = 0; i < data.length; i++) {
-
-
-    //                //x = x + '<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 itembox"><div class="box" id="iitombox" onclick="ItemID(' + data[i]["itemId"] + ')"><div class="row itemboxdetails" ><div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"></div></div><div class="row itemboxdetails"><div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"><div class="item-name"> ' + data[i]["itemId"] + ' </div></div></div><div class="row itemboxdetails"><div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"></div></div></div></div>'
-
-    //                x = x + '<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 itembox"><div class="box" id="iitombox" style="background-color:' + data[i].item["itemId"] + ';cursor:pointer;" onclick="ItemID(' + data[i].item["itemId"] + ')"><div class="row itemboxdetails" ><div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"><div class="image"><img src="/uploads/itemimage/' + data[i].item["itemimage"] + '" class="itemimagess"/></div></div></div><div class="row itemboxdetails"><div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"><div class="item-name"> ' + data[i].item["itemName"] + ' </div></div></div><div class="row itemboxdetails"><div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"><div class="price"> ₹' + data[i].item["itemId"] + '</div></div></div></div></div>'
-
-    //            }
-    //            $('#itemboxes').html(x);
-    //            //$('#categoryname').html(z);
-    //            if (Id) {
-    //                localStorage.setItem('selectedCategoryId', Id);
-    //            }
-    //        },
-    //        error: function () {
-
-    //        }
-    //    });
-    //}
-    //$(document).ready(function () {
-    //    var selectedCategoryId = localStorage.getItem('selectedCategoryId');
-    //    if (selectedCategoryId) {
-    //        POId(selectedCategoryId);
-    //    }
-
-    //});
-
+    var save = null;
+  
     function POId(Id) {
         $.ajax({
             type: "GET",
@@ -356,10 +333,17 @@
             dataType: "json",
             success: function (data) {
                 console.log(data);
-                var table = '<table class="table"><thead><tr><th>Sl No.</th><th>Product Name</th><th>Selling Price</th><th>Quantity</th><th>Amount</th><th>GST</th><th>HSN</th><th>Final Amount</th><th>Action</th></tr></thead><tbody>';
 
+                var orderInfoHtml = '<div><strong>Customer Name:</strong> ' + data[0].sellerRegistration["name"] + '</div>';
+                orderInfoHtml += '<div><strong>Address:</strong> ' + data[0].sellerRegistration["address"] + '</div>';
+                orderInfoHtml += '<div><strong>Phone No.:</strong> ' + data[0].sellerRegistration["primaryPhone"] + '</div>';
+                $('#orderInfo').html(orderInfoHtml);
+
+                var table = '<table class="table"><thead><tr><th>Sl No.</th><th>Product Name</th><th>Selling Price</th><th>Quantity</th><th>Amount</th><th>GST</th><th>HSN</th><th>Action</th></tr></thead><tbody>';
+                var totalAmount = 0;
                 for (var i = 0; i < data.length; i++) {
-                    table += '<tr onclick="ItemID(' + data[i].item["itemId"] + ')">';
+                    //table += '<tr onclick="ItemID(' + data[i].item["itemId"] + ')">';
+                    table += '<tr class="item-row" data-item-id="' + data[i].item["itemId"] + '" onclick="ItemID(' + data[i].item["itemId"] + ')">';
                     table += '<td>' + (i + 1) + '</td>';
                     table += '<td>' + data[i].item["itemName"] + '</td>';
                     table += '<td>₹' + data[i].item["salesCost"] + '</td>';
@@ -369,19 +353,25 @@
                     var gstSum = data[i].item["cgst"] + data[i].item["sgst"];
                     table += '<td>' + gstSum + '</td>';
                     table += '<td>' + data[i].item["hsn"] + '</td>';
-                    var finalAmount = data[i]["quantity"] * data[i]["value"];
-                    table += '<td>' + finalAmount + '</td>';
+                    //var finalAmount = data[i]["quantity"] * data[i]["value"];
+                    //table += '<td>' + finalAmount + '</td>';
 
                     table += '<td class="action-buttons">';
-                    table += '<button onclick="acceptAction(' + data[i].item["itemId"] + ')">Accept</button>';
+                    //table += '<button onclick="acceptAction(' + data[i].item["itemId"] + ')">Accept</button>';
+                    //table += '<button onclick="acceptAction(' + data[i].item["itemId"] + ', \'' + data[i].item["itemName"] + '\', \'' + data[i].item["salesCost"] + '\', \'' + data[i].unitId + '\', \'' + data[i].item["caseWeight"] + '\', \'' + data[i].item["mrp"] + '\', \'' + data[i].item["cgst"] + '\', \'' + data[i].item["sgst"] + '\', \'' + data[i]["quantity"] + '\')">Accept</button>';
+                    table += '<button onclick="acceptAction(\'' + data[i].item["itemName"] + '\', \'' + data[i].item["salesCost"] + '\', \'' + data[i].item["shortName"] + '\', \'' + data[i].item["caseWeight"] + '\', \'' + data[i].item["mrp"] + '\', \'' + data[i].item["cgst"] + '\', \'' + data[i].item["sgst"] + '\', \'' + data[i]["quantity"] + '\')">Accept</button>';
+
                     table += '<button onclick="rejectAction(' + data[i].item["itemId"] + ')">Reject</button>';
                     table += '</td>';
 
                     table += '</tr>';
+                    totalAmount += parseFloat(data[i]["value"]);
                 }
 
                 table += '</tbody></table>';
-                $('#itemboxes').html(table);
+                table += '<div>Total Amount: ₹' + totalAmount.toFixed(2) + '</div>';
+
+                $('#itemsTable').html(table);
 
                 if (Id) {
                     localStorage.setItem('selectedCategoryId', Id);
@@ -392,6 +382,64 @@
             }
         });
     }
+
+    function acceptAction(itemName, salesCost, shortName, caseWeight, mrp, cgst, sgst, quantity) {
+        // Check if data is already present in acceptedItemContainer
+        if ($('#acceptedItemContainer').children().length === 0) {
+            var acceptedItemHtml = '<div class="accepted-item">';
+            acceptedItemHtml += '<strong>Product Details:</strong>';
+            acceptedItemHtml += '<div>Item Name: ' + itemName + '</div>';
+            acceptedItemHtml += '<div>Sales Cost: ' + salesCost + '</div>';
+            acceptedItemHtml += '<div>UOM: ' + shortName + '</div>';
+            acceptedItemHtml += '<div>Case Weight: ' + caseWeight + '</div>';
+            acceptedItemHtml += '<div>MRP: ' + mrp + '</div>';
+            acceptedItemHtml += '<div>CGST: ' + cgst + '</div>';
+            acceptedItemHtml += '<div>SGST: ' + sgst + '</div>';
+            acceptedItemHtml += '<div>Quantity: ' + quantity + '</div>';
+            acceptedItemHtml += '<div class="action-buttons">';
+            acceptedItemHtml += '<button onclick="acceptButtonClick()">Accept</button>';
+            acceptedItemHtml += '<button onclick="editButtonClick()">Edit</button>';
+            acceptedItemHtml += '</div>';
+            acceptedItemHtml += '</div>';
+
+            // Remove the row from the table based on the itemName
+            var removedRow = $('#itemsTable').find('td:contains("' + itemName + '")').closest('tr').remove();
+
+            // Update the total amount by subtracting the value of the removed row
+            var removedValue = parseFloat(removedRow.find('td:eq(4)').text().replace('₹', '').trim());
+            var totalAmount = parseFloat($('#itemsTable').find('div:contains("Total Amount:")').text().replace('Total Amount: ₹', '').trim());
+            totalAmount -= removedValue;
+
+            // Update the total amount in the table
+            $('#itemsTable').find('div:contains("Total Amount:")').text('Total Amount: ₹' + totalAmount.toFixed(2));
+
+            $('#acceptedItemContainer').append(acceptedItemHtml);
+        }
+    }
+    function rejectAction(itemId) {
+       
+        // Remove the row from the table based on the itemId
+        var removedRow = $('#itemsTable').find('tr[data-item-id="' + itemId + '"]').remove();
+
+        // Update the total amount by subtracting the value of the removed row
+        var removedValue = parseFloat(removedRow.find('td:eq(4)').text().replace('₹', '').trim());
+        var totalAmount = parseFloat($('#itemsTable').find('div:contains("Total Amount:")').text().replace('Total Amount: ₹', '').trim());
+        totalAmount -= removedValue;
+
+        $('#itemsTable').find('div:contains("Total Amount:")').text('Total Amount: ₹' + totalAmount.toFixed(2));
+    }
+
+    function acceptButtonClick() {
+        // Handle the accept button click
+        // You can store data in the "save" variable or perform other actions
+        save = $('#acceptedItemContainer').html();
+        console.log("Data saved:", save);
+
+        // Clear the contents of the acceptedItemContainer
+        $('#acceptedItemContainer').empty();
+    }
+
+
 
     $(document).ready(function () {
         var selectedCategoryId = localStorage.getItem('selectedCategoryId');

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,9 +25,10 @@ namespace CloudVOffice.Data.DTO.Buyers
         public Int64? WareHuoseId { get; set; }
         //public string? Password { get; set; }
 		public bool FirstLogin { get; set; }
-		public int? SectorId { get; set; }
+		public int? SectorId { get; set; } 
 		public string? ShopImage { get; set; }
 		public Int64 CreatedBy { get; set; }
+        public IFormFile? imageUpload { get; set; }
     }
 
     public class BuyerUpdateDTO

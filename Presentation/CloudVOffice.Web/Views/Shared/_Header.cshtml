@@ -111,7 +111,7 @@
 						<div class="dropdown-menu lg dropdown-menu-right" aria-labelledby="userSettings">
 							<ul class="user-settings-list">
 								<li>
-									<a href="profile.html">
+									<a href="../../SetUp/User/Profile?UserId=@User.Claims.FirstOrDefault(x => x.Type == "UserId").Value">
 										<div class="icon">
 											<i class="icon-account_circle"></i>
 										</div>

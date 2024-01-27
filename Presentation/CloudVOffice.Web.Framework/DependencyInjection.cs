@@ -38,6 +38,7 @@ using CloudVOffice.Services.WareHouses.States;
 using CloudVOffice.Services.WareHouses.PurchaseOrders;
 using CloudVOffice.Services.Orders;
 using CloudVOffice.Services.WareHouses.Stocks;
+using CloudVOffice.Services.Logging;
 using CloudVOffice.Core.Domain.Sellers;
 
 namespace CloudVOffice.Web.Framework
@@ -58,12 +59,14 @@ namespace CloudVOffice.Web.Framework
             services.AddScoped<IEmailAccountService, EmailAccountService>();
             services.AddScoped<IEmailDomainService, EmailDomainService>();
 
+
             services.AddScoped<IEmailTemplateService, EmailTemplateService>();
             services.AddScoped<ICompanyDetailsService, CompanyDetailsService>();
             services.AddScoped<IEmailService, EmailService>();
 
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<ILetterHeadService, LetterHeadService>();
+            services.AddScoped<IErrorLogService, ErrorLogService>();
            
             services.AddScoped<IPinCodeService, PinCodeService>();
             services.AddScoped<IPinCodeMappingService, PinCodeMappingService>();
@@ -111,6 +114,7 @@ namespace CloudVOffice.Web.Framework
             services.AddScoped<IMonthService, MonthService>();
             services.AddScoped<IBuyerRegistrationService, BuyerRegistrationService>();
             services.AddScoped<ISellerRegistrationService, SellerRegistrationService>();
+            services.AddScoped<ISellerFarmingProductService, SellerFarmingProductService>();
 
             services.AddScoped<IRetailModelService, RetailModelService>();
             services.AddScoped<ISalesAdminService, SalesAdminService>();

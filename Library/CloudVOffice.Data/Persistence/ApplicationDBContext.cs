@@ -109,6 +109,7 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<Stock> Stocks { get; set; }
         public virtual DbSet<SellerProductEntry> SellerProductEntrys { get; set; }
         public virtual DbSet<SellerFarmingProduct> SellerFarmingProducts { get; set; }
+        public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
 
 
 
