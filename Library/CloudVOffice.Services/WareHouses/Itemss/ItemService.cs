@@ -87,6 +87,8 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						item.PurchaseCaseCost = itemDTO.PurchaseCaseCost;
 						item.SalesCost = itemDTO.SalesCost;
 						item.SalesCaseCost = itemDTO.SalesCaseCost;
+					    item.PartnerSalesCost = itemDTO.PartnerSalesCost;
+					    item.PartnerSalesCaseCost = itemDTO.PartnerSalesCaseCost;
 						item.SGST = itemDTO.SGST;
 						item.CGST = itemDTO.CGST;
 						item.SellerMargin = itemDTO.SellerMargin;
@@ -154,6 +156,8 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 							PurchaseCaseCost = item.PurchaseCaseCost,
 							SalesCost = item.SalesCost,
 							SalesCaseCost = item.SalesCaseCost,
+							PartnerSalesCost=item.PartnerSalesCost,
+							PartnerSalesCaseCost=item.PartnerSalesCaseCost,
 							SGST = item.SGST,
 							HSN = item.HSN,
 							CGST = item.CGST,
@@ -298,6 +302,8 @@ namespace CloudVOffice.Services.WareHouses.Itemss
                         item.PurchaseCaseCost = itemDTO.PurchaseCaseCost;
                         item.SalesCost = itemDTO.SalesCost;
                         item.SalesCaseCost = itemDTO.SalesCaseCost;
+						item.PartnerSalesCost= itemDTO.PartnerSalesCost;
+						item.PartnerSalesCaseCost=itemDTO.PartnerSalesCaseCost;
                         item.SGST = itemDTO.SGST;
                         item.CGST = itemDTO.CGST;
 						item.SellerMargin=itemDTO.SellerMargin;
@@ -493,6 +499,14 @@ namespace CloudVOffice.Services.WareHouses.Itemss
         public List<Item> GetItemlistByCategoryId(int CategoryId)
         {
             return _dbContext.Items.Where(x => x.CategoryId == CategoryId && x.Deleted == false).ToList();
+        }
+        public List<Item> GetItemlistBySubCategory1Id(int SubCategory1Id)
+        {
+            return _dbContext.Items.Where(x => x.SubCategory1Id == SubCategory1Id && x.Deleted == false).ToList();
+        }
+        public List<Item> GetItemlistBySubCategory2Id(int SubCategory2Id)
+        {
+            return _dbContext.Items.Where(x => x.SubCategory2Id == SubCategory2Id && x.Deleted == false).ToList();
         }
         public List<Item> GetItemlistBySectorId(int SectorId)
         {

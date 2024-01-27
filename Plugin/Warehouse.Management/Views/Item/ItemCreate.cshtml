@@ -315,6 +315,18 @@
                                 <input asp-for="@Model.CreatedItemDTO.SalesCaseCost" type="number" id="SalesCaseCost" class="form-control" autofocus="autofocus" placeholder="Sales Case Cost" readonly />
                                 <span asp-validation-for="CreatedItemDTO.SalesCaseCost"></span>
                             </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="PartnerSalesCost" class="form-label">PartnerSales Cost &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemDTO.PartnerSalesCost" type="number" id="PartnerSalesCost" class="form-control" autofocus="autofocus" placeholder="PartnerSales Cost" />
+                                <span asp-validation-for="CreatedItemDTO.PartnerSalesCost"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="PartnerSalesCaseCost" class="form-label">PartnerSales Case Cost &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemDTO.PartnerSalesCaseCost" type="number" id="PartnerSalesCaseCost" class="form-control" autofocus="autofocus" placeholder="PartnerSales Case Cost" readonly />
+                                <span asp-validation-for="CreatedItemDTO.PartnerSalesCaseCost"></span>
+                            </div>
                             @*<div class="form-group col-md-3">
                             <label for="CGST" class="form-label">CGST</label>
                             <ejs-dropdownlist id="GSTValue" allowFiltering="true" name="CreatedItemDTO.CGST"
@@ -651,6 +663,11 @@
         var salesCostValue = parseFloat(document.getElementById('SalesCost').value) || 0;
         var salesCaseCost = unitPerCaseValue * salesCostValue;
         document.getElementById('SalesCaseCost').value = salesCaseCost.toFixed(2);
+
+        // PartnerSalesCaseCost calculation
+        var partnerSalesCostValue = parseFloat(document.getElementById('PartnerSalesCost').value) || 0;
+        var partnerSalesCaseCost = unitPerCaseValue * partnerSalesCostValue;
+        document.getElementById('PartnerSalesCaseCost').value = partnerSalesCaseCost.toFixed(2);
     }
 
     // Call the function whenever UnitPerCase, MRP, PurchaseCost, or SalesCost changes
@@ -658,6 +675,7 @@
     document.getElementById('MRP').addEventListener('input', calculateCaseCosts);
     document.getElementById('PurchaseCost').addEventListener('input', calculateCaseCosts);
     document.getElementById('SalesCost').addEventListener('input', calculateCaseCosts);
+    document.getElementById('PartnerSalesCost').addEventListener('input', calculateCaseCosts);
 </script>
 
 @section scripts {
@@ -771,6 +789,8 @@
             var purchaseCaseCost = $("#PurchaseCaseCost").val() || '';
             var salesCost = $("#SalesCost").val() || '';
             var salesCaseCost = $("#SalesCaseCost").val() || '';
+            var partnerSalesCost = $("#partnerSalesCost").val() || '';
+            var partnerSalesCaseCost = $("#partnerSalesCaseCost").val() || '';
             var cgst = $("#CGST").val() || '';
             var sgst = $("#SGST").val() || '';
             var hsn = $("#HSN").val() || '';
@@ -800,6 +820,8 @@
             reviewHtml += "<b>PurchaseCaseCost:</b> " + purchaseCaseCost + "<br>";
             reviewHtml += "<b>SalesCost:</b> " + salesCost + "<br>";
             reviewHtml += "<b>SalesCaseCost:</b> " + salesCaseCost + "<br>";
+            reviewHtml += "<b>PartnerSalesCost:</b> " + partnerSalesCost + "<br>";
+            reviewHtml += "<b>PartnerSalesCaseCost:</b> " + partnerSalesCaseCost + "<br>";
             reviewHtml += "<b>CGST:</b> " + cgst + "<br>";
             reviewHtml += "<b>SGST:</b> " + sgst + "<br>";
             reviewHtml += "<b>HSN:</b> " + hsn + "<br>";
