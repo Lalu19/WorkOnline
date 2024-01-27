@@ -3,6 +3,7 @@ using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Core.Domain.WareHouses.Stocks;
 using CloudVOffice.Data.DTO.WareHouses.PinCodes;
 using CloudVOffice.Data.DTO.WareHouses.Stocks;
+using CloudVOffice.Services.ProductCategories;
 using CloudVOffice.Services.WareHouses;
 using CloudVOffice.Services.WareHouses.Itemss;
 using CloudVOffice.Services.WareHouses.Stocks;
@@ -22,6 +23,7 @@ namespace Warehouse.Management.Controllers
     public class StockController : BasePluginController
     {
         private readonly IStockService _stockService;
+        private readonly ISectorService _sectorService;
         private readonly IItemService _itemService;
         private readonly IWareHouseService _wareHouseService;
         private readonly IUnit _unit;
@@ -29,13 +31,15 @@ namespace Warehouse.Management.Controllers
         public StockController(IStockService stockService,
                                IItemService itemService,
                                IWareHouseService wareHouseService,
-                               IUnit unit
+                               IUnit unit,
+                               ISectorService sectorService
                               )
         {
             _stockService = stockService;
             _itemService = itemService;
             _wareHouseService = wareHouseService;
             _unit = unit;
+            _sectorService = sectorService;
         }
 
         [HttpGet]
@@ -44,6 +48,7 @@ namespace Warehouse.Management.Controllers
             ViewBag.ItemList = _itemService.GetItemList();
             ViewBag.WareHouseList = _wareHouseService.GetWareHouseList();
             ViewBag.UnitList = _unit.GetUnit();
+            ViewBag.Sectors = _sectorService.GetSectorList();
 
             StockDTO stockDTO = new StockDTO();
 

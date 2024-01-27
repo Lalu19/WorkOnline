@@ -1,0 +1,438 @@
+﻿@model CloudVOffice.Data.DTO.WareHouses.Stocks.StockDTO;
+@using System.Collections;
+@using Newtonsoft.Json;
+@{
+    Layout = "_MainAppLayout";
+    ViewData["Title"] = "Stock Management";
+}
+@addTagHelper *, Syncfusion.EJ2
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<style>
+
+    .has-icon {
+        flex: 0 0 25px;
+    }
+
+    .box {
+        width: 100%;
+        height: auto;
+        text-align: center;
+        display: inline-block;
+        vertical-align: top;
+        border-radius: 6px;
+        height: 170px;
+    }
+
+    .item-name {
+        font-size: 15px;
+        color: #ffffff;
+        display: block;
+        font-weight: 700;
+    }
+
+    .price {
+        font-size: 15px;
+        color: #ffffff;
+        display: block;
+        font-weight: 700;
+        padding: 0 0 10px 0;
+    }
+
+    img.itemimagess {
+        width: 100%;
+        height: 100px;
+        padding: 5px 5px 5px 5px;
+    }
+
+    .col-xl-2.col-lg-2.col-md-2.col-sm-2.itembox {
+        padding: 0px 5px 5px 5px;
+    }
+
+    .image {
+        height: 100px;
+    }
+</style>
+<style>
+
+
+    .qty-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 18px;
+    }
+
+        .qty-container .input-qty {
+            text-align: center;
+            padding: 6px 0px;
+            border: 1px solid #d4d4d4;
+            max-width: 40px;
+        }
+
+        .qty-container .qty-btn-minus,
+        .qty-container .qty-btn-plus {
+            border: 1px solid #d4d4d4;
+            padding: 10px 10px;
+            font-size: 10px;
+            height: 32px;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .qty-container .qty-btn-plus {
+            margin-left: -1px;
+        }
+
+        .qty-container .qty-btn-minus {
+            margin-right: -1px;
+        }
+
+    .btn-cornered,
+    .input-cornered {
+        border-radius: 4px;
+    }
+
+    .btn-rounded {
+        border-radius: 50%;
+    }
+
+    .input-rounded {
+        border-radius: 50px;
+    }
+
+    p.card-text {
+        font-weight: 600;
+        font-size: 13px;
+        margin-left: -7px;
+        /* color:white; */
+    }
+
+    .row.itemlist {
+        padding: 6px;
+    }
+
+    .row.itemlists {
+        margin-right: 0px;
+        margin-left: 0px;
+        margin-bottom: 5px;
+    }
+
+    .card-body.checkoutitembody {
+        padding: 8px 15px 8px 7px;
+    }
+
+    .card-header.itemorderheder {
+        text-align: center;
+        font-weight: 600;
+    }
+
+    .card-body.checkoutitembody {
+        height: 350px;
+    }
+
+    li.categorymenu {
+        border: 3px solid #56c16f;
+        margin: 2px 0 2px 0px;
+        font-weight: 600;
+        border-radius: 5px;
+        padding: 10px 0px 10px 5px;
+    }
+
+    .card .card-header {
+        background: #ffffff;
+        border-bottom: 2px solid #56c16d;
+    }
+
+    .card .card-footer {
+        background: #ffffff;
+        border-top: 2px solid #56c16d;
+    }
+
+    .card .card-header {
+        background: #ffffff;
+        border-bottom: 2px solid #56c16d;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .app-container {
+        position: relative;
+        background: #e8f6eb;
+        top: 60px;
+        padding-bottom: 20px;
+    }
+
+    .app-wrap {
+        min-height: 100vh;
+        position: relative;
+        background-color: #e8f6eb;
+    }
+
+    .card-body.menubody {
+        padding: 0px 4px 0px 4px;
+    }
+
+    .card.cart {
+        position: fixed;
+    }
+
+    .main-heading {
+        padding: 10px 0 0 0;
+    }
+</style>
+<style>
+    form {
+        max-width: 80%;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .input-group {
+        position: relative;
+    }
+
+    label {
+        position: absolute;
+        right: 2%;
+        top: 50%;
+        transform: translatey(-50%);
+        color: rgba(0, 0, 0, 0.08);
+        transition: all 0.2s ease;
+    }
+
+    input.searchinput {
+        width: 100%;
+        padding: 8px 30px 8px 22px;
+        border: 1px solid rgb(0 0 0 / 35%);
+        outline: none;
+        font-size: 16px;
+        box-shadow: 0px 2px 5px rgb(0 0 0 / 27%);
+        color: #56c16d;
+        font-weight: bold;
+        letter-spacing: 1px;
+        border-radius: 24px;
+        transition: all 0.2s ease;
+        text-transform: uppercase;
+        margin: 5px 0 5px 0;
+    }
+
+    ::-webkit-input-placeholder { /* WebKit browsers */
+        text-transform: none;
+    }
+
+    input:focus {
+        border-color: #56c16d;
+    }
+
+        input:focus + label {
+            transform: scale(1.05) translatey(-50%);
+            color: #56c16d;
+        }
+
+    .checkoutitembody {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+</style>
+<header class="main-heading">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+                <div class="page-icon">
+                    <i class="icon-laptop_windows"></i>
+                </div>
+                <div class="page-title">
+                    <h5>WareHouse</h5>
+                    <h6 class="sub-heading">  </h6>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                <div class="right-actions">
+                    <span class="last-login">  </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="row gutters">
+    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+        <br>
+        <div class="card ">
+            <div class="card-header itemorderheder">
+                Stock Management
+            </div>  
+            <div class="card-body">
+                <nav class="side-nav">
+                    <ul class="unifyMenu" id="unifyMenu">
+                        <li class="categorymenu" onclick="showStockLeft()">
+                            <a class="has-arrow" style="cursor:pointer;">
+                                <span class="nav-title">Total Stock Left</span>
+                            </a>
+                        </li>
+                        <li class="categorymenu" onclick="showSector()">
+                            <a class="has-arrow" style="cursor:pointer;">
+                                <span class="nav-title">Sector Wise</span>
+                            </a>
+                        </li>
+                        <li class="categorymenu" onclick="showCategory()">
+                            <a class="has-arrow" style="cursor:pointer;">
+                                <span class="nav-title">Category Wise</span>
+                            </a>
+                        </li>
+                        <li class="categorymenu" onclick="showBrands()">
+                            <a class="has-arrow" style="cursor:pointer;">
+                                <span class="nav-title">Brand Wise</span>
+                            </a>
+                        </li>
+                        <li class="categorymenu" onclick="showSKU()">
+                            <a class="has-arrow" style="cursor:pointer;">
+                                <span class="nav-title">SKU Wise</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7">
+        <br />
+        <div class="card">
+            <div class="card-header" id="centerhead"> </div>
+            <div class="card-body">
+                <div class="row " id="centerstage">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function onWareHouseNamefiltering(e) {
+        var query = new ej.data.Query();
+        query = (e.text !== '') ? query.where('WareHouseName', 'startswith', e.text, true) : query;
+        e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.WareHouseList)), query);
+    }
+
+    function onItemNamefiltering(e) {
+        var query = new ej.data.Query();
+        query = (e.text !== '') ? query.where('ItemName', 'startswith', e.text, true) : query;
+        e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.ItemList)), query);
+    }
+    function onUnitfiltering(e) {
+        var query = new ej.data.Query();
+        query = (e.text !== '') ? query.where('ShortName', 'startswith', e.text, true) : query;
+        e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.UnitList)), query);
+    }
+
+</script>
+
+<script>
+    function showStockLeft() {
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/StockManagement/TotalStockLeft",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (data) {
+               
+                $('#centerhead').text('Stock Left');
+                var centerstageContent = '<div class="col-md-12">Stock Left in Quantity: ' + data + '</div>';
+                $('#centerstage').html(centerstageContent);
+
+
+                $.ajax({
+                    type: "GET",
+                    url: "/WareHouse/StockManagement/TotalPrice",
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (priceData) {
+                        // Assuming 'priceData' is the value you want to display for Total Price
+                        var priceContent = '<div class="col-md-12" style="margin-top: 10px;">Stock Left in Amount: ' + priceData + '</div>';
+
+                        // Insert the Total Price content above the Stock Left content
+                        $('#centerstage').append(priceContent);
+                    },
+                    error: function (error) {
+                        console.error("Error in TotalPrice:", error);
+                    }
+                });
+            },
+            error: function (error) {
+                console.error("Error:", error);
+            }
+        });
+    }
+</script>
+
+
+@*<script>
+    function showStockLeft() {
+        // Function for the first AJAX call
+        function getTotalStockLeft() {
+            $.ajax({
+                type: "GET",
+                url: "/WareHouse/StockManagement/TotalStockLeft",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (data) {
+                    $('#categoryname').text('Stock Left');
+                    var itemboxesContent = '<div class="col-md-12">Stock Left in Quantity: ' + data + '</div>';
+                    $('#itemboxes').html(itemboxesContent);
+                },
+                error: function (error) {
+                    console.error("Error in TotalStockLeft:", error);
+                }
+            });
+        }
+
+        // Function for the second AJAX call
+        function getTotalPrice() {
+            $.ajax({
+                type: "GET",
+                url: "/WareHouse/StockManagement/TotalPrice",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (priceData) {
+                    var priceContent = '<div class="col-md-12" style="margin-top: 10px;">Stock Left in Amount: ' + priceData + '</div>';
+                    $('#itemboxes').append(priceContent);
+                },
+                error: function (error) {
+                    console.error("Error in TotalPrice:", error);
+                }
+            });
+        }
+
+        // Call the independent functions
+        getTotalStockLeft();
+        getTotalPrice();
+    }
+</script>*@
+
+@*<script>
+    function showSector(){
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/StockManagement/TotalStockLeft",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (data) {
+
+
+
+            },
+                error: function (error) {
+                console.error("Error in TotalPrice:", error);
+            }
+        });
+    }
+</script>*@
+
+
+
+
+

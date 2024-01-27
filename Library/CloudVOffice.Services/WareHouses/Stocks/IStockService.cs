@@ -18,5 +18,7 @@ namespace CloudVOffice.Services.WareHouses.Stocks
         public List<Stock> GetStockList();
         public MessageEnum StockUpdate(StockDTO stockDTO);
         public MessageEnum StockDelete(Int64 stockId, Int64 DeletedBy);
+        public double? TotalStock();
+        public double TotalValue();
     }
 }
