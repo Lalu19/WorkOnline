@@ -98,7 +98,7 @@ namespace Seller_Login.Web.Controllers
 		[HttpPost]
 		public IActionResult CreateSellerFarmingProduct(SellerFarmingProductDTO sellerFarmingProductDTO)
 		{
-			sellerFarmingProductDTO.CreatedBy = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
+			sellerFarmingProductDTO.CreatedBy = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "SellerRegistrationId").Value.ToString());
 
 			if (ModelState.IsValid)
 			{
@@ -227,8 +227,21 @@ namespace Seller_Login.Web.Controllers
         {
             int sectorId = int.Parse(User.Claims.FirstOrDefault(x => x.Type == "SectorId").Value.ToString());
             var a = _categoryService.GetCategoryBySectorId(sectorId);
-            //var distinctItems = a.DistinctBy(a => a.Category.CategoryId);
-            //return Json(distinctItems);
+            
+            return Json(a);
+        }
+
+        public JsonResult GetSubCategoryByCategoryId(int CategoryId)
+        {
+            var a = _subCategory1Service.GetSubCategoryByCategoeyId(CategoryId);
+           
+            return Json(a);
+        }
+
+        public JsonResult GetSubCategory2BySubCategoryId(int SubCategory1Id)
+        {
+            var a = _subCategory2Service.GetSubCategory2BySubCategory1Id(SubCategory1Id);
+          
             return Json(a);
         }
     }
