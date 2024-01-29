@@ -290,7 +290,9 @@
                     </ul>
                 </nav>
             </div>
-           
+            <div class="card-footer">
+                <p>Total Orders: <span id="totalPOCount">0</span></p>
+            </div>
         </div>
   </div>
   <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7">
@@ -320,7 +322,12 @@
 
 
 </div>
-
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var totalPOCount = @ViewBag.POlist.Count; 
+        document.getElementById("totalPOCount").innerText = totalPOCount;
+    });
+</script>
 <script>
     var save = null;
   
