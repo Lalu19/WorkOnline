@@ -48,6 +48,8 @@ namespace CloudVOffice.Core.Domain.WareHouses.Items
         public double? PurchaseCaseCost { get; set; }
         public double SalesCost { get; set; }
         public double? SalesCaseCost { get; set; }
+        public double PartnerSalesCost { get; set; }
+        public double? PartnerSalesCaseCost { get; set; }
         public double? CGST { get; set; }
         public double? SGST { get; set; }
         public int? HandlingTypeId { get; set; }
