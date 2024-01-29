@@ -70,63 +70,22 @@
 
                             <div class="form-row">
 
-
                                 <div class="form-group col-md-3">
                                     <label for="CategoryId" class="form-label">Category Name</label>
-                                    <select id="CategoryId" class="form-control"></select>
+                                    <select id="categoryId" asp-for="@Model.CategoryId" class="form-control" onchange="categoryChanged()"></select>
                                 </div>
 
-                                @* <div class="form-group col-md-3">
-                                <label for="CategoryId" class="form-label">Category Name</label>
-                                <ejs-dropdownlist id="CategoryId" allowFiltering="true" ejs-for="@Model.CategoryId" filtering="onCategoryfiltering"  dataSource="@(new SelectList((IEnumerable)ViewBag.Category, "CategoryId", "CategoryName").Items)" placeholder="Select Category" popupHeight="220px">
-                                <e-dropdownlist-fields text="CategoryName" value="CategoryId"></e-dropdownlist-fields>
-                                </ejs-dropdownlist>
-                                <span asp-validation-for="CategoryId"></span>
-                                </div> *@
-
+                               
                                 <div class="form-group col-md-3">
                                     <label for="SubCategory1Id" class="form-label">SubCategory1 Name</label>
-                                    <ejs-dropdownlist id="SubCategory1Id" allowFiltering="true" ejs-for="@Model.SubCategory1Id" filtering="onSubCategory1filtering" dataSource="@(new SelectList((IEnumerable)ViewBag.SubCategory1, "SubCategory1Id", "SubCategory1Name").Items)" placeholder="Select SubCategory1" popupHeight="220px">
-                                        <e-dropdownlist-fields text="SubCategory1Name" value="SubCategory1Id"></e-dropdownlist-fields>
-                                    </ejs-dropdownlist>
-                                    <span asp-validation-for="SubCategory1Id"></span>
+                                    <select id="subCategory1Id" asp-for="@Model.SubCategory1Id" class="form-control" onchange="subCategory1Changed()"></select>
                                 </div>
+
 
                                 <div class="form-group col-md-3">
                                     <label for="SubCategory2Id" class="form-label">SubCategory2 Name</label>
-                                    <ejs-dropdownlist id="SubCategory2Id" allowFiltering="true" ejs-for="@Model.SubCategory2Id" filtering="onSubCategory2filtering" dataSource="@(new SelectList((IEnumerable)ViewBag.SubCategory2, "SubCategory2Id", "SubCategory2Name").Items)" placeholder="Select SubCategory2" popupHeight="220px">
-                                        <e-dropdownlist-fields text="SubCategory2Name" value="SubCategory2Id"></e-dropdownlist-fields>
-                                    </ejs-dropdownlist>
-                                    <span asp-validation-for="SubCategory2Id"></span>
+                                    <select id="subCategory2Id" asp-for="@Model.SubCategory2Id" class="form-control"></select>
                                 </div>
-
-
-
-
-                                @* <div class="form-group col-md-3">
-                                <label for="CategoryId" class="form-label">Category Name</label>
-                                <ejs-dropdownlist id="CategoryId" allowFiltering="true" ejs-for="@Model.CategoryId" change="onChangeCategory" placeholder="Select Category" popupHeight="220px">
-                                <e-dropdownlist-fields text="categoryName" value="categoryId"></e-dropdownlist-fields>
-                                </ejs-dropdownlist>
-                                <span asp-validation-for="CategoryId"></span>
-                                </div>
-
-                                <div class="form-group col-md-3">
-                                <label for="SubCategory1Id" class="form-label">SubCategory Name</label>
-                                <ejs-dropdownlist id="SubCategory1Id" allowFiltering="true" ejs-for="@Model.SubCategory1Id" change="onChangeSubCategory" placeholder="Select SubCategory" popupHeight="220px">
-                                <e-dropdownlist-fields text="subCategory1Name" value="subCategory1Id"></e-dropdownlist-fields>
-                                </ejs-dropdownlist>
-                                <span asp-validation-for="SubCategory1Id"></span>
-                                </div>
-
-
-                                <div class="form-group col-md-3">
-                                <label for="SubCategory2Id" class="form-label">SubCategory1 Name</label>
-                                <ejs-dropdownlist id="SubCategory2Id" allowFiltering="true" ejs-for="@Model.SubCategory2Id" placeholder="Select SubCategory1" popupHeight="220px">
-                                <e-dropdownlist-fields text="subCategory2Name" value="subCategory2Id"></e-dropdownlist-fields>
-                                </ejs-dropdownlist>
-                                <span asp-validation-for="SubCategory2Id"></span>
-                                </div> *@
 
 
                             </div>
@@ -145,14 +104,7 @@
                                     <span asp-validation-for="MinQty"></span>
                                 </div>
 
-                                @* <div class="form-group col-md-3">
-                                <label for="GSTId" class="form-label">GST</label>
-                                <ejs-dropdownlist id="GSTId" allowFiltering="true" ejs-for="@Model.GSTId" filtering="onGSTfiltering"  dataSource="@(new SelectList((IEnumerable)ViewBag.GST, "GSTId", "GSTValue").Items)" placeholder="Select GST" popupHeight="220px">
-                                <e-dropdownlist-fields text="GSTValue" value="GSTId"></e-dropdownlist-fields>
-                                </ejs-dropdownlist>
-                                <span asp-validation-for="GSTId"></span>
-                                </div> *@
-
+                              
 
                                 <div class="form-group col-md-3">
                                     <label for="GSTId" class="form-label">GST</label>
@@ -194,13 +146,6 @@
                                     <span asp-validation-for="CompanyName"></span>
                                 </div>
 
-                                @* <div class="form-group col-md-3">
-                                <label for="BrandId" class="form-label">Brand</label>
-                                <ejs-dropdownlist id="BrandId" allowFiltering="true" ejs-for="@Model.BrandId" filtering="onBrandfiltering" dataSource="@(new SelectList((IEnumerable)ViewBag.Brand, "BrandId", "BrandName").Items)" placeholder="Select Brand" popupHeight="220px">
-                                <e-dropdownlist-fields text="BrandName" value="BrandId"></e-dropdownlist-fields>
-                                </ejs-dropdownlist>
-                                <span asp-validation-for="BrandId"></span>
-                                </div> *@
 
                                 <div class="form-group col-md-3">
                                     <label for="BrandId" class="form-label">Brand</label>
@@ -224,13 +169,6 @@
                                     <span asp-validation-for="ProductWeight"></span>
                                 </div>
 
-                                @* <div class="form-group col-md-3">
-                                <label for="UnitId" class="form-label">Unit</label>
-                                <ejs-dropdownlist id="UnitId" allowFiltering="true" ejs-for="@Model.UnitId" filtering="onUnitfiltering" dataSource="@(new SelectList((IEnumerable)ViewBag.Unit, "UnitId", "ShortName").Items)" placeholder="Select Unit" popupHeight="220px">
-                                <e-dropdownlist-fields text="ShortName" value="UnitId"></e-dropdownlist-fields>
-                                </ejs-dropdownlist>
-                                <span asp-validation-for="UnitId"></span>
-                                </div> *@
 
                                 <div class="form-group col-md-3">
                                     <label for="UnitId" class="form-label">Unit</label>
@@ -306,13 +244,10 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <script>
-    $(document).ready(function () {
-        GetSector();
-    });
+    GetSector();
 
     function GetSector(Id) {
-
-        var opt = '';   
+        var opt = '';
         $.ajax({
             type: "GET",
             url: '/SellerFarmingProduct/GetCategoryBySectorId/',
@@ -325,13 +260,86 @@
                 var options = [];
                 options.push('<option value="">Please Select</option>');
 
-                // Assuming 'res' is an array of objects with 'value' and 'text' properties
                 for (var i = 0; i < res.length; i++) {
                     options.push('<option value="' + res[i].categoryId + '">' + res[i].categoryName + '</option>');
                 }
 
-                // Set the dropdown options
-                $('#CategoryId').html(options.join(''));
+                $('#categoryId').html(options.join(''));
+
+                categoryChanged();
+            },
+            error: function (error) {
+                console.error("Error fetching data: ", error);
+            }
+        });
+    }
+
+    function categoryChanged() {
+        var categoryId = $('#categoryId').val();
+        if (categoryId) {
+            GetSubCategory(categoryId);
+        } else {
+            $('#subCategory1Id').html('<option value="">Please Select</option>');
+            $('#subCategory2Id').html('<option value="">Please Select</option>');
+        }
+    }
+
+    function GetSubCategory(categoryId) {
+        var opt = '';
+        $.ajax({
+            type: "GET",
+            url: '/SellerFarmingProduct/GetSubCategoryByCategoryId/',
+            data: { CategoryId: categoryId },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (res) {
+                console.log(res);
+
+                var options = [];
+                options.push('<option value="">Please Select</option>');
+
+                for (var i = 0; i < res.length; i++) {
+                    options.push('<option value="' + res[i].subCategory1Id + '">' + res[i].subCategory1Name + '</option>');
+                }
+
+                $('#subCategory1Id').html(options.join(''));
+
+                subCategory1Changed();
+            },
+            error: function (error) {
+                console.error("Error fetching data: ", error);
+            }
+        });
+    }
+
+    function subCategory1Changed() {
+        var subCategory1Id = $('#subCategory1Id').val();
+        if (subCategory1Id) {
+            GetSubCategory2(subCategory1Id);
+        } else {
+            $('#subCategory2Id').html('<option value="">Please Select</option>');
+        }
+    }
+
+    function GetSubCategory2(subCategory1Id) {
+        var opt = '';
+        $.ajax({
+            type: "GET",
+            url: '/SellerFarmingProduct/GetSubCategory2BySubCategoryId/',
+            data: { SubCategory1Id: subCategory1Id },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (res) {
+                console.log(res);
+
+                var options = [];
+                options.push('<option value="">Please Select</option>');
+
+                for (var i = 0; i < res.length; i++) {
+                    options.push('<option value="' + res[i].subCategory2Id + '">' + res[i].subCategory2Name + '</option>');
+                }
+
+                $('#subCategory2Id').html(options.join(''));
             },
             error: function (error) {
                 console.error("Error fetching data: ", error);
@@ -339,45 +347,4 @@
         });
     }
 </script>
-
-
-
-
-
-
-
-
-
-@* <script>
-    onChangeCategory();
-
-    function onChangeCategory(Id) {
-        var sectorId = @User.Claims.FirstOrDefault(x => x.Type == "SectorId").Value"
-        $.ajax({
-            type: "GET",
-            url: '/WareHouse/Category/GetCategoryBySectorId/' + sectorId,
-            contentType: "application/json",
-            dataType: "json",
-            success: function (res) {
-                if (res && res.data) {
-                    console.log(res);
-
-                    var options = ['<option value="">Please Select</option>'];
-
-                    for (var i = 0; i < res.data.length; i++) {
-                        var opt = (Id == res.data[i].sectorId) ? 'selected' : '';
-                        options.push('<option value="' + res.data[i].sectorId + '" ' + opt + '>' + res.data[i].sectorName + '</option>');
-                    }
-
-                    $("#CategoryId").html(options.join(''));
-                } else {
-                    console.error("Invalid response format");
-                }
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                console.error("Error loading data:", errorThrown);
-            }
-        });
-    }
-</script> *@
 
