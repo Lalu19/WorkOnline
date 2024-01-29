@@ -125,6 +125,8 @@ namespace Warehouse.Management.Controllers
 				viewForItem.CreatedItemDTO.PurchaseCaseCost = item1.PurchaseCaseCost;
 				viewForItem.CreatedItemDTO.SalesCost = item1.SalesCost;
 				viewForItem.CreatedItemDTO.SalesCaseCost = item1.SalesCaseCost;
+				viewForItem.CreatedItemDTO.PartnerSalesCost= item1.PartnerSalesCost;
+				viewForItem.CreatedItemDTO.PartnerSalesCaseCost= item1.PartnerSalesCaseCost;
 				viewForItem.CreatedItemDTO.CGST = item1.CGST;
 				viewForItem.CreatedItemDTO.SGST = item1.SGST;
 				viewForItem.CreatedItemDTO.HSN = item1.HSN;

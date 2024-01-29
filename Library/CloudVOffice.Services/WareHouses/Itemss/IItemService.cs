@@ -22,6 +22,8 @@ namespace CloudVOffice.Services.WareHouses.Itemss
         public MessageEnum DeleteItem(Int64 itemId, Int64 DeletedBy);
         public List<Item> GetItemlistByBrandId(Int64 BrandId);
         public List<Item> GetItemlistByCategoryId(int CategoryId);
+        public List<Item> GetItemlistBySubCategory1Id(int SubCategory1Id);
+        public List<Item> GetItemlistBySubCategory2Id(int SubCategory2Id);
         public List<Item> GetItemlistBySectorId(int SectorId);
 
     }
