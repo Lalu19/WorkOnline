@@ -215,7 +215,7 @@ namespace Seller_Login.Web.Controllers
 		[HttpGet]
 		public IActionResult DeleteSellerFarmingProduct(Int64 sellerFarmingProductId)
 		{
-			Int64 DeletedBy = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
+			Int64 DeletedBy = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "SellerRegistrationId").Value.ToString());
 
 			var a = _sellerFarmingProductService.SellerFarmingProductDelete(sellerFarmingProductId, DeletedBy);
 			TempData["msg"] = a;
