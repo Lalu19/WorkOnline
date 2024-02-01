@@ -236,7 +236,7 @@
     .action-buttons button {
         margin-right: 5px;
         padding: 5px 10px;
-        font-size: 10px; 
+        font-size: 10px;
     }
 </style>
 <header class="main-heading">
@@ -269,7 +269,7 @@
 </header>
 
 <div class="row gutters">
-  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
         <br>
         <div class="card ">
             <div class="card-header itemorderheder">
@@ -280,9 +280,8 @@
                     <ul class="unifyMenu" id="unifyMenu">
                         @foreach (var PO in ViewBag.POlist)
                         {
-                            <li class="categorymenu" onclick="POId(@PO.PurchaseOrderParentId)">
-                                <a class="has-arrow" style="cursor:pointer;">
-
+                            <li class="categorymenu" id="menuItem_@PO.POPUniqueNumber" onclick="POId(@PO.PurchaseOrderParentId)">
+                                <a class="has-arrow" style="cursor:pointer">
                                     <span class="nav-title">@PO.POPUniqueNumber</span>
                                 </a>
                             </li>
@@ -292,20 +291,28 @@
             </div>
             <div class="card-footer">
                 <p>Total Orders: <span id="totalPOCount">0</span></p>
+
+                @{
+                    int totalQuantitySum = 0;
+                    foreach (var PO in ViewBag.POlist)
+                    {
+                        totalQuantitySum += PO.TotalQuantity;
+                    }
+                }
+                <p>Order Value: <span id="totalQuantity">@totalQuantitySum</span></p>
+
             </div>
         </div>
-  </div>
-  <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7">
+    </div>
+    <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7">
         <br />
         <div class="card">
             <div class="card-header" id="categoryname"> Items</div>
             <div class="card-body">
                 <div class="row " id="itemboxes">
                     <div id="orderInfo">
-                      
                     </div>
                     <div id="itemsTable">
-                      
                     </div>
                 </div>
             </div>
@@ -323,14 +330,36 @@
 
 </div>
 <script>
+    //document.addEventListener("DOMContentLoaded", function () {
+    //    var totalPOCount = @ViewBag.POlist.Count;
+    //    document.getElementById("totalPOCount").innerText = totalPOCount;
+    //});
+
+
     document.addEventListener("DOMContentLoaded", function () {
-        var totalPOCount = @ViewBag.POlist.Count; 
+        var totalPOCount = @ViewBag.POlist.Count;
         document.getElementById("totalPOCount").innerText = totalPOCount;
+
+        // Initialize total amount for each order
+        var totalOrderAmounts = {};
+    @foreach (var PO in ViewBag.POlist)
+    {
+        <text>totalOrderAmounts[@PO.POPUniqueNumber] = 0; </text>
+    }
+
+            // Display total amount for each order
+            Object.keys(totalOrderAmounts).forEach(function (key) {
+                var totalAmountSpan = document.createElement("span");
+                totalAmountSpan.id = "totalOrderAmount_" + key;
+                totalAmountSpan.innerText = "0.00";
+                document.querySelector("#totalAmount").parentNode.appendChild(document.createElement("br"));
+                document.querySelector("#totalAmount").parentNode.appendChild(totalAmountSpan);
+            });
     });
 </script>
 <script>
     var save = null;
-  
+
     function POId(Id) {
         $.ajax({
             type: "GET",
@@ -356,7 +385,7 @@
                     table += '<td>₹' + data[i].item["salesCost"] + '</td>';
                     table += '<td>' + data[i]["quantity"] + '</td>';
                     table += '<td>' + data[i]["value"] + '</td>';
-                   // table += '<td>' + data[i].item["sgst"] + '</td>';
+                    // table += '<td>' + data[i].item["sgst"] + '</td>';
                     var gstSum = data[i].item["cgst"] + data[i].item["sgst"];
                     table += '<td>' + gstSum + '</td>';
                     table += '<td>' + data[i].item["hsn"] + '</td>';
@@ -404,8 +433,8 @@
             acceptedItemHtml += '<div>SGST: ' + sgst + '</div>';
             acceptedItemHtml += '<div>Quantity: ' + quantity + '</div>';
             acceptedItemHtml += '<div class="action-buttons">';
-            acceptedItemHtml += '<button onclick="acceptButtonClick()">Accept</button>';
-            acceptedItemHtml += '<button onclick="editButtonClick()">Edit</button>';
+            acceptedItemHtml += '<button onclick="acceptButtonClick(\'' + itemName + '\', \'' + salesCost + '\', \'' + shortName + '\', \'' + caseWeight + '\', \'' + mrp + '\', \'' + cgst + '\', \'' + sgst + '\', \'' + quantity + '\')">Accept</button>';
+            acceptedItemHtml += '<button onclick="editButtonClick(\'' + itemName + '\', \'' + salesCost + '\', \'' + shortName + '\', \'' + caseWeight + '\', \'' + mrp + '\', \'' + cgst + '\', \'' + sgst + '\', \'' + quantity + '\')">Edit</button>';
             acceptedItemHtml += '</div>';
             acceptedItemHtml += '</div>';
 
@@ -423,8 +452,65 @@
             $('#acceptedItemContainer').append(acceptedItemHtml);
         }
     }
+
+    function editButtonClick(itemName, salesCost, shortName, caseWeight, mrp, cgst, sgst, quantity) {
+        // Create an editable form for the accepted item
+        var acceptedItemForm = '<form id="editForm">';
+        acceptedItemForm += '<strong>Product Details:</strong>';
+        acceptedItemForm += '<div>Item Name:<input type="text" id="editItemName" value="' + itemName + '"></div>';
+        acceptedItemForm += '<div>Sales Cost:<input type="text" id="editSalesCost" value="' + salesCost + '"></div>';
+        acceptedItemForm += '<div>UOM:<input type="text" id="editShortName" value="' + shortName + '"></div>';
+        acceptedItemForm += '<div>Case Weight:<input type="text" id="editCaseWeight" value="' + caseWeight + '"></div>';
+        acceptedItemForm += '<div>MRP:<input type="text" id="editMRP" value="' + mrp + '"></div>';
+        acceptedItemForm += '<div>CGST:<input type="text" id="editCGST" value="' + cgst + '"></div>';
+        acceptedItemForm += '<div>SGST:<input type="text" id="editSGST" value="' + sgst + '"></div>';
+        acceptedItemForm += '<div>Quantity:<input type="text" id="editQuantity" value="' + quantity + '"></div>';
+        acceptedItemForm += '<div class="action-buttons">';
+        acceptedItemForm += '<button type="button" onclick="saveEdit()">Save</button>';
+        acceptedItemForm += '<button type="button" onclick="cancelEdit()">Cancel</button>';
+        acceptedItemForm += '</div>';
+        acceptedItemForm += '</form>';
+
+        // Append the editable form to the acceptedItemContainer
+        $('#acceptedItemContainer').html(acceptedItemForm);
+    }
+
+
+    function saveEdit() {
+        var editedData = {
+            itemName: $('#editItemName').val(),
+            salesCost: $('#editSalesCost').val(),
+            shortName: $('#editShortName').val(),
+            caseWeight: $('#editCaseWeight').val(),
+            mrp: $('#editMRP').val(),
+            cgst: $('#editCGST').val(),
+            sgst: $('#editSGST').val(),
+            quantity: $('#editQuantity').val()
+        };
+
+        var editedItemHtml = '<div class="edited-item">';
+        editedItemHtml += '<strong>Edited Product Details:</strong>';
+        editedItemHtml += '<div>Item Name: ' + editedData.itemName + '</div>';
+        editedItemHtml += '<div>Sales Cost: ' + editedData.salesCost + '</div>';
+        editedItemHtml += '<div>UOM: ' + editedData.shortName + '</div>';
+        editedItemHtml += '<div>Case Weight: ' + editedData.caseWeight + '</div>';
+        editedItemHtml += '<div>MRP: ' + editedData.mrp + '</div>';
+        editedItemHtml += '<div>CGST: ' + editedData.cgst + '</div>';
+        editedItemHtml += '<div>SGST: ' + editedData.sgst + '</div>';
+        editedItemHtml += '<div>Quantity: ' + editedData.quantity + '</div>';
+        editedItemHtml += '</div>';
+
+        $('#acceptedItemContainer').append(editedItemHtml);
+        save = $('#acceptedItemContainer').html();
+        $('#acceptedItemContainer').hide();
+        console.log("Edited Data:", editedData);
+    }
+
+    function cancelEdit() {
+        $('#acceptedItemContainer').html(save);
+    }
     function rejectAction(itemId) {
-       
+
         // Remove the row from the table based on the itemId
         var removedRow = $('#itemsTable').find('tr[data-item-id="' + itemId + '"]').remove();
 
@@ -436,18 +522,36 @@
         $('#itemsTable').find('div:contains("Total Amount:")').text('Total Amount: ₹' + totalAmount.toFixed(2));
     }
 
-    function acceptButtonClick() {
-        // Handle the accept button click
-        // You can store data in the "save" variable or perform other actions
-        save = $('#acceptedItemContainer').html();
+    function acceptButtonClick(itemName, salesCost, shortName, caseWeight, mrp, cgst, sgst, quantity) {
+        // Create a JavaScript object with accepted item details
+        var acceptedItemData = {
+            itemName: itemName,
+            salesCost: salesCost,
+            shortName: shortName,
+            caseWeight: caseWeight,
+            mrp: mrp,
+            cgst: cgst,
+            sgst: sgst,
+            quantity: quantity
+        };
+
+        // Save the JavaScript object in the save variable
+        save = acceptedItemData;
         console.log("Data saved:", save);
 
-        // Clear the contents of the acceptedItemContainer
+        // Clear the content of the acceptedItemContainer
         $('#acceptedItemContainer').empty();
+        // Hide the corresponding menu item
+        $('#menuItem_' + POPUniqueNumber).hide();
     }
 
 
+    //function acceptButtonClick() {
 
+    //    save = $('#acceptedItemContainer').html();
+    //    console.log("Data saved:", save);
+    //    $('#acceptedItemContainer').empty();
+    //}
     $(document).ready(function () {
         var selectedCategoryId = localStorage.getItem('selectedCategoryId');
         if (selectedCategoryId) {
