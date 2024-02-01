@@ -214,6 +214,27 @@ namespace Seller_Login.Web.Controllers
             var a = _sellerProductEntryService.DeleteSellerProductEntry(sellerProductEntryId, DeletedBy);
             return Redirect("/SellerProductEntry/SellerProductEntryView");
         }
-        
-    }
+
+		public JsonResult GetCategoryBySectorId(int SectorId)
+		{
+			int sectorId = int.Parse(User.Claims.FirstOrDefault(x => x.Type == "SectorId").Value.ToString());
+			var a = _categoryService.GetCategoryBySectorId(sectorId);
+			//var distinctItems = a.DistinctBy(a => a.Category.CategoryId);
+			//return Json(distinctItems);
+			return Json(a);
+		}
+		public JsonResult GetSubCategoryByCategoryId(int CategoryId)
+		{
+			var a = _subCategory1Service.GetSubCategoryByCategoeyId(CategoryId);
+
+			return Json(a);
+		}
+
+		public JsonResult GetSubCategory2BySubCategoryId(int SubCategory1Id)
+		{
+			var a = _subCategory2Service.GetSubCategory2BySubCategory1Id(SubCategory1Id);
+
+			return Json(a);
+		}
+	}
 }

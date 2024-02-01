@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CloudVOffice.Core.Domain.ProductCategories;
-using Microsoft.CodeAnalysis;
 
-namespace CloudVOffice.Data.DTO.WareHouses.ViewModel
+namespace CloudVOffice.Data.DTO.WareHouses.ViewModel.StockManagement
 {
-    
-    public class StockManagementSectorWise
+    public class StockManagementBrandWise
     {
-        public string Sectors { get; set; }
+        public string Brands { get; set; }
         public List<double> Quantity { get; set; }
         public List<double> Amount { get; set; }
         public List<string> ShortName { get; set; }
 
-        public StockManagementSectorWise()
+        public StockManagementBrandWise()
         {
             Quantity = new List<double>();
             Amount = new List<double>();

@@ -1,10 +1,14 @@
 ﻿using CloudVOffice.Core.Domain.Common;
+using CloudVOffice.Core.Domain.WareHouses.Brands;
+using CloudVOffice.Core.Domain.WareHouses.Items;
 using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Core.Domain.WareHouses.Stocks;
 using CloudVOffice.Data.DTO.WareHouses.PinCodes;
 using CloudVOffice.Data.DTO.WareHouses.Stocks;
+using CloudVOffice.Data.DTO.WareHouses.ViewModel;
 using CloudVOffice.Services.ProductCategories;
 using CloudVOffice.Services.WareHouses;
+using CloudVOffice.Services.WareHouses.Brands;
 using CloudVOffice.Services.WareHouses.Itemss;
 using CloudVOffice.Services.WareHouses.Stocks;
 using CloudVOffice.Services.WareHouses.UOMs;
@@ -27,12 +31,14 @@ namespace Warehouse.Management.Controllers
         private readonly IItemService _itemService;
         private readonly IWareHouseService _wareHouseService;
         private readonly IUnit _unit;
+        private readonly IBrandService _brandService;
 
         public StockController(IStockService stockService,
                                IItemService itemService,
                                IWareHouseService wareHouseService,
                                IUnit unit,
-                               ISectorService sectorService
+                               ISectorService sectorService,
+                               IBrandService brandService
                               )
         {
             _stockService = stockService;
@@ -40,6 +46,7 @@ namespace Warehouse.Management.Controllers
             _wareHouseService = wareHouseService;
             _unit = unit;
             _sectorService = sectorService;
+            _brandService = brandService;
         }
 
         [HttpGet]
@@ -56,6 +63,9 @@ namespace Warehouse.Management.Controllers
             {
                 Stock d = _stockService.GetStockByStockId(int.Parse(stockId.ToString()));
 
+                stockDTO.SectorId = d.SectorId;
+                stockDTO.CategoryId = d.CategoryId;
+                stockDTO.BrandId = d.BrandId;
                 stockDTO.ItemId = d.ItemId;
                 stockDTO.WareHuoseId = d.WareHuoseId;
                 stockDTO.UnitId = d.UnitId;
@@ -142,6 +152,31 @@ namespace Warehouse.Management.Controllers
             TempData["msg"] = a;
             return Redirect("/WareHouse/Stock/StockView");
         }
+
+        
+        public List<Item> GetItemsByCategoryId(int categoryId)
+        {
+            var a = _itemService.ItemListByCategoryId(categoryId);
+            return a;
+        }
+
+        public List<Brand> GetBrandsByCategoryId(int categoryId)
+        {
+            var brandsAll = _brandService.GetBrandListByCategoryId(categoryId);
+
+            var brands = brandsAll.GroupBy(b => b.BrandId).Select(g => g.First()).ToList();
+            return brands;
+        }
+
+
+        public List<StockManagementSkuWise> GetStockDetailsByBrandId(int brandId)
+        {
+            var items = _stockService.GetStockDetailsByBrandId(brandId);
+            return items;
+        }
+
+
+
 
     }
 }

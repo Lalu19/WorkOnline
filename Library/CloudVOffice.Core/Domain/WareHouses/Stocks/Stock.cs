@@ -18,6 +18,8 @@ namespace CloudVOffice.Core.Domain.WareHouses.Stocks
 		public Int64 StockId { get; set; }
         public Int64? ItemId { get; set; }
         public int? SectorId { get; set; }
+        public int? CategoryId { get; set; }
+        public Int64? BrandId { get; set; }
         public Int64? WareHuoseId { get; set; }
         public Int64? UnitId { get; set; }
         public double? Quantity { get; set; }
@@ -40,6 +42,7 @@ namespace CloudVOffice.Core.Domain.WareHouses.Stocks
         [ForeignKey("SectorId")]
         public Sector Sector { get; set; }
 
-
+        [ForeignKey("CategoryId")]
+        public Category Category { get; set; }
     }
 }

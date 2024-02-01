@@ -4,6 +4,7 @@ using CloudVOffice.Data.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CloudVOffice.Data.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240125071509_StockChangesssss")]
+    partial class StockChangesssss
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -556,45 +559,6 @@ namespace CloudVOffice.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ActivityLogTypes");
-                });
-
-            modelBuilder.Entity("CloudVOffice.Core.Domain.Logging.ErrorLog", b =>
-                {
-                    b.Property<long>("ErrorLogId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ErrorLogId"));
-
-                    b.Property<string>("ActionName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AreaName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ControllerName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ErrorMessage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("LogedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("StackTrace")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StatusCode")
-                        .HasColumnType("int");
-
-                    b.Property<long?>("UserId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("ErrorLogId");
-
-                    b.ToTable("ErrorLogs");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.Logging.Log", b =>
@@ -2844,12 +2808,6 @@ namespace CloudVOffice.Data.Migrations
 
                     b.Property<DateTime?>("ManufactureDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<double?>("PartnerSalesCaseCost")
-                        .HasColumnType("float");
-
-                    b.Property<double>("PartnerSalesCost")
-                        .HasColumnType("float");
 
                     b.Property<double>("ProductWeight")
                         .HasColumnType("float");

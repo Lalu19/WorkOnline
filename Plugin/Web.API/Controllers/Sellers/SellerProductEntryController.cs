@@ -4,6 +4,7 @@ using CloudVOffice.Data.DTO.WareHouses.Brands;
 using CloudVOffice.Services.Sellers;
 using CloudVOffice.Services.WareHouses.Brands;
 using CloudVOffice.Services.WareHouses.Itemss;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -18,15 +19,74 @@ namespace Web.API.Controllers.Sellers
     public class SellerProductEntryController:Controller
     {
         private readonly ISellerProductEntryService _sellerProductEntryService;
-        public SellerProductEntryController(ISellerProductEntryService sellerProductEntryService)
+        private readonly IWebHostEnvironment _hostingEnvironment;
+        public SellerProductEntryController(ISellerProductEntryService sellerProductEntryService, IWebHostEnvironment hostingEnvironment)
         {
             _sellerProductEntryService = sellerProductEntryService;
+            _hostingEnvironment = hostingEnvironment;
         }
         [HttpPost]
-        public IActionResult CreateSellerProductEntry(SellerProductEntryDTO sellerProductEntryDTO)
+        public IActionResult CreateSellerProductEntry([FromForm] SellerProductEntryDTO sellerProductEntryDTO)
         {
             try
             {
+                if (sellerProductEntryDTO.ThumbnailUp != null)
+                {
+                    FileInfo fileInfo = new FileInfo(sellerProductEntryDTO.ThumbnailUp.FileName);
+                    string extn = fileInfo.Extension.ToLower();
+                    Guid id = Guid.NewGuid();
+                    string filename = id.ToString() + Path.GetExtension(sellerProductEntryDTO.ThumbnailUp.FileName);
+
+                    string newpath = DateTime.Today.Date.ToString("dd-MMM-yyyy");
+                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, @"uploads\Thumbnail\" + sellerProductEntryDTO.CreatedBy.ToString());
+                    if (!Directory.Exists(uploadsFolder))
+                    {
+                        Directory.CreateDirectory(uploadsFolder);
+                    }
+                    string uniqueFileName = Guid.NewGuid().ToString() + "_" + filename;
+                    string imagePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                    using (var stream = new FileStream(imagePath, FileMode.Create))
+                    {
+                        sellerProductEntryDTO.ThumbnailUp.CopyTo(stream);
+                    }
+
+                    sellerProductEntryDTO.ThumbnailUp.CopyTo(new FileStream(imagePath, FileMode.Create));
+                    sellerProductEntryDTO.Thumbnail = filename;
+
+                }
+
+                if (sellerProductEntryDTO.ImagesUp != null && sellerProductEntryDTO.ImagesUp.Count > 0)
+                {
+                    foreach (var image in sellerProductEntryDTO.ImagesUp)
+                    {
+                        if (image != null && image.Length > 0)
+                        {
+                            string extn = Path.GetExtension(image.FileName).ToLower();
+
+                            Guid id = Guid.NewGuid();
+                            string filename = id.ToString() + extn;
+
+                            string newpath = DateTime.Today.Date.ToString("dd-MMM-yyyy");
+                            string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, $"uploads/Images/{newpath}");
+                            if (!Directory.Exists(uploadsFolder))
+                            {
+                                Directory.CreateDirectory(uploadsFolder);
+                            }
+
+                            string uniqueFileName = Guid.NewGuid().ToString() + "_" + filename;
+                            string imagePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                            using (var fileStream = new FileStream(imagePath, FileMode.Create))
+                            {
+                                image.CopyTo(fileStream);
+                            }
+
+                            sellerProductEntryDTO.Images.Add(uniqueFileName);
+                        }
+                    }
+                }
+
                 var a = _sellerProductEntryService.CreateSellerProductEntry(sellerProductEntryDTO);
                 return Ok(a);
             }
