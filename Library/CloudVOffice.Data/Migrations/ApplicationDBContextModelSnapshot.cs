@@ -558,6 +558,45 @@ namespace CloudVOffice.Data.Migrations
                     b.ToTable("ActivityLogTypes");
                 });
 
+            modelBuilder.Entity("CloudVOffice.Core.Domain.Logging.ErrorLog", b =>
+                {
+                    b.Property<long>("ErrorLogId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ErrorLogId"));
+
+                    b.Property<string>("ActionName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AreaName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ControllerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ErrorMessage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LogedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("StackTrace")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StatusCode")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("ErrorLogId");
+
+                    b.ToTable("ErrorLogs");
+                });
+
             modelBuilder.Entity("CloudVOffice.Core.Domain.Logging.Log", b =>
                 {
                     b.Property<long>("Id")
@@ -2805,6 +2844,12 @@ namespace CloudVOffice.Data.Migrations
 
                     b.Property<DateTime?>("ManufactureDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<double?>("PartnerSalesCaseCost")
+                        .HasColumnType("float");
+
+                    b.Property<double>("PartnerSalesCost")
+                        .HasColumnType("float");
 
                     b.Property<double>("ProductWeight")
                         .HasColumnType("float");

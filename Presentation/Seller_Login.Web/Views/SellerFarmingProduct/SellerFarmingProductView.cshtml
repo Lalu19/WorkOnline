@@ -1,0 +1,174 @@
+﻿@using CloudVOffice.Core.Domain.Common;
+@{
+    Layout = "_SellerLayout";
+    ViewData["Title"] = "Seller Farming Product";
+}
+@addTagHelper *, Syncfusion.EJ2
+
+<style>
+    /* Your existing styles */
+    .side-content ul.user-actions {
+        display: block;
+        margin: auto;
+        padding: 65px 10px 20px 10px;
+        text-align: center;
+        background: #f5f6fa;
+    }
+
+    /* Style for better visibility of the table */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .card-body {
+        max-height: 580px; /* Adjust the max-height according to your requirements */
+        overflow-y: auto;
+    }
+
+</style>
+
+<div class="app-main">
+    <header class="main-heading">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+                    <div class="page-icon">
+                        <i class="icon-laptop_windows"></i>
+                    </div>
+                    <div class="page-title">
+                        <h5>Ware House</h5>
+                        <h6 class="sub-heading">  </h6>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                    <div class="right-actions">
+                        <span class="last-login"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="row gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-10">
+                                Seller Farming Product View
+                            </div>
+                            <div class="col-md-2 ">
+                                <a href="/SellerFarmingProduct/CreateSellerFarmingProduct" class="btn btn-primary btn-sm float-right"><i class="icon icon-add"></i>Add</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- Use a simple HTML table to display the data -->
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>CategoryName</th>
+                                    <th>SubCategory1Name</th>
+                                    <th>SubCategory2Name</th>
+                                    <th>ProductName</th>
+                                    <th>MinQty</th>
+                                    <th>GSTValue</th>
+                                    <th>HSN</th>
+                                    <th>Price</th>
+                                    <th>QtyPerKg</th>
+                                    <th>CompanyName</th>
+                                    <th>BrandName</th>
+                                    <th>ProductWeight</th>
+                                    <th>ShortName</th>
+                                    <th>HarvestDate</th>
+                                    <th>Thumbnail</th>
+                                    <th>Images</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in ViewBag.SellerFarmingProducts)
+                                {
+                                    <tr>
+                                        <td>@item.Category.CategoryName</td>
+                                        <td>@item.SubCategory1.SubCategory1Name</td>
+                                        <td>@item.SubCategory2.SubCategory2Name</td>
+                                        <td>@item.ProductName</td>
+                                        <td>@item.MinQty</td>
+                                        <td>@item.GST.GSTValue</td>
+                                        <td>@item.HSN</td>
+                                        <td>@item.Price</td>
+                                        <td>@item.QtyPerKg</td>
+                                        <td>@item.CompanyName</td>
+                                        <td>@item.Brand.BrandName</td>
+                                        <td>@item.ProductWeight</td>
+                                        <td>@item.Unit.ShortName</td>
+                                        <td>@item.HarvestDate</td>
+                                        <td>
+                                            @if (item.Thumbnail != null)
+                                            {
+                                                <img src="/uploads/SellerFarmingThumbnail/@item.Thumbnail" style="height:100px; width:100px ;padding: 5px 0px 5px 0;" />
+                                            }
+                                            @*  else
+                                        {
+                                        No Image
+                                        } *@
+                                        </td>
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(item.Images))
+                                            {
+                                                var imageFilenames = item.Images.Split(',');
+                                                <div class="image-container">
+                                                    @foreach (var filename in imageFilenames)
+                                                    {
+                                                        <img src="/uploads/SellerFarmingImages/@filename.Trim()" class="grid-image" style="height: 100px; width: 100px; padding: 5px 0 5px 0;" />
+                                                    }
+                                                </div>
+                                            }
+                                            @*  else
+                                        {
+                                        No Images
+                                        } *@
+                                        </td>
+                                        <td>
+                                            <div style="display: flex; align-items: center;">
+                                                <a href="/SellerFarmingProduct/CreateSellerFarmingProduct?SellerFarmingProductId=@item.SellerFarmingProductId" style="margin-right: 10px;">
+                                                    <i class="icon icon-pencil3" style="font-size:22px"></i>
+                                                </a>
+                                                <a href="/SellerFarmingProduct/DeleteSellerFarmingProduct?SellerFarmingProductId=@item.SellerFarmingProductId" onclick="Delete(@item.SellerFarmingProductId); return false;">
+                                                    <i class="icon-trash" style="font-size:22px"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+
+
+
+

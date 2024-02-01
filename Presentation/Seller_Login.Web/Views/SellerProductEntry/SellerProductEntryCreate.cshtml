@@ -1,0 +1,342 @@
+﻿@model CloudVOffice.Data.DTO.Sellers.SellerProductEntryDTO;
+@using System.Collections;
+@using Newtonsoft.Json;
+@{
+	Layout = "_SellerLayout";
+	ViewData["Title"] = "SellerProductEntry";
+}
+@addTagHelper *, Syncfusion.EJ2
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<style>
+	.side-content ul.user-actions {
+		display: block;
+		margin: auto;
+		padding: 65px 10px 20px 10px;
+		text-align: center;
+		background: #f5f6fa;
+	}
+</style>
+
+
+<div class="app-main">
+
+<header class="main-heading">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+				<div class="page-icon">
+					<i class="icon-laptop_windows"></i>
+				</div>
+				<div class="page-title">
+					<h5>Sellers</h5>
+					<h6 class="sub-heading">  </h6>
+				</div>
+			</div>
+			<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+				<div class="right-actions">
+					<span class="last-login"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+<div class="main-content">
+	<div class="row gutters">
+		<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+			<div class="card">
+					<form asp-route="/SellerProductEntry/SellerProductEntryCreate" method="post" autocomplete="off" enctype="multipart/form-data">
+						
+
+					<div class="card-header">
+
+						<div class="row">
+							<div class="col-md-10">
+								<b>SellerProductEntry Create</b>
+							</div>
+							<div class="col-md-2 ">
+								<a href="/SellerProductEntry/SellerProductEntryView" class="btn btn-primary btn-sm float-right"><i class="icon-list2"></i> List</a>
+							</div>
+						</div>
+					</div>
+					<div class="card-body">
+						<div class="form-row">
+							<div class="form-group col-md-3">
+								<input asp-for="@Model.SellerProductEntryId" type="hidden" />
+								<label for="ProductName" class="form-label">Product Name</label>
+								<input asp-for="@Model.ProductName" type="text" class="form-control" autofocus="autofocus" placeholder="ProductName" />
+								<span asp-validation-for="ProductName"></span>
+							</div>
+								<div class="form-group col-md-3">
+									<label for="CategoryId" class="form-label">Category Name</label>
+									<select id="CategoryId" class="form-control" onchange="categoryChanged()"></select>
+								</div>
+
+								<div class="form-group col-md-3">
+									<label for="SubCategory1Id" class="form-label">SubCategory1 Name</label>
+									<select id="subCategory1Id" class="form-control" onchange="subCategory1Changed()"></select>
+								</div>
+
+								<div class="form-group col-md-3">
+									<label for="SubCategory2Id" class="form-label">SubCategory2 Name</label>
+									<select id="subCategory2Id" class="form-control"></select>
+								</div>
+
+						</div>
+
+						<div class="form-row">
+								
+								
+								<div class="form-group col-md-3">
+									<label for="UnitId" class="form-label">Unit Name</label>
+									<select id="UnitId" asp-for="@Model.UnitId" class="form-control" required>
+										<option value="">Please Select UnitName</option>
+										@foreach (var item in ViewBag.Unit)
+										{
+											<option value="@item.UnitId">@item.UnitName</option>
+										}
+									</select>
+									<span asp-validation-for="UnitId"></span>
+								</div>
+
+							<div class="form-group col-md-3">
+											<label for="GSTId" class="form-label">GST Value</label>
+											<select id="GSTId" asp-for="@Model.GSTId" class="form-control" required>
+												<option value="">Please Select GSTValue</option>
+										@foreach (var item in ViewBag.GSTs)
+										{
+																<option value="@item.GSTId">@item.GSTValue</option>
+										}
+											</select>
+											<span asp-validation-for="GSTId"></span>
+							</div>
+								<div class="form-group col-md-3">
+									<label for="BrandId" class="form-label">Brand Name</label>
+									<select id="BrandId" asp-for="@Model.BrandId" class="form-control" required>
+										<option value="">Please Select BrandName</option>
+										@foreach (var item in ViewBag.Brands)
+										{
+											<option value="@item.BrandId">@item.BrandName</option>
+										}
+									</select>
+									<span asp-validation-for="BrandId"></span>
+								</div>
+								<div class="form-group col-md-3">
+									<label for="HandlingTypeId" class="form-label">HandlingType Name</label>
+									<select id="HandlingTypeId" asp-for="@Model.HandlingTypeId" class="form-control" required>
+										<option value="">Please Select HandlingTypeName</option>
+										@foreach (var item in ViewBag.handlingtypes)
+										{
+											<option value="@item.HandlingTypeId">@item.HandlingTypeName</option>
+										}
+									</select>
+									<span asp-validation-for="HandlingTypeId"></span>
+								</div>
+                        </div>
+
+						<div class="form-row">
+								<div class="form-group col-md-3">
+									<label for="HSN" class="form-label">HSN</label>
+									<input type="text" id="HSN" asp-for="@Model.HSN" class="form-control" placeholder="HSN" required>
+									<span asp-validation-for="HSN"></span>
+								</div>
+								<div class="form-group col-md-3">
+									<label for="CompanyName" class="form-label">CompanyName</label>
+									<input type="CompanyName" id="CompanyName" asp-for="@Model.CompanyName" class="form-control" placeholder="CompanyName" required>
+									<span asp-validation-for="CompanyName"></span>
+								</div>
+
+								<div class="form-group col-md-3">
+									<label for="ProductWeight" class="form-label">ProductWeight</label>
+									<input type="text" id="ProductWeight" asp-for="@Model.ProductWeight" class="form-control" placeholder="ProductWeight" required>
+									<span asp-validation-for="ProductWeight"></span>
+								</div>
+
+								<div class="form-group col-md-3">
+									<label for="CaseWeight" class="form-label">CaseWeight</label>
+									<input type="text" id="CaseWeight" asp-for="@Model.CaseWeight" class="form-control" placeholder="CaseWeight" required>
+									<span asp-validation-for="CaseWeight"></span>
+								</div>
+                        </div>
+
+						<div class="form-row">
+								<div class="form-group col-md-3">
+									<label for="UnitPerCase" class="form-label">UnitPerCase</label>
+									<input type="text" id="UnitPerCase" asp-for="@Model.UnitPerCase" class="form-control" placeholder="UnitPerCase" required>
+									<span asp-validation-for="UnitPerCase"></span>
+								</div>
+
+								<div class="form-group col-md-3">
+									<label for="ManufactureDate" class="form-label">ManufactureDate</label>
+									<input type="date" id="ManufactureDate" asp-for="@Model.ManufactureDate" class="form-control" placeholder="ManufactureDate" required>
+									<span asp-validation-for="ManufactureDate"></span>
+								</div>
+
+								<div class="form-group col-md-3">
+									<label for="ExpiryDate" class="form-label">ExpiryDate</label>
+									<input type="date" id="ExpiryDate" asp-for="@Model.ExpiryDate" class="form-control" placeholder="ExpiryDate" required>
+									<span asp-validation-for="ManufactureDate"></span>
+								</div>
+								<div class="form-group col-md-3">
+									<label for="MRP" class="form-label">MRP</label>
+									<input type="text" id="MRP" asp-for="@Model.MRP" class="form-control" placeholder="MRP" required>
+									<span asp-validation-for="MRP"></span>
+								</div>
+                        </div>
+
+						<div class="form-row">
+								<div class="form-group col-md-3">
+									<label for="MRPCaseCost" class="form-label">MRPCaseCost</label>
+									<input type="text" id="MRPCaseCost" asp-for="@Model.MRPCaseCost" class="form-control" placeholder="MRPCaseCost" required>
+									<span asp-validation-for="MRPCaseCost"></span>
+								</div>
+
+								<div class="form-group col-md-3">
+									<label for="SalesCaseCost" class="form-label">SalesCaseCost</label>
+									<input type="text" id="SalesCaseCost" asp-for="@Model.SalesCaseCost" class="form-control" placeholder="SalesCaseCost" required>
+									<span asp-validation-for="SalesCaseCost"></span>
+								</div>
+
+								<div class="form-group col-md-3">
+									<label for="Thumbnail" class="form-label">Thumbnail</label>
+									<input asp-for="@Model.ThumbnailUp" type="file" class="form-control" autofocus="autofocus" placeholder="Image" required data-val="true" data-val-required="Please select an image file.   />
+									<span asp-validation-for="Thumbnail"></span>
+								</div>
+
+								<div class="form-group col-md-3">
+									<label for="Images" class="form-label">Images</label>
+									<input asp-for="@Model.ImagesUp" type="file" class="form-control" autofocus="autofocus" placeholder="Image" required data-val="true" data-val-required="Please select an image file.    />
+									<span asp-validation-for="Images"></span>
+								</div>
+							<div asp-validation-summary="ModelOnly" class="message-error"></div>
+						</div>
+
+						<div class="card-body">
+							<div class="col-lg-2 col-md-2 col-sm-12">
+								<button type="submit" class="btn btn-primary">Save</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+	$(document).ready(function () {
+		GetSector();
+	});
+
+	function GetSector(Id) {
+
+		var opt = '';
+		$.ajax({
+			type: "GET",
+			url: '/SellerProductEntry/GetCategoryBySectorId/',
+			data: { SectorId: Id },
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			success: function (res) {
+				console.log(res);
+
+				var options = [];
+				options.push('<option value="">Please Select</option>');
+
+				// Assuming 'res' is an array of objects with 'value' and 'text' properties
+				for (var i = 0; i < res.length; i++) {
+					options.push('<option value="' + res[i].categoryId + '">' + res[i].categoryName + '</option>');
+				}
+
+				// Set the dropdown options
+				$('#CategoryId').html(options.join(''));
+			},
+			error: function (error) {
+				console.error("Error fetching data: ", error);
+			}
+		});
+	}
+
+	function categoryChanged() {
+		var categoryId = $('#categoryId').val();
+		if (categoryId) {
+			GetSubCategory(categoryId);
+		} else {
+			$('#subCategory1Id').html('<option value="">Please Select</option>');
+			$('#subCategory2Id').html('<option value="">Please Select</option>');
+		}
+	}
+
+	function GetSubCategory(categoryId) {
+		var opt = '';
+		$.ajax({
+			type: "GET",
+			url: '/SellerProductEntry/GetSubCategoryByCategoryId/',
+			data: { CategoryId: categoryId },
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			success: function (res) {
+				console.log(res);
+
+				var options = [];
+				options.push('<option value="">Please Select</option>');
+
+				for (var i = 0; i < res.length; i++) {
+					options.push('<option value="' + res[i].subCategory1Id + '">' + res[i].subCategory1Name + '</option>');
+				}
+
+				$('#subCategory1Id').html(options.join(''));
+
+				subCategory1Changed();
+			},
+			error: function (error) {
+				console.error("Error fetching data: ", error);
+			}
+		});
+	}
+
+	function subCategory1Changed() {
+		var subCategory1Id = $('#subCategory1Id').val();
+		if (subCategory1Id) {
+			GetSubCategory2(subCategory1Id);
+		} else {
+			$('#subCategory2Id').html('<option value="">Please Select</option>');
+		}
+	}
+
+	function GetSubCategory2(subCategory1Id) {
+		var opt = '';
+		$.ajax({
+			type: "GET",
+			url: '/SellerProductEntry/GetSubCategory2BySubCategoryId/',
+			data: { SubCategory1Id: subCategory1Id },
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			success: function (res) {
+				console.log(res);
+
+				var options = [];
+				options.push('<option value="">Please Select</option>');
+
+				for (var i = 0; i < res.length; i++) {
+					options.push('<option value="' + res[i].subCategory2Id + '">' + res[i].subCategory2Name + '</option>');
+				}
+
+				$('#subCategory2Id').html(options.join(''));
+			},
+			error: function (error) {
+				console.error("Error fetching data: ", error);
+			}
+		});
+	}
+</script>
+
+
+
+
+
+

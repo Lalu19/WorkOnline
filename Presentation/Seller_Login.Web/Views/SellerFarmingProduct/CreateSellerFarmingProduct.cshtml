@@ -1,0 +1,350 @@
+﻿@model CloudVOffice.Data.DTO.Sellers.SellerFarmingProductDTO;
+@using System.Collections;
+@using Newtonsoft.Json;
+@{
+    Layout = "_SellerLayout";
+    ViewData["Title"] = "Seller Farming Product";
+}
+@addTagHelper *, Syncfusion.EJ2
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<style>
+    .side-content ul.user-actions {
+        display: block;
+        margin: auto;
+        padding: 65px 10px 20px 10px;
+        text-align: center;
+        background: #f5f6fa;
+    }
+</style>
+
+<div class="app-main">
+
+    <header class="main-heading">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+                    <div class="page-icon">
+                        <i class="icon-laptop_windows"></i>
+                    </div>
+                    <div class="page-title">
+                        <h5>Ware House</h5>
+                        <h6 class="sub-heading">  </h6>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                    <div class="right-actions">
+                        <span class="last-login"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="row gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <form asp-route="/SellerFarmingProduct/CreateSellerFarmingProduct" method="post" autocomplete="off" enctype="multipart/form-data">
+
+                        <div class="card-header">
+
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <b>SellerFarming Product Create</b>
+                                </div>
+                                <div class="col-md-2 ">
+                                    <a href="/SellerFarmingProduct/SellerFarmingProductView" class="btn btn-primary btn-sm float-right"><i class="icon-list2"></i> List</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <input asp-for="@Model.SellerFarmingProductId" type="hidden" />
+                                    <span asp-validation-for="SellerFarmingProductId"></span>
+                                </div>
+                            </div>
+
+
+                            <div class="form-row">
+
+                                <div class="form-group col-md-3">
+                                    <label for="CategoryId" class="form-label">Category Name</label>
+                                    <select id="categoryId" asp-for="@Model.CategoryId" class="form-control" onchange="categoryChanged()"></select>
+                                </div>
+
+                               
+                                <div class="form-group col-md-3">
+                                    <label for="SubCategory1Id" class="form-label">SubCategory1 Name</label>
+                                    <select id="subCategory1Id" asp-for="@Model.SubCategory1Id" class="form-control" onchange="subCategory1Changed()"></select>
+                                </div>
+
+
+                                <div class="form-group col-md-3">
+                                    <label for="SubCategory2Id" class="form-label">SubCategory2 Name</label>
+                                    <select id="subCategory2Id" asp-for="@Model.SubCategory2Id" class="form-control"></select>
+                                </div>
+
+
+                            </div>
+
+                            <div class="form-row">
+
+                                <div class="form-group col-md-3">
+                                    <label for="ProductName" class="form-label">Product Name &nbsp;<span style="color:red;"><b>*</b></span></label>
+                                    <input asp-for="@Model.ProductName" type="text" id="ProductName" class="form-control" autofocus="autofocus" placeholder="Product Name" required />
+                                    <span asp-validation-for="ProductName"></span>
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="MinQty" class="form-label">MinQty &nbsp;<span style="color:red;"><b>*</b></span></label>
+                                    <input asp-for="@Model.MinQty" type="number" id="MinQty" class="form-control" autofocus="autofocus" placeholder="MinQty" required />
+                                    <span asp-validation-for="MinQty"></span>
+                                </div>
+
+                              
+
+                                <div class="form-group col-md-3">
+                                    <label for="GSTId" class="form-label">GST</label>
+                                    <select id="GSTId" asp-for="@Model.GSTId" class="form-control">
+                                        <option value="">Please Select GST</option>
+                                        @foreach (var item in ViewBag.GST)
+                                        {
+                                            <option value="@item.GSTId">@item.GSTValue</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="GSTId"></span>
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="HSN" class="form-label">HSN &nbsp;</label>
+                                    <input asp-for="@Model.HSN" type="text" class="form-control" id="HSN" autofocus="autofocus" placeholder="HSN" />
+                                    <span asp-validation-for="HSN"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="form-row">
+
+                                <div class="form-group col-md-3">
+                                    <label for="Price" class="form-label">Price &nbsp;</label>
+                                    <input asp-for="@Model.Price" type="number" id="Price" class="form-control" autofocus="autofocus" placeholder="Price" />
+                                    <span asp-validation-for="Price"></span>
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="QtyPerKg" class="form-label">QtyPerKg &nbsp;</label>
+                                    <input asp-for="@Model.QtyPerKg" type="number" id="QtyPerKg" class="form-control" autofocus="autofocus" placeholder="QtyPerKg" />
+                                    <span asp-validation-for="QtyPerKg"></span>
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="CompanyName" class="form-label">CompanyName &nbsp;</label>
+                                    <input asp-for="@Model.CompanyName" type="text" class="form-control" id="CompanyName" autofocus="autofocus" placeholder="Company Name" />
+                                    <span asp-validation-for="CompanyName"></span>
+                                </div>
+
+
+                                <div class="form-group col-md-3">
+                                    <label for="BrandId" class="form-label">Brand</label>
+                                    <select id="BrandId" asp-for="@Model.BrandId" class="form-control">
+                                        <option value="">Please Select Brand</option>
+                                        @foreach (var item in ViewBag.Brand)
+                                        {
+                                            <option value="@item.BrandId">@item.BrandName</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="BrandId"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="form-row">
+
+                                <div class="form-group col-md-3">
+                                    <label for="ProductWeight" class="form-label">Product Weight &nbsp;</label>
+                                    <input asp-for="@Model.ProductWeight" type="number" id="ProductWeight" class="form-control" autofocus="autofocus" placeholder="QtyPerKg" />
+                                    <span asp-validation-for="ProductWeight"></span>
+                                </div>
+
+
+                                <div class="form-group col-md-3">
+                                    <label for="UnitId" class="form-label">Unit</label>
+                                    <select id="UnitId" asp-for="@Model.UnitId" class="form-control">
+                                        <option value="">Please Select Unit</option>
+                                        @foreach (var item in ViewBag.Unit)
+                                        {
+                                            <option value="@item.UnitId">@item.ShortName</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="UnitId"></span>
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="HarvestDate" class="form-label">Harvest Date &nbsp;</label>
+                                    <input asp-for="@Model.HarvestDate" type="date" id="HarvestDate" class="form-control" autofocus="autofocus" placeholder="HarvestDate" />
+                                    <span asp-validation-for="HarvestDate"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="form-row">
+
+                                <div class="form-group col-md-3">
+                                    <label for="Thumbnail" class="form-label">Thumbnail</label>
+                                    <input asp-for="@Model.ThumbnailUp" type="file" id="ThumbnailUp" class="form-control" autofocus="autofocus" placeholder="Upload Image" />
+                                    <span asp-validation-for="Thumbnail"></span>
+                                    @* @{
+                                    if (Model.Thumbnail != null)
+                                    {
+                                    <img src="/uploads/farmingimage/@Model.Thumbnail" style="height:100px; width:100px" />
+                                    <input type="hidden" asp-for="@Model.Thumbnail" value="@Model.Thumbnail">
+                                    }
+                                    } *@
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="Images" class="form-label">Add Product Images</label>
+                                    <input asp-for="@Model.ImagesUp" type="file" id="ImagesUp" class="form-control" multiple />
+                                    <span asp-validation-for="Images"></span>
+
+                                    @* @if (Model.Images != null && Model.Images.Count > 0)
+                                    {
+                                    for (int i = 0; i < Model.Images.Count; i++)
+                                    {
+                                    <img src="/uploads/farmingimage/@Model.Images[i]" style="height:100px; width:100px" />
+                                    <input type="hidden" name="Images" value="@Model.Images[i]" />
+                                    }
+                                    } *@
+                                </div>
+
+
+                            </div>
+
+                            <div asp-validation-summary="ModelOnly" class="message-error"></div>
+                        </div>
+
+
+                        <div class="card-body">
+                            <div class="col-lg-2 col-md-2 col-sm-12">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    GetSector();
+
+    function GetSector(Id) {
+        var opt = '';
+        $.ajax({
+            type: "GET",
+            url: '/SellerFarmingProduct/GetCategoryBySectorId/',
+            data: { SectorId: Id },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (res) {
+                console.log(res);
+
+                var options = [];
+                options.push('<option value="">Please Select</option>');
+
+                for (var i = 0; i < res.length; i++) {
+                    options.push('<option value="' + res[i].categoryId + '">' + res[i].categoryName + '</option>');
+                }
+
+                $('#categoryId').html(options.join(''));
+
+                categoryChanged();
+            },
+            error: function (error) {
+                console.error("Error fetching data: ", error);
+            }
+        });
+    }
+
+    function categoryChanged() {
+        var categoryId = $('#categoryId').val();
+        if (categoryId) {
+            GetSubCategory(categoryId);
+        } else {
+            $('#subCategory1Id').html('<option value="">Please Select</option>');
+            $('#subCategory2Id').html('<option value="">Please Select</option>');
+        }
+    }
+
+    function GetSubCategory(categoryId) {
+        var opt = '';
+        $.ajax({
+            type: "GET",
+            url: '/SellerFarmingProduct/GetSubCategoryByCategoryId/',
+            data: { CategoryId: categoryId },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (res) {
+                console.log(res);
+
+                var options = [];
+                options.push('<option value="">Please Select</option>');
+
+                for (var i = 0; i < res.length; i++) {
+                    options.push('<option value="' + res[i].subCategory1Id + '">' + res[i].subCategory1Name + '</option>');
+                }
+
+                $('#subCategory1Id').html(options.join(''));
+
+                subCategory1Changed();
+            },
+            error: function (error) {
+                console.error("Error fetching data: ", error);
+            }
+        });
+    }
+
+    function subCategory1Changed() {
+        var subCategory1Id = $('#subCategory1Id').val();
+        if (subCategory1Id) {
+            GetSubCategory2(subCategory1Id);
+        } else {
+            $('#subCategory2Id').html('<option value="">Please Select</option>');
+        }
+    }
+
+    function GetSubCategory2(subCategory1Id) {
+        var opt = '';
+        $.ajax({
+            type: "GET",
+            url: '/SellerFarmingProduct/GetSubCategory2BySubCategoryId/',
+            data: { SubCategory1Id: subCategory1Id },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (res) {
+                console.log(res);
+
+                var options = [];
+                options.push('<option value="">Please Select</option>');
+
+                for (var i = 0; i < res.length; i++) {
+                    options.push('<option value="' + res[i].subCategory2Id + '">' + res[i].subCategory2Name + '</option>');
+                }
+
+                $('#subCategory2Id').html(options.join(''));
+            },
+            error: function (error) {
+                console.error("Error fetching data: ", error);
+            }
+        });
+    }
+</script>
+
