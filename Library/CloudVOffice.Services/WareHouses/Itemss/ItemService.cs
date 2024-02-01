@@ -499,5 +499,27 @@ namespace CloudVOffice.Services.WareHouses.Itemss
             return _dbContext.Items.Where(x => x.SectorId == SectorId && x.Deleted == false).ToList();
         }
 
+        //public List<Category> GetCategorybySectorId(int SectorId)
+        //{
+        //	try
+        //	{
+
+        //	}
+        //	catch
+        //	{
+
+        //	}
+        //}
+
+        public List<Category> GetCategoryBySectorId(int SectorId)
+        {
+            return _dbContext.Categories.Where(x => x.SectorId == SectorId && x.Deleted == false).ToList();
+        }
+
+		public List<Item> ItemListByCategoryId(int CategoryId)
+		{
+			var a = _dbContext.Items.Where(a => a.CategoryId == CategoryId).ToList();
+			return a;
+		}
     }
 }

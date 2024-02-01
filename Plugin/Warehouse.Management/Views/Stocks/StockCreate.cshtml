@@ -64,15 +64,48 @@
                             <div class="form-group col-md-3">
                                 <input asp-for="@Model.StockId" type="hidden" />
 
-                                    <label for="ItemId" class="form-label">Item Name</label>
-                                    <ejs-dropdownlist id="ItemId" allowFiltering="true" ejs-for="@Model.ItemId" filtering="onItemNamefiltering" dataSource="@(new SelectList((IEnumerable)ViewBag.ItemList, "ItemId", "ItemName").Items)" placeholder="Select Item" popupHeight="220px">
-                                        <e-dropdownlist-fields text="ItemName" value="ItemId"></e-dropdownlist-fields>
+                                    <label for="SectorId" class="form-label">Sector Name</label>
+                                <ejs-dropdownlist id="SectorId" allowFiltering="true" ejs-for="@Model.SectorId" filtering="onItemNamefiltering" change="onChangeSector" dataSource="@(new SelectList((IEnumerable)ViewBag.Sectors, "SectorId", "SectorName").Items)" placeholder="Select Sector" popupHeight="220px">
+                                    <e-dropdownlist-fields text="SectorName" value="SectorId"></e-dropdownlist-fields>
                                     </ejs-dropdownlist>
-                                    <span asp-validation-for="ItemId"></span>
+                                <span asp-validation-for="SectorId"></span>
 
 
                             </div>
 
+
+                            <div class="form-group col-md-3">
+                                <label for="CategoryId" class="form-label">Category Name</label>
+                                <ejs-dropdownlist id="CategoryId" allowFiltering="true" change="onChangeCategory" ejs-for="@Model.CategoryId" placeholder="Select Category" popupHeight="220px">
+                                    <e-dropdownlist-fields text="categoryName" value="categoryId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="CategoryId"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="ItemId" class="form-label">Item Name</label>
+                                <ejs-dropdownlist id="ItemId" allowFiltering="true" ejs-for="@Model.ItemId" filtering="onItemNamefiltering"  placeholder="Select Item" popupHeight="220px">
+                                    <e-dropdownlist-fields text="itemName" value="itemId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="ItemId"></span>
+
+                            </div>                                                       
+                            
+                            <div class="form-group col-md-3">
+                                <label for="BrandId" class="form-label">Brand Name</label>
+                                <ejs-dropdownlist id="BrandId" allowFiltering="true" ejs-for="@Model.BrandId" filtering="onItemNamefiltering" placeholder="Select Brand" popupHeight="220px">
+                                    <e-dropdownlist-fields text="brandName" value="brandId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="BrandId"></span>
+
+                            </div>
+
+
+
+                        </div>                        
+
+
+                        <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="WareHuoseId" class="form-label">WareHouse Name</label>
                                 <ejs-dropdownlist id="WareHuoseId" allowFiltering="true" ejs-for="@Model.WareHuoseId" filtering="onWareHouseNamefiltering" dataSource="@(new SelectList((IEnumerable)ViewBag.WareHouseList, "WareHuoseId", "WareHouseName").Items)" placeholder="Select WareHouse" popupHeight="220px">
@@ -98,8 +131,6 @@
                             </div>
 
                         </div>
-
-
                     </div>
 
                     <div class="card-body">
@@ -140,3 +171,94 @@
     }
 
 </script>
+
+
+<script>
+    function onChangeSector(args) {
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/Category/GetCategoryBySectorId",
+            data: { sectorId: args.value },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                var categoryDropDown = document.getElementById("CategoryId").ej2_instances[0];
+                categoryDropDown.dataSource = result;
+                categoryDropDown.dataBind();
+
+                categoryDropDown.value = null;
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+    function onChangeCategory(args) {
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/Stock/GetItemsByCategoryId",
+            data: { categoryId: args.value },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                var categoryDropDown = document.getElementById("ItemId").ej2_instances[0];
+                categoryDropDown.dataSource = result;
+                categoryDropDown.dataBind();
+
+                categoryDropDown.value = null;
+            },
+            error: function () {
+
+            }
+        });
+
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/Stock/GetBrandsByCategoryId",
+            data: { categoryId: args.value },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                var categoryDropDown = document.getElementById("BrandId").ej2_instances[0];
+                categoryDropDown.dataSource = result;
+                categoryDropDown.dataBind();
+
+                categoryDropDown.value = null;
+            },
+            error: function () {
+
+            }
+        });
+
+    }
+
+</script>
+
+
+@*<script>
+    function onChangeCategory(args) {
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/Stock/GetItemsByCategoryId",
+            data: { sectorId: args.value },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                var categoryDropDown = document.getElementById("ItemId").ej2_instances[0];
+                categoryDropDown.dataSource = result;
+                categoryDropDown.dataBind();
+
+                categoryDropDown.value = null;
+            },
+            error: function () {
+
+            }
+        });
+    }
+</script>
+*@

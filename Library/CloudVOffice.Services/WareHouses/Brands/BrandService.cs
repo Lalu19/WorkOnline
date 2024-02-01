@@ -1,6 +1,7 @@
 ﻿using CloudVOffice.Core.Domain.Common;
 using CloudVOffice.Core.Domain.WareHouses.Brands;
 using CloudVOffice.Core.Domain.WareHouses.Months;
+using CloudVOffice.Core.Domain.WareHouses.Stocks;
 using CloudVOffice.Data.DTO.WareHouses.Brands;
 using CloudVOffice.Data.DTO.WareHouses.Months;
 using CloudVOffice.Data.Persistence;
@@ -150,6 +151,22 @@ namespace CloudVOffice.Services.WareHouses.Brands
 
             Int64 id = brand.BrandId;
             return id;
+        }
+
+
+        public List<Brand> GetBrandListByCategoryId(Int64 categoryId)
+        {
+            var items = _dbContext.Items.Where(i => i.CategoryId == categoryId).ToList();
+
+            List<Brand> brands = new List<Brand>();
+
+            foreach (var item in items)
+            {
+                var brand = _dbContext.Brands.FirstOrDefault(b => b.BrandId == item.BrandId);
+                brands.Add(brand);
+            }
+
+            return brands;
         }
     }
 }

@@ -3,6 +3,8 @@ using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Core.Domain.WareHouses.Stocks;
 using CloudVOffice.Data.DTO.WareHouses.PinCodes;
 using CloudVOffice.Data.DTO.WareHouses.Stocks;
+using CloudVOffice.Data.DTO.WareHouses.ViewModel;
+using CloudVOffice.Data.DTO.WareHouses.ViewModel.StockManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,5 +22,17 @@ namespace CloudVOffice.Services.WareHouses.Stocks
         public MessageEnum StockDelete(Int64 stockId, Int64 DeletedBy);
         public double? TotalStock();
         public double TotalValue();
+        //public List<(string SectorName, double Quantity)> SectorViewPage();
+
+        public List<StockManagementSectorWise> SectorViewPage();
+        public List<StockManagementSkuWise> GetStockDetailsByBrandId(int brandId);
+        public List<StockManagementSkuWise> GetStockDetailsByBrandIdsList(List<Int64> brandIdList);
+        //public List<StockManagementCategoryWise> CategoryViewPage();
+
+        public List<StockManagementCategoryWise> CategoryViewPage(List<Int64> categoryIds);
+        public List<Stock> GetStockListBySectorId(Int64 sectorId);
+        public List<StockManagementBrandWise> BrandsViewPage(List<Int64> brandIds);
+
+        public Dictionary<string, double?> TotalStockByShortName();
     }
 }

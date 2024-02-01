@@ -23,6 +23,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
         public List<Item> GetItemlistByBrandId(Int64 BrandId);
         public List<Item> GetItemlistByCategoryId(int CategoryId);
         public List<Item> GetItemlistBySectorId(int SectorId);
+        public List<Item> ItemListByCategoryId(int CategoryId);
 
     }
 }
