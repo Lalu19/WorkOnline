@@ -7,6 +7,7 @@ using CloudVOffice.Data.DTO.WareHouses.PurchaseOrders;
 using CloudVOffice.Data.Migrations;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -175,6 +176,14 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
                 throw;
             }
         }
-		
-	}
+        public PurchaseOrderParent GetPOOrderByPurchaseOrderParentId(Int64 purchaseOrderParentId)
+        {
+            return _dbContext.PurchaseOrderParents
+				.Include(x=> x.SellerRegistration)
+				.ThenInclude(x=> x.WareHuose)
+				.Include(x=> x.PurchaseOrders.Where(s=> s.Deleted == false))
+				.ThenInclude(x=> x.Item)
+				.Where(x => x.Deleted == false && x.PurchaseOrderParentId == purchaseOrderParentId).SingleOrDefault();
+        }
+    }
 }
