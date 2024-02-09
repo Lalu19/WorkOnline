@@ -308,7 +308,7 @@
         <br />
         <div class="card">
             <div class="card-header" id="categoryname"> Items</div>
-            <div class="card-body">
+            <div class="card-body" id="itemboxesbody">
                 <div class="row " id="itemboxes">
                     <div id="orderInfo">
                     </div>
@@ -324,6 +324,9 @@
             <div class="card-header">Billing Section</div>
             <div class="card-body" id="acceptedItemContainer">
             </div>
+        </div>
+        <div class="card-footer">
+            <button onclick="printInvoice()">Print Invoice</button>
         </div>
     </div>
 
@@ -359,6 +362,9 @@
 </script>
 <script>
     var save = null;
+
+    var originalItemsTableHtml2 = '';
+
 
     function POId(Id) {
         $.ajax({
@@ -407,7 +413,14 @@
                 table += '</tbody></table>';
                 table += '<div>Total Amount: ₹' + totalAmount.toFixed(2) + '</div>';
 
+
                 $('#itemsTable').html(table);
+
+                originalItemsTableHtml2 = table;
+
+                // Populate #itemsTable with the generated table HTML
+                $('#itemsTable').html(originalItemsTableHtml2);
+
 
                 if (Id) {
                     localStorage.setItem('selectedCategoryId', Id);
@@ -418,6 +431,8 @@
             }
         });
     }
+
+    var originalAcceptedItemHtml = '';  //to handle the cancel button
 
     function acceptAction(itemName, salesCost, shortName, caseWeight, mrp, cgst, sgst, quantity) {
         // Check if data is already present in acceptedItemContainer
@@ -435,6 +450,7 @@
             acceptedItemHtml += '<div class="action-buttons">';
             acceptedItemHtml += '<button onclick="acceptButtonClick(\'' + itemName + '\', \'' + salesCost + '\', \'' + shortName + '\', \'' + caseWeight + '\', \'' + mrp + '\', \'' + cgst + '\', \'' + sgst + '\', \'' + quantity + '\')">Accept</button>';
             acceptedItemHtml += '<button onclick="editButtonClick(\'' + itemName + '\', \'' + salesCost + '\', \'' + shortName + '\', \'' + caseWeight + '\', \'' + mrp + '\', \'' + cgst + '\', \'' + sgst + '\', \'' + quantity + '\')">Edit</button>';
+            acceptedItemHtml += '<button onclick="backButtonClick(\'' + itemName + '\', \'' + salesCost + '\', \'' + shortName + '\', \'' + caseWeight + '\', \'' + mrp + '\', \'' + cgst + '\', \'' + sgst + '\', \'' + quantity + '\')">Back</button>';
             acceptedItemHtml += '</div>';
             acceptedItemHtml += '</div>';
 
@@ -450,10 +466,25 @@
             $('#itemsTable').find('div:contains("Total Amount:")').text('Total Amount: ₹' + totalAmount.toFixed(2));
 
             $('#acceptedItemContainer').append(acceptedItemHtml);
+            originalAcceptedItemHtml = $('#acceptedItemContainer').html();
         }
     }
 
+
+    function backButtonClick() {
+        // Restore the original HTML content of #acceptedItemContainer
+        //$('#acceptedItemContainer').html(originalAcceptedItemHtml2);
+
+
+        $('#itemsTable').html(originalItemsTableHtml2);
+        $('#acceptedItemContainer').empty();
+
+    }
+
+
     function editButtonClick(itemName, salesCost, shortName, caseWeight, mrp, cgst, sgst, quantity) {
+
+
         // Create an editable form for the accepted item
         var acceptedItemForm = '<form id="editForm">';
         acceptedItemForm += '<strong>Product Details:</strong>';
@@ -478,14 +509,16 @@
 
     function saveEdit() {
         var editedData = {
-            itemName: $('#editItemName').val(),
-            salesCost: $('#editSalesCost').val(),
-            shortName: $('#editShortName').val(),
-            caseWeight: $('#editCaseWeight').val(),
-            mrp: $('#editMRP').val(),
-            cgst: $('#editCGST').val(),
-            sgst: $('#editSGST').val(),
-            quantity: $('#editQuantity').val()
+            itemName: $('#ItemName').val(),
+            salesCost: $('#SalesCost').val(),
+            salesCost: parseFloat($('#SalesCost').val()),
+            shortName: $('#ShortName').val(),
+            caseWeight: $('#CaseWeight').val(),
+            caseWeight: parseFloat($('#CaseWeight').val()),
+            mrp: parseFloat($('#MRP').val()),
+            cgst: parseFloat($('#CGST').val()),
+            sgst: parseFloat($('#SGST').val()),
+            quantity: parseFloat($('#quantity').val())
         };
 
         var editedItemHtml = '<div class="edited-item">';
@@ -507,7 +540,8 @@
     }
 
     function cancelEdit() {
-        $('#acceptedItemContainer').html(save);
+        //$('#acceptedItemContainer').html(save);
+        $('#acceptedItemContainer').html(originalAcceptedItemHtml);
     }
     function rejectAction(itemId) {
 
@@ -522,28 +556,92 @@
         $('#itemsTable').find('div:contains("Total Amount:")').text('Total Amount: ₹' + totalAmount.toFixed(2));
     }
 
+
+    var itemDetails = [];
+
+
+    //function acceptButtonClick(itemName, salesCost, shortName, caseWeight, mrp, cgst, sgst, quantity) {
+    //    // Create a JavaScript object with accepted item details
+    //    var acceptedItemData = {
+    //        itemName: itemName,
+    //        salesCost: salesCost,
+    //        shortName: shortName,
+    //        caseWeight: caseWeight,
+    //        mrp: mrp,
+    //        cgst: cgst,
+    //        sgst: sgst,
+    //        quantity: quantity
+    //    };
+
+    //    //// Save the JavaScript object in the save variable
+    //    //save = acceptedItemData;
+    //    //console.log("Data saved:", save);
+
+    //    itemDetails.push(acceptedItemData);
+
+
+    //    // Clear the content of the acceptedItemContainer
+    //    $('#acceptedItemContainer').empty();
+    //    // Hide the corresponding menu item
+    //    //$('#menuItem_' + POPUniqueNumber).hide();
+    //}
+
+
     function acceptButtonClick(itemName, salesCost, shortName, caseWeight, mrp, cgst, sgst, quantity) {
+        // Convert data types if needed
+        var parsedSalesCost = parseFloat(salesCost);
+        var parsedCaseWeight = parseFloat(caseWeight);
+        var parsedMRP = parseFloat(mrp);
+        var parsedCGST = parseFloat(cgst);
+        var parsedSGST = parseFloat(sgst);
+        var parsedQuantity = parseFloat(quantity);
+
         // Create a JavaScript object with accepted item details
         var acceptedItemData = {
             itemName: itemName,
-            salesCost: salesCost,
+            salesCost: parsedSalesCost,
             shortName: shortName,
-            caseWeight: caseWeight,
-            mrp: mrp,
-            cgst: cgst,
-            sgst: sgst,
-            quantity: quantity
+            caseWeight: parsedCaseWeight,
+            mrp: parsedMRP,
+            cgst: parsedCGST,
+            sgst: parsedSGST,
+            quantity: parsedQuantity
         };
 
-        // Save the JavaScript object in the save variable
-        save = acceptedItemData;
-        console.log("Data saved:", save);
+        // Push the converted data into the itemDetails array
+        itemDetails.push(acceptedItemData);
 
         // Clear the content of the acceptedItemContainer
         $('#acceptedItemContainer').empty();
         // Hide the corresponding menu item
-        $('#menuItem_' + POPUniqueNumber).hide();
+        //$('#menuItem_' + POPUniqueNumber).hide();
     }
+
+
+
+    var model = {
+        "Orders": itemDetails
+    };
+
+    function printInvoice() {
+        $.ajax({
+            type: "POST",
+            url: "/WareHouse/SO/SalesOrderDataSave",
+            //data: { sellerRegistrationId: args.value },
+            data: JSON.stringify(model),
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                
+            },
+            error: function () {
+
+            }
+        });
+
+    }
+
 
 
     //function acceptButtonClick() {

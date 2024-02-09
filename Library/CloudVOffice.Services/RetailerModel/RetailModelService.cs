@@ -3,7 +3,7 @@ using CloudVOffice.Core.Domain.ProductCategories;
 using CloudVOffice.Core.Domain.RetailerModel;
 using CloudVOffice.Data.DTO.ProductCategories;
 using CloudVOffice.Data.DTO.RetailerModel;
-using CloudVOffice.Data.Migrations;
+//using CloudVOffice.Data.Migrations;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
 using System;

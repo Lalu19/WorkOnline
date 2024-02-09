@@ -4,7 +4,7 @@ using CloudVOffice.Core.Domain.WareHouses.Months;
 using CloudVOffice.Core.Domain.WareHouses.PurchaseOrders;
 using CloudVOffice.Data.DTO.WareHouses.Months;
 using CloudVOffice.Data.DTO.WareHouses.PurchaseOrders;
-using CloudVOffice.Data.Migrations;
+//using CloudVOffice.Data.Migrations;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
 using System;

@@ -1,6 +1,7 @@
 ﻿using CloudVOffice.Core.Domain.WareHouses.Brands;
 using CloudVOffice.Data.DTO.SalesOrders;
 using CloudVOffice.Data.DTO.WareHouses.Brands;
+using CloudVOffice.Data.DTO.WareHouses.SalesOrders;
 using CloudVOffice.Services.WareHouses.Brands;
 using CloudVOffice.Services.WareHouses.PurchaseOrders;
 using CloudVOffice.Web.Framework;
@@ -40,9 +41,18 @@ namespace Warehouse.Management.Controllers
 			//	SODTO.BrandName = d.BrandName;
 			//	SODTO.BrandImage = d.BrandImage;
 			//}
-			return View("~/Plugins/Warehouse.Management/Views/SalesOrders/SOCreate.cshtml", sODTO);
-			
+			return View("~/Plugins/Warehouse.Management/Views/SalesOrders/SOCreate.cshtml", sODTO);			
 		}
+
+
+			[HttpPost]
+			public IActionResult SalesOrderDataSave([FromBody] SalesOrderMasterDTO salesOrderMasterDTO)
+			{
+
+
+				return Ok();
+			}
+
 
 	}
 }

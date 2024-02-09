@@ -26,7 +26,7 @@ using CloudVOffice.Core.Domain.WareHouses.Stocks;
 using CloudVOffice.Core.Domain.WareHouses.UOMs;
 using CloudVOffice.Core.Domain.WareHouses.Vehicles;
 using CloudVOffice.Core.Domain.WareHouses.Vendors;
-using CloudVOffice.Data.Migrations;
+//using CloudVOffice.Data.Migrations;
 using CloudVOffice.Data.Seeding;
 using Microsoft.EntityFrameworkCore;
 
