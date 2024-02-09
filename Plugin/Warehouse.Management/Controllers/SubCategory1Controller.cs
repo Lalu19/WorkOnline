@@ -1,7 +1,7 @@
 ﻿using CloudVOffice.Core.Domain.Common;
 using CloudVOffice.Core.Domain.ProductCategories;
 using CloudVOffice.Data.DTO.ProductCategories;
-using CloudVOffice.Data.Migrations;
+//using CloudVOffice.Data.Migrations;
 using CloudVOffice.Services.ProductCategories;
 using CloudVOffice.Services.WareHouses.GSTs;
 using CloudVOffice.Web.Framework;

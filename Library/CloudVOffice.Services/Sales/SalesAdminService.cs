@@ -10,7 +10,7 @@ using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Data.DTO.Sales;
 using CloudVOffice.Data.DTO.WareHouses.GSTs;
 using CloudVOffice.Data.DTO.WareHouses.PinCodes;
-using CloudVOffice.Data.Migrations;
+//using CloudVOffice.Data.Migrations;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
 using LinqToDB;

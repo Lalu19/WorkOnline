@@ -8,7 +8,7 @@ using CloudVOffice.Core.Domain.Common;
 using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Data.DTO.Buyers;
 using CloudVOffice.Data.DTO.WareHouses.PinCodes;
-using CloudVOffice.Data.Migrations;
+//using CloudVOffice.Data.Migrations;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
 using Microsoft.EntityFrameworkCore;

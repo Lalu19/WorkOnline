@@ -91,12 +91,44 @@ namespace Web.API.Controllers.Itemss
             var a = _itemService.GetItemlistBySubCategory1Id(SubCategory1Id);
             return Ok(a);
         }
+
+        //[HttpGet("{SubCategory1Id}")]
+        //public IActionResult GetItemsBySubCategory1Id(int SubCategory1Id)
+        //{
+        //    var items = _itemService.GetItemlistBySubCategory1Id(SubCategory1Id);
+
+        //    // Convert each item's comma-separated string of images to an array
+        //    var itemsWithArrayImages = items.Select(item =>
+        //        new
+        //        {
+        //            ItemId = item.ItemId,
+        //            Images = item.Images?.Split(',') ?? Array.Empty<string>()
+        //        }).ToList();
+
+        //    return Ok(itemsWithArrayImages);
+        //}
         [HttpGet("{SubCategory2Id}")]
         public IActionResult GetItemsBySubCategory2Id(int SubCategory2Id)
         {
             var a = _itemService.GetItemlistBySubCategory2Id(SubCategory2Id);
             return Ok(a);
         }
-       
+        //[HttpGet("{SubCategory2Id}")]
+        //public IActionResult GetItemsBySubCategory2Id(int SubCategory2Id)
+        //{
+        //    var items = _itemService.GetItemlistBySubCategory2Id(SubCategory2Id);
+
+        //    // Convert each item's comma-separated string of images to an array
+        //    var itemsWithArrayImages = items.Select(item =>
+        //        new
+        //        {
+        //            ItemId = item.ItemId,
+        //            Images = item.Images?.Split(',') ?? Array.Empty<string>()
+        //        }).ToList();
+
+        //    return Ok(itemsWithArrayImages);
+        //}
+
+
     }
 }
