@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CloudVOffice.Data.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240118050709_PurchaseOrderParentIdAddedToPurchaseOrder")]
-    partial class PurchaseOrderParentIdAddedToPurchaseOrder
+    [Migration("20240209055448_NewDBBB")]
+    partial class NewDBBB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -479,7 +479,7 @@ namespace CloudVOffice.Data.Migrations
                         {
                             EmailTemplateId = 1,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(6952),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(1838),
                             Deleted = false,
                             EmailTemplateDescription = "<div role=\"document\">\r\n    <div class=\"_rp_T4 _rp_U4 ms-font-weight-regular ms-font-color-neutralDark\" style=\"display: none;\"></div>  <div autoid=\"_rp_w\" class=\"_rp_T4\" style=\"display: none;\"></div>  <div autoid=\"_rp_x\" class=\"_rp_T4\" id=\"Item.MessagePartBody\" style=\"\">\r\n        <div class=\"_rp_U4 ms-font-weight-regular ms-font-color-neutralDark rpHighlightAllClass rpHighlightBodyClass\" id=\"Item.MessageUniqueBody\" style=\"font-family: wf_segoe-ui_normal, &quot;Segoe UI&quot;, &quot;Segoe WP&quot;, Tahoma, Arial, sans-serif, serif, EmojiFont;\">\r\n            <div class=\"rps_ad57\">\r\n                <div>\r\n                    <div>\r\n                        <div style=\"margin: 0px; padding: 0px; font-family: Verdana, Helvetica, Arial, sans-serif, serif, EmojiFont; color: rgb(103, 103, 103);\">\r\n                            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"padding-top:0px; background-color:#FFFFFF; width:100%; border-collapse:separate\">\r\n                                <tbody>\r\n                                    <tr>\r\n                                        <td align=\"center\">\r\n                                            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"600\" style=\"padding:0px 24px 10px; background-color:white; border-collapse:separate; border:1px solid #e7e7e7; border-bottom:none\">\r\n                                                <tbody>\r\n                                                    <tr>\r\n                                                        <td></td>\r\n                                                    </tr>\r\n                                                    <tr>\r\n                                                        <td align=\"center\" style=\"min-width:590px\">\r\n                                                            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"padding:20px 0 0; border-collapse:separate\">\r\n                                                                <tbody>\r\n                                                                    <tr>\r\n                                                                        <td valign=\"middle\">\r\n                                                                            <h1 style=\"color:#676767; font-weight:400; margin:0px\">{%welcometitle%} </h1>\r\n                                                                        </td>\r\n                                                                        <td valign=\"middle\" align=\"right\" width=\"200px\">{%emailogo%}</td>\r\n                                                                    </tr>\r\n                                                                    <tr>\r\n                                                                        <td colspan=\"2\" style=\"text-align:center\">\r\n                                                                            <hr width=\"100%\" style=\"background-color:rgb(204,204,204); border:medium none; clear:both; display:block; font-size:0px; min-height:1px; line-height:0; margin:4px 0px 16px 0px\">\r\n                                                                        </td>\r\n                                                                    </tr>\r\n                                                                </tbody>\r\n                                                            </table>\r\n                                                        </td>\r\n                                                    </tr>\r\n                                                    <tr>\r\n                                                        <td style=\"min-width:590px\">\r\n                                                            <table border=\"0\">\r\n                                                                <tbody>\r\n                                                                    <tr>\r\n                                                                        <td>\r\n                                                                            <div style=\"margin-left:1.2rem; margin-bottom:1em\">\r\n                                                                                <h5 style=\"font-weight:400; margin-bottom:0; font-size:16px; color:#676767\"><span style=\"color:rgb(22,123,158); font-size:16px; margin-right:2px; font-weight:600\"></span>{%helloname%}</h5>\r\n                                                                                <p style=\"color:#676767; line-height:145%; margin:10px 0 0 0; font-size:16px\">{%accountcreatetionmessage%}</p>\r\n\r\n                                                                                <p style=\"color:#676767; line-height:145%; margin:10px 0 0 0; font-size:16px\">{%loginidmessage%}</p>\r\n\r\n\r\n                                                                                <p style=\"color:#676767; line-height:145%; margin:10px 0 0 0; font-size:16px\">{%aditionalmessage%}</p>\r\n                                                                                <div style=\"margin:20px 0 0 0; text-align:center\">{%setpasswordlink%}</div>\r\n                                                                                <br />\r\n                                                                                {%copylinkfrommessage%}\r\n                                                                            </div>\r\n                                                                         \r\n                                                                            <div style=\"margin-left:1.2rem; margin-bottom:1em\">\r\n                                                                                <p style=\"color:#676767; line-height:145%; margin:10px 0 0 0; font-size:16px\">\r\n                                                                                    {%emailsignature%}\r\n                                                                                </p>\r\n                                                                            </div>\r\n                                                                        </td>\r\n                                                                    </tr>\r\n                                                                </tbody>\r\n                                                            </table>\r\n                                                        </td>\r\n                                                    </tr>\r\n                                                    <tr>\r\n                                                        <td>\r\n                                                            <table border=\"0\" style=\"width:100%\">\r\n                                                                <tbody>\r\n                                                                    <tr>\r\n                                                                        <td>\r\n                                                                            <div style=\"text-align:center; border-top:1px solid rgb(230,230,230); padding-bottom:20px; padding-top:15px; line-height:125%; font-size:11px; margin:20px 20px 0 20px\">\r\n                                                                                <p style=\"color:rgb(115,115,115); font-size:10px\">© Copyright {%companyname%}, {%address%} </p>\r\n                                                                            </div>\r\n                                                                        </td>\r\n                                                                    </tr>\r\n                                                                    <tr>\r\n                                                                        <td align=\"right\">\r\n                                                                            <div style=\" margin:0 20px\">{%footerletterhera%}</div>\r\n                                                                        </td>\r\n                                                                    </tr>\r\n                                                                </tbody>\r\n                                                            </table>\r\n                                                        </td>\r\n                                                    </tr>\r\n                                                    <tr>\r\n                                                        <td>\r\n                                                            <table border=\"0\" style=\"width:100%\">\r\n                                                                <tbody>\r\n                                                                    <tr>\r\n                                                                        <td>\r\n                                                                            <div style=\"text-align:justify; border-top:1px solid rgb(230,230,230); padding-bottom:10px; padding-top:10px; line-height:125%; font-size:10px; margin:25px 20px 0 20px\">\r\n                                                                                <p style=\"color:rgb(115,115,115); margin:0; font-size:10px\">\r\n                                                                                    The information contained in this e-mail message and/or attachments to it may contain confidential\r\n                                                                                    or privileged information. If you are not the intended recipient, any dissemination,use, review, distribution,\r\n                                                                                    printing or copying of the information contained in this email message and/or attachments to it are strictly prohibited.\r\n                                                                                    If you have received this communication in error, please notify us by reply e-mail or telephone and immediately\r\n                                                                                    and permanently delete the message and any attachments. Thank you.\r\n                                                                                </p>\r\n                                                                            </div>\r\n                                                                        </td>\r\n                                                                    </tr>\r\n                                                                </tbody>\r\n                                                            </table>\r\n                                                        </td>\r\n                                                    </tr>\r\n                                                </tbody>\r\n                                            </table>\r\n                                        </td>\r\n                                    </tr>\r\n                                </tbody>\r\n                            </table>\r\n                        </div>\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n        </div> <div class=\"_rp_c5\" style=\"display: none;\"></div>\r\n    </div>  <span class=\"PersonaPaneLauncher\"><div ariatabindex=\"-1\" class=\"_pe_d _pe_62\" aria-expanded=\"false\" tabindex=\"-1\" aria-haspopup=\"false\">  <div style=\"display: none;\"></div> </div></span>\r\n</div>",
                             EmailTemplateName = "WelcomeEmail",
@@ -489,7 +489,7 @@ namespace CloudVOffice.Data.Migrations
                         {
                             EmailTemplateId = 7,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(6955),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(1855),
                             Deleted = false,
                             EmailTemplateDescription = "<div role=\"document\">\r\n    <div class=\"_rp_T4 _rp_U4 ms-font-weight-regular ms-font-color-neutralDark\" style=\"display: none;\"><br></div>  <div autoid=\"_rp_w\" class=\"_rp_T4\" style=\"display: none;\"><br></div>  <div autoid=\"_rp_x\" class=\"_rp_T4\" id=\"Item.MessagePartBody\" style=\"\">\r\n        <div class=\"_rp_U4 ms-font-weight-regular ms-font-color-neutralDark rpHighlightAllClass rpHighlightBodyClass\" id=\"Item.MessageUniqueBody\" style=\"font-family: wf_segoe-ui_normal, &quot;Segoe UI&quot;, &quot;Segoe WP&quot;, Tahoma, Arial, sans-serif, serif, EmojiFont;\">\r\n            <div class=\"rps_ad57\">\r\n                <div>\r\n                    <div>\r\n                        <div style=\"margin: 0px; padding: 0px; font-family: Verdana, Helvetica, Arial, sans-serif, serif, EmojiFont; color: rgb(103, 103, 103);\">\r\n                            <table cellpadding=\"0\" cellspacing=\"0\" style=\"padding-top:0px; background-color:#FFFFFF; width:100%; border-collapse:separate\" class=\"e-rte-table\">\r\n                                <tbody>\r\n                                    <tr>\r\n                                        <td align=\"center\" class=\"\">\r\n                                            <table cellpadding=\"0\" cellspacing=\"0\" width=\"600\" style=\"padding:0px 24px 10px; background-color:white; border-collapse:separate; border:1px solid #e7e7e7; border-bottom:none\" class=\"e-rte-table\">\r\n                                                <tbody>\r\n                                                    <tr>\r\n                                                        <td><br></td>\r\n                                                    </tr>\r\n                                                    <tr>\r\n                                                        <td align=\"center\" style=\"min-width:590px\">\r\n                                                            <table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"padding:20px 0 0; border-collapse:separate\" class=\"e-rte-table\">\r\n                                                                <tbody>\r\n                                                                    <tr>\r\n                                                                        <td valign=\"middle\" class=\"\">\r\n                                                                            <h1 style=\"color:#676767; font-weight:400; margin:0px\">Password Reset Request</h1>\r\n                                                                        </td>\r\n                                                                        <td valign=\"middle\" align=\"right\" width=\"200px\">{%emailogo%}</td>\r\n                                                                    </tr>\r\n                                                                    <tr>\r\n                                                                        <td colspan=\"2\" style=\"text-align:center\">\r\n                                                                            <hr width=\"100%\" style=\"background-color:rgb(204,204,204); border:medium none; clear:both; display:block; font-size:0px; min-height:1px; line-height:0; margin:4px 0px 16px 0px\">\r\n                                                                        </td>\r\n                                                                    </tr>\r\n                                                                </tbody>\r\n                                                            </table>\r\n                                                        </td>\r\n                                                    </tr>\r\n                                                    <tr>\r\n                                                        <td style=\"min-width:590px\">\r\n                                                            <table class=\"e-rte-table\">\r\n                                                                <tbody>\r\n                                                                    <tr>\r\n                                                                        <td class=\"\">\r\n                                                                            <div style=\"margin-left:1.2rem; margin-bottom:1em\">\r\n                                                                                <h5 style=\"font-weight:400; margin-bottom:0; font-size:16px; color:#676767\">Hello {%helloname%}</h5><div><br></div>\r\n                                                                                <p>We have received a request to reset your account password. To proceed with the password reset, please click on the link below:</p>\r\n                                                                                <div style=\"margin:20px 0 0 0; text-align:center\">{%setpasswordlink%}</div>\r\n                                                                                <br>If you did not request a password reset, Please ignore this email. Your account will&nbsp;<span style=\"background-color: transparent; text-align: inherit;\">remain secure, and no action is required.</span></div><div style=\"margin-left:1.2rem; margin-bottom:1em\"><span style=\"background-color: transparent; text-align: inherit;\"><p>For security reasons, this link will expire in 2 hours. If you&nbsp;<span style=\"background-color: transparent; text-align: inherit;\">are unable to reset your password within this time frame,&nbsp;</span><span style=\"background-color: transparent; text-align: inherit;\">please request another password reset.</span></p></span></div>\r\n                                                                         \r\n                                                                            <div style=\"margin-left:1.2rem; margin-bottom:1em\">\r\n                                                                                <p style=\"color:#676767; line-height:145%; margin:10px 0 0 0; font-size:16px\">\r\n                                                                                    {%emailsignature%}\r\n                                                                                </p>\r\n                                                                            </div>\r\n                                                                        </td>\r\n                                                                    </tr>\r\n                                                                </tbody>\r\n                                                            </table>\r\n                                                        </td>\r\n                                                    </tr>\r\n                                                    <tr>\r\n                                                        <td>\r\n                                                            <table style=\"width:100%\" class=\"e-rte-table\">\r\n                                                                <tbody>\r\n                                                                    <tr>\r\n                                                                        <td>\r\n                                                                            <div style=\"text-align:center; border-top:1px solid rgb(230,230,230); padding-bottom:20px; padding-top:15px; line-height:125%; font-size:11px; margin:20px 20px 0 20px\">\r\n                                                                                <p style=\"color:rgb(115,115,115); font-size:10px\">© Copyright {%companyname%}, {%address%} </p>\r\n                                                                            </div>\r\n                                                                        </td>\r\n                                                                    </tr>\r\n                                                                    <tr>\r\n                                                                        <td align=\"right\">\r\n                                                                            <div style=\" margin:0 20px\">{%footerletterhera%}</div>\r\n                                                                        </td>\r\n                                                                    </tr>\r\n                                                                </tbody>\r\n                                                            </table>\r\n                                                        </td>\r\n                                                    </tr>\r\n                                                    <tr>\r\n                                                        <td>\r\n                                                            <table style=\"width:100%\" class=\"e-rte-table\">\r\n                                                                <tbody>\r\n                                                                    <tr>\r\n                                                                        <td>\r\n                                                                            <div style=\"text-align:justify; border-top:1px solid rgb(230,230,230); padding-bottom:10px; padding-top:10px; line-height:125%; font-size:10px; margin:25px 20px 0 20px\">\r\n                                                                                <p style=\"color:rgb(115,115,115); margin:0; font-size:10px\">\r\n                                                                                    The information contained in this e-mail message and/or attachments to it may contain confidential\r\n                                                                                    or privileged information. If you are not the intended recipient, any dissemination,use, review, distribution,\r\n                                                                                    printing or copying of the information contained in this email message and/or attachments to it are strictly prohibited.\r\n                                                                                    If you have received this communication in error, please notify us by reply e-mail or telephone and immediately\r\n                                                                                    and permanently delete the message and any attachments. Thank you.\r\n                                                                                </p>\r\n                                                                            </div>\r\n                                                                        </td>\r\n                                                                    </tr>\r\n                                                                </tbody>\r\n                                                            </table>\r\n                                                        </td>\r\n                                                    </tr>\r\n                                                </tbody>\r\n                                            </table>\r\n                                        </td>\r\n                                    </tr>\r\n                                </tbody>\r\n                            </table>\r\n                        </div>\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n        </div> <div class=\"_rp_c5\" style=\"display: none;\"><br></div>\r\n    </div>  <span class=\"PersonaPaneLauncher\"><div ariatabindex=\"-1\" class=\"_pe_d _pe_62\" aria-expanded=\"false\" tabindex=\"-1\" aria-haspopup=\"false\">  <div style=\"display: none;\"><br></div> </div></span>\r\n</div>",
                             EmailTemplateName = "PasswordReset",
@@ -561,6 +561,45 @@ namespace CloudVOffice.Data.Migrations
                     b.ToTable("ActivityLogTypes");
                 });
 
+            modelBuilder.Entity("CloudVOffice.Core.Domain.Logging.ErrorLog", b =>
+                {
+                    b.Property<long>("ErrorLogId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ErrorLogId"));
+
+                    b.Property<string>("ActionName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AreaName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ControllerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ErrorMessage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LogedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("StackTrace")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StatusCode")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("ErrorLogId");
+
+                    b.ToTable("ErrorLogs");
+                });
+
             modelBuilder.Entity("CloudVOffice.Core.Domain.Logging.Log", b =>
                 {
                     b.Property<long>("Id")
@@ -604,6 +643,45 @@ namespace CloudVOffice.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Logs");
+                });
+
+            modelBuilder.Entity("CloudVOffice.Core.Domain.Orders.Checkout", b =>
+                {
+                    b.Property<long>("CheckoutId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("CheckoutId"));
+
+                    b.Property<long>("CreatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<long>("ItemId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("CheckoutId");
+
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("Checkouts");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.Pemission.Application", b =>
@@ -671,7 +749,7 @@ namespace CloudVOffice.Data.Migrations
                             ApplicationName = "Applications",
                             AreaName = "Application",
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(5944),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(134),
                             Deleted = false,
                             IconClass = "icon-th-large-outline",
                             IconImageUrl = "/appstatic/images/applications.png",
@@ -684,7 +762,7 @@ namespace CloudVOffice.Data.Migrations
                             ApplicationName = "Setup",
                             AreaName = "Setup",
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(5947),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(141),
                             Deleted = false,
                             IconClass = "icon-cogs",
                             IconImageUrl = "/appstatic/images/setup.png",
@@ -697,7 +775,7 @@ namespace CloudVOffice.Data.Migrations
                             ApplicationName = "Company Settings",
                             AreaName = "Setup",
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(5948),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(143),
                             Deleted = false,
                             IconClass = "icon-office",
                             IsGroup = true,
@@ -710,7 +788,7 @@ namespace CloudVOffice.Data.Migrations
                             ApplicationName = "Company",
                             AreaName = "Setup",
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(5950),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(146),
                             Deleted = false,
                             IsGroup = false,
                             Parent = 3,
@@ -722,7 +800,7 @@ namespace CloudVOffice.Data.Migrations
                             ApplicationName = "Letter Head",
                             AreaName = "Setup",
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(5952),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(149),
                             Deleted = false,
                             IsGroup = false,
                             Parent = 3,
@@ -734,7 +812,7 @@ namespace CloudVOffice.Data.Migrations
                             ApplicationName = "User",
                             AreaName = "Setup",
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(5954),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(152),
                             Deleted = false,
                             IconClass = "icon-users",
                             IsGroup = true,
@@ -747,7 +825,7 @@ namespace CloudVOffice.Data.Migrations
                             ApplicationName = "User List",
                             AreaName = "Setup",
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(5955),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(155),
                             Deleted = false,
                             IsGroup = false,
                             Parent = 6,
@@ -839,7 +917,7 @@ namespace CloudVOffice.Data.Migrations
                             RoleAndApplicationWisePermissionId = 1L,
                             ApplicationId = 1,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(6397),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(871),
                             Deleted = false,
                             RoleId = 1
                         },
@@ -848,7 +926,7 @@ namespace CloudVOffice.Data.Migrations
                             RoleAndApplicationWisePermissionId = 2L,
                             ApplicationId = 2,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(6398),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(876),
                             Deleted = false,
                             RoleId = 1
                         },
@@ -857,7 +935,7 @@ namespace CloudVOffice.Data.Migrations
                             RoleAndApplicationWisePermissionId = 3L,
                             ApplicationId = 3,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(6399),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(879),
                             Deleted = false,
                             RoleId = 1
                         },
@@ -866,7 +944,7 @@ namespace CloudVOffice.Data.Migrations
                             RoleAndApplicationWisePermissionId = 4L,
                             ApplicationId = 4,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(6401),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(881),
                             Deleted = false,
                             RoleId = 1
                         },
@@ -875,7 +953,7 @@ namespace CloudVOffice.Data.Migrations
                             RoleAndApplicationWisePermissionId = 5L,
                             ApplicationId = 5,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(6402),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(883),
                             Deleted = false,
                             RoleId = 1
                         },
@@ -884,7 +962,7 @@ namespace CloudVOffice.Data.Migrations
                             RoleAndApplicationWisePermissionId = 6L,
                             ApplicationId = 6,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(6403),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(885),
                             Deleted = false,
                             RoleId = 1
                         },
@@ -893,7 +971,7 @@ namespace CloudVOffice.Data.Migrations
                             RoleAndApplicationWisePermissionId = 7L,
                             ApplicationId = 7,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(6405),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(887),
                             Deleted = false,
                             RoleId = 1
                         },
@@ -902,7 +980,7 @@ namespace CloudVOffice.Data.Migrations
                             RoleAndApplicationWisePermissionId = 8L,
                             ApplicationId = 8,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(6406),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(889),
                             Deleted = false,
                             RoleId = 1
                         },
@@ -911,7 +989,7 @@ namespace CloudVOffice.Data.Migrations
                             RoleAndApplicationWisePermissionId = 9L,
                             ApplicationId = 9,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(6407),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(892),
                             Deleted = false,
                             RoleId = 1
                         },
@@ -920,7 +998,7 @@ namespace CloudVOffice.Data.Migrations
                             RoleAndApplicationWisePermissionId = 10L,
                             ApplicationId = 10,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(6408),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(894),
                             Deleted = false,
                             RoleId = 1
                         });
@@ -972,7 +1050,7 @@ namespace CloudVOffice.Data.Migrations
                             UserWiseViewMapperId = 1L,
                             ApplicationId = 1,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(6813),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(1571),
                             Deleted = false,
                             UserId = 1L
                         },
@@ -981,7 +1059,7 @@ namespace CloudVOffice.Data.Migrations
                             UserWiseViewMapperId = 2L,
                             ApplicationId = 2,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(6816),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(1576),
                             Deleted = false,
                             UserId = 1L
                         },
@@ -990,7 +1068,7 @@ namespace CloudVOffice.Data.Migrations
                             UserWiseViewMapperId = 3L,
                             ApplicationId = 3,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(6817),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(1579),
                             Deleted = false,
                             UserId = 1L
                         },
@@ -999,7 +1077,7 @@ namespace CloudVOffice.Data.Migrations
                             UserWiseViewMapperId = 4L,
                             ApplicationId = 4,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(6818),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(1581),
                             Deleted = false,
                             UserId = 1L
                         },
@@ -1008,7 +1086,7 @@ namespace CloudVOffice.Data.Migrations
                             UserWiseViewMapperId = 5L,
                             ApplicationId = 5,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(6820),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(1584),
                             Deleted = false,
                             UserId = 1L
                         },
@@ -1017,7 +1095,7 @@ namespace CloudVOffice.Data.Migrations
                             UserWiseViewMapperId = 6L,
                             ApplicationId = 6,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(6821),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(1586),
                             Deleted = false,
                             UserId = 1L
                         },
@@ -1026,7 +1104,7 @@ namespace CloudVOffice.Data.Migrations
                             UserWiseViewMapperId = 7L,
                             ApplicationId = 7,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(6822),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(1589),
                             Deleted = false,
                             UserId = 1L
                         },
@@ -1035,7 +1113,7 @@ namespace CloudVOffice.Data.Migrations
                             UserWiseViewMapperId = 8L,
                             ApplicationId = 8,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(6824),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(1592),
                             Deleted = false,
                             UserId = 1L
                         },
@@ -1044,7 +1122,7 @@ namespace CloudVOffice.Data.Migrations
                             UserWiseViewMapperId = 9L,
                             ApplicationId = 9,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(6825),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(1594),
                             Deleted = false,
                             UserId = 1L
                         },
@@ -1053,7 +1131,7 @@ namespace CloudVOffice.Data.Migrations
                             UserWiseViewMapperId = 10L,
                             ApplicationId = 10,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(6827),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 958, DateTimeKind.Local).AddTicks(1597),
                             Deleted = false,
                             UserId = 1L
                         });
@@ -1496,6 +1574,12 @@ namespace CloudVOffice.Data.Migrations
                     b.Property<double?>("MonthlyBrandWiseTarget")
                         .HasColumnType("float");
 
+                    b.Property<long?>("SalesExecutiveId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("SalesManagerID")
+                        .HasColumnType("bigint");
+
                     b.Property<int?>("SectorId")
                         .IsRequired()
                         .HasColumnType("int");
@@ -1508,6 +1592,9 @@ namespace CloudVOffice.Data.Migrations
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<long?>("WareHuoseId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("BrandWiseTargetId");
 
@@ -1566,6 +1653,10 @@ namespace CloudVOffice.Data.Migrations
                     b.Property<string>("SalesAdminTargetName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<long?>("SalesManagerId")
+                        .IsRequired()
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Sector")
                         .HasColumnType("nvarchar(max)");
 
@@ -1584,6 +1675,8 @@ namespace CloudVOffice.Data.Migrations
                     b.HasKey("SalesAdminTargetId");
 
                     b.HasIndex("MonthId");
+
+                    b.HasIndex("SalesManagerId");
 
                     b.ToTable("SalesAdminTargets");
                 });
@@ -1693,6 +1786,223 @@ namespace CloudVOffice.Data.Migrations
                     b.HasIndex("SectorId");
 
                     b.ToTable("SalesManagerTargets");
+                });
+
+            modelBuilder.Entity("CloudVOffice.Core.Domain.Sellers.SellerFarmingProduct", b =>
+                {
+                    b.Property<long>("SellerFarmingProductId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("SellerFarmingProductId"));
+
+                    b.Property<long?>("BrandId")
+                        .IsRequired()
+                        .HasColumnType("bigint");
+
+                    b.Property<int?>("CategoryId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<string>("CompanyName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("CreatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<long?>("GSTId")
+                        .IsRequired()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("HSN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("HarvestDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Images")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double?>("MinQty")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("ProductWeight")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("QtyPerKg")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("SubCategory1Id")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SubCategory2Id")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Thumbnail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("UnitId")
+                        .IsRequired()
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("SellerFarmingProductId");
+
+                    b.HasIndex("BrandId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("GSTId");
+
+                    b.HasIndex("SubCategory1Id");
+
+                    b.HasIndex("SubCategory2Id");
+
+                    b.HasIndex("UnitId");
+
+                    b.ToTable("SellerFarmingProducts");
+                });
+
+            modelBuilder.Entity("CloudVOffice.Core.Domain.Sellers.SellerProductEntry", b =>
+                {
+                    b.Property<long>("SellerProductEntryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("SellerProductEntryId"));
+
+                    b.Property<long?>("BrandId")
+                        .IsRequired()
+                        .HasColumnType("bigint");
+
+                    b.Property<double?>("CaseWeight")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("CategoryId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<string>("CompanyName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("CreatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<DateTime?>("ExpiryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("GSTId")
+                        .IsRequired()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("HSN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("HandlingTypeId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Images")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("MRP")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("MRPCaseCost")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime?>("ManufactureDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("ProductWeight")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("SalesCaseCost")
+                        .HasColumnType("float");
+
+                    b.Property<double>("SalesCost")
+                        .HasColumnType("float");
+
+                    b.Property<string>("SellerProductCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SubCategory1Id")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SubCategory2Id")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Thumbnail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("UnitId")
+                        .IsRequired()
+                        .HasColumnType("bigint");
+
+                    b.Property<double?>("UnitPerCase")
+                        .HasColumnType("float");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("SellerProductEntryId");
+
+                    b.HasIndex("BrandId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("GSTId");
+
+                    b.HasIndex("HandlingTypeId");
+
+                    b.HasIndex("SubCategory1Id");
+
+                    b.HasIndex("SubCategory2Id");
+
+                    b.HasIndex("UnitId");
+
+                    b.ToTable("SellerProductEntrys");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.Sellers.SellerRegistration", b =>
@@ -1870,7 +2180,7 @@ namespace CloudVOffice.Data.Migrations
                         {
                             RoleId = 1,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(3660),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 957, DateTimeKind.Local).AddTicks(7305),
                             Deleted = false,
                             RoleName = "Administrator"
                         });
@@ -1961,7 +2271,7 @@ namespace CloudVOffice.Data.Migrations
                         {
                             UserId = 1L,
                             CreatedBy = 1L,
-                            CreatedDate = new DateTime(2024, 1, 18, 10, 37, 9, 47, DateTimeKind.Local).AddTicks(5330),
+                            CreatedDate = new DateTime(2024, 2, 9, 11, 24, 47, 957, DateTimeKind.Local).AddTicks(9053),
                             Deleted = false,
                             Email = "admin@appman.in",
                             FirstName = "Administrator",
@@ -2522,6 +2832,9 @@ namespace CloudVOffice.Data.Migrations
                     b.Property<string>("InvoiceNo")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ItemCode")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ItemName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -2534,6 +2847,12 @@ namespace CloudVOffice.Data.Migrations
 
                     b.Property<DateTime?>("ManufactureDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<double?>("PartnerSalesCaseCost")
+                        .HasColumnType("float");
+
+                    b.Property<double>("PartnerSalesCost")
+                        .HasColumnType("float");
 
                     b.Property<double>("ProductWeight")
                         .HasColumnType("float");
@@ -2894,10 +3213,6 @@ namespace CloudVOffice.Data.Migrations
                         .IsRequired()
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("UnitId")
-                        .IsRequired()
-                        .HasColumnType("bigint");
-
                     b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");
 
@@ -2911,9 +3226,9 @@ namespace CloudVOffice.Data.Migrations
 
                     b.HasIndex("ItemId");
 
-                    b.HasIndex("SellerRegistrationId");
+                    b.HasIndex("PurchaseOrderParentId");
 
-                    b.HasIndex("UnitId");
+                    b.HasIndex("SellerRegistrationId");
 
                     b.ToTable("PurchaseOrders");
                 });
@@ -2940,6 +3255,9 @@ namespace CloudVOffice.Data.Migrations
 
                     b.Property<bool>("OrderShipped")
                         .HasColumnType("bit");
+
+                    b.Property<string>("POPUniqueNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<long?>("SellerRegistrationId")
                         .IsRequired()
@@ -2997,6 +3315,73 @@ namespace CloudVOffice.Data.Migrations
                     b.HasKey("StateId");
 
                     b.ToTable("States");
+                });
+
+            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Stocks.Stock", b =>
+                {
+                    b.Property<long>("StockId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("StockId"));
+
+                    b.Property<long?>("BrandId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int?>("CategoryId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<long>("CreatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<long?>("ItemId")
+                        .IsRequired()
+                        .HasColumnType("bigint");
+
+                    b.Property<double?>("Quantity")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("SectorId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<long?>("UnitId")
+                        .IsRequired()
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("WareHuoseId")
+                        .IsRequired()
+                        .HasColumnType("bigint");
+
+                    b.HasKey("StockId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("ItemId");
+
+                    b.HasIndex("SectorId");
+
+                    b.HasIndex("UnitId");
+
+                    b.HasIndex("WareHuoseId");
+
+                    b.ToTable("Stocks");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.UOMs.Unit", b =>
@@ -3349,6 +3734,17 @@ namespace CloudVOffice.Data.Migrations
                     b.Navigation("EmailDomain");
                 });
 
+            modelBuilder.Entity("CloudVOffice.Core.Domain.Orders.Checkout", b =>
+                {
+                    b.HasOne("CloudVOffice.Core.Domain.WareHouses.Items.Item", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Item");
+                });
+
             modelBuilder.Entity("CloudVOffice.Core.Domain.Pemission.Application", b =>
                 {
                     b.HasOne("CloudVOffice.Core.Domain.Pemission.Application", null)
@@ -3435,7 +3831,15 @@ namespace CloudVOffice.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("CloudVOffice.Core.Domain.Sales.SalesManager", "SalesManager")
+                        .WithMany()
+                        .HasForeignKey("SalesManagerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Month");
+
+                    b.Navigation("SalesManager");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.Sales.SalesManagerTarget", b =>
@@ -3463,6 +3867,116 @@ namespace CloudVOffice.Data.Migrations
                     b.Navigation("Month");
 
                     b.Navigation("Sector");
+                });
+
+            modelBuilder.Entity("CloudVOffice.Core.Domain.Sellers.SellerFarmingProduct", b =>
+                {
+                    b.HasOne("CloudVOffice.Core.Domain.WareHouses.Brands.Brand", "Brand")
+                        .WithMany()
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CloudVOffice.Core.Domain.ProductCategories.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CloudVOffice.Core.Domain.WareHouses.GST.GST", "GST")
+                        .WithMany()
+                        .HasForeignKey("GSTId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CloudVOffice.Core.Domain.ProductCategories.SubCategory1", "SubCategory1")
+                        .WithMany()
+                        .HasForeignKey("SubCategory1Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CloudVOffice.Core.Domain.ProductCategories.SubCategory2", "SubCategory2")
+                        .WithMany()
+                        .HasForeignKey("SubCategory2Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CloudVOffice.Core.Domain.WareHouses.UOMs.Unit", "Unit")
+                        .WithMany()
+                        .HasForeignKey("UnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Brand");
+
+                    b.Navigation("Category");
+
+                    b.Navigation("GST");
+
+                    b.Navigation("SubCategory1");
+
+                    b.Navigation("SubCategory2");
+
+                    b.Navigation("Unit");
+                });
+
+            modelBuilder.Entity("CloudVOffice.Core.Domain.Sellers.SellerProductEntry", b =>
+                {
+                    b.HasOne("CloudVOffice.Core.Domain.WareHouses.Brands.Brand", "Brand")
+                        .WithMany()
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CloudVOffice.Core.Domain.ProductCategories.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CloudVOffice.Core.Domain.WareHouses.GST.GST", "GST")
+                        .WithMany()
+                        .HasForeignKey("GSTId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CloudVOffice.Core.Domain.WareHouses.HandlingTypes.HandlingType", "HandlingType")
+                        .WithMany()
+                        .HasForeignKey("HandlingTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CloudVOffice.Core.Domain.ProductCategories.SubCategory1", "SubCategory1")
+                        .WithMany()
+                        .HasForeignKey("SubCategory1Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CloudVOffice.Core.Domain.ProductCategories.SubCategory2", "SubCategory2")
+                        .WithMany()
+                        .HasForeignKey("SubCategory2Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CloudVOffice.Core.Domain.WareHouses.UOMs.Unit", "Unit")
+                        .WithMany()
+                        .HasForeignKey("UnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Brand");
+
+                    b.Navigation("Category");
+
+                    b.Navigation("GST");
+
+                    b.Navigation("HandlingType");
+
+                    b.Navigation("SubCategory1");
+
+                    b.Navigation("SubCategory2");
+
+                    b.Navigation("Unit");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.Users.UserRoleMapping", b =>
@@ -3511,23 +4025,19 @@ namespace CloudVOffice.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("CloudVOffice.Core.Domain.WareHouses.PurchaseOrders.PurchaseOrderParent", null)
+                        .WithMany("PurchaseOrders")
+                        .HasForeignKey("PurchaseOrderParentId");
+
                     b.HasOne("CloudVOffice.Core.Domain.Sellers.SellerRegistration", "SellerRegistration")
                         .WithMany()
                         .HasForeignKey("SellerRegistrationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CloudVOffice.Core.Domain.WareHouses.UOMs.Unit", "Unit")
-                        .WithMany()
-                        .HasForeignKey("UnitId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Item");
 
                     b.Navigation("SellerRegistration");
-
-                    b.Navigation("Unit");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.PurchaseOrders.PurchaseOrderParent", b =>
@@ -3539,6 +4049,49 @@ namespace CloudVOffice.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("SellerRegistration");
+                });
+
+            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.Stocks.Stock", b =>
+                {
+                    b.HasOne("CloudVOffice.Core.Domain.ProductCategories.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CloudVOffice.Core.Domain.WareHouses.Items.Item", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CloudVOffice.Core.Domain.ProductCategories.Sector", "Sector")
+                        .WithMany()
+                        .HasForeignKey("SectorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CloudVOffice.Core.Domain.WareHouses.UOMs.Unit", "Unit")
+                        .WithMany()
+                        .HasForeignKey("UnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CloudVOffice.Core.Domain.WareHouses.WareHuose", "WareHuose")
+                        .WithMany()
+                        .HasForeignKey("WareHuoseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Item");
+
+                    b.Navigation("Sector");
+
+                    b.Navigation("Unit");
+
+                    b.Navigation("WareHuose");
                 });
 
             modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.UOMs.Unit", b =>
@@ -3584,6 +4137,11 @@ namespace CloudVOffice.Data.Migrations
                     b.Navigation("UserRoleMappings");
 
                     b.Navigation("UserWiseViewMapper");
+                });
+
+            modelBuilder.Entity("CloudVOffice.Core.Domain.WareHouses.PurchaseOrders.PurchaseOrderParent", b =>
+                {
+                    b.Navigation("PurchaseOrders");
                 });
 #pragma warning restore 612, 618
         }

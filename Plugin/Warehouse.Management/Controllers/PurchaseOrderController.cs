@@ -77,8 +77,12 @@ namespace Warehouse.Management.Controllers
 					order.PurchaseOrderParentId = a.PurchaseOrderParentId;
 					var result = _purchaseOrderService.PurchaseOrderCreate(order);
 
-					// Handle the result accordingly
-					if (result == MessageEnum.Success)
+                    var poorder = _purchaseOrderParentService.GetPOOrderByPurchaseOrderParentId(a.PurchaseOrderParentId);
+                    var POSOrderid = poorder.PurchaseOrderParentId;
+                    TempData["PurchaseOrderParentId"] = POSOrderid;
+
+                    // Handle the result accordingly
+                    if (result == MessageEnum.Success)
 					{
 						TempData["msg"] = MessageEnum.Success;
 					}
