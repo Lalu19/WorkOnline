@@ -99,5 +99,18 @@ namespace Web.API.Controllers.Orders
             var a = _purchaseOrderService.GetItemsByPurchaseOrderParentId(PurchaseOrderParentId);
             return Ok(a);
         }
+
+        [HttpGet("{UserId}")]
+        public IActionResult CheckOutListbyUserId(int UserId)
+        {
+            var a = _checkoutService.CheckOutListbyUserId(UserId);
+            return Ok(a);
+        }
+        [HttpGet("{ItemsId}/{DeletedBy}/{Createdby}")]
+        public ActionResult DeleteCheckOutAfterOrder(int ItemsId, Int64 DeletedBy, Int64 Createdby)
+        {
+            var a = _checkoutService.CheckOutDeleteAfterOrder(ItemsId, DeletedBy, Createdby);
+            return Ok(a);
+        }
     }
 }

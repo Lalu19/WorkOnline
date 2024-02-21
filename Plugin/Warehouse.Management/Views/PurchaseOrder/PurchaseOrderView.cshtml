@@ -93,6 +93,8 @@
                     title: "WareHouse",
                     text: "Successfully created.",
                     type: "success"
+                }).then(() => {
+                    window.location.href = "/WareHouse/Invoice/InvoiceCreate?PurchaseOrderParentId=@TempData["PurchaseOrderParentId"]";
                 });
             }
             else if (message == "@((int)MessageEnum.Updated)") {

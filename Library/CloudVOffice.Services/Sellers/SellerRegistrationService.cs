@@ -9,6 +9,7 @@ using CloudVOffice.Data.DTO.Users;
 using CloudVOffice.Data.DTO.WareHouses.PinCodes;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -84,7 +85,7 @@ namespace CloudVOffice.Services.Sellers
         {
             try
             {
-                var a = _dbContext.SellerRegistrations.Where(x => x.Deleted == false).ToList();
+                var a = _dbContext.SellerRegistrations.Include(x => x.WareHuose).Where(x => x.Deleted == false).ToList();
                 return a;
             }
             catch
