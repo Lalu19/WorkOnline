@@ -52,6 +52,7 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<User> Users { get; set; }
 
         public virtual DbSet<UserRoleMapping> UserRoleMappings { get; set; }
+        public virtual DbSet<UserWareHouseMapping> UserWareHouseMappings { get; set; }
 
 
         public virtual DbSet<Application> Applications { get; set; }
@@ -170,6 +171,14 @@ namespace CloudVOffice.Data.Persistence
              .HasDefaultValue(false)
              .ValueGeneratedNever();
 
+            modelBuilder.Entity<UserWareHouseMapping>()
+       .Property(s => s.CreatedDate)
+       .HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<UserWareHouseMapping>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
 
 
             modelBuilder.Entity<Application>()
