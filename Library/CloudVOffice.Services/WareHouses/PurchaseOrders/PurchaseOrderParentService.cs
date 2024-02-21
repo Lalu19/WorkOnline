@@ -100,7 +100,7 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
         {
             try
             {
-                return _dbContext.PurchaseOrderParents.Where(x => x.Deleted == false).ToList();
+                return _dbContext.PurchaseOrderParents.Where(x => x.Deleted == false && x.OrderShipped == false).ToList();
             }
             catch
             {
