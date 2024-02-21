@@ -206,29 +206,38 @@ namespace CloudVOffice.Services.Orders
 				throw;
 			}
 		}
-		//public MessageEnum CheckOutUpdate(Int64 CheckoutId, int Quantity, Int64 UpdatedBy)
-		//{
-		//	try
-		//	{
-		//		var checkout = _dbContext.Checkouts.SingleOrDefault(x => x.CheckoutId == CheckoutId);
+        //public MessageEnum CheckOutUpdate(Int64 CheckoutId, int Quantity, Int64 UpdatedBy)
+        //{
+        //	try
+        //	{
+        //		var checkout = _dbContext.Checkouts.SingleOrDefault(x => x.CheckoutId == CheckoutId);
 
-		//		if (checkout != null)
-		//		{
-		//			checkout.Quantity = Quantity;
-		//			checkout.UpdatedBy = UpdatedBy;
-		//			checkout.UpdatedDate = DateTime.Now;
-		//			_dbContext.SaveChanges();
-		//			return MessageEnum.Updated;
-		//		}
-		//		else
-		//		{
-		//			return MessageEnum.Invalid;
-		//		}
-		//	}
-		//	catch
-		//	{
-		//		throw;
-		//	}
-		//}
-	}
+        //		if (checkout != null)
+        //		{
+        //			checkout.Quantity = Quantity;
+        //			checkout.UpdatedBy = UpdatedBy;
+        //			checkout.UpdatedDate = DateTime.Now;
+        //			_dbContext.SaveChanges();
+        //			return MessageEnum.Updated;
+        //		}
+        //		else
+        //		{
+        //			return MessageEnum.Invalid;
+        //		}
+        //	}
+        //	catch
+        //	{
+        //		throw;
+        //	}
+        //}
+
+        public List<Checkout> CheckOutListbyUserId(Int64 CreatedBy)
+        {
+            return _dbContext.Checkouts
+              .Include(s => s.Item)
+              .Where(x => x.Deleted == false && x.CreatedBy == CreatedBy).ToList();
+        }
+
+        
+    }
 }
