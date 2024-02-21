@@ -116,6 +116,5 @@ namespace Warehouse.Management.Controllers
 			var a = _purchaseOrderParentServiceService.PurchaseOrderParentDelete(PurchaseOrderParentId, DeletedBy);
 			return Redirect("/WareHouse/PurchaseOrderParent/PurchaseOrderParentView");
 		}
-
 	}
 }

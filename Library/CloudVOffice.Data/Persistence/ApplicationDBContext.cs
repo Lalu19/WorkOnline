@@ -21,6 +21,7 @@ using CloudVOffice.Core.Domain.WareHouses.Items;
 using CloudVOffice.Core.Domain.WareHouses.Months;
 using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Core.Domain.WareHouses.PurchaseOrders;
+using CloudVOffice.Core.Domain.WareHouses.SalesOrders;
 using CloudVOffice.Core.Domain.WareHouses.States;
 using CloudVOffice.Core.Domain.WareHouses.Stocks;
 using CloudVOffice.Core.Domain.WareHouses.UOMs;
@@ -110,6 +111,8 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<SellerProductEntry> SellerProductEntrys { get; set; }
         public virtual DbSet<SellerFarmingProduct> SellerFarmingProducts { get; set; }
         public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
+        public virtual DbSet<SalesOrderItem> SalesOrderItems { get; set; }
+        public virtual DbSet<SalesOrderParent> SalesOrderParents { get; set; }
 
 
 
@@ -119,6 +122,7 @@ namespace CloudVOffice.Data.Persistence
 
         public virtual DbSet<SalesAdminTarget> SalesAdminTargets { get; set; }
         public virtual DbSet<SalesManagerTarget> SalesManagerTargets { get; set; }
+
 		#endregion
 
 		#region Orders
@@ -566,13 +570,34 @@ namespace CloudVOffice.Data.Persistence
 			  .HasDefaultValue(false)
 			  .ValueGeneratedNever();
 
+            modelBuilder.Entity<SalesOrderItem>()
+            .Property(s => s.CreatedDate)
+            .HasDefaultValueSql("getdate()");
 
 
-			#endregion
+            modelBuilder.Entity<SalesOrderItem>()
+              .Property(s => s.Deleted)
+              .HasDefaultValue(false)
+              .ValueGeneratedNever();
 
-			#region Sales
 
-			modelBuilder.Entity<SalesAdminTarget>()
+            modelBuilder.Entity<SalesOrderParent>()
+            .Property(s => s.CreatedDate)
+            .HasDefaultValueSql("getdate()");
+
+
+            modelBuilder.Entity<SalesOrderParent>()
+              .Property(s => s.Deleted)
+              .HasDefaultValue(false)
+              .ValueGeneratedNever();
+
+
+
+            #endregion
+
+            #region Sales
+
+            modelBuilder.Entity<SalesAdminTarget>()
 	.Property(s => s.CreatedDate)
 	.HasDefaultValueSql("getdate()");
 
@@ -699,7 +724,9 @@ namespace CloudVOffice.Data.Persistence
             modelBuilder.Entity<SellerFarmingProduct>()
               .Property(s => s.Deleted)
               .HasDefaultValue(false)
-              .ValueGeneratedNever();
+              .ValueGeneratedNever();            
+
+
 
             modelBuilder.Seed();
         }

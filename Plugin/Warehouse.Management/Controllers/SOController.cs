@@ -2,6 +2,7 @@
 using CloudVOffice.Data.DTO.SalesOrders;
 using CloudVOffice.Data.DTO.WareHouses.Brands;
 using CloudVOffice.Data.DTO.WareHouses.SalesOrders;
+using CloudVOffice.Data.Persistence;
 using CloudVOffice.Services.WareHouses.Brands;
 using CloudVOffice.Services.WareHouses.PurchaseOrders;
 using CloudVOffice.Web.Framework;
@@ -20,10 +21,12 @@ namespace Warehouse.Management.Controllers
 	public class SOController : BasePluginController
 	{
 		private readonly IPurchaseOrderParentService _purchaseOrderParentService;
+		private readonly ApplicationDBContext _dbContext;
 
-		public SOController(IPurchaseOrderParentService purchaseOrderParentService)
+        public SOController(IPurchaseOrderParentService purchaseOrderParentService, ApplicationDBContext dbContext)
 		{
 			_purchaseOrderParentService = purchaseOrderParentService;
+			_dbContext = dbContext;
 		}
 		[HttpGet]
 		public IActionResult SOCreate(Int64? SOId)
@@ -45,14 +48,27 @@ namespace Warehouse.Management.Controllers
 		}
 
 
-			[HttpPost]
-			public IActionResult SalesOrderDataSave([FromBody] SalesOrderMasterDTO salesOrderMasterDTO)
+		[HttpPost]
+		public IActionResult SalesOrderDataSave([FromBody] SalesOrderMasterDTO salesOrderMasterDTO)
+		{
+
+
+			return Ok();
+		}
+
+        [HttpPost]
+        public IActionResult SOShippedSetTrue([FromBody] int parsedGlobalId)
+        {
+			var a = _dbContext.PurchaseOrderParents.FirstOrDefault(a=> a.POPUniqueNumber == parsedGlobalId.ToString());
+			if (a != null)
 			{
-
-
-				return Ok();
+				a.OrderShipped = true;
+				_dbContext.SaveChanges();
 			}
+            return Ok();
+        }
 
 
-	}
+
+    }
 }

@@ -238,6 +238,20 @@
         padding: 5px 10px;
         font-size: 10px;
     }
+
+    .card {
+        max-height: 400px;
+        overflow-y: auto;
+        position: relative;
+    }
+
+    .card-footer {
+        padding: 10px;
+        background-color: #f9f9f9;
+        margin-left: 12px;
+    }
+
+
 </style>
 <header class="main-heading">
     <div class="container-fluid">
@@ -275,12 +289,13 @@
             <div class="card-header itemorderheder">
                 Order
             </div>
+
             <div class="card-body">
                 <nav class="side-nav">
                     <ul class="unifyMenu" id="unifyMenu">
                         @foreach (var PO in ViewBag.POlist)
                         {
-                            <li class="categorymenu" id="menuItem_@PO.POPUniqueNumber" onclick="POId(@PO.PurchaseOrderParentId)">
+                            <li class="categorymenu" id="menuItem_@PO.POPUniqueNumber" onclick="POIdOnClick(@PO.PurchaseOrderParentId, @PO.POPUniqueNumber)">
                                 <a class="has-arrow" style="cursor:pointer">
                                     <span class="nav-title">@PO.POPUniqueNumber</span>
                                 </a>
@@ -289,6 +304,8 @@
                     </ul>
                 </nav>
             </div>
+        </div>
+        <div>
             <div class="card-footer">
                 <p>Total Orders: <span id="totalPOCount">0</span></p>
 
@@ -364,9 +381,15 @@
     var save = null;
 
     var originalItemsTableHtml2 = '';
+    var globalId;
 
+    //function POId(Id, POPUniqueNumber) {
+    function POIdOnClick(Id, POPUniqueNumber) {
 
-    function POId(Id) {
+        globalId = POPUniqueNumber;
+
+        resetItemDetails();
+
         $.ajax({
             type: "GET",
             url: "/WareHouse/PurchaseOrder/GetItemsByPurchaseOrderParentId",
@@ -379,6 +402,7 @@
                 var orderInfoHtml = '<div><strong>Customer Name:</strong> ' + data[0].sellerRegistration["name"] + '</div>';
                 orderInfoHtml += '<div><strong>Address:</strong> ' + data[0].sellerRegistration["address"] + '</div>';
                 orderInfoHtml += '<div><strong>Phone No.:</strong> ' + data[0].sellerRegistration["primaryPhone"] + '</div>';
+                orderInfoHtml += '<div><strong>Order Number:</strong> ' + POPUniqueNumber + '</div>';
                 $('#orderInfo').html(orderInfoHtml);
 
                 var table = '<table class="table"><thead><tr><th>Sl No.</th><th>Product Name</th><th>Selling Price</th><th>Quantity</th><th>Amount</th><th>GST</th><th>HSN</th><th>Action</th></tr></thead><tbody>';
@@ -414,6 +438,7 @@
                 table += '<div>Total Amount: ₹' + totalAmount.toFixed(2) + '</div>';
 
 
+
                 $('#itemsTable').html(table);
 
                 originalItemsTableHtml2 = table;
@@ -421,10 +446,17 @@
                 // Populate #itemsTable with the generated table HTML
                 $('#itemsTable').html(originalItemsTableHtml2);
 
-
                 if (Id) {
                     localStorage.setItem('selectedCategoryId', Id);
                 }
+
+
+                //if (isTableEmpty()) {
+                //    console.log('Table is completely empty2');
+
+                //    $('#menuItem_' + Id).find('#' + Id).remove();
+                //}
+
             },
             error: function () {
 
@@ -432,7 +464,14 @@
         });
     }
 
+    function resetItemDetails() {
+        itemDetails.length = 0; // Clear all elements in the array
+    }
+
+
     var originalAcceptedItemHtml = '';  //to handle the cancel button
+    var removedRowHtml = '';
+
 
     function acceptAction(itemName, salesCost, shortName, caseWeight, mrp, cgst, sgst, quantity) {
         // Check if data is already present in acceptedItemContainer
@@ -467,8 +506,11 @@
 
             $('#acceptedItemContainer').append(acceptedItemHtml);
             originalAcceptedItemHtml = $('#acceptedItemContainer').html();
+
         }
     }
+
+
 
 
     function backButtonClick() {
@@ -477,9 +519,25 @@
 
 
         $('#itemsTable').html(originalItemsTableHtml2);
+        //$('#itemsTable').html(originalAcceptedItemHtml);
         $('#acceptedItemContainer').empty();
 
+
+        //ChatGPT
+
     }
+
+
+    function isTableEmpty() {
+        return $('#itemsTable tbody tr').length === 0;
+    }
+
+    // Example usage:
+    //if (isTableEmpty()) {
+    //    console.log('No rows in the table');
+    //} else {
+    //    console.log('Table has rows');
+    //}
 
 
     function editButtonClick(itemName, salesCost, shortName, caseWeight, mrp, cgst, sgst, quantity) {
@@ -554,37 +612,22 @@
         totalAmount -= removedValue;
 
         $('#itemsTable').find('div:contains("Total Amount:")').text('Total Amount: ₹' + totalAmount.toFixed(2));
+
+        if (isTableEmpty()) {
+            console.log('Table is empty');
+
+            $('#menuItem_' + globalId).remove();
+
+        }
     }
 
 
     var itemDetails = [];
-
-
-    //function acceptButtonClick(itemName, salesCost, shortName, caseWeight, mrp, cgst, sgst, quantity) {
-    //    // Create a JavaScript object with accepted item details
-    //    var acceptedItemData = {
-    //        itemName: itemName,
-    //        salesCost: salesCost,
-    //        shortName: shortName,
-    //        caseWeight: caseWeight,
-    //        mrp: mrp,
-    //        cgst: cgst,
-    //        sgst: sgst,
-    //        quantity: quantity
-    //    };
-
-    //    //// Save the JavaScript object in the save variable
-    //    //save = acceptedItemData;
-    //    //console.log("Data saved:", save);
-
-    //    itemDetails.push(acceptedItemData);
-
-
-    //    // Clear the content of the acceptedItemContainer
-    //    $('#acceptedItemContainer').empty();
-    //    // Hide the corresponding menu item
-    //    //$('#menuItem_' + POPUniqueNumber).hide();
-    //}
+    var totalQuantity = 0;
+    var totalValue = 0;
+    var parentDetails = {};
+    //var parentDetails = [];
+    var parsedGlobalId = String(globalId);
 
 
     function acceptButtonClick(itemName, salesCost, shortName, caseWeight, mrp, cgst, sgst, quantity) {
@@ -608,6 +651,10 @@
             quantity: parsedQuantity
         };
 
+
+        totalQuantity += parsedQuantity;
+        totalValue += parsedMRP * parsedQuantity;
+
         // Push the converted data into the itemDetails array
         itemDetails.push(acceptedItemData);
 
@@ -615,32 +662,134 @@
         $('#acceptedItemContainer').empty();
         // Hide the corresponding menu item
         //$('#menuItem_' + POPUniqueNumber).hide();
+
+        //createParentDetails();
+
+        parentDetails = {
+            //"POPUniqueNumber": globalId.toString(),
+            "POPUniqueNumber": globalId,
+            "TotalQuantity": totalQuantity,
+            "TotalAmount": totalValue
+        };
     }
 
+    //var newTotalQuantity = parseFloat(totalQuantity);
+    //var newTotalAmount = parseFloat(totalValue);
 
 
-    var model = {
-        "Orders": itemDetails
-    };
+    
+
+    //function createParentDetails() {
+    //    var parentDetails = {
+    //        "POPUniqueNumber": parsedGlobalId,
+    //        "TotalQuantity": totalQuantity,
+    //        "TotalAmount": totalValue
+    //    };
+
+
+    
+
 
     function printInvoice() {
+
+
+        var model = {
+            "Orders": itemDetails,
+            "ParentOrder": parentDetails
+        };
+
         $.ajax({
             type: "POST",
             url: "/WareHouse/SO/SalesOrderDataSave",
-            //data: { sellerRegistrationId: args.value },
             data: JSON.stringify(model),
             contentType: "application/json",
             dataType: "json",
             success: function (result) {
                 console.log(result);
-                
+
+                //RemovePOPUniqueSetOrderShipped(globalId);
+
+                 // <-- Corrected closing parenthesis
+
+                if (isTableEmpty()) {
+                    console.log('Table is empty');
+
+
+                    //console.log(typeof globalId);
+                    //RemovePOPUniqueSetOrderShipped(globalId);
+
+                    var GlobalIDs = parseInt(globalId);
+
+                    RemovePOPUniqueSetOrderShipped(parseInt(GlobalIDs));
+                    $('#menuItem_' + globalId).remove();
+
+
+
+                    function RemovePOPUniqueSetOrderShipped(parsedGlobalId) {
+                        console.log(typeof parsedGlobalId)
+                        $.ajax({
+                            type: "POST",
+                            url: "/WareHouse/SO/SOShippedSetTrue",
+                            //data: { globalId: parsedGlobalId }, // Use lowercase "globalId"
+                            data: JSON.stringify(parsedGlobalId),
+                            contentType: "application/json",
+                            dataType: "json",
+                            success: function (result) {
+                                console.log(result);
+                                console.log("Shipping Success");
+                            },
+                            error: function () {
+                                console.error("Error in AJAX call");
+                            }
+                        });
+                    }
+
+                }
             },
             error: function () {
 
+
+                if (isTableEmpty()) {
+                    console.log('Table is empty');
+
+
+                    //console.log(typeof globalId);
+                    //RemovePOPUniqueSetOrderShipped(globalId);
+
+                    var GlobalIDs = parseInt(globalId);
+
+                    RemovePOPUniqueSetOrderShipped(parseInt(GlobalIDs));
+                    $('#menuItem_' + globalId).remove();
+
+
+
+                    function RemovePOPUniqueSetOrderShipped(parsedGlobalId) {
+                        console.log(typeof parsedGlobalId)
+                        $.ajax({
+                            type: "POST",
+                            url: "/WareHouse/SO/SOShippedSetTrue",
+                            //data: { globalId: parsedGlobalId }, // Use lowercase "globalId"
+                            data: JSON.stringify(parsedGlobalId),
+                            contentType: "application/json",
+                            dataType: "json",
+                            success: function (result) {
+                                console.log(result);
+                                console.log("Shipping Success");
+                            },
+                            error: function () {
+                                console.error("Error in AJAX call");
+                            }
+                        });
+                    }
+
+                }
+
             }
         });
-
     }
+
+
+
 
 
 
