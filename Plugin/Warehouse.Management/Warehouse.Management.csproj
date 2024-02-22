@@ -72,6 +72,8 @@
 		<None Remove="Views\UnitGroup\UnitGroupView.cshtml" />
 		<None Remove="Views\Unit\UnitCreate.cshtml" />
 		<None Remove="Views\Unit\UnitView.cshtml" />
+		<None Remove="Views\UserWareHouse\UserWareHouseMappingCreate.cshtml" />
+		<None Remove="Views\UserWareHouse\UserWareHouseMappingView.cshtml" />
 		<None Remove="Views\Vehicle\VehicleCreate.cshtml" />
 		<None Remove="Views\Vehicle\VehicleView.cshtml" />
 		<None Remove="Views\Vendor\VendorCreate.cshtml" />

@@ -10,8 +10,11 @@ using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Data.DTO.ProductCategories;
 using CloudVOffice.Data.DTO.WareHouses.PinCodes;
 using CloudVOffice.Data.DTO.WareHouses.PurchaseOrders;
+using CloudVOffice.Data.Migrations;
 using CloudVOffice.Services.ProductCategories;
 using CloudVOffice.Services.Sellers;
+using CloudVOffice.Services.Users;
+using CloudVOffice.Services.WareHouses;
 using CloudVOffice.Services.WareHouses.PurchaseOrders;
 using CloudVOffice.Web.Framework;
 using CloudVOffice.Web.Framework.Controllers;
@@ -26,15 +29,21 @@ namespace Warehouse.Management.Controllers
 		private readonly IPurchaseOrderService _purchaseOrderService;
 		private readonly ISellerRegistrationService _sellerRegistrationService;
 		private readonly IPurchaseOrderParentService _purchaseOrderParentService;
+		private readonly IWareHouseService _WareHouseService;
+		private readonly IUserWareHouseMappingService _UserWareHouseMappingService;
 
 
 		public PurchaseOrderController(IPurchaseOrderService purchaseOrderService, ISellerRegistrationService sellerRegistrationService,
-									   IPurchaseOrderParentService purchaseOrderParentService
-										)
+									   IPurchaseOrderParentService purchaseOrderParentService,
+                                       IWareHouseService WareHouseService,
+                                       IUserWareHouseMappingService UserWareHouseMappingService
+                                        )
 		{
 			_purchaseOrderService = purchaseOrderService;
 			_sellerRegistrationService = sellerRegistrationService;
 			_purchaseOrderParentService = purchaseOrderParentService;
+            _WareHouseService = WareHouseService;
+            _UserWareHouseMappingService = UserWareHouseMappingService;
 		}
 
 
@@ -62,9 +71,13 @@ namespace Warehouse.Management.Controllers
 		[HttpPost]
 		public IActionResult CreatePurchaseOrder([FromBody] PurchaseOrderMasterDTO model)
 		{
-			//purchaseOrderDTO.CreatedBy = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
+            //purchaseOrderDTO.CreatedBy = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
+            Int64 UserId = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
+            var Warehousedetails = _UserWareHouseMappingService.GetWareHouseByUserId(UserId);
 
-			var a = _purchaseOrderParentService.PurchaseOrderParentCreate(model.Parent);
+            model.Parent.WareHuoseId = Warehousedetails.WareHuoseId;
+
+            var a = _purchaseOrderParentService.PurchaseOrderParentCreate(model.Parent);
 
 			foreach (var order in model.Orders)
 			{
@@ -126,11 +139,11 @@ namespace Warehouse.Management.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult DeletePurchaseOrder(Int64 purchaseOrderId)
+		public IActionResult DeletePurchaseOrder(Int64 PurchaseOrderParentId)
 		{
 			Int64 DeletedBy = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
 
-			var a = _purchaseOrderService.PurchaseOrderDelete(purchaseOrderId, DeletedBy);
+			var a = _purchaseOrderParentService.PurchaseOrderParentDelete(PurchaseOrderParentId, DeletedBy);
 			TempData["msg"] = a;
 			return Redirect("/WareHouse/PurchaseOrder/PurchaseOrderView");
 		}
@@ -138,7 +151,9 @@ namespace Warehouse.Management.Controllers
 
 		public IActionResult PurchaseOrderView()
 		{
-			ViewBag.PurchaseOrders = _purchaseOrderService.GetPurchaseOrderList();
+            Int64 UserId = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
+            var Warehousedetails = _UserWareHouseMappingService.GetWareHouseByUserId(UserId);
+            ViewBag.PurchaseOrders = _purchaseOrderParentService.GetPurchaseOrderParentListbyWareHouseId(Int64.Parse(Warehousedetails.WareHuoseId.ToString()));
             return View("~/Plugins/Warehouse.Management/Views/PurchaseOrder/PurchaseOrderView.cshtml");
         }
 

@@ -1,9 +1,20 @@
-﻿@{
+﻿@using CloudVOffice.Core.Domain.Common;
+@{
     Layout = "_MainAppLayout";
-    ViewData["Title"] = "SalesAdminTargetView";
 }
 @addTagHelper *, Syncfusion.EJ2
-@using CloudVOffice.Core.Domain.Common;
+<style>
+    .badge-primary {
+        background-color: #da1113;
+    }
+</style>
+<style>
+
+
+    .highlighted-row {
+        background-color: #90EE90; /* Set your desired highlight color */
+    }
+</style>
 <header class="main-heading">
     <div class="container-fluid">
         <div class="row">
@@ -12,46 +23,42 @@
                     <i class="icon-laptop_windows"></i>
                 </div>
                 <div class="page-title">
-                    <h5>Purchase Order</h5>
-                    <h6 class="sub-heading">  </h6>
+                    <h5>Ware House</h5>
+                    <h6 class="sub-heading">Welcome to WareHouse Admin</h6>
                 </div>
             </div>
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                 <div class="right-actions">
-                    <span class="last-login">  </span>
+                    <span class="last-login"></span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-
 <div class="main-content">
     <div class="row gutters">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-header">
-
                     <div class="row">
-                        <div class="col-md-8">
-                            Sales Target
+                        <div class="col-md-10">
+                            UserLocation Mapping View
                         </div>
-                        <div class="col-md-4 text-right float-right">
-                            <a href="/WareHouse/PurchaseOrder/CreatePurchaseOrder" class="btn btn-success btn-sm"><i class="icon icon-add"></i> Add </a>
-
+                        <div class="col-md-2 ">
+                            <a href="/WareHouse/UserWareHouseMapping/UserWareHouseMappingCreate" class="btn btn-primary btn-sm float-right"><i class="icon icon-add"></i>Add UserWareHouseMapping</a>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
 
-                    <ejs-grid id="GridOverview" dataSource="ViewBag.PurchaseOrders"
+                    <ejs-grid id="GridOverview" dataSource="ViewBag.UserWareHousemappinglist"
                               allowFiltering="true" allowSorting="true"
                               allowExcelExport="true" allowGrouping="true"
                               allowMultiSorting="true"
                               allowPdfExport="true"
                               height="600" rowHeight="38"
                               enableHover="false" enableHeaderFocus="true"
-                              allowResizing="true" autoFit="true" dataBound="dataBound"
                               enableVirtualization="true" allowSelection="true"
                               toolbarClick="toolbarClick" toolbar="@(new List<string>() {"ExcelExport", "PdfExport", "CsvExport" ,"Search"})">
 
@@ -59,17 +66,10 @@
 
                         <e-grid-selectionsettings persistSelection="true" type="Multiple" checkboxOnly="true"></e-grid-selectionsettings>
                         <e-grid-columns>
+                            <e-grid-column field="WareHuose.WareHouseName" headerText="WareHouse" textAlign="Left" width="200"></e-grid-column>
+                            <e-grid-column field="User.FullName" headerText="User" textAlign="Left" width="200"></e-grid-column>
 
-                            <e-grid-column headerText="Action" template="#Actions" width="50"></e-grid-column>
-                            <e-grid-column field="POPUniqueNumber" headerText="PO Number" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="SellerRegistration.Name" headerText="Seller" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="WareHuose.WareHouseName" headerText="WareHouseName" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="TotalQuantity" headerText="Quantity" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="TotalAmount" headerText="Amount" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="CreatedDate" headerText="OrderDate" textAlign="Left" width="120" format="dd-MM-yyyy"></e-grid-column>
-                            <e-grid-column field="CreatedDate" headerText="OrderTime" textAlign="Left" width="120" format="hh:mm a"></e-grid-column>
-
-                            
+                            <e-grid-column headerText="Action" template="#Actions" width="120"></e-grid-column>
                         </e-grid-columns>
                     </ejs-grid>
 
@@ -79,8 +79,14 @@
     </div>
 
 </div>
-
-
+<script>
+    $(document).ready(function () {
+        $('#GridOverview').on('click', '.e-row', function () {
+            $('.highlighted-row').removeClass('highlighted-row');
+            $(this).addClass('highlighted-row');
+        });
+    });
+</script>
 @{
 
     if (TempData["msg"] != null)
@@ -91,18 +97,16 @@
                 sweetAlert({
                     html: true,
                     icon: "success",
-                    title: "WareHouse",
+                    title: "UserWarteHouseMapping",
                     text: "Successfully created.",
                     type: "success"
-                }).then(() => {
-                    window.location.href = "/WareHouse/Invoice/InvoiceCreate?PurchaseOrderParentId=@TempData["PurchaseOrderParentId"]";
                 });
             }
             else if (message == "@((int)MessageEnum.Updated)") {
                 sweetAlert({
                     html: true,
                     icon: "success",
-                    title: "WareHouse",
+                    title: "UserWarteHouseMapping",
                     text: "Successfully updated.",
                     type: "success"
                 });
@@ -111,7 +115,7 @@
                 sweetAlert({
                     html: true,
                     icon: "success",
-                    title: "WareHouse",
+                    title: "UserWarteHouseMapping",
                     text: "Successfully Deleted.",
                     type: "success"
                 });
@@ -120,7 +124,7 @@
                 sweetAlert({
                     html: true,
                     icon: "danger",
-                    title: "WareHouse",
+                    title: "UserWarteHouseMapping",
                     text: "There is somthing going wrong.",
                     type: "danger"
                 });
@@ -129,7 +133,7 @@
                 sweetAlert({
                     html: true,
                     icon: "error",
-                    title: "WareHouse",
+                    title: "UserWarteHouseMapping",
                     text: "There is somthing going wrong.",
                     type: "error"
                 });
@@ -137,8 +141,8 @@
             else {
                 sweetAlert({
                     html: true,
-                    icon: "error",
-                    title: "WareHouse",
+                    icon: "question",
+                    title: "UserWarteHouseMapping",
                     text: message,
                     type: "error"
                 });
@@ -146,7 +150,6 @@
         </script>
     }
 }
-
 <script type="text/javascript">
     function Delete(Id) {
         swal({
@@ -161,27 +164,20 @@
             dangerMode: true,
         }).then(function (isConfirm) {
             if (isConfirm) {
-                window.location.href = "../../WareHouse/PurchaseOrder/DeletePurchaseOrder?PurchaseOrderParentId=" + Id;
+                window.location.href = "/WareHouse/UserWareHouseMapping/DeleteUserWareHouseMapping?UserWareHouseMappingId=" + Id;
             }
         })
     }
 </script>
-
-
 <script id="Actions" type="text/x-template">
     <div class="link">
-        @* <a href="../../WareHouse/PurchaseOrder/CreatePurchaseOrder?PurchaseOrderId=${PurchaseOrderId}"><i class="icon-pencil3" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp; *@
+        <a href="/WareHouse/UserWareHouseMapping/UserWareHouseMappingCreate?UserWareHouseMappingId=${UserWareHouseMappingId}"><i class="icon-pencil3" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp;
+        <button onClick="Delete(${UserWareHouseMappingId})" style="background: transparent;border: none;"><i class="icon-trash" style="font-size:22px"></i></button>
 
-        <button onClick="Delete(${PurchaseOrderParentId})" style="background: transparent;border: none;"><i class="icon-trash" style="font-size:22px"></i></button>
     </div>
 </script>
 
-<script id="statusTemplate" type="text/x-template">
-    ${statusDetail(data)}
-</script>
-
 <script>
-
     function toolbarClick(args) {
         var gridObj = document.getElementById("GridOverview").ej2_instances[0];
         if (args.item.id === 'GridOverview_pdfexport') {
@@ -192,36 +188,6 @@
         }
         if (args.item.id === 'GridOverview_csvexport') {
             gridObj.csvExport();
-        }
-    }
-
-    function exportQueryCellInfo(args) {
-        if (args.column.headerText === 'Employee Image') {
-            if (args.name === "excelQueryCellInfo") {
-                args.image = { height: 75, base64: args.data["EmployeeImage"], width: 75 };
-            } else {
-                args.image = { base64: args.data["EmployeeImage"] };
-            }
-        }
-        if (args.column.headerText === 'Track') {
-            args.hyperLink = {
-                target: "../../DMS/DesktopLogin/Track?id=" + args.data["erpUser"],
-                displayText: "Track"
-            };
-        }
-    };
-
-
-    function dataBound(args) {
-        this.autoFitColumns();
-    }
-
-    function statusDetail(e) {
-
-        if (e.IsActive == true) {
-            return '<span class="badge badge-pill badge-success" > True </span>';
-        } else {
-            return '<span class="badge badge-pill badge-dark"> False </span>';
         }
     }
 

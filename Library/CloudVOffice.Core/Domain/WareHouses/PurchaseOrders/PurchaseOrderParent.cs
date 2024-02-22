@@ -12,6 +12,7 @@ namespace CloudVOffice.Core.Domain.WareHouses.PurchaseOrders
     public class PurchaseOrderParent : IAuditEntity, ISoftDeletedEntity
     {
         public Int64 PurchaseOrderParentId { get; set; }
+        public Int64 WareHuoseId { get; set; }
         public double? TotalAmount { get; set; }
         public double? TotalQuantity { get; set; }
         public Int64? SellerRegistrationId { get; set; }
@@ -25,6 +26,9 @@ namespace CloudVOffice.Core.Domain.WareHouses.PurchaseOrders
 
         [ForeignKey("SellerRegistrationId")]
         public SellerRegistration SellerRegistration { get; set; }
+
+        [ForeignKey("WareHuoseId")]
+        public WareHuose WareHuose { get; set; }
         public ICollection<PurchaseOrder> PurchaseOrders { get; set; }
     }
 }

@@ -24,5 +24,6 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
 		public Int64 ItemIdFromItemName(string itemName);
 		public Item GetItemFromItemId(int itemId);
         public List<PurchaseOrder> GetItemsByPurchaseOrderParentId(Int64 PurchaseOrderParentId);
+		public List<PurchaseOrder> GetPurchaseOrderByPurchaseOrderParentId(Int64 PurchaseOrderParentId);
     }
 }
