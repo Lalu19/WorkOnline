@@ -140,6 +140,8 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<Banner> Banners { get; set; }
         public virtual DbSet<BrandWiseTarget> BrandWiseTargets { get; set; }
 		public virtual DbSet<SalesManager> SalesManagers { get; set; }		
+		public virtual DbSet<BuyerOrder> BuyerOrders { get; set; }		
+		public virtual DbSet<BuyerOrderItems> BuyerOrderItems { get; set; }		
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -636,11 +638,30 @@ namespace CloudVOffice.Data.Persistence
 			 .Property(s => s.Deleted)
 			 .HasDefaultValue(false)
 			.ValueGeneratedNever();
-			#endregion
+            #endregion
+            #region BuyerOrder
+            modelBuilder.Entity<BuyerOrder>()
+       .Property(s => s.CreatedDate)
+       .HasDefaultValueSql("getdate()");
 
+            modelBuilder.Entity<BuyerOrder>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+            .ValueGeneratedNever();
+            #endregion
 
+            #region BuyerOrderItems
+            modelBuilder.Entity<BuyerOrderItems>()
+       .Property(s => s.CreatedDate)
+       .HasDefaultValueSql("getdate()");
 
-			modelBuilder.Entity<RetailModel>()
+            modelBuilder.Entity<BuyerOrderItems>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+            .ValueGeneratedNever();
+            #endregion
+
+            modelBuilder.Entity<RetailModel>()
            .Property(s => s.CreatedDate)
            .HasDefaultValueSql("getdate()");
 	
