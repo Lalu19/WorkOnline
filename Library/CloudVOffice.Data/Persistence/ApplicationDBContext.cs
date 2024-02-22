@@ -53,6 +53,7 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<User> Users { get; set; }
 
         public virtual DbSet<UserRoleMapping> UserRoleMappings { get; set; }
+        public virtual DbSet<UserWareHouseMapping> UserWareHouseMappings { get; set; }
 
 
         public virtual DbSet<Application> Applications { get; set; }
@@ -139,6 +140,8 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<Banner> Banners { get; set; }
         public virtual DbSet<BrandWiseTarget> BrandWiseTargets { get; set; }
 		public virtual DbSet<SalesManager> SalesManagers { get; set; }		
+		public virtual DbSet<BuyerOrder> BuyerOrders { get; set; }		
+		public virtual DbSet<BuyerOrderItems> BuyerOrderItems { get; set; }		
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -174,6 +177,14 @@ namespace CloudVOffice.Data.Persistence
              .HasDefaultValue(false)
              .ValueGeneratedNever();
 
+            modelBuilder.Entity<UserWareHouseMapping>()
+       .Property(s => s.CreatedDate)
+       .HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<UserWareHouseMapping>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
 
 
             modelBuilder.Entity<Application>()
@@ -627,11 +638,30 @@ namespace CloudVOffice.Data.Persistence
 			 .Property(s => s.Deleted)
 			 .HasDefaultValue(false)
 			.ValueGeneratedNever();
-			#endregion
+            #endregion
+            #region BuyerOrder
+            modelBuilder.Entity<BuyerOrder>()
+       .Property(s => s.CreatedDate)
+       .HasDefaultValueSql("getdate()");
 
+            modelBuilder.Entity<BuyerOrder>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+            .ValueGeneratedNever();
+            #endregion
 
+            #region BuyerOrderItems
+            modelBuilder.Entity<BuyerOrderItems>()
+       .Property(s => s.CreatedDate)
+       .HasDefaultValueSql("getdate()");
 
-			modelBuilder.Entity<RetailModel>()
+            modelBuilder.Entity<BuyerOrderItems>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+            .ValueGeneratedNever();
+            #endregion
+
+            modelBuilder.Entity<RetailModel>()
            .Property(s => s.CreatedDate)
            .HasDefaultValueSql("getdate()");
 	

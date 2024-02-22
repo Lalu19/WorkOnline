@@ -16,6 +16,7 @@ using CloudVOffice.Data.Repository;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Utilities;
+using SkiaSharp;
 
 namespace CloudVOffice.Services.WareHouses.PurchaseOrders
 {
@@ -109,7 +110,9 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
 					_dbContext.SaveChanges();
 					return MessageEnum.Deleted;
 				}
-				else { return MessageEnum.Invalid; }
+				else { 
+					return MessageEnum.Invalid; 
+				}
 			}
 			catch
 			{
@@ -218,6 +221,17 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
             }
         }
 
+        public List<PurchaseOrder> GetPurchaseOrderByPurchaseOrderParentId(Int64 PurchaseOrderParentId)
+        {
+            try
+            {
+                return _dbContext.PurchaseOrders.Where(x => x.PurchaseOrderParentId == PurchaseOrderParentId && x.Deleted == false).ToList();
+            }
+            catch
+            {
+                throw;
+            }
+        }
 
     }
 }

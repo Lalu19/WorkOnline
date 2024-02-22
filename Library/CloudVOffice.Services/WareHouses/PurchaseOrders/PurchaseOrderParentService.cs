@@ -20,14 +20,16 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
     {
         private readonly ApplicationDBContext _dbContext;
         private readonly ISqlRepository<PurchaseOrderParent> _purchaseOrderParentRepo;
+        private readonly IPurchaseOrderService _PurchaseOrderService;
 
         public PurchaseOrderParentService(ApplicationDBContext dbContext,
-                                   ISqlRepository<PurchaseOrderParent> purchaseOrderParentRepo
-
+                                   ISqlRepository<PurchaseOrderParent> purchaseOrderParentRepo,
+                                   IPurchaseOrderService PurchaseOrderService
                                     )
         {
             _dbContext = dbContext;
             _purchaseOrderParentRepo = purchaseOrderParentRepo;
+            _PurchaseOrderService = PurchaseOrderService;
 
         }
 		//    public MessageEnum PurchaseOrderParentCreate(PurchaseOrderParentDTO purchaseOrderParentDTO)
@@ -74,6 +76,7 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
 					purchaseOrderParent.TotalAmount = purchaseOrderParentDTO.TotalAmount;
 					purchaseOrderParent.TotalQuantity = purchaseOrderParentDTO.TotalQuantity;
 					purchaseOrderParent.SellerRegistrationId = purchaseOrderParentDTO.SellerRegistrationId;
+					purchaseOrderParent.WareHuoseId = purchaseOrderParentDTO.WareHuoseId;
 					purchaseOrderParent.OrderShipped = purchaseOrderParentDTO.OrderShipped;
 					purchaseOrderParent.POPUniqueNumber = random.Next(100000, 1000000).ToString();
 					purchaseOrderParent.CreatedBy = purchaseOrderParentDTO.CreatedBy;
@@ -121,6 +124,7 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
 						order.TotalAmount = purchaseOrderParentDTO.TotalAmount;
 						order.TotalQuantity = purchaseOrderParentDTO.TotalQuantity;
 						order.SellerRegistrationId = purchaseOrderParentDTO.SellerRegistrationId;
+						order.WareHuoseId = purchaseOrderParentDTO.WareHuoseId;
 						order.OrderShipped = purchaseOrderParentDTO.OrderShipped;
 						order.UpdatedBy = purchaseOrderParentDTO.CreatedBy;
 						order.UpdatedDate = DateTime.Now;
@@ -158,14 +162,21 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
         {
             try
             {
-                //var a = _dbContext.PurchaseOrderParents.Where(x => x.PurchaseOrderParentId == PurchaseOrderParentId).FirstOrDefault();
-				var order = _dbContext.PurchaseOrderParents.FirstOrDefault(o => o.PurchaseOrderParentId == purchaseOrderParentId);
-				if (order != null)
+                var a = _dbContext.PurchaseOrderParents.Where(x => x.PurchaseOrderParentId == purchaseOrderParentId).FirstOrDefault();
+
+                if (a != null)
                 {
-					order.Deleted = true;
-                    order.UpdatedBy = DeletedBy;
-					order.UpdatedDate = DateTime.Now;
+                    a.Deleted = true;
+                    a.UpdatedBy = DeletedBy;
+                    a.UpdatedDate = DateTime.Now;
+
+                    var PurcheseOrder = _PurchaseOrderService.GetPurchaseOrderByPurchaseOrderParentId(purchaseOrderParentId);
+                    foreach (var PurcheseOrderdetails in PurcheseOrder)
+                    {
+                        _PurchaseOrderService.PurchaseOrderDelete(PurcheseOrderdetails.PurchaseOrderId, DeletedBy);
+                    }
                     _dbContext.SaveChanges();
+
                     return MessageEnum.Deleted;
                 }
                 else
@@ -184,6 +195,15 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
 				.Include(x=> x.PurchaseOrders.Where(s=> s.Deleted == false))
 				.ThenInclude(x=> x.Item)
 				.Where(x => x.Deleted == false && x.PurchaseOrderParentId == purchaseOrderParentId).SingleOrDefault();
+        }
+
+        public List<PurchaseOrderParent> GetPurchaseOrderParentListbyWareHouseId(Int64 WareHuoseId)
+        {
+            return _dbContext.PurchaseOrderParents
+                    .Include(x => x.PurchaseOrders).Where(x => x.Deleted == false)
+                    .Include(x => x.WareHuose)
+                    .Include(x => x.SellerRegistration)
+                    .Where(x => x.Deleted == false && x.OrderShipped == false && x.WareHuoseId == WareHuoseId).ToList();
         }
     }
 }

@@ -132,6 +132,9 @@ namespace CloudVOffice.Web.Framework
             services.AddScoped<ICheckoutService, CheckoutService>();
             services.AddScoped<IStockService, StockService>();
             services.AddScoped<ISellerProductEntryService, SellerProductEntryService>();
+            services.AddScoped<IUserWareHouseMappingService, UserWareHouseMappingService>();
+            services.AddScoped<IBuyerOrderService, BuyerOrderService>();
+            services.AddScoped<IBuyerOrderItemsService, BuyerOrderItemsService>();
             services.AddScoped<ISalesOrderParentService, SalesOrderParentService>();
             services.AddScoped<ISalesOrderItemService, SalesOrderItemService>();
             
