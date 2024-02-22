@@ -40,6 +40,7 @@ using CloudVOffice.Services.Orders;
 using CloudVOffice.Services.WareHouses.Stocks;
 using CloudVOffice.Services.Logging;
 using CloudVOffice.Core.Domain.Sellers;
+using CloudVOffice.Services.WareHouses.SalesOrders;
 
 namespace CloudVOffice.Web.Framework
 {
@@ -131,6 +132,9 @@ namespace CloudVOffice.Web.Framework
             services.AddScoped<ICheckoutService, CheckoutService>();
             services.AddScoped<IStockService, StockService>();
             services.AddScoped<ISellerProductEntryService, SellerProductEntryService>();
+            services.AddScoped<ISalesOrderParentService, SalesOrderParentService>();
+            services.AddScoped<ISalesOrderItemService, SalesOrderItemService>();
+            
 
 
             return services;

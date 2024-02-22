@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CloudVOffice.Core.Domain.Common;
+using CloudVOffice.Core.Domain.Users;
 using CloudVOffice.Core.Domain.WareHouses.PurchaseOrders;
 using CloudVOffice.Core.Domain.WareHouses.SalesOrders;
 using CloudVOffice.Data.DTO.WareHouses.SalesOrders;
@@ -12,7 +13,7 @@ using CloudVOffice.Data.Repository;
 
 namespace CloudVOffice.Services.WareHouses.SalesOrders
 {
-    public class SalesOrderItemService
+    public class SalesOrderItemService : ISalesOrderItemService
     {
         private readonly ApplicationDBContext _dbContext;
         private readonly ISqlRepository<SalesOrderItem> _salesOrderItemRepo;
@@ -25,39 +26,68 @@ namespace CloudVOffice.Services.WareHouses.SalesOrders
             _salesOrderItemRepo = salesOrderItemRepo;
         }
 
-        //public MessageEnum SalesOrderItemCreate(List<SalesOrderItemDTO> salesOrderItemDTO)
-        //{
-        //    try
-        //    {
+        public MessageEnum SalesOrderItemCreate(Int64 salesParentOrderId, Int64 createdBy , List<SalesOrderItemDTO> salesOrderItemDTO)
+        {
+            try
+            {
 
-        //        SalesOrderItem salesOrderItem = new SalesOrderItem();
+                
 
-        //        foreach (var salesOrder in salesOrderItemDTO)
-        //        {
-        //            //salesOrderItem.SalesOrderParentId = salesOrder.SalesOrderParentId;
+                foreach (var salesOrder in salesOrderItemDTO)
+                {
+                    //salesOrderItem.SalesOrderParentId = salesOrder.SalesOrderParentId;
 
-        //            salesOrderItem.SalesOrderParentId = salesOrder.SalesOrderParentId;
-        //            salesOrderItem.Quantity = salesOrder.Quantity;
-        //            salesOrderItem.Amount = salesOrder.MRP;
-        //            salesOrderItem.CGST = salesOrder.CGST;
-        //            salesOrderItem.SGST = salesOrder.SGST;
-        //            salesOrderItem.CreatedBy = salesOrder.CreatedBy;
-        //            salesOrderItem.CreatedDate = DateTime.Now;
+                    //if (_dbContext.SalesOrderItems.Any(item => item.SalesOrderParentId == salesOrder.SalesOrderParentId))
+                    //{
+                    //    return MessageEnum.Duplicate;
+                    //}
+                    SalesOrderItem salesOrderItem = new SalesOrderItem();
 
-        //            //salesOrderItem.ItemId = _dbContext.
+                    salesOrderItem.SalesOrderParentId = salesParentOrderId;
+                    salesOrderItem.Quantity = salesOrder.Quantity;
+                    salesOrderItem.Amount = salesOrder.MRP;
+                    salesOrderItem.CGST = salesOrder.CGST;
+                    salesOrderItem.SGST = salesOrder.SGST;
+                    salesOrderItem.CreatedBy = createdBy;
+                    salesOrderItem.CreatedDate = DateTime.Now;
+                    salesOrderItem.ItemId = _dbContext.Items.Where(a=> a.ItemName == salesOrder.ItemName).Select(x => x.ItemId).FirstOrDefault();
+
+                    _salesOrderItemRepo.Insert(salesOrderItem);
+                }
+                return MessageEnum.Success;
+            }
+            catch
+            {
+                throw;
+            }
+        }
 
 
-        //            return MessageEnum.Success;
-        //        }
+        public List<SalesOrderItem> GetSalesOrderItemList()
+        {
+            try
+            {
+                var list = _dbContext.SalesOrderItems.Where(a => a.Deleted == false).ToList();
+                return list;
+            }
+            catch
+            {
+                throw;
+            }
+        }
 
-        //    }
-        //    catch
-        //    {
-        //        throw;
-        //    }
-
-        //}
-
+        public SalesOrderItem GetSalesOrderItemById(int salesOrderItemId)
+        {
+            try
+            {
+                var salesOrderItem = _dbContext.SalesOrderItems.FirstOrDefault(a=> a.SalesOrderItemId ==  salesOrderItemId);
+                return salesOrderItem;
+            }
+            catch
+            {
+                throw;
+            }
+        }
 
     }
 }

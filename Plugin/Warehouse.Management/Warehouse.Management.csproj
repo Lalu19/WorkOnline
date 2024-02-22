@@ -60,6 +60,7 @@
 		<None Remove="Views\PurchaseOrder\PurchaseOrderParentCreate.cshtml" />
 		<None Remove="Views\PurchaseOrder\PurchaseOrderParentView.cshtml" />
 		<None Remove="Views\PurchaseOrder\PurchaseOrderView.cshtml" />
+		<None Remove="Views\SalesOrders\SalesOrderView.cshtml" />
 		<None Remove="Views\SalesOrders\SOCreate.cshtml" />
 		<None Remove="Views\State\StateCreate.cshtml" />
 		<None Remove="Views\State\StateView.cshtml" />

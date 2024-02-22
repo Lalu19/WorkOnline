@@ -263,8 +263,19 @@ namespace Web.API.Controllers.ProductCategories
 										sub2.UpdatedDate,
 										sub2.Deleted
 									})
-									.ToList()
-							})
+									.ToList(),
+
+
+                            //    Items = _dbContext.Items
+                            //        .Where(item => item.SubCategory2Id == sub2.SubCategory2Id)
+                            //        .Select(item => new
+                            //        {
+                            //    item.ItemId,
+                            //    item.ItemName,
+                            //    // Add other item properties as needed
+                            //})
+                            //.ToList()
+                            })
 							.ToList()
 					})
 					.ToList()
@@ -273,5 +284,172 @@ namespace Web.API.Controllers.ProductCategories
 
 			return Ok(result);
 		}
-	}
+
+        [HttpGet]
+        public IActionResult SectorTreeViewAll1()
+        {
+            var sectors = _sectorService.GetSectorList();
+
+            var result = sectors.Select(sector => new
+            {
+                Sector = new
+                {
+                    sector.SectorId,
+                    sector.SectorName,
+                    sector.CreatedBy,
+                    sector.CreatedDate,
+                    sector.UpdatedBy,
+                    sector.UpdatedDate,
+                    sector.Deleted
+                },
+                Categories = _dbContext.Categories
+                    .Where(c => c.SectorId == sector.SectorId)
+                    .Select(category => new
+                    {
+                        Category = new
+                        {
+                            category.CategoryId,
+                            category.SectorId,
+                            category.CategoryName,
+                            category.CreatedBy,
+                            category.CreatedDate,
+                            category.UpdatedBy,
+                            category.UpdatedDate,
+                            category.Deleted
+                        },
+                        SubCategories1 = _dbContext.SubCategories1
+                            .Where(sub => sub.CategoryId == category.CategoryId)
+                            .Select(sub => new
+                            {
+                                sub.SubCategory1Id,
+                                sub.SubCategory1Name,
+                                sub.SectorId,
+                                sub.CategoryId,
+                                sub.GSTId,
+                                sub.HSN,
+                                sub.CreatedBy,
+                                sub.CreatedDate,
+                                sub.UpdatedBy,
+                                sub.UpdatedDate,
+                                sub.Deleted,
+                                SubCategories2 = _dbContext.SubCategories2
+                                    .Where(sub2 => sub2.SubCategory1Id == sub.SubCategory1Id)
+                                    .Select(sub2 => new
+                                    {
+                                        sub2.SubCategory2Id,
+                                        sub2.SubCategory2Name,
+                                        sub2.SectorId,
+                                        sub2.CategoryId,
+                                        sub2.SubCategory1Id,
+                                        sub2.CreatedBy,
+                                        sub2.CreatedDate,
+                                        sub2.UpdatedBy,
+                                        sub2.UpdatedDate,
+                                        sub2.Deleted,
+                                        Items = _dbContext.Items
+                                            .Where(item => item.SubCategory2Id == sub2.SubCategory2Id)
+                                            .Select(item => new
+                                            {
+                                                item.ItemId,
+                                                item.ItemName,
+                                                // Add other item properties as needed
+                                            })
+                                            .ToList()
+                                    })
+                                    .ToList()
+                            })
+                            .ToList()
+                    })
+                    .ToList()
+            })
+            .ToList();
+
+            return Ok(result);
+        }
+
+
+        //[HttpGet]
+        //public IActionResult SectorTreeViewAll3()
+        //{
+        //    var sectors = _sectorService.GetSectorList();
+
+        //    var result = sectors.Select(sector => new
+        //    {
+        //        Sector = new
+        //        {
+        //            sector.SectorId,
+        //            sector.SectorName,
+        //            sector.CreatedBy,
+        //            sector.CreatedDate,
+        //            sector.UpdatedBy,
+        //            sector.UpdatedDate,
+        //            sector.Deleted
+        //        },
+        //        Categories = _dbContext.Categories
+        //            .Where(c => c.SectorId == sector.SectorId)
+        //            .Select(category => new
+        //            {
+        //                Category = new
+        //                {
+        //                    category.CategoryId,
+        //                    category.SectorId,
+        //                    category.CategoryName,
+        //                    category.CreatedBy,
+        //                    category.CreatedDate,
+        //                    category.UpdatedBy,
+        //                    category.UpdatedDate,
+        //                    category.Deleted
+        //                },
+        //                SubCategories1 = _dbContext.SubCategories1
+        //                    .Where(sub => sub.CategoryId == category.CategoryId)
+        //                    .Select(sub => new
+        //                    {
+        //                        sub.SubCategory1Id,
+        //                        sub.SubCategory1Name,
+        //                        sub.SectorId,
+        //                        sub.CategoryId,
+        //                        sub.GSTId,
+        //                        sub.HSN,
+        //                        sub.CreatedBy,
+        //                        sub.CreatedDate,
+        //                        sub.UpdatedBy,
+        //                        sub.UpdatedDate,
+        //                        sub.Deleted,
+        //                        SubCategories2 = _dbContext.SubCategories2
+        //                            .Where(sub2 => sub2.SubCategory1Id == sub.SubCategory1Id)
+        //                            .Select(sub2 => new
+        //                            {
+        //                                sub2.SubCategory2Id,
+        //                                sub2.SubCategory2Name,
+        //                                sub2.SectorId,
+        //                                sub2.CategoryId,
+        //                                sub2.SubCategory1Id,
+        //                                sub2.CreatedBy,
+        //                                sub2.CreatedDate,
+        //                                sub2.UpdatedBy,
+        //                                sub2.UpdatedDate,
+        //                                sub2.Deleted
+        //                            })
+        //                            .ToList(), // Use FirstOrDefault to get a single SubCategory2 or null
+        //                        Items = _dbContext.Items
+        //                            .Where(item => sub2 == null || item.SubCategory1Id == sub.SubCategory1Id)
+        //                            .Select(item => new
+        //                            {
+        //                                item.ItemId,
+        //                                item.ItemName,
+        //                                // Add other item properties as needed
+        //                            })
+        //                            .ToList()
+        //                    })
+        //                    .ToList()
+        //            })
+        //            .ToList()
+        //    })
+        //    .ToList();
+
+        //    return Ok(result);
+        //}
+
+
+    }
 }

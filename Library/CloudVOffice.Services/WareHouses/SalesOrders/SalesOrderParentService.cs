@@ -13,7 +13,7 @@ using CloudVOffice.Data.Repository;
 
 namespace CloudVOffice.Services.WareHouses.SalesOrders
 {
-    public class SalesOrderParentService
+    public class SalesOrderParentService : ISalesOrderParentService
     {
         private readonly ApplicationDBContext _dbContext;
         private readonly ISqlRepository<SalesOrderParent> _salesOrderParentRepo;
@@ -31,15 +31,12 @@ namespace CloudVOffice.Services.WareHouses.SalesOrders
         {
             try
             {
-                //var objCheck = _dbContext.PurchaseOrders.FirstOrDefault(p => p.PurchaseOrderId == purchaseOrderDTO.PurchaseOrderId);
-
 
                 var objcheck = _dbContext.SalesOrderParents.FirstOrDefault(a=> a.SalesOrderParentId == salesOrderParentDTO.SalesOrderParentId);
 
                 if (objcheck == null)
                 {
                     SalesOrderParent salesOrderParent = new SalesOrderParent();
-
                     Random random = new Random();
 
                     salesOrderParent.SalesOrderUniqueNumber = random.Next(100000, 1000000).ToString();
@@ -89,6 +86,54 @@ namespace CloudVOffice.Services.WareHouses.SalesOrders
                 throw;
             }
         }
+
+
+        public MessageEnum DeleteSalesOrderParent(Int64 SalesOrderParentId, Int64 DeletedBy)
+        {
+            try
+            {
+                var a = _dbContext.SalesOrderParents.FirstOrDefault(a => a.SalesOrderParentId == SalesOrderParentId);
+                var child = _dbContext.SalesOrderItems.Where(a=> a.SalesOrderParentId==SalesOrderParentId).ToList();
+
+                if (a != null)
+                {
+                    a.Deleted = true;
+                    a.UpdatedBy = DeletedBy;
+                    a.UpdatedDate = DateTime.Now;
+                    _dbContext.SaveChanges();
+
+                    foreach (var item in child)
+                    {
+                        item.Deleted = true;
+                        item.UpdatedBy = DeletedBy;
+                        item.UpdatedDate = DateTime.Now;
+                        _dbContext.SaveChanges();
+                    }
+                    return MessageEnum.Deleted;
+                }
+                else
+                {
+                    return MessageEnum.Invalid;
+                }                
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         //public MessageEnum SalesOrderParentUpdate(SalesOrderParentDTO salesOrderParentDTO)
