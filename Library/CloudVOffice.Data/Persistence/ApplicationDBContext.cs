@@ -146,7 +146,6 @@ namespace CloudVOffice.Data.Persistence
 		public virtual DbSet<BuyerOrderItems> BuyerOrderItems { get; set; }		
 		public virtual DbSet<DPO> DPO { get; set; }		
 		public virtual DbSet<DPOItems> DPOItems { get; set; }		
-		public virtual DbSet<BuyerOrderItems> BuyerOrderItems { get; set; }
 		public virtual DbSet<DistributorRegistration> DistributorRegistrations { get; set; }
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
