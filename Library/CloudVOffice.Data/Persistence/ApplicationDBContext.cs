@@ -2,6 +2,7 @@
 using CloudVOffice.Core.Domain.Buyers;
 using CloudVOffice.Core.Domain.Company;
 using CloudVOffice.Core.Domain.Comunication;
+using CloudVOffice.Core.Domain.Distributor;
 using CloudVOffice.Core.Domain.Distributors;
 using CloudVOffice.Core.Domain.EmailTemplates;
 using CloudVOffice.Core.Domain.Logging;
@@ -142,6 +143,9 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<BrandWiseTarget> BrandWiseTargets { get; set; }
 		public virtual DbSet<SalesManager> SalesManagers { get; set; }		
 		public virtual DbSet<BuyerOrder> BuyerOrders { get; set; }		
+		public virtual DbSet<BuyerOrderItems> BuyerOrderItems { get; set; }		
+		public virtual DbSet<DPO> DPO { get; set; }		
+		public virtual DbSet<DPOItems> DPOItems { get; set; }		
 		public virtual DbSet<BuyerOrderItems> BuyerOrderItems { get; set; }
 		public virtual DbSet<DistributorRegistration> DistributorRegistrations { get; set; }
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -658,6 +662,28 @@ namespace CloudVOffice.Data.Persistence
        .HasDefaultValueSql("getdate()");
 
             modelBuilder.Entity<BuyerOrderItems>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+            .ValueGeneratedNever();
+            #endregion
+
+            #region DPO
+            modelBuilder.Entity<DPO>()
+       .Property(s => s.CreatedDate)
+       .HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<DPO>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+            .ValueGeneratedNever();
+            #endregion
+
+            #region DPOItems
+            modelBuilder.Entity<DPOItems>()
+       .Property(s => s.CreatedDate)
+       .HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<DPOItems>()
              .Property(s => s.Deleted)
              .HasDefaultValue(false)
             .ValueGeneratedNever();
