@@ -1,0 +1,376 @@
+﻿@using System.Collections;
+@using Newtonsoft.Json;
+@model CloudVOffice.Data.DTO.WareHouses.Items.DamageItemDTO;
+@{
+	Layout = "_MainAppLayout";
+	ViewData["Title"] = "DamageItem";
+}
+@addTagHelper *, Syncfusion.EJ2
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<header class="main-heading">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+				<div class="page-icon">
+					<i class="icon-laptop_windows"> </i>
+				</div>
+				<div class="page-title">
+					<h5>DamageItem</h5>
+				</div>
+			</div>
+			<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+				<div class="right-actions">
+					<span class="last-login"> </span>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+
+<div class="main-content">
+	<div class="row gutters">
+		<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+			<div class="card">
+				<div class="card-header">
+
+					<div class="row">
+						<div class="col-md-8">
+							Damage Item
+						</div>
+						<div class="col-md-4 text-right float-right">
+							<a href="/WareHouse/DamageItem/DamageItemView" class="btn btn-success btn-sm float-right"><i class="icon-list2"></i> List </a>
+
+						</div>
+					</div>
+				</div>
+				<form asp-route="WareHouse/DamageItem/CreateDamageItem" method="post" autocomplete="off" enctype="multipart/form-data">
+					<div asp-validation-summary="ModelOnly" class="message-error"></div>
+					
+					<div class="card-body">
+
+						<div class="form-row">
+							<div class="form-group col-md-3">
+								<input asp-for="@Model.DamageItemId" type="hidden" />
+								<span asp-validation-for="DamageItemId"></span>
+							</div>
+						</div>
+
+						<div class="form-row">
+
+							<div class="form-group col-md-3">
+								<label for="ItemId" class="form-label">ItemId</label>
+								<ejs-dropdownlist id="ItemId" allowFiltering="true" change="onChangeItem" ejs-for="@Model.ItemId" filtering="onItemfiltering" dataSource="@(new SelectList((IEnumerable)ViewBag.ItemList, "ItemId", "ItemId").Items)" placeholder="Select ItemId" popupHeight="220px">
+									<e-dropdownlist-fields text="ItemId" value="ItemId"></e-dropdownlist-fields>
+								</ejs-dropdownlist>
+								<span asp-validation-for="ItemId"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="ItemName" class="form-label">ItemName</label>
+								<input asp-for="@Model.ItemName" type="text" id="ItemName" class="form-control" autofocus="autofocus" placeholder="ItemName" />
+								<span asp-validation-for="ItemName"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="WareHouseName" class="form-label">WareHouseName </label>
+								<input asp-for="@Model.WareHouseName" type="text" id="WareHouseName" class="form-control" autofocus="autofocus" placeholder="WareHouseName " />
+								<span asp-validation-for="WareHouseName"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="DistrictName" class="form-label">DistrictName</label>
+								<input asp-for="@Model.DistrictName" type="text" id="DistrictName" class="form-control" autofocus="autofocus" placeholder="DistrictName" />
+								<span asp-validation-for="DistrictName"></span>
+							</div>
+
+						</div>
+
+						<div class="form-row">
+							
+							<div class="form-group col-md-3">
+								<label for="VendorName" class="form-label">VendorName</label>
+								<input asp-for="@Model.VendorName" type="text" id="VendorName" class="form-control" autofocus="autofocus" placeholder="VendorName" />
+								<span asp-validation-for="VendorName"></span>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="EmployeeName" class="form-label">EmployeeName</label>
+								<input asp-for="@Model.EmployeeName" type="text" id="EmployeeName" class="form-control" autofocus="autofocus" placeholder="EmployeeName" />
+								<span asp-validation-for="EmployeeName"></span>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="CompanyName" class="form-label">CompanyName</label>
+								<input asp-for="@Model.CompanyName" type="text" id="CompanyName" class="form-control" autofocus="autofocus" placeholder="CompanyName" />
+								<span asp-validation-for="CompanyName"></span>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="BrandName" class="form-label">BrandName</label>
+								<input asp-for="@Model.BrandName" type="text" id="BrandName" class="form-control" autofocus="autofocus" placeholder="BrandName" />
+								<span asp-validation-for="BrandName"></span>
+							</div>
+						</div>
+
+						<div class="form-row">
+
+							<div class="form-group col-md-3">
+								<label for="ProductWeight" class="form-label">ProductWeight</label>
+								<input asp-for="@Model.ProductWeight" type="text" id="ProductWeight" class="form-control" autofocus="autofocus" placeholder="ProductWeight" />
+								<span asp-validation-for="ProductWeight"></span>
+							</div>
+
+							@*<div class="form-group col-md-3">
+								<label for="UnitId" class="form-label">UnitId</label>
+								<input asp-for="@Model.UnitId" type="text" id="UnitId" class="form-control" autofocus="autofocus" placeholder="UnitId" />
+								<span asp-validation-for="UnitId"></span>
+							</div>*@
+
+							<div class="form-group col-md-3">
+								<label for="ShortName" class="form-label">Unit Name</label>
+								<input asp-for="@Model.ShortName" type="text" id="ShortName" class="form-control" autofocus="autofocus" placeholder="ShortName" />
+								<span asp-validation-for="ShortName"></span>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="CaseWeight" class="form-label">CaseWeight</label>
+								<input asp-for="@Model.CaseWeight" type="text" id="CaseWeight" class="form-control" autofocus="autofocus" placeholder="CaseWeight" />
+								<span asp-validation-for="CaseWeight"></span>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="UnitPerCase" class="form-label">UnitPerCase</label>
+								<input asp-for="@Model.UnitPerCase" type="text" id="UnitPerCase" class="form-control" autofocus="autofocus" placeholder="UnitPerCase " />
+								<span asp-validation-for="UnitPerCase"></span>
+							</div>
+						</div>
+
+						<div class="form-row">
+
+						
+
+							<div class="form-group col-md-3">
+								<label for="ManufactureDate" class="form-label">ManufactureDate</label>
+								<input asp-for="@Model.ManufactureDate" type="date" id="ManufactureDate" class="form-control" autofocus="autofocus" placeholder="ManufactureDate" />
+								<span asp-validation-for="ManufactureDate"></span>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="ExpiryDate" class="form-label">ExpiryDate</label>
+								<input asp-for="@Model.ExpiryDate" type="date" id="ExpiryDate" class="form-control" autofocus="autofocus" placeholder="ExpiryDate" />
+								<span asp-validation-for="ExpiryDate"></span>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="MRP" class="form-label">MRP</label>
+								<input asp-for="@Model.MRP" type="text" id="MRP" class="form-control" autofocus="autofocus" placeholder="MRP" />
+								<span asp-validation-for="MRP"></span>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="PurchaseCost" class="form-label">PurchaseCost</label>
+								<input asp-for="@Model.PurchaseCost" type="text" id="PurchaseCost" class="form-control" autofocus="autofocus" placeholder="PurchaseCost" />
+								<span asp-validation-for="PurchaseCost"></span>
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="form-group col-md-3">
+								<label for="SalesCost" class="form-label">SalesCost</label>
+								<input asp-for="@Model.SalesCost" type="text" id="SalesCost" class="form-control" autofocus="autofocus" placeholder="SalesCost" />
+								<span asp-validation-for="SalesCost"></span>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="CGST" class="form-label">CGST</label>
+								<input asp-for="@Model.CGST" type="text" id="CGST" class="form-control" autofocus="autofocus" placeholder="CGST" />
+								<span asp-validation-for="CGST"></span>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="SGST" class="form-label">SGST</label>
+								<input asp-for="@Model.SGST" type="text" id="SGST" class="form-control" autofocus="autofocus" placeholder="SGST" />
+								<span asp-validation-for="SGST"></span>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="HandlingType" class="form-label">HandlingType</label>
+								<input asp-for="@Model.HandlingType" type="text" id="HandlingType" class="form-control" autofocus="autofocus" placeholder="HandlingType" />
+								<span asp-validation-for="HandlingType"></span>
+							</div>
+						</div>
+
+
+						<div class="form-row">
+
+							<div class="form-group col-md-3">
+								<label for="InvoiceNo" class="form-label">InvoiceNo</label>
+								<input asp-for="@Model.InvoiceNo" type="text" id="InvoiceNo" class="form-control" autofocus="autofocus" placeholder="InvoiceNo" />
+								<span asp-validation-for="InvoiceNo"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="ReceivedDate" class="form-label">ReceivedDate</label>
+								<input asp-for="@Model.ReceivedDate" type="date" id="ReceivedDate" class="form-control" autofocus="autofocus" placeholder="ReceivedDate" />
+								<span asp-validation-for="ReceivedDate"></span>
+							</div>
+
+						</div>
+
+
+
+						<div class="form-row">
+						
+							<div class="form-group col-md-3">
+								<label for="DamageUnits" class="form-label">DamageUnits</label>
+								<input asp-for="@Model.DamageUnits" type="text" id="DamageUnits" class="form-control" autofocus="autofocus" placeholder="DamageUnits" />
+								<span asp-validation-for="DamageUnits"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="DamagePics" class="form-label">DamagePics</label>
+								<input asp-for="@Model.DamagePic" type="file" id="DamagePic" class="form-control" autofocus="autofocus" placeholder="Upload Image" />
+								<span asp-validation-for="DamagePics"></span>
+								@{
+									if (Model.DamagePics != null)
+									{
+										<img src="/uploads/damageproduct/@Model.DamagePics" style="height:100px; width:100px" />
+										<input type="hidden" asp-for="@Model.DamagePics" value="@Model.DamagePics">
+									}
+								}
+							</div>
+
+							<div class="form-group col-md-6">
+								<label for="Reason" class="form-label">Reason&nbsp;</label>
+								<textarea asp-for="@Model.Reason" id="Reason" class="form-control" autofocus="autofocus" placeholder="Reason"></textarea>
+								<span asp-validation-for="Reason"></span>
+							</div>
+
+						</div>
+
+					</div>
+
+					<div class="card-body">
+						<div class="col-lg-2 col-md-2 col-sm-12">
+							<button type="submit" class="btn btn-primary">Save</button>
+						</div>
+					</div>
+
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+	function onChangeItem(args) {
+		$.ajax({
+			type: "GET",
+			url: "/WareHouse/Item/GetItemById",
+			data: { itemId: args.value },
+			contentType: "application/json",
+			dataType: "json",
+			success: function (result) {
+				console.log(result);
+
+				var itemTextbox = document.getElementById("ItemName");
+				var wareHouseTextbox = document.getElementById("WareHouseName");
+				var districtTextbox = document.getElementById("DistrictName");
+				var venderTextbox = document.getElementById("VendorName");
+				var employeeTextbox = document.getElementById("EmployeeName");
+				var companyTextbox = document.getElementById("CompanyName");
+				var brandTextbox = document.getElementById("BrandName");
+				var productWeightTextbox = document.getElementById("ProductWeight");
+				var unitTextbox = document.getElementById("ShortName");
+				var caseWeightTextbox = document.getElementById("CaseWeight");
+				var unitPerCaseTextbox = document.getElementById("UnitPerCase");
+				var mrpTextbox = document.getElementById("MRP");
+				var purchaseCostTextbox = document.getElementById("PurchaseCost");
+				var salesCostTextbox = document.getElementById("SalesCost");
+				var cgstTextbox = document.getElementById("CGST");
+				var sgstTextbox = document.getElementById("SGST");
+				var handlingTypeTextbox = document.getElementById("HandlingType");
+				var invoiceTextbox = document.getElementById("InvoiceNo");
+
+
+				itemTextbox.value = result.itemName;
+				companyTextbox.value = result.companyName;
+				brandTextbox.value = result.brandName;
+				productWeightTextbox.value = result.productWeight;
+				caseWeightTextbox.value = result.caseWeight;
+				unitPerCaseTextbox.value = result.unitPerCase;
+				mrpTextbox.value = result.mrp;
+				purchaseCostTextbox.value = result.purchaseCost;
+				salesCostTextbox.value = result.salesCost;
+				cgstTextbox.value = result.cgst;
+				sgstTextbox.value = result.sgst;
+				invoiceTextbox.value = result.invoiceNo;
+
+				//wareHouseTextbox.value = result.wareHuoseId;
+				//districtTextbox.value = result.addDistrictId;
+				//venderTextbox.value = result.vendorId;
+				//employeeTextbox.value = result.employeeId;
+				//unitTextbox.value = result.unitId;
+				//handlingTypeTextbox.value = result.handlingTypeId;
+
+
+				wareHouseTextbox.value = result.wareHouseName;
+				districtTextbox.value = result.districtName;
+				venderTextbox.value = result.vendorName;
+				employeeTextbox.value = result.employeeName;
+				unitTextbox.value = result.shortName;
+				handlingTypeTextbox.value = result.handlingType;
+
+
+				var receivedDate = result.receivedDate;
+				console.log("Received Date:", receivedDate);
+				var formattedReceivedDate = receivedDate.split('T')[0];
+				console.log("Formatted Date:", formattedReceivedDate);
+				var receivedDateInput = document.getElementById("ReceivedDate");
+				receivedDateInput.value = formattedReceivedDate;
+
+				var manufactureDate = result.manufactureDate;
+				console.log("Manufacture Date:", manufactureDate);
+				var formattedManufactureDate = manufactureDate.split('T')[0];
+				console.log("Formatted Date:", formattedManufactureDate);
+				var manufactureDateInput = document.getElementById("ManufactureDate");
+				manufactureDateInput.value = formattedManufactureDate;
+
+
+				var expiryDate = result.expiryDate;
+				console.log("Harvest Date:", expiryDate);
+				var formattedExpiryDateDate = expiryDate.split('T')[0];
+				console.log("Formatted Date:", formattedExpiryDateDate);
+				var expiryDateInput = document.getElementById("ExpiryDate");
+				expiryDateInput.value = formattedExpiryDateDate;
+
+			},
+			error: function () {
+
+			}
+		});
+
+
+
+	}
+</script>
+
+
+<script>
+	function onItemfiltering(e) {
+		var query = new ej.data.Query();
+		query = (e.text !== '') ? query.where('ItemId', 'startswith', e.text, true) : query;
+		e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.ItemList)), query);
+	}
+</script>
+
+@section scripts{
+	<script>
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					$('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+					$('#imagePreview').hide();
+					$('#imagePreview').fadeIn(650);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+		$("#DamagePics").change(function () {
+			readURL(this);
+		});
+	</script>
+}
