@@ -18,5 +18,6 @@ namespace CloudVOffice.Services.ProductCategories
         public List<Category> GetCategoryList();
         public Category GetCategoryById(int CategoryId);
         public List<Category> GetCategoryBySectorId(int SectorId);
+        public List<Category> GetCategoryForFarmingSector(int SectorId);
     }
 }

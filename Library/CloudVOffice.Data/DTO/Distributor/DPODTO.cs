@@ -17,9 +17,7 @@ namespace CloudVOffice.Data.DTO.Distributor
         public string? OrderStatus { get; set; }
         public Int64 CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
-        public Int64? UpdatedBy { get; set; }
-        public DateTime? UpdatedDate { get; set; }
-        public bool Deleted { get; set; }
+       
         public List<int>? Items { get; set; }
         public List<int>? Quantity { get; set; }
     }

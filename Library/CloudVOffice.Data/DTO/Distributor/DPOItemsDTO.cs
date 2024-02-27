@@ -15,4 +15,4 @@ namespace CloudVOffice.Data.DTO.Distributor
         public Int64 CreatedBy { get; set; }
     }
 }
-}
+

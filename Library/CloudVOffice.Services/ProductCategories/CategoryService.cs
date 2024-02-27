@@ -128,5 +128,24 @@ namespace CloudVOffice.Services.ProductCategories
             return _dbContext.Categories.Where(x => x.SectorId == SectorId && x.Deleted == false).ToList();
         }
 
+        public List<Category> GetCategoryForFarmingSector(int SectorId)
+        {
+            try
+            {
+                if (SectorId != 3)
+                {
+                    return new List<Category>();
+                }
+                else
+                {
+                    return _dbContext.Categories.Where(x => x.SectorId == SectorId && x.Deleted == false).ToList();
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
     }
 }
