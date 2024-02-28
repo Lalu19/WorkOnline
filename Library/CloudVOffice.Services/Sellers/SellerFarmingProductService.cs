@@ -1,4 +1,5 @@
-﻿using CloudVOffice.Core.Domain.Common;
+﻿using System.Reflection.Metadata.Ecma335;
+using CloudVOffice.Core.Domain.Common;
 using CloudVOffice.Core.Domain.Sellers;
 using CloudVOffice.Data.DTO.Sellers;
 using CloudVOffice.Data.Persistence;
@@ -169,6 +170,19 @@ namespace CloudVOffice.Services.Sellers
 				throw;
 			}
 		}
-		
+
+		public List<SellerFarmingProduct> GetSellerFarmingProductBySellerId(Int64 SellerRegistrationId)
+		{
+			try
+			{
+				var product = _dbContext.SellerFarmingProducts.Where(a => a.CreatedBy == SellerRegistrationId).ToList();
+				return product;
+			}
+			catch
+			{
+				throw;
+			}
+		}
+
 	}
 }

@@ -143,7 +143,7 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<BrandWiseTarget> BrandWiseTargets { get; set; }
 		public virtual DbSet<SalesManager> SalesManagers { get; set; }		
 		public virtual DbSet<BuyerOrder> BuyerOrders { get; set; }		
-		public virtual DbSet<BuyerOrderItems> BuyerOrderItems { get; set; }		
+		public virtual DbSet<BuyerOrderItems> BuyerOrderItems { get; set; }
 		public virtual DbSet<DPO> DPO { get; set; }		
 		public virtual DbSet<DPOItems> DPOItems { get; set; }		
 		public virtual DbSet<DistributorRegistration> DistributorRegistrations { get; set; }

@@ -26,6 +26,15 @@
 	<!-- Chartist css -->
 	<link href="~/app/vendor/chartist/css/chartist.min.css" rel="stylesheet">
 	<link href="~/app/vendor/chartist/css/chartist-custom.css" rel="stylesheet">
+	<style>
+		.side-content ul.user-actions {
+			display: block;
+			margin: auto;
+			padding: 65px 10px 20px 10px;
+			text-align: center;
+			background: #f5f6fa;
+		}
+	</style>
 </head>
 <body>
 	<header class="app-header">
@@ -142,6 +151,22 @@
 							
 						</ul>
 					</li>
+
+					<li>
+						<a href="#" class="has-arrow" aria-expanded="false">
+							<span class="has-icon">
+								<i class="icon-tabs-outline"></i>
+							</span>
+							<span class="nav-title">Billing</span>
+						</a>
+						<ul aria-expanded="false">
+							<li>
+								<a href='/Billing/SOCreate'>Generate Sales Order</a>
+							</li>
+
+						</ul>
+					</li>
+
 				</ul>
 				<!-- END: side-nav-content -->
 			</nav>

@@ -1,4 +1,5 @@
 ﻿using CloudVOffice.Core.Domain.Common;
+using CloudVOffice.Core.Domain.ProductCategories;
 using CloudVOffice.Core.Domain.WareHouses.Items;
 using CloudVOffice.Core.Domain.WareHouses.Months;
 using CloudVOffice.Core.Domain.WareHouses.PurchaseOrders;
@@ -10,6 +11,7 @@ using CloudVOffice.Data.Repository;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -205,5 +207,38 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
                     .Include(x => x.SellerRegistration)
                     .Where(x => x.Deleted == false && x.OrderShipped == false && x.WareHuoseId == WareHuoseId).ToList();
         }
+
+
+        public List<PurchaseOrderParent> GetPurchaseOrdersBySellerId(Int64 SellerId)
+        {
+            try
+            {
+                var purchaseOrders = _dbContext.PurchaseOrderParents.Where(a => a.SellerRegistrationId == SellerId).ToList();
+                return purchaseOrders;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public List<PurchaseOrderParent> GetPurchaseOrdersDispatchedBySellerId(Int64 SellerId)
+        {
+            try
+            {
+                var purchaseOrdersdispatched = _dbContext.PurchaseOrderParents.Where(a => a.SellerRegistrationId == SellerId && a.OrderShipped == true).ToList();
+                return purchaseOrdersdispatched;
+            }
+            catch
+            {
+                throw;
+            }            
+        }
+
+        //public List<Category> Categories()
+        //{
+
+        //}
+
     }
 }

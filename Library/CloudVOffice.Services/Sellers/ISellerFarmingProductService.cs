@@ -11,5 +11,6 @@ namespace CloudVOffice.Services.Sellers
 		public List<SellerFarmingProduct> GetSellerFarmingProductList();
 		public MessageEnum SellerFarmingProductUpdate(SellerFarmingProductDTO sellerFarmingProductDTO);
 		public MessageEnum SellerFarmingProductDelete(Int64 sellerFarmingProductId, Int64 DeletedBy);
+		public List<SellerFarmingProduct> GetSellerFarmingProductBySellerId(Int64 SellerRegistrationId);
 	}
 }

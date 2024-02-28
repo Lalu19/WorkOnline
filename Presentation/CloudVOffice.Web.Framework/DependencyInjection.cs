@@ -140,10 +140,11 @@ namespace CloudVOffice.Web.Framework
             services.AddScoped<ISalesOrderItemService, SalesOrderItemService>();
             services.AddScoped<IDPOService, DPOService>();
             services.AddScoped<IDPOItemsService, DPOItemsService>();
-            
+			services.AddScoped<IDistributorRegistrationService, DistributorRegistrationService>();
 
 
-            return services;
+
+			return services;
 
         }
     }

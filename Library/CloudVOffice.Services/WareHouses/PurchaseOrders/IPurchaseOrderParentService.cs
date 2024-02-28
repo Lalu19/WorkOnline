@@ -24,6 +24,8 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
         public MessageEnum PurchaseOrderParentDelete(Int64 purchaseOrderParentId, Int64 DeletedBy);
         public PurchaseOrderParent GetPOOrderByPurchaseOrderParentId(Int64 purchaseOrderParentId);
         public List<PurchaseOrderParent> GetPurchaseOrderParentListbyWareHouseId(Int64 WareHuoseId);
+        public List<PurchaseOrderParent> GetPurchaseOrdersBySellerId(Int64 SellerId);
+        public List<PurchaseOrderParent> GetPurchaseOrdersDispatchedBySellerId(Int64 SellerId);
 
     }
 }

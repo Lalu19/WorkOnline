@@ -28,7 +28,7 @@ namespace CloudVOffice.Services.Sellers
             _dbContext = dbContext;
             _sellerRegistrationRepo = sellerRegistrationRepo;
         }
-        public MessageEnum SellerRegistrationCreate(SellerRegistrationDTO sellerRegistrationDTO)
+        public SellerRegistration SellerRegistrationCreate(SellerRegistrationDTO sellerRegistrationDTO)
         {
             try
             {
@@ -59,11 +59,12 @@ namespace CloudVOffice.Services.Sellers
                     var obj = _sellerRegistrationRepo.Insert(sr);
                     _dbContext.SaveChanges();
 
-                    return MessageEnum.Success;
+                    //return MessageEnum.Success;
+                    return obj;
                 }
                 else
                 {
-                    return MessageEnum.Duplicate;
+                    return null;
                 }
             }
             catch
@@ -174,7 +175,6 @@ namespace CloudVOffice.Services.Sellers
 		{
 			//string hashedPassword = EncryptPassword(Password, UserMobileNumber);
 			var SellerUser = _dbContext.SellerRegistrations
-
 				.Where(x => x.PrimaryPhone == UserMobileNumber && x.Password == Password).SingleOrDefault();
 
 			return SellerUser;

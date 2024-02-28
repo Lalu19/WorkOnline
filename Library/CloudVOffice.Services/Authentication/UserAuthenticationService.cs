@@ -3,6 +3,7 @@ using CloudVOffice.Core.Domain.Users;
 using CloudVOffice.Core.Security;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
+using CloudVOffice.Services.Distributors;
 using CloudVOffice.Services.Sellers;
 using CloudVOffice.Services.Users;
 
@@ -15,14 +16,17 @@ namespace CloudVOffice.Services.Authentication
         private readonly ISqlRepository<SellerRegistration> _sellerRegistrationRepo;
         private readonly IUserService _userService;
         private readonly ISellerRegistrationService _sellerRegistrationService;
-        public UserAuthenticationService(ApplicationDBContext context, ISqlRepository<User> userRepo, IUserService userService, ISqlRepository<SellerRegistration> sellerRegistrationRepo, ISellerRegistrationService sellerRegistrationService)
+        private readonly IDistributorRegistrationService _distributorRegistrationService;
+
+        public UserAuthenticationService(ApplicationDBContext context, ISqlRepository<User> userRepo, IUserService userService, ISqlRepository<SellerRegistration> sellerRegistrationRepo, ISellerRegistrationService sellerRegistrationService, IDistributorRegistrationService distributorRegistrationService)
         {
             _context = context;
             _userRepo = userRepo;
             _userService = userService;
             _sellerRegistrationService = sellerRegistrationService;
             _sellerRegistrationRepo = sellerRegistrationRepo;
-        }
+			_distributorRegistrationService = distributorRegistrationService;
+		}
 
 
         public async Task<UserLoginResults> ValidateUserAsync(string EmailId, string Password)
@@ -60,7 +64,7 @@ namespace CloudVOffice.Services.Authentication
 
         public async Task<UserLoginResults> DistributorValidateUserAsync(string UserMobileNumber, string Password)
         {
-            var users = await _sellerRegistrationService.GetSellerAsyncss(UserMobileNumber);
+            var users = await _distributorRegistrationService.GetDistributorAsyncss(UserMobileNumber);
 
             if (users == null)
                 return UserLoginResults.UserNotExist;

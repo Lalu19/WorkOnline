@@ -14,6 +14,7 @@ using CloudVOffice.Core.Domain.Common;
 using CloudVOffice.Data.DTO.Users;
 using CloudVOffice.Data.DTO.Sellers;
 using CloudVOffice.Data.DTO.Banners;
+using CloudVOffice.Services.WareHouses.PurchaseOrders;
 
 namespace Seller_Login.Web.Controllers
 {
@@ -25,14 +26,14 @@ namespace Seller_Login.Web.Controllers
 		private readonly ICategoryService _categoryService;
         private readonly ApplicationDBContext _dbContext;
 		private readonly IWebHostEnvironment _hostingEnvironment;
+		private readonly IPurchaseOrderParentService _purchaseOrderParentService;
 
 		public SellerUserController(IUserAuthenticationService userauthenticationService,
 			ISellerRegistrationService sellerRegistrationService,
 			ICompanyDetailsService companyDetailsService,
-			ICategoryService categoryService, ApplicationDBContext dbContext, IWebHostEnvironment hostingEnvironment
-
-
-			)
+			ICategoryService categoryService, ApplicationDBContext dbContext, IWebHostEnvironment hostingEnvironment,
+            IPurchaseOrderParentService purchaseOrderParentService
+            )
 		{
 			_userauthenticationService = userauthenticationService;
 			_companyDetailsService = companyDetailsService;
@@ -40,7 +41,9 @@ namespace Seller_Login.Web.Controllers
 			_categoryService = categoryService;
             _dbContext = dbContext;
 			_hostingEnvironment = hostingEnvironment;
-		}
+            _purchaseOrderParentService = purchaseOrderParentService;
+
+        }
 		public IActionResult SellerLogin()
 		{
 			return View();
@@ -123,12 +126,40 @@ namespace Seller_Login.Web.Controllers
 			int PinCodeId = int.Parse(User.Claims.FirstOrDefault(x => x.Type == "PinCodeId").Value.ToString());
 			int SectorId = int.Parse(User.Claims.FirstOrDefault(x => x.Type == "SectorId").Value.ToString());
 
-
 			return View();
 		}
 
+        [HttpGet("/SellerDashboard")]
+        public IActionResult SellerDashboard()
+		{
 
-		[HttpGet]
+            Int64 SellerRegistrationId = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "SellerRegistrationId").Value.ToString());
+
+
+
+			var purchaseOrders = _purchaseOrderParentService.GetPurchaseOrdersBySellerId(SellerRegistrationId);
+			var purchaseOrdersdispatched = _purchaseOrderParentService.GetPurchaseOrdersDispatchedBySellerId(SellerRegistrationId);
+
+			ViewBag.PurchaseOrders = purchaseOrders.Count();
+			ViewBag.DispatchedPurchaseOrders = purchaseOrdersdispatched.Count();
+
+			//double pendingQuan = 0;
+			double pendingAmount = 0;
+
+			foreach(var purchaseOrder in purchaseOrders.Where(a=> a.OrderShipped == false).ToList())
+			{
+                pendingAmount += (double)purchaseOrder.TotalAmount;
+			}
+
+			
+
+
+			ViewBag.PendingAmount = pendingAmount;
+
+			return View();
+        }
+
+        [HttpGet]
 		public async Task<IActionResult> SellerLogOut()
 		{
 			//SignOutAsync is Extension method for SignOut    

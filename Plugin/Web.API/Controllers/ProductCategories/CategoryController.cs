@@ -73,8 +73,17 @@ namespace Web.API.Controllers.ProductCategories
             var a = _categoryService.GetCategoryBySectorId(SectorId);
             return Ok(a);
         }
-	
-		[HttpGet("{CategoryId}")]
+
+		[HttpGet("{SectorId}")]
+		public IActionResult GetCategoryByFarmingSectorId(int SectorId)
+		{
+			var a = _categoryService.GetCategoryForFarmingSector(SectorId);
+
+			return Ok(a);
+		}
+
+
+        [HttpGet("{CategoryId}")]
 		public IActionResult AllItemListByCategory(int CategoryId)
 		{
 			var categoryData = _dbContext.Categories

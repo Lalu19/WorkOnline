@@ -6,6 +6,7 @@ namespace CloudVOffice.Services.Authentication
     {
         public Task<UserLoginResults> ValidateUserAsync(string EmailId, string Password);
 		public Task<UserLoginResults> SellerValidateUserAsync(string UserMobileNumber, string Password);
+		public Task<UserLoginResults> DistributorValidateUserAsync(string UserMobileNumber, string Password);
 
 	}
 }

@@ -5,6 +5,7 @@ using CloudVOffice.Services.Sellers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
+using NUglify.JavaScript.Syntax;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -105,6 +106,14 @@ namespace Web.API.Controllers.Sellers
 			var a = _sellerFarmingProductService.GetSellerFarmingProductList();
 			return Ok(a);
 		}
+
+		[HttpGet("{SellerRegistrationId}")]
+		public IActionResult GetSellerFarmingProductBySellerId(int SellerRegistrationId)
+		{
+			var a = _sellerFarmingProductService.GetSellerFarmingProductBySellerId(SellerRegistrationId);
+			return Ok(a);
+		}
+
 		[HttpGet("{sellerFarmingProductId}")]
 		public IActionResult SellerFarmingProductListbyId(Int64 sellerFarmingProductId)
 		{
