@@ -83,20 +83,20 @@ namespace Seller_Login.Web.Controllers
             {
                 var a = _sellerRegistrationService.SellerRegistrationCreate(sellerRegistrationDTO);
 
-                if (a == MessageEnum.Success)
+                if (a != null)
                 {
                     TempData["msg"] = MessageEnum.Success;
 
                     return Redirect("/SellerUser/SellerLogin");
 
                 }
-                else if (a == MessageEnum.Duplicate)
-                {
+                //else if (a == MessageEnum.Duplicate)
+                //{
 
-                    TempData["msg"] = MessageEnum.Duplicate;
-                    ModelState.AddModelError("", "Mobile Number Already Exists");
+                //    TempData["msg"] = MessageEnum.Duplicate;
+                //    ModelState.AddModelError("", "Mobile Number Already Exists");
 
-                }
+                //}
                 else
                 {
 
