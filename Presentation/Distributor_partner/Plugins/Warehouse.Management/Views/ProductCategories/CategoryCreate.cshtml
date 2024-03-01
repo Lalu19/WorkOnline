@@ -1,0 +1,105 @@
+﻿@model CloudVOffice.Data.DTO.ProductCategories.CategoryDTO;
+@using System.Collections;
+@using Newtonsoft.Json;
+
+@{
+    Layout = "_MainAppLayout";
+    ViewData["Title"] = "Category";
+}
+@addTagHelper *, Syncfusion.EJ2
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+<header class="main-heading">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+                <div class="page-icon">
+                    <i class="icon-laptop_windows"></i>
+                </div>
+                <div class="page-title">
+                    <h5>WareHouse Dashboard</h5>
+                    <h6 class="sub-heading">Welcome to WareHouse Admin</h6>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                <div class="right-actions">
+                    <span class="last-login"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="main-content">
+    <div class="row gutters">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <div class="card">
+                <form asp-route="/WareHouse/Category/CategoryCreate" method="post" autocomplete="off" enctype="multipart/form-data" onsubmit="prepareFormData(event)">
+
+                    <div class="card-header">
+
+                        <div class="row">
+                            <div class="col-md-10">
+                                <b>Category Create</b>
+                            </div>
+                            <div class="col-md-2 ">
+                                <a href="/WareHouse/Category/CategoryView" class="btn btn-primary btn-sm float-right"><i class="icon-list2"></i> List</a>
+                            </div>
+                        </div>
+                    </div>
+                   
+
+                    <div class="card-body">
+                        <div class="form-row">
+                            <input asp-for="@Model.CategoryId" type="hidden" />
+
+                            <div class="form-group col-md-3">
+                                <label for="SectorId" class="form-label">Sector Name</label>
+                                <ejs-dropdownlist id="SectorId" allowFiltering="true" ejs-for="@Model.SectorId" filtering="onSectorNamefiltering" dataSource="@(new SelectList((IEnumerable)ViewBag.SectorList, "SectorId", "SectorName").Items)" placeholder="Select Sector" popupHeight="220px">
+                                    <e-dropdownlist-fields text="SectorName" value="SectorId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="SectorId"></span>
+                            </div>
+                         
+                            <div class="form-group col-md-3">
+                                <label for="CategoryName" class="form-label">Category Name</label>
+                                <input asp-for="@Model.CategoryName" type="text" class="form-control" autofocus="autofocus" placeholder="Category Name" />
+                                <span asp-validation-for="CategoryName"></span>
+                                <div asp-validation-summary="ModelOnly" class="message-error"></div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="CategoryImage" class="form-label">Category Image</label>
+                                <input asp-for="@Model.CategoryImageUp" type="file" class="form-control" autofocus="autofocus" placeholder="Category Image" />
+                                <span asp-validation-for="CategoryImage"></span>
+                                @{
+                                    if (Model.CategoryImage != null)
+                                    {
+                                        <img src="/uploads/setup/@Model.CategoryImage" style="height:100px; width:100px" />
+                                        <input type="hidden" asp-for="@Model.CategoryImage">
+                                    }
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-lg-2 col-md-2 col-sm-12">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function onSectorNamefiltering(e) {
+        var query = new ej.data.Query();
+        query = (e.text !== '') ? query.where('SectorName', 'startswith', e.text, true) : query;
+        e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.SectorList)), query);
+    }
+</script>
+

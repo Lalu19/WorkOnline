@@ -1,0 +1,1322 @@
+﻿@model CloudVOffice.Data.DTO.WareHouses.Stocks.StockDTO;
+@using System.Collections;
+@using Newtonsoft.Json;
+@{
+    Layout = "_MainAppLayout";
+    ViewData["Title"] = "Stock Management";
+}
+@addTagHelper *, Syncfusion.EJ2
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<style>
+
+    .has-icon {
+        flex: 0 0 25px;
+    }
+
+    .box {
+        width: 100%;
+        height: auto;
+        text-align: center;
+        display: inline-block;
+        vertical-align: top;
+        border-radius: 6px;
+        height: 170px;
+    }
+
+    .item-name {
+        font-size: 15px;
+        color: #ffffff;
+        display: block;
+        font-weight: 700;
+    }
+
+    .price {
+        font-size: 15px;
+        color: #ffffff;
+        display: block;
+        font-weight: 700;
+        padding: 0 0 10px 0;
+    }
+
+    img.itemimagess {
+        width: 100%;
+        height: 100px;
+        padding: 5px 5px 5px 5px;
+    }
+
+    .col-xl-2.col-lg-2.col-md-2.col-sm-2.itembox {
+        padding: 0px 5px 5px 5px;
+    }
+
+    .image {
+        height: 100px;
+    }
+</style>
+<style>
+
+
+    .qty-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 18px;
+    }
+
+        .qty-container .input-qty {
+            text-align: center;
+            padding: 6px 0px;
+            border: 1px solid #d4d4d4;
+            max-width: 40px;
+        }
+
+        .qty-container .qty-btn-minus,
+        .qty-container .qty-btn-plus {
+            border: 1px solid #d4d4d4;
+            padding: 10px 10px;
+            font-size: 10px;
+            height: 32px;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .qty-container .qty-btn-plus {
+            margin-left: -1px;
+        }
+
+        .qty-container .qty-btn-minus {
+            margin-right: -1px;
+        }
+
+    .btn-cornered,
+    .input-cornered {
+        border-radius: 4px;
+    }
+
+    .btn-rounded {
+        border-radius: 50%;
+    }
+
+    .input-rounded {
+        border-radius: 50px;
+    }
+
+    p.card-text {
+        font-weight: 600;
+        font-size: 13px;
+        margin-left: -7px;
+        /* color:white; */
+    }
+
+    .row.itemlist {
+        padding: 6px;
+    }
+
+    .row.itemlists {
+        margin-right: 0px;
+        margin-left: 0px;
+        margin-bottom: 5px;
+    }
+
+    .card-body.checkoutitembody {
+        padding: 8px 15px 8px 7px;
+    }
+
+    .card-header.itemorderheder {
+        text-align: center;
+        font-weight: 600;
+    }
+
+    .card-body.checkoutitembody {
+        height: 350px;
+    }
+
+    li.categorymenu {
+        border: 3px solid #56c16f;
+        margin: 2px 0 2px 0px;
+        font-weight: 600;
+        border-radius: 5px;
+        padding: 10px 0px 10px 5px;
+    }
+
+    .card .card-header {
+        background: #ffffff;
+        //border-bottom: 2px solid #56c16d;
+    }
+
+    .card .card-footer {
+        background: #ffffff;
+        border-top: 2px solid #56c16d;
+    }
+
+    .card .card-header {
+        background: #ffffff;
+        //border-bottom: 2px solid #56c16d;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .app-container {
+        position: relative;
+        background: #e8f6eb;
+        top: 60px;
+        padding-bottom: 20px;
+    }
+
+    .app-wrap {
+        min-height: 100vh;
+        position: relative;
+        background-color: #e8f6eb;
+    }
+
+    .card-body.menubody {
+        padding: 0px 4px 0px 4px;
+    }
+
+    .card.cart {
+        position: fixed;
+    }
+
+    .main-heading {
+        padding: 10px 0 0 0;
+    }
+
+    #centerstage1 {
+        margin-left: 6px;
+    }
+
+    #centerhead1 {
+        margin-left: 10px;
+    }
+
+</style>
+<style>
+    form {
+        max-width: 80%;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .input-group {
+        position: relative;
+    }
+
+    label {
+        position: absolute;
+        right: 2%;
+        top: 50%;
+        transform: translatey(-50%);
+        color: rgba(0, 0, 0, 0.08);
+        transition: all 0.2s ease;
+    }
+
+    input.searchinput {
+        width: 100%;
+        padding: 8px 30px 8px 22px;
+        border: 1px solid rgb(0 0 0 / 35%);
+        outline: none;
+        font-size: 16px;
+        box-shadow: 0px 2px 5px rgb(0 0 0 / 27%);
+        color: #56c16d;
+        font-weight: bold;
+        letter-spacing: 1px;
+        border-radius: 24px;
+        transition: all 0.2s ease;
+        text-transform: uppercase;
+        margin: 5px 0 5px 0;
+    }
+
+    ::-webkit-input-placeholder { /* WebKit browsers */
+        text-transform: none;
+    }
+
+    input:focus {
+        border-color: #56c16d;
+    }
+
+        input:focus + label {
+            transform: scale(1.05) translatey(-50%);
+            color: #56c16d;
+        }
+
+    .checkoutitembody {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+</style>
+<header class="main-heading">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+                <div class="page-icon">
+                    <i class="icon-laptop_windows"></i>
+                </div>
+                <div class="page-title">
+                    <h5>WareHouse</h5>
+                    <h6 class="sub-heading">  </h6>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                <div class="right-actions">
+                    <span class="last-login">  </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="row gutters">
+    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+        <br>
+        <div class="card ">
+            <div class="card-header itemorderheder">
+                Stock Management
+            </div>  
+            <div class="card-body">
+                <nav class="side-nav">
+                    <ul class="unifyMenu" id="unifyMenu">
+                        <li class="categorymenu" onclick="showStockLeft()">
+                            <a class="has-arrow" style="cursor:pointer;">
+                                <span class="nav-title">Total Stock Left</span>
+                            </a>
+                        </li>
+                        <li class="categorymenu" onclick="showSector()">
+                            <a class="has-arrow" style="cursor:pointer;">
+                                <span class="nav-title">Sector Wise</span>
+                            </a>
+                        </li>
+                        <li class="categorymenu" onclick="showCategory()">
+                            <a class="has-arrow" style="cursor:pointer;">
+                                <span class="nav-title">Category Wise</span>
+                            </a>
+                        </li>
+                        <li class="categorymenu" onclick="showBrands()">
+                            <a class="has-arrow" style="cursor:pointer;">
+                                <span class="nav-title">Brand Wise</span>
+                            </a>
+                        </li>
+                        <li class="categorymenu" onclick="showSKU()">
+                            <a class="has-arrow" style="cursor:pointer;">
+                                <span class="nav-title">SKU Wise</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+        <br />
+        <div class="card">
+            <div class="card-header" id="centerhead"> </div>
+            <div class="card-body" id="centerbod">
+                <div class="row " id="centerstage">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card d-none" id="skuCard">
+            <div class="card-header" id="centerhead1"> 
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="SectorId" class="form-label">Sector Name</label>
+                        <ejs-dropdownlist id="SectorId" allowFiltering="true" ejs-for="@Model.SectorId" filtering="onItemNamefiltering" change="onChangeSector" dataSource="@(new SelectList((IEnumerable)ViewBag.Sectors, "SectorId", "SectorName").Items)" placeholder="Select Sector" popupHeight="220px">
+                            <e-dropdownlist-fields text="SectorName" value="SectorId"></e-dropdownlist-fields>
+                        </ejs-dropdownlist>
+                        <span asp-validation-for="SectorId"></span>
+                    </div>                    
+                
+                    <div class="form-group col-md-3">
+                        <label for="CategoryId" class="form-label">Category Name</label>
+                        <ejs-dropdownlist id="CategoryId" allowFiltering="true" change="onChangeCategory" ejs-for="@Model.CategoryId" placeholder="Select Category" popupHeight="220px">
+                            <e-dropdownlist-fields text="categoryName" value="categoryId"></e-dropdownlist-fields>
+                        </ejs-dropdownlist>
+                        <span asp-validation-for="CategoryId"></span>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="BrandId" class="form-label">Brand Name</label>
+                        <ejs-dropdownlist id="BrandId" allowFiltering="true" change="onChangeBrand" ejs-for="@Model.BrandId" filtering="onItemNamefiltering" placeholder="Select Brand" popupHeight="220px">
+                            <e-dropdownlist-fields text="brandName" value="brandId"></e-dropdownlist-fields>
+                        </ejs-dropdownlist>
+                        <span asp-validation-for="BrandId"></span>
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <!-- Button to trigger AJAX call for all brands -->
+                        <button type="button" id="allbrands" class="btn btn-primary" onclick="getAllBrands()">All Brands</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="row " id="centerstage1">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card d-none" id="CategoryCard">
+            <div class="card-header" id="centerhead2">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="SectorId" class="form-label">Sector Name</label>
+                        <ejs-dropdownlist id="SectorId1" allowFiltering="true" ejs-for="@Model.SectorId" filtering="onItemNamefiltering" change="onChangeSector1" dataSource="@(new SelectList((IEnumerable)ViewBag.Sectors, "SectorId", "SectorName").Items)" placeholder="Select Sector" popupHeight="220px">
+                            <e-dropdownlist-fields text="SectorName" value="SectorId"></e-dropdownlist-fields>
+                        </ejs-dropdownlist>
+                        <span asp-validation-for="SectorId"></span>
+                    </div>                    
+
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="row " id="centerstage2">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card d-none" id="BrandCard">
+            <div class="card-header" id="centerhead3">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="SectorId" class="form-label">Sector Name</label>
+                        <ejs-dropdownlist id="SectorId2" allowFiltering="true" ejs-for="@Model.SectorId" filtering="onItemNamefiltering" change="onChangeSector2" dataSource="@(new SelectList((IEnumerable)ViewBag.Sectors, "SectorId", "SectorName").Items)" placeholder="Select Sector" popupHeight="220px">
+                            <e-dropdownlist-fields text="SectorName" value="SectorId"></e-dropdownlist-fields>
+                        </ejs-dropdownlist>
+                        <span asp-validation-for="SectorId"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="row " id="centerstage3">
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+</div>
+
+<script>
+    function onWareHouseNamefiltering(e) {
+        var query = new ej.data.Query();
+        query = (e.text !== '') ? query.where('WareHouseName', 'startswith', e.text, true) : query;
+        e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.WareHouseList)), query);
+    }
+
+    function onItemNamefiltering(e) {
+        var query = new ej.data.Query();
+        query = (e.text !== '') ? query.where('ItemName', 'startswith', e.text, true) : query;
+        e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.ItemList)), query);
+    }
+    function onUnitfiltering(e) {
+        var query = new ej.data.Query();
+        query = (e.text !== '') ? query.where('ShortName', 'startswith', e.text, true) : query;
+        e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.UnitList)), query);
+    }
+
+</script>
+
+
+<script>
+
+
+    var brandArray = [];
+    //var categoryArray = [];
+
+    function onChangeSector(args) {
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/Category/GetCategoryBySectorId",
+            data: { sectorId: args.value },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                var categoryDropDown = document.getElementById("CategoryId").ej2_instances[0];
+                categoryDropDown.dataSource = result;
+                categoryDropDown.dataBind();
+
+                categoryDropDown.value = null;
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+
+    //function onChangeSector1(args) {
+
+    //    var categoryArray = [];
+
+    //    $.ajax({
+    //        type: "GET",
+    //        url: "/WareHouse/Category/GetCategoryBySectorId",
+    //        data: { sectorId: args.value },
+    //        contentType: "application/json",
+    //        dataType: "json",
+    //        success: function (result) {
+    //            console.log(result);
+
+                
+    //            for (var i = 0; i < result.length; i++) {
+    //            var categoryId = result[i].categoryId;
+    //                // Check if brandId already exists in brandArray
+    //                if (!categoryArray.includes(categoryId)) {
+    //                    // Assuming each brandId is unique
+    //                    categoryArray.push(categoryId); // Add brandId to the brandArray
+    //                }
+    //            }
+    //        },
+
+
+    //            type: "POST",
+    //            url: "/WareHouse/StockManagement/CategoryViewPage",
+    //            data: JSON.stringify(categoryArray),
+    //            contentType: "application/json",
+    //            dataType: "json",
+    //            success: function (result) {
+    //                console.log(result);
+
+                
+    //                var table = '<table class="table table-bordered"><thead><tr><th class="col-md-3 text-center">Category Name</th><th class="col-md-3 text-center">Quantity</th><th class="col-md-3 text-center">Short Name</th><th class="col-md-3 text-center">Amount</th></tr></thead><tbody>';
+
+    //            // Handle the data as needed, for example, you can loop through it
+    //            for (var i = 0; i < data.length; i++) {
+    //                table += '<tr>';
+
+    //                // Add the class="col-md-4 text-center" to all <td> elements
+    //                table += '<td class="col-md-3 text-center">' + data[i].categories + '</td>';
+
+    //                // Handle multiple values for Quantity if it exists
+    //                table += '<td class="col-md-3 text-center">';
+    //                if (data[i].quantity && data[i].quantity.length > 0) {
+    //                    for (var j = 0; j < data[i].quantity.length; j++) {
+    //                        table += data[i].quantity[j];
+    //                        if (j < data[i].quantity.length - 1) {
+    //                            table += '<br>';
+    //                        }
+    //                    }
+    //                }
+    //                table += '</td>';
+
+    //                // Handle multiple values for ShortName if it exists
+    //                table += '<td class="col-md-3 text-center">';
+    //                if (data[i].shortName && data[i].shortName.length > 0) {
+    //                    for (var l = 0; l < data[i].shortName.length; l++) {
+    //                        table += data[i].shortName[l];
+    //                        if (l < data[i].shortName.length - 1) {
+    //                            table += '<br>';
+    //                        }
+    //                    }
+    //                }
+    //                table += '</td>';
+
+
+    //                // Handle multiple values for Amount if it exists
+    //                table += '<td class="col-md-3 text-center">';
+    //                if (data[i].amount && data[i].amount.length > 0) {
+    //                    for (var k = 0; k < data[i].amount.length; k++) {
+    //                        table += data[i].amount[k];
+    //                        if (k < data[i].amount.length - 1) {
+    //                            table += '<br>';
+    //                        }
+    //                    }
+    //                }
+    //                table += '</td>';                    
+
+    //                table += '</tr>';
+    //            }
+
+    //            table += '</tbody></table>';
+    //            $('#centerhead').html(table);
+    //        },
+    //        error: function (error) {
+    //            console.error("Error in TotalPrice:", error);
+    //        }
+    //    });
+    //}
+
+    function onChangeSector1(args) {
+        var categoryArray = [];
+
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/Category/GetCategoryBySectorId",
+            data: { sectorId: args.value },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+
+                for (var i = 0; i < result.length; i++) {
+                    var categoryId = result[i].categoryId;
+                    if (!categoryArray.includes(categoryId)) {
+                        categoryArray.push(categoryId);
+                    }
+                }
+
+                // Move the second AJAX call inside the success callback of the first AJAX call
+                $.ajax({
+                    type: "POST",
+                    url: "/WareHouse/StockManagement/CategoryViewPage",
+                    data: JSON.stringify(categoryArray),
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data);
+
+                        var table = '<table class="table table-bordered"><thead><tr><th class="col-md-3 text-center">Category Name</th><th class="col-md-3 text-center">Quantity</th><th class="col-md-3 text-center">Short Name</th><th class="col-md-3 text-center">Amount</th></tr></thead><tbody>';
+
+                        for (var i = 0; i < data.length; i++) {
+                            table += '<tr>';
+
+                            // Add the class="col-md-4 text-center" to all <td> elements
+                            table += '<td class="col-md-3 text-center">' + data[i].categories + '</td>';
+
+                            // Handle multiple values for Quantity if it exists
+                            table += '<td class="col-md-3 text-center">';
+                            if (data[i].quantity && data[i].quantity.length > 0) {
+                                for (var j = 0; j < data[i].quantity.length; j++) {
+                                    table += data[i].quantity[j];
+                                    if (j < data[i].quantity.length - 1) {
+                                        table += '<br>';
+                                    }
+                                }
+                            }
+                            table += '</td>';
+
+                            // Handle multiple values for ShortName if it exists
+                            table += '<td class="col-md-3 text-center">';
+                            if (data[i].shortName && data[i].shortName.length > 0) {
+                                for (var l = 0; l < data[i].shortName.length; l++) {
+                                    table += data[i].shortName[l];
+                                    if (l < data[i].shortName.length - 1) {
+                                        table += '<br>';
+                                    }
+                                }
+                            }
+                            table += '</td>';
+
+
+                            // Handle multiple values for Amount if it exists
+                            table += '<td class="col-md-3 text-center">';
+                            if (data[i].amount && data[i].amount.length > 0) {
+                                for (var k = 0; k < data[i].amount.length; k++) {
+                                    table += data[i].amount[k];
+                                    if (k < data[i].amount.length - 1) {
+                                        table += '<br>';
+                                    }
+                                }
+                            }
+                            table += '</td>';
+
+                            table += '</tr>';
+                        }
+
+                        table += '</tbody></table>';
+                        $('#centerstage2').html(table);
+                    },
+                    error: function (error) {
+                        console.error("Error in CategoryViewPage:", error);
+                    }
+                });
+            },
+            error: function (error) {
+                console.error("Error in GetCategoryBySectorId:", error);
+            }
+        });
+    }
+
+
+    function onChangeSector2(args) {
+        var brandArray = [];
+
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/StockManagement/GetBrandsInStockBySectorId",
+            data: { sectorId: args.value },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+
+                for (var i = 0; i < result.length; i++) {
+                    var brandId = result[i].brandId;
+                    if (!brandArray.includes(brandId)) {
+                        brandArray.push(brandId);
+                    }
+                }
+
+                // Move the second AJAX call inside the success callback of the first AJAX call
+                $.ajax({
+                    type: "POST",
+                    url: "/WareHouse/StockManagement/BrandViewPage",
+                    data: JSON.stringify(brandArray),
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data);
+
+                        var table = '<table class="table table-bordered"><thead><tr><th class="col-md-3 text-center">Brand Name</th><th class="col-md-3 text-center">Quantity</th><th class="col-md-3 text-center">Short Name</th><th class="col-md-3 text-center">Amount</th></tr></thead><tbody>';
+
+                        for (var i = 0; i < data.length; i++) {
+                            table += '<tr>';
+
+                            // Add the class="col-md-4 text-center" to all <td> elements
+                            table += '<td class="col-md-3 text-center">' + data[i].brands + '</td>';
+
+                            // Handle multiple values for Quantity if it exists
+                            table += '<td class="col-md-3 text-center">';
+                            if (data[i].quantity && data[i].quantity.length > 0) {
+                                for (var j = 0; j < data[i].quantity.length; j++) {
+                                    table += data[i].quantity[j];
+                                    if (j < data[i].quantity.length - 1) {
+                                        table += '<br>';
+                                    }
+                                }
+                            }
+                            table += '</td>';
+
+                            // Handle multiple values for ShortName if it exists
+                            table += '<td class="col-md-3 text-center">';
+                            if (data[i].shortName && data[i].shortName.length > 0) {
+                                for (var l = 0; l < data[i].shortName.length; l++) {
+                                    table += data[i].shortName[l];
+                                    if (l < data[i].shortName.length - 1) {
+                                        table += '<br>';
+                                    }
+                                }
+                            }
+                            table += '</td>';
+
+
+                            // Handle multiple values for Amount if it exists
+                            table += '<td class="col-md-3 text-center">';
+                            if (data[i].amount && data[i].amount.length > 0) {
+                                for (var k = 0; k < data[i].amount.length; k++) {
+                                    table += data[i].amount[k];
+                                    if (k < data[i].amount.length - 1) {
+                                        table += '<br>';
+                                    }
+                                }
+                            }
+                            table += '</td>';
+
+                            table += '</tr>';
+                        }
+
+                        table += '</tbody></table>';
+                        $('#centerstage3').html(table);
+                    },
+                    error: function (error) {
+                        console.error("Error in CategoryViewPage:", error);
+                    }
+                });
+            },
+            error: function (error) {
+                console.error("Error in GetCategoryBySectorId:", error);
+            }
+        });
+    }
+
+
+
+    function onChangeCategory(args) {
+        brandArray = [];
+
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/Stock/GetBrandsByCategoryId",
+            data: { categoryId: args.value },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+
+                for (var i = 0; i < result.length; i++) {
+                var brandId = result[i].brandId;
+                    // Check if brandId already exists in brandArray
+                    if (!brandArray.includes(brandId)) {
+                        // Assuming each brandId is unique
+                        brandArray.push(brandId); // Add brandId to the brandArray
+                    }
+                }
+
+                console.log(brandArray);
+
+                var categoryDropDown = document.getElementById("BrandId").ej2_instances[0];
+                categoryDropDown.dataSource = result;
+                categoryDropDown.dataBind();
+
+                categoryDropDown.value = null;
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+    //function onChangeCategory1(args) {
+
+    //    $.ajax({
+    //        type: "GET",
+    //        url: "/WareHouse/Stock/GetBrandsByCategoryId",
+    //        data: { categoryId: args.value },
+    //        contentType: "application/json",
+    //        dataType: "json",
+    //        success: function (result) {
+    //            console.log(result);
+
+
+                
+    //        },
+    //        error: function () {
+
+    //        }
+    //    });
+    //}
+
+
+    function onChangeBrand(args) {
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/Stock/GetStockDetailsByBrandId",
+            data: { brandId: args.value },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+
+                // Clear existing table rows
+                $("#centerstage1").empty();
+                $("#centerstage1").show();
+
+                // Generate table header
+                var table = '<table class="table"><thead><tr>';
+                table += '<th class="col-md-1">Product Name</th>';
+                table += '<th class="col-md-1">Unit</th>';
+                table += '<th class="col-md-1">Unit Per Case</th>';
+                table += '<th class="col-md-1">Stock Left</th>';
+                table += '<th class="col-md-1">GST</th>';
+                table += '<th class="col-md-1">Manufacturing Date</th>';
+                table += '<th class="col-md-1">Expiry Date</th>';
+                table += '<th class="col-md-1">Days Left</th>';
+                table += '</tr></thead><tbody>';
+
+                // Append the table HTML to the centerstage1 container
+                $("#centerstage1").append(table);
+
+                // Populate the table with data
+                for (var i = 0; i < result.length; i++) {
+                    var row = '<tr>';
+                    row += '<td class="col-md-1">' + result[i].productName + '</td>';
+                    row += '<td class="col-md-1">' + result[i].shortName + '</td>';
+                    row += '<td class="col-md-1">' + result[i].unitPerCase + '</td>';
+                    row += '<td class="col-md-1">' + result[i].stockLeft + '</td>';
+                    row += '<td class="col-md-1">' + result[i].gst + '</td>';
+                    row += '<td class="col-md-1">' + result[i].manufacturingDate + '</td>';
+                    row += '<td class="col-md-1">' + result[i].expiryDate + '</td>';
+                    row += '<td class="col-md-1">' + result[i].daysLeft + '</td>';
+                    row += '</tr>';
+
+                    $("#centerstage1 table tbody").append(row);
+                }
+            },
+            error: function () {
+                // Handle error
+            }
+        });
+    }
+
+
+    function getAllBrands() {
+        // Make the AJAX call
+
+        //var categoryId = $("#CategoryId").ej2_instances[0].value;
+        var categoryId = $('#CategoryId').val();
+
+        if (categoryId) {
+
+            $.ajax({
+                type: "POST",
+                url: "/WareHouse/StockManagement/GetStockDetailsByBrandIdsList",
+                data: JSON.stringify(brandArray),
+                contentType: "application/json",
+                dataType: "json",
+                success: function (result) {
+                    // Clear existing content in the #centerstage1 container
+                    $("#centerstage1").empty();
+                    $("#centerstage1").show();
+
+
+                    // Generate table header
+                    var table = '<table class="table"><thead><tr>';
+                    table += '<th class="col-md-1">Product Name</th>';
+                    table += '<th class="col-md-1">Unit</th>';
+                    table += '<th class="col-md-1">Unit Per Case</th>';
+                    table += '<th class="col-md-1">Stock Left</th>';
+                    table += '<th class="col-md-1">GST</th>';
+                    table += '<th class="col-md-1">Manufacturing Date</th>';
+                    table += '<th class="col-md-1">Expiry Date</th>';
+                    table += '<th class="col-md-1">Days Left</th>';
+                    table += '</tr></thead><tbody>';
+
+                    // Append the table HTML to the #centerstage1 container
+                    $("#centerstage1").append(table);
+
+                    // Populate the table with data
+                    for (var i = 0; i < result.length; i++) {
+                        var row = '<tr>';
+                        row += '<td class="col-md-1">' + result[i].productName + '</td>';
+                        row += '<td class="col-md-1">' + result[i].shortName + '</td>';
+                        row += '<td class="col-md-1">' + result[i].unitPerCase + '</td>';
+                        row += '<td class="col-md-1">' + result[i].stockLeft + '</td>';
+                        row += '<td class="col-md-1">' + result[i].gst + '</td>';
+                        row += '<td class="col-md-1">' + result[i].manufacturingDate + '</td>';
+                        row += '<td class="col-md-1">' + result[i].expiryDate + '</td>';
+                        row += '<td class="col-md-1">' + result[i].daysLeft + '</td>';
+                        row += '</tr>';
+
+                        // Append the row to the table body
+                        $("#centerstage1 table tbody").append(row);
+                    }
+                },
+                error: function () {
+                    // Handle error
+                }
+            });
+        }
+    }
+</script>
+
+<script>
+    //function showStockLeft() {
+    //    $.ajax({
+    //        type: "GET",
+    //        url: "/WareHouse/StockManagement/TotalStockLeft",
+    //        contentType: "application/json",
+    //        dataType: "json",
+    //        success: function (data) {
+
+    //            $("#BrandCard").hide();
+    //            $("#skuCard").hide();
+    //            $("#CategoryCard").hide();
+    //            $("#centerhead").show();
+    //            $("#centerstage").show();
+
+    //            $('#centerhead').text('Stock Left');
+    //            var centerstageContent = '<div class="col-md-12">Stock Left in Quantity: ' + data + '</div>';
+    //            $('#centerstage').html(centerstageContent);
+
+
+    //            $.ajax({
+    //                type: "GET",
+    //                url: "/WareHouse/StockManagement/TotalPrice",
+    //                contentType: "application/json",
+    //                dataType: "json",
+    //                success: function (priceData) {
+
+    //                    // Assuming 'priceData' is the value you want to display for Total Price
+    //                    var priceContent = '<div class="col-md-12" style="margin-top: 10px;">Stock Left in Amount: ' + priceData + '</div>';
+
+    //                    // Insert the Total Price content above the Stock Left content
+    //                    $('#centerstage').append(priceContent);
+    //                },
+    //                error: function (error) {
+    //                    console.error("Error in TotalPrice:", error);
+    //                }
+    //            });
+    //        },
+    //        error: function (error) {
+    //            console.error("Error:", error);
+    //        }
+    //    });
+    //}
+
+
+    function showStockLeft() {
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/StockManagement/TotalStockLeft",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (data) {
+                // Assuming 'data' is a dictionary with shortName as keys and quantities as values
+                $("#BrandCard").hide();
+                $("#skuCard").hide();
+                $("#CategoryCard").hide();
+                $("#centerhead").show();
+                $("#centerstage").show();
+
+                $('#centerhead').text('Stock Left');
+
+                // Create HTML content based on the dictionary data
+                var stockLeftContent = '<div class="col-md-12">Stock Left:</div>';
+                $.each(data, function (shortName, quantity) {
+                    stockLeftContent += '<div class="col-md-12"><strong>' + shortName.toUpperCase() + ': ' + quantity + '</div>';
+                });
+
+                // Append the Stock Left content to the centerstage
+                $('#centerstage').html(stockLeftContent);
+
+                // Now, make another Ajax call to get and display Total Price
+                $.ajax({
+                    type: "GET",
+                    url: "/WareHouse/StockManagement/TotalPrice",
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (priceData) {
+                        // Assuming 'priceData' is the value you want to display for Total Price
+                        var priceContent = '<div class="col-md-12" style="margin-top: 10px;">Total Price: ' + priceData + '</div>';
+
+                        // Append the Total Price content to the centerstage
+                        $('#centerstage').append(priceContent);
+                    },
+                    error: function (error) {
+                        console.error("Error in TotalPrice:", error);
+                    }
+                });
+            },
+            error: function (error) {
+                console.error("Error:", error);
+            }
+        });
+    }
+
+
+
+
+    //function showSector() {
+    //    $.ajax({
+    //        type: "GET",
+    //        url: "/WareHouse/StockManagement/SectorViewPage",
+    //        contentType: "application/json",
+    //        dataType: "json",
+    //        success: function (data) {
+    //            console.log(data);
+
+    //            $("#centerhead").show();
+    //            $("#centerstage").show();
+    //            //$("#centerstage").hide();
+    //            $("#CategoryCard").hide();
+    //            $("#skuCard").hide();
+    //            $("#centerbod").hide();
+                
+    //            $('#centerhead').text('Sector Wise Data');
+
+
+    //            var table = '<table class="table table-bordered"><thead><tr><th class="col-md-3 text-center">Sector Name</th><th class="col-md-3 text-center">Quantity</th><th class="col-md-3 text-center">Short Name</th><th class="col-md-3 text-center">Amount</th></tr></thead><tbody>';
+
+    //            // Handle the data as needed, for example, you can loop through it
+    //            for (var i = 0; i < data.length; i++) {
+    //                table += '<tr>';
+
+    //                // Add the class="col-md-4 text-center" to all <td> elements
+    //                table += '<td class="col-md-3 text-center">' + data[i].sectors + '</td>';
+
+    //                // Handle multiple values for Quantity if it exists
+    //                table += '<td class="col-md-3 text-center">';
+    //                if (data[i].quantity && data[i].quantity.length > 0) {
+    //                    for (var j = 0; j < data[i].quantity.length; j++) {
+    //                        table += data[i].quantity[j];
+    //                        if (j < data[i].quantity.length - 1) {
+    //                            table += '<br>';
+    //                        }
+    //                    }
+    //                }
+    //                table += '</td>';
+
+    //                // Handle multiple values for ShortName if it exists
+    //                table += '<td class="col-md-3 text-center">';
+    //                if (data[i].shortName && data[i].shortName.length > 0) {
+    //                    for (var l = 0; l < data[i].shortName.length; l++) {
+    //                        table += data[i].shortName[l];
+    //                        if (l < data[i].shortName.length - 1) {
+    //                            table += '<br>';
+    //                        }
+    //                    }
+    //                }
+    //                table += '</td>';
+
+
+    //                // Handle multiple values for Amount if it exists
+    //                table += '<td class="col-md-3 text-center">';
+    //                if (data[i].amount && data[i].amount.length > 0) {
+    //                    for (var k = 0; k < data[i].amount.length; k++) {
+    //                        table += data[i].amount[k];
+    //                        if (k < data[i].amount.length - 1) {
+    //                            table += '<br>';
+    //                        }
+    //                    }
+    //                }
+    //                table += '</td>';
+
+    //                table += '</tr>';
+    //            }
+
+    //            table += '</tbody></table>';
+    //            $('#centerhead').html(table);
+    //        },
+    //        error: function (error) {
+    //            console.error("Error in TotalPrice:", error);
+    //        }
+    //    });
+    //}
+
+
+    function showSector() {
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/StockManagement/SectorViewPage",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+
+                $("#centerhead").show();
+                $("#centerstage").show();
+                $("#CategoryCard").hide();
+                $("#skuCard").hide();
+                $("#centerbod").show();
+                $("#BrandCard").hide();
+
+
+                $('#centerhead').text('Sector Wise Data');
+
+                var table = '<table class="table table-bordered"><thead><tr><th class="col-md-3 text-center">Sector Name</th><th class="col-md-3 text-center">Quantity</th><th class="col-md-3 text-center">Short Name</th><th class="col-md-3 text-center">Amount</th></tr></thead><tbody>';
+
+                // Handle the data as needed, for example, you can loop through it
+                for (var i = 0; i < data.length; i++) {
+                    table += '<tr>';
+
+                    table += '<td class="col-md-3 text-center">' + data[i].sectors + '</td>';
+
+                    table += '<td class="col-md-3 text-center">';
+                    if (data[i].quantity && data[i].quantity.length > 0) {
+                        for (var j = 0; j < data[i].quantity.length; j++) {
+                            table += data[i].quantity[j];
+                            if (j < data[i].quantity.length - 1) {
+                                table += '<br>';
+                            }
+                        }
+                    }
+                    table += '</td>';
+
+                    table += '<td class="col-md-3 text-center">';
+                    if (data[i].shortName && data[i].shortName.length > 0) {
+                        for (var l = 0; l < data[i].shortName.length; l++) {
+                            table += data[i].shortName[l];
+                            if (l < data[i].shortName.length - 1) {
+                                table += '<br>';
+                            }
+                        }
+                    }
+                    table += '</td>';
+
+                    table += '<td class="col-md-3 text-center">';
+                    if (data[i].amount && data[i].amount.length > 0) {
+                        for (var k = 0; k < data[i].amount.length; k++) {
+                            table += data[i].amount[k];
+                            if (k < data[i].amount.length - 1) {
+                                table += '<br>';
+                            }
+                        }
+                    }
+                    table += '</td>';
+
+                    table += '</tr>';
+                }
+
+                table += '</tbody></table>';
+                $('#centerbod').html(table);
+            },
+            error: function (error) {
+                console.error("Error in TotalPrice:", error);
+            }
+        });
+    }
+
+
+    function showCategory() {
+        // Get the card element
+
+
+
+        $('#centerhead').text('Category Wise Stock');
+        $("#centerhead").show();
+        $("#CategoryCard").show();
+        $("#centerstage").hide();
+        $("#skuCard").hide();
+        $("#centerbod").hide();
+        $("#BrandCard").hide();
+
+
+        var categoryCard = document.getElementById('CategoryCard');
+
+        // Toggle the visibility of the card
+        if (categoryCard) {
+            // If the card is hidden, show it; otherwise, hide it
+            if (categoryCard.classList.contains('d-none')) {
+                categoryCard.classList.remove('d-none');
+            } else {
+
+            }
+        }
+    }
+
+
+
+    function showBrands() {
+
+
+        $('#centerhead').text('Brand Wise Stock');
+
+        $("#centerhead").show();
+        $("#CategoryCard").hide();
+        $("#centerstage").hide();
+        $("#skuCard").hide();
+        $("#centerbod").hide();
+        $("#BrandCard").show();
+
+
+        var brandCard = document.getElementById('BrandCard');
+
+        // Toggle the visibility of the card
+        if (brandCard) {
+            // If the card is hidden, show it; otherwise, hide it
+            if (brandCard.classList.contains('d-none')) {
+                brandCard.classList.remove('d-none');
+            } else {
+
+            }
+        }
+    }
+
+
+    
+
+
+    function showSKU() {
+        // Get the card element
+
+        $('#centerhead').text('SKU Wise Stock');
+        $("#centerhead").show();
+        $("#skuCard").show();
+        $("#centerstage").hide();
+        $("#CategoryCard").hide();
+        $("#CategoryCard").hide();
+        $("#centerbod").hide();
+        $("#BrandCard").hide();
+
+
+        var skuCard = document.getElementById('skuCard');
+
+        // Toggle the visibility of the card
+        if (skuCard) {
+            // If the card is hidden, show it; otherwise, hide it
+            if (skuCard.classList.contains('d-none')) {
+                skuCard.classList.remove('d-none');
+
+            } else {
+
+            }
+        }
+    }
+
+    
+
+
+    //function showSector() {
+    //    $.ajax({
+    //        type: "GET",
+    //        url: "/WareHouse/StockManagement/SectorViewPage",
+    //        contentType: "application/json",
+    //        dataType: "json",
+    //        success: function (data) {
+    //            console.log(data);
+
+    //            $("#centerhead").empty();
+    //            $("#centerstage").empty();
+
+    //            var table = '<table class="table"><thead><tr><th class="col-md-4">Sector Name</th><th class="col-md-4">Quantity</th><th class="col-md-4">Amount</th></tr></thead><tbody>';
+
+    //            // Handle the data as needed, for example, you can loop through it
+                //for (var i = 0; i < data.length; i++) {
+                //    table += '<tr>';
+                //    table += '<td>' + data[i].sectors + '</td>';
+                //    table += '<td>' + data[i].shortName + '</td>';
+                //    table += '<td>' + data[i].quantity + '</td>';
+                //    table += '<td>' + data[i].amount + '</td>';                   
+                //    table += '</tr>';
+                //}
+
+    //            table += '</tbody></table>';
+    //            $('#centerhead').html(table);
+    //        },
+    //        error: function (error) {
+    //            console.error("Error in TotalPrice:", error);
+    //        }
+    //    });
+    //}
+
+</script>
+
+
+@*<script>
+    function showStockLeft() {
+        // Function for the first AJAX call
+        function getTotalStockLeft() {
+            $.ajax({
+                type: "GET",
+                url: "/WareHouse/StockManagement/TotalStockLeft",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (data) {
+                    $('#categoryname').text('Stock Left');
+                    var itemboxesContent = '<div class="col-md-12">Stock Left in Quantity: ' + data + '</div>';
+                    $('#itemboxes').html(itemboxesContent);
+                },
+                error: function (error) {
+                    console.error("Error in TotalStockLeft:", error);
+                }
+            });
+        }
+
+        // Function for the second AJAX call
+        function getTotalPrice() {
+            $.ajax({
+                type: "GET",
+                url: "/WareHouse/StockManagement/TotalPrice",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (priceData) {
+                    var priceContent = '<div class="col-md-12" style="margin-top: 10px;">Stock Left in Amount: ' + priceData + '</div>';
+                    $('#itemboxes').append(priceContent);
+                },
+                error: function (error) {
+                    console.error("Error in TotalPrice:", error);
+                }
+            });
+        }
+
+        // Call the independent functions
+        getTotalStockLeft();
+        getTotalPrice();
+    }
+</script>*@
+
+
+
+

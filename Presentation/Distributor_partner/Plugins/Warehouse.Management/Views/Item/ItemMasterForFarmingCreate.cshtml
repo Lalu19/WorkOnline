@@ -1,0 +1,656 @@
+﻿@using System.Collections;
+@using Newtonsoft.Json;
+
+
+@*@model CloudVOffice.Data.DTO.WareHouses.Items.ItemMasterForFarmingDTO;*@
+@model CloudVOffice.Data.DTO.WareHouses.ViewModel.ViewForItemMasterFarming ;
+
+
+@{
+    Layout = "_MainAppLayout";
+    ViewData["Title"] = "ItemMaster For Farming";
+}
+@addTagHelper *, Syncfusion.EJ2
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<header class="main-heading">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+                <div class="page-icon">
+                    <i class="icon-laptop_windows"></i>
+                </div>
+                <div class="page-title">
+                    <h5>Ware House</h5>
+                    <h6 class="sub-heading">  </h6>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                <div class="right-actions">
+                    <span class="last-login"> </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div class="main-content">
+    <div class="row gutters">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
+            <div class="card">
+                <form asp-route="WareHouse/ItemMasterForFarming/CreateItemMasterForFarming" method="post" autocomplete="off" enctype="multipart/form-data" onsubmit="prepareFormData(event)">
+
+                    <div class="card-header">
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                Item Master For Farmer
+                            </div>
+                            <div class="col-md-4 text-right float-right">
+                                <a href="/WareHouse/ItemMasterForFarming/ItemMasterForFarmingView" class="btn btn-success btn-sm float-right"><i class="icon-list2"></i> List </a>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    @*<div class="card-header"><b>Pin Code</b></div>*@
+                    <div class="card-body">
+
+                        <div class="form-row">
+                            <input asp-for="@Model.CreatedItemMasterFarmingDTO.ItemMasterForFarmingId" type="hidden" />
+
+
+                            <div class="form-group col-md-3">
+                                <label for="SectorId" class="form-label">Sector Name</label>
+                                <ejs-dropdownlist id="SectorId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.SectorId" allowFiltering="true" change="onChangeSector" dataSource="@(new SelectList(Model.Sectors, "SectorId", "SectorName").Items)" placeholder="Select Sector" popupHeight="220px">
+                                    <e-dropdownlist-fields text="SectorName" value="SectorId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.SectorId"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="CategoryId" class="form-label">Category Name</label>
+                                <ejs-dropdownlist id="CategoryId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.CategoryId" change="onChangeCategory" placeholder="Select Category" popupHeight="220px">
+                                    <e-dropdownlist-fields text="categoryName" value="categoryId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.CategoryId"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="SubCategory1Id" class="form-label">SubCategory Name</label>
+                                <ejs-dropdownlist id="SubCategory1Id" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.SubCategory1Id" change="onChangeSubCategory" placeholder="Select SubCategory" popupHeight="220px">
+                                    <e-dropdownlist-fields text="subCategory1Name" value="subCategory1Id"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.SubCategory1Id"></span>
+                            </div>
+
+
+                            <div class="form-group col-md-3">
+                                <label for="SubCategory2Id" class="form-label">SubCategory1 Name</label>
+                                <ejs-dropdownlist id="SubCategory2Id" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.SubCategory2Id" placeholder="Select SubCategory1" popupHeight="220px">
+                                    <e-dropdownlist-fields text="subCategory2Name" value="subCategory2Id"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.SubCategory2Id"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-3">
+                                <label for="WareHuoseId" class="form-label">WareHouse Name</label>
+                                <ejs-dropdownlist id="WareHuoseId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.WareHuoseId" allowFiltering="true" dataSource="@(new SelectList(Model.WareHouses, "WareHuoseId", "WareHouseName").Items)" placeholder="Select WareHouse" popupHeight="220px">
+                                    <e-dropdownlist-fields text="WareHouseName" value="WareHuoseId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.WareHuoseId"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="EmployeeId" class="form-label">Employee Name</label>
+                                <ejs-dropdownlist id="EmployeeId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.EmployeeId" allowFiltering="true" dataSource="@(new SelectList(Model.Employees, "EmployeeId", "EmployeeName").Items)" placeholder="Select Employee" popupHeight="220px">
+                                    <e-dropdownlist-fields text="EmployeeName" value="EmployeeId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.EmployeeId"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="VendorId" class="form-label">Vendor Name</label>
+                                <ejs-dropdownlist id="VendorId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.VendorId" allowFiltering="true" dataSource="@(new SelectList(Model.Vendors, "VendorId", "VendorName").Items)" placeholder="Select Vendor" popupHeight="220px">
+                                    <e-dropdownlist-fields text="VendorName" value="VendorId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.VendorId"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="AddDistrictId" class="form-label">District Name</label>
+                                <ejs-dropdownlist id="AddDistrictId" allowFiltering="true" ejs-for="@Model.CreatedItemMasterFarmingDTO.AddDistrictId" allowFiltering="true" dataSource="@(new SelectList(Model.AddDistricts, "AddDistrictId", "DistrictName").Items)" placeholder="Select District" popupHeight="220px">
+                                    <e-dropdownlist-fields text="DistrictName" value="AddDistrictId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.AddDistrictId"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-3">
+                                <label for="ProductName" class="form-label">Product Name &nbsp;<span style="color:red;"><b>*</b></span></label>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.ProductName" type="text" id="ProductName" class="form-control" autofocus="autofocus" placeholder="Product Name" required />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.ProductName"></span>
+                            </div>
+
+
+                            <div class="form-group col-md-3">
+                                <label for="UnitId" class="form-label">Unit Name</label>
+                                <ejs-dropdownlist id="UnitId" allowFiltering="true" name="CreatedItemMasterFarmingDTO.UnitId"
+                                                  dataSource="@(new SelectList(Model.Units, "UnitId", "ShortName").Items)"
+                                                  placeholder="Select Unit" popupHeight="220px"
+                                                  value="@Model.CreatedItemMasterFarmingDTO.UnitId">
+                                    <e-dropdownlist-fields text="ShortName" value="UnitId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.UnitId"></span>
+                            </div>
+
+
+                            <div class="form-group col-md-3">
+                                <label for="QtyPerKg" class="form-label">Quantity&nbsp;</label>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.QtyPerKg" type="number" id="QtyPerKg" class="form-control" autofocus="autofocus" placeholder="Quantity" />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.QtyPerKg"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="Price" class="form-label">Price &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.Price" type="number" id="Price" class="form-control" autofocus="autofocus" placeholder="Price" />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.Price"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-3">
+                                <label for="MinQty" class="form-label">Min Qty &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.MinQty" type="number" id="MinQty" class="form-control" autofocus="autofocus" placeholder="MinQty" />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.MinQty"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="GST" class="form-label">GST&nbsp;</label>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.GST" type="number" id="GST" class="form-control" autofocus="autofocus" placeholder="GST" readonly />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.GST"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="HSN" class="form-label">HSN &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.HSN" type="text" class="form-control" id="HSN" autofocus="autofocus" placeholder="HSN" readonly />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.HSN"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="InvoiceNo" class="form-label">Invoice No &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.InvoiceNo" type="text" id="InvoiceNo" class="form-control" autofocus="autofocus" placeholder="InvoiceNo" />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.InvoiceNo"></span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-3">
+                                <label for="ReceivedDate" class="form-label">Received Date &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.ReceivedDate" type="date" id="ReceivedDate" class="form-control" autofocus="autofocus" placeholder="Received Date" />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.ReceivedDate"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="HarvestDate" class="form-label">Harvest Date &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.HarvestDate" type="date" id="HarvestDate" class="form-control" autofocus="autofocus" placeholder="HarvestDate" />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.HarvestDate"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="Thumbnail" class="form-label">Thumbnail</label>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.ThumbnailUp" type="file" id="ThumbnailUp" class="form-control" autofocus="autofocus" placeholder="Upload Image" />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.Thumbnail"></span>
+                                @{
+                                    if (Model.CreatedItemMasterFarmingDTO.Thumbnail != null)
+                                    {
+                                        <img src="/uploads/farmingimage/@Model.CreatedItemMasterFarmingDTO.Thumbnail" style="height:100px; width:100px" />
+                                        <input type="hidden" asp-for="@Model.CreatedItemMasterFarmingDTO.Thumbnail" value="@Model.CreatedItemMasterFarmingDTO.Thumbnail">
+                                    }
+                                }
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="Images" class="form-label">Add Product Images</label>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.ImagesUp" type="file" id="ImagesUp" class="form-control" multiple />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.Images"></span>
+
+                                @if (Model.CreatedItemMasterFarmingDTO.Images != null && Model.CreatedItemMasterFarmingDTO.Images.Count > 0)
+                                {
+                                    for (int i = 0; i < Model.CreatedItemMasterFarmingDTO.Images.Count; i++)
+                                    {
+                                        <img src="/uploads/farmingimage/@Model.CreatedItemMasterFarmingDTO.Images[i]" style="height:100px; width:100px" />
+                                        <input type="hidden" name="Images" value="@Model.CreatedItemMasterFarmingDTO.Images[i]" />
+                                    }
+                                }
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-3">
+                                <label for="BarCodeNotAvailable" class="form-label">Generate Barcode</label>
+                                <br>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.BarCodeNotAvailable" type="checkbox" id="BarCodeNotAvailable" />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.BarCodeNotAvailable"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="Barcode" class="form-label">Barcode &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemMasterFarmingDTO.Barcode" type="text" class="form-control" autofocus="autofocus" placeholder="Barcode" style="display:none;  />
+                                <span asp-validation-for="CreatedItemMasterFarmingDTO.Barcode"></span>
+
+                                @if (!string.IsNullOrEmpty(Model.CreatedItemMasterFarmingDTO.Barcode))
+                                {
+                                    <!-- Display the barcode image -->
+                                    <img src="data:image/png;base64,@(Model.CreatedItemMasterFarmingDTO.Barcode)" alt="Barcode Image" />
+                                }
+                            </div>
+
+                        </div>
+
+                        <br /><br />
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-2">
+                                <button id="saveButton" type="submit" name="btnSave" value="btnSave" class="btn btn-primary">Save</button>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <button id="reviewButton" type="button" class="btn btn-info" style="margin-top: 5px;">Review</button>
+                            </div>
+
+                            <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="reviewModalLabel">Review Data</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body" id="reviewModalBody">
+                                            <!-- Review data will be displayed here -->
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @*<div class="form-group col-md-2">
+                                @if (Model != null && Model.CreatedItemMasterFarmingDTO.ItemMasterForFarmingId.HasValue)
+                                {
+                                    <!-- Display the ItemId if available -->
+                                    <p>ItemMasterForFarmingId: @Model.CreatedItemMasterFarmingDTO.ItemMasterForFarmingId</p>
+
+                                    <!-- Set the value of the button to ItemId if available -->
+                                    <button id="generateBarcodeButton" type="submit" class="btn btn-secondary" value="@Model.CreatedItemMasterFarmingDTO.ItemMasterForFarmingId" name="btnGenerateBarcode" style="margin-top: 5px;">Generate BarCode</button>
+                                }
+                                else
+                                {
+                                    <!-- Default value for the button if ItemId is not available -->
+                                    <button id="generateBarcodeButton" type="submit" class="btn btn-secondary" value="btnGenerateBarcode" name="btnGenerateBarcode" style="margin-top: 5px;">Generate BarCode</button>
+                                }
+                            </div>*@
+
+                            <div class="form-group col-md-2"></div>
+                            <div class="form-group col-md-2"></div>
+                            <div class="form-group col-md-2"></div>
+
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function onChangeSector(args) {
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/Category/GetCategoryBySectorId",
+            data: { sectorId: args.value },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                var categoryDropDown = document.getElementById("CategoryId").ej2_instances[0];
+                categoryDropDown.dataSource = result;
+                categoryDropDown.dataBind();
+
+                categoryDropDown.value = null;
+            },
+            error: function () {
+
+            }
+        });
+    }
+</script>
+
+<script>
+    function onChangeCategory(args) {
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/SubCategory1/GetSubCategoryByCategoeyId",
+            data: { categoryId: args.value },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+
+                var subcategoryDropDown = document.getElementById("SubCategory1Id").ej2_instances[0];
+                subcategoryDropDown.dataSource = result;
+                subcategoryDropDown.dataBind();
+
+                subcategoryDropDown.value = null;
+            },
+            error: function () {
+
+            }
+        });
+    }
+</script>
+
+@*<script>
+    function onChangeSubCategory(args) {
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/SubCategory2/GetSubCategory2BySubCategory1Id",
+            data: { subCategory1Id: args.value },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                var subcategory2DropDown = document.getElementById("SubCategory2Id").ej2_instances[0];
+                subcategory2DropDown.dataSource = result;
+                subcategory2DropDown.dataBind();
+
+                subcategory2DropDown.value = null;
+            },
+            error: function () {
+
+            }
+        });
+    }
+</script>*@
+
+@*<script>
+    function onChangeSubCategory(args) {
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/SubCategory1/GetSubCategory1ById",
+            data: { subCategory1Id: args.value },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+
+                var gstTextbox = document.getElementById("GST");
+                var hsnTextbox = document.getElementById("HSN");
+
+                gstTextbox.value = result.gst;
+                hsnTextbox.value = result.hsn;
+
+            },
+            error: function () {
+
+            }
+        });
+    }
+</script>*@
+
+<script>
+    function onChangeSubCategory(args) {
+        // First API call
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/SubCategory1/GetSubCategory1ById",
+            data: { subCategory1Id: args.value },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+
+                var hsnTextbox = document.getElementById("HSN");
+                hsnTextbox.value = result.hsn;
+
+                // Third API call
+                $.ajax({
+                    type: "GET",
+                    url: "/WareHouse/GST/GetGSTByGSTId",
+                    data: { gstId: result.gstId }, // Adjust the parameter accordingly
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (gstResult) {
+                        console.log(gstResult);
+
+                        var gstTextbox = document.getElementById("GST");
+                        gstTextbox.value = gstResult.gstValue;
+
+                        // Do something with the GST result
+                    },
+                    error: function () {
+                        // Handle error for the third API call
+                    }
+                });
+
+                // Second API call
+                $.ajax({
+                    type: "GET",
+                    url: "/WareHouse/SubCategory2/GetSubCategory2BySubCategory1Id",
+                    data: { subCategory1Id: args.value },
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (result) {
+                        console.log(result);
+                        var subcategory2DropDown = document.getElementById("SubCategory2Id").ej2_instances[0];
+                        subcategory2DropDown.dataSource = result;
+                        subcategory2DropDown.dataBind();
+
+                        subcategory2DropDown.value = null;
+                    },
+                    error: function () {
+                        // Handle error for the second API call
+                    }
+                });
+
+            },
+            error: function () {
+                // Handle error for the first API call
+            }
+        });
+    }
+</script>
+
+
+
+@{
+    if (TempData["msg"] != null)
+    {
+        <script type="text/javascript">
+            var message = "@TempData["msg"]";
+            if (message == "Kindly Save the data first") {
+                sweetAlert({
+                    html: true,
+                    icon: "danger",
+                    title: "Process Error",
+                    text: "Kindly Save the data first.",
+                    type: "danger"
+                });
+            }
+        </script>
+    }
+}
+
+@section scripts{
+
+    <script>
+
+
+        function onSectorNamefiltering(e) {
+            var query = new ej.data.Query();
+            query = (e.text !== '') ? query.where('SectorName', 'startswith', e.text, true) : query;
+            e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.Sectors)), query);
+        }
+
+
+        function onCategoryNamefiltering(e) {
+            var query = new ej.data.Query();
+            query = (e.text !== '') ? query.where('CategoryName', 'startswith', e.text, true) : query;
+            e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.Categories)), query);
+        }
+
+        function onSubCategoryNamefiltering(e) {
+            var query = new ej.data.Query();
+            query = (e.text !== '') ? query.where('SubCategory1Name', 'startswith', e.text, true) : query;
+            e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.SubCategories)), query);
+        }
+
+        //function onUOMfiltering(e) {
+        //    var query = new ej.data.Query();
+        //    query = (e.text !== '') ? query.where('UOM', 'startswith', e.text, true) : query;
+        //    e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.UOMList)), query);
+        //}
+
+    </script>
+
+    <script>
+        function readThumbnailURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#thumbnailPreview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function readImagesURL(input) {
+            if (input.files && input.files.length > 0) {
+                for (var i = 0; i < input.files.length; i++) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        // Create an img element for each image and append it to a container
+                        var img = $('<img>').attr('src', e.target.result).css({ 'height': '100px', 'width': '100px' });
+                        $('#imagesPreview').append(img);
+                    }
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+        }
+
+        $("#ThumbnailUp").change(function () {
+            readThumbnailURL(this);
+        });
+
+        $("#ImagesUp").change(function () {
+            readImagesURL(this);
+        });
+
+
+        //$(document).ready(function () {
+        //    // Function to update the button text and visibility based on the checkbox state
+        //    function updateButtonsVisibility() {
+        //        var checkBox = $('#BarCodeNotAvailable');
+        //        var saveButton = $('#saveButton');
+        //        var generateBarcodeButton = $('#generateBarcodeButton');
+
+        //        if (checkBox.prop('checked')) {
+        //            saveButton.text('Save');
+        //            generateBarcodeButton.show();
+        //        } else {
+        //            saveButton.text('Save');
+        //            generateBarcodeButton.hide();
+        //        }
+        //    }
+
+        //    // Attach change event handler to the checkbox
+        //    $('#BarCodeNotAvailable').change(function () {
+        //        updateButtonsVisibility();
+        //    });
+
+        //    // Initial call to set the initial button text and visibility
+        //    updateButtonsVisibility();
+        //});
+
+    </script>
+
+    <script>
+        // Function to gather filled data and display in a popup
+        function reviewData() {
+            // Collect data from form fields
+            var sectorId = $("#SectorId").val() || '';
+            var categoryId = $("#CategoryId").val() || '';
+            var subCategory1Id = $("#SubCategory1Id").val() || '';
+            var subCategory2Id = $("#SubCategory2Id").val() || '';
+            var wareHouseName = $("#WareHuoseId").val() || '';
+            var employeeName = $("#EmployeeId").val() || '';
+            var vendorName = $("#VendorId").val() || '';
+            var districtName = $("#AddDistrictId").val() || '';
+            var productName = $("#ProductName").val() || '';
+            var unitId = $("#UnitId").val() || '';
+            var qtyPerKg = $("#QtyPerKg").val() || '';
+            var price = $("#Price").val() || '';
+            var minQty = $("#MinQty").val() || '';
+            var gst = $("#GST").val() || '';
+            var hsn = $("#HSN").val() || '';
+            var invoiceNo = $("#InvoiceNo").val() || '';
+            var receivedDate = $("#ReceivedDate").val() || '';
+            var harvestDate = $("#HarvestDate").val() || '';
+
+            // Create HTML for displaying in the modal
+            var reviewHtml = "<b>Sector Name:</b> " + sectorId + "<br>";
+            reviewHtml += "<b>Category Name:</b> " + categoryId + "<br>";
+            reviewHtml += "<b>SubCategory Name:</b> " + subCategory1Id + "<br>";
+            reviewHtml += "<b>SubCategory1 Name:</b> " + subCategory2Id + "<br>";
+            reviewHtml += "<b>WareHouse Name:</b> " + wareHouseName + "<br>";
+            reviewHtml += "<b>Employee Name:</b> " + employeeName + "<br>";
+            reviewHtml += "<b>Vendor Name:</b> " + vendorName + "<br>";
+            reviewHtml += "<b>District Name:</b> " + districtName + "<br>";
+            reviewHtml += "<b>Product Name:</b> " + productName + "<br>";
+            reviewHtml += "<b>Unit Name:</b> " + unitId + "<br>";
+            reviewHtml += "<b>Qty Per Kg:</b> " + qtyPerKg + "<br>";
+            reviewHtml += "<b>Price:</b> " + price + "<br>";
+            reviewHtml += "<b>Min Qty:</b> " + minQty + "<br>";
+            reviewHtml += "<b>GST:</b> " + gst + "<br>";
+            reviewHtml += "<b>HSN:</b> " + hsn + "<br>";
+            reviewHtml += "<b>Invoice No:</b> " + invoiceNo + "<br>";
+            reviewHtml += "<b>Received Date:</b> " + receivedDate + "<br>";
+            reviewHtml += "<b>Harvest Date:</b> " + harvestDate + "<br>";
+
+            // Display the data in the modal
+            $("#reviewModalBody").html(reviewHtml);
+
+            // Show the modal
+            $("#reviewModal").modal("show");
+        }
+
+        // Attach click event handler to the "Review" button
+        $('#reviewButton').click(function () {
+            reviewData();
+        });
+    </script>
+
+}

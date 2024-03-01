@@ -1,0 +1,52 @@
+﻿@using System.Collections;
+@using Newtonsoft.Json;
+@{
+    Layout = "_DistributorLayout";
+
+    // var Location = ViewBag.LocationDetails;
+
+}
+
+<style>
+    .side-content ul.user-actions {
+        display: block;
+        margin: auto;
+        padding: 65px 10px 20px 10px;
+        text-align: center;
+        background: #f5f6fa;
+    }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+<main class="main-wrap catagories-wide mb-xxl">
+    @* <div class="search-box">
+    <i class="iconly-Search icli search"></i>
+    <input type="text" id="search" class="form-control" placeholder="Search item's..." autocomplete="off">
+
+    </div>*@
+    <section class="pb-0">
+        <div class="catagories-wrap">
+            @*  <div class="nav" id="catagories-tab" role="tablist" aria-orientation="vertical">
+            @foreach (var category in ViewBag.Categorydetails)
+            {
+            <div class="nav-link" id="catagories1-tab" data-bs-toggle="pill" data-bs-target="#catagories1" role="tab" aria-controls="catagories1" aria-selected="true" onclick="CategiryId(@category.CategoryId)">
+            <div class="content">
+            <img src="http://yatris.in/uploads/POSFile/@category.Category.CategoryImage">
+            <span class="font-xs title-color">@category.Category.CategoryName</span>
+            </div>
+            </div>
+
+            }
+
+            </div>*@
+            <div class="tab-content ratio2_1" id="catagories-tabContent">
+                <div class="tab-pane fade show active" id="catagories1" role="tabpanel" aria-labelledby="catagories1">
+
+                    <div class="row g-3" id="itemboxes">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>

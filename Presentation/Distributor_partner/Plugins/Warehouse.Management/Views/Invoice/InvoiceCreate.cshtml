@@ -1,0 +1,172 @@
+﻿@model CloudVOffice.Data.DTO.WareHouses.HandlingTypes.HandlingTypeDTO;
+
+@{
+	Layout = "_MainAppLayout";
+	ViewData["Title"] = "Invoice";
+	var podatails = ViewBag.POOrderDetails;
+}
+@addTagHelper *, Syncfusion.EJ2
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers *@
+
+
+
+<style>
+
+	#color {
+		background-color: #343a40; /* Dark background color */
+		color: white; /* Text color */
+		font-weight: bold; /* Bold text */
+	}
+
+	table.table-bordered th,
+	table.table-bordered td {
+		border: 1px solid #343a40; /* Border color */
+	}
+
+	#BUTTON button {
+		background-color: #343a40; /* Dark background color for the button */
+		color: white; /* Text color for the button */
+		font-weight: bold; /* Bold text for the button */
+	}
+
+</style>
+
+<div class="main-content">
+	<div class="row gutters">
+		<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+			<div class="card">
+				<div class="card-header">
+
+					<div class="row">
+						<div class="col-md-10">
+							<b>Invoice</b>
+						</div>
+						<div class="col-md-2 ">
+						</div>
+					</div>
+				</div>
+
+				<div class="invoice-container" id="pdf-content">
+					<div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="invoice-container">
+									<div class="row gutters">
+										<p class="text-center"><strong>Happiness Under Budget Retail</strong></p>
+										<hr class="my-2" style="width: 100%; background-color: #343a40; border-color: #343a40;">
+									</div>
+
+									<div class="row gutters">
+										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+
+											<p class="text-left"><strong>Address:</strong>@podatails.SellerRegistration.Address</p>
+											<p class="text-left"><strong>GST:</strong>@podatails.SellerRegistration.GSTNumber</p>
+											<p class="text-left"><strong>Phone:</strong>@podatails.SellerRegistration.PrimaryPhone</p>
+											<p class="text-left"><strong>Mail:</strong>@podatails.SellerRegistration.MailId</p>
+										</div>
+									</div>
+									<hr class="my-2" style="width: 100%; background-color: #343a40; border-color: #343a40;">
+									<div class="row gutters">
+										<div class="col-lg-6 col-md-6 col-sm-6">
+											<p><strong>Warehouse:</strong>@podatails.SellerRegistration.WareHuose.WareHouseName</p>
+											<p><strong>Date:</strong>@podatails.CreatedDate</p>
+											<p><strong>Transport:</strong></p>
+
+										</div>
+										<div class="col-lg-6 col-md-6 col-sm-6">
+											<p class="text-right"><strong>Bill No: </strong>@podatails.POPUniqueNumber</p>
+										</div>
+									</div>
+
+									<div class="row gutters">
+										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+											<div class="card">
+												<div class="card-header"></div>
+												<div class="card-body">
+													<table id="purchaseOrderTable" class="table table-bordered table-responsive">
+														<tr id="color">
+															<th>Sl.No</th>
+															<th>Product Description</th>
+															<th>HSN</th>
+															<th>UNITS</th>
+															<th>MRP</th>
+															<th>Sales Price</th>
+															<th>Total Amount</th>
+															<th>CGST</th>
+															<th>SGST</th>
+														</tr>
+														@foreach (var item in podatails.PurchaseOrders)
+														{
+															<tr>
+																<td>@item.Item.ItemName</td>
+																<td>@item.Item.HSN</td>
+																<td>@item.Item.ShortName</td>
+																<td>@item.Item.MRP</td>
+																<td>@item.Item.MRP</td>
+																<td>@item.Value</td>
+																<td>@item.Item.CGST</td>
+																<td>@item.Item.SGST</td>
+															</tr>
+														}
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row gutters">
+										<div class="col-lg-6 col-md-6 col-sm-12">
+										</div>
+										<div class="col-lg-6 col-md-6 col-sm-12">
+											<table class="table plain">
+												<tbody>
+													<tr>
+														<td>
+															<p class="text-right"><strong>Subtotal:</strong>@podatails.TotalAmount</p>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="card-body">
+										<div class="col-lg-2 col-md-2 col-sm-12">
+											<button onclick="printPDF()">Print PDF</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+ <script>
+
+	// Function to add Sl.No to the table
+	document.addEventListener('DOMContentLoaded', function () {
+		addSerialNumber();
+	});
+
+	function addSerialNumber() {
+		var table = document.getElementById("purchaseOrderTable");
+		var rows = table.getElementsByTagName("tr");
+
+		for (var i = 1; i < rows.length; i++) {
+			var cell = rows[i].insertCell(0);
+			cell.textContent = i;
+		}
+	}
+</script>
+<script>
+	function printPDF() {
+		var printButton = document.querySelector('.card-body button');
+		printButton.style.display = 'none';
+		window.print();
+		printButton.style.display = 'block';
+
+	}
+</script>

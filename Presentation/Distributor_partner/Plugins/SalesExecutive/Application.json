@@ -1,0 +1,30 @@
+{
+  "ApplicationName": "SalesExecutive",
+  "Url": "/SalesExecutive/SalesExecutiveDashboard/Dashboard",
+  "IconImageUrl": "/Plugin/SalesExecutive/logo.png",
+  "IconClass": "",
+  "AreaName": "SalesExecutive",
+  "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ],
+  "Children": [
+    {
+      "ApplicationName": "Master",
+      "Url": "",
+      "IsGroup": true,
+      "IconImageUrl": "",
+      "IconClass": "icon-event_note",
+      "AreaName": "WareHouse",
+      "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ],
+      "Children": [
+        {
+          "ApplicationName": "PinCode",
+          "IsGroup": false,
+          "Url": "/WareHouse/PinCode/PinCodeView",
+          "IconImageUrl": "",
+          "IconClass": "icon-event_note",
+          "AreaName": "WareHouse",
+          "Roles": [ "WareHouse Manager", "WareHouse User", "Sales Head" ]
+        }
+      ]
+    }
+  ]
+}
