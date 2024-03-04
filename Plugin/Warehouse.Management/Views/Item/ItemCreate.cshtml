@@ -831,27 +831,7 @@
                     dataType: "json",
                     success: function (gstResult) {
                         console.log(gstResult);
-                        @*var cgstTextbox = document.getElementById("CGST");
-                        cgstTextbox.value = (gstResult.gstValue) / 2;
-
-                        var sgstTextbox = document.getElementById("SGST");
-                        sgstTextbox.value = (gstResult.gstValue) / 2;*@
-
-                        @*var CgstTextbox1 = document.getElementById("CGSTPP");
-                        var SgstTextbox1 = document.getElementById("SGSTPP");
-                        var IgstTextbox1 = document.getElementById("IGSTPP");
-                        var CgstTextbox2 = document.getElementById("CGSTPD");
-                        var SgstTextbox2 = document.getElementById("SGSTPD");
-                        var IgstTextbox2 = document.getElementById("IGSTPD");
-
-
-                        CgstTextbox1.value = (gstResult.gstValue) / 2;
-                        SgstTextbox1.value = (gstResult.gstValue) / 2;
-                        IgstTextbox1.value = (gstResult.gstValue);
-
-                        CgstTextbox2.value = (gstResult.gstValue) / 2;
-                        SgstTextbox2.value = (gstResult.gstValue) / 2;
-                        IgstTextbox2.value = (gstResult.gstValue);*@
+                        
 
 
                         IGStRAte = (gstResult.gstValue);                        
@@ -947,7 +927,7 @@
 </script>
 
 
-<script>        
+<script>
 
     function updateCgstVP1() {
 
@@ -1005,45 +985,6 @@
     }
 
 
-
-    @*function updateCgstVP2() {
-        // Assuming PartnerSalesCost, CGSTPD, and CgstVD are the correct IDs for your elements
-        var partnerSalesCost = document.getElementById("PartnerSalesCost").value;
-        var cgstPD = document.getElementById("CGSTPD").value;
-        var cgstVD = document.getElementById("CgstVD");
-        var sgstVD = document.getElementById("SgstVD");
-
-        var igstPD = document.getElementById("IGSTPD").value;
-        var igstVD = document.getElementById("IgstVD");
-
-        var distributorLandingCost = document.getElementById("DistributorLandingCost");
-
-
-        // Check if PartnerSalesCost is filled and CGSTPD has a value
-        if (partnerSalesCost !== "" && cgstPD !== "") {
-            // Convert the values to numbers and multiply them
-            var result = parseFloat(partnerSalesCost) * (parseFloat(cgstPD) / 100);
-
-            // Set the result in CgstVD
-            cgstVD.value = result.toFixed(2); // Adjust the decimal places as needed
-            sgstVD.value = result.toFixed(2); // Adjust the decimal places as needed
-        } else {
-            // Optionally, you may want to clear CgstVD if the conditions are not met
-            cgstVD.value = "";
-        }
-
-        // Check if PartnerSalesCost is filled and IGSTPD has a value
-        if (partnerSalesCost !== "" && igstPD !== "") {
-            // Convert the values to numbers and multiply them
-            var result = parseFloat(partnerSalesCost) * (parseFloat(igstPD) / 100);
-
-            // Set the result in CgstVD
-            igstVD.value = result.toFixed(2);
-        } else {
-            // Optionally, you may want to clear IgstVD if the conditions are not met
-            igstVD.value = "";
-        }
-    }*@
 
 
         function updateCgstVP2() {
@@ -1108,39 +1049,6 @@
         }
     }
 
-    @*function updateCgstVP3() {
-
-        var unitpercase = parseFloat(document.getElementById("UnitPerCase").value) || 0;
-
-        var retailercost = parseFloat(document.getElementById("RetailerCost").value);
-        var CgstPR = parseFloat(document.getElementById("CGSTPR").value);
-        var IgstPR = parseFloat(document.getElementById("IGSTPR").value);
-
-        var cgstVR = document.getElementById("CgstVR");
-        var sgstVR = document.getElementById("SgstVR");
-        var igstVR = document.getElementById("IgstVR");
-
-        var retaillandingcost = document.getElementById("RetailerLandingCost");
-
-        if (retailercost !== "" && CgstPR !== ""){
-
-            cgstVR.value = parseFloat(retailercost) * parseFloat(CgstPR/100);
-            sgstVR.value = parseFloat(retailercost) * parseFloat(CgstPR/100);
-            igstVR.value = parseFloat(retailercost) * parseFloat(IgstPR/100);
-
-            retaillandingcost.value = parseFloat(retailercost) + (parseFloat(cgstVR.value) * 2);
-
-
-            var retaillandingvalue = document.getElementById("RetailerLandingCost").value;
-
-            document.getElementById("RetailerCaseCost").value = parseFloat(retaillandingvalue) * parseFloat(unitpercase);
-
-        }
-        else{
-            cgstVR.value = "";
-        }
-
-    }*@
 
         function updateCgstVP3() {
 

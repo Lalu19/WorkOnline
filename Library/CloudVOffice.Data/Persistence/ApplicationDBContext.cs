@@ -2,6 +2,7 @@
 using CloudVOffice.Core.Domain.Buyers;
 using CloudVOffice.Core.Domain.Company;
 using CloudVOffice.Core.Domain.Comunication;
+using CloudVOffice.Core.Domain.DeliveryPartners;
 using CloudVOffice.Core.Domain.Distributor;
 using CloudVOffice.Core.Domain.Distributors;
 using CloudVOffice.Core.Domain.EmailTemplates;
@@ -125,6 +126,7 @@ namespace CloudVOffice.Data.Persistence
 
         public virtual DbSet<SalesAdminTarget> SalesAdminTargets { get; set; }
         public virtual DbSet<SalesManagerTarget> SalesManagerTargets { get; set; }
+        public virtual DbSet<SalesExecutiveRegistration> SalesExecutiveRegistrations { get; set; }
 
 		#endregion
 
@@ -147,6 +149,7 @@ namespace CloudVOffice.Data.Persistence
 		public virtual DbSet<DPO> DPO { get; set; }		
 		public virtual DbSet<DPOItems> DPOItems { get; set; }		
 		public virtual DbSet<DistributorRegistration> DistributorRegistrations { get; set; }
+		public virtual DbSet<DeliveryPartner> DeliveryPartners { get; set; }
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -632,10 +635,20 @@ namespace CloudVOffice.Data.Persistence
              .ValueGeneratedNever();
 
 
-			#endregion
+            modelBuilder.Entity<SalesExecutiveRegistration>()
+   .Property(s => s.CreatedDate)
+   .HasDefaultValueSql("getdate()");
 
-			#region Orders
-			modelBuilder.Entity<Checkout>()
+            modelBuilder.Entity<SalesExecutiveRegistration>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+             .ValueGeneratedNever();
+
+
+            #endregion
+
+            #region Orders
+            modelBuilder.Entity<Checkout>()
 	   .Property(s => s.CreatedDate)
 	   .HasDefaultValueSql("getdate()");
 
@@ -789,6 +802,16 @@ namespace CloudVOffice.Data.Persistence
 
 
             modelBuilder.Entity<DistributorRegistration>()
+              .Property(s => s.Deleted)
+              .HasDefaultValue(false)
+              .ValueGeneratedNever();
+
+            modelBuilder.Entity<DeliveryPartner>()
+            .Property(s => s.CreatedDate)
+            .HasDefaultValueSql("getdate()");
+
+
+            modelBuilder.Entity<DeliveryPartner>()
               .Property(s => s.Deleted)
               .HasDefaultValue(false)
               .ValueGeneratedNever();
