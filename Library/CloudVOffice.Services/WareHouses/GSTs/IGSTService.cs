@@ -17,5 +17,7 @@ namespace CloudVOffice.Services.WareHouses.GSTs
         public List<GST> GetGSTList();
         public MessageEnum GSTUpdate(GSTDTO gstDTO);
         public MessageEnum GSTDelete(Int64 gstId, Int64 DeletedBy);
+
+        public string GetGstForSeller(int SellerRegistrationId);
     }
 }

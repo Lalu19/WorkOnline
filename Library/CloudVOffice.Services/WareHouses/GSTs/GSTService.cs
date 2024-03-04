@@ -1,4 +1,5 @@
 ﻿using CloudVOffice.Core.Domain.Common;
+using CloudVOffice.Core.Domain.Sellers;
 using CloudVOffice.Core.Domain.WareHouses.GST;
 using CloudVOffice.Data.DTO.ProductCategories;
 using CloudVOffice.Data.DTO.WareHouses.GSTs;
@@ -114,6 +115,34 @@ namespace CloudVOffice.Services.WareHouses.GSTs
             }
         }
 
+
+        public string GetGstForSeller(int SellerRegistrationId)
+        {
+            try
+            {
+                var a = _dbContext.SellerRegistrations.Where(s => s.SellerRegistrationId == SellerRegistrationId).Select(x => x.State).FirstOrDefault();                
+                if (a != null)
+                {
+                    a = a.Trim();
+
+                    if (a == "Odisha")
+                    {
+                        return a;
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+
+                return null;
+
+            }
+            catch
+            {
+                throw;
+            }
+        }
         
     }
 }

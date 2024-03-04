@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CloudVOffice.Core.Domain.ProductCategories;
+using CloudVOffice.Core.Domain.Sellers;
 using CloudVOffice.Core.Domain.WareHouses;
 using CloudVOffice.Core.Domain.WareHouses.Brands;
 using CloudVOffice.Core.Domain.WareHouses.Districts;
@@ -31,5 +32,6 @@ namespace CloudVOffice.Data.DTO.WareHouses.ViewModel
 		public List<Employee> Employee { get; set; }
 		public List<Unit> Unit { get; set; }
 		public List<Brand> Brand { get; set; }
+		public List<SellerRegistration> SellerRegistration { get; set; }
 	}
 }

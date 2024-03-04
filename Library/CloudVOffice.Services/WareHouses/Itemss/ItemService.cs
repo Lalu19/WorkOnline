@@ -93,6 +93,17 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						item.CGST = itemDTO.CGST;
 						item.SellerMargin = itemDTO.SellerMargin;
 
+
+						item.RetailerCost = itemDTO.RetailerCost;
+						item.RetailerCaseCost = itemDTO.RetailerCaseCost;
+						item.RetailerLandingCost = itemDTO.RetailerLandingCost;
+						item.DistributorLandingCost = itemDTO.DistributorLandingCost;
+						item.PurchaseLandingCost = itemDTO.PurchaseLandingCost;
+						item.IGST = itemDTO.IGST;
+
+
+
+
 						//item.HandlingType = itemDTO.HandlingType;
 
 						item.HandlingTypeId = itemDTO.HandlingTypeId;
@@ -152,8 +163,18 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 							BarCodeNotAvailable = item.BarCodeNotAvailable,
 							MRP = item.MRP,
 							MRPCaseCost = item.MRPCaseCost,
+
+
 							PurchaseCost = item.PurchaseCost,
 							PurchaseCaseCost = item.PurchaseCaseCost,
+							PurchaseLandingCost = item.PurchaseLandingCost,
+							DistributorLandingCost = item.DistributorLandingCost,
+							RetailerCost = item.RetailerCost,
+							RetailerLandingCost = item.RetailerLandingCost,
+							RetailerCaseCost = item.RetailerCaseCost,
+							IGST = item.IGST,
+
+
 							SalesCost = item.SalesCost,
 							SalesCaseCost = item.SalesCaseCost,
 							PartnerSalesCost=item.PartnerSalesCost,
@@ -307,6 +328,15 @@ namespace CloudVOffice.Services.WareHouses.Itemss
                         item.SGST = itemDTO.SGST;
                         item.CGST = itemDTO.CGST;
 						item.SellerMargin=itemDTO.SellerMargin;
+
+						item.RetailerCost= itemDTO.RetailerCost;
+						item.RetailerCaseCost = itemDTO.RetailerCaseCost;
+						item.RetailerLandingCost= itemDTO.RetailerLandingCost;
+						item.DistributorLandingCost= itemDTO.DistributorLandingCost;
+						item.PurchaseLandingCost= itemDTO.PurchaseLandingCost;
+						item.IGST = itemDTO.IGST;
+
+
 
                         //item.HandlingType = itemDTO.HandlingType;
                         item.HandlingTypeId = itemDTO.HandlingTypeId;

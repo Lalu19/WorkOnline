@@ -26,6 +26,9 @@ using CloudVOffice.Services.WareHouses.Employees;
 using CloudVOffice.Services.WareHouses.Districts;
 using CloudVOffice.Services.WareHouses.UOMs;
 using CloudVOffice.Services.WareHouses.Brands;
+using CloudVOffice.Services.Sellers;
+using CloudVOffice.Core.Domain.Sellers;
+using Microsoft.Identity.Client;
 
 namespace Warehouse.Management.Controllers
 {
@@ -35,7 +38,7 @@ namespace Warehouse.Management.Controllers
         private readonly IItemService _itemService;
 		private readonly IWebHostEnvironment _hostingEnvironment;
 		private readonly IHandlingTypeService _handlingTypeService;
-		//private readonly IGSTService _gSTService;
+		private readonly IGSTService _gSTService;
 		private readonly ISectorService _sectorService;
 		private readonly ICategoryService _categoryService;
 		private readonly ISubCategory1Service _subCategory1Service;
@@ -46,56 +49,63 @@ namespace Warehouse.Management.Controllers
 		private readonly IEmployeeService _employeeService;
 		private readonly IUnit _unitService;
 		private readonly IBrandService _brandService;
+		private readonly ISellerRegistrationService _sellerRegistrationService;
 
 
 
-		public ItemController(IItemService itemService, IWebHostEnvironment hostingEnvironment, IHandlingTypeService handlingTypeService/*, IGSTService gSTService*/, ISectorService sectorService, ICategoryService categoryService, ISubCategory1Service subCategory1Service, ISubCategory2Service subCategory2Service, IWareHouseService warehouseService, IVendorService vendorService, IEmployeeService employeeService, IAddDistrictService addDistrictService, IUnit unitService,IBrandService brandService)
+		public ItemController(IItemService itemService, IWebHostEnvironment hostingEnvironment, IHandlingTypeService handlingTypeService, IGSTService gSTService, ISectorService sectorService, ICategoryService categoryService, ISubCategory1Service subCategory1Service, ISubCategory2Service subCategory2Service, IWareHouseService warehouseService, IVendorService vendorService, IEmployeeService employeeService, IAddDistrictService addDistrictService, IUnit unitService,IBrandService brandService, ISellerRegistrationService sellerRegistrationService)
         {
 			_hostingEnvironment = hostingEnvironment;
 			_itemService = itemService;
 			_handlingTypeService = handlingTypeService;
-			//_gSTService = gSTService;
+			_gSTService = gSTService;
 			_sectorService = sectorService;
             _categoryService = categoryService;
 			_subCategory1Service = subCategory1Service;
 			_subCategory2Service = subCategory2Service;
 			_warehouseService = warehouseService;
             _addDistrictService = addDistrictService;
-			_vendorService = vendorService;
+			//_vendorService = vendorService;
 			_employeeService = employeeService;
 			_unitService = unitService;
 			_brandService = brandService;
+			_sellerRegistrationService = sellerRegistrationService;
 		}
 
         [HttpGet]
         public IActionResult ItemCreate(int? itemId)
         {
 
-			//ViewBag.Gst = _gSTService.GetGSTList();
-			//ViewBag.HandlingTypes = _handlingTypeService.GetHandlingTypeList();
-			//ViewBag.Sectors = _sectorService.GetSectorList();
-			//ViewBag.Categories = _categoryService.GetCategoryList();
-			//ViewBag.SubCategories1 = _subCategory1Service.GetSubCategory1List();
+            //ViewBag.Gst = _gSTService.GetGSTList();
+            //ViewBag.HandlingTypes = _handlingTypeService.GetHandlingTypeList();
+            //ViewBag.Sectors = _sectorService.GetSectorList();
+            //ViewBag.Categories = _categoryService.GetCategoryList();
+            //ViewBag.SubCategories1 = _subCategory1Service.GetSubCategory1List();
 
-			var viewForItem = new ViewForItem
-			{
-				HandlingTypes = _handlingTypeService.GetHandlingTypeList(),
-				WareHuose = _warehouseService.GetWareHouseList(),
-				AddDistrict = _addDistrictService.GetAddDistrictList(),
-				Vendor = _vendorService.GetVendorList(),
-				Employee = _employeeService.GetEmployees(),
-				//GST = _gSTService.GetGSTList(),
-				Sectors = _sectorService.GetSectorList(),
-				Category = _categoryService.GetCategoryList(),
-				SubCategory1 = _subCategory1Service.GetSubCategory1List(),
-				SubCategory2 = _subCategory2Service.GetSubCategory2List(),
-				Unit = _unitService.GetUnit(),
-				Brand = _brandService.GetBrandList(),
-				CreatedItemDTO = new ItemDTO()
-			};
+            //ViewBag.Sellers = _sellerRegistrationService.GetSellerRegistrationList();
 
 
-			//ItemDTO item = new ItemDTO();
+
+            var viewForItem = new ViewForItem
+            {
+                HandlingTypes = _handlingTypeService.GetHandlingTypeList(),
+                WareHuose = _warehouseService.GetWareHouseList(),
+				SellerRegistration = _sellerRegistrationService.GetSellerRegistrationList(),
+                AddDistrict = _addDistrictService.GetAddDistrictList(),
+                //Vendor = _vendorService.GetVendorList(),
+                Employee = _employeeService.GetEmployees(),
+                //GST = _gSTService.GetGSTList(),
+                Sectors = _sectorService.GetSectorList(),
+                Category = _categoryService.GetCategoryList(),
+                SubCategory1 = _subCategory1Service.GetSubCategory1List(),
+                SubCategory2 = _subCategory2Service.GetSubCategory2List(),
+                Unit = _unitService.GetUnit(),
+                Brand = _brandService.GetBrandList(),
+                CreatedItemDTO = new ItemDTO()
+            };
+
+
+            //ItemDTO item = new ItemDTO();
             if (itemId != null)
             {
                 var item1 = _itemService.GetItemByItemId(int.Parse(itemId.ToString()));
@@ -120,17 +130,25 @@ namespace Warehouse.Management.Controllers
 				viewForItem.CreatedItemDTO.Barcode = item1.Barcode;
 				viewForItem.CreatedItemDTO.BarCodeNotAvailable = item1.BarCodeNotAvailable;
 				viewForItem.CreatedItemDTO.MRP = item1.MRP;
-				viewForItem.CreatedItemDTO.MRPCaseCost = item1.MRPCaseCost;
-				viewForItem.CreatedItemDTO.PurchaseCost = item1.PurchaseCost;
-				viewForItem.CreatedItemDTO.PurchaseCaseCost = item1.PurchaseCaseCost;
+				viewForItem.CreatedItemDTO.MRPCaseCost = item1.MRPCaseCost;				
 				viewForItem.CreatedItemDTO.SalesCost = item1.SalesCost;
-				viewForItem.CreatedItemDTO.SalesCaseCost = item1.SalesCaseCost;
-				viewForItem.CreatedItemDTO.PartnerSalesCost= item1.PartnerSalesCost;
-				viewForItem.CreatedItemDTO.PartnerSalesCaseCost= item1.PartnerSalesCaseCost;
+				viewForItem.CreatedItemDTO.SalesCaseCost = item1.SalesCaseCost;				
 				viewForItem.CreatedItemDTO.CGST = item1.CGST;
 				viewForItem.CreatedItemDTO.SGST = item1.SGST;
 				viewForItem.CreatedItemDTO.HSN = item1.HSN;
 				viewForItem.CreatedItemDTO.SellerMargin = item1.SellerMargin;
+
+				viewForItem.CreatedItemDTO.RetailerCost = item1.RetailerCost;
+				viewForItem.CreatedItemDTO.RetailerLandingCost = item1.RetailerLandingCost;
+				viewForItem.CreatedItemDTO.RetailerCaseCost = item1.RetailerCaseCost;
+                viewForItem.CreatedItemDTO.PartnerSalesCost = item1.PartnerSalesCost;
+                viewForItem.CreatedItemDTO.PartnerSalesCaseCost = item1.PartnerSalesCaseCost;
+				viewForItem.CreatedItemDTO.DistributorLandingCost = item1.DistributorLandingCost;
+                viewForItem.CreatedItemDTO.PurchaseCost = item1.PurchaseCost;
+                viewForItem.CreatedItemDTO.PurchaseCaseCost = item1.PurchaseCaseCost;
+				viewForItem.CreatedItemDTO.PurchaseLandingCost = item1.PurchaseLandingCost;
+				viewForItem.CreatedItemDTO.IGST = item1.IGST;
+
 
                 //viewForItem.CreatedItemDTO.HandlingType = item1.HandlingType;
                 //viewForItem.CreatedItemDTO.WareHouseName = item1.WareHouseName;
@@ -143,6 +161,7 @@ namespace Warehouse.Management.Controllers
                 viewForItem.CreatedItemDTO.AddDistrictId = item1.AddDistrictId;
                 viewForItem.CreatedItemDTO.VendorId = item1.VendorId;
                 viewForItem.CreatedItemDTO.EmployeeId = item1.EmployeeId;
+
 
                 viewForItem.CreatedItemDTO.Thumbnail = item1.Thumbnail;
 				viewForItem.CreatedItemDTO.InvoiceNo = item1.InvoiceNo;
@@ -453,5 +472,14 @@ namespace Warehouse.Management.Controllers
 		{
 			return Json(_itemService.GetItemById(ItemId));
 		}
-	}
+
+
+        [HttpGet]
+        public string GetGstForSeller(int sellerRegistrationId)
+        {
+            string a = _gSTService.GetGstForSeller(sellerRegistrationId);
+			return a;
+        }
+
+    }
 }
