@@ -148,12 +148,6 @@ namespace Web.API.Controllers.ProductCategories
 			return Ok(categoryData);
 		}
 
-        //[HttpGet("{SectorId}")]
-        //public IActionResult GetCategoryByFarmingSectorId(int SectorId)
-        //{
-        //    var a = _categoryService.GetCategoryForFarmingSector(SectorId);
-
-        //    return Ok(a);
-        //}
+     
     }
 }

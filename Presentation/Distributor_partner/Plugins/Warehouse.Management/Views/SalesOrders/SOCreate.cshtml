@@ -1,0 +1,809 @@
+﻿@using System.Collections;
+@using Newtonsoft.Json;
+@{
+    Layout = "_MainAppLayout";
+    ViewData["Title"] = "Order DashBoard";
+    var data = new string[] { "Contains", "StartsWith", "EndsWith" };
+
+}
+<style>
+    .has-icon {
+        flex: 0 0 25px;
+    }
+
+    .box {
+        width: 100%;
+        height: auto;
+        text-align: center;
+        display: inline-block;
+        vertical-align: top;
+        border-radius: 6px;
+        height: 170px;
+    }
+
+    .item-name {
+        font-size: 15px;
+        color: #ffffff;
+        display: block;
+        font-weight: 700;
+    }
+
+    .price {
+        font-size: 15px;
+        color: #ffffff;
+        display: block;
+        font-weight: 700;
+        padding: 0 0 10px 0;
+    }
+
+    img.itemimagess {
+        width: 100%;
+        height: 100px;
+        padding: 5px 5px 5px 5px;
+    }
+
+    .col-xl-2.col-lg-2.col-md-2.col-sm-2.itembox {
+        padding: 0px 5px 5px 5px;
+    }
+
+    .image {
+        height: 100px;
+    }
+</style>
+<style>
+
+
+    .qty-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 18px;
+    }
+
+        .qty-container .input-qty {
+            text-align: center;
+            padding: 6px 0px;
+            border: 1px solid #d4d4d4;
+            max-width: 40px;
+        }
+
+        .qty-container .qty-btn-minus,
+        .qty-container .qty-btn-plus {
+            border: 1px solid #d4d4d4;
+            padding: 10px 10px;
+            font-size: 10px;
+            height: 32px;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .qty-container .qty-btn-plus {
+            margin-left: -1px;
+        }
+
+        .qty-container .qty-btn-minus {
+            margin-right: -1px;
+        }
+
+    .btn-cornered,
+    .input-cornered {
+        border-radius: 4px;
+    }
+
+    .btn-rounded {
+        border-radius: 50%;
+    }
+
+    .input-rounded {
+        border-radius: 50px;
+    }
+
+    p.card-text {
+        font-weight: 600;
+        font-size: 13px;
+        margin-left: -7px;
+        /* color:white; */
+    }
+
+    .row.itemlist {
+        padding: 6px;
+    }
+
+    .row.itemlists {
+        margin-right: 0px;
+        margin-left: 0px;
+        margin-bottom: 5px;
+    }
+
+    .card-body.checkoutitembody {
+        padding: 8px 15px 8px 7px;
+    }
+
+    .card-header.itemorderheder {
+        text-align: center;
+        font-weight: 600;
+    }
+
+    .card-body.checkoutitembody {
+        height: 350px;
+    }
+
+    li.categorymenu {
+        border: 3px solid #56c16f;
+        margin: 2px 0 2px 0px;
+        font-weight: 600;
+        border-radius: 5px;
+        padding: 10px 0px 10px 5px;
+    }
+
+    .card .card-header {
+        background: #ffffff;
+        border-bottom: 2px solid #56c16d;
+    }
+
+    .card .card-footer {
+        background: #ffffff;
+        border-top: 2px solid #56c16d;
+    }
+
+    .card .card-header {
+        background: #ffffff;
+        border-bottom: 2px solid #56c16d;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .app-container {
+        position: relative;
+        background: #e8f6eb;
+        top: 60px;
+        padding-bottom: 20px;
+    }
+
+    .app-wrap {
+        min-height: 100vh;
+        position: relative;
+        background-color: #e8f6eb;
+    }
+
+    .card-body.menubody {
+        padding: 0px 4px 0px 4px;
+    }
+
+    .card.cart {
+        position: fixed;
+    }
+
+    .main-heading {
+        padding: 10px 0 0 0;
+    }
+</style>
+<style>
+    form {
+        max-width: 80%;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .input-group {
+        position: relative;
+    }
+
+    label {
+        position: absolute;
+        right: 2%;
+        top: 50%;
+        transform: translatey(-50%);
+        color: rgba(0, 0, 0, 0.08);
+        transition: all 0.2s ease;
+    }
+
+    input.searchinput {
+        width: 100%;
+        padding: 8px 30px 8px 22px;
+        border: 1px solid rgb(0 0 0 / 35%);
+        outline: none;
+        font-size: 16px;
+        box-shadow: 0px 2px 5px rgb(0 0 0 / 27%);
+        color: #56c16d;
+        font-weight: bold;
+        letter-spacing: 1px;
+        border-radius: 24px;
+        transition: all 0.2s ease;
+        text-transform: uppercase;
+        margin: 5px 0 5px 0;
+    }
+
+    ::-webkit-input-placeholder { /* WebKit browsers */
+        text-transform: none;
+    }
+
+    input:focus {
+        border-color: #56c16d;
+    }
+
+        input:focus + label {
+            transform: scale(1.05) translatey(-50%);
+            color: #56c16d;
+        }
+
+    .checkoutitembody {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+</style>
+<style>
+    .action-buttons button {
+        margin-right: 5px;
+        padding: 5px 10px;
+        font-size: 10px;
+    }
+
+    .card {
+        max-height: 400px;
+        overflow-y: auto;
+        position: relative;
+    }
+
+    .card-footer {
+        padding: 10px;
+        background-color: #f9f9f9;
+        margin-left: 12px;
+    }
+
+
+</style>
+<header class="main-heading">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+                <div class="page-icon">
+                    <a href="/WareHouse/WareHouseDashboard/Dashboard"><i class="icon-home4"></i></a>
+                </div>
+
+            </div>
+            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+                <form>
+                    <div class="input-group">
+                        <input type="text" id="search" class="searchinput" placeholder="Search item's..." autocomplete="off">
+                        <label for="search"><i class="icon-search"></i></label>
+                    </div>
+
+                    <div class="suggestion-list">
+                    </div>
+                </form>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+                <div class="right-actions">
+                    <span class="last-login"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="row gutters">
+    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+        <br>
+        <div class="card ">
+            <div class="card-header itemorderheder">
+                Order
+            </div>
+
+            <div class="card-body">
+                <nav class="side-nav">
+                    <ul class="unifyMenu" id="unifyMenu">
+                        @foreach (var PO in ViewBag.POlist)
+                        {
+                            <li class="categorymenu" id="menuItem_@PO.POPUniqueNumber" onclick="POIdOnClick(@PO.PurchaseOrderParentId, @PO.POPUniqueNumber)">
+                                <a class="has-arrow" style="cursor:pointer">
+                                    <span class="nav-title">@PO.POPUniqueNumber</span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div>
+            <div class="card-footer">
+                <p>Total Orders: <span id="totalPOCount">0</span></p>
+
+                @{
+                    int totalQuantitySum = 0;
+                    foreach (var PO in ViewBag.POlist)
+                    {
+                        totalQuantitySum += PO.TotalQuantity;
+                    }
+                }
+                <p>Order Value: <span id="totalQuantity">@totalQuantitySum</span></p>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7">
+        <br />
+        <div class="card">
+            <div class="card-header" id="categoryname"> Items</div>
+            <div class="card-body" id="itemboxesbody">
+                <div class="row " id="itemboxes">
+                    <div id="orderInfo">
+                    </div>
+                    <div id="itemsTable">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+        <br />
+        <div class="card">
+            <div class="card-header">Billing Section</div>
+            <div class="card-body" id="acceptedItemContainer">
+            </div>
+        </div>
+        <div class="card-footer">
+            <button onclick="printInvoice()">Print Invoice</button>
+        </div>
+    </div>
+
+
+</div>
+<script>
+    //document.addEventListener("DOMContentLoaded", function () {
+    //    var totalPOCount = @ViewBag.POlist.Count;
+    //    document.getElementById("totalPOCount").innerText = totalPOCount;
+    //});
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var totalPOCount = @ViewBag.POlist.Count;
+        document.getElementById("totalPOCount").innerText = totalPOCount;
+
+        // Initialize total amount for each order
+        var totalOrderAmounts = {};
+    @foreach (var PO in ViewBag.POlist)
+    {
+        <text>totalOrderAmounts[@PO.POPUniqueNumber] = 0; </text>
+    }
+
+            // Display total amount for each order
+            Object.keys(totalOrderAmounts).forEach(function (key) {
+                var totalAmountSpan = document.createElement("span");
+                totalAmountSpan.id = "totalOrderAmount_" + key;
+                totalAmountSpan.innerText = "0.00";
+                document.querySelector("#totalAmount").parentNode.appendChild(document.createElement("br"));
+                document.querySelector("#totalAmount").parentNode.appendChild(totalAmountSpan);
+            });
+    });
+</script>
+<script>
+    var save = null;
+
+    var originalItemsTableHtml2 = '';
+    var globalId;
+
+    //function POId(Id, POPUniqueNumber) {
+    function POIdOnClick(Id, POPUniqueNumber) {
+
+        globalId = POPUniqueNumber;
+
+        resetItemDetails();
+
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/PurchaseOrder/GetItemsByPurchaseOrderParentId",
+            data: { PurchaseOrderParentId: Id },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+
+                var orderInfoHtml = '<div><strong>Customer Name:</strong> ' + data[0].sellerRegistration["name"] + '</div>';
+                orderInfoHtml += '<div><strong>Address:</strong> ' + data[0].sellerRegistration["address"] + '</div>';
+                orderInfoHtml += '<div><strong>Phone No.:</strong> ' + data[0].sellerRegistration["primaryPhone"] + '</div>';
+                orderInfoHtml += '<div><strong>Order Number:</strong> ' + POPUniqueNumber + '</div>';
+                $('#orderInfo').html(orderInfoHtml);
+
+                var table = '<table class="table"><thead><tr><th>Sl No.</th><th>Product Name</th><th>Selling Price</th><th>Quantity</th><th>Amount</th><th>GST</th><th>HSN</th><th>Action</th></tr></thead><tbody>';
+                var totalAmount = 0;
+                for (var i = 0; i < data.length; i++) {
+                    //table += '<tr onclick="ItemID(' + data[i].item["itemId"] + ')">';
+                    table += '<tr class="item-row" data-item-id="' + data[i].item["itemId"] + '" onclick="ItemID(' + data[i].item["itemId"] + ')">';
+                    table += '<td>' + (i + 1) + '</td>';
+                    table += '<td>' + data[i].item["itemName"] + '</td>';
+                    table += '<td>₹' + data[i].item["salesCost"] + '</td>';
+                    table += '<td>' + data[i]["quantity"] + '</td>';
+                    table += '<td>' + data[i]["value"] + '</td>';
+                    // table += '<td>' + data[i].item["sgst"] + '</td>';
+                    var gstSum = data[i].item["cgst"] + data[i].item["sgst"];
+                    table += '<td>' + gstSum + '</td>';
+                    table += '<td>' + data[i].item["hsn"] + '</td>';
+                    //var finalAmount = data[i]["quantity"] * data[i]["value"];
+                    //table += '<td>' + finalAmount + '</td>';
+
+                    table += '<td class="action-buttons">';
+                    //table += '<button onclick="acceptAction(' + data[i].item["itemId"] + ')">Accept</button>';
+                    //table += '<button onclick="acceptAction(' + data[i].item["itemId"] + ', \'' + data[i].item["itemName"] + '\', \'' + data[i].item["salesCost"] + '\', \'' + data[i].unitId + '\', \'' + data[i].item["caseWeight"] + '\', \'' + data[i].item["mrp"] + '\', \'' + data[i].item["cgst"] + '\', \'' + data[i].item["sgst"] + '\', \'' + data[i]["quantity"] + '\')">Accept</button>';
+                    table += '<button onclick="acceptAction(\'' + data[i].item["itemName"] + '\', \'' + data[i].item["salesCost"] + '\', \'' + data[i].item["shortName"] + '\', \'' + data[i].item["caseWeight"] + '\', \'' + data[i].item["mrp"] + '\', \'' + data[i].item["cgst"] + '\', \'' + data[i].item["sgst"] + '\', \'' + data[i]["quantity"] + '\')">Accept</button>';
+
+                    table += '<button onclick="rejectAction(' + data[i].item["itemId"] + ')">Reject</button>';
+                    table += '</td>';
+
+                    table += '</tr>';
+                    totalAmount += parseFloat(data[i]["value"]);
+                }
+
+                table += '</tbody></table>';
+                table += '<div>Total Amount: ₹' + totalAmount.toFixed(2) + '</div>';
+
+
+
+                $('#itemsTable').html(table);
+
+                originalItemsTableHtml2 = table;
+
+                // Populate #itemsTable with the generated table HTML
+                $('#itemsTable').html(originalItemsTableHtml2);
+
+                if (Id) {
+                    localStorage.setItem('selectedCategoryId', Id);
+                }
+
+
+                //if (isTableEmpty()) {
+                //    console.log('Table is completely empty2');
+
+                //    $('#menuItem_' + Id).find('#' + Id).remove();
+                //}
+
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+    function resetItemDetails() {
+        itemDetails.length = 0; // Clear all elements in the array
+    }
+
+
+    var originalAcceptedItemHtml = '';  //to handle the cancel button
+    var removedRowHtml = '';
+
+
+    function acceptAction(itemName, salesCost, shortName, caseWeight, mrp, cgst, sgst, quantity) {
+        // Check if data is already present in acceptedItemContainer
+        if ($('#acceptedItemContainer').children().length === 0) {
+            var acceptedItemHtml = '<div class="accepted-item">';
+            acceptedItemHtml += '<strong>Product Details:</strong>';
+            acceptedItemHtml += '<div>Item Name: ' + itemName + '</div>';
+            acceptedItemHtml += '<div>Sales Cost: ' + salesCost + '</div>';
+            acceptedItemHtml += '<div>UOM: ' + shortName + '</div>';
+            acceptedItemHtml += '<div>Case Weight: ' + caseWeight + '</div>';
+            acceptedItemHtml += '<div>MRP: ' + mrp + '</div>';
+            acceptedItemHtml += '<div>CGST: ' + cgst + '</div>';
+            acceptedItemHtml += '<div>SGST: ' + sgst + '</div>';
+            acceptedItemHtml += '<div>Quantity: ' + quantity + '</div>';
+            acceptedItemHtml += '<div class="action-buttons">';
+            acceptedItemHtml += '<button onclick="acceptButtonClick(\'' + itemName + '\', \'' + salesCost + '\', \'' + shortName + '\', \'' + caseWeight + '\', \'' + mrp + '\', \'' + cgst + '\', \'' + sgst + '\', \'' + quantity + '\')">Accept</button>';
+            acceptedItemHtml += '<button onclick="editButtonClick(\'' + itemName + '\', \'' + salesCost + '\', \'' + shortName + '\', \'' + caseWeight + '\', \'' + mrp + '\', \'' + cgst + '\', \'' + sgst + '\', \'' + quantity + '\')">Edit</button>';
+            acceptedItemHtml += '<button onclick="backButtonClick(\'' + itemName + '\', \'' + salesCost + '\', \'' + shortName + '\', \'' + caseWeight + '\', \'' + mrp + '\', \'' + cgst + '\', \'' + sgst + '\', \'' + quantity + '\')">Back</button>';
+            acceptedItemHtml += '</div>';
+            acceptedItemHtml += '</div>';
+
+            // Remove the row from the table based on the itemName
+            var removedRow = $('#itemsTable').find('td:contains("' + itemName + '")').closest('tr').remove();
+
+            // Update the total amount by subtracting the value of the removed row
+            var removedValue = parseFloat(removedRow.find('td:eq(4)').text().replace('₹', '').trim());
+            var totalAmount = parseFloat($('#itemsTable').find('div:contains("Total Amount:")').text().replace('Total Amount: ₹', '').trim());
+            totalAmount -= removedValue;
+
+            // Update the total amount in the table
+            $('#itemsTable').find('div:contains("Total Amount:")').text('Total Amount: ₹' + totalAmount.toFixed(2));
+
+            $('#acceptedItemContainer').append(acceptedItemHtml);
+            originalAcceptedItemHtml = $('#acceptedItemContainer').html();
+
+        }
+    }
+
+
+
+
+    function backButtonClick() {
+        // Restore the original HTML content of #acceptedItemContainer
+        //$('#acceptedItemContainer').html(originalAcceptedItemHtml2);
+
+
+        $('#itemsTable').html(originalItemsTableHtml2);
+        //$('#itemsTable').html(originalAcceptedItemHtml);
+        $('#acceptedItemContainer').empty();
+
+
+        //ChatGPT
+
+    }
+
+
+    function isTableEmpty() {
+        return $('#itemsTable tbody tr').length === 0;
+    }
+
+    // Example usage:
+    //if (isTableEmpty()) {
+    //    console.log('No rows in the table');
+    //} else {
+    //    console.log('Table has rows');
+    //}
+
+
+    function editButtonClick(itemName, salesCost, shortName, caseWeight, mrp, cgst, sgst, quantity) {
+
+
+        // Create an editable form for the accepted item
+        var acceptedItemForm = '<form id="editForm">';
+        acceptedItemForm += '<strong>Product Details:</strong>';
+        acceptedItemForm += '<div>Item Name:<input type="text" id="editItemName" value="' + itemName + '"></div>';
+        acceptedItemForm += '<div>Sales Cost:<input type="text" id="editSalesCost" value="' + salesCost + '"></div>';
+        acceptedItemForm += '<div>UOM:<input type="text" id="editShortName" value="' + shortName + '"></div>';
+        acceptedItemForm += '<div>Case Weight:<input type="text" id="editCaseWeight" value="' + caseWeight + '"></div>';
+        acceptedItemForm += '<div>MRP:<input type="text" id="editMRP" value="' + mrp + '"></div>';
+        acceptedItemForm += '<div>CGST:<input type="text" id="editCGST" value="' + cgst + '"></div>';
+        acceptedItemForm += '<div>SGST:<input type="text" id="editSGST" value="' + sgst + '"></div>';
+        acceptedItemForm += '<div>Quantity:<input type="text" id="editQuantity" value="' + quantity + '"></div>';
+        acceptedItemForm += '<div class="action-buttons">';
+        acceptedItemForm += '<button type="button" onclick="saveEdit()">Save</button>';
+        acceptedItemForm += '<button type="button" onclick="cancelEdit()">Cancel</button>';
+        acceptedItemForm += '</div>';
+        acceptedItemForm += '</form>';
+
+        // Append the editable form to the acceptedItemContainer
+        $('#acceptedItemContainer').html(acceptedItemForm);
+    }
+
+
+    function saveEdit() {
+        var editedData = {
+            itemName: $('#ItemName').val(),
+            salesCost: $('#SalesCost').val(),
+            salesCost: parseFloat($('#SalesCost').val()),
+            shortName: $('#ShortName').val(),
+            caseWeight: $('#CaseWeight').val(),
+            caseWeight: parseFloat($('#CaseWeight').val()),
+            mrp: parseFloat($('#MRP').val()),
+            cgst: parseFloat($('#CGST').val()),
+            sgst: parseFloat($('#SGST').val()),
+            quantity: parseFloat($('#quantity').val())
+        };
+
+        var editedItemHtml = '<div class="edited-item">';
+        editedItemHtml += '<strong>Edited Product Details:</strong>';
+        editedItemHtml += '<div>Item Name: ' + editedData.itemName + '</div>';
+        editedItemHtml += '<div>Sales Cost: ' + editedData.salesCost + '</div>';
+        editedItemHtml += '<div>UOM: ' + editedData.shortName + '</div>';
+        editedItemHtml += '<div>Case Weight: ' + editedData.caseWeight + '</div>';
+        editedItemHtml += '<div>MRP: ' + editedData.mrp + '</div>';
+        editedItemHtml += '<div>CGST: ' + editedData.cgst + '</div>';
+        editedItemHtml += '<div>SGST: ' + editedData.sgst + '</div>';
+        editedItemHtml += '<div>Quantity: ' + editedData.quantity + '</div>';
+        editedItemHtml += '</div>';
+
+        $('#acceptedItemContainer').append(editedItemHtml);
+        save = $('#acceptedItemContainer').html();
+        $('#acceptedItemContainer').hide();
+        console.log("Edited Data:", editedData);
+    }
+
+    function cancelEdit() {
+        //$('#acceptedItemContainer').html(save);
+        $('#acceptedItemContainer').html(originalAcceptedItemHtml);
+    }
+    function rejectAction(itemId) {
+
+        // Remove the row from the table based on the itemId
+        var removedRow = $('#itemsTable').find('tr[data-item-id="' + itemId + '"]').remove();
+
+        // Update the total amount by subtracting the value of the removed row
+        var removedValue = parseFloat(removedRow.find('td:eq(4)').text().replace('₹', '').trim());
+        var totalAmount = parseFloat($('#itemsTable').find('div:contains("Total Amount:")').text().replace('Total Amount: ₹', '').trim());
+        totalAmount -= removedValue;
+
+        $('#itemsTable').find('div:contains("Total Amount:")').text('Total Amount: ₹' + totalAmount.toFixed(2));
+
+        if (isTableEmpty()) {
+            console.log('Table is empty');
+
+            $('#menuItem_' + globalId).remove();
+
+        }
+    }
+
+
+    var itemDetails = [];
+    var totalQuantity = 0;
+    var totalValue = 0;
+    var parentDetails = {};
+    //var parentDetails = [];
+    var parsedGlobalId = String(globalId);
+
+
+    function acceptButtonClick(itemName, salesCost, shortName, caseWeight, mrp, cgst, sgst, quantity) {
+        // Convert data types if needed
+        var parsedSalesCost = parseFloat(salesCost);
+        var parsedCaseWeight = parseFloat(caseWeight);
+        var parsedMRP = parseFloat(mrp);
+        var parsedCGST = parseFloat(cgst);
+        var parsedSGST = parseFloat(sgst);
+        var parsedQuantity = parseFloat(quantity);
+
+        // Create a JavaScript object with accepted item details
+        var acceptedItemData = {
+            itemName: itemName,
+            salesCost: parsedSalesCost,
+            shortName: shortName,
+            caseWeight: parsedCaseWeight,
+            mrp: parsedMRP,
+            cgst: parsedCGST,
+            sgst: parsedSGST,
+            quantity: parsedQuantity
+        };
+
+
+        totalQuantity += parsedQuantity;
+        totalValue += parsedMRP * parsedQuantity;
+
+        // Push the converted data into the itemDetails array
+        itemDetails.push(acceptedItemData);
+
+        // Clear the content of the acceptedItemContainer
+        $('#acceptedItemContainer').empty();
+        // Hide the corresponding menu item
+        //$('#menuItem_' + POPUniqueNumber).hide();
+
+        //createParentDetails();
+
+        parentDetails = {
+            //"POPUniqueNumber": globalId.toString(),
+            "POPUniqueNumber": globalId,
+            "TotalQuantity": totalQuantity,
+            "TotalAmount": totalValue
+        };
+    }
+
+    //var newTotalQuantity = parseFloat(totalQuantity);
+    //var newTotalAmount = parseFloat(totalValue);
+
+
+    
+
+    //function createParentDetails() {
+    //    var parentDetails = {
+    //        "POPUniqueNumber": parsedGlobalId,
+    //        "TotalQuantity": totalQuantity,
+    //        "TotalAmount": totalValue
+    //    };
+
+
+    
+
+
+    function printInvoice() {
+
+
+        var model = {
+            "Orders": itemDetails,
+            "ParentOrder": parentDetails
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "/WareHouse/SO/SalesOrderDataSave",
+            data: JSON.stringify(model),
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+
+                //RemovePOPUniqueSetOrderShipped(globalId);
+
+                 // <-- Corrected closing parenthesis
+
+                if (isTableEmpty()) {
+                    console.log('Table is empty');
+
+
+                    //console.log(typeof globalId);
+                    //RemovePOPUniqueSetOrderShipped(globalId);
+
+                    var GlobalIDs = parseInt(globalId);
+
+                    RemovePOPUniqueSetOrderShipped(parseInt(GlobalIDs));
+                    $('#menuItem_' + globalId).remove();
+
+
+
+                    function RemovePOPUniqueSetOrderShipped(parsedGlobalId) {
+                        console.log(typeof parsedGlobalId)
+                        $.ajax({
+                            type: "POST",
+                            url: "/WareHouse/SO/SOShippedSetTrue",
+                            //data: { globalId: parsedGlobalId }, // Use lowercase "globalId"
+                            data: JSON.stringify(parsedGlobalId),
+                            contentType: "application/json",
+                            dataType: "json",
+                            success: function (result) {
+                                console.log(result);
+                                console.log("Shipping Success");
+                            },
+                            error: function () {
+                                console.error("Error in AJAX call");
+                            }
+                        });
+                    }
+
+                }
+            },
+            error: function () {
+
+
+                if (isTableEmpty()) {
+                    console.log('Table is empty');
+
+
+                    //console.log(typeof globalId);
+                    //RemovePOPUniqueSetOrderShipped(globalId);
+
+                    var GlobalIDs = parseInt(globalId);
+
+                    RemovePOPUniqueSetOrderShipped(parseInt(GlobalIDs));
+                    $('#menuItem_' + globalId).remove();
+
+
+
+                    function RemovePOPUniqueSetOrderShipped(parsedGlobalId) {
+                        console.log(typeof parsedGlobalId)
+                        $.ajax({
+                            type: "POST",
+                            url: "/WareHouse/SO/SOShippedSetTrue",
+                            //data: { globalId: parsedGlobalId }, // Use lowercase "globalId"
+                            data: JSON.stringify(parsedGlobalId),
+                            contentType: "application/json",
+                            dataType: "json",
+                            success: function (result) {
+                                console.log(result);
+                                console.log("Shipping Success");
+                            },
+                            error: function () {
+                                console.error("Error in AJAX call");
+                            }
+                        });
+                    }
+
+                }
+
+            }
+        });
+    }
+
+
+
+
+
+
+    //function acceptButtonClick() {
+
+    //    save = $('#acceptedItemContainer').html();
+    //    console.log("Data saved:", save);
+    //    $('#acceptedItemContainer').empty();
+    //}
+    $(document).ready(function () {
+        var selectedCategoryId = localStorage.getItem('selectedCategoryId');
+        if (selectedCategoryId) {
+            POId(selectedCategoryId);
+        }
+    });
+
+</script>

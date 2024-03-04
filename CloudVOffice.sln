@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Seller.Web", "Plugin\Seller
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Seller_Login.Web", "Presentation\Seller_Login.Web\Seller_Login.Web.csproj", "{2A106EFD-5F97-4679-BD4F-B58E7F906A1C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Distributor_partner", "Presentation\Distributor_partner\Distributor_partner.csproj", "{50ECB7FB-6AAF-42A5-91CF-2976C90199C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,10 @@ Global
 		{2A106EFD-5F97-4679-BD4F-B58E7F906A1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A106EFD-5F97-4679-BD4F-B58E7F906A1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A106EFD-5F97-4679-BD4F-B58E7F906A1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50ECB7FB-6AAF-42A5-91CF-2976C90199C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50ECB7FB-6AAF-42A5-91CF-2976C90199C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50ECB7FB-6AAF-42A5-91CF-2976C90199C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50ECB7FB-6AAF-42A5-91CF-2976C90199C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,6 +105,7 @@ Global
 		{152C88D0-546A-443D-A509-700571815944} = {94EFDF8F-BB1B-43E6-BECB-CE10FC2F03B8}
 		{7FF8157A-24F6-4EDE-BA9A-65F14A8A0A49} = {94EFDF8F-BB1B-43E6-BECB-CE10FC2F03B8}
 		{2A106EFD-5F97-4679-BD4F-B58E7F906A1C} = {AA00359E-BE0A-4C17-B416-63E87E8B2C34}
+		{50ECB7FB-6AAF-42A5-91CF-2976C90199C4} = {AA00359E-BE0A-4C17-B416-63E87E8B2C34}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4DEF2CA5-EC2C-4C0B-878F-AEA8D00FE3E6}

@@ -62,23 +62,21 @@ namespace CloudVOffice.Services.Authentication
             return UserLoginResults.Successful;
         }
 
-        public async Task<UserLoginResults> DistributorValidateUserAsync(string UserMobileNumber, string Password)
-        {
-            var users = await _distributorRegistrationService.GetDistributorAsyncss(UserMobileNumber);
+		public async Task<UserLoginResults> DistributorValidateUserAsync(string UserMobileNumber, string Password)
+		{
+			var users = await _distributorRegistrationService.GetDistributorAsyncss(UserMobileNumber);
 
-            if (users == null)
-                return UserLoginResults.UserNotExist;
-            if (users.Deleted)
-                return UserLoginResults.Deleted;
-            if (users.Password != Password)
-                return UserLoginResults.WrongPassword;
+			if (users == null)
+				return UserLoginResults.UserNotExist;
+			if (users.Deleted)
+				return UserLoginResults.Deleted;
+			if (users.Password != Password)
+				return UserLoginResults.WrongPassword;
 
-            await _context.SaveChangesAsync();
+			await _context.SaveChangesAsync();
 
-            return UserLoginResults.Successful;
-        }
+			return UserLoginResults.Successful;
+		}
 
-
-
-    }
+	}
 }

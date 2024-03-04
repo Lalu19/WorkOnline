@@ -1,0 +1,212 @@
+﻿@model Distributor_partner.Model.DistributorUsers.LoginModel;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+
+
+    <meta charset="utf-8" />
+    <title>Distributor Login | OneWholesale</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Work Online" name="description" />
+    <meta content="Appman Technologies Pvt Ltd" name="author" />
+    <!-- App favicon -->
+    @* <link rel="shortcut icon" href="~/app/img/favicon.ico">*@
+    <link rel="shortcut icon" href="~/app/img/Wo_Icon.ico">
+
+    <!-- owl.carousel css -->
+    <link rel="stylesheet" href="~/login/libs/owl.carousel/assets/owl.carousel.min.css">
+
+    <link rel="stylesheet" href="~/login/libs/owl.carousel/assets/owl.theme.default.min.css">
+
+    <!-- Bootstrap Css -->
+    <link href="~/login/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="~/login/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="~/login/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+
+    <!-- Common CSS -->
+    <link rel="stylesheet" href="~/app/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/app/fonts/icomoon/icomoon.css">
+
+    <!-- Mian and Login css -->
+    <link rel="stylesheet" href="~/app/css/main.css">
+
+    <style>
+        .field-validation-error {
+            color: red;
+        }
+
+        .btn-check:focus + .btn-light, .btn-light:focus {
+            color: #000;
+            background-color: #f1f4f8;
+            border-color: #f1f3f8;
+            -webkit-box-shadow: 0 0 0 0.15rem rgba(203,206,210,.5);
+            box-shadow: 0 0 0 0.15rem rgba(203,206,210,.5);
+        }
+
+        .btn-light:hover {
+            color: #000;
+            background-color: #f1f4f8;
+            border-color: #f1f3f8;
+        }
+    </style>
+
+</head>
+
+<body class="login-bg">
+
+
+    <div class="container">
+        <div class="login-screen row align-items-center">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <form id="loginForm" asp-route="DistributorPartner/DistributorLogin" asp-route-returnurl="@Context.Request.Query["ReturnUrl"]" method="post" autocomplete="off">
+                    <div asp-validation-summary="ModelOnly" class="message-error">Invalid Password</div>
+                    <div class="login-container">
+                        <div class="row no-gutters">
+
+
+                            <div class="col-xl-8 col-lg-7 col-md-6 col-sm-12">
+                                <div class="signup-slider"></div>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-5 col-md-6 col-sm-12">
+                                <div class="login-box">
+                                    <a href="#" class="login-logo">
+                                        <img src="~/uimages/wo_login.png" alt="One Wholesale">
+                                    </a>
+
+                                    <label for="UserMobileNumber" class="form-label">Mobile Number</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="UserMobileNumber"><i class="icon-mobile"></i></span>
+                                        <input id="inputEmail" asp-for="UserMobileNumber" class="form-control" autofocus="autofocus" placeholder="Enter UserMobile Number" />
+                                    </div>
+                                    <span asp-validation-for="UserMobileNumber"></span>
+                                    <br>
+
+                                    <label class="form-label" for="Password">Password</label>
+                                    <div class="input-group auth-pass-inputgroup">
+                                        <span class="input-group-addon" id="password"><i class="icon-verified_user"></i></span>
+                                        <input id="NewPassword" asp-for="Password" class="form-control" autofocus="autofocus" placeholder="Enter Password" aria-label="Password" aria-describedby="password-addon" />
+                                        <button class="btn btn-light" type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
+                                    </div>
+                                    <span asp-validation-for="Password"></span>
+
+                                    <div class="form-check mt-2">
+                                        <input class="form-check-input" type="checkbox" id="remember-check">
+                                        <label class="form-check-label" for="remember-check">
+                                            Remember me
+                                        </label>
+                                    </div>
+                                    <div class="actions clearfix">
+                                        @*  <a href="#">Forgot password?</a> *@
+                                        <button type="submit" class="btn btn-primary">Login</button>
+                                        <br />
+                                        <div class="mt-4">
+                                            <a href="/DistributorSignup/DistributorSignupPage" class="additional-link">Don't have an Account? <span>Create Now</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            //var rememberCheckbox = document.getElementById("remember-check");
+            //var loginForm = document.getElementById("loginForm");
+
+            //// Check if there's a saved value in the cookie
+            //var rememberMeValue = getCookie("rememberMe");
+
+            //// Set the checkbox state based on the cookie value
+            //rememberCheckbox.checked = rememberMeValue === "true";
+
+            //loginForm.addEventListener("submit", function () {
+            //    setCookie("rememberMe", rememberCheckbox.checked, 7); // 7 days expiration
+            //});
+            var rememberCheckbox = document.getElementById("remember-check");
+            var emailInput = document.getElementById("inputEmail");
+            var passwordInput = document.getElementById("inputPassword");
+            var loginForm = document.getElementById("loginForm");
+
+            var rememberMeValue = getCookie("rememberMe");
+
+            rememberCheckbox.checked = rememberMeValue === "true";
+
+            if (rememberCheckbox.checked) {
+                var storedEmail = getCookie("storedEmail");
+                var storedPassword = getCookie("storedPassword");
+
+                if (storedEmail) {
+                    emailInput.value = storedEmail;
+                }
+
+                if (storedPassword) {
+                    passwordInput.value = storedPassword;
+                }
+            }
+
+            loginForm.addEventListener("submit", function () {
+                setCookie("rememberMe", rememberCheckbox.checked, 7); // 7 days expiration
+
+                if (rememberCheckbox.checked) {
+                    setCookie("storedEmail", emailInput.value, 7);
+                    setCookie("storedPassword", passwordInput.value, 7);
+                }
+            });
+
+            function setCookie(name, value, days) {
+                var expires = "";
+                if (days) {
+                    var date = new Date();
+                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                    expires = "; expires=" + date.toUTCString();
+                }
+                document.cookie = name + "=" + (value || "") + expires + "; path=/";
+            }
+
+            function getCookie(name) {
+                var nameEQ = name + "=";
+                var ca = document.cookie.split(';');
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+                }
+                return null;
+            }
+        });
+    </script>
+
+    <!-- JAVASCRIPT -->
+    <script src="~/login/libs/jquery/jquery.min.js"></script>
+    <script src="~/login/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/login/libs/metismenu/metisMenu.min.js"></script>
+    <script src="~/login/libs/simplebar/simplebar.min.js"></script>
+    <script src="~/login/libs/node-waves/waves.min.js"></script>
+
+    <!-- owl.carousel js -->
+    <script src="~/login/libs/owl.carousel/owl.carousel.min.js"></script>
+
+    <!-- auth-2-carousel init -->
+    <script src="~/login/js/pages/auth-2-carousel.init.js"></script>
+
+    <!-- App js -->
+    <script src="~/login/js/app.js"></script>
+
+</body>
+</html>
+
