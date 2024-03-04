@@ -42,6 +42,7 @@ using CloudVOffice.Services.Logging;
 using CloudVOffice.Core.Domain.Sellers;
 using CloudVOffice.Services.WareHouses.SalesOrders;
 using CloudVOffice.Services.Distributors;
+using CloudVOffice.Services.DeliveryPartners;
 
 namespace CloudVOffice.Web.Framework
 {
@@ -141,6 +142,7 @@ namespace CloudVOffice.Web.Framework
             services.AddScoped<IDPOService, DPOService>();
             services.AddScoped<IDPOItemsService, DPOItemsService>();
 			services.AddScoped<IDistributorRegistrationService, DistributorRegistrationService>();
+			services.AddScoped<IDeliveryPartnerService, DeliveryPartnerService>();
 
 
 

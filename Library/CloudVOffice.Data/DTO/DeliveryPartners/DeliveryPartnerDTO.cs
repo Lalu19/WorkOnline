@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CloudVOffice.Core.Domain.DeliveryPartners
+namespace CloudVOffice.Data.DTO.DeliveryPartners
 {
-    public class DeliveryPartner : IAuditEntity, ISoftDeletedEntity
+    public class DeliveryPartnerDTO
     {
-        public Int64 DeliveryPartnerId { get; set; }
+        public Int64? DeliveryPartnerId { get; set; }
         public Int64? WareHuoseId { get; set; }
         public string? DriverName { get; set; }
         public string? DriverContact { get; set; }
@@ -32,11 +33,12 @@ namespace CloudVOffice.Core.Domain.DeliveryPartners
         public string? VehicleFrontPhoto { get; set; }
         public string? VehicleBackPhoto { get; set; }
 
+        public IFormFile? OwnerPhotoUp { get; set; }
+        public IFormFile? DriverPhotoUp { get; set; }
+        public IFormFile? VehicleFrontPhotoUp { get; set; }
+        public IFormFile? VehicleBackPhotoUp { get; set; }
+
 
         public Int64 CreatedBy { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public Int64? UpdatedBy { get; set; }
-        public DateTime? UpdatedDate { get; set; }
-        public bool Deleted { get; set; }
     }
 }
