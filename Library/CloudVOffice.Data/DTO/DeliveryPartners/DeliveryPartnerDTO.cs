@@ -15,6 +15,7 @@ namespace CloudVOffice.Data.DTO.DeliveryPartners
         public string? DriverContact { get; set; }
         public string? OwnerName { get; set; }
         public string? OwnerContact { get; set; }
+        public string? Password { get; set; }
         public string? Address { get; set; }
         public string? FuelType { get; set; }
         public string? VehicleType { get; set; }

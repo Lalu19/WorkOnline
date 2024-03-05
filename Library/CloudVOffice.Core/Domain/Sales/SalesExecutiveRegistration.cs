@@ -16,6 +16,7 @@ namespace CloudVOffice.Core.Domain.Sales
         public Int64? WareHuoseId { get; set; }
         public string? PrimaryPhone { get; set; }
         public string? AlternatePhone { get; set; }
+        public Int64? RetailModelId { get; set; }
         public string? MailId { get; set; }
         public string? Password { get; set; }
         public string? Address { get; set; }

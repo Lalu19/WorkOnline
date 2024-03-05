@@ -50,6 +50,7 @@ namespace CloudVOffice.Services.Sellers
                     sr.SalesRepresentativeContact = sellerRegistrationDTO.SalesRepresentativeContact;
                     sr.GSTNumber = sellerRegistrationDTO.GSTNumber;
                     sr.WareHuoseId = sellerRegistrationDTO.WareHuoseId;
+                    sr.RetailModelId = 2;
                     sr.Password = GenerateRandomPassword(6);
                     sr.FirstLogin = false;
 					sr.SectorId = sellerRegistrationDTO.SectorId;

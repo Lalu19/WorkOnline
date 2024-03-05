@@ -50,6 +50,7 @@ namespace CloudVOffice.Services.DeliveryPartners
                     deliveryPartner.DriverPhoto = deliveryPartnerDTO.DriverPhoto;
                     deliveryPartner.VehicleFrontPhoto = deliveryPartnerDTO.VehicleFrontPhoto;
                     deliveryPartner.VehicleBackPhoto = deliveryPartnerDTO.VehicleBackPhoto;
+                    deliveryPartner.RetailModelId = 5;
 
                     deliveryPartner.CreatedBy = deliveryPartnerDTO.CreatedBy;
                     deliveryPartner.CreatedDate = System.DateTime.Now;

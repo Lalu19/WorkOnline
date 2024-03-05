@@ -44,6 +44,7 @@ namespace CloudVOffice.Services.Sales
                     salesExecutiveRegistration.Address = salesExecutiveRegistrationDTO.Address;
                     salesExecutiveRegistration.WareHuoseId = salesExecutiveRegistrationDTO.WareHuoseId;
                     salesExecutiveRegistration.MailId = salesExecutiveRegistrationDTO.MailId;
+                    salesExecutiveRegistration.RetailModelId = 4;
                     salesExecutiveRegistration.Password = salesExecutiveRegistrationDTO.Password;
                     salesExecutiveRegistration.Image = salesExecutiveRegistrationDTO.Image;
 
@@ -126,7 +127,7 @@ namespace CloudVOffice.Services.Sales
         {
             try
             {
-                var buyers = _dbContext.BuyerRegistrations.Where(a => a.SalesRepresentativeId == salesExecutiveRegistrationId.ToString()).ToList();
+                var buyers = _dbContext.BuyerRegistrations.Where(a => a.SalesExecutiveUniqueNumber == salesExecutiveRegistrationId.ToString()).ToList();
                 return buyers;
             }
             catch
@@ -139,7 +140,7 @@ namespace CloudVOffice.Services.Sales
         {
             try
             {
-                var buyers = _dbContext.BuyerRegistrations.Where(a => a.SalesRepresentativeId == SalesExecutiveUniqueNumber.ToString()).ToList();
+                var buyers = _dbContext.BuyerRegistrations.Where(a => a.SalesExecutiveUniqueNumber == SalesExecutiveUniqueNumber.ToString()).ToList();
                 return buyers;
             }
             catch
