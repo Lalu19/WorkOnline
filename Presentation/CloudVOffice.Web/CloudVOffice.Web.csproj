@@ -30,6 +30,7 @@
 		<Folder Include="wwwroot\uploads\Bannerimages\" />
 		<Folder Include="wwwroot\uploads\BuyerSnaps\" />
 		<Folder Include="wwwroot\uploads\SalesExec\" />
+		<Folder Include="wwwroot\uploads\DeliveryPartners\" />
 		<Folder Include="wwwroot\uploads\SellerSnaps\" />
 		<Folder Include="wwwroot\uploads\SubCategory3\" />
 		<Folder Include="wwwroot\uploads\SubCategory4\" />
