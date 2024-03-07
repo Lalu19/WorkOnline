@@ -9,6 +9,6 @@ namespace CloudVOffice.Services.Distributors
 {
     public interface IDPOItemsService
     {
-        public MessageEnum DPOItemsCreate(Int64 DPOId, int ItemId, Int64 Quantity, Int64 createdBy);
+        //public MessageEnum DPOItemsCreate(Int64 DPOId, int ItemId, Int64 Quantity, Int64 createdBy);
     }
 }

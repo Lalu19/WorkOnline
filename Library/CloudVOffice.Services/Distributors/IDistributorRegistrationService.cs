@@ -14,5 +14,9 @@ namespace CloudVOffice.Services.Distributors
 		public MessageEnum DistributorRegistrationCreate(DistributorRegistrationDTO distributorRegistrationDTO);
 		public Task<DistributorRegistration> GetDistributorAsyncss(string UserMobileNumber);
 		public Task<DistributorRegistration> GetDistributorLoginAsync(string UserMobileNumber, string Password);
-	}
+		public DistributorRegistration getdistibutorlistbyid(Int64 DistributorRegistrationId);
+		public List<DistributorRegistration> getdistibutorlistbywarehouseId(Int64 WareHuoseId);
+		public MessageEnum DistributorDelete(Int64 DistributorRegistrationId, Int64 DeletedBy);
+
+    }
 }
