@@ -138,7 +138,7 @@
                                 <span asp-validation-for="CreatedItemDTO.EmployeeName"></span>
                             </div>
 
-                            <div class="form-group col-md-3">
+                            @*<div class="form-group col-md-3">
                                 <label for="VendorName" class="form-label">Vendor Name</label>
                                 <ejs-dropdownlist id="VendorName" allowFiltering="true" name="CreatedItemDTO.VendorId"
                                                   dataSource="@(new SelectList(Model.Vendor, "VendorId", "VendorName").Items)"
@@ -147,9 +147,15 @@
                                     <e-dropdownlist-fields text="VendorName" value="VendorId"></e-dropdownlist-fields>
                                 </ejs-dropdownlist>
                                 <span asp-validation-for="CreatedItemDTO.VendorId"></span>
+                            </div>*@
+
+                            <div class="form-group col-md-3">
+                                <label for="SellerRegistrationId" class="form-label">Seller Name</label>
+                                <ejs-dropdownlist id="SellerRegistrationId" change="onChangeSeller" ejs-for="@Model.CreatedItemDTO.SellerRegistrationId" dataSource="@(new SelectList(Model.SellerRegistration, "SellerRegistrationId", "Name").Items)" placeholder="Select Seller" popupHeight="220px" value="@Model.CreatedItemDTO.SellerRegistrationId">
+                                    <e-dropdownlist-fields text="Name" value="SellerRegistrationId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                                <span asp-validation-for="CreatedItemDTO.SellerRegistrationId"></span>
                             </div>
-
-
 
 
                         </div>
@@ -266,7 +272,6 @@
                                 </ejs-dropdownlist>
                                 <span asp-validation-for="CreatedItemDTO.HandlingTypeId"></span>
                             </div>
-
                         </div>
 
                         <div class="form-row">
@@ -288,21 +293,16 @@
                                 <input asp-for="@Model.CreatedItemDTO.MRPCaseCost" type="number" id="MRPCaseCost" class="form-control" autofocus="autofocus" placeholder="MRP Case Cost" readonly />
                                 <span asp-validation-for="CreatedItemDTO.MRPCaseCost"></span>
                             </div>
-                            <div class="form-group col-md-3">
+
+                           @* <div class="form-group col-md-3"> cleared
                                 <label for="PurchaseCost" class="form-label">Purchase Cost &nbsp;</label>
                                 <input asp-for="@Model.CreatedItemDTO.PurchaseCost" type="number" id="PurchaseCost" class="form-control" autofocus="autofocus" placeholder="Purchase Cost" />
                                 <span asp-validation-for="CreatedItemDTO.PurchaseCost"></span>
-                            </div>
+                            </div>*@
 
                         </div>
 
                         <div class="form-row">
-
-                            <div class="form-group col-md-3">
-                                <label for="PurchaseCaseCost" class="form-label">Purchase Case Cost &nbsp;</label>
-                                <input asp-for="@Model.CreatedItemDTO.PurchaseCaseCost" type="number" id="PurchaseCaseCost" class="form-control" autofocus="autofocus" placeholder="Purchase Case Cost" readonly />
-                                <span asp-validation-for="CreatedItemDTO.PurchaseCaseCost"></span>
-                            </div>
 
                             <div class="form-group col-md-3">
                                 <label for="SalesCost" class="form-label">Sales Cost &nbsp;</label>
@@ -316,17 +316,23 @@
                                 <span asp-validation-for="CreatedItemDTO.SalesCaseCost"></span>
                             </div>
 
-                            <div class="form-group col-md-3">
+                            @*<div class="form-group col-md-3"> cleared
                                 <label for="PartnerSalesCost" class="form-label">PartnerSales Cost &nbsp;</label>
                                 <input asp-for="@Model.CreatedItemDTO.PartnerSalesCost" type="number" id="PartnerSalesCost" class="form-control" autofocus="autofocus" placeholder="PartnerSales Cost" />
                                 <span asp-validation-for="CreatedItemDTO.PartnerSalesCost"></span>
-                            </div>
+                            </div>*@
 
-                            <div class="form-group col-md-3">
+
+
+                            @*<div class="form-group col-md-3"> cleared
                                 <label for="PartnerSalesCaseCost" class="form-label">PartnerSales Case Cost &nbsp;</label>
                                 <input asp-for="@Model.CreatedItemDTO.PartnerSalesCaseCost" type="number" id="PartnerSalesCaseCost" class="form-control" autofocus="autofocus" placeholder="PartnerSales Case Cost" readonly />
                                 <span asp-validation-for="CreatedItemDTO.PartnerSalesCaseCost"></span>
-                            </div>
+                            </div>*@
+
+
+
+
                             @*<div class="form-group col-md-3">
                             <label for="CGST" class="form-label">CGST</label>
                             <ejs-dropdownlist id="GSTValue" allowFiltering="true" name="CreatedItemDTO.CGST"
@@ -344,6 +350,244 @@
                             </div>
 
                         </div>
+
+                        <div class="form-row">  @*GST Calculation*@
+
+                            <div class="form-group col-md-3">
+                                <label for="PurchaseCost" class="form-label">Purchase Cost &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemDTO.PurchaseCost" type="number" id="PurchaseCost" class="form-control" autofocus="autofocus" placeholder="Purchase Cost" />
+                                <span asp-validation-for="CreatedItemDTO.PurchaseCost"></span>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label for="CGST" class="form-label">CGST &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemDTO.CGST" type="number" id="CGSTPP" class="form-control" autofocus="autofocus" placeholder="CGST" readonly />
+                                <span asp-validation-for="CreatedItemDTO.CGST"></span>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label for="SGST" class="form-label">SGST &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemDTO.SGST" type="number" id="SGSTPP" class="form-control" autofocus="autofocus" placeholder="SGST" readonly />
+                                <span asp-validation-for="CreatedItemDTO.SGST"></span>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label for="IGST" class="form-label">IGST &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemDTO.IGST" type="number" id="IGSTPP" class="form-control" autofocus="autofocus" placeholder="IGST" readonly />
+                                <span asp-validation-for="CreatedItemDTO.IGST"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="PurchaseLandingCost" class="form-label">Purchase Landing Cost &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemDTO.PurchaseLandingCost" type="number" id="PurchaseLandingCost" class="form-control" autofocus="autofocus" placeholder="Purchase Landing Cost" readonly />
+                                <span asp-validation-for="CreatedItemDTO.PurchaseLandingCost"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-3">
+                                Values
+                            </div>
+
+                            @*<div class="form-group col-md-2">
+                                <input type="text" id="CgstVP" placeholder="Cgst">
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <input type="text" id="SgstVP" placeholder="Sgst">
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <input type="text" id="IgstVP" placeholder="Igst">
+                            </div>*@
+
+
+                            <div class="form-group col-md-2">
+                                <label for="CgstVP" class="form-label">Cgst</label>
+                                <input type="text" id="CgstVP" class="form-control" placeholder="Cgst">
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label for="SgstVP" class="form-label">Sgst</label>
+                                <input type="text" id="SgstVP" class="form-control" placeholder="Sgst">
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label for="IgstVP" class="form-label">Igst</label>
+                                <input type="text" id="IgstVP" class="form-control" placeholder="Igst">
+                            </div>
+
+
+                            <div class="form-group col-md-3">
+                                <label for="PurchaseCaseCost" class="form-label">Purchase Case Cost &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemDTO.PurchaseCaseCost" type="number" id="PurchaseCaseCost" class="form-control" autofocus="autofocus" placeholder="Purchase Case Cost" readonly />
+                                <span asp-validation-for="CreatedItemDTO.PurchaseCaseCost"></span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-3">
+                                <label for="PartnerSalesCost" class="form-label">PartnerSales Cost &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemDTO.PartnerSalesCost" type="number" id="PartnerSalesCost" class="form-control" autofocus="autofocus" placeholder="PartnerSales Cost" />
+                                <span asp-validation-for="CreatedItemDTO.PartnerSalesCost"></span>
+                            </div>
+
+
+                            <div class="form-group col-md-2">
+                                <label for="CGST" class="form-label">CGST &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemDTO.CGST" type="number" id="CGSTPD" class="form-control" autofocus="autofocus" placeholder="CGST" readonly />
+                                <span asp-validation-for="CreatedItemDTO.CGST"></span>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label for="SGST" class="form-label">SGST &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemDTO.SGST" type="number" id="SGSTPD" class="form-control" autofocus="autofocus" placeholder="SGST" readonly />
+                                <span asp-validation-for="CreatedItemDTO.SGST"></span>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label for="IGST" class="form-label">IGST &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemDTO.IGST" type="number" id="IGSTPD" class="form-control" autofocus="autofocus" placeholder="IGST" readonly />
+                                <span asp-validation-for="CreatedItemDTO.IGST"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="DistributorLandingCost" class="form-label">Distributor Landing Cost &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemDTO.DistributorLandingCost" type="number" id="DistributorLandingCost" class="form-control" autofocus="autofocus" placeholder="Distributor Landing Cost" readonly />
+                                <span asp-validation-for="CreatedItemDTO.DistributorLandingCost"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-3">
+                                Values
+                            </div>
+
+                            @*<div class="form-group col-md-2">
+                                <input type="text" id="CgstVD" placeholder="Cgst">
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <input type="text" id="SgstVD" placeholder="Sgst">
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <input type="text" id="IgstVD" placeholder="Igst">
+                            </div>*@
+
+                            <div class="form-group col-md-2">
+                                <label for="CgstVD" class="form-label">Cgst</label>
+                                <input type="text" id="CgstVD" class="form-control" placeholder="Cgst">
+                            </div>
+
+
+                            <div class="form-group col-md-2">
+                                <label for="SgstVD" class="form-label">Sgst</label>
+                                <input type="text" id="SgstVD" class="form-control" placeholder="Sgst">
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label for="IgstVD" class="form-label">Igst</label>
+                                <input type="text" id="IgstVD" class="form-control" placeholder="Igst">
+                            </div>
+
+
+                            <div class="form-group col-md-3">
+                                <label for="PartnerSalesCaseCost" class="form-label">PartnerSales Case Cost &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemDTO.PartnerSalesCaseCost" type="number" id="PartnerSalesCaseCost" class="form-control" autofocus="autofocus" placeholder="PartnerSales Case Cost" readonly />
+                                <span asp-validation-for="CreatedItemDTO.PartnerSalesCaseCost"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-3">
+                                <label for="RetailerCost" class="form-label">Retailer Cost &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemDTO.RetailerCost" type="number" id="RetailerCost" class="form-control" autofocus="autofocus" placeholder="Retailer Cost" />
+                                <span asp-validation-for="CreatedItemDTO.RetailerCost"></span>
+                            </div>
+
+
+                            <div class="form-group col-md-2">
+                                <label for="CGST" class="form-label">CGST &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemDTO.CGST" type="number" id="CGSTPR" class="form-control" autofocus="autofocus" placeholder="CGST" readonly />
+                                <span asp-validation-for="CreatedItemDTO.CGST"></span>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label for="SGST" class="form-label">SGST &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemDTO.SGST" type="number" id="SGSTPR" class="form-control" autofocus="autofocus" placeholder="SGST" readonly />
+                                <span asp-validation-for="CreatedItemDTO.SGST"></span>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label for="IGST" class="form-label">IGST &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemDTO.IGST" type="number" id="IGSTPR" class="form-control" autofocus="autofocus" placeholder="IGST" readonly />
+                                <span asp-validation-for="CreatedItemDTO.IGST"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="RetailerLandingCost" class="form-label">Retailer Landing Cost &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemDTO.RetailerLandingCost" type="number" id="RetailerLandingCost" class="form-control" autofocus="autofocus" placeholder="Distributor Landing Cost" readonly />
+                                <span asp-validation-for="CreatedItemDTO.RetailerLandingCost"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-3">
+                                Values
+                            </div>
+
+                            @*<div class="form-group col-md-2">
+                            <input type="text" id="CgstVD" placeholder="Cgst">
+                            </div>
+
+                            <div class="form-group col-md-2">
+                            <input type="text" id="SgstVD" placeholder="Sgst">
+                            </div>
+
+                            <div class="form-group col-md-2">
+                            <input type="text" id="IgstVD" placeholder="Igst">
+                            </div>*@
+
+                            <div class="form-group col-md-2">
+                                <label for="CgstVD" class="form-label">Cgst</label>
+                                <input type="text" id="CgstVR" class="form-control" placeholder="Cgst">
+                            </div>
+
+
+                            <div class="form-group col-md-2">
+                                <label for="SgstVD" class="form-label">Sgst</label>
+                                <input type="text" id="SgstVR" class="form-control" placeholder="Sgst">
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label for="IgstVD" class="form-label">Igst</label>
+                                <input type="text" id="IgstVR" class="form-control" placeholder="Igst">
+                            </div>
+
+
+                            <div class="form-group col-md-3">
+                                <label for="RetailerCaseCost" class="form-label">Retailer Case Cost &nbsp;</label>
+                                <input asp-for="@Model.CreatedItemDTO.RetailerCaseCost" type="number" id="RetailerCaseCost" class="form-control" autofocus="autofocus" placeholder="Retailer Case Cost" readonly />
+                                <span asp-validation-for="CreatedItemDTO.RetailerCaseCost"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                            </div>
+                        </div>
+
 
                         <div class="form-row">
 
@@ -560,6 +804,10 @@
 </script>*@
 
 <script>
+
+    var IGStRAte;
+    var Isgst;
+
     function onChangeSubCategory(args) {
         // First API call
         $.ajax({
@@ -583,12 +831,11 @@
                     dataType: "json",
                     success: function (gstResult) {
                         console.log(gstResult);
-                        var cgstTextbox = document.getElementById("CGST");
-                        cgstTextbox.value = (gstResult.gstValue) / 2;
+                        
 
-                        var sgstTextbox = document.getElementById("SGST");
-                        sgstTextbox.value = (gstResult.gstValue) / 2;
 
+                        IGStRAte = (gstResult.gstValue);                        
+                        Isgst = (gstResult.gstValue) / 2;
                     },
                     error: function () {
                         // Handle error for the third API call
@@ -621,7 +868,263 @@
             }
         });
     }
+
+    function onChangeSeller(args) {
+        var CgstTextbox1 = document.getElementById("CGSTPP");
+        var SgstTextbox1 = document.getElementById("SGSTPP");
+        var CgstTextbox2 = document.getElementById("CGSTPD");
+        var SgstTextbox2 = document.getElementById("SGSTPD");
+        var CgstTextbox3 = document.getElementById("CGSTPR");
+        var SgstTextbox3 = document.getElementById("SGSTPR");
+
+        var IgstTextbox2 = document.getElementById("IGSTPD");
+        var IgstTextbox1 = document.getElementById("IGSTPP");
+        var IgstTextbox3 = document.getElementById("IGSTPR");
+
+        // Clear values of IgstTextbox2 and IgstTextbox1
+        IgstTextbox2.value = "";
+        IgstTextbox1.value = "";
+        IgstTextbox3.value = "";
+        CgstTextbox1.value = "";
+        SgstTextbox1.value = "";
+        CgstTextbox3.value = "";
+        SgstTextbox3.value = "";
+        CgstTextbox2.value = "";
+        SgstTextbox2.value = "";
+
+
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/Item/GetGstForSeller",
+            data: { sellerRegistrationId: args.value },
+            contentType: "application/json",
+            dataType: "text",
+            success: function (result) {
+                console.log(result);
+
+                if (result === null || result === undefined) {
+                    // Assuming IGStRAte is defined somewhere in your code
+                    IgstTextbox2.value = IGStRAte;
+                    IgstTextbox1.value = IGStRAte;
+                    IgstTextbox3.value = IGStRAte;
+                } else {
+                    // Assuming Isgst is defined somewhere in your code
+                    CgstTextbox1.value = Isgst;
+                    SgstTextbox1.value = Isgst;
+                    CgstTextbox2.value = Isgst;
+                    SgstTextbox2.value = Isgst;
+                    CgstTextbox3.value = Isgst;
+                    SgstTextbox3.value = Isgst;
+                }
+            },
+            error: function () {
+                // Handle error
+            }
+        });
+    }
+
+
 </script>
+
+
+<script>
+
+    function updateCgstVP1() {
+
+        var unitPerCaseValue = parseFloat(document.getElementById('UnitPerCase').value) || 0;
+
+        // Assuming PurchaseCost, CGSTPP, CgstVP, and PurchaseCaseCost are the correct IDs for your elements
+        var purchaseCost = document.getElementById("PurchaseCost").value;
+        var cgstPP = document.getElementById("CGSTPP").value;
+        var cgstVP = document.getElementById("CgstVP");
+        var sgstVP = document.getElementById("SgstVP");
+        var igstPP = document.getElementById("IGSTPP").value;
+        var igstVP = document.getElementById("IgstVP");
+        var purchaseLandingCost = document.getElementById("PurchaseLandingCost");
+
+        // Check if PurchaseCost is filled and CGSTPP has a value
+        if (purchaseCost !== "" && cgstPP !== "") {
+            // Convert the values to numbers and multiply them
+            var result = parseFloat(purchaseCost) * (parseFloat(cgstPP) / 100);
+
+            // Set the result in CgstVP
+            cgstVP.value = result.toFixed(2); // Adjust the decimal places as needed
+            sgstVP.value = result.toFixed(2); // Adjust the decimal places as needed
+
+            // Calculate purchaseLandingCost
+            var caseCostResult = parseFloat(purchaseCost) + (parseFloat(cgstVP.value) * 2);
+            purchaseLandingCost.value = caseCostResult.toFixed(2);
+
+            var purchaseLandingValue = parseFloat(document.getElementById('PurchaseLandingCost').value) || 0;
+            var purchaseCaseCost = unitPerCaseValue * purchaseLandingValue;
+            document.getElementById('PurchaseCaseCost').value = purchaseCaseCost.toFixed(2);
+
+
+        } else {
+            // Optionally, you may want to clear CgstVP and PurchaseCaseCost if the conditions are not met
+            cgstVP.value = "";
+            // purchaseCaseCost.value = ""; // Removed this line
+        }
+
+        // Check if PurchaseCost is filled and IGSTPP has a value
+        if (purchaseCost !== "" && igstPP !== "") {
+            // Convert the values to numbers and multiply them
+            var result = parseFloat(purchaseCost) * (parseFloat(igstPP) / 100);
+
+            // Set the result in IgstVP
+            igstVP.value = result.toFixed(2);
+
+            // Calculate purchaseCaseCost
+            var caseCostResult = parseFloat(purchaseCost) + (parseFloat(igstVP.value));
+            purchaseLandingCost.value = caseCostResult.toFixed(2);
+        } else {
+            // Optionally, you may want to clear IgstVP if the conditions are not met
+            igstVP.value = "";
+            // purchaseCaseCost.value = ""; // Removed this line
+        }
+    }
+
+
+
+
+        function updateCgstVP2() {
+
+            var unitPerCaseValue = parseFloat(document.getElementById('UnitPerCase').value) || 0;
+
+        // Assuming PartnerSalesCost, CGSTPD, CgstVD, SgstVD, IGSTPD, IgstVD, and DistributorLandingCost are the correct IDs for your elements
+        var partnerSalesCost = document.getElementById("PartnerSalesCost").value;
+        var cgstPD = document.getElementById("CGSTPD").value;
+        var cgstVD = document.getElementById("CgstVD");
+        var sgstVD = document.getElementById("SgstVD");
+        var igstPD = document.getElementById("IGSTPD").value;
+        var igstVD = document.getElementById("IgstVD");
+
+        var distributorLandingCost = document.getElementById("DistributorLandingCost");
+        
+
+        // Check if PartnerSalesCost is filled and CGSTPD has a value
+        if (partnerSalesCost !== "" && cgstPD !== "") {
+            // Convert the values to numbers and multiply them
+            var result = parseFloat(partnerSalesCost) * (parseFloat(cgstPD) / 100);
+
+            // Set the result in CgstVD and SgstVD
+            cgstVD.value = result.toFixed(2);
+            sgstVD.value = result.toFixed(2);
+
+            // Calculate distributorLandingCost
+            var landingCostResult = parseFloat(partnerSalesCost) + (parseFloat(cgstVD.value) * 2);
+            distributorLandingCost.value = landingCostResult.toFixed(2);
+
+            // PartnerSalesCaseCost calculation
+                var distributorLandingValue = document.getElementById("DistributorLandingCost").value;
+                var partnerSalesCaseCost = unitPerCaseValue * parseFloat(distributorLandingValue);
+            document.getElementById('PartnerSalesCaseCost').value = partnerSalesCaseCost.toFixed(2);
+        } else {
+            // Optionally, you may want to clear CgstVD, SgstVD, DistributorLandingCost, and PartnerSalesCaseCost if the conditions are not met
+            cgstVD.value = "";
+
+        }
+
+        // Check if PartnerSalesCost is filled and IGSTPD has a value
+        if (partnerSalesCost !== "" && igstPD !== "") {
+            // Convert the values to numbers and multiply them
+            var result = parseFloat(partnerSalesCost) * (parseFloat(igstPD) / 100);
+
+            // Set the result in IgstVD
+            igstVD.value = result.toFixed(2);
+
+            // Calculate distributorLandingCost
+            var landingCostResult = parseFloat(partnerSalesCost) + parseFloat(igstVD.value);
+            distributorLandingCost.value = landingCostResult.toFixed(2);
+
+            // PartnerSalesCaseCost calculation
+
+            var distributorLandingValue = document.getElementById("DistributorLandingCost").value;
+                var partnerSalesCaseCost = unitPerCaseValue * parseFloat(distributorLandingValue);
+            document.getElementById('PartnerSalesCaseCost').value = partnerSalesCaseCost.toFixed(2);
+        } else {
+            // Optionally, you may want to clear IgstVD, DistributorLandingCost, and PartnerSalesCaseCost if the conditions are not met
+            igstVD.value = "";
+
+        }
+    }
+
+
+        function updateCgstVP3() {
+
+        var unitPerCaseValue = parseFloat(document.getElementById('UnitPerCase').value) || 0;
+
+        // Assuming RetailerCost, CGSTPR, IGSTPR, CgstVR, SgstVR, RetailerLandingCost, and RetailerCaseCost are the correct IDs for your elements(PR=Percentage of Retailer,VR=Values of Retailer)
+        var retailerCost = parseFloat(document.getElementById("RetailerCost").value);
+        var cgstPR = document.getElementById("CGSTPR").value;
+        var igstPR = document.getElementById("IGSTPR").value;
+
+        var cgstVR = document.getElementById("CgstVR");
+        var sgstVR = document.getElementById("SgstVR");
+        var igstVR = document.getElementById("IgstVR");
+
+        var retailerLandingCost = document.getElementById("RetailerLandingCost");
+
+        if (retailerCost !== "" && cgstPR !== "") {
+            // Convert the values to numbers and multiply them
+            var cgstResult = parseFloat(retailerCost) * (parseFloat(cgstPR) / 100);
+
+            // Set the result in CgstVR and SgstVR
+            cgstVR.value = cgstResult.toFixed(2);
+            sgstVR.value = cgstResult.toFixed(2);
+
+            // Calculate retailerLandingCost
+            var landingCostResult = parseFloat(retailerCost) + (parseFloat(cgstVR.value) * 2);
+            retailerLandingCost.value = landingCostResult.toFixed(2);
+
+            // RetailerCaseCost calculation
+            var retailerLandingValue = document.getElementById("RetailerLandingCost").value;
+            document.getElementById("RetailerCaseCost").value = parseFloat(retailerLandingValue) * parseFloat(unitPerCaseValue);
+        } else if (retailerCost !== "" && igstPR !== "") {
+            // Convert the values to numbers and multiply them
+            var igstResult = parseFloat(retailerCost) * (parseFloat(igstPR) / 100);
+
+            // Set the result in IgstVR
+            igstVR.value = igstResult.toFixed(2);
+
+            // Calculate retailerLandingCost
+            var landingCostResult = parseFloat(retailerCost) + parseFloat(igstVR.value);
+            retailerLandingCost.value = landingCostResult.toFixed(2);
+
+            // RetailerCaseCost calculation
+            var retailerLandingValue = document.getElementById("RetailerLandingCost").value;
+            document.getElementById("RetailerCaseCost").value = parseFloat(retailerLandingValue) * parseFloat(unitPerCaseValue);
+        } else {
+            // Optionally, you may want to clear CgstVR, SgstVR, IgstVR, RetailerLandingCost, and RetailerCaseCost if the conditions are not met
+            cgstVR.value = "";
+            sgstVR.value = "";
+            igstVR.value = "";
+            retailerLandingCost.value = "";
+            document.getElementById("RetailerCaseCost").value = "";
+        }
+    }
+
+
+
+    
+
+
+
+    // Attach an event listener to the PurchaseCost element
+    //document.getElementById("PurchaseCost").addEventListener("input", updateCgstVP1);
+    document.getElementById("PurchaseCost").addEventListener("input", function () {
+        updateCgstVP1();
+    });
+
+
+    document.getElementById("PartnerSalesCost").addEventListener("input", updateCgstVP2);
+    document.getElementById("RetailerCost").addEventListener("input", updateCgstVP3);
+    
+
+</script>
+
+
+
 
 <script>
     function calculateCaseWeight() {
@@ -645,8 +1148,8 @@
         document.getElementById('MRPCaseCost').value = MRPCaseCost.toFixed(2);
 
         // PurchaseCaseCost calculation
-        var purchaseCostValue = parseFloat(document.getElementById('PurchaseCost').value) || 0;
-        var purchaseCaseCost = unitPerCaseValue * purchaseCostValue;
+        var purchaseLandingValue = parseFloat(document.getElementById('PurchaseLandingCost').value) || 0;
+        var purchaseCaseCost = unitPerCaseValue * purchaseLandingValue;
         document.getElementById('PurchaseCaseCost').value = purchaseCaseCost.toFixed(2);
 
         // SalesCaseCost calculation
@@ -655,9 +1158,10 @@
         document.getElementById('SalesCaseCost').value = salesCaseCost.toFixed(2);
 
         // PartnerSalesCaseCost calculation
-        var partnerSalesCostValue = parseFloat(document.getElementById('PartnerSalesCost').value) || 0;
+        var partnerSalesCostValue = parseFloat(document.getElementById('DistributorLandingCost').value) || 0;
         var partnerSalesCaseCost = unitPerCaseValue * partnerSalesCostValue;
         document.getElementById('PartnerSalesCaseCost').value = partnerSalesCaseCost.toFixed(2);
+
     }
 
     // Call the function whenever UnitPerCase, MRP, PurchaseCost, or SalesCost changes
@@ -665,7 +1169,7 @@
     document.getElementById('MRP').addEventListener('input', calculateCaseCosts);
     document.getElementById('PurchaseCost').addEventListener('input', calculateCaseCosts);
     document.getElementById('SalesCost').addEventListener('input', calculateCaseCosts);
-    document.getElementById('PartnerSalesCost').addEventListener('input', calculateCaseCosts);
+    //document.getElementById('PartnerSalesCost').addEventListener('input', calculateCaseCosts);
 </script>
 
 @section scripts {

@@ -52,6 +52,15 @@ namespace CloudVOffice.Core.Domain.WareHouses.Items
         public double? PartnerSalesCaseCost { get; set; }
         public double? CGST { get; set; }
         public double? SGST { get; set; }
+        public double? IGST { get; set; }
+		public Int64? SellerRegistrationId { get; set; }
+        public double? PurchaseLandingCost { get; set; }
+        public double? DistributorCost { get; set; }
+        public double? DistributorLandingCost { get; set; }
+        public double? DistributorCaseCost { get; set; }
+        public double? RetailerCost { get; set; }
+        public double? RetailerLandingCost { get; set; }
+        public double? RetailerCaseCost { get; set; }
         public int? HandlingTypeId { get; set; }
         public string? HandlingType { get; set; }
 		public string? Images { get; set; }
