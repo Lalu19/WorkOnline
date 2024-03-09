@@ -116,12 +116,13 @@ namespace CloudVOffice.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SalesRepresentativeContact")
-                        .IsRequired()
+                    b.Property<long?>("RetailModelId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SalesExecutiveContact")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SalesRepresentativeId")
-                        .IsRequired()
+                    b.Property<string>("SalesExecutiveUniqueNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("SectorId")
@@ -485,6 +486,9 @@ namespace CloudVOffice.Data.Migrations
                     b.Property<string>("OwnerPhoto")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PollutionCertificate")
                         .HasColumnType("nvarchar(max)");
 
@@ -493,6 +497,9 @@ namespace CloudVOffice.Data.Migrations
 
                     b.Property<DateTime?>("RegistrationYear")
                         .HasColumnType("datetime2");
+
+                    b.Property<long?>("RetailModelId")
+                        .HasColumnType("bigint");
 
                     b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");
@@ -2098,6 +2105,9 @@ namespace CloudVOffice.Data.Migrations
                     b.Property<string>("PrimaryPhone")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<long?>("RetailModelId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("SalesExecutiveName")
                         .HasColumnType("nvarchar(max)");
 
@@ -2504,6 +2514,9 @@ namespace CloudVOffice.Data.Migrations
                     b.Property<string>("PrimaryPhone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("RetailModelId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("SalesRepresentativeContact")
                         .HasColumnType("nvarchar(max)");

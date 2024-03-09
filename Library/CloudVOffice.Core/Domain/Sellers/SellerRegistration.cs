@@ -24,7 +24,8 @@ namespace CloudVOffice.Core.Domain.Sellers
 		public string? MailId { get; set; }
 		public string SalesRepresentativeId { get; set; }
 		public string? SalesRepresentativeContact { get; set; }
-		public string? GSTNumber { get; set; }
+        public Int64? RetailModelId { get; set; }
+        public string? GSTNumber { get; set; }
 		public Int64? WareHuoseId { get; set; }
 		public string? Password { get; set; }
         public bool FirstLogin { get; set; }

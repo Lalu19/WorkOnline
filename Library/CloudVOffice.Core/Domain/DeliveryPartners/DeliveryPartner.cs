@@ -14,11 +14,13 @@ namespace CloudVOffice.Core.Domain.DeliveryPartners
         public string? DriverContact { get; set; }
         public string? OwnerName { get; set; }
         public string? OwnerContact { get; set; }
+        public string? Password { get; set; }
         public string? Address { get; set; }
         public string? FuelType { get; set; }
         public string? VehicleType { get; set; }
         public string? RegistrationType { get; set; }
         public string? LoadCapacity { get; set; }
+        public Int64? RetailModelId { get; set; }
         public string? VehicleName { get; set; }
         public string? EngineNumber { get; set; }
         public string? ChassisNumber { get; set; }

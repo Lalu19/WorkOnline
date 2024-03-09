@@ -1,0 +1,295 @@
+﻿@model CloudVOffice.Data.DTO.Distributor.DPODTO;
+@using System.Collections;
+@using Newtonsoft.Json;
+@{
+	Layout = "_DistributorLayout";
+}
+<style>
+
+	#Statee tfoot #totalRow td:nth-child(1),
+	#Statee tfoot #totalRow td:nth-child(2),
+	#Statee tfoot #totalRow td:nth-child(3) {
+		font-weight: bold;
+	}
+</style>
+
+<header class="main-heading">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+				<div class="page-icon">
+					<i class="icon-laptop_windows"></i>
+				</div>
+				<div class="page-title">
+					<h5>Distributors</h5>
+					<h6 class="sub-heading">  </h6>
+				</div>
+			</div>
+			<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+				<div class="right-actions">
+					<span class="last-login">  </span>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+
+<div class="main-content">
+	<div class="row gutters">
+		<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
+			<div class="card">
+
+				<div class="card-header">
+
+					<div class="row">
+						<div class="col-md-8">
+							Purchase Order
+						</div>
+						<div class="col-md-4 text-right float-right">
+							<a href="/PO/OrderList" class="btn btn-success btn-sm float-right"><i class="icon-list2"></i> List </a>
+
+						</div>
+					</div>
+				</div>
+
+				<form action="/PO/SaveDPO" method="post" autocomplete="off">
+					<div asp-ation-summary="ModelOnly" class="message-error"></div>
+
+					<div class="card-body">
+
+						<div class="form-row">
+							<input  type="hidden" />
+						</div>
+
+
+						<div class="form-row">
+
+							<div class="form-group col-md-3">
+								<label for="ItemId" class="form-label">Item Name</label>
+								<select id="ItemId" class='form-control form-control-sm itemlist'>
+
+								</select>
+							</div>
+
+
+							<div class="form-group col-md-3">
+
+								<label for="Quantity" class="form-label">Quantity &nbsp;<span style="color:red;"><b>*</b></span></label>
+								<input  id="Quantity" type="text" class="form-control" placeholder="Enter Quantity" />
+							</div>
+
+							<br />
+
+
+							<div class="form-group col-md-3">
+
+								<label for="Value" class="form-label">MRP &nbsp;<span style="color:red;"><b>*</b></span></label>
+								<input  id="Value" type="text" class="form-control" placeholder="Value" readonly />
+							</div>
+						</div>
+
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<button type="button" id="Add_Target" class="btn btn-radius btn-info">Add</button>
+						</div>
+					</div>
+
+					<br />
+
+					<div class="table-responsive mb-5">
+						<table id="Statee" class="table table-bordered table-hover">
+							<thead class="tablehead">
+								<tr>
+									<th style='display:none;'>>Itemid</th>
+									<th>Item</th>
+									<th>Quantity</th>
+									<th>MRP</th>
+									<th>Amount</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody id="Target_tb">
+							</tbody>
+							<tfoot>
+								<tr id="totalRow">
+									<td>Total</td>
+									<td id="totalquantity">0</td>
+									<td></td>
+									<td id="totalamount">0</td>
+									
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+
+							<button type="button" id="btnSave" class="btn btn-radius btn-success">Save</button>
+
+						</div>
+					</div>
+
+				</form>
+
+			</div>
+
+
+
+		</div>
+	</div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+
+<script>
+	$(document).ready(function () {
+		var totalQuantity = 0;
+		var totalAmount = 0;
+
+		$("#Add_Target").click(function () {
+			var itemId = $("#ItemId option:selected").val();
+			var itemName = $("#ItemId option:selected").text();
+			var quantity = $("#Quantity").val();
+			var mrp = $("#Value").val();
+
+			if (itemId && quantity && mrp) {
+				var amount = quantity * mrp;
+
+				$("#Target_tb").append(
+					"<tr>" +
+					"<td id='itemlist' style='display:none;'>" + itemId + "</td>" +
+					"<td >" + itemName + "</td>" +
+					"<td id='quantity'>" + quantity + "</td>" +
+					"<td>" + mrp + "</td>" +
+					"<td>" + amount + "</td>" +
+					"<td><button type='button' class='btn btn-danger btn-sm removeRow'>Remove</button></td>" +
+					"</tr>"
+				);
+
+				totalQuantity += parseInt(quantity);
+				totalAmount += parseFloat(amount);
+
+				$("#totalRow td:nth-child(2)").text(totalQuantity);
+				$("#totalRow td:nth-child(4)").text(totalAmount.toFixed(2));
+
+				$("#ItemId").val("");
+				$("#Quantity").val("");
+				$("#Value").val("");
+			} else {
+				alert("Please fill all the fields");
+			}
+		});
+
+		// Remove row
+		$("#Target_tb").on("click", ".removeRow", function () {
+			var row = $(this).closest("tr");
+			var quantityToRemove = parseInt(row.find("td:nth-child(2)").text());
+			var amountToRemove = parseFloat(row.find("td:nth-child(4)").text());
+
+			row.remove();
+
+			totalQuantity -= quantityToRemove;
+			totalAmount -= amountToRemove;
+
+			$("#totalRow td:nth-child(2)").text(totalQuantity);
+			$("#totalRow td:nth-child(4)").text(totalAmount.toFixed(2));
+		});
+
+		$.ajax({
+			type: "GET",
+			url: "/PO/ItemListByWareHouseIdbyJson",
+			contentType: "application/json",
+			dataType: "json",
+			success: function (result) {
+				var dropdown = $("#ItemId");
+				dropdown.append('<option value="">Select Item</option>');
+
+				$.each(result, function (index, item) {
+					dropdown.append($('<option>', {
+						value: item.itemId,
+						text: item.itemName
+					}));
+				});
+			},
+			error: function () {
+				// Handle error
+			}
+		});
+
+		$("#ItemId").change(function () {
+			var itemId = $(this).val();
+			$.ajax({
+				type: "GET",
+				url: "/PO/GetItemByItemIdbyJson",
+				data: { itemId: itemId },
+				success: function (result) {
+					$("#Value").val(result.mrp);
+				},
+				error: function () {
+					// Handle error
+				}
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function () {
+		$("#btnSave").click(function () {
+			saveData();
+		});
+
+		function saveData() {
+			var DPoDTO = {
+				TotalAmount: parseFloat($("#totalamount").text()),
+				TotalQuantity: parseInt($("#totalquantity").text()),
+				Items: [],
+			};
+
+			$('#Target_tb tr').each(function () {
+				var row = $(this);
+				var itemId = row.find('#itemlist').text(); // Get ItemId from the first column
+				var quantity = row.find('#quantity').text(); // Get Quantity from the third column
+
+				var item = {
+					ItemId: itemId,
+					Quantity: quantity
+				};
+
+
+				DPoDTO.Items.push(item);
+			});
+
+			$.ajax({
+				type: "POST",
+				url: "/PO/SaveDPO",
+				contentType: "application/json",
+				data: JSON.stringify(DPoDTO),
+				success: function (response) {
+					Swal.fire({
+						title: "Success",
+						text: "Order SuccessFully",
+						icon: "success",
+						confirmButtonText: "OK"
+					}).then((result) => {
+						window.location.href = "/PO/OrderList";
+					});
+					
+				},
+				error: function (error) {
+					console.error("Error:", error);
+					alert("Error occurred while saving data"); // Show error message
+				}
+			});
+		}
+	});
+
+</script>
