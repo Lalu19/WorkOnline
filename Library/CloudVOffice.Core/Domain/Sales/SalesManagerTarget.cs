@@ -15,6 +15,7 @@ namespace CloudVOffice.Core.Domain.Sales
     public class SalesManagerTarget : IAuditEntity, ISoftDeletedEntity
     {
         public Int64 SalesManagerTargetId { get; set; }
+        public Int64? UserId { get; set; }
         //public Int64? StateId { get; set; }
         public Int64? MonthId { get; set; }
         public int? SectorId { get; set; }
