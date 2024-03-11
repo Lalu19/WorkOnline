@@ -8,6 +8,7 @@ using CloudVOffice.Core.Domain.Buyers;
 using CloudVOffice.Core.Domain.Common;
 using CloudVOffice.Core.Domain.Sales;
 using CloudVOffice.Data.DTO.Sales;
+using CloudVOffice.Data.DTO.WareHouses.PinCodes;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
 using LinqToDB;
@@ -19,7 +20,7 @@ namespace CloudVOffice.Services.Sales
         private readonly ApplicationDBContext _dbContext;
         private readonly ISqlRepository<SalesExecutiveRegistration> _salesExecutiveRegistration;
 
-        public SalesExecutiveRegistrationService (ApplicationDBContext dbContext, ISqlRepository<SalesExecutiveRegistration> salesExecutiveRegistration
+        public SalesExecutiveRegistrationService(ApplicationDBContext dbContext, ISqlRepository<SalesExecutiveRegistration> salesExecutiveRegistration
             )
         {
             _dbContext = dbContext;
@@ -30,9 +31,11 @@ namespace CloudVOffice.Services.Sales
         {
             try
             {
-                var objcheck = _dbContext.SalesExecutiveRegistrations.FirstOrDefault(a => a.SalesExecutiveRegistrationId == salesExecutiveRegistrationDTO.SalesExecutiveRegistrationId);
+               // var objcheck = _dbContext.SalesExecutiveRegistrations.FirstOrDefault(a => a.SalesExecutiveRegistrationId == salesExecutiveRegistrationDTO.SalesExecutiveRegistrationId && a.PrimaryPhone == salesExecutiveRegistrationDTO.PrimaryPhone);
 
-                if (objcheck == null)
+				var objcheck = _dbContext.SalesExecutiveRegistrations.Where(x => x.PrimaryPhone == salesExecutiveRegistrationDTO.PrimaryPhone && x.Deleted == false).FirstOrDefault();
+
+				if (objcheck == null)
                 {
                     SalesExecutiveRegistration salesExecutiveRegistration = new SalesExecutiveRegistration();
 
@@ -47,7 +50,7 @@ namespace CloudVOffice.Services.Sales
                     salesExecutiveRegistration.RetailModelId = 4;
                     salesExecutiveRegistration.Password = salesExecutiveRegistrationDTO.Password;
                     salesExecutiveRegistration.Image = salesExecutiveRegistrationDTO.Image;
-
+                    salesExecutiveRegistration.CreatedBy = salesExecutiveRegistrationDTO.CreatedBy;
 
 
                     string warehouseName = _dbContext.WareHouses.Where(x => x.WareHuoseId == salesExecutiveRegistrationDTO.WareHuoseId).Select(x => x.WareHouseName).FirstOrDefault();
@@ -83,6 +86,48 @@ namespace CloudVOffice.Services.Sales
             }
         }
 
+        public MessageEnum UpdateSalesExecutive(SalesExecutiveRegistrationDTO salesExecutiveRegistrationDTO)
+        {
+            try
+            {
+                var updateSalesExecutive = _dbContext.SalesExecutiveRegistrations.Where(x => x.SalesExecutiveRegistrationId != salesExecutiveRegistrationDTO.SalesExecutiveRegistrationId && x.PrimaryPhone == salesExecutiveRegistrationDTO.PrimaryPhone && x.Deleted == false).FirstOrDefault();
+                if (updateSalesExecutive == null)
+                {
+                    var a = _dbContext.SalesExecutiveRegistrations.Where(x => x.SalesExecutiveRegistrationId == salesExecutiveRegistrationDTO.SalesExecutiveRegistrationId).FirstOrDefault();
+                    if (a != null)
+                    {
+                        a.SalesExecutiveName = salesExecutiveRegistrationDTO.SalesExecutiveName;
+                        a.PANCardNumber = salesExecutiveRegistrationDTO.PANCardNumber;
+                        a.AadharCardNumber = salesExecutiveRegistrationDTO.AadharCardNumber;
+                        a.WareHuoseId = salesExecutiveRegistrationDTO.WareHuoseId;
+                        a.PrimaryPhone = salesExecutiveRegistrationDTO.PrimaryPhone;
+                        a.AlternatePhone = salesExecutiveRegistrationDTO.AlternatePhone;
+                        a.MailId = salesExecutiveRegistrationDTO.MailId;
+                        a.Password = salesExecutiveRegistrationDTO.Password;
+                        a.Address = salesExecutiveRegistrationDTO.Address;
+                        a.Image = salesExecutiveRegistrationDTO.Image;
+                      
+                        a.UpdatedBy = salesExecutiveRegistrationDTO.CreatedBy;
+                        a.UpdatedDate = DateTime.Now;
+                        _dbContext.SaveChanges();
+                        return MessageEnum.Updated;
+                    }
+                    else
+                        return MessageEnum.Invalid;
+                }
+                else
+                {
+                    return MessageEnum.Duplicate;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+
+
         public List<SalesExecutiveRegistration> GetAllSalesExecutiveRegistrations()
         {
             try
@@ -110,11 +155,34 @@ namespace CloudVOffice.Services.Sales
             }
         }
 
+        public MessageEnum SalesExecutiveRegistrationDelete(Int64 SalesExecutiveRegistrationId, Int64 DeletedBy)
+        {
+            try
+            {
+                var a = _dbContext.SalesExecutiveRegistrations.Where(x => x.SalesExecutiveRegistrationId == SalesExecutiveRegistrationId).FirstOrDefault();
+
+                if (a != null)
+                {
+                    a.Deleted = true;
+                    a.UpdatedBy = DeletedBy;
+                    a.UpdatedDate = DateTime.Now;
+                    _dbContext.SaveChanges();
+                    return MessageEnum.Deleted;
+                }
+                else
+                    return MessageEnum.Invalid;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public List<SalesExecutiveRegistration> GetSalesExecutiveRegistrationByWarehouseId(int WarehouseId)
         {
             try
             {
-                var salesExec = _dbContext.SalesExecutiveRegistrations.Where(a=> a.WareHuoseId == WarehouseId).ToList();
+                var salesExec = _dbContext.SalesExecutiveRegistrations.Where(a => a.WareHuoseId == WarehouseId).ToList();
                 return salesExec;
             }
             catch

@@ -13,8 +13,10 @@ namespace CloudVOffice.Services.Sales
     public interface ISalesExecutiveRegistrationService
     {
         public MessageEnum CreateSalesExecutive(SalesExecutiveRegistrationDTO salesExecutiveRegistrationDTO);
+        public MessageEnum UpdateSalesExecutive(SalesExecutiveRegistrationDTO salesExecutiveRegistrationDTO);
         public List<SalesExecutiveRegistration> GetAllSalesExecutiveRegistrations();
         public SalesExecutiveRegistration GetSalesExecutiveRegistrationsById(int salesExecutiveRegistrationId);
+        public MessageEnum SalesExecutiveRegistrationDelete(Int64 SalesExecutiveRegistrationId, Int64 DeletedBy);
         public List<SalesExecutiveRegistration> GetSalesExecutiveRegistrationByWarehouseId(int WarehouseId);
         public List<BuyerRegistration> GetBuyerRegistrationsBySalesExecutiveUniqueNumber(int SalesExecutiveUniqueNumber);
     }
