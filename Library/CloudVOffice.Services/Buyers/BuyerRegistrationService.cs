@@ -47,10 +47,11 @@ namespace CloudVOffice.Services.Buyers
 					buy.PrimaryPhone = buyerRegistrationDTO.PrimaryPhone;
 					buy.AlternatePhone = buyerRegistrationDTO.AlternatePhone;
 					buy.MailId = buyerRegistrationDTO.MailId;
-					buy.SalesRepresentativeId = buyerRegistrationDTO.SalesRepresentativeId;
-					buy.SalesRepresentativeContact = buyerRegistrationDTO.SalesRepresentativeContact;
+					buy.SalesExecutiveUniqueNumber = buyerRegistrationDTO.SalesExecutiveUniqueNumber;
+					buy.SalesExecutiveContact = buyerRegistrationDTO.SalesExecutiveContact;
 					buy.GSTNumber = buyerRegistrationDTO.GSTNumber;
 					buy.WareHuoseId = buyerRegistrationDTO.WareHuoseId;
+					buy.RetailModelId = 1;
 
 					buy.FirstLogin = false;
 					buy.Password = GenerateRandomPassword(6);
@@ -168,8 +169,8 @@ namespace CloudVOffice.Services.Buyers
 						buy.PrimaryPhone = buyerUpdateDTO.PrimaryPhone;
 						buy.AlternatePhone = buyerUpdateDTO.AlternatePhone;
 						buy.MailId = buyerUpdateDTO.MailId;
-						buy.SalesRepresentativeId = buyerUpdateDTO.SalesRepresentativeId;
-						buy.SalesRepresentativeContact = buyerUpdateDTO.SalesRepresentativeContact;
+						buy.SalesExecutiveUniqueNumber = buyerUpdateDTO.SalesExecutiveUniqueNumber;
+						buy.SalesExecutiveContact = buyerUpdateDTO.SalesExecutiveContact;
 						buy.GSTNumber = buyerUpdateDTO.GSTNumber;
 						buy.WareHuoseId = buyerUpdateDTO.WareHuoseId;
 						buy.Password = buyerUpdateDTO.Password;

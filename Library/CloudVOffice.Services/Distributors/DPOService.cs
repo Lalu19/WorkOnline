@@ -1,5 +1,7 @@
-﻿using CloudVOffice.Core.Domain.Distributor;
+﻿using CloudVOffice.Core.Domain.Common;
+using CloudVOffice.Core.Domain.Distributor;
 using CloudVOffice.Core.Domain.Orders;
+using CloudVOffice.Core.Domain.WareHouses.PurchaseOrders;
 using CloudVOffice.Data.DTO.Distributor;
 using CloudVOffice.Data.DTO.Orders;
 using CloudVOffice.Data.Persistence;
@@ -31,44 +33,46 @@ namespace CloudVOffice.Services.Distributors
             _ItemService = ItemService;
             _DPOItemsService = DPOItemsService;
         }
-        public DPO DPOCreate(DPODTO DPODTO)
-        {
+		public List<DPO> GetDPOList(Int64 DistributorId)
+		{
+			return _dbContext.DPO
+			    .Include(s => s.DPOItems.Where(x=> x.Deleted == false))
+			    .ThenInclude(s => s.Item)
+			    .Where(x => x.Deleted == false && x.DistributorId == DistributorId).ToList();
+			
+		}
+		public MessageEnum DeleteDPOrder(Int64 DPOId, Int64 DeletedBy)
+		{
+			try
+			{
+				var a = _dbContext.DPO.FirstOrDefault(a => a.DPOId == DPOId);
+				var child = _dbContext.DPOItems.Where(a => a.DPOId == DPOId).ToList();
 
-            try
-            {
-                Random random = new Random();
-                DPO DPO = new DPO();
-                DPO.DPOUniqueNo = random.Next(100000, 1000000).ToString();
-                DPO.TotalAmount = DPODTO.TotalAmount;
-                DPO.TotalQuantity = DPODTO.TotalQuantity;
-                DPO.OrderStatus = "Order Placed";
-                DPO.CreatedBy = DPODTO.CreatedBy;
-                DPO.WareHuoseId = DPODTO.WareHuoseId;
-                DPO.DistributorId = DPODTO.DistributorId;
-                DPO.CreatedDate = System.DateTime.Now;
+				if (a != null)
+				{
+					a.Deleted = true;
+					a.UpdatedBy = DeletedBy;
+					a.UpdatedDate = DateTime.Now;
+					_dbContext.SaveChanges();
 
-                var obj = _DPORepo.Insert(DPO);
-                int Quaninty = 0;
-                for (int i = 0; i < DPODTO.Items.Count; i++)
-                {
-
-                    Quaninty += DPODTO.Quantity[i];
-                    _DPOItemsService.DPOItemsCreate(obj.DPOId, DPODTO.Items[i], DPODTO.Quantity[i], DPODTO.CreatedBy);
-                }
-                return obj;
-            }
-            catch
-            {
-                throw;
-            }
-        }
-
-        public List<DPO> GetDPOLIstbyDistributorId(int DistributorId)
-        {
-            return _dbContext.DPO
-               .Include(s => s.DPOItems.Where(x => x.Deleted == false))
-               .ThenInclude(s => s.Item)
-               .Where(x => x.Deleted == false && x.DistributorId == DistributorId).ToList();
-        }
-    }
+					foreach (var item in child)
+					{
+						item.Deleted = true;
+						item.UpdatedBy = DeletedBy;
+						item.UpdatedDate = DateTime.Now;
+						_dbContext.SaveChanges();
+					}
+					return MessageEnum.Deleted;
+				}
+				else
+				{
+					return MessageEnum.Invalid;
+				}
+			}
+			catch
+			{
+				throw;
+			}
+		}
+	}
 }

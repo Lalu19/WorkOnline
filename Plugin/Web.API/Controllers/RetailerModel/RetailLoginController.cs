@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CloudVOffice.Core.Domain.Buyers;
 using CloudVOffice.Core.Domain.Sellers;
 using CloudVOffice.Data.DTO.RetailerModel;
+using CloudVOffice.Data.Migrations;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Services.Buyers;
 using Microsoft.AspNetCore.Mvc;
@@ -113,6 +114,164 @@ namespace Web.API.Controllers.RetailerModel
 
             return Ok("Password changed successfully");
         }
+
+
+
+
+		[HttpGet("{UserMobileNumber}/{Password}")]
+		public IActionResult SellerLogin(string UserMobileNumber, string Password)
+		{
+			var seller = _dbContext.SellerRegistrations.FirstOrDefault(a => a.PrimaryPhone == UserMobileNumber);
+
+			if (seller == null)
+			{
+				return BadRequest("The Mobile Number is wrong");
+			}
+			else
+			{
+				if(seller.Password == Password)
+                {
+                    return Ok(new { Seller = seller });
+                }
+                else
+                {
+                    return BadRequest("Mobile Number is correct but the Password is wrong");
+                }
+            }
+		}
+
+
+        [HttpPost]
+        public IActionResult ChangeSellerPassword(ChangePasswordDTO changePasswordDTO)
+        {
+            var seller = _dbContext.SellerRegistrations.FirstOrDefault(x => x.PrimaryPhone == changePasswordDTO.UserMobileNumber);
+
+            if (seller == null)
+            {
+                return BadRequest("Seller not found");
+            }
+
+            if (seller.Password != changePasswordDTO.OldPassword)
+            {
+                return BadRequest("Old password is incorrect");
+            }
+
+            if (changePasswordDTO.NewPassword != changePasswordDTO.RetypePassword)
+            {
+                return BadRequest("New password and retype password do not match");
+            }
+
+            seller.Password = changePasswordDTO.NewPassword;
+            _dbContext.SaveChanges();
+
+            return Ok("Seller password changed successfully");
+        }
+
+
+
+
+
+        [HttpGet("{UserMobileNumber}/{Password}")]
+        public IActionResult SalesExecutiveLogin(string UserMobileNumber, string Password)
+        {
+            var executive = _dbContext.SalesExecutiveRegistrations.FirstOrDefault(a => a.PrimaryPhone == UserMobileNumber);
+
+            if (executive == null)
+            {
+                return BadRequest("The Mobile Number is wrong");
+            }
+            else
+            {
+                if (executive.Password == Password)
+                {
+                    return Ok(new { SalesExecutive = executive });
+                }
+                else
+                {
+                    return BadRequest("Mobile Number is correct but the Password is wrong");
+                }
+            }
+        }
+
+
+        [HttpPost]
+        public IActionResult ChangeSalesExecutivePassword(ChangePasswordDTO changePasswordDTO)
+        {
+            var SalesExecutive = _dbContext.SalesExecutiveRegistrations.FirstOrDefault(x => x.PrimaryPhone == changePasswordDTO.UserMobileNumber);
+
+            if (SalesExecutive == null)
+            {
+                return BadRequest("Seller not found");
+            }
+
+            if (SalesExecutive.Password != changePasswordDTO.OldPassword)
+            {
+                return BadRequest("Old password is incorrect");
+            }
+
+            if (changePasswordDTO.NewPassword != changePasswordDTO.RetypePassword)
+            {
+                return BadRequest("New password and retype password do not match");
+            }
+
+            SalesExecutive.Password = changePasswordDTO.NewPassword;
+            _dbContext.SaveChanges();
+
+            return Ok("Seller password changed successfully");
+        }
+
+
+        [HttpGet("{UserMobileNumber}/{Password}")]
+        public IActionResult DeliveryAgentLogin(string UserMobileNumber, string Password)
+        {
+            var deliveryAgent = _dbContext.DeliveryPartners.FirstOrDefault(a => a.OwnerContact == UserMobileNumber);
+
+            if (deliveryAgent == null)
+            {
+                return BadRequest("The Mobile Number is wrong");
+            }
+            else
+            {
+                if (deliveryAgent.Password == Password)
+                {
+                    return Ok(new { DeliveryAgent = deliveryAgent });
+                }
+                else
+                {
+                    return BadRequest("Mobile Number is correct but the Password is wrong");
+                }
+            }
+        }
+
+
+        [HttpPost]
+        public IActionResult ChangeDeliveryAgentPassword(ChangePasswordDTO changePasswordDTO)
+        {
+            var deliveryAgent = _dbContext.DeliveryPartners.FirstOrDefault(x => x.OwnerContact == changePasswordDTO.UserMobileNumber);
+
+            if (deliveryAgent == null)
+            {
+                return BadRequest("Seller not found");
+            }
+
+            if (deliveryAgent.Password != changePasswordDTO.OldPassword)
+            {
+                return BadRequest("Old password is incorrect");
+            }
+
+            if (changePasswordDTO.NewPassword != changePasswordDTO.RetypePassword)
+            {
+                return BadRequest("New password and retype password do not match");
+            }
+
+            deliveryAgent.Password = changePasswordDTO.NewPassword;
+            _dbContext.SaveChanges();
+
+            return Ok("Seller password changed successfully");
+        }
+
+
+
 
     }
 }

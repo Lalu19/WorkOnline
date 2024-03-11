@@ -22,8 +22,9 @@ namespace CloudVOffice.Core.Domain.Buyers
         public string PrimaryPhone { get; set; }
         public string? AlternatePhone { get; set; }
         public string? MailId { get; set; }
-        public string SalesRepresentativeId { get; set; }
-        public string SalesRepresentativeContact { get; set; }
+        public string? SalesExecutiveUniqueNumber { get; set; }
+        public string? SalesExecutiveContact { get; set; }
+        public Int64? RetailModelId { get; set; }
         public string? GSTNumber { get; set; }
         public Int64? WareHuoseId { get; set; }
         public string? Password { get; set; }

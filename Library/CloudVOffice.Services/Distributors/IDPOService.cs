@@ -1,4 +1,5 @@
-﻿using CloudVOffice.Core.Domain.Distributor;
+﻿using CloudVOffice.Core.Domain.Common;
+using CloudVOffice.Core.Domain.Distributor;
 using CloudVOffice.Data.DTO.Distributor;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,8 +12,9 @@ namespace CloudVOffice.Services.Distributors
 {
     public interface IDPOService
     {
-        public DPO DPOCreate(DPODTO DPODTO);
-        public List<DPO> GetDPOLIstbyDistributorId(int DistributorId);
-       
-    }
+		public List<DPO> GetDPOList(Int64 DistributorId);
+		public MessageEnum DeleteDPOrder(Int64 DPOId, Int64 DeletedBy);
+
+
+	}
 }
