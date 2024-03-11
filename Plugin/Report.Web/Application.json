@@ -1,0 +1,9 @@
+{
+  "ApplicationName": "SalesExecutive",
+  "Url": "/Report/ReportDashbord/Dashboard",
+  "IconImageUrl": "/Plugin/Report.Web/logo.png",
+  "IconClass": "",
+  "AreaName": "Report",
+  "Roles": [ "Super Admin", "Admin", "Users" ],
+  "Children": []
+}

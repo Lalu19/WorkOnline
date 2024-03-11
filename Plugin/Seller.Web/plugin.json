@@ -6,8 +6,8 @@
   "SupportedVersions": [ "0.3" ],
   "Author": "Appman team",
   "DisplayOrder": 1,
-  "FileName": "Seller.Web.dll",
-  "Description": "Point Of Storage",
+  "FileName": "Report.Web.dll",
+  "Description": "Seller",
   "InstallationUrl": "/Seller/SellerInstall/Install",
   "UnInstallationUrl": "/Seller/SellerInstall/UnInstall",
   "Dependency": []

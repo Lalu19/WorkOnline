@@ -339,9 +339,6 @@
 		<Content Update="**\*.config;**\*.json" CopyToOutputDirectory="Never" CopyToPublishDirectory="PreserveNewest" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\CloudVOffice.Web.Framework\CloudVOffice.Web.Framework.csproj" />
-	</ItemGroup>
-	<ItemGroup>
 		<UpToDateCheckInput Remove="Views\Shared\_DistributorLayout.cshtml" />
 	</ItemGroup>
 	<ItemGroup>
@@ -641,5 +638,9 @@
 
 	<ItemGroup>
 	  <Folder Include="wwwroot\uploads\DistributorRegistration\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\CloudVOffice.Web\CloudVOffice.Web.csproj" />
 	</ItemGroup>
 </Project>
