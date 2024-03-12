@@ -35,6 +35,7 @@ namespace CloudVOffice.Services.Sales
                         SalesManagerTarget target = new SalesManagerTarget
                         {
                             MonthId = salesManagerrTargetDTO.MonthId,
+                            UserId = salesManagerrTargetDTO.UserId,
                             SectorId =(int?) Convert.ToInt64(salesManagerrTargetDTO.Sector),
                             CategoryId =(int?) Convert.ToInt64(salesManagerrTargetDTO.Category),
                             MonthlyCategoryWiseTarget = salesManagerrTargetDTO.MonthlyCategoryWiseTarget,
@@ -133,6 +134,7 @@ namespace CloudVOffice.Services.Sales
                     {
                         // Update properties of the existing target
                         targetToUpdate.MonthId = salesManagerTargetDTO.MonthId;
+                        targetToUpdate.UserId = salesManagerTargetDTO.UserId;
                         targetToUpdate.SectorId =(int?) Convert.ToInt64(salesManagerTargetDTO.Sector);
                         targetToUpdate.CategoryId =(int?) Convert.ToInt64(salesManagerTargetDTO.Category);
                         targetToUpdate.MonthlyCategoryWiseTarget = salesManagerTargetDTO.MonthlyCategoryWiseTarget;

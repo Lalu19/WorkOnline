@@ -15,6 +15,8 @@ using CloudVOffice.Services.EmailTemplates;
 using CloudVOffice.Services.Permissions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Azure;
+using System.Collections.Generic;
 using System.Text;
 
 
@@ -427,9 +429,6 @@ namespace CloudVOffice.Services.Users
             return obj.ToString();
         }
 
-
-
-
         public async void SendWelcomeMessage(User user)
         {
             try
@@ -629,5 +628,38 @@ namespace CloudVOffice.Services.Users
                 throw;
             }
         }
+
+
+        //public List<UserRoleMapping> GetWareHouseManagerList()
+        //{
+        //    var a = _context.UserRoleMappings.Where(x => x.RoleId == 2).ToList();
+
+        //    return a;
+        //}
+
+        public List<(UserRoleMapping UserRoleMapping, string UserName)> GetWareHouseManagerList()
+        {
+            var result = _context.UserRoleMappings
+                .Where(x => x.RoleId == 2)
+                .Join(
+                    _context.Users,
+                    mapping => mapping.UserId,
+                    user => user.UserId,
+                    (mapping, user) => new
+                    {
+                        UserRoleMapping = mapping,
+                        UserName = user.FirstName
+                    })
+                .ToList();
+
+            return result.Select(item => (item.UserRoleMapping, item.UserName)).ToList();
+        }
+
+        public Int64 GetUserIdByName(string Name)
+        {
+            var a = _context.Users.FirstOrDefault(user => user.FirstName == Name);
+            return a.UserId;
+        }
+
     }
 }

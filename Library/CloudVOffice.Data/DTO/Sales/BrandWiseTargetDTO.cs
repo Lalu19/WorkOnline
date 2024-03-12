@@ -16,6 +16,7 @@ namespace CloudVOffice.Data.DTO.Sales
 		public Int64? WareHuoseId { get; set; }
 		public Int64? SalesExecutiveId { get; set; }
 		public Int64? MonthId { get; set; }
+        public Int64? UserId { get; set; }
         public Int64? UnitId { get; set; }
         public double? MonthlyBrandWiseTarget { get; set; }
         public Int64 CreatedBy { get; set; }
@@ -32,6 +33,7 @@ namespace CloudVOffice.Data.DTO.Sales
         public int? BrandId { get; set; }
         public int? MonthId { get; set; }
         //public Int64? UnitId { get; set; }
+        public Int64? UserId { get; set; }
         public double? MonthlyBrandWiseTarget { get; set; }
         public Int64 CreatedBy { get; set; }
     }

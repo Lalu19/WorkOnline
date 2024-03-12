@@ -9,6 +9,7 @@ namespace CloudVOffice.Data.DTO.Sales
     public class SalesManagerTargetDTO
     {
         public Int64? SalesManagerTargetId { get; set; }
+        public Int64? UserId { get; set; }
         public Int64? StateId { get; set; }
         public Int64? MonthId { get; set; }
         public int? SectorId { get; set; }
@@ -25,6 +26,7 @@ namespace CloudVOffice.Data.DTO.Sales
     {
         
         public Int64? SalesManagerTargetId { get; set; }
+        public Int64? UserId { get; set; }
         public string? Sector { get; set; }
         public string? Category { get; set; }
         public Int64 MonthId { get; set; }

@@ -42,6 +42,7 @@ namespace CloudVOffice.Services.Sales
                         {
 							SalesManagerID = brandWiseTargetDTO.SalesManagerID,
                             WareHuoseId = brandWiseTargetDTO.WareHuoseId,
+                            UserId = brandWiseTargetDTO.UserId,
 							SalesExecutiveId = brandWiseTargetDTO.SalesExecutiveId,
 							SectorId = brandWiseTargetDTO.SectorId,
                             CategoryId = brandWiseTargetDTO.CategoryId,
@@ -89,6 +90,7 @@ namespace CloudVOffice.Services.Sales
                     {
 						targetToUpdate.SalesManagerID = brandWiseTargetDTO.SalesManagerID;
 						targetToUpdate.WareHuoseId = brandWiseTargetDTO.WareHuoseId;
+						targetToUpdate.UserId = brandWiseTargetDTO.UserId;
 						targetToUpdate.SalesExecutiveId = brandWiseTargetDTO.SalesExecutiveId;
                         targetToUpdate.SectorId = brandWiseTargetDTO.SectorId;
                         targetToUpdate.CategoryId = brandWiseTargetDTO.CategoryId;

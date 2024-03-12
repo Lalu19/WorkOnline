@@ -12,6 +12,7 @@ using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
 using CloudVOffice.Services.Orders;
 using CloudVOffice.Services.WareHouses.Itemss;
+using Microsoft.EntityFrameworkCore;
 
 namespace CloudVOffice.Services.Distributors
 {
@@ -52,6 +53,8 @@ namespace CloudVOffice.Services.Distributors
 					distributorRegistration.Password = distributorRegistrationDTO.Password;
 					distributorRegistration.SectorId = distributorRegistrationDTO.SectorId;
 					distributorRegistration.Image = distributorRegistrationDTO.Image;
+					distributorRegistration.CreatedBy = distributorRegistrationDTO.CreatedBy;
+					distributorRegistration.CreatedDate = DateTime.Now;
 
 					_distributorRegistrationRepo.Insert(distributorRegistration);
 				}
@@ -83,6 +86,39 @@ namespace CloudVOffice.Services.Distributors
 			return distributor;
 		}
 
+		public DistributorRegistration getdistibutorlistbyid(Int64 DistributorRegistrationId)
+		{
+			return _dbContext.DistributorRegistrations
+				.Where(x => x.Deleted == false && x.DistributorRegistrationId == DistributorRegistrationId).SingleOrDefault();
+		}
+		public List<DistributorRegistration> getdistibutorlistbywarehouseId(Int64 WareHuoseId)
+		{
+			return _dbContext.DistributorRegistrations
+				.Include(x=> x.WareHuose)
+				.Where(x => x.Deleted == false && x.WareHuoseId == WareHuoseId).ToList();
+		}
 
-	}
+        public MessageEnum DistributorDelete(Int64 DistributorRegistrationId, Int64 DeletedBy)
+        {
+            try
+            {
+                var a = _dbContext.DistributorRegistrations.Where(x => x.DistributorRegistrationId == DistributorRegistrationId).FirstOrDefault();
+                if (a != null)
+                {
+                    a.Deleted = true;
+                    a.UpdatedBy = DeletedBy;
+                    a.UpdatedDate = DateTime.Now;
+                    _dbContext.SaveChanges();
+                    return MessageEnum.Deleted;
+                }
+                else
+                    return MessageEnum.Invalid;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+    }
 }

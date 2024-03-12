@@ -599,5 +599,11 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 			var a = _dbContext.Items.Where(a => a.CategoryId == CategoryId).ToList();
 			return a;
 		}
-    }
+
+		public List<Item> ItemListByWareHouseId(int WareHuoseId)
+		{
+			var a = _dbContext.Items.Where(a => a.WareHuoseId == WareHuoseId).ToList();
+			return a;
+		}
+	}
 }

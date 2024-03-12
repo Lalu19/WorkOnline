@@ -4,6 +4,7 @@ using CloudVOffice.Core.Domain.WareHouses.Brands;
 using CloudVOffice.Data.DTO.Sales;
 using CloudVOffice.Services.ProductCategories;
 using CloudVOffice.Services.Sales;
+using CloudVOffice.Services.Users;
 using CloudVOffice.Services.WareHouses.Brands;
 using CloudVOffice.Services.WareHouses.Months;
 using CloudVOffice.Web.Framework;
@@ -25,15 +26,17 @@ namespace SalesExecutive.Controllers
         private readonly ICategoryService _categoryService;
         private readonly IMonthService _monthService;
 		private readonly IBrandService _brandService;
+		private readonly IUserService _userService;
 
 
-		public SalesManagerTargetController(ISalesManagerTargetService salesManagerTargetService, ISectorService sectorService, ICategoryService categoryService, IMonthService monthService, IBrandService brandService)
+		public SalesManagerTargetController(ISalesManagerTargetService salesManagerTargetService, ISectorService sectorService, ICategoryService categoryService, IMonthService monthService, IBrandService brandService, IUserService userService)
         {
             _salesManagerTargetService = salesManagerTargetService;
             _sectorService = sectorService;
             _categoryService = categoryService;
             _monthService = monthService;
 			_brandService= brandService;
+            _userService = userService;
 
 		}
 
@@ -46,6 +49,7 @@ namespace SalesExecutive.Controllers
 			ViewBag.Sectors = _sectorService.GetSectorList();
             ViewBag.Categories = _categoryService.GetCategoryList();
             ViewBag.months = _monthService.GetMonthList();
+            ViewBag.WarehouseManager = _userService.GetWareHouseManagerList();
 
             SalesManagerTargetDTO salesManagerTargetDTO = new SalesManagerTargetDTO();
 
@@ -54,6 +58,7 @@ namespace SalesExecutive.Controllers
                 var target = _salesManagerTargetService.GetSalesManagerTargetBySalesManagerTargetId(int.Parse(salesManagerTargetId.ToString()));
 
                //salesManagerTargetDTO.SalesAdminTargetName = target.SalesAdminTargetName;
+                salesManagerTargetDTO.UserId = target.UserId;
                 salesManagerTargetDTO.MonthId = target.MonthId;
                 salesManagerTargetDTO.SectorId = target.SectorId;
                 salesManagerTargetDTO.CategoryId = target.CategoryId;
@@ -179,5 +184,12 @@ namespace SalesExecutive.Controllers
 			var a = _brandService.GetBrandIdByBrandName(brandName);
 			return a;
 		}
-	}
+
+        public Int64 GetUserIdByName(string userName)
+        {
+            var a = _userService.GetUserIdByName(userName);
+            return a;
+        }
+
+    }
 }
