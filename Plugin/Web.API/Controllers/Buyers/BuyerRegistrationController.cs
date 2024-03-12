@@ -1,4 +1,5 @@
 ﻿using CloudVOffice.Core.Domain.Buyers;
+using CloudVOffice.Core.Domain.Common;
 using CloudVOffice.Data.DTO.Buyers;
 using CloudVOffice.Data.DTO.ProductCategories;
 using CloudVOffice.Services.Buyers;
@@ -75,8 +76,19 @@ namespace Web.API.Controllers.Buyers
                 //}
 
             }
+
+
             var a = _buyerRegistrationService.CreateBuyerRegistration(buyerRegistrationDTO);
 
+            if(a == MessageEnum.Duplicate)
+            {
+                return BadRequest("Given Mobile Number is already registered");
+            }
+
+            if (a == MessageEnum.Success)
+            {
+                return Ok("Success");
+            }
 
             return Ok(a);
         }

@@ -1,4 +1,5 @@
 ﻿using CloudVOffice.Core.Domain.Orders;
+using CloudVOffice.Core.Domain.WareHouses.Items;
 using CloudVOffice.Data.DTO.Orders;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
@@ -68,6 +69,15 @@ namespace CloudVOffice.Services.Orders
                .Include(s => s.BuyerOrderItems.Where(x => x.Deleted == false))
                .ThenInclude(s => s.Item)
                .Where(x => x.Deleted == false && x.CreatedBy == UserId).ToList();
+        }
+
+        public List<Item> GetItemsByPincodeId(int pincodeId)
+        {
+
+            var distributors = _dbContext.DistributorRegistrations.Where(a => a.PinCodeId == pincodeId).ToList();
+
+            
+
         }
 
     }

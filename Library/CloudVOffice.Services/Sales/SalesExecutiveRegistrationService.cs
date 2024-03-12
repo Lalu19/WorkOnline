@@ -191,11 +191,24 @@ namespace CloudVOffice.Services.Sales
             }
         }
 
-        public List<BuyerRegistration> GetBuyerRegistrationBySalesExecutiveId(int salesExecutiveRegistrationId)
+        //public List<BuyerRegistration> GetBuyerRegistrationBySalesExecutiveId(int salesExecutiveRegistrationId)
+        //{
+        //    try
+        //    {
+        //        var buyers = _dbContext.BuyerRegistrations.Where(a => a.SalesExecutiveUniqueNumber == salesExecutiveRegistrationId.ToString()).ToList();
+        //        return buyers;
+        //    }
+        //    catch
+        //    {
+        //        throw;
+        //    }
+        //}
+
+        public List<BuyerRegistration> GetBuyerRegistrationsBySalesExecutiveUniqueNumber(string SalesExecutiveUniqueNumber)
         {
             try
             {
-                var buyers = _dbContext.BuyerRegistrations.Where(a => a.SalesExecutiveUniqueNumber == salesExecutiveRegistrationId.ToString()).ToList();
+                var buyers = _dbContext.BuyerRegistrations.Where(a => a.SalesExecutiveUniqueNumber == SalesExecutiveUniqueNumber).ToList();
                 return buyers;
             }
             catch
@@ -204,17 +217,27 @@ namespace CloudVOffice.Services.Sales
             }
         }
 
-        public List<BuyerRegistration> GetBuyerRegistrationsBySalesExecutiveUniqueNumber(int SalesExecutiveUniqueNumber)
+        public MessageEnum DeleteSalesExecutive(Int64 salesExecutiveRegistrationId, Int64 DeletedBy)
         {
             try
             {
-                var buyers = _dbContext.BuyerRegistrations.Where(a => a.SalesExecutiveUniqueNumber == SalesExecutiveUniqueNumber.ToString()).ToList();
-                return buyers;
+                var a = _dbContext.SalesExecutiveRegistrations.Where(x => x.SalesExecutiveRegistrationId == salesExecutiveRegistrationId).FirstOrDefault();
+                if (a != null)
+                {
+                    a.Deleted = true;
+                    a.UpdatedBy = DeletedBy;
+                    a.UpdatedDate = DateTime.Now;
+                    _dbContext.SaveChanges();
+                    return MessageEnum.Deleted;
+                }
+                else
+                    return MessageEnum.Invalid;
             }
             catch
             {
                 throw;
             }
         }
+
     }
 }

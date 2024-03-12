@@ -61,6 +61,17 @@ namespace CloudVOffice.Data.DTO.WareHouses.Items
         public double? RetailerCost { get; set; }
         public double? RetailerLandingCost { get; set; }
         public double? RetailerCaseCost { get; set; }
+
+        public string? DistributorMargin { get; set; }
+        public string? RetailerMargin { get; set; }
+        public double? PurchaseCGSTValue { get; set; }
+        public double? PurchaseSGSTValue { get; set; }
+        public double? PurchaseIGSTValue { get; set; }
+        public double? DistributorCGSTValue { get; set; }
+        public double? DistributorSGSTValue { get; set; }
+        public double? RetailerCGSTValue { get; set; }
+        public double? RetailerSGSTValue { get; set; }
+
         public int? HandlingTypeId { get; set; }
         public string? HandlingType { get; set; }
 		public string? InvoiceNo { get; set; }
