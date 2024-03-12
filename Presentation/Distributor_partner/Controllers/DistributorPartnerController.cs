@@ -65,7 +65,7 @@ namespace Distributor_partner.Controllers
 								{
 									new Claim(ClaimTypes.MobilePhone, DistributorDetails.PrimaryPhone),
 									new Claim("DistributorName",DistributorDetails.Name),
-									new Claim("Image",DistributorDetails.Image),
+									//new Claim("Image",DistributorDetails.Image),
 									new Claim("PrimaryPhoneNumber",DistributorDetails.PrimaryPhone),
 									new Claim("Address",DistributorDetails.Address),
 									new Claim("Country",DistributorDetails.Country),
@@ -73,8 +73,6 @@ namespace Distributor_partner.Controllers
 									new Claim("MailId",DistributorDetails.MailId),
 									new Claim("GSTNumber",DistributorDetails.GSTNumber),
 									new Claim("WareHuoseId",DistributorDetails.WareHuoseId.ToString()),
-									new Claim("PinCodeId",DistributorDetails.PinCodeId.ToString()),
-									new Claim("SectorId",DistributorDetails.SectorId.ToString()),
 									new Claim("DistributorRegistrationId",DistributorDetails.DistributorRegistrationId.ToString()),
 
 								};
@@ -112,7 +110,7 @@ namespace Distributor_partner.Controllers
 		{
 			Int64 DistributorRegistrationId = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "DistributorRegistrationId").Value.ToString());
 			string Name = User.Claims.FirstOrDefault(x => x.Type == "DistributorName").ToString();
-			string Image = User.Claims.FirstOrDefault(x => x.Type == "Image").ToString();
+			//string Image = User.Claims.FirstOrDefault(x => x.Type == "Image").ToString();
 			string PrimaryPhone = User.Claims.FirstOrDefault(x => x.Type == "PrimaryPhoneNumber").ToString();
 			string Address = User.Claims.FirstOrDefault(x => x.Type == "Address").ToString();
 			string Country = User.Claims.FirstOrDefault(x => x.Type == "Country").ToString();
@@ -120,8 +118,6 @@ namespace Distributor_partner.Controllers
 			string MailId = User.Claims.FirstOrDefault(x => x.Type == "MailId").ToString();
 			string GSTNumber = User.Claims.FirstOrDefault(x => x.Type == "GSTNumber").ToString();
 			int WareHuoseId = int.Parse(User.Claims.FirstOrDefault(x => x.Type == "WareHuoseId").Value.ToString());
-			int PinCodeId = int.Parse(User.Claims.FirstOrDefault(x => x.Type == "PinCodeId").Value.ToString());
-			int SectorId = int.Parse(User.Claims.FirstOrDefault(x => x.Type == "SectorId").Value.ToString());
 
 			return View();
 		}

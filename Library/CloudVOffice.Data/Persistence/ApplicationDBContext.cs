@@ -149,6 +149,7 @@ namespace CloudVOffice.Data.Persistence
 		public virtual DbSet<DPO> DPO { get; set; }		
 		public virtual DbSet<DPOItems> DPOItems { get; set; }		
 		public virtual DbSet<DistributorRegistration> DistributorRegistrations { get; set; }
+		public virtual DbSet<DistributorAssign> DistributorAssigns { get; set; }
 		public virtual DbSet<DeliveryPartner> DeliveryPartners { get; set; }
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -610,7 +611,7 @@ namespace CloudVOffice.Data.Persistence
               .HasDefaultValue(false)
               .ValueGeneratedNever();
 
-
+           
 
             #endregion
 
@@ -816,7 +817,15 @@ namespace CloudVOffice.Data.Persistence
               .HasDefaultValue(false)
               .ValueGeneratedNever();
 
+            modelBuilder.Entity<DistributorAssign>()
+           .Property(s => s.CreatedDate)
+           .HasDefaultValueSql("getdate()");
 
+
+            modelBuilder.Entity<DistributorAssign>()
+              .Property(s => s.Deleted)
+              .HasDefaultValue(false)
+              .ValueGeneratedNever();
 
             modelBuilder.Seed();
         }

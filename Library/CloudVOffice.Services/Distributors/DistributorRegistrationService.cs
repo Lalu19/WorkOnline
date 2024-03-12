@@ -42,7 +42,6 @@ namespace CloudVOffice.Services.Distributors
 					distributorRegistration.Name = distributorRegistrationDTO.Name;
 					distributorRegistration.BusinessName = distributorRegistrationDTO.BusinessName;
 					distributorRegistration.Address = distributorRegistrationDTO.Address;
-					distributorRegistration.PinCodeId = distributorRegistrationDTO.PinCodeId;
 					distributorRegistration.Country = distributorRegistrationDTO.Country;
 					distributorRegistration.State = distributorRegistrationDTO.State;
 					distributorRegistration.PrimaryPhone = distributorRegistrationDTO.PrimaryPhone;
@@ -51,7 +50,6 @@ namespace CloudVOffice.Services.Distributors
 					distributorRegistration.GSTNumber = distributorRegistrationDTO.GSTNumber;
 					distributorRegistration.WareHuoseId = distributorRegistrationDTO.WareHuoseId;
 					distributorRegistration.Password = distributorRegistrationDTO.Password;
-					distributorRegistration.SectorId = distributorRegistrationDTO.SectorId;
 					distributorRegistration.Image = distributorRegistrationDTO.Image;
 					distributorRegistration.CreatedBy = distributorRegistrationDTO.CreatedBy;
 					distributorRegistration.CreatedDate = DateTime.Now;
