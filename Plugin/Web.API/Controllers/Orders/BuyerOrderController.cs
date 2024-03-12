@@ -47,5 +47,14 @@ namespace Web.API.Controllers.Orders
             var a = _BuyerOrderService.GetBuyerOrderListByUserId(UserId);
             return Ok(a);
         }
+
+        //[HttpGet("{PincodeId}")]
+        //public IActionResult GetItemsbyDistributorId(int PincodeId)
+        //{
+
+        //    var a = 
+
+        //}
+
     }
 }

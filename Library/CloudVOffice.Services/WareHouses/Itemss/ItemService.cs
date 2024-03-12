@@ -99,14 +99,25 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						item.RetailerLandingCost = itemDTO.RetailerLandingCost;
 						item.DistributorLandingCost = itemDTO.DistributorLandingCost;
 						item.PurchaseLandingCost = itemDTO.PurchaseLandingCost;
+						item.DistributorCost = itemDTO.DistributorCost;
+						item.DistributorCaseCost = itemDTO.DistributorCaseCost;
 						item.IGST = itemDTO.IGST;
 
+						item.DistributorMargin = itemDTO.DistributorMargin;
+					    item.RetailerMargin = itemDTO.RetailerMargin;
+						item.PurchaseCGSTValue = itemDTO.PurchaseCGSTValue;
+						item.PurchaseSGSTValue = itemDTO.PurchaseSGSTValue;
+						item.PurchaseIGSTValue = itemDTO.PurchaseIGSTValue;
+						item.DistributorCGSTValue = itemDTO.DistributorCGSTValue;
+						item.DistributorSGSTValue = itemDTO.DistributorSGSTValue;
+						item.RetailerCGSTValue = itemDTO.RetailerCGSTValue;
+						item.RetailerSGSTValue = itemDTO.RetailerSGSTValue;
 
 
 
-						//item.HandlingType = itemDTO.HandlingType;
+                        //item.HandlingType = itemDTO.HandlingType;
 
-						item.HandlingTypeId = itemDTO.HandlingTypeId;
+                        item.HandlingTypeId = itemDTO.HandlingTypeId;
 
 						item.InvoiceNo = itemDTO.InvoiceNo;
 						item.ReceivedDate = itemDTO.ReceivedDate;
@@ -169,6 +180,8 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 							PurchaseCaseCost = item.PurchaseCaseCost,
 							PurchaseLandingCost = item.PurchaseLandingCost,
 							DistributorLandingCost = item.DistributorLandingCost,
+							DistributorCost = item.DistributorCost,
+							DistributorCaseCost = item.DistributorCaseCost,
 							RetailerCost = item.RetailerCost,
 							RetailerLandingCost = item.RetailerLandingCost,
 							RetailerCaseCost = item.RetailerCaseCost,
@@ -184,8 +197,18 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 							CGST = item.CGST,
 							SellerMargin = item.SellerMargin,
 
-							//HandlingType = item.HandlingType,
-							HandlingTypeId = item.HandlingTypeId,
+                            DistributorMargin= item.DistributorMargin,
+                            RetailerMargin = item.RetailerMargin,
+                            PurchaseCGSTValue = item.PurchaseCGSTValue,
+                            PurchaseSGSTValue = item.PurchaseSGSTValue,
+                            PurchaseIGSTValue = item.PurchaseIGSTValue,
+                            DistributorCGSTValue = item.DistributorCGSTValue,
+							DistributorSGSTValue = item.DistributorSGSTValue,
+							RetailerCGSTValue = item.RetailerCGSTValue,
+                            RetailerSGSTValue = item.RetailerSGSTValue,
+
+                            //HandlingType = item.HandlingType,
+                            HandlingTypeId = item.HandlingTypeId,
 
 							InvoiceNo = item.InvoiceNo,
 							ReceivedDate = item.ReceivedDate,
@@ -334,8 +357,19 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 						item.RetailerLandingCost= itemDTO.RetailerLandingCost;
 						item.DistributorLandingCost= itemDTO.DistributorLandingCost;
 						item.PurchaseLandingCost= itemDTO.PurchaseLandingCost;
-						item.IGST = itemDTO.IGST;
+                        item.DistributorCost = itemDTO.DistributorCost;
+                        item.DistributorCaseCost = itemDTO.DistributorCaseCost;
+                        item.IGST = itemDTO.IGST;
 
+                        item.DistributorMargin = itemDTO.DistributorMargin;
+                        item.RetailerMargin = itemDTO.RetailerMargin;
+                        item.PurchaseCGSTValue = itemDTO.PurchaseCGSTValue;
+                        item.PurchaseSGSTValue = itemDTO.PurchaseSGSTValue;
+                        item.PurchaseIGSTValue = itemDTO.PurchaseIGSTValue;
+                        item.DistributorCGSTValue = itemDTO.DistributorCGSTValue;
+                        item.DistributorSGSTValue = itemDTO.DistributorSGSTValue;
+                        item.RetailerCGSTValue = itemDTO.RetailerCGSTValue;
+                        item.RetailerSGSTValue = itemDTO.RetailerSGSTValue;
 
 
                         //item.HandlingType = itemDTO.HandlingType;

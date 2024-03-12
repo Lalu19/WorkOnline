@@ -16,6 +16,7 @@ namespace CloudVOffice.Services.Sales
         public List<SalesExecutiveRegistration> GetAllSalesExecutiveRegistrations();
         public SalesExecutiveRegistration GetSalesExecutiveRegistrationsById(int salesExecutiveRegistrationId);
         public List<SalesExecutiveRegistration> GetSalesExecutiveRegistrationByWarehouseId(int WarehouseId);
-        public List<BuyerRegistration> GetBuyerRegistrationsBySalesExecutiveUniqueNumber(int SalesExecutiveUniqueNumber);
+        public List<BuyerRegistration> GetBuyerRegistrationsBySalesExecutiveUniqueNumber(string SalesExecutiveUniqueNumber);
+        public MessageEnum DeleteSalesExecutive(Int64 salesExecutiveRegistrationId, Int64 DeletedBy);
     }
 }
