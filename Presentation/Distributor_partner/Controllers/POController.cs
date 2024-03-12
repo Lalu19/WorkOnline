@@ -108,18 +108,21 @@ namespace Distributor_partner.Controllers
 				return BadRequest("Error occurred while saving DPO");
 			}
 		}
+		[HttpGet]
 		public IActionResult OrderList()
 		{
 			var DistributorId = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "DistributorRegistrationId").Value.ToString());
 			var list = _DPOService.GetDPOList(DistributorId);
 			ViewBag.OrderList = list;
-            return View();
-        }
+			return View();
+		}
+		[HttpGet]
 		public IActionResult Orderdelete(Int64 DPOId)
 		{
 			var deleteby = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "DistributorRegistrationId").Value.ToString());
 			var a = _DPOService.DeleteDPOrder(DPOId, deleteby);
 			return Json(a);
 		}
+		
 	}
 }

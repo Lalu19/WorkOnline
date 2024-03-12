@@ -47,15 +47,7 @@
                     </div>
                     <div class="card-body">
                         <input asp-for="@Model.DistributorRegistrationId" type="hidden" />
-                        <div class="form-row">
-                            <div class="form-group col-md-3">
-                                <label for="SectorId" class="form-label">Sector Name</label>
-                                <ejs-dropdownlist id="SectorId" allowFiltering="true" ejs-for="@Model.SectorId" filtering="onSectorNamefiltering" dataSource="@(new SelectList((IEnumerable)ViewBag.Sectorlist, "SectorId", "SectorName").Items)" placeholder="Select Sector" popupHeight="220px">
-                                    <e-dropdownlist-fields text="SectorName" value="SectorId"></e-dropdownlist-fields>
-                                </ejs-dropdownlist>
-                                <span asp-validation-for="SectorId"></span>
-                            </div>
-                        </div>
+                       
                         <div class="form-row">
 
                             <div class="form-group col-md-4">
@@ -117,22 +109,7 @@
 
 
                         <div class="form-row">
-                           @*  <div class="form-group col-md-4">
-                                <label for="PinCodeId" class="form-label">PinCode &nbsp;<span style="color:red;"><b>*</b></span></label>
-                                <input asp-for="@Model.PinCodeId" type="number" class="form-control" autofocus="autofocus" placeholder="PinCode" />
-                                <span asp-validation-for="PinCodeId"></span>
-                            </div> *@
-                            <div class="form-group col-md-4">
-                                <label for="PinCodeId" class="form-label">PinCode</label>
-                                <select id="PinCodeId" asp-for="@Model.PinCodeId" class="form-control" required>
-                                    <option value="">Please Select Pincode</option>
-                                    @foreach (var item in ViewBag.PinList)
-                                    {
-                                        <option value="@item.PinCodeId">@item.Pin</option>
-                                    }
-                                </select>
-                                <span asp-validation-for="PinCodeId"></span>
-                            </div>
+                          
                             <div class="form-group col-md-4">
 
                                 <label for="GSTNumber" class="form-label">GSTNumber &nbsp;<span style="color:red;"><b>*</b></span></label>
@@ -141,10 +118,16 @@
                             </div>
 
                             <div class="form-group col-md-4">
-
-                                <label for="Image" class="form-label">Image &nbsp;<span style="color:red;"><b>*</b></span></label>
-                                <input asp-for="@Model.Image" type="file" class="form-control" autofocus="autofocus" placeholder="Image " />
+                                <label for="Image" class="form-label">Image</label>
+                                <input asp-for="@Model.Image" type="file" class="form-control" autofocus="autofocus" placeholder="Image" />
                                 <span asp-validation-for="Image"></span>
+                                @{
+                                    if (Model.Image != null)
+                                    {
+                                        <img src="/uploads/DistributorRegistration/@Model.Image" style="height:100px; width:100px" />
+                                        <input type="hidden" asp-for="@Model.Image">
+                                    }
+                                }
                             </div>
                         </div>
 

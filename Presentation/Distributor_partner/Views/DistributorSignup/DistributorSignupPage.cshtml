@@ -98,18 +98,6 @@
                                             <span asp-validation-for="Address"></span>
                                         </div>
 
-                                        <div class="form-group col-md-3">
-                                            <label for="PinCodeId" class="form-label">PinCode</label>
-                                            <select id="PinCodeId" asp-for="@Model.PinCodeId" class="form-control" required>
-                                                <option value="">Please Select Pincode</option>
-                                                @foreach (var item in ViewBag.PinList)
-                                                {
-                                                    <option value="@item.PinCodeId">@item.Pin</option>
-                                                }
-                                            </select>
-                                            <span asp-validation-for="PinCodeId"></span>
-                                        </div>
-
                                     </div>
 
                                     <div class="form-row">
@@ -163,18 +151,6 @@
                                                 }
                                             </select>
                                             <span asp-validation-for="WareHuoseId"></span>
-                                        </div>
-
-                                        <div class="form-group col-md-3">
-                                            <label for="SectorId" class="form-label">Sector Name</label>
-                                            <select id="SectorId" asp-for="@Model.SectorId" class="form-control">
-                                                <option value="">Please Select Sector</option>
-                                                @foreach (var item in ViewBag.SectorList)
-                                                {
-                                                    <option value="@item.SectorId">@item.SectorName</option>
-                                                }
-                                            </select>
-                                            <span asp-validation-for="SectorId"></span>
                                         </div>
 
                                     </div>

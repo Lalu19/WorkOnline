@@ -38,6 +38,7 @@ namespace CloudVOffice.Services.Distributors
 			return _dbContext.DPO
 			    .Include(s => s.DPOItems.Where(x=> x.Deleted == false))
 			    .ThenInclude(s => s.Item)
+				.Include(s=>s.WareHuose)
 			    .Where(x => x.Deleted == false && x.DistributorId == DistributorId).ToList();
 			
 		}

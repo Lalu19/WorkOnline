@@ -1,10 +1,11 @@
 ﻿@{
 	Layout = "_DistributorLayout";
-    ViewData["Title"] = "Order View";
+	ViewData["Title"] = "Order View";
 }
 @addTagHelper *, Syncfusion.EJ2
 @using CloudVOffice.Core.Domain.Common;
 @using CloudVOffice.Core.Domain.Distributor;
+
 <header class="main-heading">
 	<div class="container-fluid">
 		<div class="row">
@@ -27,82 +28,92 @@
 </header>
 
 <div class="main-content">
-    <div class="row gutters">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-            <div class="card">
-                <div class="card-header">
-
-                    <div class="row">
-                        <div class="col-md-8">
-                           Order Histroy
-                        </div>
-                        <div class="col-md-4 text-right float-right">
-                            <a href="/PO/POCreate" class="btn btn-success btn-sm"><i class="icon icon-add"></i> Add </a>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-
-                    <ejs-grid id="GridOverview" dataSource="ViewBag.OrderList"
-                              allowFiltering="true" allowSorting="true"
-                              allowExcelExport="true" allowGrouping="true"
-                              allowMultiSorting="true"
-                              allowPdfExport="true"
-                              enableHover="false" enableHeaderFocus="true"
-                              allowResizing="true" autoFit="true" dataBound="dataBound"
-                              enableVirtualization="true" allowSelection="true"
-                              toolbarClick="toolbarClick" toolbar="@(new List<string>() {"ExcelExport", "PdfExport", "CsvExport" ,"Search"})" allowPaging="true">
-
-                        <e-grid-filtersettings type="Excel"></e-grid-filtersettings>
-
-                        <e-grid-pagesettings pageCount="4" pageSizes="true"></e-grid-pagesettings>
-                        <e-grid-columns>
-                            @* <e-grid-column headerText="Action" template="#Actions" width="50"></e-grid-column> *@
-                            <e-grid-column field="OrderStatus" headerText="Status" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="DPOUniqueNo" headerText="Order No" textAlign="Left" width="120"></e-grid-column>
-                           @*  <e-grid-column field="CreatedDate" headerText="Order Date" textAlign="Left" width="120" Format="dd-MM-yyyy "></e-grid-column>
-                            <e-grid-column field="CreatedDate" headerText="Order Time" textAlign="Left" width="120"></e-grid-column> *@
-                            <e-grid-column field="TotalQuantity" headerText="Total Quntity" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="TotalAmount" headerText="Total Amount" textAlign="Left" width="120"></e-grid-column>
-                            
-                        </e-grid-columns>
-                    </ejs-grid>
-
-                </div>
-            </div>
-        </div>
-    </div>
+	<!-- Row start -->
+	<div class="row gutters">
+		<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+			<div class="card">
+				<div class="card-header">Order List</div>
+				<div class="card-body">
+					<table id="fixedHeader" class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>Action</th>
+								<th>OrderStatus</th>
+								<th>Order Number</th>
+								<th>WareHouse Name</th>
+								<th>Total Amount</th>
+								<th>Total Quantity</th>
+								<th>Order Date</th>
+								@* <th>Items</th> *@
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var item in ViewBag.OrderList)
+							{
+								<tr>
+									
+									<td>
+										<button class="delete-button" data-orderid="@item.DPOId" style="background: transparent;border: none;">
+											<i class="icon-trash" style="font-size:22px"></i>
+										</button>
+									</td>
+									<td>@item.OrderStatus</td>
+									<td>@item.DPOUniqueNo</td>
+									<td>@item.WareHuose.WareHouseName</td>
+									<td>@item.TotalAmount</td>
+									<td>@item.TotalQuantity</td>
+									<td>@item.CreatedDate</td>
+									@* <td>@item.DPOItems.ItemId</td> *@
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Row ends -->
 
 </div>
-
-
-
-
-<script id="Actions" type="text/x-template">
-    <div class="link">
-        <a href="../../WareHouse/PinCode/PinCodeCreate?PinCodeId=${PinCodeId}"><i class="icon-pencil3" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp;
-
-        <button onClick="Delete(${PinCodeId})" style="background: transparent;border: none;"><i class="icon-trash" style="font-size:22px"></i></button>
-    </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('#fixedHeader').DataTable({
+			"pageLength": 10
+		});
+		$('#fixedHeader').on('click', '.delete-button', function () {
+			var orderId = $(this).data('orderid');
+			Swal.fire({ 
+				title: "Are you sure?",
+				text: "You will not be able to recover this data!",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "Yes, I am sure!",
+				cancelButtonText: "No, cancel it!"
+			}).then(function (result) {
+				
+				if (result.isConfirmed) {
+					$.ajax({
+						type: "GET",
+						url: "../../PO/Orderdelete?DPOId=" + orderId,
+						success: function (response) {
+							window.location.href = "/PO/OrderList";
+						},
+						error: function (error) {
+							Swal.fire({
+								icon: 'error',
+								title: 'Error occurred',
+								text: 'Failed to delete order. Please try again later.'
+							});
+						}
+					});
+				}
+			});
+		});
+	});
 </script>
 
 
-<script>
-    function toolbarClick(args) {
-        var gridObj = document.getElementById("GridOverview").ej2_instances[0];
-        if (args.item.id === 'GridOverview_pdfexport') {
-            gridObj.pdfExport();
-        }
-        if (args.item.id === 'GridOverview_excelexport') {
-            gridObj.excelExport();
-        }
-        if (args.item.id === 'GridOverview_csvexport') {
-            gridObj.csvExport();
-        }
-    }
-    
-
-
-   
-</script>
