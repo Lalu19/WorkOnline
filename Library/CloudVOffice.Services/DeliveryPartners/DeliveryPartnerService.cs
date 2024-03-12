@@ -50,6 +50,7 @@ namespace CloudVOffice.Services.DeliveryPartners
                     deliveryPartner.DriverPhoto = deliveryPartnerDTO.DriverPhoto;
                     deliveryPartner.VehicleFrontPhoto = deliveryPartnerDTO.VehicleFrontPhoto;
                     deliveryPartner.VehicleBackPhoto = deliveryPartnerDTO.VehicleBackPhoto;
+                    deliveryPartner.Password = deliveryPartnerDTO.Password;
                     deliveryPartner.RetailModelId = 5;
 
                     deliveryPartner.CreatedBy = deliveryPartnerDTO.CreatedBy;
@@ -101,6 +102,7 @@ namespace CloudVOffice.Services.DeliveryPartners
                         partner.DriverPhoto = deliveryPartnerDTO.DriverPhoto;
                         partner.VehicleFrontPhoto = deliveryPartnerDTO.VehicleFrontPhoto;
                         partner.VehicleBackPhoto = deliveryPartnerDTO.VehicleBackPhoto;
+                        partner.Password = deliveryPartnerDTO.Password;
 
                         partner.UpdatedDate = DateTime.Now;
                         _dbContext.SaveChanges();
@@ -148,7 +150,7 @@ namespace CloudVOffice.Services.DeliveryPartners
                 throw;
             }
         }
-        public MessageEnum DeleteDeliveryPartner(Int64 deliveryPartnerId, long DeletedBy)
+        public MessageEnum DeleteDeliveryPartner(Int64 deliveryPartnerId, Int64 DeletedBy)
         {
             try
             {

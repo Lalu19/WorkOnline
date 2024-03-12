@@ -1,0 +1,14 @@
+{
+  "Group": "Report",
+  "FriendlyName": "Report Web",
+  "SystemName": "Report.Web",
+  "Version": 0.2,
+  "SupportedVersions": [ "0.2" ],
+  "Author": "Appman team",
+  "DisplayOrder": 1,
+  "FileName": "Report.Web.dll",
+  "Description": "Report",
+  "InstallationUrl": "/Report/ReportInstall/Install",
+  "UnInstallationUrl": "/Report/ReportInstall/UnInstall",
+  "Dependency": []
+}

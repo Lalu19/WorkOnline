@@ -33,7 +33,11 @@ namespace CloudVOffice.Services.Users
         public MessageEnum SetPassword(string password, string email, string token);
         public MessageEnum SendResetPasswordEmail(string EmailId);
 
+      //  public List<UserRoleMapping> GetWareHouseManagerList();
 
+        public List<(UserRoleMapping UserRoleMapping, string UserName)> GetWareHouseManagerList();
+
+        public Int64 GetUserIdByName(string Name);
 
     }
 }

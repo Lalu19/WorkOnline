@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CloudVOffice.Data.DTO.Buyers;
+using CloudVOffice.Data.DTO.DeliveryPartners;
 using CloudVOffice.Data.DTO.Sales;
 using CloudVOffice.Services.Buyers;
 using CloudVOffice.Services.Sales;
@@ -34,13 +35,13 @@ namespace Web.API.Controllers.SalesExecutive
                 Guid id = Guid.NewGuid();
                 string filename = id.ToString() + Path.GetExtension(salesExecutiveRegistrationDTO.ImageUp.FileName);
 
-                //string filename = id.ToString() + extn;
-                string newpath = DateTime.Today.Date.ToString("dd-MMM-yyyy");
-                string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, @"uploads\SalesExec\" + salesExecutiveRegistrationDTO.CreatedBy.ToString());
+                string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, @"uploads\SalesExec");
+
                 if (!Directory.Exists(uploadsFolder))
                 {
                     Directory.CreateDirectory(uploadsFolder);
                 }
+
                 string uniqueFileName = Guid.NewGuid().ToString() + "_" + filename;
                 string imagePath = Path.Combine(uploadsFolder, uniqueFileName);
 
@@ -50,14 +51,7 @@ namespace Web.API.Controllers.SalesExecutive
                     salesExecutiveRegistrationDTO.ImageUp.CopyTo(stream);
                 }
 
-                salesExecutiveRegistrationDTO.ImageUp.CopyTo(new FileStream(imagePath, FileMode.Create));
-                //buyerRegistrationDTO.ShopImage = Path.Combine("uploads", "buyerregistrations", buyerRegistrationDTO.CreatedBy.ToString(), filename);
-                //salesExecutiveRegistrationDTO.ImageUp = filename;
-                //if (fileInfo.Exists)
-                //{
-                //    buyerRegistrationDTO.FileSize = fileInfo.Length;
-                //}
-
+                salesExecutiveRegistrationDTO.Image = filename;
             }
             var a = _salesExecutiveRegistrationService.CreateSalesExecutive(salesExecutiveRegistrationDTO);
 
@@ -86,20 +80,25 @@ namespace Web.API.Controllers.SalesExecutive
             return Ok(a);
         }
 
-        [HttpGet("{SalesExecutiveRegistrationId}")]
-        public IActionResult GetBuyerRegistrationsBySalesExecutiveId(int SalesExecutiveRegistrationId)
-        {
-            var a = _salesExecutiveRegistrationService.GetSalesExecutiveRegistrationByWarehouseId(SalesExecutiveRegistrationId);
-            return Ok(a);
-        }
+        //[HttpGet("{SalesExecutiveRegistrationId}")]
+        //public IActionResult GetBuyerRegistrationsBySalesExecutiveId(int SalesExecutiveRegistrationId)
+        //{
+        //    var a = _salesExecutiveRegistrationService.GetSalesExecutiveRegistrationByWarehouseId(SalesExecutiveRegistrationId);
+        //    return Ok(a);
+        //}
 
         [HttpGet("{SalesExecutiveUniqueNumber}")]
-        public IActionResult GetBuyerRegistrationsBySalesExecutiveUniqueNumber(int SalesExecutiveUniqueNumber)
+        public IActionResult GetBuyersBySalesExecutiveUniqueNumber(string SalesExecutiveUniqueNumber)
         {
             var a = _salesExecutiveRegistrationService.GetBuyerRegistrationsBySalesExecutiveUniqueNumber(SalesExecutiveUniqueNumber);
             return Ok(a);
         }
 
-
+        [HttpGet("{SalesExecutiveRegistrationId}/{DeletedBy}")]
+        public ActionResult DeleteSalesExecutive(Int64 SalesExecutiveRegistrationId, Int64 DeletedBy)
+        {
+            var a = _salesExecutiveRegistrationService.DeleteSalesExecutive(SalesExecutiveRegistrationId, DeletedBy);
+            return Ok(a);
+        }
     }
 }

@@ -127,6 +127,7 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<SalesAdminTarget> SalesAdminTargets { get; set; }
         public virtual DbSet<SalesManagerTarget> SalesManagerTargets { get; set; }
         public virtual DbSet<SalesExecutiveRegistration> SalesExecutiveRegistrations { get; set; }
+        public virtual DbSet<SalesExecutiveTarget> SalesExecutiveTargets { get; set; }
 
 		#endregion
 
@@ -645,11 +646,20 @@ namespace CloudVOffice.Data.Persistence
              .HasDefaultValue(false)
              .ValueGeneratedNever();
 
+			modelBuilder.Entity<SalesExecutiveTarget>()
+  .Property(s => s.CreatedDate)
+  .HasDefaultValueSql("getdate()");
 
-            #endregion
+			modelBuilder.Entity<SalesExecutiveTarget>()
+			 .Property(s => s.Deleted)
+			 .HasDefaultValue(false)
+			 .ValueGeneratedNever();
 
-            #region Orders
-            modelBuilder.Entity<Checkout>()
+
+			#endregion
+
+			#region Orders
+			modelBuilder.Entity<Checkout>()
 	   .Property(s => s.CreatedDate)
 	   .HasDefaultValueSql("getdate()");
 
