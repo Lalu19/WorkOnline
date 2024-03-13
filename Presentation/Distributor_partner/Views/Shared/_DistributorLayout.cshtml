@@ -21,6 +21,10 @@
 	<link href="~/Frontend/vendor/chartist/css/chartist.min.css" rel="stylesheet">
 	<link href="~/Frontend/vendor/chartist/css/chartist-custom.css" rel="stylesheet">
 
+	<!-- Data Tables -->
+	<link rel="stylesheet" href="~/Frontend/vendor/datatables/dataTables.bs4.css">
+	<link rel="stylesheet" href="~/Frontend/vendor/datatables/dataTables.bs4-custom.css">
+
 </head>
 <body>
 	<div class="app-wrap">
@@ -47,7 +51,7 @@
 								<a href="#" id="userSettings" class="user-settings" data-toggle="dropdown" aria-haspopup="true">
 									@if (User.Identity.IsAuthenticated)
 									{
-										<img class="avatar" src="~/uploads/DistributorRegistration/@User.Claims.FirstOrDefault(x => x.Type == "Image").Value" alt="@User.Claims.FirstOrDefault(x => x.Type == "DistributorName").Value">
+										@* <img class="avatar" src="~/uploads/DistributorRegistration/@User.Claims.FirstOrDefault(x => x.Type == "Image").Value" alt="@User.Claims.FirstOrDefault(x => x.Type == "DistributorName").Value"> *@
 										<span class="user-name">@User.Claims.FirstOrDefault(x => x.Type == "DistributorName").Value</span>
 										<i class="icon-chevron-small-down"></i>
 									}
@@ -98,9 +102,7 @@
 									<li>
 										<a href='index.html' class="current-page">Dashboard</a>
 									</li>
-									<li>
-										<a href='dashboard2.html'>CRM</a>
-									</li>
+									
 									
 								</ul>
 							</li>
@@ -109,11 +111,11 @@
 									<span class="has-icon">
 										<i class="icon-adjust2"></i>
 									</span>
-									<span class="nav-title">Cool Features</span>
+									<span class="nav-title">Purches Order</span>
 								</a>
 								<ul aria-expanded="false">
 									<li>
-										<a href="filters.html">Content Filter</a>
+										<a href="/PO/POCreate">PO Create</a>
 									</li>
 									
 								</ul>
@@ -145,7 +147,14 @@
 	<script src="~/Frontend/vendor/chartist/js/custom/donut-chart2.js"></script>
 	<script src="~/Frontend/vendor/chartist/js/custom/custom-line-chart4.js"></script>
 	<script src="~/Frontend/js/common.js"></script>
-	<ejs-scripts></ejs-scripts>
+	<!-- Data Tables -->
+	<script src="~/Frontend/vendor/datatables/dataTables.min.js"></script>
+	<script src="~/Frontend/vendor/datatables/dataTables.bootstrap.min.js"></script>
+
+	<!-- Custom Data tables -->
+	<script src="~/Frontend/vendor/datatables/custom/custom-datatables.js"></script>
+	<script src="~/Frontend/vendor/datatables/custom/fixedHeader.js"></script>
+	
 	@RenderSection("scripts", false);
 </body>
 </html>

@@ -143,11 +143,24 @@ namespace Warehouse.Management.Controllers
 				viewForItem.CreatedItemDTO.RetailerCaseCost = item1.RetailerCaseCost;
                 viewForItem.CreatedItemDTO.PartnerSalesCost = item1.PartnerSalesCost;
                 viewForItem.CreatedItemDTO.PartnerSalesCaseCost = item1.PartnerSalesCaseCost;
+				viewForItem.CreatedItemDTO.DistributorCaseCost = item1.DistributorCaseCost;
+				viewForItem.CreatedItemDTO.DistributorCost = item1.DistributorCost;
 				viewForItem.CreatedItemDTO.DistributorLandingCost = item1.DistributorLandingCost;
                 viewForItem.CreatedItemDTO.PurchaseCost = item1.PurchaseCost;
                 viewForItem.CreatedItemDTO.PurchaseCaseCost = item1.PurchaseCaseCost;
 				viewForItem.CreatedItemDTO.PurchaseLandingCost = item1.PurchaseLandingCost;
 				viewForItem.CreatedItemDTO.IGST = item1.IGST;
+
+
+				viewForItem.CreatedItemDTO.DistributorMargin = item1.DistributorMargin;
+				viewForItem.CreatedItemDTO.RetailerMargin = item1.RetailerMargin;
+				viewForItem.CreatedItemDTO.PurchaseCGSTValue = item1.PurchaseCGSTValue;
+				viewForItem.CreatedItemDTO.PurchaseSGSTValue = item1.PurchaseSGSTValue;
+				viewForItem.CreatedItemDTO.PurchaseIGSTValue = item1.PurchaseIGSTValue;
+				viewForItem.CreatedItemDTO.DistributorCGSTValue = item1.DistributorCGSTValue;
+				viewForItem.CreatedItemDTO.DistributorSGSTValue = item1.DistributorSGSTValue;
+				viewForItem.CreatedItemDTO.RetailerCGSTValue = item1.RetailerCGSTValue;
+				viewForItem.CreatedItemDTO.RetailerSGSTValue = item1.RetailerSGSTValue;
 
 
                 //viewForItem.CreatedItemDTO.HandlingType = item1.HandlingType;

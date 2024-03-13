@@ -14,7 +14,6 @@ namespace CloudVOffice.Core.Domain.Distributors
         public string Name { get; set; }
         public string BusinessName { get; set; }
         public string Address { get; set; }
-        public Int64 PinCodeId { get; set; }
         public string? Country { get; set; }
         public string? State { get; set; }
         public string PrimaryPhone { get; set; }
@@ -23,10 +22,7 @@ namespace CloudVOffice.Core.Domain.Distributors
         public string? GSTNumber { get; set; }
         public Int64? WareHuoseId { get; set; }
         public string? Password { get; set; }
-        public int? SectorId { get; set; }
         public string? Image { get; set; }
-
-
         public Int64 CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
         public Int64? UpdatedBy { get; set; }

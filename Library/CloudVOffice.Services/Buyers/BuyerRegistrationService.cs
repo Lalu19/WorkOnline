@@ -28,55 +28,105 @@ namespace CloudVOffice.Services.Buyers
 		}
 
 
-		public MessageEnum CreateBuyerRegistration(BuyerRegistrationDTO buyerRegistrationDTO)
-		{
-			try
-			{
-				var buyerRegistration = _dbContext.BuyerRegistrations.Where(x => x.BuyerRegistrationId == buyerRegistrationDTO.BuyerRegistrationId && x.Deleted == false).FirstOrDefault();
+        //public MessageEnum CreateBuyerRegistration(BuyerRegistrationDTO buyerRegistrationDTO)
+        //{
+        //	try
+        //	{
+        //		var buyerRegistration = _dbContext.BuyerRegistrations.Where(x => x.BuyerRegistrationId == buyerRegistrationDTO.BuyerRegistrationId && x.PrimaryPhone == buyerRegistrationDTO.PrimaryPhone && x.Deleted == false).FirstOrDefault();
 
-				if (buyerRegistration == null)
-				{
-					BuyerRegistration buy = new BuyerRegistration();
+        //		if (buyerRegistration == null)
+        //		{
+        //			BuyerRegistration buy = new BuyerRegistration();
 
-					buy.Name = buyerRegistrationDTO.Name;
-					buy.DateOfBirth = buyerRegistrationDTO.DateOfBirth;
-					buy.Address = buyerRegistrationDTO.Address;
-					buy.PinCodeId = buyerRegistrationDTO.PinCodeId;
-					buy.Country = buyerRegistrationDTO.Country;
-					buy.State = buyerRegistrationDTO.State;
-					buy.PrimaryPhone = buyerRegistrationDTO.PrimaryPhone;
-					buy.AlternatePhone = buyerRegistrationDTO.AlternatePhone;
-					buy.MailId = buyerRegistrationDTO.MailId;
-					buy.SalesExecutiveUniqueNumber = buyerRegistrationDTO.SalesExecutiveUniqueNumber;
-					buy.SalesExecutiveContact = buyerRegistrationDTO.SalesExecutiveContact;
-					buy.GSTNumber = buyerRegistrationDTO.GSTNumber;
-					buy.WareHuoseId = buyerRegistrationDTO.WareHuoseId;
-					buy.RetailModelId = 1;
+        //			buy.Name = buyerRegistrationDTO.Name;
+        //			buy.DateOfBirth = buyerRegistrationDTO.DateOfBirth;
+        //			buy.Address = buyerRegistrationDTO.Address;
+        //			buy.PinCodeId = buyerRegistrationDTO.PinCodeId;
+        //			buy.Country = buyerRegistrationDTO.Country;
+        //			buy.State = buyerRegistrationDTO.State;
+        //			buy.PrimaryPhone = buyerRegistrationDTO.PrimaryPhone;
+        //			buy.AlternatePhone = buyerRegistrationDTO.AlternatePhone;
+        //			buy.MailId = buyerRegistrationDTO.MailId;
+        //			buy.SalesExecutiveUniqueNumber = buyerRegistrationDTO.SalesExecutiveUniqueNumber;
+        //			buy.SalesExecutiveContact = buyerRegistrationDTO.SalesExecutiveContact;
+        //			buy.GSTNumber = buyerRegistrationDTO.GSTNumber;
+        //			buy.WareHuoseId = buyerRegistrationDTO.WareHuoseId;
+        //			buy.RetailModelId = 1;
 
-					buy.FirstLogin = false;
-					buy.Password = GenerateRandomPassword(6);
+        //			buy.FirstLogin = false;
+        //			buy.Password = GenerateRandomPassword(6);
 
-					buy.SectorId = buyerRegistrationDTO.SectorId;
-					buy.ShopImage = buyerRegistrationDTO.ShopImage;
-					buy.CreatedBy = buyerRegistrationDTO.CreatedBy;
+        //			buy.SectorId = buyerRegistrationDTO.SectorId;
+        //			buy.ShopImage = buyerRegistrationDTO.ShopImage;
+        //			buy.CreatedBy = buyerRegistrationDTO.CreatedBy;
 
-					var obj = _buyerRegistrationRepo.Insert(buy);
-					_dbContext.SaveChanges();
+        //			var obj = _buyerRegistrationRepo.Insert(buy);
+        //			_dbContext.SaveChanges();
 
-					return MessageEnum.Success;
-				}
-				else
-				{
-					return MessageEnum.Duplicate;
-				}
-			}
-			catch
-			{
-				throw;
-			}
-		}
+        //			return MessageEnum.Success;
+        //		}
+        //		else
+        //		{
+        //			return MessageEnum.Duplicate;
+        //		}
+        //	}
+        //	catch
+        //	{
+        //		throw;
+        //	}
+        //}
 
-		public string GenerateRandomPassword(int length)
+
+        public MessageEnum CreateBuyerRegistration(BuyerRegistrationDTO buyerRegistrationDTO)
+        {
+            try
+            {
+                var isPhoneNumberAlreadyRegistered = _dbContext.BuyerRegistrations
+                    .Any(x => x.PrimaryPhone == buyerRegistrationDTO.PrimaryPhone && x.Deleted == false);
+
+                if (isPhoneNumberAlreadyRegistered)
+                {
+                    return MessageEnum.Duplicate;
+                }
+
+                BuyerRegistration buy = new BuyerRegistration();
+
+                buy.Name = buyerRegistrationDTO.Name;
+                buy.DateOfBirth = buyerRegistrationDTO.DateOfBirth;
+                buy.Address = buyerRegistrationDTO.Address;
+                buy.PinCodeId = buyerRegistrationDTO.PinCodeId;
+                buy.Country = buyerRegistrationDTO.Country;
+                buy.State = buyerRegistrationDTO.State;
+                buy.PrimaryPhone = buyerRegistrationDTO.PrimaryPhone;
+                buy.AlternatePhone = buyerRegistrationDTO.AlternatePhone;
+                buy.MailId = buyerRegistrationDTO.MailId;
+                buy.SalesExecutiveUniqueNumber = buyerRegistrationDTO.SalesExecutiveUniqueNumber;
+                buy.SalesExecutiveContact = buyerRegistrationDTO.SalesExecutiveContact;
+                buy.GSTNumber = buyerRegistrationDTO.GSTNumber;
+                buy.WareHuoseId = buyerRegistrationDTO.WareHuoseId;
+                buy.RetailModelId = 1;
+
+                buy.FirstLogin = false;
+                buy.Password = GenerateRandomPassword(6);
+
+                buy.SectorId = buyerRegistrationDTO.SectorId;
+                buy.ShopImage = buyerRegistrationDTO.ShopImage;
+                buy.CreatedBy = buyerRegistrationDTO.CreatedBy;
+
+                var obj = _buyerRegistrationRepo.Insert(buy);
+                _dbContext.SaveChanges();
+
+                return MessageEnum.Success;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+
+
+        public string GenerateRandomPassword(int length)
 		{
 			Random random = new Random();
 

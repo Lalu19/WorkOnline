@@ -1,6 +1,7 @@
 ﻿using CloudVOffice.Core.Domain.Common;
 using CloudVOffice.Core.Domain.Distributors;
 using CloudVOffice.Data.DTO.Distributor;
+using CloudVOffice.Data.DTO.ProductCategories;
 using CloudVOffice.Data.DTO.WareHouses.Items;
 using CloudVOffice.Services.Distributors;
 using CloudVOffice.Services.ProductCategories;
@@ -53,10 +54,8 @@ namespace Warehouse.Management.Controllers
 				DistributorRegistration DistributorRegistration = _DistributorRegistrationService.getdistibutorlistbyid(int.Parse(DistributorRegistrationId.ToString()));
 
 				DistributorRegistrationDTO.Name = DistributorRegistration.Name;
-				DistributorRegistrationDTO.SectorId = DistributorRegistration.SectorId;
 				DistributorRegistrationDTO.BusinessName = DistributorRegistration.BusinessName;
 				DistributorRegistrationDTO.Address = DistributorRegistration.Address;
-				DistributorRegistrationDTO.PinCodeId = DistributorRegistration.PinCodeId;
 				DistributorRegistrationDTO.Country = DistributorRegistration.Country;
 				DistributorRegistrationDTO.State = DistributorRegistration.State;
 				DistributorRegistrationDTO.PrimaryPhone = DistributorRegistration.PrimaryPhone;
