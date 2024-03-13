@@ -1,4 +1,5 @@
 ﻿using CloudVOffice.Core.Domain.ProductCategories;
+using CloudVOffice.Core.Domain.Users;
 using CloudVOffice.Core.Domain.WareHouses.Brands;
 using CloudVOffice.Core.Domain.WareHouses.Months;
 using CloudVOffice.Core.Domain.WareHouses.States;
@@ -39,5 +40,8 @@ namespace CloudVOffice.Core.Domain.Sales
 
         [ForeignKey("CategoryId")]
         public Category Category { get; set; }
+
+        [ForeignKey("UserId")]
+        public User User { get; set; }
     }
 }

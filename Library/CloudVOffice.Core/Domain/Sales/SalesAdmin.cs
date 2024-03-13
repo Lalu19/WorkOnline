@@ -17,11 +17,15 @@ namespace CloudVOffice.Core.Domain.Sales
         public Int64? SalesManagerId { get; set; }
         public string? SalesAdminTargetName { get; set; }
         public Int64 MonthId { get; set; }
-        public Int64? SectorId { get; set; }
-        public Int64? CategoryId { get; set; }
+
+        //public Int64? SectorId { get; set; }
+        //public Int64? CategoryId { get; set; }
+        public int? SectorId { get; set; }
+        public int? CategoryId { get; set; }
         public Int64? BrandId { get; set; }
-        public string? Sector { get; set; }
-        public string? Category { get; set; }
+
+        //public string? Sector { get; set; }
+        //public string? Category { get; set; }
 
 		public double? MonthlyCategoryWiseTarget { get; set; }
         public double? MonthlySectorWiseTarget { get; set; }
@@ -36,7 +40,13 @@ namespace CloudVOffice.Core.Domain.Sales
         [ForeignKey("MonthId")]
         public Month Month { get; set; }
 
-		[ForeignKey("SalesManagerId")]
+        [ForeignKey("SectorId")]
+        public Sector Sector { get; set; }
+
+        [ForeignKey("CategoryId")]
+        public Category Category { get; set; }
+
+        [ForeignKey("SalesManagerId")]
 		public SalesManager SalesManager { get; set; }
 
 	}
