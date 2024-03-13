@@ -122,53 +122,9 @@ namespace CloudVOffice.Services.WareHouses.SalesOrders
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //public MessageEnum SalesOrderParentUpdate(SalesOrderParentDTO salesOrderParentDTO)
+        //public List<SalesOrderParent> GetSaleOrderListByDateAndStateId(Int64 StateId, DateTime FromDate, DateTime ToDate)
         //{
-        //    try
-        //    {
-        //        var updateSalesOrderParent = _dbContext.SalesOrderParents.Where(x => x.SalesOrderParentId != salesOrderParentDTO.SalesOrderParentId && x.Deleted == false).FirstOrDefault();
-
-        //        if (updateSalesOrderParent == null)
-        //        {
-        //            // var a = _dbContext.PurchaseOrderParents.Where(x => x.PurchaseOrderParentId == purchaseOrderParentDTO.PurchaseOrderParentId).FirstOrDefault();
-        //            var order = _dbContext.SalesOrderParents.FirstOrDefault(o => o.SalesOrderParentId == salesOrderParentDTO.SalesOrderParentId);
-        //            if (order != null)
-        //            {
-        //                order.TotalAmount = purchaseOrderParentDTO.TotalAmount;
-        //                order.TotalQuantity = purchaseOrderParentDTO.TotalQuantity;
-        //                order.SellerRegistrationId = purchaseOrderParentDTO.SellerRegistrationId;
-        //                order.OrderShipped = purchaseOrderParentDTO.OrderShipped;
-        //                order.UpdatedBy = purchaseOrderParentDTO.CreatedBy;
-        //                order.UpdatedDate = DateTime.Now;
-        //                _dbContext.SaveChanges();
-        //                return MessageEnum.Updated;
-        //            }
-        //            else
-        //                return MessageEnum.Invalid;
-        //        }
-        //        else
-        //        {
-        //            return MessageEnum.Duplicate;
-        //        }
-        //    }
-        //    catch
-        //    {
-        //        throw;
-        //    }
+        //    return _dbContext.SalesOrderParents.Where(x=>x.Deleted == false && x.Sta)
         //}
 
     }
