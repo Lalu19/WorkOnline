@@ -26,6 +26,9 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
         public List<PurchaseOrderParent> GetPurchaseOrderParentListbyWareHouseId(Int64 WareHuoseId);
         public List<PurchaseOrderParent> GetPurchaseOrdersBySellerId(Int64 SellerId);
         public List<PurchaseOrderParent> GetPurchaseOrdersDispatchedBySellerId(Int64 SellerId);
+        public List<PurchaseOrderParent> GetPurchaseOrderParentListsimple();
+        public List<PurchaseOrderParent> GetPurchaseOrderParentsByDate(DateTime FromDate, DateTime ToDate);
 
-    }
+
+	}
 }

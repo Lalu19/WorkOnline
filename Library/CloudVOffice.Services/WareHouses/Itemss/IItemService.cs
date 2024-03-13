@@ -27,6 +27,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
         public List<Item> GetItemlistBySectorId(int SectorId);
         public List<Item> ItemListByCategoryId(int CategoryId);
         public List<Item> ItemListByWareHouseId(int WareHuoseId);
+        public Item GetItemBytailsByPurchaseOrder(Int64 ItemId);
 
 	}
 }
