@@ -10,6 +10,7 @@ using CloudVOffice.Data.DTO.WareHouses.PurchaseOrders;
 using CloudVOffice.Data.DTO.WareHouses.SalesOrders;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace CloudVOffice.Services.WareHouses.SalesOrders
 {
@@ -122,9 +123,11 @@ namespace CloudVOffice.Services.WareHouses.SalesOrders
             }
         }
 
-        //public List<SalesOrderParent> GetSaleOrderListByDateAndStateId(Int64 StateId, DateTime FromDate, DateTime ToDate)
+        //public List<SalesOrderParent> GetSaleOrderListByDateAndStateId(DateTime FromDate, DateTime ToDate)
         //{
-        //    return _dbContext.SalesOrderParents.Where(x=>x.Deleted == false && x.Sta)
+        //    return _dbContext.SalesOrderParents
+        //        .Include(s=>s.WareHuose.Where(x => x.Deleted == false))
+        //        .Where(x => x.Deleted == false && x.CreatedDate.Date >= FromDate && x.CreatedDate.Date <= ToDate).ToList();
         //}
 
     }
