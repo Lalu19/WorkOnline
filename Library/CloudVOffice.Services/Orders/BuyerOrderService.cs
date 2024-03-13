@@ -1,4 +1,5 @@
 ﻿using CloudVOffice.Core.Domain.Orders;
+using CloudVOffice.Core.Domain.WareHouses.Brands;
 using CloudVOffice.Core.Domain.WareHouses.Items;
 using CloudVOffice.Data.DTO.Orders;
 using CloudVOffice.Data.Persistence;
@@ -71,13 +72,27 @@ namespace CloudVOffice.Services.Orders
                .Where(x => x.Deleted == false && x.CreatedBy == UserId).ToList();
         }
 
+
         public List<Item> GetItemsByPincodeId(int pincodeId)
         {
+            var distributors = _dbContext.DistributorAssigns.Where(a => a.PinCodeId == pincodeId).ToList();
 
-            var distributors = _dbContext.DistributorRegistrations.Where(a => a.PinCodeId == pincodeId).ToList();
+            List<Int64> brandIds = new List<Int64>();
 
-            
+            foreach(var distributor in distributors)
+            {
+                brandIds.Add(distributor.BrandId);
+            }
 
+            List<Item> items = new List<Item>();
+
+            foreach (var brand in brandIds)
+            {
+                var item = _dbContext.Items.Where(z => z.BrandId == brand).ToList();
+                items.AddRange(item);
+                //items.Add(item);
+            }
+            return items;
         }
 
     }

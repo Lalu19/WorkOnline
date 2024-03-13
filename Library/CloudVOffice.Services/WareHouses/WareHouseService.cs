@@ -30,6 +30,7 @@ namespace CloudVOffice.Services.WareHouses
                 if (ware == null)
                 {
                     WareHuose wareHouse = new WareHuose();
+                    Random random = new Random();
 
                     wareHouse.Address = wareHousesDTO.Address;
                     wareHouse.WareHouseName = wareHousesDTO.WareHouseName;
@@ -38,6 +39,7 @@ namespace CloudVOffice.Services.WareHouses
                     wareHouse.Mobile = wareHousesDTO.Mobile;
                     wareHouse.Telephone = wareHousesDTO.Telephone;
                     wareHouse.IsActive = wareHousesDTO.IsActive;
+                    //wareHouse.AssignmentCode = "WH" + GenerateRandomNumber(100000, 999999).ToString();
                     wareHouse.CreatedBy = wareHousesDTO.CreatedBy;
 
                     var obj = _wareHouseRepo.Insert(wareHouse);
