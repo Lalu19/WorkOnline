@@ -1,4 +1,6 @@
-﻿using CloudVOffice.Data.DTO.Sales;
+﻿using CloudVOffice.Core.Domain.Common;
+using CloudVOffice.Core.Domain.WareHouses.Brands;
+using CloudVOffice.Data.DTO.Sales;
 using CloudVOffice.Services.ProductCategories;
 using CloudVOffice.Services.Sales;
 using CloudVOffice.Services.WareHouses.Brands;
@@ -70,6 +72,105 @@ namespace SalesExecutive.Controllers
             return View("~/Plugins/SalesExecutive/Views/SalesExecutiveTargets/SalesExecutiveTargetCreate.cshtml", salesExecutiveDTO);
         }
 
+
+        [HttpPost]
+        public IActionResult CreateTargetBySalesExecutive([FromBody] SalesExecutiveTargetMasterDTO model)
+        {
+            foreach (var target in model.Targets)
+            {
+                target.CreatedBy = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
+
+                if (target.SalesExecutiveTargetId == null)
+                {
+                    // It's a new target, create it
+                    var result = _salesExecutiveTargetService.CreateTargetsBySalesExecutive(target);
+
+                    // Handle the result accordingly
+                    if (result == MessageEnum.Success)
+                    {
+                        TempData["msg"] = MessageEnum.Success;
+                    }
+                    else if (result == MessageEnum.Duplicate)
+                    {
+                        TempData["msg"] = MessageEnum.Duplicate;
+                        ModelState.AddModelError("", "Already Exists");
+                    }
+                    else
+                    {
+                        TempData["msg"] = MessageEnum.UnExpectedError;
+                        ModelState.AddModelError("", "Un-Expected Error");
+                    }
+                }
+                else
+                {
+                    // It's an existing target, update it
+                    var result = _salesExecutiveTargetService.UpdateTargetsBySalesExecutive(target);
+
+                    // Handle the result accordingly
+                    if (result == MessageEnum.Updated)
+                    {
+                        TempData["msg"] = MessageEnum.Updated;
+                        return Redirect("/SalesExecutive/SalesExecutiveTarget/SalesExecutiveTargetView");
+                    }
+                    else if (result == MessageEnum.Duplicate)
+                    {
+                        TempData["msg"] = MessageEnum.Duplicate;
+                        ModelState.AddModelError("", "Already Exists");
+                    }
+                    else
+                    {
+                        TempData["msg"] = MessageEnum.UnExpectedError;
+                        ModelState.AddModelError("", "Un-Expected Error");
+                    }
+                }
+            }
+
+            return Ok();
+        }
+
+        [HttpGet]
+        public IActionResult SalesExecutiveTargetView()
+        {
+            ViewBag.SalesTarget = _salesExecutiveTargetService.GetAllTargetsBySalesExecutive();
+
+            return View("~/Plugins/SalesExecutive/Views/SalesExecutiveTargets/SalesExecutiveTargetView.cshtml");
+        }
+
+        [HttpGet]
+        public IActionResult SalesExecutiveTargetDelete(int SalesExecutiveTargetId)
+        {
+            Int64 DeletedBy = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
+
+            var a = _salesExecutiveTargetService.DeleteTargetsBySalesExecutive(SalesExecutiveTargetId, DeletedBy);
+            return Redirect("/SalesExecutive/SalesExecutiveTarget/SalesExecutiveTargetView");
+        }
+
+        public string GetCategoryIdByName(string categoryName)
+        {
+            var a = _salesExecutiveTargetService.GetCategoryIdByName(categoryName);
+            return a;
+        }
+
+        public Int64 GetMonthIdByName(string monthName)
+        {
+            var a = _monthService.GetMonthIdByName(monthName);
+            return a;
+        }
+
+
+        public List<Brand> BrandsBySectorId(Int64 sectorId)
+        {
+            var brands = _brandService.GetBrandsBySectorId(sectorId);
+            var uniqueBrands = brands.GroupBy(b => b.BrandId).Select(g => g.First()).ToList();
+
+            return uniqueBrands;
+        }
+
+        public Int64 GetBrandIdByName(string brandName)
+        {
+            var a = _brandService.GetBrandIdByBrandName(brandName);
+            return a;
+        }
 
     }
 }

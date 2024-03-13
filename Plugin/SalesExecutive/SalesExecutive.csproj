@@ -25,6 +25,7 @@
 		<None Remove="Views\SalesExecutiveRegistrations\SalesExecutiveRegistrationCreate.cshtml" />
 		<None Remove="Views\SalesExecutiveRegistrations\SalesExecutiveRegistrationView.cshtml" />
 		<None Remove="Views\SalesExecutiveTargets\SalesExecutiveTargetCreate.cshtml" />
+		<None Remove="Views\SalesExecutiveTargets\SalesExecutiveTargetView.cshtml" />
 		<None Remove="Views\SalesManagers\SalesManagerCreate.cshtml" />
 		<None Remove="Views\SalesManagers\SalesManagerView.cshtml" />
 	</ItemGroup>

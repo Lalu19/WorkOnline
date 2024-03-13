@@ -71,14 +71,14 @@ namespace CloudVOffice.Services.Orders
                .Where(x => x.Deleted == false && x.CreatedBy == UserId).ToList();
         }
 
-        public List<Item> GetItemsByPincodeId(int pincodeId)
-        {
+        //public List<Item> GetItemsByPincodeId(int pincodeId)
+        //{
 
-            var distributors = _dbContext.DistributorRegistrations.Where(a => a.PinCodeId == pincodeId).ToList();
+        //    var distributors = _dbContext.DistributorRegistrations.Where(a => a.PinCodeId == pincodeId).ToList();
 
             
 
-        }
+        //}
 
     }
 }

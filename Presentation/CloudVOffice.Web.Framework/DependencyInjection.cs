@@ -144,6 +144,7 @@ namespace CloudVOffice.Web.Framework
 			services.AddScoped<IDistributorRegistrationService, DistributorRegistrationService>();
 			services.AddScoped<IDeliveryPartnerService, DeliveryPartnerService>();
 			services.AddScoped<ISalesExecutiveRegistrationService, SalesExecutiveRegistrationService>();
+			services.AddScoped<ISalesExecutiveTargetService, SalesExecutiveTargetService>();
 
 
 
