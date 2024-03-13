@@ -63,7 +63,8 @@ namespace SalesExecutive.Controllers
                 brandWiseTargetDTO.SalesManagerID = target.SalesManagerID;
                 //brandWiseTargetDTO.WareHuoseId = target.WareHuoseId;
                 //brandWiseTargetDTO.SalesExecutiveId = target.SalesExecutiveId;
-
+                brandWiseTargetDTO.SalesExecutiveRegistrationId=target.SalesExecutiveRegistrationId;
+                brandWiseTargetDTO.UserId=target.UserId;
                 brandWiseTargetDTO.SectorId = target.SectorId;
                 brandWiseTargetDTO.CategoryId = target.CategoryId;
                 brandWiseTargetDTO.BrandId =target.BrandId;

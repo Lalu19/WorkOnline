@@ -112,7 +112,20 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
                 throw;
             }
         }
-        public MessageEnum PurchaseOrderParentUpdate(PurchaseOrderParentDTO purchaseOrderParentDTO)
+
+		public List<PurchaseOrderParent> GetPurchaseOrderParentListsimple()
+		{
+			try
+			{
+				return _dbContext.PurchaseOrderParents.Where(x => x.Deleted == false).ToList();
+			}
+			catch
+			{
+				throw;
+			}
+		}
+
+		public MessageEnum PurchaseOrderParentUpdate(PurchaseOrderParentDTO purchaseOrderParentDTO)
         {
             try
             {
@@ -235,10 +248,10 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
             }            
         }
 
-        //public List<Category> Categories()
-        //{
-
-        //}
+        public List<PurchaseOrderParent> GetPurchaseOrderParentsByDate(DateTime FromDate, DateTime ToDate)
+        {
+             return _dbContext.PurchaseOrderParents.Where(x => x.Deleted == false && x.CreatedDate.Date >= FromDate && x.CreatedDate.Date <= ToDate).ToList();
+        }
 
     }
 }
