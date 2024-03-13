@@ -13,11 +13,15 @@ namespace CloudVOffice.Data.DTO.Sales
 		public Int64? SalesManagerId { get; set; }
 		public string? SalesAdminTargetName { get; set; }
         public Int64 MonthId { get; set; }
-        public Int64? SectorId { get; set; }
-		public Int64? CategoryId { get; set; }
-		public Int64? BrandId { get; set; }
-		public string? Sector { get; set; }
-		public string? Category { get; set; }
+
+        //public Int64? SectorId { get; set; }
+        //public Int64? CategoryId { get; set; }
+        public int? SectorId { get; set; }
+        public int? CategoryId { get; set; }
+        public Int64? BrandId { get; set; }
+
+		//public string? Sector { get; set; }
+		//public string? Category { get; set; }
 		public double? MonthlyCategoryWiseTarget { get; set; }
 		public double? MonthlySectorWiseTarget { get; set; }
 		public double? MonthlyBrandWiseTarget { get; set; }
