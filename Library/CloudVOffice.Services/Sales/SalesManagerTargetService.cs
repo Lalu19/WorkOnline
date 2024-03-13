@@ -73,6 +73,9 @@ namespace CloudVOffice.Services.Sales
         {
             var a = _dbContext.SalesManagerTargets
             .Include(s => s.Month)
+            .Include(s => s.Sector)
+            .Include(s => s.Category)
+            .Include(s => s.User)
             .Where(x => x.Deleted == false).ToList();
 
             return a;

@@ -48,13 +48,12 @@ namespace Web.API.Controllers.Orders
             return Ok(a);
         }
 
-        //[HttpGet("{PincodeId}")]
-        //public IActionResult GetItemsbyDistributorId(int PincodeId)
-        //{
-
-        //    var a = 
-
-        //}
+        [HttpGet("{PincodeId}")]
+        public IActionResult GetItemsbyPincodeId(int PincodeId)
+        {
+            var a = _BuyerOrderService.GetItemsByPincodeId(PincodeId);
+            return Ok(a);
+        }
 
     }
 }

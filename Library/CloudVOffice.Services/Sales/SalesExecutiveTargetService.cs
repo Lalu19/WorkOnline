@@ -37,8 +37,10 @@ namespace CloudVOffice.Services.Sales
                         {
                             SalesExecutiveRegistrationId = salesExecutiveTargetDTO.SalesExecutiveRegistrationId,
                             MonthId = salesExecutiveTargetDTO.MonthId,
-                            SectorId = Convert.ToInt64(salesExecutiveTargetDTO.Sector),
-                            CategoryId = Convert.ToInt64(salesExecutiveTargetDTO.Category),
+
+                            SectorId = (int?) Convert.ToInt64(salesExecutiveTargetDTO.Sector),
+                            CategoryId = (int?) Convert.ToInt64(salesExecutiveTargetDTO.Category),
+
                             MonthlyCategoryWiseTarget = salesExecutiveTargetDTO.MonthlyCategoryWiseTarget,
                             CreatedBy = salesExecutiveTargetDTO.CreatedBy,
                             // Set other properties for new targets
@@ -83,8 +85,8 @@ namespace CloudVOffice.Services.Sales
                         // Update properties of the existing target
                         targetToUpdate.SalesExecutiveRegistrationId = salesExecutiveTargetDTO.SalesExecutiveRegistrationId;
                         targetToUpdate.MonthId = salesExecutiveTargetDTO.MonthId;
-                        targetToUpdate.SectorId = Convert.ToInt64(salesExecutiveTargetDTO.Sector);
-                        targetToUpdate.CategoryId = Convert.ToInt64(salesExecutiveTargetDTO.Category);
+                        targetToUpdate.SectorId = (int?)Convert.ToInt64(salesExecutiveTargetDTO.Sector);
+                        targetToUpdate.CategoryId = (int?)Convert.ToInt64(salesExecutiveTargetDTO.Category);
                         targetToUpdate.MonthlyCategoryWiseTarget = salesExecutiveTargetDTO.MonthlyCategoryWiseTarget;
                         // Update other properties for existing targets
 
@@ -111,7 +113,10 @@ namespace CloudVOffice.Services.Sales
         public List<SalesExecutiveTarget> GetAllTargetsBySalesExecutive()
         {
             var a = _dbContext.SalesExecutiveTargets
-             //.Include(s => s.Month)
+             .Include(s => s.Month)
+             .Include(s => s.Sector)
+             .Include(s => s.Category)
+             .Include(s => s.SalesExecutiveRegistration)
              .Where(x => x.Deleted == false).ToList();
 
             return a;
