@@ -10,6 +10,7 @@ using CloudVOffice.Data.DTO.WareHouses;
 using CloudVOffice.Data.DTO.WareHouses.PinCodes;
 using CloudVOffice.Services.WareHouse.PinCodes;
 using CloudVOffice.Services.WareHouses;
+using CloudVOffice.Services.WareHouses.States;
 using CloudVOffice.Web.Framework;
 using CloudVOffice.Web.Framework.Controllers;
 using Microsoft.AspNetCore.Authorization;
@@ -21,14 +22,18 @@ namespace Warehouse.Management.Controllers
     public class WareHouseController : BasePluginController
     {
         private readonly IWareHouseService _wareHouseService;
-        public WareHouseController(IWareHouseService wareHouseService)
+        private readonly IStateService _stateService;
+        public WareHouseController(IWareHouseService wareHouseService, IStateService stateService)
         {
             _wareHouseService = wareHouseService;
+            _stateService = stateService;
         }
 
         [HttpGet]
         public IActionResult WareHouseCreate(int? wareHuoseId)
         {
+            ViewBag.State = _stateService.GetStateList();
+
             WareHouseDTO ware = new WareHouseDTO();
             if (wareHuoseId != null)
             {
@@ -41,6 +46,7 @@ namespace Warehouse.Management.Controllers
                 ware.Telephone = W.Telephone;
                 ware.Mobile = W.Mobile;
                 ware.GSTNumber = W.GSTNumber;
+                ware.StateId = W.StateId;
 
                 //ware.Lat = d.Lat;
                 //ware.Long = d.Long;
