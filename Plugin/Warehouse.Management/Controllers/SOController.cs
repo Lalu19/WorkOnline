@@ -4,6 +4,7 @@ using CloudVOffice.Data.DTO.SalesOrders;
 using CloudVOffice.Data.DTO.WareHouses.Brands;
 using CloudVOffice.Data.DTO.WareHouses.SalesOrders;
 using CloudVOffice.Data.Persistence;
+using CloudVOffice.Services.WareHouses;
 using CloudVOffice.Services.WareHouses.Brands;
 using CloudVOffice.Services.WareHouses.PurchaseOrders;
 using CloudVOffice.Services.WareHouses.SalesOrders;
@@ -26,13 +27,15 @@ namespace Warehouse.Management.Controllers
 		private readonly ApplicationDBContext _dbContext;
         private readonly ISalesOrderParentService _salesOrderParentService;
         private readonly ISalesOrderItemService _salesOrderItemService;
+        private readonly IWareHouseService _wareHouseService;
 
-        public SOController(IPurchaseOrderParentService purchaseOrderParentService, ApplicationDBContext dbContext, ISalesOrderParentService salesOrderParentService, ISalesOrderItemService salesOrderItemService)
+        public SOController(IPurchaseOrderParentService purchaseOrderParentService, ApplicationDBContext dbContext, ISalesOrderParentService salesOrderParentService, ISalesOrderItemService salesOrderItemService, IWareHouseService wareHouseService)
 		{
 			_purchaseOrderParentService = purchaseOrderParentService;
 			_dbContext = dbContext;
 			_salesOrderParentService = salesOrderParentService;
             _salesOrderItemService = salesOrderItemService;
+			_wareHouseService = wareHouseService;
         }
 		[HttpGet]
 		public IActionResult SOCreate(Int64? SOId)
@@ -53,9 +56,15 @@ namespace Warehouse.Management.Controllers
 		[HttpPost]
 		public IActionResult SalesOrderDataSave([FromBody] SalesOrderMasterDTO salesOrderMasterDTO)
 		{
-			var a = _salesOrderParentService.SalesOrderParentCreate(salesOrderMasterDTO.ParentOrder);
 			Int64 createdBy = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
 
+			var warehouseId =  _wareHouseService.GetWareHouseByPOPUniqueNumber(salesOrderMasterDTO.ParentOrder.POPUniqueNumber);
+
+			salesOrderMasterDTO.ParentOrder.WareHuoseId = warehouseId;
+			salesOrderMasterDTO.ParentOrder.CreatedBy =	createdBy;
+
+			var a = _salesOrderParentService.SalesOrderParentCreate(salesOrderMasterDTO.ParentOrder);
+			
             var result = _salesOrderItemService.SalesOrderItemCreate(a.SalesOrderParentId, createdBy, salesOrderMasterDTO.Orders);
 
             if (result == MessageEnum.Success)
