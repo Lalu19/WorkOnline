@@ -244,6 +244,17 @@ namespace CloudVOffice.Services.WareHouses.PinCodes
                 throw;
             }
         }
+
+        public List<PinCodeMapping> GetPinCodeMappingListbywarehouseId(Int64 WareHuoseId)
+        {
+            return _dbContext.PinCodeMappings
+            .Include(s => s.WareHuose)
+            .Include(s => s.PinCode)
+            .Where(x => x.Deleted == false && WareHuoseId == WareHuoseId).ToList();
+
+           
+
+        }
     }
 
 }

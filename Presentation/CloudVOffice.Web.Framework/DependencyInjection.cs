@@ -142,6 +142,7 @@ namespace CloudVOffice.Web.Framework
             services.AddScoped<IDPOService, DPOService>();
             services.AddScoped<IDPOItemsService, DPOItemsService>();
 			services.AddScoped<IDistributorRegistrationService, DistributorRegistrationService>();
+			services.AddScoped<IDistributorsAssignService, DistributorsAssignService>();
 			services.AddScoped<IDeliveryPartnerService, DeliveryPartnerService>();
 			services.AddScoped<ISalesExecutiveRegistrationService, SalesExecutiveRegistrationService>();
 			services.AddScoped<ISalesExecutiveTargetService, SalesExecutiveTargetService>();

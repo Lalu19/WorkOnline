@@ -1,0 +1,134 @@
+﻿@model CloudVOffice.Data.DTO.Distributor.DistributorAssignDTO;
+@using System.Collections;
+@using Newtonsoft.Json;
+
+@{
+    Layout = "_MainAppLayout";
+    ViewData["Title"] = "Distibutor Assign";
+}
+@addTagHelper *, Syncfusion.EJ2
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<header class="main-heading">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+                <div class="page-icon">
+                    <i class="icon-laptop_windows"></i>
+                </div>
+                <div class="page-title">
+                    <h5>Ware House</h5>
+                    <h6 class="sub-heading">Distibutor Creation</h6>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                <div class="right-actions">
+                    <span class="last-login"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="main-content">
+    <div class="row gutters">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <div class="card">
+                <form asp-route="WareHouse/DistributorAssign/DistributorAssign" method="post" autocomplete="off" enctype="multipart/form-data">
+
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <b>Distributor Assign</b>
+                            </div>
+                            <div class="col-md-2 ">
+                                <a href="/WareHouse/DistributorAssign/DistributorAssignView" class="btn btn-primary btn-sm float-right"><i class="icon-list2"></i>List</a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <input asp-for="@Model.DistributorAssignId" type="hidden" />
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-4">
+                                <label for="DistributorRegistrationId" class="form-label"> Choose Distributor &nbsp;<span style="color:red;"><b>*</b></span></label>
+                                <ejs-dropdownlist id="DistributorRegistrationId" allowFiltering="true" ejs-for="@Model.DistributorRegistrationId" filtering="onDistributorfiltering" dataSource="@(new SelectList((IEnumerable)ViewBag.distributorlist, "DistributorRegistrationId", "Name").Items)" placeholder="Select Distributor" popupHeight="220px">
+                                    <e-dropdownlist-fields text="Name" value="DistributorRegistrationId"></e-dropdownlist-fields>
+                                </ejs-dropdownlist>
+                            </div>
+                          
+                            <div class="form-group col-md-4">
+                                <label for="PincodeId" class="form-label"> Choose Pincode &nbsp;<span style="color:red;"><b>*</b></span></label>
+                                <ejs-multiselect id="PincodeId" ejs-for="@Model.PinCodeId" dataSource="@ViewBag.data" placeholder="Choose Pincode" allowFiltering="true"
+                                                 mode="CheckBox" showSelectAll="true" selectAllText="Select All" unSelectAllText="unSelect All" popupHeight="220px">
+                                    <e-multiselect-fields text="pinCode.pin" value="pinCodeId"></e-multiselect-fields>
+                                </ejs-multiselect>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="BrandId" class="form-label"> Choose Brand &nbsp;<span style="color:red;"><b>*</b></span></label>
+                                <ejs-multiselect id="BrandId" ejs-for="@Model.BrandId" dataSource="@ViewBag.data" placeholder="Choose Brand" allowFiltering="true"
+                                                 mode="CheckBox" showSelectAll="true" selectAllText="SelectAll" unSelectAllText="UnSelectAll" popupHeight="220px">
+                                    <e-multiselect-fields text="brandName" value="brandId"></e-multiselect-fields>
+                                </ejs-multiselect>
+                            </div>
+
+                        </div>
+                        
+                        <div asp-validation-summary="ModelOnly" class="message-error"></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-lg-2 col-md-2 col-sm-12">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function onDistributorfiltering(e) {
+        var query = new ej.data.Query();
+        query = (e.text !== '') ? query.where('Name', 'startswith', e.text, true) : query;
+        e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.distributorlist)), query);
+    }
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/PinCodeMapping/Getpincodelistbywarehouse",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                //console.log(result);
+                var PincodeDropDown = document.getElementById("PincodeId").ej2_instances[0];
+                PincodeDropDown.dataSource = result;
+                PincodeDropDown.dataBind();
+            },
+            error: function () {
+
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            url: "/WareHouse/Item/BrandListByWareHouseId",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                //console.log(result);
+                var BrandDropDown = document.getElementById("BrandId").ej2_instances[0];
+                BrandDropDown.dataSource = result;
+                BrandDropDown.dataBind();
+            },
+            error: function () {
+
+            }
+        });
+    });
+</script>
+

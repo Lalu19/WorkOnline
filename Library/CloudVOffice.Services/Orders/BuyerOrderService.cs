@@ -76,8 +76,11 @@ namespace CloudVOffice.Services.Orders
         public List<Item> GetItemsByPincodeId(int pincodeId)
         {
             var distributors = _dbContext.DistributorAssigns.Where(a => a.PinCodeId == pincodeId).ToList();
+        //public List<Item> GetItemsByPincodeId(int pincodeId)
+        //{
 
             List<Int64> brandIds = new List<Int64>();
+        //    var distributors = _dbContext.DistributorRegistrations.Where(a => a.PinCodeId == pincodeId).ToList();
 
             foreach(var distributor in distributors)
             {
@@ -94,6 +97,7 @@ namespace CloudVOffice.Services.Orders
             }
             return items;
         }
+        //}
 
     }
 }

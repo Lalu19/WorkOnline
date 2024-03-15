@@ -28,6 +28,8 @@ namespace CloudVOffice.Services.WareHouses.Itemss
         public List<Item> ItemListByCategoryId(int CategoryId);
         public List<Item> ItemListByWareHouseId(int WareHuoseId);
         public Item GetItemBytailsByPurchaseOrder(Int64 ItemId);
+        public List<Item> BrandListByWareHouseId(Int64 WareHuoseId);
 
-	}
+
+    }
 }
