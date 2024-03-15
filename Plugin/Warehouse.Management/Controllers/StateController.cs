@@ -26,6 +26,7 @@ namespace Warehouse.Management.Controllers
 			_stateService = stateService;
 
 		}
+		
 		[HttpGet]
 		public IActionResult StateCreate(Int64? StateId)
 		{
@@ -109,6 +110,12 @@ namespace Warehouse.Management.Controllers
 
 			var a = _stateService.StateDelete(StateId, DeletedBy);
 			return Redirect("/WareHouse/State/StateView");
+		}
+		
+		[HttpGet]
+		public JsonResult GetStateLists()
+		{
+			return Json(_stateService.GetStateList());
 		}
 	}
 }
