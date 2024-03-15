@@ -20,6 +20,8 @@ namespace CloudVOffice.Core.Domain.WareHouses
         public string? Telephone { get; set; }
         public string Address { get; set; }
         public string Area { get; set; }
+        public string AssignmentCode { get; set; }
+        public Int64 StateId { get; set; }
         public bool IsActive { get; set; }
         public Int64 CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }

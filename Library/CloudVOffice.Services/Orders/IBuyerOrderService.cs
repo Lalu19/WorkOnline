@@ -1,4 +1,5 @@
 ﻿using CloudVOffice.Core.Domain.Orders;
+using CloudVOffice.Core.Domain.WareHouses.Items;
 using CloudVOffice.Data.DTO.Orders;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,7 @@ namespace CloudVOffice.Services.Orders
     {
         public BuyerOrder BuyerOrderCreate(BuyerOrderDTO BuyerOrderDTO);
         public List<BuyerOrder> GetBuyerOrderListByUserId(int UserId);
+
+        public List<Item> GetItemsByPincodeId(int pincodeId);
     }
 }

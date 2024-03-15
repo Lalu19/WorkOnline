@@ -19,5 +19,7 @@ namespace CloudVOffice.Services.WareHouses
         public WareHuose GetWareHousebyWareHuoseId(Int64 WareHuoseId);
         public List<WareHuose> GetWareHouseList();
         public MessageEnum WareHouseDelete(Int64 pinCodeId, Int64 DeletedBy);
-    }
+        public Int64 GetWareHouseByPOPUniqueNumber(string PopUniqueNumber);
+
+	}
 }

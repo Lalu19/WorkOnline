@@ -30,6 +30,7 @@ namespace CloudVOffice.Services.WareHouses
                 if (ware == null)
                 {
                     WareHuose wareHouse = new WareHuose();
+                    Random random = new Random();
 
                     wareHouse.Address = wareHousesDTO.Address;
                     wareHouse.WareHouseName = wareHousesDTO.WareHouseName;
@@ -38,7 +39,9 @@ namespace CloudVOffice.Services.WareHouses
                     wareHouse.Mobile = wareHousesDTO.Mobile;
                     wareHouse.Telephone = wareHousesDTO.Telephone;
                     wareHouse.IsActive = wareHousesDTO.IsActive;
-                    wareHouse.CreatedBy = wareHousesDTO.CreatedBy;
+                    wareHouse.StateId = wareHousesDTO.StateId;					
+					wareHouse.AssignmentCode = "WH" + GenerateRandomNumber(100000, 999999).ToString();
+					wareHouse.CreatedBy = wareHousesDTO.CreatedBy;
 
                     var obj = _wareHouseRepo.Insert(wareHouse);
                     _dbContext.SaveChanges();
@@ -56,7 +59,14 @@ namespace CloudVOffice.Services.WareHouses
             }
         }
 
-        public WareHuose GetWareHousebyWareHuoseId(Int64 WareHuoseId)
+		private int GenerateRandomNumber(int minValue, int maxValue)
+		{
+			Random random = new Random();
+			return random.Next(minValue, maxValue + 1);
+		}
+
+
+		public WareHuose GetWareHousebyWareHuoseId(Int64 WareHuoseId)
         {
             try
             {
@@ -100,6 +110,7 @@ namespace CloudVOffice.Services.WareHouses
                         warehouse.Telephone = wareHouseDTO.Telephone;
                         warehouse.Mobile = wareHouseDTO.Mobile;
                         warehouse.IsActive = wareHouseDTO.IsActive;
+                        warehouse.StateId = wareHouseDTO.StateId;
                         warehouse.UpdatedDate = DateTime.Now;
 
                         _wareHouseRepo.Update(warehouse);
@@ -142,5 +153,13 @@ namespace CloudVOffice.Services.WareHouses
                 throw;
             }
         }
+
+        public Int64 GetWareHouseByPOPUniqueNumber(string PopUniqueNumber)
+        {
+            var a = _dbContext.PurchaseOrderParents.Where(a => a.POPUniqueNumber == PopUniqueNumber && a.Deleted == false).FirstOrDefault();
+
+            return a.WareHuoseId;
+        }
+
     }
 }

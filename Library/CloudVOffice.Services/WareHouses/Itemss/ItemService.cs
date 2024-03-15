@@ -51,7 +51,7 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 
 					if (existingItem == null)
 					{
-					Random random = new Random();
+						Random random = new Random();
 						Item item = new Item();
 						item.ItemName = itemDTO.ItemName;
 					    item.ItemCode = random.Next(1000000, 10000000).ToString();
@@ -578,18 +578,6 @@ namespace CloudVOffice.Services.WareHouses.Itemss
             return _dbContext.Items.Where(x => x.SectorId == SectorId && x.Deleted == false).ToList();
         }
 
-        //public List<Category> GetCategorybySectorId(int SectorId)
-        //{
-        //	try
-        //	{
-
-        //	}
-        //	catch
-        //	{
-
-        //	}
-        //}
-
         public List<Category> GetCategoryBySectorId(int SectorId)
         {
             return _dbContext.Categories.Where(x => x.SectorId == SectorId && x.Deleted == false).ToList();
@@ -606,6 +594,23 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 			var a = _dbContext.Items.Where(a => a.WareHuoseId == WareHuoseId).ToList();
 			return a;
 		}
+	
+	
+		public Item GetItemBytailsByPurchaseOrder(Int64 ItemId)
+		{
+			try
+			{
+				return _dbContext.Items.Where(x => x.ItemId == ItemId && x.Deleted == false).SingleOrDefault();
+			}
+			catch
+			{
+				throw;
+			}
+			
+			
+		}
+	
+	}
 
         public List<Item> BrandListByWareHouseId(Int64 WareHuoseId)
         {

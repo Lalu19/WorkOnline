@@ -29,5 +29,5 @@ namespace CloudVOffice.Data.DTO.WareHouses.SalesOrders
         public SalesOrderParentDTO ParentOrder { get; set; }
         public List<SalesOrderItemDTO> Orders { get; set; }
     }
-
+    
 }

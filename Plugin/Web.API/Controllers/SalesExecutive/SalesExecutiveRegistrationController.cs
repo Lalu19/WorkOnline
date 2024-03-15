@@ -100,5 +100,8 @@ namespace Web.API.Controllers.SalesExecutive
             var a = _salesExecutiveRegistrationService.DeleteSalesExecutive(SalesExecutiveRegistrationId, DeletedBy);
             return Ok(a);
         }
+
+
+
     }
 }

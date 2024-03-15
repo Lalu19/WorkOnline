@@ -22,8 +22,10 @@ namespace CloudVOffice.Core.Domain.Sales
         public Int64? SalesManagerID { get; set; }
         public Int64? UserId { get; set; }
         public Int64? WareHuoseId { get; set; }
-        public Int64? SalesExecutiveId { get; set; }
-        public double? MonthlyBrandWiseTarget { get; set; }
+
+		// public Int64? SalesExecutiveId { get; set; }
+		public Int64? SalesExecutiveRegistrationId { get; set; }
+		public double? MonthlyBrandWiseTarget { get; set; }
         public Int64 CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
         public Int64? UpdatedBy { get; set; }

@@ -13,7 +13,7 @@ namespace CloudVOffice.Data.DTO.Sales
         public string? SalesExecutiveName { get; set; }
         public string? PANCardNumber { get; set; }
         public string? AadharCardNumber { get; set; }
-        public string? SalesExecutiveUniqueNumber { get; set; }
+        //public string? SalesExecutiveUniqueNumber { get; set; }
         public Int64? WareHuoseId { get; set; }
         public string? PrimaryPhone { get; set; }
         public string? AlternatePhone { get; set; }
