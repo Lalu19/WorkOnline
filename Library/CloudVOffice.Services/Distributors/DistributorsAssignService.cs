@@ -1,5 +1,6 @@
 ﻿using CloudVOffice.Core.Domain.Common;
 using CloudVOffice.Core.Domain.Distributors;
+using CloudVOffice.Core.Domain.WareHouses.Brands;
 using CloudVOffice.Data.DTO.Distributor;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
@@ -35,20 +36,21 @@ namespace CloudVOffice.Services.Distributors
 
                 if (objcheck == null)
                 {
-                    DistributorAssign DistributorAssign = new DistributorAssign();
-                    DistributorAssign.DistributorRegistrationId = DistributorAssignDTO.DistributorRegistrationId;
                     foreach (var PinCodeId in DistributorAssignDTO.PinCodeId)
                     {
-                        DistributorAssign.PinCodeId = PinCodeId;
+                        foreach (var BrandId in DistributorAssignDTO.BrandId)
+                        {
+                            DistributorAssign DistributorAssign = new DistributorAssign();
+                            DistributorAssign.DistributorRegistrationId = DistributorAssignDTO.DistributorRegistrationId;
+                            DistributorAssign.PinCodeId = PinCodeId;
+                            DistributorAssign.BrandId = BrandId;
+                            DistributorAssign.CreatedBy = DistributorAssignDTO.CreatedBy;
+                            DistributorAssign.CreatedDate = System.DateTime.Now;
+
+                            var obj = _DistributorAssignRepo.Insert(DistributorAssign);
+                        }
                     }
-                    foreach (var BrandId in DistributorAssignDTO.BrandId)
-                    {
-                        DistributorAssign.BrandId = BrandId;
-                    }
-                    DistributorAssign.CreatedBy = DistributorAssignDTO.CreatedBy;
-                    DistributorAssign.CreatedDate = System.DateTime.Now;
-                    var obj = _DistributorAssignRepo.Insert(DistributorAssign);
-                    
+
                     return MessageEnum.Success;
                 }
                 else if (objcheck != null)
@@ -63,5 +65,37 @@ namespace CloudVOffice.Services.Distributors
                 throw;
             };
         }
+
+        public List<DistributorAssign> DAssignListbyWareHouseId(Int64 WareHuoseId)
+        {
+            return _dbContext.DistributorAssigns
+                .Include(x => x.PinCodes)
+                .Include(x => x.DistributorRegistrations)
+                .Include(x => x.Brands)
+                .Where(x => x.Deleted == false && x.DistributorRegistrations.WareHuoseId == WareHuoseId).ToList();
+        }
+
+        public MessageEnum DistributorAssignDelete(Int64 DistributorAssignId, Int64 DeletedBy)
+        {
+            try
+            {
+                var a = _dbContext.DistributorAssigns.Where(x => x.DistributorAssignId == DistributorAssignId).FirstOrDefault();
+                if (a != null)
+                {
+                    a.Deleted = true;
+                    a.UpdatedBy = DeletedBy;
+                    a.UpdatedDate = DateTime.Now;
+                    _dbContext.SaveChanges();
+                    return MessageEnum.Deleted;
+                }
+                else
+                    return MessageEnum.Invalid;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
     }
 }

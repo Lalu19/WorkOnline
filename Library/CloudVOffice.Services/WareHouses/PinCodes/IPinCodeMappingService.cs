@@ -16,5 +16,7 @@ namespace CloudVOffice.Services.WareHouses.PinCodes
 		public MessageEnum PinCodeMappingUpdate(PinCodeMappingDTO pinCodeMappingDTO);
 		public PinCodeMapping GetPinCodeMappingById(Int64 PinCodeMappingId);
 		public MessageEnum PinCodeMappingDelete(Int64 PinCodeMappingId, Int64 DeletedBy);
-	}
+		public List<PinCodeMapping> GetPinCodeMappingListbywarehouseId(Int64 WareHuoseId);
+
+    }
 }

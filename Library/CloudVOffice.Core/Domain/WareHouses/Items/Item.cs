@@ -1,6 +1,8 @@
-﻿using System;
+﻿using CloudVOffice.Core.Domain.WareHouses.Brands;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -84,5 +86,8 @@ namespace CloudVOffice.Core.Domain.WareHouses.Items
         public Int64? UpdatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public bool Deleted { get; set; }
+
+        [ForeignKey("BrandId")]
+        public Brand Brands { get; set; }
     }
 }

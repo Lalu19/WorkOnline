@@ -27,6 +27,7 @@ using CloudVOffice.Core.Domain.WareHouses.Vendors;
 using CloudVOffice.Core.Domain.WareHouses.Districts;
 using CloudVOffice.Core.Domain.WareHouses.UOMs;
 using CloudVOffice.Core.Domain.WareHouses.Brands;
+using Microsoft.EntityFrameworkCore;
 
 namespace CloudVOffice.Services.WareHouses.Itemss
 {
@@ -605,5 +606,14 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 			var a = _dbContext.Items.Where(a => a.WareHuoseId == WareHuoseId).ToList();
 			return a;
 		}
-	}
+
+        public List<Item> BrandListByWareHouseId(Int64 WareHuoseId)
+        {
+            return _dbContext.Items
+				.Include(x=> x.Brands)
+                .Where(a => a.WareHuoseId == WareHuoseId && a.Deleted == false)
+                .ToList();
+        }
+
+    }
 }

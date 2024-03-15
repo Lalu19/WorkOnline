@@ -21,6 +21,8 @@
 		<None Remove="Views\Brand\BrandCreate.cshtml" />
 		<None Remove="Views\Brand\BrandView.cshtml" />
 		<None Remove="Views\Dashboard.cshtml" />
+		<None Remove="Views\Distributor\DistributorAssign.cshtml" />
+		<None Remove="Views\Distributor\DistributorAssignView.cshtml" />
 		<None Remove="Views\Distributor\DistributorCreate.cshtml" />
 		<None Remove="Views\Distributor\DistributorView.cshtml" />
 		<None Remove="Views\District\AddDistrictCreate.cshtml" />
