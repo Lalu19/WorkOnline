@@ -124,12 +124,25 @@ namespace CloudVOffice.Services.WareHouses.SalesOrders
             }
         }
 
-        //public List<SalesOrderParent> GetSaleOrderListByDateAndStateId(DateTime FromDate, DateTime ToDate)
-        //{
-        //    return _dbContext.SalesOrderParents
-        //        .Include(s=>s.WareHuose.Where(x => x.Deleted == false))
-        //        .Where(x => x.Deleted == false && x.CreatedDate.Date >= FromDate && x.CreatedDate.Date <= ToDate).ToList();
-        //}
+		public List<SalesOrderParent> GetSaleOrderListByDateAndStateId(Int64 StateId, DateTime FromDate, DateTime ToDate)
+		{
+			try
+			{
+				var saleOrders = _dbContext.SalesOrderParents
+					.Include(x => x.WareHuose) // Ensure that the WareHuose navigation property is loaded
+					.Where(x => !x.Deleted && x.CreatedDate.Date >= FromDate.Date && x.CreatedDate.Date <= ToDate.Date && x.WareHuose.StateId == StateId)
+					.ToList();
 
-    }
+				// Add logging or debugging statements here to inspect the saleOrders
+
+				return saleOrders;
+			}
+			catch (Exception ex)
+			{
+				// Log the exception for debugging purposes
+				Console.WriteLine("An error occurred while fetching sale orders: " + ex.Message);
+				throw; // Rethrow the exception to be handled by the caller
+			}
+		}
+	}
 }

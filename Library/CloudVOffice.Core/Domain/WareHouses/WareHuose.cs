@@ -28,5 +28,7 @@ namespace CloudVOffice.Core.Domain.WareHouses
         public Int64? UpdatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public bool Deleted { get; set; }
+
     }
+
 }

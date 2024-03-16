@@ -27,4 +27,5 @@ namespace CloudVOffice.Core.Domain.WareHouses.SalesOrders
 		[ForeignKey("WareHuoseId")]
 		public WareHuose WareHuose { get; set; }
 	}
+
 }
