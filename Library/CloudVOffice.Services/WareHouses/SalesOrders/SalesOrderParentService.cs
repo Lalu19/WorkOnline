@@ -45,7 +45,7 @@ namespace CloudVOffice.Services.WareHouses.SalesOrders
                     salesOrderParent.POPUniqueNumber = salesOrderParentDTO.POPUniqueNumber;
                     salesOrderParent.TotalQuantity = salesOrderParentDTO.TotalQuantity;
                     salesOrderParent.TotalAmount = salesOrderParentDTO.TotalAmount;
-                    salesOrderParent.WareHuoseId = salesOrderParentDTO.WareHuoseId;
+                    salesOrderParent.WareHuoseId = (long)salesOrderParentDTO.WareHuoseId;
                     salesOrderParent.CreatedBy = salesOrderParentDTO.CreatedBy;
                     salesOrderParent.CreatedDate = DateTime.Now;
 

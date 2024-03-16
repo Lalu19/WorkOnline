@@ -609,16 +609,17 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 			
 			
 		}
-	
-	}
-
         public List<Item> BrandListByWareHouseId(Int64 WareHuoseId)
         {
             return _dbContext.Items
-				.Include(x=> x.Brands)
+                .Include(x => x.Brands)
                 .Where(a => a.WareHuoseId == WareHuoseId && a.Deleted == false)
                 .ToList();
         }
 
     }
+
+        
+
 }
+
