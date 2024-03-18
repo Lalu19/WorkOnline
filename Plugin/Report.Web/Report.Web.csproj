@@ -18,6 +18,7 @@
 		<None Remove="roles.json" />
 		<None Remove="Views\ReportDashbord\Dashboard.cshtml" />
 		<None Remove="Views\SellerOrders\SellerTotalOrderReprot.cshtml" />
+		<None Remove="Views\SellerOrders\SellerTotalSaleReprot.cshtml" />
 	</ItemGroup>
 	<ItemGroup>
 		<Content Include="Application.json">

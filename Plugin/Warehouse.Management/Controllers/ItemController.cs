@@ -29,6 +29,8 @@ using CloudVOffice.Services.WareHouses.Brands;
 using CloudVOffice.Services.Sellers;
 using CloudVOffice.Core.Domain.Sellers;
 using Microsoft.Identity.Client;
+using CloudVOffice.Services.Users;
+using CloudVOffice.Core.Domain.WareHouses.Brands;
 
 namespace Warehouse.Management.Controllers
 {
@@ -51,9 +53,24 @@ namespace Warehouse.Management.Controllers
 		private readonly IBrandService _brandService;
 		private readonly ISellerRegistrationService _sellerRegistrationService;
 
+        private readonly IUserWareHouseMappingService _UserWareHouseMappingService;
 
-
-		public ItemController(IItemService itemService, IWebHostEnvironment hostingEnvironment, IHandlingTypeService handlingTypeService, IGSTService gSTService, ISectorService sectorService, ICategoryService categoryService, ISubCategory1Service subCategory1Service, ISubCategory2Service subCategory2Service, IWareHouseService warehouseService, IVendorService vendorService, IEmployeeService employeeService, IAddDistrictService addDistrictService, IUnit unitService,IBrandService brandService, ISellerRegistrationService sellerRegistrationService)
+        public ItemController(IItemService itemService,
+			IWebHostEnvironment hostingEnvironment, 
+			IHandlingTypeService handlingTypeService, 
+			IGSTService gSTService, 
+			ISectorService sectorService, 
+			ICategoryService categoryService, 
+			ISubCategory1Service subCategory1Service, 
+			ISubCategory2Service subCategory2Service, 
+			IWareHouseService warehouseService, 
+			IVendorService vendorService, 
+			IEmployeeService employeeService, 
+			IAddDistrictService addDistrictService, 
+			IUnit unitService,IBrandService brandService, 
+			ISellerRegistrationService sellerRegistrationService,
+             IUserWareHouseMappingService UserWareHouseMappingService
+            )
         {
 			_hostingEnvironment = hostingEnvironment;
 			_itemService = itemService;
@@ -70,7 +87,8 @@ namespace Warehouse.Management.Controllers
 			_unitService = unitService;
 			_brandService = brandService;
 			_sellerRegistrationService = sellerRegistrationService;
-		}
+            _UserWareHouseMappingService = UserWareHouseMappingService;
+        }
 
         [HttpGet]
         public IActionResult ItemCreate(int? itemId)
@@ -492,6 +510,19 @@ namespace Warehouse.Management.Controllers
         {
             string a = _gSTService.GetGstForSeller(sellerRegistrationId);
 			return a;
+        }
+
+        public JsonResult BrandListByWareHouseId()
+        {
+            Int64 UserId = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
+            var Warehousedetails = _UserWareHouseMappingService.GetWareHouseByUserId(UserId);
+
+            var brands = _itemService.BrandListByWareHouseId(Warehousedetails.WareHuoseId)
+                            .GroupBy(b => new { b.BrandId , b.Brands.BrandName }) 
+                            .Select(g => new { BrandId = g.Key.BrandId, BrandName = g.Key.BrandName })
+                            .ToList();
+
+            return Json(brands);
         }
 
     }

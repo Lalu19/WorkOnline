@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace CloudVOffice.Core.Domain.WareHouses.SalesOrders
 		//public Int64? PurchaseOrderId { get; set; }
 
 		public string? SalesOrderUniqueNumber { get; set; }
-		public Int64? WareHuoseId { get; set; }
+		public Int64 WareHuoseId { get; set; }
         public string? POPUniqueNumber { get; set; }
         public double? TotalQuantity { get; set; }
         public double? TotalAmount { get; set; }
@@ -22,5 +23,9 @@ namespace CloudVOffice.Core.Domain.WareHouses.SalesOrders
 		public Int64? UpdatedBy { get; set; }
 		public DateTime? UpdatedDate { get; set; }
 		public bool Deleted { get; set; }
+
+		[ForeignKey("WareHuoseId")]
+		public WareHuose WareHuose { get; set; }
 	}
+
 }

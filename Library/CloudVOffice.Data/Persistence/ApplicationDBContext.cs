@@ -154,7 +154,9 @@ namespace CloudVOffice.Data.Persistence
 		public virtual DbSet<DistributorRegistration> DistributorRegistrations { get; set; }
 		public virtual DbSet<DistributorAssign> DistributorAssigns { get; set; }
 		public virtual DbSet<DeliveryPartner> DeliveryPartners { get; set; }
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
+        public virtual DbSet<DSO> DSO { get; set; }
+        public virtual DbSet<DSOItems> DSOItems { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
             #region Base
@@ -709,6 +711,28 @@ namespace CloudVOffice.Data.Persistence
        .HasDefaultValueSql("getdate()");
 
             modelBuilder.Entity<DPOItems>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+            .ValueGeneratedNever();
+            #endregion
+
+            #region DSO
+            modelBuilder.Entity<DSO>()
+       .Property(s => s.CreatedDate)
+       .HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<DSO>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+            .ValueGeneratedNever();
+            #endregion
+
+            #region DSOItems
+            modelBuilder.Entity<DSOItems>()
+       .Property(s => s.CreatedDate)
+       .HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<DSOItems>()
              .Property(s => s.Deleted)
              .HasDefaultValue(false)
             .ValueGeneratedNever();

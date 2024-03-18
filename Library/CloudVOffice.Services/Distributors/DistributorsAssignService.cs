@@ -1,5 +1,6 @@
 ﻿using CloudVOffice.Core.Domain.Common;
 using CloudVOffice.Core.Domain.Distributors;
+using CloudVOffice.Core.Domain.WareHouses.Brands;
 using CloudVOffice.Data.DTO.Distributor;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
@@ -30,38 +31,84 @@ namespace CloudVOffice.Services.Distributors
         {
             try
             {
-
-                var objcheck = _dbContext.DistributorAssigns.SingleOrDefault(opt => opt.Deleted == false);
-
-                if (objcheck == null)
+                foreach (var PinCodeId in DistributorAssignDTO.PinCodeId)
                 {
-                    DistributorAssign DistributorAssign = new DistributorAssign();
-                    DistributorAssign.DistributorRegistrationId = DistributorAssignDTO.DistributorRegistrationId;
-                    foreach (var PinCodeId in DistributorAssignDTO.PinCodeId)
-                    {
-                        DistributorAssign.PinCodeId = PinCodeId;
-                    }
                     foreach (var BrandId in DistributorAssignDTO.BrandId)
                     {
-                        DistributorAssign.BrandId = BrandId;
+                        var assign = _dbContext.DistributorAssigns.Any(opt =>
+                            opt.Deleted == false &&
+                            opt.PinCodeId == PinCodeId &&
+                            opt.BrandId == BrandId);
+
+                        if (!assign) 
+                        {
+                            var assignDistributor = _dbContext.DistributorAssigns.SingleOrDefault(opt =>
+                                opt.Deleted == false &&
+                                opt.DistributorRegistrationId != DistributorAssignDTO.DistributorRegistrationId &&
+                                opt.PinCodeId == PinCodeId &&
+                                opt.BrandId == BrandId);
+
+                            if (assignDistributor == null) 
+                            {
+                                DistributorAssign distributorAssign = new DistributorAssign();
+                                distributorAssign.DistributorRegistrationId = DistributorAssignDTO.DistributorRegistrationId;
+                                distributorAssign.PinCodeId = PinCodeId;
+                                distributorAssign.BrandId = BrandId;
+                                distributorAssign.CreatedBy = DistributorAssignDTO.CreatedBy;
+                                distributorAssign.CreatedDate = DateTime.Now;
+
+                                _DistributorAssignRepo.Insert(distributorAssign);
+                            }
+                            else
+                            {
+                                return MessageEnum.Duplicate;
+                            }
+                        }
+                        else
+                        {
+                            return MessageEnum.Duplicate;
+                        }
                     }
-                    DistributorAssign.CreatedBy = DistributorAssignDTO.CreatedBy;
-                    DistributorAssign.CreatedDate = System.DateTime.Now;
-                    var obj = _DistributorAssignRepo.Insert(DistributorAssign);
-                    
-                    return MessageEnum.Success;
-                }
-                else if (objcheck != null)
-                {
-                    return MessageEnum.Duplicate;
                 }
 
-                return MessageEnum.UnExpectedError;
+                return MessageEnum.Success;
             }
             catch
             {
                 throw;
-            };
+            }
         }
+
+        public List<DistributorAssign> DAssignListbyWareHouseId(Int64 WareHuoseId)
+        {
+            return _dbContext.DistributorAssigns
+                .Include(x => x.PinCodes)
+                .Include(x => x.DistributorRegistrations)
+                .Include(x => x.Brands)
+                .Where(x => x.Deleted == false && x.DistributorRegistrations.WareHuoseId == WareHuoseId).ToList();
+        }
+
+        public MessageEnum DistributorAssignDelete(Int64 DistributorAssignId, Int64 DeletedBy)
+        {
+            try
+            {
+                var a = _dbContext.DistributorAssigns.Where(x => x.DistributorAssignId == DistributorAssignId).FirstOrDefault();
+                if (a != null)
+                {
+                    a.Deleted = true;
+                    a.UpdatedBy = DeletedBy;
+                    a.UpdatedDate = DateTime.Now;
+                    _dbContext.SaveChanges();
+                    return MessageEnum.Deleted;
+                }
+                else
+                    return MessageEnum.Invalid;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
     }
 }

@@ -85,8 +85,21 @@ namespace CloudVOffice.Services.WareHouses.SalesOrders
                 throw;
             }
         }
+		public List<SalesOrderItem> GetSalesOrderItemByParentId(Int64 SalesOrderParentId)
+		{
+			try
+			{
+				var salesOrderItem = _dbContext.SalesOrderItems.Where(a => a.SalesOrderParentId == SalesOrderParentId).ToList();
+
+				return salesOrderItem;
+			}
+			catch
+			{
+				throw;
+			}
+		}
 
 
 
-    }
+	}
 }
