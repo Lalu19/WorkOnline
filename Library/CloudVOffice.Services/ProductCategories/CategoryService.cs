@@ -1,5 +1,8 @@
 ﻿using CloudVOffice.Core.Domain.Common;
 using CloudVOffice.Core.Domain.ProductCategories;
+using CloudVOffice.Core.Domain.WareHouses.Brands;
+using CloudVOffice.Core.Domain.WareHouses.Items;
+using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Data.DTO.ProductCategories;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
@@ -147,5 +150,79 @@ namespace CloudVOffice.Services.ProductCategories
             }
         }
 
+        //      public List<Category> GetCategoryListByPincodeId(Int64 PincodeId, int SectorId)
+        //{
+        //	var distributors = _dbContext.DistributorAssigns.Where(a => a.PinCodeId == PincodeId && a.Deleted == false).ToList();
+
+        //	List<Brand> brands = new List<Brand>();
+
+        //	foreach (var distributor in distributors)
+        //	{
+        //		Brand brnd = _dbContext.Brands.Where(a => a.BrandId == distributor.BrandId).FirstOrDefault();
+        //		brands.Add(brnd);
+        //	}
+
+        //          List<Item> items = new List<Item>();
+
+        //          foreach(var brand in brands)
+        //          {
+        //              var item = _dbContext.Items.Where(a => a.BrandId == brand.BrandId).FirstOrDefault();
+        //              items.Add(item);
+        //          }
+
+
+        //          List<Category> categories = new List<Category>();
+
+        //          foreach (var item in items)
+        //          {
+        //              var categories1 = _dbContext.Categories.Where(x => x.CategoryId == item.CategoryId).FirstOrDefault();
+        //              categories.Add(categories1);
+        //          }
+
+        //	categories = categories.Where(a=> a.SectorId == SectorId).Distinct().ToList();
+        //	return categories;
+        //}
+
+
+        public List<Category> GetCategoryListByPincodeIdSectorId(Int64 PincodeId, int SectorId)
+        {
+            var distributors = _dbContext.DistributorAssigns.Where(a => a.PinCodeId == PincodeId && a.Deleted == false).ToList();
+
+            List<Brand> brands = new List<Brand>();
+
+            foreach (var distributor in distributors)
+            {
+                Brand brnd = _dbContext.Brands.Where(a => a.BrandId == distributor.BrandId && a.Deleted == false).FirstOrDefault();
+                if (brnd != null)
+                {
+                    brands.Add(brnd);
+                }
+            }
+
+            List<Item> items = new List<Item>();
+
+            foreach (var brand in brands)
+            {
+                var item = _dbContext.Items.FirstOrDefault(a => a.BrandId == brand.BrandId && a.Deleted == false);
+                if (item != null)
+                {
+                    items.Add(item);
+                }
+            }
+
+            List<Category> categories = new List<Category>();
+
+            foreach (var item in items)
+            {
+                var category = _dbContext.Categories.FirstOrDefault(x => x.CategoryId == item.CategoryId && x.Deleted == false);
+                if (category != null)
+                {
+                    categories.Add(category);
+                }
+            }
+
+            var distinctCategories = categories.Where(a => a.SectorId == SectorId).Distinct().ToList();
+            return distinctCategories;
+        }
     }
 }

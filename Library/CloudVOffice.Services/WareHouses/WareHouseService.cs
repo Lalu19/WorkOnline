@@ -160,6 +160,5 @@ namespace CloudVOffice.Services.WareHouses
 
             return a.WareHuoseId;
         }
-
     }
 }

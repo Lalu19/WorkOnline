@@ -180,5 +180,8 @@ namespace Web.API.Controllers.DeliveryPartners
             var a = _deliveryPartnerService.DeleteDeliveryPartner(deliveryPartnerId, DeletedBy);
             return Ok(a);
         }
+
+
+
     }
 }

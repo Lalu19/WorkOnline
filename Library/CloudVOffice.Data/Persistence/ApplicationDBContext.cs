@@ -117,6 +117,8 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
         public virtual DbSet<SalesOrderItem> SalesOrderItems { get; set; }
         public virtual DbSet<SalesOrderParent> SalesOrderParents { get; set; }
+        public virtual DbSet<WarehouseSalesOrderParent> WarehouseSalesOrderParents { get; set; }
+        public virtual DbSet<WareHouseSalesOrderItem> WareHouseSalesOrderItems { get; set; }
 
 
 
@@ -836,6 +838,29 @@ namespace CloudVOffice.Data.Persistence
               .Property(s => s.Deleted)
               .HasDefaultValue(false)
               .ValueGeneratedNever();
+
+
+            modelBuilder.Entity<WarehouseSalesOrderParent>()
+           .Property(s => s.CreatedDate)
+           .HasDefaultValueSql("getdate()");
+
+
+            modelBuilder.Entity<WarehouseSalesOrderParent>()
+              .Property(s => s.Deleted)
+              .HasDefaultValue(false)
+              .ValueGeneratedNever();
+
+
+            modelBuilder.Entity<WareHouseSalesOrderItem>()
+           .Property(s => s.CreatedDate)
+           .HasDefaultValueSql("getdate()");
+
+
+            modelBuilder.Entity<WareHouseSalesOrderItem>()
+              .Property(s => s.Deleted)
+              .HasDefaultValue(false)
+              .ValueGeneratedNever();
+
 
             modelBuilder.Seed();
         }

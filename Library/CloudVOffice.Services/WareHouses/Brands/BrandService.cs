@@ -1,13 +1,17 @@
 ﻿using CloudVOffice.Core.Domain.Common;
+using CloudVOffice.Core.Domain.ProductCategories;
 using CloudVOffice.Core.Domain.WareHouses.Brands;
+using CloudVOffice.Core.Domain.WareHouses.Items;
 using CloudVOffice.Core.Domain.WareHouses.Months;
 using CloudVOffice.Core.Domain.WareHouses.Stocks;
 using CloudVOffice.Data.DTO.WareHouses.Brands;
 using CloudVOffice.Data.DTO.WareHouses.Months;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
+using Org.BouncyCastle.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -137,7 +141,7 @@ namespace CloudVOffice.Services.WareHouses.Brands
 
             foreach (var brandId in list)
             {
-                Brand brand = _dbContext.Brands.FirstOrDefault(i => i.BrandId == brandId);
+                Brand brand = _dbContext.Brands.FirstOrDefault(i => i.BrandId == brandId && i.Deleted == false);
                 brands.Add(brand);
             }
 
@@ -147,7 +151,7 @@ namespace CloudVOffice.Services.WareHouses.Brands
 
         public Int64 GetBrandIdByBrandName(string brandName)
         {
-            var brand = _dbContext.Brands.FirstOrDefault(x=> x.BrandName == brandName);
+            var brand = _dbContext.Brands.FirstOrDefault(x=> x.BrandName == brandName && x.Deleted == false);
 
             Int64 id = brand.BrandId;
             return id;
@@ -156,17 +160,60 @@ namespace CloudVOffice.Services.WareHouses.Brands
 
         public List<Brand> GetBrandListByCategoryId(Int64 categoryId)
         {
-            var items = _dbContext.Items.Where(i => i.CategoryId == categoryId).ToList();
+            var items = _dbContext.Items.Where(i => i.CategoryId == categoryId && i.Deleted == false).ToList();
 
             List<Brand> brands = new List<Brand>();
 
             foreach (var item in items)
             {
-                var brand = _dbContext.Brands.FirstOrDefault(b => b.BrandId == item.BrandId);
+                var brand = _dbContext.Brands.FirstOrDefault(b => b.BrandId == item.BrandId && b.Deleted == false);
                 brands.Add(brand);
             }
 
             return brands;
+        }
+
+        public List<Brand> GetBrandListByPincodeIdSectorId(Int64 pincodeId, int SectorId)
+        {
+			var distributors = _dbContext.DistributorAssigns.Where(a => a.PinCodeId == pincodeId && a.Deleted == false).ToList();
+
+			List<Brand> brands1 = new List<Brand>();
+
+			foreach (var distributor in distributors)
+			{
+				Brand brnd = _dbContext.Brands.Where(a=> a.BrandId == distributor.BrandId && a.Deleted == false).FirstOrDefault();
+
+                if (brnd != null)
+                {
+                    brands1.Add(brnd);
+                }
+			}
+
+            List<Item> items = new List<Item>();
+
+            foreach (var brand in brands1)
+            {
+                var item = _dbContext.Items.FirstOrDefault(a => a.BrandId == brand.BrandId && a.SectorId == SectorId && a.Deleted == false);
+                if (item != null)
+                {
+                    items.Add(item);
+                }
+            }
+
+            List<Brand> brandWithSector = new List<Brand>();
+
+            foreach (var item in items)
+            {
+                Brand brnd = _dbContext.Brands.Where(a => a.BrandId == item.BrandId && a.Deleted == false).FirstOrDefault();
+
+                if (brnd != null)
+                {
+                    brandWithSector.Add(brnd);
+                }
+            }
+
+            var distinctBrands =  brandWithSector.Distinct().ToList();
+            return distinctBrands;
         }
     }
 }

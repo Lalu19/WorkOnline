@@ -53,6 +53,7 @@ namespace CloudVOffice.Services.Distributors
 					distributorRegistration.Image = distributorRegistrationDTO.Image;
 					distributorRegistration.CreatedBy = distributorRegistrationDTO.CreatedBy;
 					distributorRegistration.CreatedDate = DateTime.Now;
+					distributorRegistration.AssignmentCode = "DS" + GenerateRandomNumber(100000, 999999).ToString();
 
 					_distributorRegistrationRepo.Insert(distributorRegistration);
 				}
@@ -63,6 +64,12 @@ namespace CloudVOffice.Services.Distributors
 			{
 				throw;
 			}	
+		}
+
+		private int GenerateRandomNumber(int minValue, int maxValue)
+		{
+			Random random = new Random();
+			return random.Next(minValue, maxValue + 1);
 		}
 
 		public async Task<DistributorRegistration> GetDistributorAsyncss(string UserMobileNumber)

@@ -42,7 +42,36 @@ namespace CloudVOffice.Services.Distributors
 			    .Where(x => x.Deleted == false && x.DistributorId == DistributorId).ToList();
 			
 		}
-		public MessageEnum DeleteDPOrder(Int64 DPOId, Int64 DeletedBy)
+
+        public List<DPO> GetDPOListByWareHouseId(Int64 WareHouseId)
+        {
+            return _dbContext.DPO
+                .Include(s => s.DPOItems.Where(x => x.Deleted == false))
+                .ThenInclude(s => s.Item)
+                .Include(s => s.WareHuose)
+                .Where(x => x.Deleted == false && x.WareHuoseId == WareHouseId).ToList();
+        }
+
+        public List<DPO> GetAllDPOList()
+        {
+            return _dbContext.DPO
+                .Include(s => s.DPOItems.Where(x => x.Deleted == false))
+                .ThenInclude(s => s.Item)
+                .Include(s => s.WareHuose)
+                .Where(x => x.Deleted == false).ToList();
+        }
+
+        public List<DPO> GetAllDPOListbyParentId(int parentId)
+        {
+            return _dbContext.DPO
+                .Include(s => s.DPOItems.Where(x => x.Deleted == false))
+                .ThenInclude(s => s.Item)
+                .Include(s => s.WareHuose)
+                .Where(x => x.Deleted == false && x.DPOId == parentId).ToList();
+        }
+
+
+        public MessageEnum DeleteDPOrder(Int64 DPOId, Int64 DeletedBy)
 		{
 			try
 			{

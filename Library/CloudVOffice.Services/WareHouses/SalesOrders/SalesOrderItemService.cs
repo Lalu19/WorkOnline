@@ -30,9 +30,6 @@ namespace CloudVOffice.Services.WareHouses.SalesOrders
         {
             try
             {
-
-                
-
                 foreach (var salesOrder in salesOrderItemDTO)
                 {
                     //salesOrderItem.SalesOrderParentId = salesOrder.SalesOrderParentId;
