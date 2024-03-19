@@ -343,7 +343,7 @@
             </div>
         </div>
         <div class="card-footer">
-            <button onclick="printInvoice()">Print Invoice</button>
+            <button id="btnSave" onclick="printInvoice()">Print Invoice</button>
         </div>
     </div>
 
@@ -688,7 +688,7 @@
     //    };
 
 
-    
+
 
 
     function printInvoice() {
@@ -708,9 +708,11 @@
             success: function (result) {
                 console.log(result);
 
+                redirectToSOOrderView();
+
                 //RemovePOPUniqueSetOrderShipped(globalId);
 
-                 // <-- Corrected closing parenthesis
+                // <-- Corrected closing parenthesis
 
                 if (isTableEmpty()) {
                     console.log('Table is empty');
@@ -806,5 +808,38 @@
             POId(selectedCategoryId);
         }
     });
+
+
+    $(document).ready(function () {
+        $("#btnSave").click(function (e) {
+            e.preventDefault(); // Prevent default form submission behavior
+            redirectToSOOrderView();
+        });
+
+        // Function to redirect to Purchase Order View
+        function redirectToSOOrderView() {
+            window.location.href = "/WareHouse/SO/SalesOrderParentView";
+           // window.location.href = "/WareHouse/Invoice/SOInvoiceCreate?SalesOrderParentId=@TempData["SalesOrderParentId"]";
+        }
+    });
+
+
+
+    // $(document).ready(function () {
+    //     $("#btnSave").click(function (e) {
+    //         e.preventDefault(); 
+    //         redirectToSOOrderView();
+    //     });
+
+     
+    //     function redirectToSOOrderView() {
+    //         var salesOrderParentId = parseInt('@TempData["SalesOrderParentId"]'); 
+           
+    //         window.location.href = "/WareHouse/Invoice/SOInvoiceCreate?SalesOrderParentId=" + (parseInt(salesOrderParentId) + 1);
+    //     }
+    // });
+
+
+
 
 </script>

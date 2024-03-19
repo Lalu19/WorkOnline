@@ -32,6 +32,7 @@
 		<None Remove="Views\Employee\EmployeeCreate.cshtml" />
 		<None Remove="Views\Employee\EmployeeView.cshtml" />
 		<None Remove="Views\Invoice\InvoiceCreate.cshtml" />
+		<None Remove="Views\Invoice\SOInvoiceCreate.cshtml" />
 		<None Remove="Views\Item\DamageItemCreate.cshtml" />
 		<None Remove="Views\Item\DamageItemView.cshtml" />
 		<None Remove="Views\Item\DamageItemForFarmingCreate.cshtml" />

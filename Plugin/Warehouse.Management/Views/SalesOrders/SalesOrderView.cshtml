@@ -59,12 +59,12 @@
                         <e-grid-pagesettings pageCount="4" pageSizes="true"></e-grid-pagesettings>
                         <e-grid-columns>
 
-
-                            <e-grid-column field="SalesOrderUniqueNumber" headerText="S.O Unique Number" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column field="POPUniqueNumber" headerText="Against P.O" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column headerText="Invoice" template="#Invoices" width="50"></e-grid-column>
+                            <e-grid-column field="SalesOrderUniqueNumber" headerText="SO Unique Number" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="POPUniqueNumber" headerText="Against PO" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column field="TotalQuantity" headerText="Total Quantity" textAlign="Left" width="120"></e-grid-column>
                             <e-grid-column field="TotalAmount" headerText="Total Amount" textAlign="Left" width="120"></e-grid-column>
-                            <e-grid-column headerText="Action" template="#Actions" width="50"></e-grid-column>
+                            <e-grid-column headerText="Action" template="#Actions" width="100"></e-grid-column>
                         </e-grid-columns>
                     </ejs-grid>
 
@@ -86,7 +86,7 @@
                 sweetAlert({
                     html: true,
                     icon: "success",
-                    title: "Month",
+                    title: "Sales Order",
                     text: "Successfully created.",
                     type: "success"
                 });
@@ -95,7 +95,7 @@
                 sweetAlert({
                     html: true,
                     icon: "success",
-                    title: "Month",
+                    title: "Sales Order",
                     text: "Successfully updated.",
                     type: "success"
                 });
@@ -104,7 +104,7 @@
                 sweetAlert({
                     html: true,
                     icon: "success",
-                    title: "Month",
+                    title: "Sales Order",
                     text: "Successfully Deleted.",
                     type: "success"
                 });
@@ -113,7 +113,7 @@
                 sweetAlert({
                     html: true,
                     icon: "danger",
-                    title: "Designation",
+                    title: "Sales Order",
                     text: "There is somthing going wrong.",
                     type: "danger"
                 });
@@ -122,7 +122,7 @@
                 sweetAlert({
                     html: true,
                     icon: "error",
-                    title: "Month",
+                    title: "Sales Order",
                     text: "There is somthing going wrong.",
                     type: "error"
                 });
@@ -131,7 +131,7 @@
                 sweetAlert({
                     html: true,
                     icon: "error",
-                    title: "Month",
+                    title: "Sales Order",
                     text: message,
                     type: "error"
                 });
@@ -163,11 +163,23 @@
 
 <script id="Actions" type="text/x-template">
     <div class="link">
-        @*<a href="../../WareHouse/Month/MonthCreate?MonthId=${MonthId}"><i class="icon-pencil3" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp;*@
+      @*   <a href="/WareHouse/Invoice/SOInvoiceCreate?SalesOrderParentId=${SalesOrderParentId}"><i class="icon-file-text2" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp; *@
 
         <button onClick="Delete(${SalesOrderParentId})" style="background: transparent;border: none;"><i class="icon-trash" style="font-size:22px"></i></button>
     </div>
 </script>
+
+
+<script id="Invoices" type="text/x-template">
+    <div class="link">
+        <a href="/WareHouse/Invoice/SOInvoiceCreate?SalesOrderParentId=${SalesOrderParentId}"><i class="icon-file-text2" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp;
+
+       @*  <button onClick="Delete(${SalesOrderParentId})" style="background: transparent;border: none;"><i class="icon-trash" style="font-size:22px"></i></button> *@
+    </div>
+</script>
+
+
+
 
 <script id="statusTemplate" type="text/x-template">
     ${statusDetail(data)}
