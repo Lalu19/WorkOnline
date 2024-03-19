@@ -14,14 +14,14 @@ namespace CloudVOffice.Services.Distributors
 {
     public class DPOItemsService : IDPOItemsService
     {
-        private readonly ApplicationDBContext _Context;
+        private readonly ApplicationDBContext _dbContext;
         private readonly ISqlRepository<DPOItems> _DPOItemsRepo;
         public DPOItemsService(ApplicationDBContext Context,
                                     ISqlRepository<DPOItems> DPOItemsRepo)
         {
-            _Context = Context;
+            _dbContext = Context;
             _DPOItemsRepo = DPOItemsRepo;
-        }
-		
+        }	
+
 	}
 }

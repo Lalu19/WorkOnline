@@ -15,7 +15,7 @@ namespace CloudVOffice.Core.Domain.WareHouses.SalesOrders
 		//public Int64? PurchaseOrderId { get; set; }
 
 		public string? SalesOrderUniqueNumber { get; set; }
-		public Int64? WareHuoseId { get; set; }
+		public Int64 WareHuoseId { get; set; }
         public string? POPUniqueNumber { get; set; }
         public double? TotalQuantity { get; set; }
         public double? TotalAmount { get; set; }

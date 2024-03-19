@@ -45,6 +45,7 @@ namespace CloudVOffice.Services.WareHouses.SalesOrders
                     salesOrderParent.POPUniqueNumber = salesOrderParentDTO.POPUniqueNumber;
                     salesOrderParent.TotalQuantity = salesOrderParentDTO.TotalQuantity;
                     salesOrderParent.TotalAmount = salesOrderParentDTO.TotalAmount;
+                    salesOrderParent.WareHuoseId = (long)salesOrderParentDTO.WareHuoseId;
                     salesOrderParent.CreatedBy = salesOrderParentDTO.CreatedBy;
                     salesOrderParent.CreatedDate = DateTime.Now;
 
@@ -171,4 +172,25 @@ namespace CloudVOffice.Services.WareHouses.SalesOrders
         //}
 
     }
+		public List<SalesOrderParent> GetSaleOrderListByDateAndStateId(Int64 StateId, DateTime FromDate, DateTime ToDate)
+		{
+			try
+			{
+				var saleOrders = _dbContext.SalesOrderParents
+					.Include(x => x.WareHuose) // Ensure that the WareHuose navigation property is loaded
+					.Where(x => !x.Deleted && x.CreatedDate.Date >= FromDate.Date && x.CreatedDate.Date <= ToDate.Date && x.WareHuose.StateId == StateId)
+					.ToList();
+
+				// Add logging or debugging statements here to inspect the saleOrders
+
+				return saleOrders;
+			}
+			catch (Exception ex)
+			{
+				// Log the exception for debugging purposes
+				Console.WriteLine("An error occurred while fetching sale orders: " + ex.Message);
+				throw; // Rethrow the exception to be handled by the caller
+			}
+		}
+	}
 }

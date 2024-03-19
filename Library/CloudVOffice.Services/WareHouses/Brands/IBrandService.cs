@@ -22,5 +22,8 @@ namespace CloudVOffice.Services.WareHouses.Brands
 
         public Int64 GetBrandIdByBrandName(string brandName);
         public List<Brand> GetBrandListByCategoryId(Int64 categoryId);
-    }
+
+        public List<Brand> GetBrandListByPincodeIdSectorId(Int64 pincodeId, int SectorId);
+
+	}
 }

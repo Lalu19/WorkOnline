@@ -40,7 +40,7 @@ namespace Warehouse.Management.Controllers
 			_dbContext = dbContext;
 			_salesOrderParentService = salesOrderParentService;
             _salesOrderItemService = salesOrderItemService;
-            _wareHouseService = wareHouseService;
+			_wareHouseService = wareHouseService;
         }
 		[HttpGet]
 		public IActionResult SOCreate(Int64? SOId)
@@ -58,18 +58,18 @@ namespace Warehouse.Management.Controllers
 		}
 
 
-        [HttpPost]
-        public IActionResult SalesOrderDataSave([FromBody] SalesOrderMasterDTO salesOrderMasterDTO)
-        {
-            Int64 createdBy = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
+		[HttpPost]
+		public IActionResult SalesOrderDataSave([FromBody] SalesOrderMasterDTO salesOrderMasterDTO)
+		{
+			Int64 createdBy = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
 
-            var warehouseId = _wareHouseService.GetWareHouseByPOPUniqueNumber(salesOrderMasterDTO.ParentOrder.POPUniqueNumber);
+			var warehouseId =  _wareHouseService.GetWareHouseByPOPUniqueNumber(salesOrderMasterDTO.ParentOrder.POPUniqueNumber);
 
-            salesOrderMasterDTO.ParentOrder.WareHuoseId = warehouseId;
-            salesOrderMasterDTO.ParentOrder.CreatedBy = createdBy;
+			salesOrderMasterDTO.ParentOrder.WareHuoseId = warehouseId;
+			salesOrderMasterDTO.ParentOrder.CreatedBy =	createdBy;
 
-            var a = _salesOrderParentService.SalesOrderParentCreate(salesOrderMasterDTO.ParentOrder);
-
+			var a = _salesOrderParentService.SalesOrderParentCreate(salesOrderMasterDTO.ParentOrder);
+			
             var result = _salesOrderItemService.SalesOrderItemCreate(a.SalesOrderParentId, createdBy, salesOrderMasterDTO.Orders);
 
             if (result == MessageEnum.Success)

@@ -142,13 +142,18 @@ namespace CloudVOffice.Web.Framework
             services.AddScoped<IDPOService, DPOService>();
             services.AddScoped<IDPOItemsService, DPOItemsService>();
 			services.AddScoped<IDistributorRegistrationService, DistributorRegistrationService>();
+			services.AddScoped<IDistributorsAssignService, DistributorsAssignService>();
 			services.AddScoped<IDeliveryPartnerService, DeliveryPartnerService>();
 			services.AddScoped<ISalesExecutiveRegistrationService, SalesExecutiveRegistrationService>();
 			services.AddScoped<ISalesExecutiveTargetService, SalesExecutiveTargetService>();
+			services.AddScoped<IWareHouseSalesOrderItemService, WareHouseSalesOrderItemService>();
+			services.AddScoped<IWarehouseSalesOrderParentService, WarehouseSalesOrderParentService>();
+            services.AddScoped<IDSOService, DSOService>();
+            services.AddScoped<IDSOItemsService, DSOItemsService>();
 
 
 
-			return services;
+            return services;
 
         }
     }

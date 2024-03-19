@@ -1,6 +1,7 @@
 ﻿using CloudVOffice.Core.Domain.Common;
 using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Data.DTO.WareHouses.PinCodes;
+using CloudVOffice.Services.Users;
 using CloudVOffice.Services.WareHouse.PinCodes;
 using CloudVOffice.Services.WareHouses;
 using CloudVOffice.Services.WareHouses.PinCodes;
@@ -21,16 +22,18 @@ namespace Warehouse.Management.Controllers
 		private readonly IPinCodeMappingService _pinCodeMappingService;
 		private readonly IPinCodeService _pinCodeService;
 		private readonly IWareHouseService _wareHouseService;
+        private readonly IUserWareHouseMappingService _UserWareHouseMappingService;
 
-		public PinCodeMappingController(IPinCodeMappingService pinCodeMappingService,
+        public PinCodeMappingController(IPinCodeMappingService pinCodeMappingService,
 										IPinCodeService pinCodeService,
-										IWareHouseService wareHouseService
-			)
+										IWareHouseService wareHouseService,
+                                        IUserWareHouseMappingService UserWareHouseMappingService
+            )
 		{
 			_pinCodeMappingService = pinCodeMappingService;
 			_pinCodeService = pinCodeService;
-			_wareHouseService = wareHouseService;
-		}
+            _UserWareHouseMappingService = UserWareHouseMappingService;
+        }
 
 
 		[HttpGet]
@@ -129,5 +132,12 @@ namespace Warehouse.Management.Controllers
 			return Redirect("/WareHouse/PinCodeMapping/PinCodeMappingView");
 		}
 
-	}
+        public JsonResult Getpincodelistbywarehouse()
+        {
+            Int64 UserId = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
+            var Warehousedetails = _UserWareHouseMappingService.GetWareHouseByUserId(UserId);
+
+            return Json(_pinCodeMappingService.GetPinCodeMappingListbywarehouseId(Warehousedetails.WareHuoseId));
+        }
+    }
 }

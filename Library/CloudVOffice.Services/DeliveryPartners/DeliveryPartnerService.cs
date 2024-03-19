@@ -52,6 +52,7 @@ namespace CloudVOffice.Services.DeliveryPartners
                     deliveryPartner.VehicleBackPhoto = deliveryPartnerDTO.VehicleBackPhoto;
                     deliveryPartner.Password = deliveryPartnerDTO.Password;
                     deliveryPartner.RetailModelId = 5;
+                    deliveryPartner.AssignedCode = deliveryPartnerDTO.AssignedCode;
 
                     deliveryPartner.CreatedBy = deliveryPartnerDTO.CreatedBy;
                     deliveryPartner.CreatedDate = System.DateTime.Now;
@@ -103,6 +104,7 @@ namespace CloudVOffice.Services.DeliveryPartners
                         partner.VehicleFrontPhoto = deliveryPartnerDTO.VehicleFrontPhoto;
                         partner.VehicleBackPhoto = deliveryPartnerDTO.VehicleBackPhoto;
                         partner.Password = deliveryPartnerDTO.Password;
+                        partner.AssignedCode = deliveryPartnerDTO.AssignedCode;
 
                         partner.UpdatedDate = DateTime.Now;
                         _dbContext.SaveChanges();

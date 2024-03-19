@@ -41,7 +41,17 @@ namespace Web.API.Controllers.ProductCategories
             var a = _categoryService.GetCategoryList();
             return Ok(a);
         }
-        [HttpGet("{CategoryId}")]
+
+
+		[HttpGet("{PincodeId}/{SectorId}")]
+		public IActionResult GetCategoryListByPincodeIdSectorId(Int64 PincodeId, int SectorId)
+		{
+			var a = _categoryService.GetCategoryListByPincodeIdSectorId(PincodeId, SectorId);
+			return Ok(a);
+		}
+
+
+		[HttpGet("{CategoryId}")]
         public IActionResult SingleCategoryListbyId(int CategoryId)
         {
             var a = _categoryService.GetCategoryById(CategoryId);

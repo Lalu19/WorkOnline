@@ -117,6 +117,8 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
         public virtual DbSet<SalesOrderItem> SalesOrderItems { get; set; }
         public virtual DbSet<SalesOrderParent> SalesOrderParents { get; set; }
+        public virtual DbSet<WarehouseSalesOrderParent> WarehouseSalesOrderParents { get; set; }
+        public virtual DbSet<WareHouseSalesOrderItem> WareHouseSalesOrderItems { get; set; }
 
 
 
@@ -152,7 +154,9 @@ namespace CloudVOffice.Data.Persistence
 		public virtual DbSet<DistributorRegistration> DistributorRegistrations { get; set; }
 		public virtual DbSet<DistributorAssign> DistributorAssigns { get; set; }
 		public virtual DbSet<DeliveryPartner> DeliveryPartners { get; set; }
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
+        public virtual DbSet<DSO> DSO { get; set; }
+        public virtual DbSet<DSOItems> DSOItems { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
             #region Base
@@ -712,6 +716,28 @@ namespace CloudVOffice.Data.Persistence
             .ValueGeneratedNever();
             #endregion
 
+            #region DSO
+            modelBuilder.Entity<DSO>()
+       .Property(s => s.CreatedDate)
+       .HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<DSO>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+            .ValueGeneratedNever();
+            #endregion
+
+            #region DSOItems
+            modelBuilder.Entity<DSOItems>()
+       .Property(s => s.CreatedDate)
+       .HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<DSOItems>()
+             .Property(s => s.Deleted)
+             .HasDefaultValue(false)
+            .ValueGeneratedNever();
+            #endregion
+
             modelBuilder.Entity<RetailModel>()
            .Property(s => s.CreatedDate)
            .HasDefaultValueSql("getdate()");
@@ -836,6 +862,29 @@ namespace CloudVOffice.Data.Persistence
               .Property(s => s.Deleted)
               .HasDefaultValue(false)
               .ValueGeneratedNever();
+
+
+            modelBuilder.Entity<WarehouseSalesOrderParent>()
+           .Property(s => s.CreatedDate)
+           .HasDefaultValueSql("getdate()");
+
+
+            modelBuilder.Entity<WarehouseSalesOrderParent>()
+              .Property(s => s.Deleted)
+              .HasDefaultValue(false)
+              .ValueGeneratedNever();
+
+
+            modelBuilder.Entity<WareHouseSalesOrderItem>()
+           .Property(s => s.CreatedDate)
+           .HasDefaultValueSql("getdate()");
+
+
+            modelBuilder.Entity<WareHouseSalesOrderItem>()
+              .Property(s => s.Deleted)
+              .HasDefaultValue(false)
+              .ValueGeneratedNever();
+
 
             modelBuilder.Seed();
         }

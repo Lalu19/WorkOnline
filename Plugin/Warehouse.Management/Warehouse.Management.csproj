@@ -21,6 +21,8 @@
 		<None Remove="Views\Brand\BrandCreate.cshtml" />
 		<None Remove="Views\Brand\BrandView.cshtml" />
 		<None Remove="Views\Dashboard.cshtml" />
+		<None Remove="Views\Distributor\DistributorAssign.cshtml" />
+		<None Remove="Views\Distributor\DistributorAssignView.cshtml" />
 		<None Remove="Views\Distributor\DistributorCreate.cshtml" />
 		<None Remove="Views\Distributor\DistributorView.cshtml" />
 		<None Remove="Views\District\AddDistrictCreate.cshtml" />
@@ -65,6 +67,7 @@
 		<None Remove="Views\PurchaseOrder\PurchaseOrderView.cshtml" />
 		<None Remove="Views\SalesOrders\SalesOrderView.cshtml" />
 		<None Remove="Views\SalesOrders\SOCreate.cshtml" />
+		<None Remove="Views\SalesOrders\WareHouseSalesOrderCreate.cshtml" />
 		<None Remove="Views\State\StateCreate.cshtml" />
 		<None Remove="Views\State\StateView.cshtml" />
 		<None Remove="Views\StockManagement\StockManagement.cshtml" />
