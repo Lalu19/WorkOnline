@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CloudVOffice.Core.Domain.Common;
+using CloudVOffice.Core.Domain.Sellers;
 using CloudVOffice.Core.Domain.WareHouses.PurchaseOrders;
 using CloudVOffice.Core.Domain.WareHouses.SalesOrders;
 using CloudVOffice.Data.DTO.WareHouses.PurchaseOrders;
@@ -135,44 +136,61 @@ namespace CloudVOffice.Services.WareHouses.SalesOrders
         }
 
 
+        public SalesOrderParent GetSOOrderByCreatedById(Int64 CreatedById)
+        {
+            return _dbContext.SalesOrderParents
+                .Include(x => x.WareHuose)
+                .Include(x => x.SalesOrderItems.Where(s => s.Deleted == false))
+                    .ThenInclude(x => x.Item)
+                .Where(x => x.Deleted == false && x.CreatedBy == CreatedById)
+                .SingleOrDefault();
+        }
 
-		//public MessageEnum SalesOrderParentUpdate(SalesOrderParentDTO salesOrderParentDTO)
-		//{
-		//    try
-		//    {
-		//        var updateSalesOrderParent = _dbContext.SalesOrderParents.Where(x => x.SalesOrderParentId != salesOrderParentDTO.SalesOrderParentId && x.Deleted == false).FirstOrDefault();
-
-		//        if (updateSalesOrderParent == null)
-		//        {
-		//            // var a = _dbContext.PurchaseOrderParents.Where(x => x.PurchaseOrderParentId == purchaseOrderParentDTO.PurchaseOrderParentId).FirstOrDefault();
-		//            var order = _dbContext.SalesOrderParents.FirstOrDefault(o => o.SalesOrderParentId == salesOrderParentDTO.SalesOrderParentId);
-		//            if (order != null)
-		//            {
-		//                order.TotalAmount = purchaseOrderParentDTO.TotalAmount;
-		//                order.TotalQuantity = purchaseOrderParentDTO.TotalQuantity;
-		//                order.SellerRegistrationId = purchaseOrderParentDTO.SellerRegistrationId;
-		//                order.OrderShipped = purchaseOrderParentDTO.OrderShipped;
-		//                order.UpdatedBy = purchaseOrderParentDTO.CreatedBy;
-		//                order.UpdatedDate = DateTime.Now;
-		//                _dbContext.SaveChanges();
-		//                return MessageEnum.Updated;
-		//            }
-		//            else
-		//                return MessageEnum.Invalid;
-		//        }
-		//        else
-		//        {
-		//            return MessageEnum.Duplicate;
-		//        }
-		//    }
-		//    catch
-		//    {
-		//        throw;
-		//    }
-		//}
+        public SellerRegistration GetSOOrderByCreatedBy(Int64 createdBy)
+        {
+            var seller =  _dbContext.SellerRegistrations.FirstOrDefault(a => a.SellerRegistrationId == createdBy);
+            return seller;
+        }
 
 
-		public List<SalesOrderParent> GetSaleOrderListByDateAndStateId(Int64 StateId, DateTime FromDate, DateTime ToDate)
+
+        //public MessageEnum SalesOrderParentUpdate(SalesOrderParentDTO salesOrderParentDTO)
+        //{
+        //    try
+        //    {
+        //        var updateSalesOrderParent = _dbContext.SalesOrderParents.Where(x => x.SalesOrderParentId != salesOrderParentDTO.SalesOrderParentId && x.Deleted == false).FirstOrDefault();
+
+        //        if (updateSalesOrderParent == null)
+        //        {
+        //            // var a = _dbContext.PurchaseOrderParents.Where(x => x.PurchaseOrderParentId == purchaseOrderParentDTO.PurchaseOrderParentId).FirstOrDefault();
+        //            var order = _dbContext.SalesOrderParents.FirstOrDefault(o => o.SalesOrderParentId == salesOrderParentDTO.SalesOrderParentId);
+        //            if (order != null)
+        //            {
+        //                order.TotalAmount = purchaseOrderParentDTO.TotalAmount;
+        //                order.TotalQuantity = purchaseOrderParentDTO.TotalQuantity;
+        //                order.SellerRegistrationId = purchaseOrderParentDTO.SellerRegistrationId;
+        //                order.OrderShipped = purchaseOrderParentDTO.OrderShipped;
+        //                order.UpdatedBy = purchaseOrderParentDTO.CreatedBy;
+        //                order.UpdatedDate = DateTime.Now;
+        //                _dbContext.SaveChanges();
+        //                return MessageEnum.Updated;
+        //            }
+        //            else
+        //                return MessageEnum.Invalid;
+        //        }
+        //        else
+        //        {
+        //            return MessageEnum.Duplicate;
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        throw;
+        //    }
+        //}
+
+
+        public List<SalesOrderParent> GetSaleOrderListByDateAndStateId(Int64 StateId, DateTime FromDate, DateTime ToDate)
 		{
 			try
 			{

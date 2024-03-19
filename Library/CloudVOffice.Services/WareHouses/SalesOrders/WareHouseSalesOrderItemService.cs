@@ -36,6 +36,7 @@ namespace CloudVOffice.Services.WareHouses.SalesOrders
                     WHSOItem.ItemId = SalesOrderItemDTO.ItemId;
                     WHSOItem.Quantity = SalesOrderItemDTO.Quantity;
                     WHSOItem.Amount = SalesOrderItemDTO.Amount;
+                    WHSOItem.CreatedBy = createdBy;
 
                     _wareHouseSalesOrderItemRepo.Insert(WHSOItem);
                 }

@@ -10,7 +10,7 @@ namespace CloudVOffice.Core.Domain.WareHouses.SalesOrders
     {
         public Int64 WareHouseSalesOrderItemId { get; set; }
         public Int64 WarehouseSalesOrderParentId { get; set; }
-        public Int64? WareHuoseId { get; set; }
+        //public Int64? WareHuoseId { get; set; }
         public Int64? ItemId { get; set; }
         public double? Quantity { get; set; }
         public double? Amount { get; set; }

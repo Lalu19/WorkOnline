@@ -172,7 +172,11 @@
 
 <script id="Invoices" type="text/x-template">
     <div class="link">
-        <a href="/WareHouse/Invoice/SOInvoiceCreate?SalesOrderParentId=${SalesOrderParentId}"><i class="icon-file-text2" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp;
+        @*<a href="/WareHouse/Invoice/SOInvoiceCreate?CreatedBy=${CreatedBy}"><i class="icon-file-text2" style="font-size:22px"></i></a> &nbsp;&nbsp;&nbsp;*@
+
+        <a href="/WareHouse/Invoice/SOInvoiceCreate?CreatedBy=${CreatedBy}&SalesOrderParentId=${SalesOrderParentId}">
+            <i class="icon-file-text2" style="font-size:22px"></i>
+        </a> &nbsp;&nbsp;&nbsp;
 
        @*  <button onClick="Delete(${SalesOrderParentId})" style="background: transparent;border: none;"><i class="icon-trash" style="font-size:22px"></i></button> *@
     </div>

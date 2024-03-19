@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CloudVOffice.Core.Domain.Common;
+using CloudVOffice.Core.Domain.Sellers;
 using CloudVOffice.Core.Domain.WareHouses.PurchaseOrders;
 using CloudVOffice.Core.Domain.WareHouses.SalesOrders;
 using CloudVOffice.Data.DTO.WareHouses.PurchaseOrders;
@@ -21,6 +22,8 @@ namespace CloudVOffice.Services.WareHouses.SalesOrders
 
 
         public SalesOrderParent GetSOOrderBySalesOrderParentId(Int64 salesOrderParentId);
+        public SellerRegistration GetSOOrderByCreatedBy(Int64 salesOrderParentId);
+        public SalesOrderParent GetSOOrderByCreatedById(Int64 CreatedById);
 
     }
 }

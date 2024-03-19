@@ -44,14 +44,27 @@ namespace Warehouse.Management.Controllers
 
         }
 
+        //[HttpGet]
+        //public IActionResult SOInvoiceCreate(Int64 SalesOrderParentId)
+        //{
+        //    var orderdetails = _salesOrderParentService.GetSOOrderBySalesOrderParentId(SalesOrderParentId);
+        //    ViewBag.SOOrderDetails = orderdetails;
+        //    return View("~/Plugins/Warehouse.Management/Views/Invoice/SOInvoiceCreate.cshtml");
+
+        //}
+
         [HttpGet]
-        public IActionResult SOInvoiceCreate(Int64 SalesOrderParentId)
+        public IActionResult SOInvoiceCreate(Int64 CreatedBy, Int64 SalesOrderParentId)
         {
             var orderdetails = _salesOrderParentService.GetSOOrderBySalesOrderParentId(SalesOrderParentId);
             ViewBag.SOOrderDetails = orderdetails;
+
+            var sellerdetails = _salesOrderParentService.GetSOOrderByCreatedBy(CreatedBy);
+            ViewBag.SellerDetails = sellerdetails;
             return View("~/Plugins/Warehouse.Management/Views/Invoice/SOInvoiceCreate.cshtml");
 
         }
+
     }
 }
  
