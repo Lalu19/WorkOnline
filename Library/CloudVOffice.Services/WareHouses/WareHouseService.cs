@@ -144,5 +144,12 @@ namespace CloudVOffice.Services.WareHouses
                 throw;
             }
         }
+
+        public Int64 GetWareHouseByPOPUniqueNumber(string PopUniqueNumber)
+        {
+            var a = _dbContext.PurchaseOrderParents.Where(a => a.POPUniqueNumber == PopUniqueNumber && a.Deleted == false).FirstOrDefault();
+
+            return a.WareHuoseId;
+        }
     }
 }

@@ -18,5 +18,8 @@ namespace CloudVOffice.Services.WareHouses.SalesOrders
         public SalesOrderParent GetSalesOrderParentById(Int64 salesOrderParentId);
         public MessageEnum DeleteSalesOrderParent(Int64 SalesOrderParentId, Int64 DeletedBy);
 
+
+        public SalesOrderParent GetSOOrderBySalesOrderParentId(Int64 salesOrderParentId);
+
     }
 }

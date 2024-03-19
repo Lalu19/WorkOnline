@@ -10,6 +10,7 @@ using CloudVOffice.Data.DTO.WareHouses.PurchaseOrders;
 using CloudVOffice.Data.DTO.WareHouses.SalesOrders;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace CloudVOffice.Services.WareHouses.SalesOrders
 {
@@ -40,7 +41,7 @@ namespace CloudVOffice.Services.WareHouses.SalesOrders
                     Random random = new Random();
 
                     salesOrderParent.SalesOrderUniqueNumber = random.Next(100000, 1000000).ToString();
-                    //salesOrderParent.WareHuoseId = salesOrderParentDTO.WareHuoseId;
+                    salesOrderParent.WareHuoseId = salesOrderParentDTO.WareHuoseId;
                     salesOrderParent.POPUniqueNumber = salesOrderParentDTO.POPUniqueNumber;
                     salesOrderParent.TotalQuantity = salesOrderParentDTO.TotalQuantity;
                     salesOrderParent.TotalAmount = salesOrderParentDTO.TotalAmount;
@@ -78,7 +79,7 @@ namespace CloudVOffice.Services.WareHouses.SalesOrders
         {
             try
             {
-                var salesOrderParent = _dbContext.SalesOrderParents.FirstOrDefault(a => a.SalesOrderParentId == salesOrderParentId);
+                var salesOrderParent = _dbContext.SalesOrderParents.FirstOrDefault(a => a.SalesOrderParentId == salesOrderParentId && a.Deleted==false);
                 return salesOrderParent;
             }
             catch
@@ -122,17 +123,15 @@ namespace CloudVOffice.Services.WareHouses.SalesOrders
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
+        public SalesOrderParent GetSOOrderBySalesOrderParentId(Int64 salesOrderParentId)
+        {
+            return _dbContext.SalesOrderParents
+				.Include(x => x.WareHuose)
+                .Include(x => x.SalesOrderItems.Where(s => s.Deleted == false))
+                    .ThenInclude(x => x.Item)
+                .Where(x => x.Deleted == false && x.SalesOrderParentId == salesOrderParentId)
+                .SingleOrDefault();
+        }
 
 
 
