@@ -418,5 +418,19 @@ namespace CloudVOffice.Services.WareHouses.Itemss
 				throw;
 			}
 		}
-	}
+
+		public List<ItemMasterForFarming> GetItemsForFarmingBySellerRegistrationId(Int64 sellerRegistrationId)
+		{
+			try
+			{
+				var items = _dbContext.ItemMasterForFarmings.Where(a=> a.CreatedBy ==  sellerRegistrationId).ToList();
+				return items;
+			}
+			catch
+			{
+				throw;
+			}
+		}
+
+    }
 }

@@ -28,9 +28,9 @@ namespace CloudVOffice.Services.WareHouses.SalesOrders
         {
             try
             {
-                var objcheck = _dbContext.WarehouseSalesOrderParents.Where(a => a.DPOUniqueNo == warehouseSalesOrderParentDTO.DPOUniqueNo && a.Deleted == false);
+                var objcheck = _dbContext.WarehouseSalesOrderParents.Where(a => a.DPOUniqueNo == warehouseSalesOrderParentDTO.DPOUniqueNo && a.Deleted == false).FirstOrDefault();
 
-                if(objcheck == null)
+                if (objcheck == null)
                 {
                     WarehouseSalesOrderParent WHSOParent = new WarehouseSalesOrderParent();
 
@@ -49,12 +49,10 @@ namespace CloudVOffice.Services.WareHouses.SalesOrders
                     return null;
                 }
             }
-
             catch
             {
                 throw;
             }
         }
-
     }
 }
