@@ -377,8 +377,10 @@
     var save = null;
 
     var originalItemsTableHtml2 = '';
+    var acceptButtonData = '';
     var globalId;
     var WHouseID;
+
 
     //function POId(Id, POPUniqueNumber) {
     function POIdOnClick(Id, POPUniqueNumber, WhId) {
@@ -404,50 +406,9 @@
 
                 $('#orderInfo').html(orderInfoHtml);
 
-                var table = '<table class="table"><thead><tr><th>Sl No.</th><th>Product Name</th><th>Selling Price</th><th>Quantity</th><th>MRP</th><th>GST</th><th>HSN</th><th>Action</th></tr></thead><tbody>';
+                var table = '<table class="table"><thead><tr><th>Sl No.</th><th>Product Name</th><th>Selling Price</th><th>Quantity</th><th>Price</th><th>GST</th><th>HSN</th><th>Action</th></tr></thead><tbody>';
                 var totalAmount = 0;
-                //for (var i = 0; i < data[0].dpoItems.item.length; i++) {
-                //    //table += '<tr onclick="ItemID(' + data[i].item["itemId"] + ')">';
-                //    table += '<tr class="item-row" data-item-id="' + data[i].item["itemId"] + '" onclick="ItemID(' + data[i].item["itemId"] + ')">';
-                //    table += '<td>' + (i + 1) + '</td>';
-                //    table += '<td>' + data[i].item["itemName"] + '</td>';
-                //    table += '<td>₹' + data[i].item["salesCost"] + '</td>';
-                //    table += '<td>' + data[i]["quantity"] + '</td>';
-                //    table += '<td>' + data[i]["value"] + '</td>';
-                //    // table += '<td>' + data[i].item["sgst"] + '</td>';
-                //    var gstSum = data[i].item["cgst"] + data[i].item["sgst"];
-                //    table += '<td>' + gstSum + '</td>';
-                //    table += '<td>' + data[i].item["hsn"] + '</td>';
-                //    //var finalAmount = data[i]["quantity"] * data[i]["value"];
-                //    //table += '<td>' + finalAmount + '</td>';
-
-                //    table += '<td class="action-buttons">';
-                //    //table += '<button onclick="acceptAction(' + data[i].item["itemId"] + ')">Accept</button>';
-                //    //table += '<button onclick="acceptAction(' + data[i].item["itemId"] + ', \'' + data[i].item["itemName"] + '\', \'' + data[i].item["salesCost"] + '\', \'' + data[i].unitId + '\', \'' + data[i].item["caseWeight"] + '\', \'' + data[i].item["mrp"] + '\', \'' + data[i].item["cgst"] + '\', \'' + data[i].item["sgst"] + '\', \'' + data[i]["quantity"] + '\')">Accept</button>';
-                //    table += '<button onclick="acceptAction(\'' + data[i].item["itemName"] + '\', \'' + data[i].item["salesCost"] + '\', \'' + data[i].item["shortName"] + '\', \'' + data[i].item["caseWeight"] + '\', \'' + data[i].item["mrp"] + '\', \'' + data[i].item["cgst"] + '\', \'' + data[i].item["sgst"] + '\', \'' + data[i]["quantity"] + '\')">Accept</button>';
-
-                //    table += '<button onclick="rejectAction(' + data[i].item["itemId"] + ')">Reject</button>';
-                //    table += '</td>';
-
-                //    table += '</tr>';
-                //    totalAmount += parseFloat(data[i]["value"]);
-                //}
-
-                //table += '</tbody></table>';
-                //table += '<div>Total Amount: ₹' + totalAmount.toFixed(2) + '</div>';
-
-
-
-                //$('#itemsTable').html(table);
-
-                //originalItemsTableHtml2 = table;
-
-                //// Populate #itemsTable with the generated table HTML
-                //$('#itemsTable').html(originalItemsTableHtml2);
-
-                //if (Id) {
-                //    localStorage.setItem('selectedCategoryId', Id);
-                //}
+                
 
                 for (var i = 0; i < data.length; i++) {
                     var dpoItem = data[i];
@@ -471,7 +432,7 @@
                         table += '<td>' + item.hsn + '</td>';
 
                         table += '<td class="action-buttons">';
-                        table += '<button onclick="acceptAction(\'' + item.itemId + '\', \'' + item.itemName + '\', \'' + item.distributorCost + '\', \'' + item.shortName + '\', \'' + item.caseWeight + '\', \'' + quantity1 + '\')">Accept</button>';
+                        table += '<button onclick="acceptAction(\'' + item.itemId + '\', \'' + item.itemName + '\', \'' + item.distributorCost + '\', \'' + item.shortName + '\', \'' + item.caseWeight + '\', \'' + quantity1 + '\', \'' + gstSum + '\', \'' + item.hsn + '\')">Accept</button>';
                         table += '<button onclick="rejectAction(' + item.itemId + ')">Reject</button>';
                         table += '</td>';
 
@@ -486,6 +447,17 @@
                 $('#itemsTable').html(table);
 
 
+                originalItemsTableHtml2 = table;
+
+                // Populate #itemsTable with the generated table HTML
+                $('#itemsTable').html(originalItemsTableHtml2);
+
+                var acceptButtonTableHtml = '<table>' + acceptButtonData + '</table>';
+
+                // Display the table with only the "Accept" button data
+                $('#acceptButtonTable').html(acceptButtonTableHtml);
+
+
             },
             error: function () {
 
@@ -498,11 +470,13 @@
     }
 
 
-    var originalAcceptedItemHtml = '';  //to handle the cancel button
+    var originalAcceptedItemHtml = '';
     var removedRowHtml = '';
 
 
-    function acceptAction(itemId, itemName, distributorCost, shortName, caseWeight, quantity) {
+
+
+    function acceptAction(itemId, itemName, distributorCost, shortName, caseWeight, quantity, gst, hsn) {
         // Check if data is already present in acceptedItemContainer
         if ($('#acceptedItemContainer').children().length === 0) {
             var acceptedItemHtml = '<div class="accepted-item">';
@@ -515,15 +489,21 @@
             //acceptedItemHtml += '<div>CGST: ' + cgst + '</div>';
             //acceptedItemHtml += '<div>SGST: ' + sgst + '</div>';
             acceptedItemHtml += '<div>Quantity: ' + quantity + '</div>';
+            acceptedItemHtml += '<div>HSN Code: ' + gst + '</div>';
+            acceptedItemHtml += '<div>GST: ' + hsn + '</div>';
             acceptedItemHtml += '<div class="action-buttons">';
             acceptedItemHtml += '<button onclick="acceptButtonClick(\'' + itemId + '\', \'' + itemName + '\', \'' + distributorCost + '\', \'' + shortName + '\', \'' + caseWeight + '\', \'' + quantity + '\')">Accept</button>';
-            acceptedItemHtml += '<button onclick="editButtonClick(\'' + itemName + '\', \'' + distributorCost + '\', \'' + shortName + '\', \'' + caseWeight + '\', \'' + quantity + '\')">Edit</button>';
-            acceptedItemHtml += '<button onclick="backButtonClick(\'' + itemName + '\', \'' + distributorCost + '\', \'' + shortName + '\', \'' + caseWeight + '\', \'' + quantity + '\')">Back</button>';
+            acceptedItemHtml += '<button onclick="editButtonClick(\'' + itemId + '\', \'' + itemName + '\', \'' + distributorCost + '\', \'' + shortName + '\', \'' + caseWeight + '\', \'' + quantity + '\')">Edit</button>';
+            acceptedItemHtml += '<button onclick="backButtonClick(\'' + itemId + '\', \'' + itemName + '\', \'' + distributorCost + '\', \'' + shortName + '\', \'' + caseWeight + '\', \'' + quantity + '\')">Back</button>';
             acceptedItemHtml += '</div>';
             acceptedItemHtml += '</div>';
 
             // Remove the row from the table based on the itemName
+            //var removedRow = $('#itemsTable').find('td:contains("' + itemId + '")').closest('tr').remove();
             var removedRow = $('#itemsTable').find('td:contains("' + itemName + '")').closest('tr').remove();
+
+
+
 
             // Update the total amount by subtracting the value of the removed row
             var removedValue = parseFloat(removedRow.find('td:eq(4)').text().replace('₹', '').trim());
@@ -550,9 +530,6 @@
         //$('#itemsTable').html(originalAcceptedItemHtml);
         $('#acceptedItemContainer').empty();
 
-
-        //ChatGPT
-
     }
 
 
@@ -560,30 +537,25 @@
         return $('#itemsTable tbody tr').length === 0;
     }
 
-    // Example usage:
-    //if (isTableEmpty()) {
-    //    console.log('No rows in the table');
-    //} else {
-    //    console.log('Table has rows');
-    //}
 
-
-    function editButtonClick(itemid, itemName, distributorCost, shortName, caseWeight, mrp, cgst, sgst, quantity) {
+    function editButtonClick(itemId, itemName, distributorCost, shortName, caseWeight, quantity) {
 
 
         // Create an editable form for the accepted item
         var acceptedItemForm = '<form id="editForm">';
         acceptedItemForm += '<strong>Product Details:</strong>';
+        acceptedItemForm += '<div>Item Id:<input type="text" id="editItemId" value="' + itemId + '"></div>';
         acceptedItemForm += '<div>Item Name:<input type="text" id="editItemName" value="' + itemName + '"></div>';
         acceptedItemForm += '<div>Distributor Cost:<input type="text" id="distributorCost" value="' + distributorCost + '"></div>';
         acceptedItemForm += '<div>UOM:<input type="text" id="editShortName" value="' + shortName + '"></div>';
         acceptedItemForm += '<div>Case Weight:<input type="text" id="editCaseWeight" value="' + caseWeight + '"></div>';
-        acceptedItemForm += '<div>MRP:<input type="text" id="editMRP" value="' + mrp + '"></div>';
-        acceptedItemForm += '<div>CGST:<input type="text" id="editCGST" value="' + cgst + '"></div>';
-        acceptedItemForm += '<div>SGST:<input type="text" id="editSGST" value="' + sgst + '"></div>';
+        //acceptedItemForm += '<div>MRP:<input type="text" id="editMRP" value="' + mrp + '"></div>';
+        //acceptedItemForm += '<div>CGST:<input type="text" id="editCGST" value="' + cgst + '"></div>';
+        //acceptedItemForm += '<div>SGST:<input type="text" id="editSGST" value="' + sgst + '"></div>';
         acceptedItemForm += '<div>Quantity:<input type="text" id="editQuantity" value="' + quantity + '"></div>';
         acceptedItemForm += '<div class="action-buttons">';
-        acceptedItemForm += '<button type="button" onclick="saveEdit()">Save</button>';
+        //acceptedItemForm += '<button type="button" onclick="saveEdit()">Save</button>';
+        acceptedItemForm += '<button type="button" onclick="saveEdit(\'' + itemId + '\', \'' + itemName + '\', \'' + distributorCost + '\', \'' + shortName + '\', \'' + caseWeight + '\', \'' + quantity + '\')">Save</button>';
         acceptedItemForm += '<button type="button" onclick="cancelEdit()">Cancel</button>';
         acceptedItemForm += '</div>';
         acceptedItemForm += '</form>';
@@ -592,38 +564,101 @@
         $('#acceptedItemContainer').html(acceptedItemForm);
     }
 
+    $('button.editButton').on('click', function () {
+        var itemName = 'Item Name'; // Replace with actual value
+        var distributorCost = 'Distributor Cost'; // Replace with actual value
+        var shortName = 'UOM'; // Replace with actual value
+        var caseWeight = 'Case Weight'; // Replace with actual value
+        var quantity = $(this).data('quantity'); // Assuming you're getting quantity from data attribute
 
+        //editButtonClick(itemName, distributorCost, shortName, caseWeight, quantity);
+    });
+
+
+    
+
+
+
+    //function saveEdit() {
+    //    var editedData = {
+    //        itemName: $('#ItemName').val(),
+    //        //distributorCost: $('#DistributorCost').val(),
+    //        distributorCost: parseFloat($('#DistributorCost').val()),
+    //        shortName: $('#ShortName').val(),
+    //        //caseWeight: $('#CaseWeight').val(),
+    //        caseWeight: parseFloat($('#CaseWeight').val()),
+    //        mrp: parseFloat($('#MRP').val()),
+    //        cgst: parseFloat($('#CGST').val()),
+    //        sgst: parseFloat($('#SGST').val()),
+    //        quantity: parseFloat($('#quantity').val())
+    //    };
+
+    //    var editedItemHtml = '<div class="edited-item">';
+    //    editedItemHtml += '<strong>Edited Product Details:</strong>';
+    //    editedItemHtml += '<div>Item Name: ' + editedData.itemName + '</div>';
+    //    editedItemHtml += '<div>Sales Cost: ' + editedData.salesCost + '</div>';
+    //    editedItemHtml += '<div>UOM: ' + editedData.shortName + '</div>';
+    //    editedItemHtml += '<div>Case Weight: ' + editedData.caseWeight + '</div>';
+    //    editedItemHtml += '<div>MRP: ' + editedData.mrp + '</div>';
+    //    editedItemHtml += '<div>CGST: ' + editedData.cgst + '</div>';
+    //    editedItemHtml += '<div>SGST: ' + editedData.sgst + '</div>';
+    //    editedItemHtml += '<div>Quantity: ' + editedData.quantity + '</div>';
+    //    editedItemHtml += '</div>';
+
+    //    $('#acceptedItemContainer').append(editedItemHtml);
+    //    save = $('#acceptedItemContainer').html();
+    //    $('#acceptedItemContainer').hide();
+    //    console.log("Edited Data:", editedData);
+    //}
+
+
+    // Adjust the saveEdit() function to accept parameters
     function saveEdit() {
         var editedData = {
-            itemName: $('#ItemName').val(),
-            distributorCost: $('#DistributorCost').val(),
-            distributorCost: parseFloat($('#DistributorCost').val()),
-            shortName: $('#ShortName').val(),
-            caseWeight: $('#CaseWeight').val(),
-            caseWeight: parseFloat($('#CaseWeight').val()),
-            mrp: parseFloat($('#MRP').val()),
-            cgst: parseFloat($('#CGST').val()),
-            sgst: parseFloat($('#SGST').val()),
-            quantity: parseFloat($('#quantity').val())
+            itemId: $('#editItemId').val(),
+            itemName: $('#editItemName').val(),
+            distributorCost: parseFloat($('#distributorCost').val()),
+            shortName: $('#editShortName').val(),
+            caseWeight: parseFloat($('#editCaseWeight').val()),
+            //mrp: parseFloat($('#editMRP').val()), // if uncommented
+            //cgst: parseFloat($('#editCGST').val()), // if uncommented
+            //sgst: parseFloat($('#editSGST').val()), // if uncommented
+            quantity: parseFloat($('#editQuantity').val())
         };
 
         var editedItemHtml = '<div class="edited-item">';
         editedItemHtml += '<strong>Edited Product Details:</strong>';
+        editedItemHtml += '<div>Item Id: ' + editedData.itemId + '</div>';
         editedItemHtml += '<div>Item Name: ' + editedData.itemName + '</div>';
-        editedItemHtml += '<div>Sales Cost: ' + editedData.salesCost + '</div>';
+        editedItemHtml += '<div>Sales Cost: ' + editedData.distributorCost + '</div>';
         editedItemHtml += '<div>UOM: ' + editedData.shortName + '</div>';
         editedItemHtml += '<div>Case Weight: ' + editedData.caseWeight + '</div>';
-        editedItemHtml += '<div>MRP: ' + editedData.mrp + '</div>';
-        editedItemHtml += '<div>CGST: ' + editedData.cgst + '</div>';
-        editedItemHtml += '<div>SGST: ' + editedData.sgst + '</div>';
+        //editedItemHtml += '<div>MRP: ' + editedData.mrp + '</div>';
+        //editedItemHtml += '<div>CGST: ' + editedData.cgst + '</div>';
+        //editedItemHtml += '<div>SGST: ' + editedData.sgst + '</div>';
         editedItemHtml += '<div>Quantity: ' + editedData.quantity + '</div>';
         editedItemHtml += '</div>';
 
-        $('#acceptedItemContainer').append(editedItemHtml);
-        save = $('#acceptedItemContainer').html();
+        //$('#acceptedItemContainer').append(editedItemHtml);
+        //save = $('#acceptedItemContainer').html();
         $('#acceptedItemContainer').hide();
         console.log("Edited Data:", editedData);
+
+
+        var acceptedItemData = {
+            itemId: editedData.itemId,
+            amount: editedData.distributorCost,
+            quantity: editedData.quantity,
+            //wareHuoseId: WHouseID // Assuming WHouseID is already defined
+        };
+
+        itemDetails.push(acceptedItemData);
+
+        $('#acceptedItemContainer').empty();
     }
+
+
+
 
     function cancelEdit() {
         //$('#acceptedItemContainer').html(save);
@@ -673,7 +708,7 @@
             itemId: parseditemId,
             amount: parsedDistributorCost,
             quantity: parsedQuantity,
-            wareHuoseId: WHouseID
+            //wareHuoseId: WHouseID
         };
 
 
