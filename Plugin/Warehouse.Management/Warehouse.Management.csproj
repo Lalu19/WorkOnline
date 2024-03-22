@@ -86,6 +86,7 @@
 		<None Remove="Views\Vendor\VendorCreate.cshtml" />
 		<None Remove="Views\Vendor\VendorView.cshtml" />
 		<None Remove="Views\WareHouse\WareHouseCreate.cshtml" />
+		<None Remove="Views\WareHouse\WareHouseDeliveryAgentsView.cshtml" />
 		<None Remove="Views\WareHouse\WareHouseView.cshtml" />
 	</ItemGroup>
 

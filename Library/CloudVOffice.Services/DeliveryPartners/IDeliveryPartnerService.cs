@@ -11,5 +11,8 @@ namespace CloudVOffice.Services.DeliveryPartners
         public DeliveryPartner GetDeliveryPartnerById(Int64 deliveryPartnerId);
         public MessageEnum UpdateDeliveryPartner(DeliveryPartnerDTO deliveryPartnerDTO);
         public MessageEnum DeleteDeliveryPartner(Int64 deliveryPartnerId, Int64 DeletedBy);
+        public DeliveryPartner ChangeAvailabiltyStatus(Int64 DeliveryPartnerId);
+        public List<DeliveryPartner> GetDeliveryAgentsByManagerId(Int64 WHouseManagerId);
+        public List<DeliveryPartner> GetDeliveryPartnersByWareHouseId(Int64 WareHouseId);
     }
 }

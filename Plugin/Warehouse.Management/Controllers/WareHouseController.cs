@@ -8,6 +8,7 @@ using CloudVOffice.Core.Domain.WareHouses;
 using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Data.DTO.WareHouses;
 using CloudVOffice.Data.DTO.WareHouses.PinCodes;
+using CloudVOffice.Services.DeliveryPartners;
 using CloudVOffice.Services.WareHouse.PinCodes;
 using CloudVOffice.Services.WareHouses;
 using CloudVOffice.Services.WareHouses.States;
@@ -23,10 +24,12 @@ namespace Warehouse.Management.Controllers
     {
         private readonly IWareHouseService _wareHouseService;
         private readonly IStateService _stateService;
-        public WareHouseController(IWareHouseService wareHouseService, IStateService stateService)
+        private readonly IDeliveryPartnerService _deliveryPartnerService;
+        public WareHouseController(IWareHouseService wareHouseService, IStateService stateService, IDeliveryPartnerService deliveryPartnerService)
         {
             _wareHouseService = wareHouseService;
             _stateService = stateService;
+            _deliveryPartnerService = deliveryPartnerService;
         }
 
         [HttpGet]
@@ -129,6 +132,20 @@ namespace Warehouse.Management.Controllers
             TempData["msg"] = a;
             return Redirect("/WareHouse/WareHouse/WareHouseView");
         }
+
+        [HttpGet]
+        public IActionResult GetDeliveryAgents()
+        {
+            Int64 WHouseManagerId = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
+
+            var agents = _deliveryPartnerService.GetDeliveryAgentsByManagerId(WHouseManagerId);
+            ViewBag.DeliveryAgents = agents;
+
+            return View("~/Plugins/Warehouse.Management/Views/WareHouse/WareHouseDeliveryAgentsView.cshtml");
+        }
+        
+
+
 
     }
 }
