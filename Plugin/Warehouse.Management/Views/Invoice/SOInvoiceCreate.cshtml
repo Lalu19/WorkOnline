@@ -1,5 +1,5 @@
 ﻿@{
-	Layout = "_MainAppLayout";
+	//Layout = "_MainAppLayout";
 	ViewData["Title"] = "SO Invoice";
 	var podatails = ViewBag.SOOrderDetails;
 	var sellerdetials = ViewBag.SellerDetails;
@@ -7,6 +7,11 @@
 @addTagHelper *, Syncfusion.EJ2
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers *@
 
+
+<!-- Common CSS -->
+<link rel="stylesheet" href="~/app/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/app/fonts/icomoon/icomoon.css">
+<link rel="stylesheet" href="~/app/css/main.css">
 
 
 <style>
@@ -28,122 +33,153 @@
 		font-weight: bold; /* Bold text for the button */
 	}
 
+	/* Print styles */
+	.main-content {
+		width: 210mm; /* Width of A4 page */
+		height: 297mm; /* Height of A4 page */
+		margin: 0 auto;
+		padding: 20px; /* Add padding to ensure content doesn't touch edges */
+		margin-bottom: 0; /* Remove margin bottom */
+	}
+
+	.card {
+		margin-bottom: 20px; /* Add margin between cards */
+	}
+
+	.card-body button {
+		display: block; /* Hide print button when printing */
+	}
+
+	/* Decrease table font size */
+	#soOrderTable {
+		font-size: 10pt;
+	}
+
+		/* Decrease padding within table cells */
+		#soOrderTable th,
+		#soOrderTable td {
+			padding: 1px;
+		}
+
 </style>
 
 <div class="main-content">
 	<div class="row gutters">
 		<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 			<div class="card">
-				<div class="card-header">
+				@* <div class="card-header">
 
-					<div class="row">
-						<div class="col-md-10">
-							<b>Invoice</b>
-						</div>
-						<div class="col-md-2 ">
-						</div>
-					</div>
+				<div class="row">
+				<div class="col-md-10">
+				<b>Invoice</b>
 				</div>
+				<div class="col-md-2 ">
+				</div>
+				</div>
+				</div> *@
 
 				<div class="invoice-container" id="pdf-content">
 					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-						<div class="card">
-							<div class="card-body">
-								<div class="invoice-container">
-									<div class="row gutters">
-										<p class="text-center"><strong>Happiness Under Budget Retail</strong></p>
-										<hr class="my-2" style="width: 100%; background-color: #343a40; border-color: #343a40;">
-									</div>
+						@* <div class="card"> *@
+						<div class="card-body">
+							<div class="invoice-container">
+								<h4 style="text-align:center;color:#EB05A9;font-weight:bold;">Happiness Under Budget Retail</h4>
 
-									<div class="row gutters">
-										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-
-											<p class="text-left"><strong>Address:</strong></p>
-											<p class="text-left"><strong>GST:</strong></p>
-											<p class="text-left"><strong>Phone:</strong></p>
-											<p class="text-left"><strong>Mail:</strong></p>
-										</div>
-									</div>
+								<div class="row gutters">
 									<hr class="my-2" style="width: 100%; background-color: #343a40; border-color: #343a40;">
-									<div class="row gutters">
-										<div class="col-lg-6 col-md-6 col-sm-6">
-											<p><strong>Warehouse:</strong></p>
+								</div>
 
+								<div class="row gutters">
+									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
 
-										</div>
-										<div class="col-lg-6 col-md-6 col-sm-6">
-											<p class="text-right"><strong>Bill No: </strong>@podatails.POPUniqueNumber</p>
-										</div>
+										<p class="text-left"><strong>Name: </strong>@sellerdetials.Name</p>
+										<p class="text-left"><strong>Address: </strong>@sellerdetials.Address</p>
+										<p class="text-left"><strong>GST Number: </strong>@sellerdetials.GSTNumber</p>
+										<p class="text-left"><strong>Phone: </strong>@sellerdetials.PrimaryPhone</p>
+										<p class="text-left"><strong>Mail: </strong>@sellerdetials.MailId</p>
 									</div>
 
-									<div class="row gutters">
-										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-											<div class="card">
-												<div class="card-header"></div>
-												<div class="card-body">
-													<table id="soOrderTable" class="table table-bordered table-responsive">
-														<tr id="color">
-															<th>Sl.No</th>
-															<th>Product</th>
-															<th>Quantity</th>
-															<th>Units</th>
-															<th>Purchase Cost</th>
-															<th>Total Amount</th>
-															<th>CGST</th>
-															<th>CGST Value</th>
-															<th>SGST</th>
-															<th>SGST Value</th>
-															<th>Sale Value</th>
-														</tr>
-														@foreach (var item in podatails.SalesOrderItems)
-														{
-															var totalAmount = item.Quantity * item.Item.PurchaseCost;
-															var cgstValue = totalAmount * item.Item.CGST / 100;
-															var sgstValue = totalAmount * item.Item.SGST / 100;
-															var saleValue = totalAmount + cgstValue + sgstValue;
-
-															<tr>
-																<td>@item.Item.ItemName</td>
-																<td>@item.Quantity</td>
-																<td>@item.Item.ShortName</td>
-																<td>@item.Item.PurchaseCost</td>
-																<td>@totalAmount</td>
-																<td>@item.Item.CGST</td>
-																<td>@cgstValue</td>
-																<td>@item.Item.SGST</td>
-																<td>@sgstValue</td>
-																<td>@saleValue</td>
-															</tr>
-														}
-													</table>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="row gutters">
-										<div class="col-lg-6 col-md-6 col-sm-12">
-										</div>
-										<div class="col-lg-6 col-md-6 col-sm-12">
-											<table class="table plain">
-												<tbody>
-													<tr>
-														<td>
-															<p class="text-right"><strong>Subtotal:</strong>@podatails.TotalAmount</p>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-									<div class="card-body">
-										<div class="col-lg-2 col-md-2 col-sm-12">
-											<button onclick="printPDF()">Print PDF</button>
-										</div>
+									<div class="col-lg-6 col-md-6 col-sm-6">
+										<p><strong>Warehouse: </strong>@podatails.WareHuose.WareHouseName</p>
+										<p><strong>Bill No: </strong>@podatails.POPUniqueNumber</p>
 									</div>
 								</div>
+
+
+								<div class="row gutters">
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+										@* <div class="card"> *@
+										@* <div class="card-header"></div> *@
+										@* <div class="card-body"> *@
+										<table id="soOrderTable" class="table table-bordered table-responsive">
+											<tr id="color">
+												<th>Sl.No</th>
+												<th>HSN</th>
+												<th>Product</th>
+												<th>Quantity</th>
+												<th>Units</th>
+												<th>Purchase Cost</th>
+												<th>Total Amount</th>
+												<th>CGST</th>
+												<th>CGST Value</th>
+												<th>SGST</th>
+												<th>SGST Value</th>
+												<th>Sale Value</th>
+											</tr>
+											@foreach (var item in podatails.SalesOrderItems)
+											{
+												var totalAmount = item.Quantity * item.Item.PurchaseCost;
+												var cgstValue = Math.Round(totalAmount * item.Item.CGST / 100, 2);
+												var sgstValue = Math.Round(totalAmount * item.Item.SGST / 100, 2);
+												var saleValue = Math.Round(totalAmount + cgstValue + sgstValue, 2);
+
+												<tr>
+													<td>@item.Item.HSN</td>
+													<td>@item.Item.ItemName</td>
+													<td>@item.Quantity</td>
+													<td>@item.Item.ShortName</td>
+													<td>@item.Item.PurchaseCost</td>
+													<td>@totalAmount</td>
+													<td>@item.Item.CGST</td>
+													<td>@cgstValue</td>
+													<td>@item.Item.SGST</td>
+													<td>@sgstValue</td>
+													<td>@saleValue</td>
+												</tr>
+											}
+										</table>
+										@* </div> *@
+										@* 	</div> *@
+									</div>
+								</div>
+
+
+								<div class="row gutters">
+									<div class="col-lg-9 col-md-9 col-sm-12">
+									</div>
+									<div class="col-lg-3 col-md-3 col-sm-12">
+										<table>
+											<tbody>
+												<tr>
+													<td>
+														<p class="text-right"><strong>Subtotal:</strong>@podatails.TotalAmount</p>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+
+
+								<div class="card-body" style="text-align: center;">
+									<div class="col-lg-6 col-md-6 col-sm-12" style="display:inline-block;">
+										<button onclick="printInvoice()">Print Invoice</button>
+									</div>
+								</div>
+
 							</div>
 						</div>
+						@* </div> *@
 					</div>
 				</div>
 
@@ -151,6 +187,10 @@
 		</div>
 	</div>
 </div>
+
+
+
+
 <script>
 
 	// Function to add Sl.No to the table
@@ -168,8 +208,9 @@
 		}
 	}
 </script>
+
 <script>
-	function printPDF() {
+	function printInvoice() {
 		var printButton = document.querySelector('.card-body button');
 		printButton.style.display = 'none';
 		window.print();
@@ -177,3 +218,7 @@
 
 	}
 </script>
+
+
+
+
