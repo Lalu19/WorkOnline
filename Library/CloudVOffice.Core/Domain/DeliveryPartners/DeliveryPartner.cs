@@ -35,6 +35,10 @@ namespace CloudVOffice.Core.Domain.DeliveryPartners
         public string? VehicleFrontPhoto { get; set; }
         public string? VehicleBackPhoto { get; set; }
         public bool Availability { get; set; }
+        public bool TaskAccepted { get; set; }
+        public bool TaskRejected { get; set; }
+        public bool NotificationSent { get; set; }
+        
 
 
         public Int64 CreatedBy { get; set; }

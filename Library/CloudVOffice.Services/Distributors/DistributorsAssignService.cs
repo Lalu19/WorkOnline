@@ -109,6 +109,13 @@ namespace CloudVOffice.Services.Distributors
                 throw;
             }
         }
+        public List<DistributorAssign> DAssignListbyDistributor(Int64 DistributorRegistrationId)
+        {
+            return _dbContext.DistributorAssigns
+                .Where(x => x.Deleted == false && x.DistributorRegistrationId == DistributorRegistrationId)
+                .ToList();
+        }
+
 
     }
 }

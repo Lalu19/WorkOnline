@@ -14,5 +14,7 @@ namespace CloudVOffice.Services.Distributors
         public MessageEnum DistributorAssign(DistributorAssignDTO DistributorAssignDTO);
         public List<DistributorAssign> DAssignListbyWareHouseId(Int64 WareHuoseId);
         public MessageEnum DistributorAssignDelete(Int64 DistributorAssignId, Int64 DeletedBy);
-    }
+        public List<DistributorAssign> DAssignListbyDistributor(Int64 DistributorRegistrationId);
+
+	}
 }

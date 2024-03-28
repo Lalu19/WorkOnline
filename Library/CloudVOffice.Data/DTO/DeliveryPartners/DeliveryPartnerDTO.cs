@@ -34,9 +34,14 @@ namespace CloudVOffice.Data.DTO.DeliveryPartners
         public string? VehicleFrontPhoto { get; set; }
         public string? VehicleBackPhoto { get; set; }
         public string? AssignedCode { get; set; }
-		
+        public bool Availability { get; set; }
+        public bool TaskAccepted { get; set; }
+        public bool TaskRejected { get; set; }
+        public bool NotificationSent { get; set; }
 
-		public IFormFile? OwnerPhotoUp { get; set; }
+
+
+        public IFormFile? OwnerPhotoUp { get; set; }
         public IFormFile? DriverPhotoUp { get; set; }
         public IFormFile? VehicleFrontPhotoUp { get; set; }
         public IFormFile? VehicleBackPhotoUp { get; set; }
