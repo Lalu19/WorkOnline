@@ -1,6 +1,7 @@
 ﻿using CloudVOffice.Core.Domain.Distributor;
 using CloudVOffice.Core.Domain.Orders;
 using CloudVOffice.Core.Domain.WareHouses.PinCodes;
+using CloudVOffice.Data.DTO.Distributor;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
 using CloudVOffice.Services.Distributors;
@@ -46,31 +47,84 @@ namespace Distributor_partner.Controllers
 		[HttpGet]
 		public IActionResult Buyerorderlist()
         {
-			//var DistributorId = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "DistributorRegistrationId").Value.ToString());
-			//var Pincodetails = _DistributorsAssignService.DAssignListbyDistributor(DistributorId);
-			//foreach ( var x in Pincodetails )
-			//{
-			//	var buyerOrders = _BuyerOrderService.GetBuyerOrderListByPincode(x.PinCodeId);
-			//	ViewBag.OrderList = buyerOrders;
-			//}
-			//return View();
 			var DistributorId = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "DistributorRegistrationId").Value.ToString());
 			var Pincodetails = _DistributorsAssignService.DAssignListbyDistributor(DistributorId);
 
-			HashSet<BuyerOrder> allBuyerOrders = new HashSet<BuyerOrder>(); // Use HashSet instead of List
+			HashSet<BuyerOrder> allBuyerOrders = new HashSet<BuyerOrder>();
 
 			foreach (var pincode in Pincodetails)
 			{
-				var buyerOrders = _BuyerOrderService.GetBuyerOrderListByPincode(pincode.PinCodeId);
+				var buyerOrders = _BuyerOrderService.GetBuyerOrderListByPincode(pincode.PinCodeId, pincode.BrandId);
 				foreach (var order in buyerOrders)
 				{
-					allBuyerOrders.Add(order); // Add orders to HashSet
+					allBuyerOrders.Add(order);
 				}
 			}
 
-			ViewBag.OrderList = allBuyerOrders.ToList(); // Convert HashSet to List before assigning to ViewBag
+			ViewBag.OrderList = allBuyerOrders.ToList();
 
 			return View();
 		}
-    }
+		[HttpGet]
+		public IActionResult Buyerorderdetails(Int64 BuyerOrderId)
+		{
+			var buyerOrderdetails = _BuyerOrderService.GetBuyerOrderListByBuyerOrderId(BuyerOrderId);
+			ViewBag.OrderDetails = buyerOrderdetails;
+			return View();
+		}
+
+		[HttpPost]
+		public IActionResult SaveDSO([FromBody] DSODTO dsoDTO)
+		{
+			try
+			{
+				//Random random = new Random();
+				DSO dso = new DSO
+				{
+					OrderUniqueNo = dsoDTO.OrderUniqueNo,
+					DistributorId = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "DistributorRegistrationId").Value.ToString()),
+					TotalAmount = dsoDTO.TotalAmount,
+					TotalQuantity = dsoDTO.TotalQuantity,
+					Address = dsoDTO.Address,
+					MobileNumber = dsoDTO.MobileNumber,
+					PincodeId = dsoDTO.PincodeId,
+					OrderStatus = "Order Placed",
+					CreatedBy = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "DistributorRegistrationId").Value.ToString()),
+					CreatedDate = DateTime.Now
+				};
+
+				dso.DSOItems = new List<DSOItems>();
+
+				foreach (var item in dsoDTO.Items)
+				{
+					DSOItems Dsoitem = new DSOItems
+					{
+						ItemId = item.ItemId,
+						Quantity = item.Quantity,
+						CreatedBy = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "DistributorRegistrationId").Value.ToString()),
+						CreatedDate = System.DateTime.Now
+					};
+
+					dso.DSOItems.Add(Dsoitem);
+				}
+
+				var obj = _SaleOrderRepo.Insert(dso);
+
+				return Ok("DSO saved successfully");
+			}
+			catch (Exception ex)
+			{
+				return BadRequest("Error occurred while saving DPO");
+			}
+		}
+
+		//[HttpGet]
+		//public IActionResult OrderList()
+		//{
+		//	var DistributorId = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "DistributorRegistrationId").Value.ToString());
+		//	var list = _DPOService.GetDPOList(DistributorId);
+		//	ViewBag.OrderList = list;
+		//	return View();
+		//}
+	}
 }
