@@ -3,6 +3,7 @@ using CloudVOffice.Core.Domain.Orders;
 using CloudVOffice.Core.Domain.WareHouses.Items;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,12 @@ namespace CloudVOffice.Services.Orders
             BuyerOrderItems.CreatedDate = DateTime.Now;
             _BuyerOrderItemsRepo.Insert(BuyerOrderItems);
             return MessageEnum.Success;
+        }
+        public List<BuyerOrderItems> BrandId(Int64 BrandId)
+        {
+            return _Context.BuyerOrderItems
+               .Include(s => s.Item)
+               .Where(x => x.Deleted == false && x.Item.BrandId == BrandId).ToList();
         }
     }
 }
