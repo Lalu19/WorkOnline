@@ -15,11 +15,11 @@ namespace CloudVOffice.Services.DeliveryPartners
         private readonly ApplicationDBContext _dbContext;
         private readonly ISqlRepository<DeliveryPartner> _deliveryPartnerRepo;
 
-        public DeliveryPartnerService(ApplicationDBContext dbContext, ISqlRepository<DeliveryPartner> deliveryPartnerRepoRepo)
+        public DeliveryPartnerService(ApplicationDBContext dbContext, ISqlRepository<DeliveryPartner> deliveryPartnerRepo)
         {
 
             _dbContext = dbContext;
-            _deliveryPartnerRepo = deliveryPartnerRepoRepo;
+            _deliveryPartnerRepo = deliveryPartnerRepo;
         }
 
         public MessageEnum CreateDeliveryPartner(DeliveryPartnerDTO deliveryPartnerDTO)
@@ -96,6 +96,7 @@ namespace CloudVOffice.Services.DeliveryPartners
                         partner.RegistrationType = deliveryPartnerDTO.RegistrationType;
                         partner.LoadCapacity = deliveryPartnerDTO.LoadCapacity;
                         partner.VehicleName = deliveryPartnerDTO.VehicleName;
+                        partner.RetailModelId = 5;
                         partner.EngineNumber = deliveryPartnerDTO.EngineNumber;
                         partner.ChassisNumber = deliveryPartnerDTO.ChassisNumber;
                         partner.RegistrationYear = deliveryPartnerDTO.RegistrationYear;
@@ -218,6 +219,8 @@ namespace CloudVOffice.Services.DeliveryPartners
 
                 if (warehouse != null)
                 {
+
+
                     var agents = _dbContext.DeliveryPartners.Where(a => a.Availability == true && a.AssignedCode == warehouse.AssignmentCode).ToList();
                     return agents;
                 }
@@ -231,7 +234,8 @@ namespace CloudVOffice.Services.DeliveryPartners
             {
                 throw;
             }
-        }
+        }        
+
 
         public List<DeliveryPartner> GetDeliveryPartnersByWareHouseId(Int64 WareHouseId)
         {
@@ -254,5 +258,101 @@ namespace CloudVOffice.Services.DeliveryPartners
                 throw;
             }
         }
+
+        public List<DeliveryPartner> GetDeliveryPartnersByDistributorId(Int64 DistributorId)
+        {
+            try
+            {
+                var distributorAssignedCode = _dbContext.DistributorRegistrations.Where(a=> a.DistributorRegistrationId == DistributorId).Select(z=> z.AssignmentCode).FirstOrDefault();
+                
+                if (distributorAssignedCode != null)
+                {
+                    var deliveryAgents = _dbContext.DeliveryPartners.Where(z => z.AssignedCode == distributorAssignedCode).ToList();
+                    return deliveryAgents;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+
+        public List<DeliveryPartner> GetDeliveryPartnersbyAssignedCode(string AssignedCode)
+        {
+            try
+            {
+                var deliPartners = _dbContext.DeliveryPartners.Where(z=> z.AssignedCode ==  AssignedCode).ToList();
+                return deliPartners;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public List<DeliveryPartner> GetDAWithCapacityByTaskId(Int64 WHouseManagerId, Int64 TaskId)
+        {
+            try
+            {
+                var mapping = _dbContext.UserWareHouseMappings.Where(z => z.UserId == WHouseManagerId).FirstOrDefault();
+                WareHuose warehouse = new WareHuose();
+
+                if (mapping != null)
+                {
+                    warehouse = _dbContext.WareHouses.FirstOrDefault(z => z.WareHuoseId == mapping.WareHuoseId);
+                }
+
+                if (warehouse != null)
+                {
+
+                    var task = _dbContext.DATasksWarehouses.Where(a => a.DATasksWarehouseId == TaskId).FirstOrDefault();
+
+                    var agents = _dbContext.DeliveryPartners.Where(a => a.Availability == true && a.AssignedCode == warehouse.AssignmentCode && a.LoadCapacity <= task.Orderweight).ToList();
+
+                    return agents;
+                }
+
+                else
+                {
+                    return null;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+
+        public List<DeliveryPartner> GetDAByTaskId(Int64 TaskId)
+        {
+            try
+            {
+
+                var task = _dbContext.DATasksWarehouses.FirstOrDefault(z => z.DATasksWarehouseId == TaskId);
+
+                if (task != null)
+                {
+
+                    var DAgents = _dbContext.DeliveryPartners.Where(a=> a.LoadCapacity >= task.Orderweight && a.AssignedCode == task.AssignmentCode).ToList();
+
+                    return DAgents;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
     }
 }

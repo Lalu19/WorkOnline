@@ -14,5 +14,9 @@ namespace CloudVOffice.Services.DeliveryPartners
         public DeliveryPartner ChangeAvailabiltyStatus(Int64 DeliveryPartnerId);
         public List<DeliveryPartner> GetDeliveryAgentsByManagerId(Int64 WHouseManagerId);
         public List<DeliveryPartner> GetDeliveryPartnersByWareHouseId(Int64 WareHouseId);
+        public List<DeliveryPartner> GetDeliveryPartnersByDistributorId(Int64 DistributorId);
+        public List<DeliveryPartner> GetDeliveryPartnersbyAssignedCode(string AssignedCode);
+        public List<DeliveryPartner> GetDAWithCapacityByTaskId(Int64 WHouseManagerId, Int64 TaskId);
+        public List<DeliveryPartner> GetDAByTaskId(Int64 TaskId);
     }
 }

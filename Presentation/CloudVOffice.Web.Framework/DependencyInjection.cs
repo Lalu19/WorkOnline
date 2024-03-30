@@ -43,6 +43,7 @@ using CloudVOffice.Core.Domain.Sellers;
 using CloudVOffice.Services.WareHouses.SalesOrders;
 using CloudVOffice.Services.Distributors;
 using CloudVOffice.Services.DeliveryPartners;
+using CloudVOffice.Services.Notifications;
 
 namespace CloudVOffice.Web.Framework
 {
@@ -150,6 +151,10 @@ namespace CloudVOffice.Web.Framework
 			services.AddScoped<IWarehouseSalesOrderParentService, WarehouseSalesOrderParentService>();
             services.AddScoped<IDSOService, DSOService>();
             services.AddScoped<IDSOItemsService, DSOItemsService>();
+            services.AddScoped<INotificationService, NotificationService>();
+            services.AddScoped<IDATasksWarehouseService, DATasksWarehouseService>();
+            services.AddScoped<IWareHouseDAAcceptService, WareHouseDAAcceptService>();
+            services.AddScoped<IPushNotificationService, PushNotificationService>();
 
 
 
