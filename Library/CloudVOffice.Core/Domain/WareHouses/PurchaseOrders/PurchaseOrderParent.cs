@@ -18,7 +18,10 @@ namespace CloudVOffice.Core.Domain.WareHouses.PurchaseOrders
         public Int64? SellerRegistrationId { get; set; }
         public string? POPUniqueNumber { get; set; }
         public bool OrderShipped { get; set; }
-        public Int64 CreatedBy { get; set; }
+        public double? TotalWeight { get; set; }
+
+
+		public Int64 CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
         public Int64? UpdatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }

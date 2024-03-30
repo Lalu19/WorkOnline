@@ -37,7 +37,7 @@
 					<table id="fixedHeader" class="table table-striped table-bordered">
 						<thead>
 							<tr>
-								@* <th>Action</th> *@
+								<th>Action</th>
 								<th>Order Number</th>
 								<th>Order Date</th>
 							</tr>
@@ -47,11 +47,9 @@
 							{
 								<tr>
 
-									@* <td>
-										<button class="delete-button" data-orderid="@item.DPOId" style="background: transparent;border: none;">
-											<i class="icon-trash" style="font-size:22px"></i>
-										</button>
-									</td> *@
+									<td>
+										<a href="/SO/Buyerorderdetails?BuyerOrderId=@item.BuyerOrderId"><i class="icon-pencil3" style="font-size:22px"></i></a>
+									</td>
 									<td>@item.OrderUniqueNo</td>
 									<td>@item.CreatedDate</td>
 									

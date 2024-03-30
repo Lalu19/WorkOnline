@@ -5,11 +5,13 @@ using CloudVOffice.Services.Banners;
 using CloudVOffice.Services.DeliveryPartners;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+//using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CloudVOffice.Core.Domain.Common;
 
 namespace Web.API.Controllers.DeliveryPartners
 {
@@ -19,11 +21,15 @@ namespace Web.API.Controllers.DeliveryPartners
     {
 
         private readonly IDeliveryPartnerService _deliveryPartnerService;
+        private readonly IDATasksWarehouseService _dATasksWarehouseService;
         private readonly IWebHostEnvironment _hostingEnvironment;
-        public DeliveryPartnerController(IDeliveryPartnerService deliveryPartnerService , IWebHostEnvironment hostingEnvironment)
+        private readonly IWareHouseDAAcceptService _wareHouseDAAcceptService;
+        public DeliveryPartnerController(IDeliveryPartnerService deliveryPartnerService, IWebHostEnvironment hostingEnvironment, IDATasksWarehouseService dATasksWarehouseService, IWareHouseDAAcceptService wareHouseDAAcceptService)
         {
             _deliveryPartnerService = deliveryPartnerService;
             _hostingEnvironment = hostingEnvironment;
+            _dATasksWarehouseService = dATasksWarehouseService;
+            _wareHouseDAAcceptService = wareHouseDAAcceptService;
         }
 
         [HttpPost]
@@ -182,34 +188,7 @@ namespace Web.API.Controllers.DeliveryPartners
         }
 
 
-        [HttpPost("{DeliveryPartnerId}")]
-        public IActionResult ChangeAvailability(Int64 DeliveryPartnerId)
-        {
-            try
-            {
-                var a = _deliveryPartnerService.ChangeAvailabiltyStatus(DeliveryPartnerId);
-
-                if(a == null)
-                {
-                    return BadRequest();
-                }
-                
-                return Ok(a);
-            }
-            catch (Exception ex)
-            {
-                return Accepted(new { Status = "error", ResponseMsg = ex.Message });
-            }
-        }
-
-        [HttpGet("{WareHouseId}")]
-        public IActionResult GetDeliveryAgentsByWareHouseId(Int64 WareHouseId)
-        {
-            var DAgents = _deliveryPartnerService.GetDeliveryPartnersByWareHouseId(WareHouseId);
-
-            return Ok(DAgents);
-        }
-
+        
 
         [HttpGet("{WHouseManagerId}")]
         public IActionResult GetDeliveryAgentsByWareHouseManagerId(Int64 WHouseManagerId)
@@ -220,6 +199,151 @@ namespace Web.API.Controllers.DeliveryPartners
         }
 
 
+        [HttpGet("{WareHouseId}")]
+        public IActionResult GetDeliveryAgentsByWareHouseId(Int64 WareHouseId)
+        {
+            var DAgents = _deliveryPartnerService.GetDeliveryPartnersByWareHouseId(WareHouseId);
+
+            return Ok(DAgents);
+        }
+
+
+        [HttpGet("{DistributorId}")]
+        public IActionResult GetDeliveryAgentsByDistributorId(Int64 DistributorId)
+        {
+            var DAgents = _deliveryPartnerService.GetDeliveryPartnersByDistributorId(DistributorId);
+
+            return Ok(DAgents);
+        }
+
+        [HttpGet("{AssignedCode}")]
+        public IActionResult GetDeliveryAgentsByAssignedCode(string AssignedCode)
+        {
+            var DAgents = _deliveryPartnerService.GetDeliveryPartnersbyAssignedCode(AssignedCode);
+
+            return Ok(DAgents);
+        }
+
+        [HttpPost("{DeliveryPartnerId}")]
+        public IActionResult ChangeAvailability(Int64 DeliveryPartnerId)
+        {
+            try
+            {
+                var a = _deliveryPartnerService.ChangeAvailabiltyStatus(DeliveryPartnerId);
+
+                if (a == null)
+                {
+                    return BadRequest();
+                }
+
+                return Ok(a);
+            }
+            catch (Exception ex)
+            {
+                return Accepted(new { Status = "error", ResponseMsg = ex.Message });
+            }
+        }
+
+
+
+        [HttpPost]
+        public IActionResult AgentTaskAcceptCreatePage([FromForm] WareHouseDAAcceptDTO wareHouseDAAcceptDTO)
+        {
+            try
+            {
+				if (wareHouseDAAcceptDTO.StartMeterPhotoUp != null)
+				{
+					FileInfo fileInfo = new FileInfo(wareHouseDAAcceptDTO.StartMeterPhotoUp.FileName);
+					string extn = fileInfo.Extension.ToLower();
+					Guid id = Guid.NewGuid();
+					string filename = id.ToString() + Path.GetExtension(wareHouseDAAcceptDTO.StartMeterPhotoUp.FileName);
+
+					string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, @"uploads\AcceptedTasks");
+
+					if (!Directory.Exists(uploadsFolder))
+					{
+						Directory.CreateDirectory(uploadsFolder);
+					}
+
+					string uniqueFileName = Guid.NewGuid().ToString() + "_" + filename;
+					string imagePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+					// Copy the uploaded image to the specified path
+					using (var stream = new FileStream(imagePath, FileMode.Create))
+					{
+						wareHouseDAAcceptDTO.StartMeterPhotoUp.CopyTo(stream);
+					}
+
+					wareHouseDAAcceptDTO.StartMeterPhoto = filename;
+				}
+
+
+				if (wareHouseDAAcceptDTO.EndMeterPhotoUp != null)
+				{
+					FileInfo fileInfo = new FileInfo(wareHouseDAAcceptDTO.EndMeterPhotoUp.FileName);
+					string extn = fileInfo.Extension.ToLower();
+					Guid id = Guid.NewGuid();
+					string filename = id.ToString() + Path.GetExtension(wareHouseDAAcceptDTO.EndMeterPhotoUp.FileName);
+
+					string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, @"uploads\AcceptedTasks");
+
+					if (!Directory.Exists(uploadsFolder))
+					{
+						Directory.CreateDirectory(uploadsFolder);
+					}
+
+					string uniqueFileName = Guid.NewGuid().ToString() + "_" + filename;
+					string imagePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+					// Copy the uploaded image to the specified path
+					using (var stream = new FileStream(imagePath, FileMode.Create))
+					{
+						wareHouseDAAcceptDTO.EndMeterPhotoUp.CopyTo(stream);
+					}
+
+					wareHouseDAAcceptDTO.EndMeterPhoto = filename;
+				}
+
+
+                var a = _wareHouseDAAcceptService.CreateWareHouseDAAccept(wareHouseDAAcceptDTO);
+
+
+                if(a == MessageEnum.Success)
+                {
+                    return Ok(a);
+                }
+                else if (a == MessageEnum.Exists)
+                {
+                    return BadRequest("Task has already been assigned");
+                }
+                else if (a == MessageEnum.InvalidInput)
+                {
+                    return BadRequest("Either DeliveryPartnerId or DATasksWarehouseId is missing");
+                }
+
+                return Ok(a);
+			}
+            catch
+            {
+                throw;
+            }
+
+        }
+
+        [HttpGet]
+        public IActionResult GetWareHouseDAAcceptList()
+        {
+            var list = _wareHouseDAAcceptService.GetWareHouseDAAcceptList();
+            return Ok(list);
+        }
+
+
+        [HttpGet("{WareHouseDAAcceptId}")]
+        public IActionResult GetWareHouseDAAcceptById(Int64 WareHouseDAAcceptId)
+        {
+            var a = _wareHouseDAAcceptService.GetWareHouseDAAcceptListById(WareHouseDAAcceptId);
+            return Ok(a);
+        }
 
     }
 }

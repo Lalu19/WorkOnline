@@ -14,6 +14,7 @@ namespace CloudVOffice.Data.DTO.Distributor
         public Int64 DistributorId { get; set; }
         public double TotalAmount { get; set; }
         public int TotalQuantity { get; set; }
+        public double TotalWeight { get; set; }
         public string? OrderStatus { get; set; }
         public Int64 CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }

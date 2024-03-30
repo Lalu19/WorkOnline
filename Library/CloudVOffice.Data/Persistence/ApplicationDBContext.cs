@@ -10,6 +10,7 @@ using CloudVOffice.Core.Domain.Logging;
 using CloudVOffice.Core.Domain.Orders;
 using CloudVOffice.Core.Domain.Pemission;
 using CloudVOffice.Core.Domain.ProductCategories;
+using CloudVOffice.Core.Domain.PushNotifications;
 using CloudVOffice.Core.Domain.RetailerModel;
 using CloudVOffice.Core.Domain.Sales;
 using CloudVOffice.Core.Domain.Sellers;
@@ -156,7 +157,12 @@ namespace CloudVOffice.Data.Persistence
 		public virtual DbSet<DeliveryPartner> DeliveryPartners { get; set; }
         public virtual DbSet<DSO> DSO { get; set; }
         public virtual DbSet<DSOItems> DSOItems { get; set; }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        public virtual DbSet<DATasksWarehouse> DATasksWarehouses { get; set; }
+		public virtual DbSet<PushNotification> PushNotifications { get; set; }
+		public virtual DbSet<WareHouseDAAccept> WareHouseDAAccepts { get; set; }
+
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
             #region Base
@@ -886,7 +892,39 @@ namespace CloudVOffice.Data.Persistence
               .ValueGeneratedNever();
 
 
-            modelBuilder.Seed();
+			modelBuilder.Entity<DATasksWarehouse>()
+		   .Property(s => s.CreatedDate)
+		   .HasDefaultValueSql("getdate()");
+
+
+			modelBuilder.Entity<DATasksWarehouse>()
+			  .Property(s => s.Deleted)
+			  .HasDefaultValue(false)
+			  .ValueGeneratedNever();
+
+			modelBuilder.Entity<PushNotification>()
+		   .Property(s => s.CreatedDate)
+		   .HasDefaultValueSql("getdate()");
+
+
+			modelBuilder.Entity<PushNotification>()
+			  .Property(s => s.Deleted)
+			  .HasDefaultValue(false)
+			  .ValueGeneratedNever();
+
+
+			modelBuilder.Entity<WareHouseDAAccept>()
+		   .Property(s => s.CreatedDate)
+		   .HasDefaultValueSql("getdate()");
+
+
+			modelBuilder.Entity<WareHouseDAAccept>()
+			  .Property(s => s.Deleted)
+			  .HasDefaultValue(false)
+			  .ValueGeneratedNever();
+
+
+			modelBuilder.Seed();
         }
     }
 }
