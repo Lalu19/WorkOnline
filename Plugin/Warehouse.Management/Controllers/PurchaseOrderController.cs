@@ -10,7 +10,7 @@ using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Data.DTO.ProductCategories;
 using CloudVOffice.Data.DTO.WareHouses.PinCodes;
 using CloudVOffice.Data.DTO.WareHouses.PurchaseOrders;
-using CloudVOffice.Data.Migrations;
+//using CloudVOffice.Data.Migrations;
 using CloudVOffice.Services.ProductCategories;
 using CloudVOffice.Services.Sellers;
 using CloudVOffice.Services.Users;

@@ -180,5 +180,46 @@ namespace Web.API.Controllers.DeliveryPartners
             var a = _deliveryPartnerService.DeleteDeliveryPartner(deliveryPartnerId, DeletedBy);
             return Ok(a);
         }
+
+
+        [HttpPost("{DeliveryPartnerId}")]
+        public IActionResult ChangeAvailability(Int64 DeliveryPartnerId)
+        {
+            try
+            {
+                var a = _deliveryPartnerService.ChangeAvailabiltyStatus(DeliveryPartnerId);
+
+                if(a == null)
+                {
+                    return BadRequest();
+                }
+                
+                return Ok(a);
+            }
+            catch (Exception ex)
+            {
+                return Accepted(new { Status = "error", ResponseMsg = ex.Message });
+            }
+        }
+
+        [HttpGet("{WareHouseId}")]
+        public IActionResult GetDeliveryAgentsByWareHouseId(Int64 WareHouseId)
+        {
+            var DAgents = _deliveryPartnerService.GetDeliveryPartnersByWareHouseId(WareHouseId);
+
+            return Ok(DAgents);
+        }
+
+
+        [HttpGet("{WHouseManagerId}")]
+        public IActionResult GetDeliveryAgentsByWareHouseManagerId(Int64 WHouseManagerId)
+        {
+            var DAgents = _deliveryPartnerService.GetDeliveryAgentsByManagerId(WHouseManagerId);
+
+            return Ok(DAgents);
+        }
+
+
+
     }
 }

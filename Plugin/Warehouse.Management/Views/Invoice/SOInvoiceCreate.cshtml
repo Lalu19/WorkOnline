@@ -1,0 +1,231 @@
+﻿@{
+	//Layout = "_MainAppLayout";
+	ViewData["Title"] = "SO Invoice";
+	var podatails = ViewBag.SOOrderDetails;
+	var sellerdetials = ViewBag.SellerDetails;
+}
+@addTagHelper *, Syncfusion.EJ2
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers *@
+
+
+<!-- Common CSS -->
+<link rel="stylesheet" href="~/app/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/app/fonts/icomoon/icomoon.css">
+<link rel="stylesheet" href="~/app/css/main.css">
+
+
+<style>
+
+	#color {
+		background-color: #343a40; /* Dark background color */
+		color: white; /* Text color */
+		font-weight: bold; /* Bold text */
+	}
+
+	table.table-bordered th,
+	table.table-bordered td {
+		border: 1px solid #343a40; /* Border color */
+	}
+
+	#BUTTON button {
+		background-color: #343a40; /* Dark background color for the button */
+		color: white; /* Text color for the button */
+		font-weight: bold; /* Bold text for the button */
+	}
+
+	/* Print styles */
+	.main-content {
+		width: 210mm; /* Width of A4 page */
+		height: 297mm; /* Height of A4 page */
+		margin: 0 auto;
+		padding: 20px; /* Add padding to ensure content doesn't touch edges */
+		margin-bottom: 0; /* Remove margin bottom */
+	}
+
+	.card {
+		margin-bottom: 20px; /* Add margin between cards */
+	}
+
+	.card-body button {
+		display: block; /* Hide print button when printing */
+	}
+
+	/* Decrease table font size */
+	#soOrderTable {
+		font-size: 10pt;
+	}
+
+		/* Decrease padding within table cells */
+		#soOrderTable th,
+		#soOrderTable td {
+			padding: 1px;
+		}
+
+</style>
+
+<div class="main-content">
+	<div class="row gutters">
+		<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+			<div class="card">
+				@* <div class="card-header">
+
+				<div class="row">
+				<div class="col-md-10">
+				<b>Invoice</b>
+				</div>
+				<div class="col-md-2 ">
+				</div>
+				</div>
+				</div> *@
+
+				<div class="invoice-container" id="pdf-content">
+					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+						@* <div class="card"> *@
+						<div class="card-body">
+							<div class="invoice-container">
+								<h4 style="text-align:center;color:#EB05A9;font-weight:bold;">Happiness Under Budget Retail</h4>
+
+								<div class="row gutters">
+									<hr class="my-2" style="width: 100%; background-color: #343a40; border-color: #343a40;">
+								</div>
+
+								<div class="row gutters">
+									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+
+										<p><strong>Warehouse: </strong>@podatails.WareHuose.WareHouseName</p>
+										<p><strong>Address: </strong>@podatails.WareHuose.Area,@podatails.WareHuose.Address</p>
+										<p><strong>Mobile: </strong>@podatails.WareHuose.Mobile</p>
+										<p><strong>GST: </strong>@podatails.WareHuose.GSTNumber</p>
+
+										@* <p><strong>Bill No: </strong>@podatails.POPUniqueNumber</p> *@
+
+									</div>
+
+									<div class="col-lg-6 col-md-6 col-sm-6">
+
+										<p><strong>Name: </strong>@sellerdetials.Name</p>
+										<p><strong>Address: </strong>@sellerdetials.Address</p>
+										<p><strong>GST Number: </strong>@sellerdetials.GSTNumber</p>
+										<p><strong>Phone: </strong>@sellerdetials.PrimaryPhone</p>
+										<p><strong>Mail: </strong>@sellerdetials.MailId</p>
+
+									</div>
+								</div>
+
+
+								<div class="row gutters">
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+										@* <div class="card"> *@
+										@* <div class="card-header"></div> *@
+										@* <div class="card-body"> *@
+										<table id="soOrderTable" class="table table-bordered table-responsive">
+											<tr id="color">
+												<th>Sl.No</th>
+												<th>HSN</th>
+												<th>Product</th>
+												<th>Quantity</th>
+												<th>Units</th>
+												<th>Purchase Cost</th>
+												<th>Total Amount</th>
+												<th>CGST</th>
+												<th>CGST Value</th>
+												<th>SGST</th>
+												<th>SGST Value</th>
+												<th>Sale Value</th>
+											</tr>
+											@foreach (var item in podatails.SalesOrderItems)
+											{
+												var totalAmount = item.Quantity * item.Item.PurchaseCost;
+												var cgstValue = Math.Round(totalAmount * item.Item.CGST / 100, 2);
+												var sgstValue = Math.Round(totalAmount * item.Item.SGST / 100, 2);
+												var saleValue = Math.Round(totalAmount + cgstValue + sgstValue, 2);
+
+												<tr>
+													<td>@item.Item.HSN</td>
+													<td>@item.Item.ItemName</td>
+													<td>@item.Quantity</td>
+													<td>@item.Item.ShortName</td>
+													<td>@item.Item.PurchaseCost</td>
+													<td>@totalAmount</td>
+													<td>@item.Item.CGST</td>
+													<td>@cgstValue</td>
+													<td>@item.Item.SGST</td>
+													<td>@sgstValue</td>
+													<td>@saleValue</td>
+												</tr>
+											}
+										</table>
+										@* </div> *@
+										@* 	</div> *@
+									</div>
+								</div>
+
+
+								<div class="row gutters">
+									<div class="col-lg-9 col-md-9 col-sm-12">
+									</div>
+									<div class="col-lg-3 col-md-3 col-sm-12">
+										<table>
+											<tbody>
+												<tr>
+													<td>
+														<p class="text-right"><strong>Subtotal:</strong>@podatails.TotalAmount</p>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+
+
+								<div class="card-body" style="text-align: center;">
+									<div class="col-lg-6 col-md-6 col-sm-12" style="display:inline-block;">
+										<button onclick="printInvoice()">Print Invoice</button>
+									</div>
+								</div>
+
+							</div>
+						</div>
+						@* </div> *@
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<script>
+
+	// Function to add Sl.No to the table
+	document.addEventListener('DOMContentLoaded', function () {
+		addSerialNumber();
+	});
+
+	function addSerialNumber() {
+		var table = document.getElementById("soOrderTable");
+		var rows = table.getElementsByTagName("tr");
+
+		for (var i = 1; i < rows.length; i++) {
+			var cell = rows[i].insertCell(0);
+			cell.textContent = i;
+		}
+	}
+</script>
+
+<script>
+	function printInvoice() {
+		var printButton = document.querySelector('.card-body button');
+		printButton.style.display = 'none';
+		window.print();
+		printButton.style.display = 'block';
+
+	}
+</script>
+
+
+
+

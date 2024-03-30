@@ -62,7 +62,7 @@
 
 						<div class="form-row">
 
-							<div class="form-group col-md-4">
+							<div class="form-group col-md-3">
 								<input asp-for="@Model.WareHuoseId" type="hidden" />
 
 								<label for="WareHouseName" class="form-label">WareHouse Name&nbsp;<span style="color:red;"><b>*</b></span></label>
@@ -71,16 +71,23 @@
 							</div>
 						
 
-							<div class="form-group col-md-4">
+							<div class="form-group col-md-3">
 								<label for="Area" class="form-label">Area Name &nbsp;<span style="color:red;"><b>*</b></span></label>
 								<input asp-for="@Model.Area" type="text" class="form-control" autofocus="autofocus" placeholder="Area Name" />
 								<span asp-validation-for="Area"></span>
 							</div>
 							
-							<div class="form-group col-md-4">
+							<div class="form-group col-md-3">
 								<label for="GSTNumber" class="form-label">GST Number &nbsp;<span style="color:red;"><b>*</b></span></label>
 								<input asp-for="@Model.GSTNumber" type="text" class="form-control" autofocus="autofocus" placeholder="GST Number" />
 								<span asp-validation-for="GSTNumber"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="IsActive" class="form-label">Is Active</label>
+								<br>
+								<input asp-for="@Model.IsActive" type="checkbox" />
+								<span asp-validation-for="IsActive"></span>
 							</div>
 
 						</div>
@@ -96,19 +103,19 @@
                             </div>
 
 
-							<div class="form-group col-md-4">
+							<div class="form-group col-md-3">
 								<label for="Mobile" class="form-label">Mobile Number &nbsp;<span style="color:red;"><b>*</b></span></label>
 								<input asp-for="@Model.Mobile" type="text" class="form-control" autofocus="autofocus" placeholder="Mobile Number" />
 								<span asp-validation-for="Mobile"></span>
 							</div>
 
-							<div class="form-group col-md-4">
+							<div class="form-group col-md-3">
 								<label for="Telephone" class="form-label">Telephone &nbsp;<span style="color:red;"><b>*</b></span></label>
 								<input asp-for="@Model.Telephone" type="text" class="form-control" autofocus="autofocus" placeholder="Telephone" />
 								<span asp-validation-for="Telephone"></span>
 							</div>
 
-							<div class="form-group col-md-4">
+							<div class="form-group col-md-3">
 								<label for="Address" class="form-label">Address &nbsp;<span style="color:red;"><b>*</b></span></label>
 								<input asp-for="@Model.Address" type="text" class="form-control" autofocus="autofocus" placeholder="Address" />
 								<span asp-validation-for="Address"></span>
@@ -118,12 +125,7 @@
 
 						<div class="form-row">
 
-							<div class="form-group col-md-3">
-								<label for="IsActive" class="form-label">Is Active</label>
-								<br>
-								<input asp-for="@Model.IsActive" type="checkbox" />
-								<span asp-validation-for="IsActive"></span>
-							</div>
+					
 
 						</div>
 						

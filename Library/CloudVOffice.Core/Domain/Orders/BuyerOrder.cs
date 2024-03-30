@@ -16,7 +16,7 @@ namespace CloudVOffice.Core.Domain.Orders
         public string? OrderStatus { get; set; }
         public string? Address { get; set; }
         public string? MobileNumber { get; set; }
-        public string? Pincode { get; set; }
+        public Int64? Pincode { get; set; }
         public Int64 BuyerCustomerLoginID { get; set; }
         public Int64 CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }

@@ -1,9 +1,12 @@
 ﻿using CloudVOffice.Core.Domain.Banners;
 using CloudVOffice.Core.Domain.Common;
 using CloudVOffice.Core.Domain.DeliveryPartners;
+using CloudVOffice.Core.Domain.WareHouses;
 using CloudVOffice.Data.DTO.DeliveryPartners;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
+using Org.BouncyCastle.Asn1.Mozilla;
+using Pipelines.Sockets.Unofficial;
 
 namespace CloudVOffice.Services.DeliveryPartners
 {
@@ -52,6 +55,8 @@ namespace CloudVOffice.Services.DeliveryPartners
                     deliveryPartner.VehicleBackPhoto = deliveryPartnerDTO.VehicleBackPhoto;
                     deliveryPartner.Password = deliveryPartnerDTO.Password;
                     deliveryPartner.RetailModelId = 5;
+                    deliveryPartner.AssignedCode = deliveryPartnerDTO.AssignedCode;
+                    deliveryPartner.Availability = deliveryPartnerDTO.Availability;
 
                     deliveryPartner.CreatedBy = deliveryPartnerDTO.CreatedBy;
                     deliveryPartner.CreatedDate = System.DateTime.Now;
@@ -103,6 +108,12 @@ namespace CloudVOffice.Services.DeliveryPartners
                         partner.VehicleFrontPhoto = deliveryPartnerDTO.VehicleFrontPhoto;
                         partner.VehicleBackPhoto = deliveryPartnerDTO.VehicleBackPhoto;
                         partner.Password = deliveryPartnerDTO.Password;
+                        partner.AssignedCode = deliveryPartnerDTO.AssignedCode;
+                        partner.Availability = deliveryPartnerDTO.Availability;
+                        partner.NotificationSent = deliveryPartnerDTO.NotificationSent;
+                        partner.TaskAccepted = deliveryPartnerDTO.TaskAccepted;
+                        partner.TaskRejected = deliveryPartnerDTO.TaskRejected;
+
 
                         partner.UpdatedDate = DateTime.Now;
                         _dbContext.SaveChanges();
@@ -172,6 +183,76 @@ namespace CloudVOffice.Services.DeliveryPartners
             }
         }
 
-       
+        public DeliveryPartner ChangeAvailabiltyStatus(Int64 DeliveryPartnerId)
+        {
+            try
+            {
+                var agent = _dbContext.DeliveryPartners.FirstOrDefault(a=> a.DeliveryPartnerId == DeliveryPartnerId);
+
+                if (agent == null)
+                {
+                    return null;
+                }
+                agent.Availability = !agent.Availability;
+
+                _dbContext.SaveChanges();
+                return agent;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public List<DeliveryPartner> GetDeliveryAgentsByManagerId(Int64 WHouseManagerId)
+        {
+            try
+            {
+                var mapping = _dbContext.UserWareHouseMappings.Where(z => z.UserId == WHouseManagerId).FirstOrDefault();
+                WareHuose warehouse = new WareHuose();
+
+                if(mapping != null)
+                {
+                    warehouse = _dbContext.WareHouses.FirstOrDefault(z => z.WareHuoseId == mapping.WareHuoseId);
+                }
+
+                if (warehouse != null)
+                {
+                    var agents = _dbContext.DeliveryPartners.Where(a => a.Availability == true && a.AssignedCode == warehouse.AssignmentCode).ToList();
+                    return agents;
+                }
+
+                else
+                {
+                    return null;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public List<DeliveryPartner> GetDeliveryPartnersByWareHouseId(Int64 WareHouseId)
+        {
+            try
+            {
+                var warehouse = _dbContext.WareHouses.FirstOrDefault(z => z.WareHuoseId == WareHouseId);
+
+                if (warehouse != null)
+                {
+                    var agents = _dbContext.DeliveryPartners.Where(a => a.Availability == true && a.AssignedCode == warehouse.AssignmentCode).ToList();
+                    return agents;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

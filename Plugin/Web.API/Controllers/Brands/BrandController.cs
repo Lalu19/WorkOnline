@@ -33,12 +33,21 @@ namespace Web.API.Controllers.Brands
 				return Accepted(new { Status = "error", ResponseMsg = ex.Message });
 			}
 		}
+
 		[HttpGet]
 		public IActionResult BrandList()
 		{
 			var a = _brandService.GetBrandList();
 			return Ok(a);
 		}
+
+		[HttpGet("{PincodeId}/{SectorId}")]
+		public IActionResult BrandListbyPincodeIdSectorId(Int64 PincodeId, int SectorId)
+		{
+			var a = _brandService.GetBrandListByPincodeIdSectorId(PincodeId, SectorId);
+			return Ok(a);
+		}
+
 		[HttpGet("{brandId}")]
 		public IActionResult SingleBannerListbyId(Int64 brandId)
 		{

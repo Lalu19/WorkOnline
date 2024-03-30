@@ -97,7 +97,23 @@ namespace CloudVOffice.Services.Orders
             }
             return items;
         }
-        //}
+		//}
 
-    }
+
+		public List<BuyerOrder> GetBuyerOrderListByPincode(Int64 PincodeId, Int64 BrandId)
+		{
+			return _dbContext.BuyerOrders
+			   .Include(s => s.BuyerOrderItems.Where(x => x.Deleted == false && x.Item.BrandId == BrandId))
+			   .ThenInclude(s => s.Item)
+			   .Where(x => x.Deleted == false && x.Pincode == PincodeId).ToList();
+		}
+
+		public List<BuyerOrder> GetBuyerOrderListByBuyerOrderId(Int64 BuyerOrderId)
+		{
+			return _dbContext.BuyerOrders
+			   .Include(s => s.BuyerOrderItems.Where(x => x.Deleted == false))
+			   .ThenInclude(s => s.Item)
+			   .Where(x => x.Deleted == false && x.BuyerOrderId == BuyerOrderId).ToList();
+		}
+	}
 }

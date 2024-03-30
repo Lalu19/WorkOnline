@@ -32,6 +32,7 @@
 		<None Remove="Views\Employee\EmployeeCreate.cshtml" />
 		<None Remove="Views\Employee\EmployeeView.cshtml" />
 		<None Remove="Views\Invoice\InvoiceCreate.cshtml" />
+		<None Remove="Views\Invoice\SOInvoiceCreate.cshtml" />
 		<None Remove="Views\Item\DamageItemCreate.cshtml" />
 		<None Remove="Views\Item\DamageItemView.cshtml" />
 		<None Remove="Views\Item\DamageItemForFarmingCreate.cshtml" />
@@ -66,6 +67,7 @@
 		<None Remove="Views\PurchaseOrder\PurchaseOrderView.cshtml" />
 		<None Remove="Views\SalesOrders\SalesOrderView.cshtml" />
 		<None Remove="Views\SalesOrders\SOCreate.cshtml" />
+		<None Remove="Views\SalesOrders\WareHouseSalesOrderCreate.cshtml" />
 		<None Remove="Views\State\StateCreate.cshtml" />
 		<None Remove="Views\State\StateView.cshtml" />
 		<None Remove="Views\StockManagement\StockManagement.cshtml" />
@@ -84,6 +86,7 @@
 		<None Remove="Views\Vendor\VendorCreate.cshtml" />
 		<None Remove="Views\Vendor\VendorView.cshtml" />
 		<None Remove="Views\WareHouse\WareHouseCreate.cshtml" />
+		<None Remove="Views\WareHouse\WareHouseDeliveryAgentsView.cshtml" />
 		<None Remove="Views\WareHouse\WareHouseView.cshtml" />
 	</ItemGroup>
 

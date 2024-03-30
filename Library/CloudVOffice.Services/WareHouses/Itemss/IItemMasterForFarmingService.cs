@@ -16,5 +16,6 @@ namespace CloudVOffice.Services.WareHouses.Itemss
         public ItemMasterForFarming GetItemMasterForFarmingById(Int64 itemMasterForFarmingId);
         public List<ItemMasterForFarming> GetItemMasterForFarmingList();
         public MessageEnum DeleteItemMasterForFarming(Int64 itemMasterForFarmingId, Int64 DeletedBy);
+        public List<ItemMasterForFarming> GetItemsForFarmingBySellerRegistrationId(Int64 sellerRegistrationId);
     }
 }

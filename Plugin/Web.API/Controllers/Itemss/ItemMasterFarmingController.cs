@@ -67,6 +67,13 @@ namespace Web.API.Controllers.Itemss
             return Ok(a);
         }
 
+        [HttpGet("{SellerRegistrationId}")]
+        public IActionResult GetItemsForFarmingBySellerRegistrationId(Int64 SellerRegistrationId)
+        {
+            var a = _itemMasterForFarmingService.GetItemsForFarmingBySellerRegistrationId(SellerRegistrationId);
+            return Ok(a);
+        }
+
 
     }
 }

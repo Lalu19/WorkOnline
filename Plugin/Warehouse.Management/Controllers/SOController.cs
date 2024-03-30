@@ -29,7 +29,12 @@ namespace Warehouse.Management.Controllers
         private readonly ISalesOrderItemService _salesOrderItemService;
         private readonly IWareHouseService _wareHouseService;
 
-        public SOController(IPurchaseOrderParentService purchaseOrderParentService, ApplicationDBContext dbContext, ISalesOrderParentService salesOrderParentService, ISalesOrderItemService salesOrderItemService, IWareHouseService wareHouseService)
+        public SOController(IPurchaseOrderParentService purchaseOrderParentService, 
+                            ApplicationDBContext dbContext, 
+                            ISalesOrderParentService salesOrderParentService,
+                            ISalesOrderItemService salesOrderItemService,
+                            IWareHouseService wareHouseService
+                            )
 		{
 			_purchaseOrderParentService = purchaseOrderParentService;
 			_dbContext = dbContext;
@@ -70,7 +75,7 @@ namespace Warehouse.Management.Controllers
             if (result == MessageEnum.Success)
             {
                 TempData["msg"] = MessageEnum.Success;
-                return Redirect("/WareHouse/Month/MonthView");
+               // return Redirect("/WareHouse/Month/MonthView");
             }
             else if (result == MessageEnum.Duplicate)
             {
@@ -85,7 +90,43 @@ namespace Warehouse.Management.Controllers
 
 
             return Ok();
-		}
+        }
+
+
+        //[HttpPost]
+        //public IActionResult SalesOrderDataSave([FromBody] SalesOrderMasterDTO salesOrderMasterDTO)
+        //{
+        //    Int64 createdBy = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
+
+        //    var warehouseId = _wareHouseService.GetWareHouseByPOPUniqueNumber(salesOrderMasterDTO.ParentOrder.POPUniqueNumber);
+
+        //    salesOrderMasterDTO.ParentOrder.WareHuoseId = warehouseId;
+        //    salesOrderMasterDTO.ParentOrder.CreatedBy = createdBy;
+
+        //    var a = _salesOrderParentService.SalesOrderParentCreate(salesOrderMasterDTO.ParentOrder);
+
+        //    var result = _salesOrderItemService.SalesOrderItemCreate(a.SalesOrderParentId, createdBy, salesOrderMasterDTO.Orders);
+
+        //    if (result == MessageEnum.Success)
+        //    {
+        //        TempData["msg"] = MessageEnum.Success;
+        //        TempData["SalesOrderParentId"] = a.SalesOrderParentId; // Storing SalesOrderParentId in TempData
+        //      //  return Redirect("/WareHouse/SO/SalesOrderParentView");
+        //    }
+        //    else if (result == MessageEnum.Duplicate)
+        //    {
+        //        TempData["msg"] = MessageEnum.Duplicate;
+        //        ModelState.AddModelError("", "Order Already Exists");
+        //    }
+        //    else
+        //    {
+        //        TempData["msg"] = MessageEnum.UnExpectedError;
+        //        ModelState.AddModelError("", "Un-Expected Error");
+        //    }
+
+        //    return Ok();
+        //}
+
 
         [HttpPost]
         public IActionResult SOShippedSetTrue([FromBody] int parsedGlobalId)

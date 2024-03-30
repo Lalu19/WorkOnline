@@ -31,39 +31,52 @@ namespace CloudVOffice.Services.Distributors
         {
             try
             {
-
-                var objcheck = _dbContext.DistributorAssigns.SingleOrDefault(opt => opt.Deleted == false);
-
-                if (objcheck == null)
+                foreach (var PinCodeId in DistributorAssignDTO.PinCodeId)
                 {
-                    foreach (var PinCodeId in DistributorAssignDTO.PinCodeId)
+                    foreach (var BrandId in DistributorAssignDTO.BrandId)
                     {
-                        foreach (var BrandId in DistributorAssignDTO.BrandId)
-                        {
-                            DistributorAssign DistributorAssign = new DistributorAssign();
-                            DistributorAssign.DistributorRegistrationId = DistributorAssignDTO.DistributorRegistrationId;
-                            DistributorAssign.PinCodeId = PinCodeId;
-                            DistributorAssign.BrandId = BrandId;
-                            DistributorAssign.CreatedBy = DistributorAssignDTO.CreatedBy;
-                            DistributorAssign.CreatedDate = System.DateTime.Now;
+                        var assign = _dbContext.DistributorAssigns.Any(opt =>
+                            opt.Deleted == false &&
+                            opt.PinCodeId == PinCodeId &&
+                            opt.BrandId == BrandId);
 
-                            var obj = _DistributorAssignRepo.Insert(DistributorAssign);
+                        if (!assign) 
+                        {
+                            var assignDistributor = _dbContext.DistributorAssigns.SingleOrDefault(opt =>
+                                opt.Deleted == false &&
+                                opt.DistributorRegistrationId != DistributorAssignDTO.DistributorRegistrationId &&
+                                opt.PinCodeId == PinCodeId &&
+                                opt.BrandId == BrandId);
+
+                            if (assignDistributor == null) 
+                            {
+                                DistributorAssign distributorAssign = new DistributorAssign();
+                                distributorAssign.DistributorRegistrationId = DistributorAssignDTO.DistributorRegistrationId;
+                                distributorAssign.PinCodeId = PinCodeId;
+                                distributorAssign.BrandId = BrandId;
+                                distributorAssign.CreatedBy = DistributorAssignDTO.CreatedBy;
+                                distributorAssign.CreatedDate = DateTime.Now;
+
+                                _DistributorAssignRepo.Insert(distributorAssign);
+                            }
+                            else
+                            {
+                                return MessageEnum.Duplicate;
+                            }
+                        }
+                        else
+                        {
+                            return MessageEnum.Duplicate;
                         }
                     }
-
-                    return MessageEnum.Success;
-                }
-                else if (objcheck != null)
-                {
-                    return MessageEnum.Duplicate;
                 }
 
-                return MessageEnum.UnExpectedError;
+                return MessageEnum.Success;
             }
             catch
             {
                 throw;
-            };
+            }
         }
 
         public List<DistributorAssign> DAssignListbyWareHouseId(Int64 WareHuoseId)
@@ -96,6 +109,13 @@ namespace CloudVOffice.Services.Distributors
                 throw;
             }
         }
+        public List<DistributorAssign> DAssignListbyDistributor(Int64 DistributorRegistrationId)
+        {
+            return _dbContext.DistributorAssigns
+                .Where(x => x.Deleted == false && x.DistributorRegistrationId == DistributorRegistrationId)
+                .ToList();
+        }
+
 
     }
 }

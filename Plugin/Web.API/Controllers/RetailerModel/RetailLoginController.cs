@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using CloudVOffice.Core.Domain.Buyers;
 using CloudVOffice.Core.Domain.Sellers;
 using CloudVOffice.Data.DTO.RetailerModel;
-using CloudVOffice.Data.Migrations;
+//using CloudVOffice.Data.Migrations;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Services.Buyers;
 using Microsoft.AspNetCore.Mvc;
