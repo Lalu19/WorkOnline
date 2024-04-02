@@ -566,25 +566,41 @@
         // Append the editable form to the acceptedItemContainer
         $('#acceptedItemContainer').html(acceptedItemForm);
         
-
-
     }
 
 
+
     function saveEdit() {
+        // Retrieve edited data from form fields
         var editedData = {
-            itemName: $('#ItemName').val(),
-            salesCost: $('#SalesCost').val(),
-            salesCost: parseFloat($('#SalesCost').val()),
-            shortName: $('#ShortName').val(),
-            caseWeight: $('#CaseWeight').val(),
-            caseWeight: parseFloat($('#CaseWeight').val()),
-            mrp: parseFloat($('#MRP').val()),
-            cgst: parseFloat($('#CGST').val()),
-            sgst: parseFloat($('#SGST').val()),
-            quantity: parseFloat($('#quantity').val())
+            itemName: $('#editItemName').val(),
+            salesCost: parseFloat($('#editSalesCost').val()),
+            shortName: $('#editShortName').val(),
+            caseWeight: parseFloat($('#editCaseWeight').val()),
+            mrp: parseFloat($('#editMRP').val()),
+            cgst: parseFloat($('#editCGST').val()),
+            sgst: parseFloat($('#editSGST').val()),
+            quantity: parseFloat($('#editQuantity').val())
         };
 
+        // Push filtered data into itemDetails array
+        var acceptedItemData = {
+            itemName: editedData.itemName,
+            salesCost: editedData.salesCost,
+            shortName: editedData.shortName,
+            caseWeight: editedData.caseWeight,
+            mrp: editedData.mrp,
+            cgst: editedData.cgst,
+            sgst: editedData.sgst,
+            quantity: editedData.quantity
+        };
+        itemDetails.push(acceptedItemData);
+
+        totalQuantity += editedData.quantity;
+        totalValue += editedData.mrp * editedData.quantity;
+
+
+        // Display edited item details
         var editedItemHtml = '<div class="edited-item">';
         editedItemHtml += '<strong>Edited Product Details:</strong>';
         editedItemHtml += '<div>Item Name: ' + editedData.itemName + '</div>';
@@ -597,15 +613,12 @@
         editedItemHtml += '<div>Quantity: ' + editedData.quantity + '</div>';
         editedItemHtml += '</div>';
 
+        // Append edited item details to the container
         $('#acceptedItemContainer').append(editedItemHtml);
-        save = $('#acceptedItemContainer').html();
-        $('#acceptedItemContainer').hide();
+        $('#editForm').hide(); // Hide the form after saving
+        $('#acceptedItemContainer').empty();
         console.log("Edited Data:", editedData);
     }
-   
-
-
-
 
 
 
@@ -635,14 +648,6 @@
 
         }
     }
-
-
-
-   
-
-    
-
-
 
 
     var itemDetails = [];
