@@ -115,5 +115,11 @@ namespace CloudVOffice.Services.Orders
 			   .ThenInclude(s => s.Item)
 			   .Where(x => x.Deleted == false && x.BuyerOrderId == BuyerOrderId).ToList();
 		}
+
+		public BuyerOrder GetsingleBuyerOrderListByBuyerOrderId(Int64 BuyerOrderId)
+		{
+			return _dbContext.BuyerOrders
+			   .Where(x => x.Deleted == false && x.BuyerOrderId == BuyerOrderId).SingleOrDefault();
+		}
 	}
 }

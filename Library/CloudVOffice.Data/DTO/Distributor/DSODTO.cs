@@ -10,9 +10,11 @@ namespace CloudVOffice.Data.DTO.Distributor
     public class DSODTO
     {
         public Int64? DSOId { get; set; }
-        public string OrderUniqueNo { get; set; }
+		public Int64? BuyerOrderId { get; set; }
+		public string OrderUniqueNo { get; set; }
         public double TotalAmount { get; set; }
-        public int TotalQuantity { get; set; }
+		public double? TotalWaight { get; set; }
+		public int TotalQuantity { get; set; }
         public string? OrderStatus { get; set; }
         public string? Address { get; set; }
         public string? MobileNumber { get; set; }
