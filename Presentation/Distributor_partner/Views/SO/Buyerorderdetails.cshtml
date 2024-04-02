@@ -64,6 +64,7 @@
 													<td>
 														<p class="text-right">Subtotal</p>
 														<p class="text-right">total Quantity</p>
+														<p class="text-right">total Waight</p>
 														<p class="text-right" style="display:none;">Address</p>
 														<p class="text-right" style="display:none;">MobileNumber</p>
 														<p class="text-right" style="display:none;">Pincode</p>
@@ -74,9 +75,11 @@
 													<td>
 														<p class="text-right">₹<span id="totalamount">@ODtails.TotalAmount</span></p>
 														<p class="text-right"><span id="totalquantity">@ODtails.TotalQuantity</span></p>
+														<p class="text-right"><span id="totalwaight">@ODtails.TotalAmount</span></p>
 														<p class="text-right" style="display:none;"><span id="address">@ODtails.Address</span></p>
 														<p class="text-right" style="display:none;"><span id="mobileno">@ODtails.MobileNumber</span></p>
 														<p class="text-right" style="display:none;"><span id="pin">@ODtails.Pincode</span></p>
+														<p class="text-right" style="display:none;"><span id="buyerid">@ODtails.BuyerOrderId</span></p>
 														@* <p class="text-right">$30.01</p> *@
 														@* <p class="text-right text-secondary"><strong>₹205.00</strong></p>
 													<p class="text-right">₹55.79</p> *@
@@ -86,60 +89,7 @@
 										</table>
 									</div>
 								</div>
-								@* <!-- Row end -->
-
-							<div class="spacer20"></div>
-
-							<!-- Row start -->
-							<div class="row gutters">
-							<div class="col-lg-6 col-md-6 col-sm-6">
-							<p class="text-uppercase">
-							<strong>Billing Information</strong>
-							</p>
-							<address>
-							<strong>Yuki Hayashi</strong><br>
-							Public Wales, Somewhere<br>
-							New York NY,4468, United States<br>
-							Tel: 000-000-9999<br>
-							</address>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6">
-							<p class="text-uppercase">
-							<strong>Payment Method</strong>
-							</p>
-							<address>
-							<strong>Credit Card</strong><br>
-							Credit Card Type: Visa<br>
-							Transaction ID: #0009324670<br><br>
-							<a href="#" class="btn btn-primary btn-sm">Right of Withdrawl</a>
-							</address>
-							</div>
-							</div>
-							<!-- Row end -->
-
-							<div class="spacer30"></div>
-
-							<!-- Row start -->
-							<div class="row gutters">
-							<div class="col-lg-6 col-md-6 col-sm-6">
-							<p class="text-uppercase">
-							<strong>Shipping Information</strong>
-							</p>
-							<address>
-							<strong>Unify INC.</strong><br>
-							Another Location, Somewhere<br>
-							New York NY,4468, United States<br>
-							Tel: 000-000-6666<br>
-							</address>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6">
-							<p class="text-uppercase">
-							<strong>Shipping Method</strong>
-							</p>
-							<p class="m-0">UPS: U.S. Shipping Services</p>
-							</div>
-							</div>
-							<!-- Row end --> *@
+								
 							</div>
 						</div>
 					</div>
@@ -171,7 +121,9 @@
 				Address: parseInt($("#address").text()),
 				MobileNumber: parseInt($("#mobileno").text()),
 				PincodeId: parseInt($("#pin").text()),
-				OrderUniqueNo: parseInt($("#uniqno").text()),
+				OrderUniqueNo: $("#uniqno").text(),
+				BuyerOrderId: parseInt($("#buyerid").text()),
+				TotalWaight: parseFloat($("#totalwaight").text()),
 				Items: [],
 			};
 
@@ -201,7 +153,7 @@
 						icon: "success",
 						confirmButtonText: "OK"
 					}).then((result) => {
-						window.location.href = "/SO/OrderList";
+						window.location.href = "/SO/Buyerorderlist";
 					});
 
 				},
