@@ -128,13 +128,6 @@ namespace Distributor_partner.Controllers
 			}
 		}
 
-		//[HttpGet]
-		//public IActionResult OrderList()
-		//{
-		//	var DistributorId = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "DistributorRegistrationId").Value.ToString());
-		//	var list = _DPOService.GetDPOList(DistributorId);
-		//	ViewBag.OrderList = list;
-		//	return View();
-		//}
+		
 	}
 }
