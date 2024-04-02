@@ -105,7 +105,7 @@
 
 							<br />
 
-						@*	<div class="form-group col-md-3">
+							@*<div class="form-group col-md-3">
 
 								<label for="UnitId" class="form-label">UOM &nbsp;<span style="color:red;"><b>*</b></span></label>
 								<input asp-for="@Model.UnitId" id="UnitId" type="text" class="form-control" placeholder="UOM" readonly/>
@@ -118,6 +118,13 @@
 								<input asp-for="@Model.Value" id="Value" type="text" class="form-control" placeholder="Value" readonly/>
 								<span asp-validation-for="Value"></span>
 							</div>
+
+
+							<div class="form-group col-md-3">
+								<label for="Weight" class="form-label">Weight &nbsp;<span style="color:red;"><b>*</b></span></label>
+								<input id="Weight" name="Weight" type="text" class="form-control" placeholder="Weight" />
+							</div>
+
 						</div>
 
 					</div>
@@ -138,6 +145,7 @@
 									<th>Item</th>
 									<th>Quantity</th>
 									<th>Amount</th>
+									<th>Weight</th>
 									<th>Action</th>
 								</tr>
 							</thead>
@@ -253,10 +261,10 @@
 				console.log(result);
 
 				var ValueTxt = document.getElementById("Value");
-				var UnitTxt = document.getElementById("UnitId");
+				var WeightTxt = document.getElementById("Weight");
 
 				ValueTxt.value = result.mrp;
-				UnitTxt.value = result.sectorName; //getting unit name through SectorName
+				WeightTxt.value = result.productWeight;
 			},
 			error: function () {
 
@@ -280,6 +288,8 @@
 				var ItemId = selectedItemValue;
 				var valuePrice = $('#Value').val();
 
+				var weight = parseFloat($('#Weight').val()) || 0;
+
 				var valuePrice = parseFloat($('#Value').val()) || 0;
 
 				var Quantity = parseFloat($('#Quantity').val()) || 0; // Parse as float, default to 0 if not a valid number
@@ -287,10 +297,15 @@
 				//var MonthId = selectedMonthValue;
 
 				var product = valuePrice * Quantity;
+				var weightProduct = weight * Quantity;
 
 				if (SellerValue && ItemValue && !isNaN(Quantity)) {
 
-					var row = "<tr><td data-value='" + SellerId + "'>" + SellerValue + "</td><td data-value='" + ItemId + "'>" + ItemValue + "</td><td data-value='" + Quantity + "'>" + Quantity + "</td><td data-value='" + product + "'>" + product + "</td><td style='display: none;' data-value='" + valuePrice + "'>" + valuePrice + "</td><td><button class='delRowBtn'><i class='icon-trash' style='color: red;'></i></button></td></tr>";
+					//var row = "<tr><td data-value='" + SellerId + "'>" + SellerValue + "</td><td data-value='" + ItemId + "'>" + ItemValue + "</td><td data-value='" + Quantity + "'>" + Quantity + "</td><td data-value='" + product + "'>" + product + "</td><td style='display: none;' data-value='" + valuePrice + "'>" + valuePrice + "</td><td><button class='delRowBtn'><i class='icon-trash' style='color: red;'></i></button></td></tr>";
+
+
+					var row = "<tr><td data-value='" + SellerId + "'>" + SellerValue + "</td><td data-value='" + ItemId + "'>" + ItemValue + "</td><td data-value='" + Quantity + "'>" + Quantity + "</td><td data-value='" + product + "'>" + product + "</td><td data-value='" + weightProduct + "'>" + weightProduct + "</td><td><button class='delRowBtn'><i class='icon-trash' style='color: red;'></i></button></td></tr>";
+
 
 
 
@@ -317,6 +332,7 @@
 		function updateTotalRow() {
 			var totalAmount = 0;
 			var totalQuantity = 0;
+			var totalWeight = 0;
 
 			$('#Statee tbody tr').each(function () {
 					var product = parseFloat($(this).find('td:eq(3)').text()) || 0;
@@ -326,11 +342,19 @@
 			$('#Statee tbody tr').each(function () {
 				var quantity = parseFloat($(this).find('td:eq(2)').text()) || 0;
 				totalQuantity += quantity;
+
+			});
+
+			$('#Statee tbody tr').each(function () {
+				var weightProduct = parseFloat($(this).find('td:eq(4)').text()) || 0;
+				totalWeight += weightProduct;
+
 			});
 
 			// Update the total row within the tfoot
 			$('#totalRow td:eq(1)').text(totalQuantity);
 			$('#totalRow td:eq(2)').text(totalAmount);
+			$('#totalRow td:eq(3)').text(totalWeight);
 			
 		}
 	});
@@ -376,6 +400,7 @@
 				var Quantity = parseFloat($irow.find("td:eq(2)").data("value"));
 				var Amount = parseFloat($irow.find("td:eq(3)").data("value"));
 				var itemValue = parseFloat($irow.find("td:eq(4)").data("value"));
+				var totalWeight = parseFloat($irow.find("td:eq(5)").data("value"));
 
 
 
@@ -402,11 +427,13 @@
 
 			var totalQuantity = parseFloat($('#totalRow td:eq(1)').text());
 			var totalAmount = parseFloat($('#totalRow td:eq(2)').text());
+			var totalWeight = parseFloat($('#totalRow td:eq(3)').text());
 			//var SellerRegId = SellerId;
 
 			var b = {
 				"TotalQuantity": totalQuantity,
 				"TotalAmount": totalAmount,
+				"TotalWeight": totalWeight,
 				"SellerRegistrationId": SellerId,
 				"CreatedBy": @(Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value))
 						};

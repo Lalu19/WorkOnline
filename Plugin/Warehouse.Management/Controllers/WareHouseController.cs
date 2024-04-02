@@ -143,7 +143,18 @@ namespace Warehouse.Management.Controllers
 
             return View("~/Plugins/Warehouse.Management/Views/WareHouse/WareHouseDeliveryAgentsView.cshtml");
         }
-        
+
+
+        [HttpGet]
+        public IActionResult GetDAWithCapacitybyTaskId(Int64 TaskId)
+        {
+            Int64 WHouseManagerId = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
+
+            var agents = _deliveryPartnerService.GetDAWithCapacityByTaskId(WHouseManagerId, TaskId);
+            ViewBag.WeightWiseAgent = agents;
+
+            return View("~/Plugins/Warehouse.Management/Views/WareHouse/AgentsAvailableWithCapacityView.cshtml");
+        }
 
 
 

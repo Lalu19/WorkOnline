@@ -15,7 +15,8 @@ namespace CloudVOffice.Services.Orders
         public List<BuyerOrder> GetBuyerOrderListByUserId(int UserId);
 
         public List<Item> GetItemsByPincodeId(int pincodeId);
-        public List<BuyerOrder> GetBuyerOrderListByPincode(Int64 PincodeId);
+        public List<BuyerOrder> GetBuyerOrderListByPincode(Int64 PincodeId, Int64 BrandId);
+        public List<BuyerOrder> GetBuyerOrderListByBuyerOrderId(Int64 BuyerOrderId);
 
 	}
 }
