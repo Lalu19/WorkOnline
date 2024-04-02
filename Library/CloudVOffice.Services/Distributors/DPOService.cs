@@ -58,7 +58,7 @@ namespace CloudVOffice.Services.Distributors
                 .Include(s => s.DPOItems.Where(x => x.Deleted == false))
                 .ThenInclude(s => s.Item)
                 .Include(s => s.WareHuose)
-                .Where(x => x.Deleted == false).ToList();
+                .Where(x => x.Deleted == false && x.OrderStatus == "Order Placed").ToList();
         }
 
         public List<DPO> GetAllDPOListbyParentId(int parentId)

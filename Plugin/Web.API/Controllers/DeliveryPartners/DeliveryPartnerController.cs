@@ -159,7 +159,7 @@ namespace Web.API.Controllers.DeliveryPartners
             return Ok(a);
         }
 
-        [HttpGet("{bannerId}")]
+        [HttpGet("{deliveryPartnerId}")]
         public IActionResult SingleDeliveryPartnerListbyId(Int64 deliveryPartnerId)
         {
             var a = _deliveryPartnerService.GetDeliveryPartnerById(deliveryPartnerId);
@@ -244,8 +244,6 @@ namespace Web.API.Controllers.DeliveryPartners
             }
         }
 
-
-
         [HttpPost]
         public IActionResult AgentTaskAcceptCreatePage([FromForm] WareHouseDAAcceptDTO wareHouseDAAcceptDTO)
         {
@@ -327,7 +325,6 @@ namespace Web.API.Controllers.DeliveryPartners
             {
                 throw;
             }
-
         }
 
         [HttpGet]
@@ -337,13 +334,11 @@ namespace Web.API.Controllers.DeliveryPartners
             return Ok(list);
         }
 
-
         [HttpGet("{WareHouseDAAcceptId}")]
         public IActionResult GetWareHouseDAAcceptById(Int64 WareHouseDAAcceptId)
         {
             var a = _wareHouseDAAcceptService.GetWareHouseDAAcceptListById(WareHouseDAAcceptId);
             return Ok(a);
         }
-
     }
 }
