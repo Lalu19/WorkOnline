@@ -80,6 +80,7 @@ namespace Distributor_partner.Controllers
 					TotalAmount = dpoDTO.TotalAmount,
 					TotalQuantity = dpoDTO.TotalQuantity,
 					OrderStatus = "Order Placed",
+					TotalWeight = dpoDTO.TotalWeight,
 					CreatedBy = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "DistributorRegistrationId").Value.ToString()),
 					CreatedDate = DateTime.Now
 				};

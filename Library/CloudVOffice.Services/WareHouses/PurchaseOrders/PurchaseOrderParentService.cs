@@ -81,6 +81,7 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
 					purchaseOrderParent.WareHuoseId = purchaseOrderParentDTO.WareHuoseId;
 					purchaseOrderParent.OrderShipped = purchaseOrderParentDTO.OrderShipped;
 					purchaseOrderParent.POPUniqueNumber = random.Next(100000, 1000000).ToString();
+                    purchaseOrderParent.TotalWeight = purchaseOrderParentDTO.TotalWeight;
 					purchaseOrderParent.CreatedBy = purchaseOrderParentDTO.CreatedBy;
 					purchaseOrderParent.CreatedDate = System.DateTime.Now;
 					
@@ -141,6 +142,7 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
 						order.SellerRegistrationId = purchaseOrderParentDTO.SellerRegistrationId;
 						order.WareHuoseId = purchaseOrderParentDTO.WareHuoseId;
 						order.OrderShipped = purchaseOrderParentDTO.OrderShipped;
+                        order.TotalWeight = purchaseOrderParentDTO.TotalWeight;
 						order.UpdatedBy = purchaseOrderParentDTO.CreatedBy;
 						order.UpdatedDate = DateTime.Now;
                         _dbContext.SaveChanges();

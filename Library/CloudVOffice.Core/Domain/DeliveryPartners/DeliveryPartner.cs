@@ -20,7 +20,7 @@ namespace CloudVOffice.Core.Domain.DeliveryPartners
         public string? VehicleType { get; set; }
         public string? AssignedCode { get; set; }
         public string? RegistrationType { get; set; }
-        public string? LoadCapacity { get; set; }
+        public double? LoadCapacity { get; set; }
         public Int64? RetailModelId { get; set; }
         public string? VehicleName { get; set; }
         public string? EngineNumber { get; set; }

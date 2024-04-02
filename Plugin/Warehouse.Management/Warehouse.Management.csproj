@@ -85,7 +85,9 @@
 		<None Remove="Views\Vehicle\VehicleView.cshtml" />
 		<None Remove="Views\Vendor\VendorCreate.cshtml" />
 		<None Remove="Views\Vendor\VendorView.cshtml" />
+		<None Remove="Views\WareHouse\AgentsAvailableWithCapacityView.cshtml" />
 		<None Remove="Views\WareHouse\WareHouseCreate.cshtml" />
+		<None Remove="Views\WareHouse\WareHouseDAAcceptView.cshtml" />
 		<None Remove="Views\WareHouse\WareHouseDeliveryAgentsView.cshtml" />
 		<None Remove="Views\WareHouse\WareHouseView.cshtml" />
 	</ItemGroup>

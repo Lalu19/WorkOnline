@@ -616,10 +616,8 @@ namespace CloudVOffice.Services.WareHouses.Itemss
                 .Where(a => a.WareHuoseId == WareHuoseId && a.Deleted == false)
                 .ToList();
         }
-
     }
 
-        
+      
 
 }
-
