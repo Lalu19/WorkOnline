@@ -470,9 +470,9 @@
     }
 
 
+
     var originalAcceptedItemHtml = '';  //to handle the cancel button
     var removedRowHtml = '';
-
 
     function acceptAction(itemName, salesCost, shortName, caseWeight, mrp, cgst, sgst, quantity) {
         // Check if data is already present in acceptedItemContainer
@@ -494,40 +494,42 @@
             acceptedItemHtml += '</div>';
             acceptedItemHtml += '</div>';
 
-            // Remove the row from the table based on the itemName
+          
             var removedRow = $('#itemsTable').find('td:contains("' + itemName + '")').closest('tr').remove();
+            removedRowHtml = removedRow.prop('outerHTML');
 
-            // Update the total amount by subtracting the value of the removed row
+          
             var removedValue = parseFloat(removedRow.find('td:eq(4)').text().replace('₹', '').trim());
             var totalAmount = parseFloat($('#itemsTable').find('div:contains("Total Amount:")').text().replace('Total Amount: ₹', '').trim());
             totalAmount -= removedValue;
 
-            // Update the total amount in the table
+           
             $('#itemsTable').find('div:contains("Total Amount:")').text('Total Amount: ₹' + totalAmount.toFixed(2));
 
             $('#acceptedItemContainer').append(acceptedItemHtml);
             originalAcceptedItemHtml = $('#acceptedItemContainer').html();
-
         }
     }
 
+    function backButtonClick(itemName, salesCost, shortName, caseWeight, mrp, cgst, sgst, quantity) {
+        if (removedRowHtml !== '') {
+
+            $('#itemsTable tbody').append(removedRowHtml);
 
 
-
-    function backButtonClick() {
-        // Restore the original HTML content of #acceptedItemContainer
-        //$('#acceptedItemContainer').html(originalAcceptedItemHtml2);
-
-
-        $('#itemsTable').html(originalItemsTableHtml2);
-        //$('#itemsTable').html(originalAcceptedItemHtml);
-        $('#acceptedItemContainer').empty();
+            var removedValue = parseFloat($(removedRowHtml).find('td:eq(4)').text().replace('₹', '').trim());
+            var totalAmount = parseFloat($('#itemsTable').find('div:contains("Total Amount:")').text().replace('Total Amount: ₹', '').trim());
+            totalAmount += removedValue;
 
 
-        //ChatGPT
+            $('#itemsTable').find('div:contains("Total Amount:")').text('Total Amount: ₹' + totalAmount.toFixed(2));
 
+            $('#acceptedItemContainer').empty();
+            originalAcceptedItemHtml = '';
+            removedRowHtml = '';
+        }
     }
-
+   
 
     function isTableEmpty() {
         return $('#itemsTable tbody tr').length === 0;
@@ -563,6 +565,9 @@
 
         // Append the editable form to the acceptedItemContainer
         $('#acceptedItemContainer').html(acceptedItemForm);
+        
+
+
     }
 
 
@@ -597,9 +602,18 @@
         $('#acceptedItemContainer').hide();
         console.log("Edited Data:", editedData);
     }
+   
+
+
+
+
+
 
     function cancelEdit() {
-        //$('#acceptedItemContainer').html(save);
+        //$('#
+        // 
+        // 
+        // ').html(save);
         $('#acceptedItemContainer').html(originalAcceptedItemHtml);
     }
     function rejectAction(itemId) {
@@ -621,6 +635,14 @@
 
         }
     }
+
+
+
+   
+
+    
+
+
 
 
     var itemDetails = [];
