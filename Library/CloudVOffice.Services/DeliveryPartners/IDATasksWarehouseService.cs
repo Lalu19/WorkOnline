@@ -18,6 +18,7 @@ namespace CloudVOffice.Services.DeliveryPartners
         public List<DATasksWarehouse> GetDATasksWarehouseList();
         public List<DATasksWarehouse> GetDATasksWarehouseUnAcceptedList();
         public List<DATasksWarehouse> GetDATasksWarehouseAcceptedList();
+        public List<DATasksWarehouse> GetDAAcceptedTasksWarehouseByDeliveryAgentId(Int64 DeliveryPartnerId);
 
     }
 }

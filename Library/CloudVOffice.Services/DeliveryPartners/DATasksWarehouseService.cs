@@ -167,5 +167,18 @@ namespace CloudVOffice.Services.DeliveryPartners
                 throw;
             }
         }
+
+		public List<DATasksWarehouse> GetDAAcceptedTasksWarehouseByDeliveryAgentId(Int64 DeliveryPartnerId)
+		{
+			try
+			{
+				var list = _dbContext.DATasksWarehouses.Where(a=> a.DeliveryPartnerId == DeliveryPartnerId).ToList();
+				return list;
+			}
+			catch
+			{
+				throw;
+			}
+		}
     }
 }

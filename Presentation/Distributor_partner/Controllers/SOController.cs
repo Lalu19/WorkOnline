@@ -16,6 +16,7 @@ namespace Distributor_partner.Controllers
     {
 		private readonly ApplicationDBContext _dbContext;
 		private readonly ISqlRepository<DSO> _SaleOrderRepo;
+		private readonly ISqlRepository<BuyerOrder> _BuyerOrderRepo;
 		private readonly IWebHostEnvironment _hostingEnvironment;
 		private readonly IItemService _ItemService;
 		private readonly IDPOService _DPOService;
@@ -27,6 +28,7 @@ namespace Distributor_partner.Controllers
 		public SOController(ApplicationDBContext dbContext,
 							IWebHostEnvironment hostingEnvironment,
 							ISqlRepository<DSO> SaleOrderRepo,
+							ISqlRepository<BuyerOrder> BuyerOrderRepo,
 							IItemService ItemService,
 							IDPOService DPOService,
 							IDPOItemsService DPOItemsService,
@@ -39,6 +41,7 @@ namespace Distributor_partner.Controllers
 			_hostingEnvironment = hostingEnvironment;
 			_ItemService = ItemService;
 			_SaleOrderRepo = SaleOrderRepo;
+			_BuyerOrderRepo = BuyerOrderRepo;
 			_DPOService = DPOService;
 			_DPOItemsService = DPOItemsService;
 			_BuyerOrderService = BuyerOrderService;
@@ -88,7 +91,9 @@ namespace Distributor_partner.Controllers
 					Address = dsoDTO.Address,
 					MobileNumber = dsoDTO.MobileNumber,
 					PincodeId = dsoDTO.PincodeId,
-					OrderStatus = "Order Placed",
+					BuyerOrderId = dsoDTO.BuyerOrderId,
+					TotalWaight = dsoDTO.TotalWaight,
+					OrderStatus = "Order Accepted",
 					CreatedBy = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "DistributorRegistrationId").Value.ToString()),
 					CreatedDate = DateTime.Now
 				};
@@ -109,7 +114,12 @@ namespace Distributor_partner.Controllers
 				}
 
 				var obj = _SaleOrderRepo.Insert(dso);
-
+				var buyerOrderlist = _BuyerOrderService.GetsingleBuyerOrderListByBuyerOrderId((long)dsoDTO.BuyerOrderId); 
+				if (buyerOrderlist != null)
+				{
+					buyerOrderlist.OrderStatus = "Order Accepted";
+					_BuyerOrderRepo.Update(buyerOrderlist); 
+				}
 				return Ok("DSO saved successfully");
 			}
 			catch (Exception ex)
@@ -118,13 +128,6 @@ namespace Distributor_partner.Controllers
 			}
 		}
 
-		//[HttpGet]
-		//public IActionResult OrderList()
-		//{
-		//	var DistributorId = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "DistributorRegistrationId").Value.ToString());
-		//	var list = _DPOService.GetDPOList(DistributorId);
-		//	ViewBag.OrderList = list;
-		//	return View();
-		//}
+		
 	}
 }

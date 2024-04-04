@@ -40,19 +40,46 @@
 								<th>Action</th>
 								<th>Order Number</th>
 								<th>Order Date</th>
+								<th>Order Status</th>
 							</tr>
 						</thead>
 						<tbody>
 							@foreach (var item in ViewBag.OrderList)
 							{
 								<tr>
-
-									<td>
-										<a href="/SO/Buyerorderdetails?BuyerOrderId=@item.BuyerOrderId"><i class="icon-pencil3" style="font-size:22px"></i></a>
-									</td>
+									@if (item.OrderStatus == "Order Placed")
+									{
+										<td>
+											<a href="/SO/Buyerorderdetails?BuyerOrderId=@item.BuyerOrderId"><i class="icon-edit" style="font-size:22px"></i></a>
+										</td>
+									}
+									else
+									{
+										<td>
+											<a href="/SO/Buyerorderdetails?BuyerOrderId=@item.BuyerOrderId"><i class="icon-document" style="font-size:22px"></i></a>
+										</td>
+									}
+									
 									<td>@item.OrderUniqueNo</td>
 									<td>@item.CreatedDate</td>
-									
+									<td>
+										@if (item.OrderStatus == "Order Placed")
+										{
+											<button class="btn btn-warning btn-rounded btn-sm">@item.OrderStatus</button>
+										}
+										else if (item.OrderStatus == "Order Accepted")
+										{
+											<button class="btn btn-danger btn-rounded btn-sm">@item.OrderStatus</button>
+										}
+										else if (item.OrderStatus == "Order Delivered")
+										{
+											<button class="btn btn-success btn-rounded btn-sm">@item.OrderStatus</button>
+										}
+										else
+										{
+											<button class="btn btn-secondary btn-rounded btn-sm">@item.OrderStatus</button>
+										}
+									</td>
 								</tr>
 							}
 						</tbody>

@@ -200,27 +200,38 @@
 				$("#ItemId").val("");
 				$("#Quantity").val("");
 				$("#Value").val("");
+				$("#Weight").val("");
 			} else {
 				alert("Please fill all the fields");
 			}
 		});
-
-		// Remove row
+		//remove
 		$("#Target_tb").on("click", ".removeRow", function () {
 			var row = $(this).closest("tr");
-			var quantityToRemove = parseInt(row.find("td:nth-child(2)").text());
-			var amountToRemove = parseFloat(row.find("td:nth-child(4)").text());
-			var weightToRemove = parseFloat(row.find("td:nth-child(5)").text());
+			var quantityToRemove = parseInt(row.find("td:nth-child(3)").text());
+			var amountToRemove = parseFloat(row.find("td:nth-child(5)").text());
+			var waightToRemove = parseFloat(row.find("td:nth-child(6)").text());
 
 			row.remove();
 
 			totalQuantity -= quantityToRemove;
 			totalAmount -= amountToRemove;
-			totalWeight -= weightToRemove;
+			totalweight -= waightToRemove;
 
 			$("#totalRow td:nth-child(2)").text(totalQuantity);
 			$("#totalRow td:nth-child(4)").text(totalAmount.toFixed(2));
-			$("#totalRow td:nth-child(5)").text(totalWeight.toFixed(2));
+			$("#totalRow td:nth-child(5)").text(totalweight.toFixed(2));
+			if ($("#Target_tb tr").length === 0) {
+				totalQuantity = 0;
+				totalAmount = 0;
+				totalweight = 0;
+				$("#totalRow td:nth-child(2)").text(totalQuantity);
+				$("#totalRow td:nth-child(4)").text(totalAmount.toFixed(2));
+				$("#totalRow td:nth-child(5)").text(totalweight.toFixed(2));
+			}
+			$("#totalRow td:nth-child(2)").text(totalQuantity);
+			$("#totalRow td:nth-child(4)").text(totalAmount.toFixed(2));
+			$("#totalRow td:nth-child(5)").text(totalweight.toFixed(2));
 		});
 
 		$.ajax({

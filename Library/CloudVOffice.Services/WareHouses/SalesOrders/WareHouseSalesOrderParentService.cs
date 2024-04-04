@@ -47,6 +47,9 @@ namespace CloudVOffice.Services.WareHouses.SalesOrders
 
                     var dpo = _dbContext.DPO.FirstOrDefault(a => a.DPOUniqueNo == warehouseSalesOrderParentDTO.DPOUniqueNo);
 
+                    dpo.OrderStatus = "Order Accepted";
+                    _dbContext.SaveChanges();
+
                     WHSOParent.DistributorRegistrationId = dpo.DistributorId;
                     WHSOParent.TotalQuantity = warehouseSalesOrderParentDTO.TotalQuantity;
                     WHSOParent.TotalAmount = warehouseSalesOrderParentDTO.TotalAmount;

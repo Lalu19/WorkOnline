@@ -44,7 +44,6 @@
 								<th>Total Amount</th>
 								<th>Total Quantity</th>
 								<th>Order Date</th>
-								@* <th>Items</th> *@
 							</tr>
 						</thead>
 						<tbody>
@@ -52,18 +51,47 @@
 							{
 								<tr>
 									
-									<td>
+									@* <td>
 										<button class="delete-button" data-orderid="@item.DPOId" style="background: transparent;border: none;">
 											<i class="icon-trash" style="font-size:22px"></i>
 										</button>
+									</td> *@
+									@if (item.OrderStatus == "Order Placed")
+									{
+										<td>
+											<button class="delete-button" data-orderid="@item.DPOId" style="background: transparent;border: none;">
+												<i class="icon-trash" style="font-size:22px"></i>
+											</button>
+										</td>
+									}
+									else
+									{
+										<td></td> <!-- empty cell if order status is not "Order Placed" -->
+									}
+									@* <td>@item.OrderStatus</td> *@
+									<td>
+										@if (item.OrderStatus == "Order Placed")
+										{
+											<button class="btn btn-warning btn-rounded btn-sm">@item.OrderStatus</button>
+										}
+										else if (item.OrderStatus == "Order Accepted")
+										{
+											<button class="btn btn-danger btn-rounded btn-sm">@item.OrderStatus</button>
+										}
+										else if (item.OrderStatus == "Order Delivered")
+										{
+											<button class="btn btn-success btn-rounded btn-sm">@item.OrderStatus</button>
+										}
+										else
+										{
+											<button class="btn btn-secondary btn-rounded btn-sm">@item.OrderStatus</button> <!-- default button style -->
+										}
 									</td>
-									<td>@item.OrderStatus</td>
 									<td>@item.DPOUniqueNo</td>
 									<td>@item.WareHuose.WareHouseName</td>
 									<td>@item.TotalAmount</td>
 									<td>@item.TotalQuantity</td>
 									<td>@item.CreatedDate</td>
-									@* <td>@item.DPOItems.ItemId</td> *@
 								</tr>
 							}
 						</tbody>
@@ -80,9 +108,9 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script type="text/javascript">
 	$(document).ready(function () {
-		$('#fixedHeader').DataTable({
-			"pageLength": 10
-		});
+		// $('#fixedHeader').DataTable({
+		// 	"pageLength": 10
+		// });
 		$('#fixedHeader').on('click', '.delete-button', function () {
 			var orderId = $(this).data('orderid');
 			Swal.fire({ 

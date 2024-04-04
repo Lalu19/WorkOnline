@@ -7,18 +7,18 @@ using CloudVOffice.Data.Persistence;
 using CloudVOffice.Services.DeliveryPartners;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Web.API.DATasksWareHouses
+namespace Web.API.Controllers.DATasksWarehouses
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
 
-    public class DATasksWareHousesController : Controller
+    public class DATasksWarehouseController : Controller
     {
 
         private readonly IDATasksWarehouseService _dATasksWarehouseService;
         private readonly ApplicationDBContext _dbContext;
 
-        public DATasksWareHousesController(IDATasksWarehouseService dATasksWarehouseService, ApplicationDBContext dbContext)
+        public DATasksWarehouseController(IDATasksWarehouseService dATasksWarehouseService, ApplicationDBContext dbContext)
         {
             _dATasksWarehouseService = dATasksWarehouseService;
             _dbContext = dbContext;
@@ -46,6 +46,8 @@ namespace Web.API.DATasksWareHouses
             }
         }
 
+
+
         [HttpGet]
         public IActionResult GetDATasksWarehouseUnAcceptedList()
         {
@@ -60,6 +62,12 @@ namespace Web.API.DATasksWareHouses
             return Ok(a);
         }
 
+        [HttpGet("{DeliveryPartnerId}")]
+        public IActionResult GetDATasksWHAcceptedListByAgentId(Int64 DeliveryPartnerId)
+        {
+            var a = _dATasksWarehouseService.GetDAAcceptedTasksWarehouseByDeliveryAgentId(DeliveryPartnerId);
+            return Ok(a);
+        }
 
     }
 }
