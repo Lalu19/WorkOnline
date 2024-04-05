@@ -693,6 +693,51 @@ namespace CloudVOffice.Services.WareHouses.Stocks
             }
             return brandDataList;
         }
+        public async Task<double?> CalculateOpeningStockAsync(Int64 warehouseId, Int64 itemId, DateTime startDate)
+        {
+            // Calculate the sum of quantities for the specified item before the start date
+            var openingStock = await _dbContext.Stocks
+                .Where(s => s.WareHuoseId == warehouseId && s.ItemId == itemId && s.CreatedDate < startDate)
+                .SumAsync(s => s.Quantity);
+
+            return openingStock;
+        }
+
+        public async Task<double?> CalculateClosingStockAsync(Int64 warehouseId, Int64 itemId, DateTime endDate)
+        {
+            // Calculate the sum of quantities for the specified item before or on the end date
+            var closingStock = await _dbContext.Stocks
+                .Where(s => s.WareHuoseId == warehouseId && s.ItemId == itemId && s.CreatedDate <= endDate)
+                .SumAsync(s => s.Quantity);
+
+            return closingStock;
+        }
+
+        //public async Task UpdateStocksWithOpeningAndClosingStocksAsync(Int64 warehouseId, Int64 itemId, DateTime startDate, DateTime endDate)
+        //{
+        //    // Get stocks for the specified warehouse and item within the date range
+        //    var stocks = await _dbContext.Stocks
+        //        .Where(s => s.WareHuoseId == warehouseId && s.ItemId == itemId && s.CreatedDate >= startDate && s.CreatedDate <= endDate)
+        //        .ToListAsync();
+
+        //    // Calculate opening stock and closing stock
+        //    double? openingStock = await _dbContext.Stocks
+        //        .Where(s => s.WareHuoseId == warehouseId && s.ItemId == itemId && s.CreatedDate < startDate)
+        //        .SumAsync(s => s.Quantity);
+
+        //    double? closingStock = await _dbContext.Stocks
+        //        .Where(s => s.WareHuoseId == warehouseId && s.ItemId == itemId && s.CreatedDate <= endDate)
+        //        .SumAsync(s => s.Quantity);
+
+        //    // Update each stock record with opening and closing stock values
+        //    foreach (var stock in stocks)
+        //    {
+        //        stock.OpeningStock = openingStock;
+        //        stock.ClosingStock = closingStock;
+        //    }
+
+        //    await _dbContext.SaveChangesAsync();
+        //}
 
     }
 }
