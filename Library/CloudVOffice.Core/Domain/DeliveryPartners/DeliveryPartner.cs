@@ -19,6 +19,7 @@ namespace CloudVOffice.Core.Domain.DeliveryPartners
         public string? FuelType { get; set; }
         public string? VehicleType { get; set; }
         public string? AssignedCode { get; set; }
+        public string? AssignedUnder { get; set; }
         public string? RegistrationType { get; set; }
         public double? LoadCapacity { get; set; }
         public Int64? RetailModelId { get; set; }

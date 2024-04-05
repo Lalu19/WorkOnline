@@ -10,7 +10,8 @@ namespace CloudVOffice.Data.DTO.DeliveryPartners
 	public class WareHouseDAAcceptDTO
 	{
 		public Int64? WareHouseDAAcceptId { get; set; }
-		public Int64 DATasksWarehouseId { get; set; }
+		public Int64? DATasksWarehouseId { get; set; }
+		public Int64? DATasksDistributorId { get; set; }
 		public Int64 DeliveryPartnerId { get; set; }
 		public DateTime StartTime { get; set; }
 		public double StartKM { get; set; }

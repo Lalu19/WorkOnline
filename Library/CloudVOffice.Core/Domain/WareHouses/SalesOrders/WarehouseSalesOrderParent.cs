@@ -5,6 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CloudVOffice.Core.Domain.Distributor;
+using CloudVOffice.Core.Domain.Distributors;
+using CloudVOffice.Core.Domain.WareHouses.Items;
 
 namespace CloudVOffice.Core.Domain.WareHouses.SalesOrders
 {

@@ -155,6 +155,7 @@ namespace CloudVOffice.Web.Framework
             services.AddScoped<IDATasksWarehouseService, DATasksWarehouseService>();
             services.AddScoped<IWareHouseDAAcceptService, WareHouseDAAcceptService>();
             services.AddScoped<IPushNotificationService, PushNotificationService>();
+            services.AddScoped<IDATasksDistrbutorService, DATasksDistributorService>();
 
 
 
