@@ -54,6 +54,7 @@ namespace CloudVOffice.Services.DeliveryPartners
 
 				WareHouseDAAccept WHDAAccept = new WareHouseDAAccept();
 
+				WHDAAccept.DATasksDistributorId = wareHouseDAAcceptDTO.DATasksDistributorId;
 				WHDAAccept.DATasksWarehouseId = wareHouseDAAcceptDTO.DATasksWarehouseId;
 				WHDAAccept.DeliveryPartnerId = wareHouseDAAcceptDTO.DeliveryPartnerId;
 				WHDAAccept.StartTime = wareHouseDAAcceptDTO.StartTime;
@@ -101,5 +102,7 @@ namespace CloudVOffice.Services.DeliveryPartners
 				throw;
 			}
         }
+
+		/*public List<WareHouseDAAccept>*/   //by WarehouseTasks,DistributorTasks, DeliveryPartnerId. and in the deliveryPartnerController
     }
 }

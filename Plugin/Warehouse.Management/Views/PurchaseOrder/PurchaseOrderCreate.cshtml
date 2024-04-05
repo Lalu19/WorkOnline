@@ -250,6 +250,34 @@
 		});
 	}
 
+	//function onChangeItem(args) {
+	//	$.ajax({
+	//		type: "GET",
+	//		url: "/WareHouse/PurchaseOrder/ItemDetails",
+	//		data: { itemId: args.value },
+	//		contentType: "application/json",
+	//		dataType: "json",
+	//		success: function (result) {
+	//			console.log(result);
+
+	//			var ValueTxt = document.getElementById("Value");
+	//			var WeightTxt = document.getElementById("Weight");
+	//			var WeightUOM;
+
+	//			ValueTxt.value = result.mrp;
+	//			WeightTxt.value = result.productWeight;
+	//			WeightUOM.value = result.unitId
+
+	//			if(WeightUOM.value == 2){
+
+	//			}
+	//		},
+	//		error: function () {
+
+	//		}
+	//	});
+	//}
+
 	function onChangeItem(args) {
 		$.ajax({
 			type: "GET",
@@ -262,15 +290,24 @@
 
 				var ValueTxt = document.getElementById("Value");
 				var WeightTxt = document.getElementById("Weight");
+				var WeightUOM = result.unitId;
 
 				ValueTxt.value = result.mrp;
-				WeightTxt.value = result.productWeight;
+
+				if (WeightUOM == 1) {
+					WeightTxt.value = result.productWeight;
+				} else if (WeightUOM == 2) {
+					WeightTxt.value = result.productWeight / 1000;
+				}
 			},
 			error: function () {
 
 			}
 		});
 	}
+
+
+
 
 	$(document).ready(function () {
 		// Create an object to store sums for each secId

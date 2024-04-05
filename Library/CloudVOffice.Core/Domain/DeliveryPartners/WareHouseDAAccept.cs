@@ -9,6 +9,7 @@ namespace CloudVOffice.Core.Domain.DeliveryPartners
 	public class WareHouseDAAccept : IAuditEntity, ISoftDeletedEntity
 	{
 		public Int64 WareHouseDAAcceptId { get; set; }
+		public Int64? DATasksDistributorId { get; set; }
 		public Int64? DATasksWarehouseId { get; set; }
 		public Int64? DeliveryPartnerId { get; set; }
 		public DateTime? StartTime { get; set; }

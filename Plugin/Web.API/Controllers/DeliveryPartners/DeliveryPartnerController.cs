@@ -24,13 +24,16 @@ namespace Web.API.Controllers.DeliveryPartners
         private readonly IDATasksWarehouseService _dATasksWarehouseService;
         private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly IWareHouseDAAcceptService _wareHouseDAAcceptService;
-        public DeliveryPartnerController(IDeliveryPartnerService deliveryPartnerService, IWebHostEnvironment hostingEnvironment, IDATasksWarehouseService dATasksWarehouseService, IWareHouseDAAcceptService wareHouseDAAcceptService)
+        private readonly IDATasksDistrbutorService _dATasksDistrbutorService;
+        public DeliveryPartnerController(IDeliveryPartnerService deliveryPartnerService, IWebHostEnvironment hostingEnvironment, IDATasksWarehouseService dATasksWarehouseService, IWareHouseDAAcceptService wareHouseDAAcceptService, IDATasksDistrbutorService dATasksDistrbutorService)
         {
             _deliveryPartnerService = deliveryPartnerService;
             _hostingEnvironment = hostingEnvironment;
             _dATasksWarehouseService = dATasksWarehouseService;
             _wareHouseDAAcceptService = wareHouseDAAcceptService;
-        }
+            _dATasksDistrbutorService = dATasksDistrbutorService;
+
+		}
 
         [HttpPost]
         public IActionResult DeliveryPartnerCreate([FromForm] DeliveryPartnerDTO deliveryPartnerDTO)
@@ -340,5 +343,13 @@ namespace Web.API.Controllers.DeliveryPartners
             var a = _wareHouseDAAcceptService.GetWareHouseDAAcceptListById(WareHouseDAAcceptId);
             return Ok(a);
         }
-    }
+
+		[HttpGet("{DistributorDAAcceptId}")]
+		public IActionResult GetDistributorDAAcceptById(Int64 DistributorDAAcceptId)
+		{
+			var a = _wareHouseDAAcceptService.GetWareHouseDAAcceptListById(DistributorDAAcceptId);
+			return Ok(a);
+		}
+
+	}
 }

@@ -61,6 +61,17 @@ namespace CloudVOffice.Services.DeliveryPartners
                     deliveryPartner.CreatedBy = deliveryPartnerDTO.CreatedBy;
                     deliveryPartner.CreatedDate = System.DateTime.Now;
                     var obj = _deliveryPartnerRepo.Insert(deliveryPartner);
+
+					if (obj.AssignedCode.StartsWith("WH"))
+					{
+                        obj.AssignedUnder = "Warehouse";
+                    }
+					else if (obj.AssignedCode.StartsWith("DS"))
+					{
+						obj.AssignedUnder = "Distributor";
+					}
+                    _dbContext.SaveChanges();
+
                     return MessageEnum.Success;
                 }
                 else
@@ -354,5 +365,31 @@ namespace CloudVOffice.Services.DeliveryPartners
             }
         }
 
-    }
+		public List<DeliveryPartner> GetDistributorDAByTaskId(Int64 TaskId)
+		{
+			try
+			{
+
+				var task = _dbContext.DATasksDistributors.FirstOrDefault(z => z.DATasksDistributorId == TaskId);
+
+				if (task != null)
+				{
+
+					var DAgents = _dbContext.DeliveryPartners.Where(a => a.LoadCapacity >= task.Orderweight && a.AssignedCode == task.AssignmentCode).ToList();
+
+					return DAgents;
+				}
+				else
+				{
+					return null;
+				}
+			}
+			catch
+			{
+				throw;
+			}
+		}
+
+
+	}
 }
