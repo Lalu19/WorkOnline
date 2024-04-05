@@ -19,7 +19,8 @@ namespace CloudVOffice.Data.DTO.DeliveryPartners
         public string? Address { get; set; }
         public string? FuelType { get; set; }
         public string? VehicleType { get; set; }
-        public string? RegistrationType { get; set; }
+		public string? AssignedUnder { get; set; }
+		public string? RegistrationType { get; set; }
         public double? LoadCapacity { get; set; }
         public string? VehicleName { get; set; }
         public string? EngineNumber { get; set; }

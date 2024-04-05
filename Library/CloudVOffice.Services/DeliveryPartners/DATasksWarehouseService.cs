@@ -83,12 +83,66 @@ namespace CloudVOffice.Services.DeliveryPartners
 				await _notificationService.SendNotification(fcm, $"Deliver to {obj.Address}", "OW");
 			}
 
-
-
 			return MessageEnum.Success;
 		}
 
-		public List<DATasksWarehouse> GetTaskListByAssignedCode(string assignedCode)
+
+		//public (List<DATasksWarehouse>, List<DATasksDistributor>) GetTaskListByAssignedCode(string assignedCode)
+		//{
+		//	try
+		//	{
+		//		var delAgents = _dbContext.DeliveryPartners.Where(x => x.AssignedCode == assignedCode).ToList();
+
+		//		if (delAgents != null)
+		//		{
+		//			List<DATasksWarehouse> dATasksWarehouses = new List<DATasksWarehouse>();
+		//			List<DATasksDistributor> dATasksDistributor = new List<DATasksDistributor>();
+
+		//			foreach (var delAgent in delAgents)
+		//			{
+		//				if (delAgent != null && delAgent.Availability == true)
+		//				{
+		//					var tasks = _dbContext.DATasksWarehouses.Where(a => a.AssignmentCode == assignedCode).ToList();
+		//					var tasks1 = _dbContext.DATasksDistributors.Where(b => b.AssignmentCode == assignedCode).ToList();
+
+		//					if (tasks != null)
+		//					{
+		//						foreach (var task in tasks)
+		//						{
+		//							if (task.Orderweight <= delAgent.LoadCapacity && task.TaskAccepted == false)
+		//							{
+		//								dATasksWarehouses.Add(task);
+		//							}
+		//						}
+		//					}
+
+		//					if (tasks1 != null)
+		//					{
+		//						foreach (var task in tasks1)
+		//						{
+		//							if (task.Orderweight <= delAgent.LoadCapacity && task.TaskAccepted == false)
+		//							{
+		//								dATasksDistributor.Add(task);
+		//							}
+		//						}
+		//					}
+		//				}
+		//			}
+
+		//			return (dATasksWarehouses, dATasksDistributor);
+		//		}
+		//		else
+		//		{
+		//			return (null, null);
+		//		}
+		//	}
+		//	catch
+		//	{
+		//		throw;
+		//	}
+		//}
+
+		public List<DATasksWarehouse> GetWareHouseTaskListByAssignedCode(string assignedCode)
 		{
 			try
 			{
@@ -109,7 +163,7 @@ namespace CloudVOffice.Services.DeliveryPartners
 								if (task.Orderweight <= delAgent.LoadCapacity && task.TaskAccepted == false)
 								{
 									dATasksWarehouses.Add(task);
-								}								
+								}
 							}
 						}
 					}
@@ -126,6 +180,7 @@ namespace CloudVOffice.Services.DeliveryPartners
 				throw;
 			}
 		}
+
 
 
 

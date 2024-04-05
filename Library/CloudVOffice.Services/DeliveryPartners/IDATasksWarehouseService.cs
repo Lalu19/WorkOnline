@@ -14,8 +14,11 @@ namespace CloudVOffice.Services.DeliveryPartners
         //public Task<MessageEnum> CreateDATasksWarehouse(WarehouseSalesOrderParentDTO warehouseSalesOrderParentDTO);
         public Task<MessageEnum> CreateDATasksWarehouse(WarehouseSalesOrderParentDTO warehouseSalesOrderParentDTO, Int64 DistributorRegistrationId);
 
-        public List<DATasksWarehouse> GetTaskListByAssignedCode(string assignedCode);
-        public List<DATasksWarehouse> GetDATasksWarehouseList();
+        public List<DATasksWarehouse> GetWareHouseTaskListByAssignedCode(string assignedCode);
+
+        //public (List<DATasksWarehouse>, List<DATasksDistributor>) GetTaskListByAssignedCode(string assignedCode);
+
+		public List<DATasksWarehouse> GetDATasksWarehouseList();
         public List<DATasksWarehouse> GetDATasksWarehouseUnAcceptedList();
         public List<DATasksWarehouse> GetDATasksWarehouseAcceptedList();
         public List<DATasksWarehouse> GetDAAcceptedTasksWarehouseByDeliveryAgentId(Int64 DeliveryPartnerId);
