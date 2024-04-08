@@ -122,9 +122,9 @@ namespace CloudVOffice.Services.DeliveryPartners
                         partner.Password = deliveryPartnerDTO.Password;
                         partner.AssignedCode = deliveryPartnerDTO.AssignedCode;
                         partner.Availability = deliveryPartnerDTO.Availability;
-                        partner.NotificationSent = deliveryPartnerDTO.NotificationSent;
-                        partner.TaskAccepted = deliveryPartnerDTO.TaskAccepted;
-                        partner.TaskRejected = deliveryPartnerDTO.TaskRejected;
+                        //partner.NotificationSent = deliveryPartnerDTO.NotificationSent;
+                        //partner.TaskAccepted = deliveryPartnerDTO.TaskAccepted;
+                        //partner.TaskRejected = deliveryPartnerDTO.TaskRejected;
 
 
                         partner.UpdatedDate = DateTime.Now;
@@ -389,7 +389,5 @@ namespace CloudVOffice.Services.DeliveryPartners
 				throw;
 			}
 		}
-
-
 	}
 }

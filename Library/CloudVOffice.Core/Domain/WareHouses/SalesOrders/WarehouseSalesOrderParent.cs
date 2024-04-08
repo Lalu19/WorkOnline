@@ -21,8 +21,6 @@ namespace CloudVOffice.Core.Domain.WareHouses.SalesOrders
         public double? TotalQuantity { get; set; }
         public double? TotalAmount { get; set; }
 
-		[ForeignKey("DistributorRegistrationId")]
-		public DistributorRegistration DistributorRegistration { get; set; }
 
         [ForeignKey("WareHuoseId")]
         public WareHuose WareHuose { get; set; }

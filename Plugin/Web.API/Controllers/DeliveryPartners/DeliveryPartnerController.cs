@@ -247,109 +247,149 @@ namespace Web.API.Controllers.DeliveryPartners
             }
         }
 
-        [HttpPost]
-        public IActionResult AgentTaskAcceptCreatePage([FromForm] WareHouseDAAcceptDTO wareHouseDAAcceptDTO)
-        {
-            try
-            {
-				if (wareHouseDAAcceptDTO.StartMeterPhotoUp != null)
-				{
-					FileInfo fileInfo = new FileInfo(wareHouseDAAcceptDTO.StartMeterPhotoUp.FileName);
-					string extn = fileInfo.Extension.ToLower();
-					Guid id = Guid.NewGuid();
-					string filename = id.ToString() + Path.GetExtension(wareHouseDAAcceptDTO.StartMeterPhotoUp.FileName);
-
-					string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, @"uploads\AcceptedTasks");
-
-					if (!Directory.Exists(uploadsFolder))
-					{
-						Directory.CreateDirectory(uploadsFolder);
-					}
-
-					string uniqueFileName = Guid.NewGuid().ToString() + "_" + filename;
-					string imagePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-					// Copy the uploaded image to the specified path
-					using (var stream = new FileStream(imagePath, FileMode.Create))
-					{
-						wareHouseDAAcceptDTO.StartMeterPhotoUp.CopyTo(stream);
-					}
-
-					wareHouseDAAcceptDTO.StartMeterPhoto = filename;
-				}
 
 
-				if (wareHouseDAAcceptDTO.EndMeterPhotoUp != null)
-				{
-					FileInfo fileInfo = new FileInfo(wareHouseDAAcceptDTO.EndMeterPhotoUp.FileName);
-					string extn = fileInfo.Extension.ToLower();
-					Guid id = Guid.NewGuid();
-					string filename = id.ToString() + Path.GetExtension(wareHouseDAAcceptDTO.EndMeterPhotoUp.FileName);
-
-					string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, @"uploads\AcceptedTasks");
-
-					if (!Directory.Exists(uploadsFolder))
-					{
-						Directory.CreateDirectory(uploadsFolder);
-					}
-
-					string uniqueFileName = Guid.NewGuid().ToString() + "_" + filename;
-					string imagePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-					// Copy the uploaded image to the specified path
-					using (var stream = new FileStream(imagePath, FileMode.Create))
-					{
-						wareHouseDAAcceptDTO.EndMeterPhotoUp.CopyTo(stream);
-					}
-
-					wareHouseDAAcceptDTO.EndMeterPhoto = filename;
-				}
 
 
-                var a = _wareHouseDAAcceptService.CreateWareHouseDAAccept(wareHouseDAAcceptDTO);
+
+        //      [HttpPost]
+        //      public IActionResult AgentTaskAcceptCreatePage([FromForm] WareHouseDAAcceptDTO wareHouseDAAcceptDTO)
+        //      {
+        //          try
+        //          {
+        //		if (wareHouseDAAcceptDTO.StartMeterPhotoUp != null)
+        //		{
+        //			FileInfo fileInfo = new FileInfo(wareHouseDAAcceptDTO.StartMeterPhotoUp.FileName);
+        //			string extn = fileInfo.Extension.ToLower();
+        //			Guid id = Guid.NewGuid();
+        //			string filename = id.ToString() + Path.GetExtension(wareHouseDAAcceptDTO.StartMeterPhotoUp.FileName);
+
+        //			string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, @"uploads\AcceptedTasks");
+
+        //			if (!Directory.Exists(uploadsFolder))
+        //			{
+        //				Directory.CreateDirectory(uploadsFolder);
+        //			}
+
+        //			string uniqueFileName = Guid.NewGuid().ToString() + "_" + filename;
+        //			string imagePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+        //			// Copy the uploaded image to the specified path
+        //			using (var stream = new FileStream(imagePath, FileMode.Create))
+        //			{
+        //				wareHouseDAAcceptDTO.StartMeterPhotoUp.CopyTo(stream);
+        //			}
+
+        //			wareHouseDAAcceptDTO.StartMeterPhoto = filename;
+        //		}
 
 
-                if(a == MessageEnum.Success)
-                {
-                    return Ok(a);
-                }
-                else if (a == MessageEnum.Exists)
-                {
-                    return BadRequest("Task has already been assigned");
-                }
-                else if (a == MessageEnum.InvalidInput)
-                {
-                    return BadRequest("Either DeliveryPartnerId or DATasksWarehouseId is missing");
-                }
+        //		if (wareHouseDAAcceptDTO.EndMeterPhotoUp != null)
+        //		{
+        //			FileInfo fileInfo = new FileInfo(wareHouseDAAcceptDTO.EndMeterPhotoUp.FileName);
+        //			string extn = fileInfo.Extension.ToLower();
+        //			Guid id = Guid.NewGuid();
+        //			string filename = id.ToString() + Path.GetExtension(wareHouseDAAcceptDTO.EndMeterPhotoUp.FileName);
 
-                return Ok(a);
-			}
-            catch
-            {
-                throw;
-            }
-        }
+        //			string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, @"uploads\AcceptedTasks");
 
-        [HttpGet]
-        public IActionResult GetWareHouseDAAcceptList()
-        {
-            var list = _wareHouseDAAcceptService.GetWareHouseDAAcceptList();
-            return Ok(list);
-        }
+        //			if (!Directory.Exists(uploadsFolder))
+        //			{
+        //				Directory.CreateDirectory(uploadsFolder);
+        //			}
 
-        [HttpGet("{WareHouseDAAcceptId}")]
-        public IActionResult GetWareHouseDAAcceptById(Int64 WareHouseDAAcceptId)
-        {
-            var a = _wareHouseDAAcceptService.GetWareHouseDAAcceptListById(WareHouseDAAcceptId);
-            return Ok(a);
-        }
+        //			string uniqueFileName = Guid.NewGuid().ToString() + "_" + filename;
+        //			string imagePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-		[HttpGet("{DistributorDAAcceptId}")]
-		public IActionResult GetDistributorDAAcceptById(Int64 DistributorDAAcceptId)
-		{
-			var a = _wareHouseDAAcceptService.GetWareHouseDAAcceptListById(DistributorDAAcceptId);
-			return Ok(a);
-		}
+        //			// Copy the uploaded image to the specified path
+        //			using (var stream = new FileStream(imagePath, FileMode.Create))
+        //			{
+        //				wareHouseDAAcceptDTO.EndMeterPhotoUp.CopyTo(stream);
+        //			}
 
-	}
+        //			wareHouseDAAcceptDTO.EndMeterPhoto = filename;
+        //		}
+
+
+        //              var a = _wareHouseDAAcceptService.CreateWareHouseDAAccept(wareHouseDAAcceptDTO);
+
+
+        //              if(a == MessageEnum.Success)
+        //              {
+        //                  return Ok(a);
+        //              }
+        //              else if (a == MessageEnum.Exists)
+        //              {
+        //                  return BadRequest("Task has already been assigned");
+        //              }
+        //              else if (a == MessageEnum.InvalidInput)
+        //              {
+        //                  return BadRequest("Either DeliveryPartnerId or DATasksWarehouseId is missing");
+        //              }
+
+        //              return Ok(a);
+        //	}
+        //          catch
+        //          {
+        //              throw;
+        //          }
+        //      }
+
+        //      [HttpGet]
+        //      public IActionResult GetWareHouseDAAcceptList()
+        //      {
+        //          var list = _wareHouseDAAcceptService.GetWareHouseDAAcceptList();
+        //          return Ok(list);
+        //      }
+
+        //      [HttpGet("{WareHouseDAAcceptId}")]
+        //      public IActionResult GetWareHouseDAAcceptById(Int64 WareHouseDAAcceptId)
+        //      {
+        //          var a = _wareHouseDAAcceptService.GetWareHouseDAAcceptListById(WareHouseDAAcceptId);
+        //          return Ok(a);
+        //      }
+
+        //[HttpGet("{DistributorDAAcceptId}")]
+        //public IActionResult GetDistributorDAAcceptById(Int64 DistributorDAAcceptId)
+        //{
+        //	var a = _wareHouseDAAcceptService.GetWareHouseDAAcceptListById(DistributorDAAcceptId);
+        //	return Ok(a);
+        //}
+
+
+        //      [HttpGet("{DeliveryPartnerId}")]
+        //      public IActionResult GetWareHouseDAAcceptListByDeliveryPartnerId(Int64 DeliveryPartnerId)
+        //      {
+        //          var a = _wareHouseDAAcceptService.GetWareHouseDAAcceptListByDeliveryPartnerId(DeliveryPartnerId);
+        //          return Ok(a);
+        //      }
+
+        //      [HttpGet]
+        //      public IActionResult GetWareHouseDAAcceptListByWarehouseTasks()
+        //      {
+        //          var a = _wareHouseDAAcceptService.GetWareHouseDAAcceptListByWarehouseTasks();
+        //          return Ok(a);
+        //}
+
+        //      [HttpGet]
+        //      public IActionResult GetWareHouseDAAcceptListByDistributorTasks()
+        //      {
+        //          var a  = _wareHouseDAAcceptService.GetWareHouseDAAcceptListByDistributorTasks();
+        //          return Ok(a);
+        //}
+
+        //      [HttpGet("{DATasksWareHouseId}")]
+        //      public IActionResult GetWareHouseDAAcceptByDATasksWareHouseId(Int64 DATasksWareHouseId)
+        //      {
+        //          var a = _wareHouseDAAcceptService.GetWareHouseDAAcceptByDATasksWareHouseId(DATasksWareHouseId);
+        //          return Ok(a);
+        //}
+
+        //      [HttpGet("{DATasksDistributorId}")]
+        //      public IActionResult GetWareHouseDAAcceptByDATasksDistributorId(Int64 DATasksDistributorId)
+        //      {
+        //          var a = _wareHouseDAAcceptService.GetWareHouseDAAcceptByDATasksDistributorId(DATasksDistributorId);
+        //          return Ok(a);
+        //}
+    }
 }

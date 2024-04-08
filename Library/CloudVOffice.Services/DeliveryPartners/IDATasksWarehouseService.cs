@@ -12,7 +12,7 @@ namespace CloudVOffice.Services.DeliveryPartners
 	public interface IDATasksWarehouseService
 	{
         //public Task<MessageEnum> CreateDATasksWarehouse(WarehouseSalesOrderParentDTO warehouseSalesOrderParentDTO);
-        public Task<MessageEnum> CreateDATasksWarehouse(WarehouseSalesOrderParentDTO warehouseSalesOrderParentDTO, Int64 DistributorRegistrationId);
+        public Task<MessageEnum> CreateDATasksWarehouse(WarehouseSalesOrderParentDTO warehouseSalesOrderParentDTO);
 
         public List<DATasksWarehouse> GetWareHouseTaskListByAssignedCode(string assignedCode);
 

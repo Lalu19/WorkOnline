@@ -68,7 +68,7 @@ namespace CloudVOffice.Services.WareHouses.SalesOrders
                 var obj = _warehouseSalesOrderParentRepo.Insert(WHSOParent);
 
 
-                _dATasksWarehouseService.CreateDATasksWarehouse(warehouseSalesOrderParentDTO, WHSOParent.DistributorRegistrationId);
+                    _dATasksWarehouseService.CreateDATasksWarehouse(warehouseSalesOrderParentDTO);
 
                 return obj;
                 //}
