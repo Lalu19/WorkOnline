@@ -535,13 +535,6 @@
         return $('#itemsTable tbody tr').length === 0;
     }
 
-    // Example usage:
-    //if (isTableEmpty()) {
-    //    console.log('No rows in the table');
-    //} else {
-    //    console.log('Table has rows');
-    //}
-
 
     function editButtonClick(itemName, salesCost, shortName, caseWeight, mrp, cgst, sgst, quantity) {
 
@@ -686,39 +679,24 @@
         // Push the converted data into the itemDetails array
         itemDetails.push(acceptedItemData);
 
+
+        
+
         // Clear the content of the acceptedItemContainer
         $('#acceptedItemContainer').empty();
-        // Hide the corresponding menu item
-        //$('#menuItem_' + POPUniqueNumber).hide();
-
-        //createParentDetails();
-
-        parentDetails = {
-            //"POPUniqueNumber": globalId.toString(),
-            "POPUniqueNumber": globalId,
-            "TotalQuantity": totalQuantity,
-            "TotalAmount": totalValue
-        };
     }
-
-    //var newTotalQuantity = parseFloat(totalQuantity);
-    //var newTotalAmount = parseFloat(totalValue);
-
-
-    
-
-    //function createParentDetails() {
-    //    var parentDetails = {
-    //        "POPUniqueNumber": parsedGlobalId,
-    //        "TotalQuantity": totalQuantity,
-    //        "TotalAmount": totalValue
-    //    };
 
 
 
 
 
     function printInvoice() {
+
+        parentDetails = {
+            "POPUniqueNumber": globalId,
+            "TotalQuantity": totalQuantity,
+            "TotalAmount": totalValue
+        };
 
 
         var model = {

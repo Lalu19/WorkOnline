@@ -160,6 +160,7 @@ namespace CloudVOffice.Data.Persistence
         public virtual DbSet<DATasksWarehouse> DATasksWarehouses { get; set; }
 		public virtual DbSet<PushNotification> PushNotifications { get; set; }
 		public virtual DbSet<WareHouseDAAccept> WareHouseDAAccepts { get; set; }
+		public virtual DbSet<DATasksDistributor> DATasksDistributors { get; set; }
 
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -923,6 +924,16 @@ namespace CloudVOffice.Data.Persistence
 			  .HasDefaultValue(false)
 			  .ValueGeneratedNever();
 
+
+			modelBuilder.Entity<DATasksDistributor>()
+		   .Property(s => s.CreatedDate)
+		   .HasDefaultValueSql("getdate()");
+
+
+			modelBuilder.Entity<DATasksDistributor>()
+			  .Property(s => s.Deleted)
+			  .HasDefaultValue(false)
+			  .ValueGeneratedNever();
 
 			modelBuilder.Seed();
         }

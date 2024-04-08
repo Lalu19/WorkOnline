@@ -18,5 +18,7 @@ namespace CloudVOffice.Services.DeliveryPartners
         public List<DeliveryPartner> GetDeliveryPartnersbyAssignedCode(string AssignedCode);
         public List<DeliveryPartner> GetDAWithCapacityByTaskId(Int64 WHouseManagerId, Int64 TaskId);
         public List<DeliveryPartner> GetDAByTaskId(Int64 TaskId);
-    }
+        public List<DeliveryPartner> GetDistributorDAByTaskId(Int64 TaskId);
+
+	}
 }

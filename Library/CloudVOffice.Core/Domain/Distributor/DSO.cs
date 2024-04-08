@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CloudVOffice.Core.Domain.Orders;
+using CloudVOffice.Core.Domain.WareHouses;
 
 namespace CloudVOffice.Core.Domain.Distributor
 {
@@ -25,7 +28,10 @@ namespace CloudVOffice.Core.Domain.Distributor
         public DateTime? UpdatedDate { get; set; }
         public bool Deleted { get; set; }
 
-        public ICollection<DSOItems> DSOItems { get; set; }
+		[ForeignKey("BuyerOrderId")]
+		public BuyerOrder BuyerOrder { get; set; }
+
+		public ICollection<DSOItems> DSOItems { get; set; }
 
     }
 }
