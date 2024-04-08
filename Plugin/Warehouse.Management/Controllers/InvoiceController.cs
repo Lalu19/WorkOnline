@@ -22,20 +22,29 @@ namespace Warehouse.Management.Controllers
         private readonly ISalesOrderParentService _salesOrderParentService;
         private readonly ISalesOrderItemService _salesOrderItemService;
 
-        public InvoiceController(
-                                 IPurchaseOrderParentService purchaseOrderParentService,
-                                 IPurchaseOrderService purchaseOrderService,
-                                 ISalesOrderParentService salesOrderParentService,
-                                 ISalesOrderItemService salesOrderItemService
-                                )
-        {
-            _purchaseOrderParentService = purchaseOrderParentService;
-            _purchaseOrderService = purchaseOrderService;
-            _salesOrderParentService = salesOrderParentService;
-            _salesOrderItemService = salesOrderItemService;
-        }
+        private readonly IWarehouseSalesOrderParentService _warehouseSalesOrderParentService;
+        private readonly IWareHouseSalesOrderItemService _warehouseSalesOrderItemService;
 
-        [HttpGet]
+        public InvoiceController(
+								 IPurchaseOrderParentService purchaseOrderParentService,
+								 IPurchaseOrderService purchaseOrderService,
+								 ISalesOrderParentService salesOrderParentService,
+								 ISalesOrderItemService salesOrderItemService
+,
+								 IWarehouseSalesOrderParentService warehouseSalesOrderParentService,
+								 IWareHouseSalesOrderItemService warehouseSalesOrderItemService
+
+								)
+		{
+			_purchaseOrderParentService = purchaseOrderParentService;
+			_purchaseOrderService = purchaseOrderService;
+			_salesOrderParentService = salesOrderParentService;
+			_salesOrderItemService = salesOrderItemService;
+			_warehouseSalesOrderParentService = warehouseSalesOrderParentService;
+			_warehouseSalesOrderItemService = warehouseSalesOrderItemService;
+		}
+
+		[HttpGet]
         public IActionResult InvoiceCreate(Int64 PurchaseOrderParentId)                       
         {
 			var orderdetails = _purchaseOrderParentService.GetPOOrderByPurchaseOrderParentId(PurchaseOrderParentId);
@@ -65,6 +74,19 @@ namespace Warehouse.Management.Controllers
 
         }
 
-    }
+
+		[HttpGet]
+		public IActionResult WarehouseInvoiceCreate(Int64 CreatedBy, Int64 WarehouseSalesOrderParentId)
+		{
+			var warehouseorderdetails = _warehouseSalesOrderParentService.GetWarehouseSalesOrderByWarehouseSalesOrderParentId(WarehouseSalesOrderParentId);
+			ViewBag.WareHouseOrderDetails = warehouseorderdetails;
+
+			var distributordetails = _warehouseSalesOrderParentService.GetWarehouseOrderByCreatedBy(CreatedBy);
+			ViewBag.DistributorDetails = distributordetails;
+			return View("~/Plugins/Warehouse.Management/Views/Invoice/WareHouseInvoiceCreate.cshtml");
+
+		}
+
+	}
 }
  

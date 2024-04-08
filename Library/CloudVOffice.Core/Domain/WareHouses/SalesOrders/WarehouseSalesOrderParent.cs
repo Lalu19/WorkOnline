@@ -24,8 +24,11 @@ namespace CloudVOffice.Core.Domain.WareHouses.SalesOrders
 		[ForeignKey("DistributorRegistrationId")]
 		public DistributorRegistration DistributorRegistration { get; set; }
 
+        [ForeignKey("WareHuoseId")]
+        public WareHuose WareHuose { get; set; }
 
-		public Int64 CreatedBy { get; set; }
+
+        public Int64 CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
         public Int64? UpdatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
