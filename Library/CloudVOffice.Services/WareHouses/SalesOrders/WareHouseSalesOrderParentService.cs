@@ -53,7 +53,10 @@ namespace CloudVOffice.Services.WareHouses.SalesOrders
                         _dbContext.SaveChanges();
                     }
 
-					WHSOParent.DistributorRegistrationId = dpo.DistributorId;
+					//WHSOParent.DistributorRegistrationId = dpo.DistributorId;
+                    warehouseSalesOrderParentDTO.DistributorRegistrationId = dpo.DistributorId;
+                    
+
                     WHSOParent.TotalQuantity = warehouseSalesOrderParentDTO.TotalQuantity;
                     WHSOParent.TotalAmount = warehouseSalesOrderParentDTO.TotalAmount;
                     WHSOParent.CreatedBy = warehouseSalesOrderParentDTO.CreatedBy;
@@ -61,7 +64,7 @@ namespace CloudVOffice.Services.WareHouses.SalesOrders
                     var obj = _warehouseSalesOrderParentRepo.Insert(WHSOParent);
 
 
-                    _dATasksWarehouseService.CreateDATasksWarehouse(warehouseSalesOrderParentDTO, WHSOParent.DistributorRegistrationId);
+                    _dATasksWarehouseService.CreateDATasksWarehouse(warehouseSalesOrderParentDTO);
 
                     return obj;
                 //}

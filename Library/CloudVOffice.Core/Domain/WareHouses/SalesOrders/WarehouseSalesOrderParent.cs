@@ -20,15 +20,11 @@ namespace CloudVOffice.Core.Domain.WareHouses.SalesOrders
         public double? TotalQuantity { get; set; }
         public double? TotalAmount { get; set; }
 
-		[ForeignKey("DistributorRegistrationId")]
-		public DistributorRegistration DistributorRegistration { get; set; }
 
 		public Int64 CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
         public Int64? UpdatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public bool Deleted { get; set; }
-
-		public ICollection<WareHouseSalesOrderItem> WareHouseSalesOrderItems { get; set; }
 	}
 }

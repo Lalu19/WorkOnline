@@ -4,6 +4,7 @@ using CloudVOffice.Core.Domain.WareHouses.PinCodes;
 using CloudVOffice.Data.DTO.Distributor;
 using CloudVOffice.Data.Persistence;
 using CloudVOffice.Data.Repository;
+using CloudVOffice.Services.DeliveryPartners;
 using CloudVOffice.Services.Distributors;
 using CloudVOffice.Services.Orders;
 using CloudVOffice.Services.WareHouses.Itemss;
@@ -23,6 +24,7 @@ namespace Distributor_partner.Controllers
 		private readonly IDPOItemsService _DPOItemsService;
 		private readonly IBuyerOrderService _BuyerOrderService;
 		private readonly IDistributorsAssignService _DistributorsAssignService;
+		private readonly IDATasksDistrbutorService _dATasksDistrbutorService;
 
 
 		public SOController(ApplicationDBContext dbContext,
@@ -33,8 +35,8 @@ namespace Distributor_partner.Controllers
 							IDPOService DPOService,
 							IDPOItemsService DPOItemsService,
 							IBuyerOrderService BuyerOrderService,
-							IDistributorsAssignService distributorsAssignService
-
+							IDistributorsAssignService distributorsAssignService,
+							IDATasksDistrbutorService dATasksDistrbutorService
 							)
 		{
 			_dbContext = dbContext;
@@ -46,6 +48,7 @@ namespace Distributor_partner.Controllers
 			_DPOItemsService = DPOItemsService;
 			_BuyerOrderService = BuyerOrderService;
 			_DistributorsAssignService = distributorsAssignService;
+			_dATasksDistrbutorService = dATasksDistrbutorService;
 		}
 		[HttpGet]
 		public IActionResult Buyerorderlist()
@@ -118,8 +121,13 @@ namespace Distributor_partner.Controllers
 				if (buyerOrderlist != null)
 				{
 					buyerOrderlist.OrderStatus = "Order Accepted";
-					_BuyerOrderRepo.Update(buyerOrderlist); 
+					_BuyerOrderRepo.Update(buyerOrderlist);
 				}
+
+				dsoDTO.CreatedBy = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "DistributorRegistrationId").Value.ToString());
+
+				_dATasksDistrbutorService.CreateDATasksDistributor(dsoDTO);
+
 				return Ok("DSO saved successfully");
 			}
 			catch (Exception ex)
@@ -127,7 +135,5 @@ namespace Distributor_partner.Controllers
 				return BadRequest("Error occurred while saving DPO");
 			}
 		}
-
-		
 	}
 }
