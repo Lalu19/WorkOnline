@@ -498,6 +498,7 @@
 
             // Remove the row from the table based on the itemName
             var removedRow = $('#itemsTable').find('td:contains("' + itemName + '")').closest('tr').remove();
+            removedRowHtml = removedRow.prop('outerHTML');
 
             // Update the total amount by subtracting the value of the removed row
             var removedValue = parseFloat(removedRow.find('td:eq(4)').text().replace('₹', '').trim());
@@ -516,19 +517,40 @@
 
 
 
-    function backButtonClick() {
-        // Restore the original HTML content of #acceptedItemContainer
-        //$('#acceptedItemContainer').html(originalAcceptedItemHtml2);
+    //function backButtonClick() {
+    //    // Restore the original HTML content of #acceptedItemContainer
+    //    //$('#acceptedItemContainer').html(originalAcceptedItemHtml2);
 
 
-        $('#itemsTable').html(originalItemsTableHtml2);
-        //$('#itemsTable').html(originalAcceptedItemHtml);
-        $('#acceptedItemContainer').empty();
+    //    $('#itemsTable').html(originalItemsTableHtml2);
+    //    //$('#itemsTable').html(originalAcceptedItemHtml);
+    //    $('#acceptedItemContainer').empty();
 
 
-        //ChatGPT
+    //    //ChatGPT
 
+    //}
+
+
+    function backButtonClick(itemName, salesCost, shortName, caseWeight, mrp, cgst, sgst, quantity) {
+        if (removedRowHtml !== '') {
+
+            $('#itemsTable tbody').append(removedRowHtml);
+
+
+            var removedValue = parseFloat($(removedRowHtml).find('td:eq(4)').text().replace('₹', '').trim());
+            var totalAmount = parseFloat($('#itemsTable').find('div:contains("Total Amount:")').text().replace('Total Amount: ₹', '').trim());
+            totalAmount += removedValue;
+
+
+            $('#itemsTable').find('div:contains("Total Amount:")').text('Total Amount: ₹' + totalAmount.toFixed(2));
+
+            $('#acceptedItemContainer').empty();
+            originalAcceptedItemHtml = '';
+            removedRowHtml = '';
+        }
     }
+
 
 
     function isTableEmpty() {
@@ -568,20 +590,160 @@
     }
 
 
+    //function saveEdit() {
+    //    var editedData = {
+    //        itemName: $('#ItemName').val(),
+    //        salesCost: $('#SalesCost').val(),
+    //        salesCost: parseFloat($('#SalesCost').val()),
+    //        shortName: $('#ShortName').val(),
+    //        caseWeight: $('#CaseWeight').val(),
+    //        caseWeight: parseFloat($('#CaseWeight').val()),
+    //        mrp: parseFloat($('#MRP').val()),
+    //        cgst: parseFloat($('#CGST').val()),
+    //        sgst: parseFloat($('#SGST').val()),
+    //        quantity: parseFloat($('#quantity').val())
+    //    };
+
+    //    var editedItemHtml = '<div class="edited-item">';
+    //    editedItemHtml += '<strong>Edited Product Details:</strong>';
+    //    editedItemHtml += '<div>Item Name: ' + editedData.itemName + '</div>';
+    //    editedItemHtml += '<div>Sales Cost: ' + editedData.salesCost + '</div>';
+    //    editedItemHtml += '<div>UOM: ' + editedData.shortName + '</div>';
+    //    editedItemHtml += '<div>Case Weight: ' + editedData.caseWeight + '</div>';
+    //    editedItemHtml += '<div>MRP: ' + editedData.mrp + '</div>';
+    //    editedItemHtml += '<div>CGST: ' + editedData.cgst + '</div>';
+    //    editedItemHtml += '<div>SGST: ' + editedData.sgst + '</div>';
+    //    editedItemHtml += '<div>Quantity: ' + editedData.quantity + '</div>';
+    //    editedItemHtml += '</div>';
+
+    //    $('#acceptedItemContainer').append(editedItemHtml);
+    //    save = $('#acceptedItemContainer').html();
+    //    $('#acceptedItemContainer').hide();
+    //    console.log("Edited Data:", editedData);
+    //}
+
+    //function cancelEdit() {
+    //    //$('#acceptedItemContainer').html(save);
+    //    $('#acceptedItemContainer').html(originalAcceptedItemHtml);
+    //}
+    //function rejectAction(itemId) {
+
+    //    // Remove the row from the table based on the itemId
+    //    var removedRow = $('#itemsTable').find('tr[data-item-id="' + itemId + '"]').remove();
+
+    //    // Update the total amount by subtracting the value of the removed row
+    //    var removedValue = parseFloat(removedRow.find('td:eq(4)').text().replace('₹', '').trim());
+    //    var totalAmount = parseFloat($('#itemsTable').find('div:contains("Total Amount:")').text().replace('Total Amount: ₹', '').trim());
+    //    totalAmount -= removedValue;
+
+    //    $('#itemsTable').find('div:contains("Total Amount:")').text('Total Amount: ₹' + totalAmount.toFixed(2));
+
+    //    if (isTableEmpty()) {
+    //        console.log('Table is empty');
+
+    //        $('#menuItem_' + globalId).remove();
+
+    //    }
+    //}
+
+
+    //var itemDetails = [];
+    //var totalQuantity = 0;
+    //var totalValue = 0;
+    //var parentDetails = {};
+    ////var parentDetails = [];
+    //var parsedGlobalId = String(globalId);
+
+
+    //function acceptButtonClick(itemName, salesCost, shortName, caseWeight, mrp, cgst, sgst, quantity) {
+    //    // Convert data types if needed
+    //    var parsedSalesCost = parseFloat(salesCost);
+    //    var parsedCaseWeight = parseFloat(caseWeight);
+    //    var parsedMRP = parseFloat(mrp);
+    //    var parsedCGST = parseFloat(cgst);
+    //    var parsedSGST = parseFloat(sgst);
+    //    var parsedQuantity = parseFloat(quantity);
+
+    //    // Create a JavaScript object with accepted item details
+    //    var acceptedItemData = {
+    //        itemName: itemName,
+    //        salesCost: parsedSalesCost,
+    //        shortName: shortName,
+    //        caseWeight: parsedCaseWeight,
+    //        mrp: parsedMRP,
+    //        cgst: parsedCGST,
+    //        sgst: parsedSGST,
+    //        quantity: parsedQuantity
+    //    };
+
+
+    //    totalQuantity += parsedQuantity;
+    //    totalValue += parsedMRP * parsedQuantity;
+
+    //    // Push the converted data into the itemDetails array
+    //    itemDetails.push(acceptedItemData);
+
+    //    // Clear the content of the acceptedItemContainer
+    //    $('#acceptedItemContainer').empty();
+    //    // Hide the corresponding menu item
+    //    //$('#menuItem_' + POPUniqueNumber).hide();
+
+    //    //createParentDetails();
+
+    //    parentDetails = {
+    //        //"POPUniqueNumber": globalId.toString(),
+    //        "POPUniqueNumber": globalId,
+    //        "TotalQuantity": totalQuantity,
+    //        "TotalAmount": totalValue
+    //    };
+    //}
+
+    //var newTotalQuantity = parseFloat(totalQuantity);
+    //var newTotalAmount = parseFloat(totalValue);
+
+
+
+
+    //function createParentDetails() {
+    //    var parentDetails = {
+    //        "POPUniqueNumber": parsedGlobalId,
+    //        "TotalQuantity": totalQuantity,
+    //        "TotalAmount": totalValue
+    //    };
+
+
+
     function saveEdit() {
+        // Retrieve edited data from form fields
         var editedData = {
-            itemName: $('#ItemName').val(),
-            salesCost: $('#SalesCost').val(),
-            salesCost: parseFloat($('#SalesCost').val()),
-            shortName: $('#ShortName').val(),
-            caseWeight: $('#CaseWeight').val(),
-            caseWeight: parseFloat($('#CaseWeight').val()),
-            mrp: parseFloat($('#MRP').val()),
-            cgst: parseFloat($('#CGST').val()),
-            sgst: parseFloat($('#SGST').val()),
-            quantity: parseFloat($('#quantity').val())
+            itemName: $('#editItemName').val(),
+            salesCost: parseFloat($('#editSalesCost').val()),
+            shortName: $('#editShortName').val(),
+            caseWeight: parseFloat($('#editCaseWeight').val()),
+            mrp: parseFloat($('#editMRP').val()),
+            cgst: parseFloat($('#editCGST').val()),
+            sgst: parseFloat($('#editSGST').val()),
+            quantity: parseFloat($('#editQuantity').val())
         };
 
+        // Push filtered data into itemDetails array
+        var acceptedItemData = {
+            itemName: editedData.itemName,
+            salesCost: editedData.salesCost,
+            shortName: editedData.shortName,
+            caseWeight: editedData.caseWeight,
+            mrp: editedData.mrp,
+            cgst: editedData.cgst,
+            sgst: editedData.sgst,
+            quantity: editedData.quantity
+        };
+        itemDetails.push(acceptedItemData);
+
+        totalQuantity += editedData.quantity;
+        totalValue += editedData.mrp * editedData.quantity;
+
+
+        // Display edited item details
         var editedItemHtml = '<div class="edited-item">';
         editedItemHtml += '<strong>Edited Product Details:</strong>';
         editedItemHtml += '<div>Item Name: ' + editedData.itemName + '</div>';
@@ -594,14 +756,20 @@
         editedItemHtml += '<div>Quantity: ' + editedData.quantity + '</div>';
         editedItemHtml += '</div>';
 
+        // Append edited item details to the container
         $('#acceptedItemContainer').append(editedItemHtml);
-        save = $('#acceptedItemContainer').html();
-        $('#acceptedItemContainer').hide();
+        $('#editForm').hide(); // Hide the form after saving
+        $('#acceptedItemContainer').empty();
         console.log("Edited Data:", editedData);
     }
 
+
+
     function cancelEdit() {
-        //$('#acceptedItemContainer').html(save);
+        //$('#
+        //
+        //
+        // ').html(save);
         $('#acceptedItemContainer').html(originalAcceptedItemHtml);
     }
     function rejectAction(itemId) {
@@ -661,39 +829,24 @@
         // Push the converted data into the itemDetails array
         itemDetails.push(acceptedItemData);
 
+
+
+
         // Clear the content of the acceptedItemContainer
         $('#acceptedItemContainer').empty();
-        // Hide the corresponding menu item
-        //$('#menuItem_' + POPUniqueNumber).hide();
-
-        //createParentDetails();
-
-        parentDetails = {
-            //"POPUniqueNumber": globalId.toString(),
-            "POPUniqueNumber": globalId,
-            "TotalQuantity": totalQuantity,
-            "TotalAmount": totalValue
-        };
     }
-
-    //var newTotalQuantity = parseFloat(totalQuantity);
-    //var newTotalAmount = parseFloat(totalValue);
-
-
-
-
-    //function createParentDetails() {
-    //    var parentDetails = {
-    //        "POPUniqueNumber": parsedGlobalId,
-    //        "TotalQuantity": totalQuantity,
-    //        "TotalAmount": totalValue
-    //    };
-
 
 
 
 
     function printInvoice() {
+
+
+        parentDetails = {
+            "POPUniqueNumber": globalId,
+            "TotalQuantity": totalQuantity,
+            "TotalAmount": totalValue
+        };
 
 
         var model = {
@@ -703,7 +856,7 @@
 
         $.ajax({
             type: "POST",
-            url: "/WareHouse/SO/SalesOrderDataSave",
+            url: "/Billing/SalesOrderDataSave",
             data: JSON.stringify(model),
             contentType: "application/json",
             dataType: "json",
@@ -732,7 +885,7 @@
                         console.log(typeof parsedGlobalId)
                         $.ajax({
                             type: "POST",
-                            url: "/WareHouse/SO/SOShippedSetTrue",
+                            url: "/Billing/SOShippedSetTrue",
                             //data: { globalId: parsedGlobalId }, // Use lowercase "globalId"
                             data: JSON.stringify(parsedGlobalId),
                             contentType: "application/json",
@@ -770,7 +923,7 @@
                         console.log(typeof parsedGlobalId)
                         $.ajax({
                             type: "POST",
-                            url: "/WareHouse/SO/SOShippedSetTrue",
+                            url: "/Billing/SOShippedSetTrue",
                             //data: { globalId: parsedGlobalId }, // Use lowercase "globalId"
                             data: JSON.stringify(parsedGlobalId),
                             contentType: "application/json",

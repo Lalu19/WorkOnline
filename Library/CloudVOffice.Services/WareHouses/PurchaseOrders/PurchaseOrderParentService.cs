@@ -114,7 +114,19 @@ namespace CloudVOffice.Services.WareHouses.PurchaseOrders
             }
         }
 
-		public List<PurchaseOrderParent> GetPurchaseOrderParentListsimple()
+		public List<PurchaseOrderParent> GetPurchaseOrderParentListBySellerId(Int64 SellerId)
+		{
+			try
+			{
+				return _dbContext.PurchaseOrderParents.Where(x => x.Deleted == false && x.OrderShipped == false && x.SellerRegistrationId == SellerId).ToList();
+			}
+			catch
+			{
+				throw;
+			}
+		}
+
+        public List<PurchaseOrderParent> GetPurchaseOrderParentListsimple()
 		{
 			try
 			{
