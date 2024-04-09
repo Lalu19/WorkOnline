@@ -4,6 +4,7 @@ using CloudVOffice.Data.DTO.SalesOrders;
 using CloudVOffice.Data.DTO.WareHouses.Brands;
 using CloudVOffice.Data.DTO.WareHouses.SalesOrders;
 using CloudVOffice.Data.Persistence;
+using CloudVOffice.Services.Distributors;
 using CloudVOffice.Services.WareHouses;
 using CloudVOffice.Services.WareHouses.Brands;
 using CloudVOffice.Services.WareHouses.PurchaseOrders;
@@ -12,6 +13,7 @@ using CloudVOffice.Web.Framework;
 using CloudVOffice.Web.Framework.Controllers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Syncfusion.EJ2.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,12 +30,15 @@ namespace Warehouse.Management.Controllers
         private readonly ISalesOrderParentService _salesOrderParentService;
         private readonly ISalesOrderItemService _salesOrderItemService;
         private readonly IWareHouseService _wareHouseService;
+        private readonly IDPOService _dPOService;
 
         public SOController(IPurchaseOrderParentService purchaseOrderParentService, 
                             ApplicationDBContext dbContext, 
                             ISalesOrderParentService salesOrderParentService,
                             ISalesOrderItemService salesOrderItemService,
-                            IWareHouseService wareHouseService
+                            IWareHouseService wareHouseService,
+                            IDPOService dPOService
+
                             )
 		{
 			_purchaseOrderParentService = purchaseOrderParentService;
@@ -41,18 +46,19 @@ namespace Warehouse.Management.Controllers
 			_salesOrderParentService = salesOrderParentService;
             _salesOrderItemService = salesOrderItemService;
 			_wareHouseService = wareHouseService;
+            _dPOService = dPOService;
         }
 		[HttpGet]
 		public IActionResult SOCreate(Int64? SOId)
 		{
 
-			ViewBag.POlist = _purchaseOrderParentService.GetPurchaseOrderParentList();
+			//ViewBag.POlist = _purchaseOrderParentService.GetPurchaseOrderParentList();
+
+            Int64 userId = (int)Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
+            var warehouseId = _dbContext.UserWareHouseMappings.Where(a => a.UserId == userId).Select(x=> x.WareHuoseId).FirstOrDefault();
+
+            ViewBag.POlist = _dPOService.GetDPOListByWareHouseId(warehouseId);
 			SODTO sODTO = new SODTO();
-
-
-
-			
-
 
 			return View("~/Plugins/Warehouse.Management/Views/SalesOrders/SOCreate.cshtml", sODTO);
 		}
