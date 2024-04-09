@@ -176,56 +176,43 @@ namespace Warehouse.Management.Controllers
             return items;
         }
 
-        //[HttpGet("opening")]
-        //public async Task<ActionResult<double?>> GetOpeningStock(Int64 warehouseId, Int64 itemId, DateTime startDate)
+        //[HttpGet]
+        //public  ActionResult StockView(Int64 itemId)
         //{
-        //    var openingStock = await _stockService.CalculateOpeningStockAsync(warehouseId, itemId, startDate);
-        //    return Ok(openingStock);
+        //    var items = itemId;
+        //    var openingStock =  _stockService.CalculateOpeningStockAsync(itemId);
+        //    var closingStock =  _stockService.CalculateClosingStockAsync(itemId);
+        //    ViewBag.ItemList = _itemService.GetItemList();
+        //    ViewBag.Stocks = _stockService.GetStockList();
+        //    ViewBag.OpeningStock = openingStock;
+        //    ViewBag.ClosingStock = closingStock;
+        //    return View("~/Plugins/Warehouse.Management/Views/Stocks/StockView.cshtml");
         //}
 
-        //[HttpGet("closing")]
-        //public async Task<ActionResult<double?>> GetClosingStock(Int64 warehouseId, Int64 itemId, DateTime endDate)
-        //{
-        //    var closingStock = await _stockService.CalculateClosingStockAsync(warehouseId, itemId, endDate);
-        //    return Ok(closingStock);
-        //}
-
-        [HttpGet("stocks")]
-        public async Task<ActionResult> StockView(Int64 warehouseId, Int64 itemId, DateTime startDate, DateTime endDate)
+       
+        public async Task<ActionResult> StockView(Int64 itemId)
         {
+            ViewBag.ItemList = _itemService.GetItemList();
             ViewBag.Stocks = _stockService.GetStockList();
-            var openingStock = await _stockService.CalculateOpeningStockAsync(warehouseId, itemId, startDate);
-            var closingStock = await _stockService.CalculateClosingStockAsync(warehouseId, itemId, endDate);
+            var openingStock = await _stockService.CalculateOpeningStockAsync(itemId);
+            var closingStock = await _stockService.CalculateClosingStockAsync(itemId);
+            if(closingStock == null)
+            {
+                closingStock = openingStock;
+            }
+            else
+            {
+                closingStock = closingStock;
+            }
 
             ViewBag.OpeningStock = openingStock;
             ViewBag.ClosingStock = closingStock;
 
-            // You can retrieve other stock data as needed and pass it to the view
-            // For example: ViewBag.Stocks = await _stockService.GetStocksAsync(warehouseId, itemId);
 
             return View("~/Plugins/Warehouse.Management/Views/Stocks/StockView.cshtml");
         }
 
-        //[HttpGet("stocks")]
-        //public async Task<ActionResult> StockView(Int64 warehouseId, Int64 itemId, DateTime startDate, DateTime endDate)
-        //{
-        //    // Update opening and closing stock values in the database
-        //    await _stockService.UpdateStocksWithOpeningAndClosingStocksAsync(warehouseId, itemId, startDate, endDate);
-
-        //    // Retrieve stocks for the specified warehouse and item
-        //    var stocks = await _stockService.GetStockList();
-
-        //    // Retrieve opening and closing stock values
-        //    var openingStock = await _stockService.UpdateStocksWithOpeningAndClosingStocksAsync(warehouseId, itemId, startDate);
-        //    var closingStock = await _stockService.CalculateClosingStockAsync(warehouseId, itemId, endDate);
-
-        //    ViewBag.Stocks = stocks;
-        //    ViewBag.OpeningStock = openingStock;
-        //    ViewBag.ClosingStock = closingStock;
-
-        //    return View("~/Plugins/Warehouse.Management/Views/Stocks/StockView.cshtml");
-        //}
-
+      
 
     }
 }

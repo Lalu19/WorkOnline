@@ -36,9 +36,10 @@ namespace CloudVOffice.Services.WareHouses.Stocks
         public Dictionary<string, double?> TotalStockByShortName();
 
 
-        Task<double?> CalculateOpeningStockAsync(Int64 warehouseId, Int64 itemId, DateTime startDate);
-        Task<double?> CalculateClosingStockAsync(Int64 warehouseId, Int64 itemId, DateTime endDate);
-        //Task UpdateStocksWithOpeningAndClosingStocksAsync(Int64 warehouseId, Int64 itemId, DateTime startDate, DateTime endDate);
+        public Task<double?> CalculateOpeningStockAsync( Int64 itemId);
+        public Task<double?> CalculateClosingStockAsync(Int64 itemId);
+        
+
 
     }
 }

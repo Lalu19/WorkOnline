@@ -1,9 +1,12 @@
-﻿@{
+﻿
+@model CloudVOffice.Data.DTO.WareHouses.Stocks.StockDTO;
+@using System.Collections;
+@using Newtonsoft.Json;
+@{
     Layout = "_MainAppLayout";
-    ViewData["Title"] = "Pin Code";
+    ViewData["Title"] = "Stock";
 }
 @addTagHelper *, Syncfusion.EJ2
-
 <style>
     .e-virtualtable {
         transform: translate(0px, 0px) !important;
@@ -32,7 +35,51 @@
     </div>
 </header>
 
+<header class="main-heading">
+    <div class="container-fluid">
+        <form action="~/WareHouse/Stock/StockView" method="post" autocomplete="off">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                    <div class="row">
+                        @* <div class="form-group col-md-3">
+                        <input asp-for="@Model.StockId" type="hidden" />
 
+                        <label for="SectorId" class="form-label">Sector Name</label>
+                        <ejs-dropdownlist id="SectorId" allowFiltering="true" ejs-for="@Model.SectorId" filtering="onSectorfiltering" dataSource="@(new SelectList((IEnumerable)ViewBag.Sectors, "SectorId", "SectorName").Items)" placeholder="Select Sector" popupHeight="220px">
+                        <e-dropdownlist-fields text="SectorName" value="SectorId"></e-dropdownlist-fields>
+                        </ejs-dropdownlist>
+                        <span asp-validation-for="SectorId"></span>
+                        </div>*@
+                        <div class="form-group col-md-3">
+                           @* <input asp-for="@Model.StockId" type="hidden" />*@
+                            <label for="ItemId" class="form-label">Item Name</label>
+                            <ejs-dropdownlist id="ItemId" allowFiltering="true" ejs-for="@Model.ItemId" filtering="onItemNamefiltering" dataSource="@(new SelectList((IEnumerable)ViewBag.ItemList, "ItemId", "ItemName").Items)" placeholder="Select Item" popupHeight="220px">
+                                <e-dropdownlist-fields text="ItemName" value="ItemId"></e-dropdownlist-fields>
+                            </ejs-dropdownlist>
+                            <span asp-validation-for="ItemId"></span>
+                        </div>
+                        @* <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                        <label for="ToDate" class="form-label">Date</label>
+                        <input type="date" id="ToDate" name="ToDate" class="form-control dateserch" autofocus="autofocus" />
+                        </div>*@
+                        @* <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                        <label for="supervisorId" class="form-label">Supervisor type</label>
+                        <ejs-dropdownlist id="supervisorId" name="supervisorId" allowFiltering="true" placeholder="Select Supervisor" popupHeight="220px">
+                        <e-dropdownlist-fields text="supervisorName" value="supervisorId"></e-dropdownlist-fields>
+                        </ejs-dropdownlist>
+
+                        </div>*@
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+                    <div class="location">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</header>
 <div class="main-content">
     <div class="row gutters">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
@@ -50,8 +97,8 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <h4>Opening Stock: @ViewBag.OpeningStock</h4>
-                    <h4>Closing Stock: @ViewBag.ClosingStock</h4>
+                    <h6>Opening Stock: @ViewBag.OpeningStock</h6>
+                    <h6>Closing Stock: @ViewBag.ClosingStock</h6>
                     <ejs-grid id="GridOverview" dataSource="ViewBag.Stocks"
                               allowFiltering="true" allowSorting="true"
                               allowExcelExport="true" allowGrouping="true"
@@ -63,7 +110,7 @@
                               toolbarClick="toolbarClick" toolbar="@(new List<string>() {"ExcelExport", "PdfExport", "CsvExport" ,"Search"})" allowPaging="true">
 
                         <e-grid-filtersettings type="Menu"></e-grid-filtersettings>
-
+                        <e-grid-selectionsettings persistSelection="true" type="Multiple" checkboxOnly="true"></e-grid-selectionsettings>
                         <e-grid-pagesettings pageCount="4" pageSizes="true"></e-grid-pagesettings>
                         <e-grid-columns>
                             <e-grid-column field="Sector.SectorName" headerText="Sector Name" textAlign="Left" width="120"></e-grid-column>
@@ -84,6 +131,64 @@
 
 </div>
 
+@*<div class="main-content">
+    <div class="row gutters">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            Stock
+                        </div>
+                        <div class="col-md-4 text-right float-right">
+                            <a href="/WareHouse/Stock/StockCreate" class="btn btn-success btn-sm"><i class="icon icon-add"></i> Add </a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <ejs-grid id="GridOverview" dataSource="ViewBag.Stocks"
+                              allowFiltering="true" allowSorting="true"
+                              allowExcelExport="true" allowGrouping="true"
+                              allowMultiSorting="true"
+                              allowPdfExport="true"
+                              enableHover="false" enableHeaderFocus="true"
+                              allowResizing="true" autoFit="true" dataBound="dataBound"
+                              enableVirtualization="true" allowSelection="true"
+                              toolbarClick="toolbarClick" toolbar="@(new List<string>() {"ExcelExport", "PdfExport", "CsvExport" ,"Search"})" allowPaging="true">
+
+                        <e-grid-filtersettings type="Menu"></e-grid-filtersettings>
+
+                        <e-grid-pagesettings pageCount="4" pageSizes="true"></e-grid-pagesettings>
+                        <e-grid-columns>
+                            <e-grid-column field="Sector.SectorName" headerText="Sector Name" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="Category.CategoryName" headerText="Category Name" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="Item.ItemName" headerText="Item Name" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="WareHuose.WareHouseName" headerText="WareHouse Name" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="Unit.ShortName" headerText="UOM" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column field="Quantity" headerText="Quantity" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column headerText="Opening Stock" template="#OpeningStockTemplate" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column headerText="Closing Stock" template="#ClosingStockTemplate" textAlign="Left" width="120"></e-grid-column>
+                            <e-grid-column headerText="Action" template="#Actions" width="50"></e-grid-column>
+                        </e-grid-columns>
+                    </ejs-grid>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>*@
+
+@*<script id="OpeningStockTemplate" type="text/x-template">
+    <div>@ViewBag.OpeningStock</div>
+</script>
+
+<script id="ClosingStockTemplate" type="text/x-template">
+    <div>@ViewBag.ClosingStock</div>
+</script>
+*@
 
 @{
 
@@ -214,6 +319,21 @@
 
     function dataBound(args) {
         this.autoFitColumns();
+    }
+
+
+</script>
+<script>
+    //function onSectorfiltering(e) {
+    //    var query = new ej.data.Query();
+    //    query = (e.text !== '') ? query.where('SectorName', 'startswith', e.text, true) : query;
+    //    e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.Sectors)), query);
+    //}
+
+    function onItemNamefiltering(e) {
+        var query = new ej.data.Query();
+        query = (e.text !== '') ? query.where('ItemName', 'startswith', e.text, true) : query;
+        e.updateData(@Html.Raw(JsonConvert.SerializeObject(ViewBag.ItemList)), query);
     }
 
 
