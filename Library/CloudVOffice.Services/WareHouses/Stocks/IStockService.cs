@@ -34,5 +34,12 @@ namespace CloudVOffice.Services.WareHouses.Stocks
         public List<StockManagementBrandWise> BrandsViewPage(List<Int64> brandIds);
 
         public Dictionary<string, double?> TotalStockByShortName();
+
+
+        public Task<double?> CalculateOpeningStockAsync( Int64 itemId);
+        public Task<double?> CalculateClosingStockAsync(Int64 itemId);
+        
+
+
     }
 }

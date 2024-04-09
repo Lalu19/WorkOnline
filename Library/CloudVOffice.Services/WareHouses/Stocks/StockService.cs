@@ -693,6 +693,31 @@ namespace CloudVOffice.Services.WareHouses.Stocks
             }
             return brandDataList;
         }
+     
+        public async Task<double?> CalculateOpeningStockAsync(Int64 itemId)
+        {
+            var openingStock = await _dbContext.Stocks
+                .Where(s => s.ItemId == itemId && s.CreatedDate < DateTime.Today)
+                .OrderByDescending(s => s.CreatedDate)
+                .ThenByDescending(s => s.ItemId)
+                .Select(s => s.Quantity)
+                .FirstOrDefaultAsync();
+
+            return openingStock ?? 0;
+        }
+
+        public async Task<double?> CalculateClosingStockAsync(Int64 itemId)
+        {
+            var closingStock = await _dbContext.Stocks
+                .Where(s => s.ItemId == itemId /*&& s.CreatedDate == DateTime.Today*/)
+                .OrderByDescending(s => s.ItemId)
+                .OrderByDescending(s => s.CreatedDate)
+                .Select(s => s.Quantity)
+                .FirstOrDefaultAsync();
+
+            return closingStock;
+        }
+
 
     }
 }

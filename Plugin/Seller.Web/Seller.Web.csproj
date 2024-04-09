@@ -52,6 +52,11 @@
 	</ItemGroup>
 
 
+	<ItemGroup>
+	  <Folder Include="NewFolder\" />
+	</ItemGroup>
+
+
 	<!-- This target execute after "Build" target -->
 	<Target Name="CloudVOfficeTarget" AfterTargets="Build">
 		<!-- Delete unnecessary libraries from plugins path -->

@@ -135,12 +135,13 @@ namespace Warehouse.Management.Controllers
 			return View("~/Plugins/Warehouse.Management/Views/Stocks/StockCreate.cshtml", stockDTO);
         }
 
-        public IActionResult StockView()
-        {
-            ViewBag.Stocks = _stockService.GetStockList();
+        //public IActionResult StockView()
+        //{
 
-            return View("~/Plugins/Warehouse.Management/Views/Stocks/StockView.cshtml");
-        }
+        //    ViewBag.Stocks = _stockService.GetStockList();
+
+        //    return View("~/Plugins/Warehouse.Management/Views/Stocks/StockView.cshtml");
+        //}
 
 
         [HttpGet]
@@ -175,8 +176,43 @@ namespace Warehouse.Management.Controllers
             return items;
         }
 
+        //[HttpGet]
+        //public  ActionResult StockView(Int64 itemId)
+        //{
+        //    var items = itemId;
+        //    var openingStock =  _stockService.CalculateOpeningStockAsync(itemId);
+        //    var closingStock =  _stockService.CalculateClosingStockAsync(itemId);
+        //    ViewBag.ItemList = _itemService.GetItemList();
+        //    ViewBag.Stocks = _stockService.GetStockList();
+        //    ViewBag.OpeningStock = openingStock;
+        //    ViewBag.ClosingStock = closingStock;
+        //    return View("~/Plugins/Warehouse.Management/Views/Stocks/StockView.cshtml");
+        //}
+
+       
+        public async Task<ActionResult> StockView(Int64 itemId)
+        {
+            ViewBag.ItemList = _itemService.GetItemList();
+            ViewBag.Stocks = _stockService.GetStockList();
+            var openingStock = await _stockService.CalculateOpeningStockAsync(itemId);
+            var closingStock = await _stockService.CalculateClosingStockAsync(itemId);
+            if(closingStock == null)
+            {
+                closingStock = openingStock;
+            }
+            else
+            {
+                closingStock = closingStock;
+            }
+
+            ViewBag.OpeningStock = openingStock;
+            ViewBag.ClosingStock = closingStock;
 
 
+            return View("~/Plugins/Warehouse.Management/Views/Stocks/StockView.cshtml");
+        }
+
+      
 
     }
 }
