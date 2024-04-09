@@ -136,22 +136,19 @@ namespace CloudVOffice.Web
                 string dllPath = CloudVOfficePluginDefaults.PathName + @"\" + folder.Split(@"\")[1].ToString() + @"\" + folder.Split(@"\")[1].ToString() + ".dll";
                 if (File.Exists(dllPath))
                 {
+                    Assembly assembly2 = Assembly.LoadFrom(dllPath);
+                    AssemblyPart part2 = new AssemblyPart(assembly2);
+
+                    services.AddControllersWithViews().AddRazorRuntimeCompilation().PartManager.ApplicationParts.Add(part2);
                     string depsPathPath = CloudVOfficePluginDefaults.PathName + @"\" + folder.Split(@"\")[1].ToString() + @"\" + folder.Split(@"\")[1].ToString() + ".deps.json";
                     if (File.Exists(depsPathPath))
                     {
                         File.Delete(depsPathPath);
                     }
-                    Assembly assembly2 = Assembly.LoadFrom(dllPath);
-                    AssemblyPart part2 = new AssemblyPart(assembly2);
-
-                    services.AddControllersWithViews(con =>
-                    {
-                        con.Filters.Add<GlobalExceptionFilter>();
-                    }).AddRazorRuntimeCompilation().PartManager.ApplicationParts.Add(part2);
-
 
                 }
             }
+
 
 
             mvcBuilder.AddControllersAsServices();
