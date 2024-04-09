@@ -8,6 +8,7 @@ using CloudVOffice.Core.Domain.Distributor;
 using CloudVOffice.Data.DTO.SalesOrders;
 using CloudVOffice.Data.DTO.WareHouses.SalesOrders;
 using CloudVOffice.Services.Distributors;
+using CloudVOffice.Services.WareHouses;
 using CloudVOffice.Services.WareHouses.SalesOrders;
 using CloudVOffice.Web.Framework;
 using CloudVOffice.Web.Framework.Controllers;
@@ -22,13 +23,15 @@ namespace Warehouse.Management.Controllers
         private readonly IWareHouseSalesOrderItemService _wareHouseSalesOrderItemService;
         private readonly IDPOService _dPOService;
         private readonly IDPOItemsService _dPOItemsService;
+        private readonly IWareHouseService _wareHouseService;
 
-        public WareHouseSalesOrderController(IWarehouseSalesOrderParentService warehouseSalesOrderParentService, IWareHouseSalesOrderItemService wareHouseSalesOrderItemService, IDPOService dPOService, IDPOItemsService dPOItemsService)
+        public WareHouseSalesOrderController(IWarehouseSalesOrderParentService warehouseSalesOrderParentService, IWareHouseSalesOrderItemService wareHouseSalesOrderItemService, IDPOService dPOService, IDPOItemsService dPOItemsService, IWareHouseService wareHouseService)
         {
             _warehouseSalesOrderParentService = warehouseSalesOrderParentService;
             _wareHouseSalesOrderItemService = wareHouseSalesOrderItemService;
             _dPOService = dPOService;
             _dPOItemsService = dPOItemsService;
+            _wareHouseService = wareHouseService;
         }
 
 
@@ -84,6 +87,15 @@ namespace Warehouse.Management.Controllers
             var a = _dPOService.GetAllDPOListbyParentId(parentId);
             return a;
         }
+
+        [HttpGet]
+        public IActionResult WareHouseParentView()
+        {
+            var list = _warehouseSalesOrderParentService.GetWarehouseParentList();
+            ViewBag.warehouseParent = list;
+            return View("~/Plugins/Warehouse.Management/Views/SalesOrders/WareHouseView.cshtml");
+        }
+
 
     }
 }

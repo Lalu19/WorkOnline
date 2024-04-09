@@ -1,0 +1,364 @@
+﻿@{
+	//Layout = "_MainAppLayout";
+	ViewData["Title"] = "SO Invoice";
+	var podatails = ViewBag.WareHouseOrderDetails;
+	var distributordetails = ViewBag.DistributorDetails;
+}
+@addTagHelper *, Syncfusion.EJ2
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers *@
+
+
+
+
+<style>
+	.gutters {
+		margin-right: -69px;
+		margin-left: -39px;
+		margin-top: 16px;
+	}
+
+	#color {
+		background-color: #343a40;
+		color: white;
+		font-weight: bold;
+	}
+
+	table.table-bordered th,
+	table.table-bordered td {
+		border: 1px solid #343a40;
+	}
+
+	#BUTTON button {
+		background-color: #343a40;
+		color: white;
+		font-weight: bold;
+	}
+
+	/* Print styles */
+	.main-content {
+		width: 210mm;
+		height: 297mm;
+		margin: 0 auto;
+		padding: 20px;
+		margin-bottom: 0;
+	}
+
+	.card {
+		margin-bottom: 20px;
+	}
+
+	.card-body button {
+		display: block;
+	}
+
+	/* Decrease table font size */
+	#soOrderTable {
+		width: 94%;
+		border-collapse: collapse;
+	}
+
+		#soOrderTable th,
+		#soOrderTable td {
+			border: 1px solid #ddd;
+			padding: 8px;
+			text-align: center;
+		}
+
+		#soOrderTable th {
+			background-color: #000000;
+		}
+
+		#soOrderTable tbody tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+
+
+	/* CSS for the new table */
+	#fixedHeader {
+		width: 76%;
+		border-collapse: collapse;
+	}
+
+	.custom-table-width {
+		width: 80%;
+		margin: 0 77px;
+	}
+
+	#fixedHeader th,
+	#fixedHeader td {
+		border: 1px solid #ddd;
+		padding: 8px;
+		text-align: center;
+	}
+
+	#fixedHeader th {
+		background-color: #f2f2f2;
+	}
+
+	#fixedHeader tbody tr:nth-child(even) {
+		background-color: #f2f2f2;
+	}
+
+	/* Style for the sub-headers under Quantity */
+	#fixedHeader th[colspan="2"] {
+		text-align: center;
+	}
+
+	/* Adjust padding for sub-headers */
+	#fixedHeader th[colspan="2"], #fixedHeader th[rowspan="2"] {
+		padding: 8px;
+	}
+
+	/* Styles for the Print Invoice button */
+	.print-button {
+		background-color: #007bff;
+		color: #fff;
+		border: none;
+		padding: 10px 20px;
+		border-radius: 5px;
+		font-size: 16px;
+		cursor: pointer;
+		transition: background-color 0.3s;
+		margin-top: 6px;
+	}
+
+		.print-button:hover {
+			background-color: #0056b3;
+		}
+
+</style>
+
+<div class="main-content">
+	<div class="row gutters">
+		<div class="col-xl-12 col-lg-12 col-md-10 col-sm-10 mx-auto">
+			<div class="card">
+				@* <div class="card-header">
+
+				<div class="row">
+				<div class="col-md-10">
+				<b>Invoice</b>
+				</div>
+				<div class="col-md-2 ">
+				</div>
+				</div>
+				</div> *@
+
+				<div class="invoice-container" id="pdf-content">
+					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+						@* <div class="card"> *@
+						<div class="card-body">
+							<div class="invoice-container">
+								<h4 style="text-align:center;color:#EB05A9;font-weight:bold;">@distributordetails.BusinessName</h4>
+								<p style="text-align:center;">
+									@* <strong>Address:</strong> *@ @distributordetails.Address,
+									@distributordetails.State,
+									@distributordetails.Country,
+									<strong>Phone no:</strong> @distributordetails.PrimaryPhone,
+									<strong>GST Number:</strong> @distributordetails.GSTNumber
+								</p>
+
+								<div class="row gutters">
+									<hr class="my-2" style="width: 100%; background-color: #343a40; border-color: #343a40;">
+								</div>
+
+								<div class="row gutters">
+									@* <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+
+									<p class="text-left"><strong>Name: </strong>@sellerdetials.Name</p>
+									<p class="text-left"><strong>Address: </strong>@sellerdetials.Address</p>
+									<p class="text-left"><strong>GST Number: </strong>@sellerdetials.GSTNumber</p>
+									<p class="text-left"><strong>Phone: </strong>@sellerdetials.PrimaryPhone</p>
+									<p class="text-left"><strong>Mail: </strong>@sellerdetials.MailId</p>
+									</div> *@
+
+									<div class="col-lg-6 col-md-6 col-sm-6">
+										<p><strong>Warehouse: </strong>@podatails.WareHuose.WareHouseName</p>
+										<p><strong>Area: </strong>@podatails.WareHuose.Area</p>
+										<p><strong>Address: </strong>@podatails.WareHuose.Address</p>
+										<p><strong>Phone no: </strong>@podatails.WareHuose.Mobile</p>
+									</div>
+
+									<div class="col-lg-6 col-md-6 col-sm-6">
+										<p><strong>Date: </strong>@podatails.CreatedDate</p>
+									</div>
+								</div>
+								<div class="row gutters">
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+										@* <div class="card"> *@
+										@* <div class="card-header"></div> *@
+										@* <div class="card-body"> *@
+										<table id="soOrderTable" class="table table-bordered table-responsive">
+											<tr id="color">
+												<th>Sl.No</th>
+												<th>HSN</th>
+												<th>Product</th>
+												<th>Quantity</th>
+												<th>Units</th>
+												<th>Purchase Cost</th>
+												<th>Total Amount</th>
+												<th>CGST</th>
+												<th>CGST Value</th>
+												<th>SGST</th>
+												<th>SGST Value</th>
+												<th>Sale Value</th>
+											</tr>
+											@foreach (var item in podatails.WareHouseSalesOrderItem)
+											{
+												var totalAmount = item.Quantity * item.Item.PurchaseCost;
+												var cgstValue = Math.Round(totalAmount * item.Item.CGST / 100, 2);
+												var sgstValue = Math.Round(totalAmount * item.Item.SGST / 100, 2);
+												var saleValue = Math.Round(totalAmount + cgstValue + sgstValue, 2);
+
+												<tr>
+													<td>@item.Item.HSN</td>
+													<td>@item.Item.ItemName</td>
+													<td>@item.Quantity</td>
+													<td>@item.Item.ShortName</td>
+													<td>@item.Item.PurchaseCost</td>
+													<td>@totalAmount</td>
+													<td>@item.Item.CGST</td>
+													<td>@cgstValue</td>
+													<td>@item.Item.SGST</td>
+													<td>@sgstValue</td>
+													<td>@saleValue</td>
+												</tr>
+											}
+										</table>
+										@* </div> *@
+										@* 	</div> *@
+									</div>
+								</div>
+
+
+								<div class="row gutters">
+									<div class="col-lg-9 col-md-9 col-sm-12">
+									</div>
+									<div class="col-lg-3 col-md-3 col-sm-12">
+										<table>
+											<tbody>
+												<tr>
+													<td>
+														<p class="text-right"><strong>Subtotal:</strong>@podatails.TotalAmount</p>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+
+								<div class="row gutters">
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+										<table id="fixedHeader" class="table table-striped table-bordered custom-table-width">
+											<thead>
+												<tr>
+													<th rowspan="2">HSN/SAC</th>
+													<th rowspan="2">Quantity</th>
+													<th rowspan="2">Taxable Value</th>
+													<th colspan="2">Central Tax</th>
+													<th colspan="2">State Tax</th>
+													<th rowspan="2">Total Tax Amount</th>
+													<!-- Add more headers as needed -->
+												</tr>
+												<tr>
+													<!-- Sub-headers for Quantity -->
+													<th>Rate</th>
+													<th>Amount</th>
+													<th>Rate</th>
+													<th>Amount</th>
+													<!-- Add more headers as needed -->
+												</tr>
+											</thead>
+											@{
+												// Define a HashSet to store unique HSN values
+												HashSet<int> uniqueHSNs = new HashSet<int>();
+											}
+											<tbody id="secondTableBody">
+												@foreach (var item in podatails.WareHouseSalesOrderItem)
+												{
+													int hsn;
+													if (int.TryParse(item.Item.HSN, out hsn))
+													{
+														if (!uniqueHSNs.Contains(hsn))
+														{
+															uniqueHSNs.Add(hsn);
+															var totalQuantity = 0; // Initialize total quantity for this HSN
+															var totalTaxableAmount = 0; // Initialize total taxable amount for this HSN
+
+															// Calculate total quantity and total taxable amount for items with the same HSN
+															foreach (var item2 in podatails.WareHouseSalesOrderItem)
+															{
+																if (int.TryParse(item2.Item.HSN, out int hsn2) && hsn2 == hsn)
+																{
+																	totalQuantity += item2.Quantity;
+																	totalTaxableAmount += item2.Quantity * item2.Item.PurchaseCost; // Accumulate the Total Amount
+																}
+															}
+
+															var cgstValue = Math.Round(totalTaxableAmount * item.Item.CGST / 100, 2); // Calculate CGST value
+															var sgstValue = Math.Round(totalTaxableAmount * item.Item.SGST / 100, 2); // Calculate SGST value
+															var taxableValue = cgstValue + sgstValue; // Taxable Value is the sum of
+															<!-- Placeholder row for totals -->
+															<tr>
+																<td>@item.Item.HSN</td>
+																<td>@totalQuantity</td>
+																<td>@totalTaxableAmount</td>
+																<td>@item.Item.CGST</td>
+																<td>@cgstValue</td>
+																<td>@item.Item.SGST</td>
+																<td>@sgstValue</td>
+																<td>@taxableValue</td>
+															</tr>
+														}
+													}
+												}
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card-body" style="text-align:center;">
+					<div class="col-lg-6 col-md-6 col-sm-12" style="display:inline-block;">
+						<button class="print-button" onclick="printInvoice()">Print Invoice</button>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<script>
+
+	// Function to add Sl.No to the table
+	document.addEventListener('DOMContentLoaded', function () {
+		addSerialNumber();
+	});
+
+	function addSerialNumber() {
+		var table = document.getElementById("soOrderTable");
+		var rows = table.getElementsByTagName("tr");
+
+		for (var i = 1; i < rows.length; i++) {
+			var cell = rows[i].insertCell(0);
+			cell.textContent = i;
+		}
+	}
+</script>
+
+<script>
+	function printInvoice() {
+		var printButton = document.querySelector('.card-body button');
+		printButton.style.display = 'none';
+		window.print();
+		printButton.style.display = 'block';
+
+	}
+</script>
+
+
