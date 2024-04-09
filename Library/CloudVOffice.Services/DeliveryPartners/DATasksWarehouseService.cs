@@ -34,7 +34,7 @@ namespace CloudVOffice.Services.DeliveryPartners
 		}
 
 
-		public async Task<MessageEnum> CreateDATasksWarehouse(WarehouseSalesOrderParentDTO warehouseSalesOrderParentDTO, Int64 DistributorRegistrationId)
+		public async Task<MessageEnum> CreateDATasksWarehouse(WarehouseSalesOrderParentDTO warehouseSalesOrderParentDTO)
 		{
 
 			//Int64 DeletedBy = Int64.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value.ToString());
@@ -54,11 +54,11 @@ namespace CloudVOffice.Services.DeliveryPartners
 
             dATasksWarehouse.WareHuoseId = _dbContext.UserWareHouseMappings.Where(a => a.UserId ==  warehouseSalesOrderParentDTO.CreatedBy).Select(z=> z.WareHuoseId).FirstOrDefault();
 
-			//dATasksWarehouse.DistributorRegistrationId = warehouseSalesOrderParentDTO.DistributorRegistrationId;
-			dATasksWarehouse.DistributorRegistrationId = DistributorRegistrationId;
+			dATasksWarehouse.DistributorRegistrationId = warehouseSalesOrderParentDTO.DistributorRegistrationId;
+			//dATasksWarehouse.DistributorRegistrationId = DistributorRegistrationId;
 			dATasksWarehouse.DPOUniqueNo = warehouseSalesOrderParentDTO.DPOUniqueNo;
 
-			var distributor = _dbContext.DistributorRegistrations.FirstOrDefault(a => a.DistributorRegistrationId == DistributorRegistrationId);
+			var distributor = _dbContext.DistributorRegistrations.FirstOrDefault(a => a.DistributorRegistrationId == warehouseSalesOrderParentDTO.DistributorRegistrationId);
 
 			dATasksWarehouse.Address = distributor.Address;
 			dATasksWarehouse.Contact = distributor.PrimaryPhone;
@@ -69,9 +69,6 @@ namespace CloudVOffice.Services.DeliveryPartners
 
 
 			var obj =_dATasksWarehouseRepo.Insert(dATasksWarehouse);
-
-            
-
 
             var agents = _deliveryPartnerService.GetDAByTaskId(obj.DATasksWarehouseId);
 
@@ -180,9 +177,6 @@ namespace CloudVOffice.Services.DeliveryPartners
 				throw;
 			}
 		}
-
-
-
 
 		public List<DATasksWarehouse> GetDATasksWarehouseList()
 		{

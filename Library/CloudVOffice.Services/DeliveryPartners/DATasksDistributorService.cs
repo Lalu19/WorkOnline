@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,7 +44,7 @@ namespace CloudVOffice.Services.DeliveryPartners
 			dATasksDistributor.Orderweight = dSODTO.TotalWaight;
 
 			dATasksDistributor.AssignmentCode = _dbContext.DistributorRegistrations.Where(uwm => uwm.DistributorRegistrationId == dSODTO.CreatedBy)
-			.Select(uwm => uwm.WareHuose.AssignmentCode)
+			.Select(uwm => uwm.AssignmentCode)
 			.FirstOrDefault();
 
 			dATasksDistributor.ArrivalDate = DateTime.Today.AddDays(1);
@@ -60,7 +61,7 @@ namespace CloudVOffice.Services.DeliveryPartners
 			{
 				dATasksDistributor.Address = buyer.Address;
 				dATasksDistributor.Contact = buyer.PrimaryPhone;
-			}			
+			}
 
 			dATasksDistributor.CreatedBy = dSODTO.CreatedBy;
 			dATasksDistributor.CreatedDate = DateTime.Now;
@@ -162,5 +163,60 @@ namespace CloudVOffice.Services.DeliveryPartners
 				throw;
 			}
 		}
+
+
+		public List<DATasksDistributor> GetDATasksDistributorList()
+		{
+			try
+			{
+
+				var list = _dbContext.DATasksDistributors.Where(a=> a.Deleted == false).ToList();
+				return list;
+			}
+			catch
+			{
+				throw;
+			}
+		}
+
+		public List<DATasksDistributor> GetAcceptedTasksDistributorList()
+		{
+			try
+			{
+				var list = _dbContext.DATasksDistributors.Where(a=> a.TaskAccepted == true).ToList();
+				return list;
+			}
+			catch
+			{
+				throw;
+			}
+		}
+
+		public List<DATasksDistributor> GetUnAcceptedTasksDistributorList()
+		{
+			try
+			{
+				var list = _dbContext.DATasksDistributors.Where(a=> a.TaskAccepted == false).ToList();
+				return list;
+			}
+			catch
+			{
+				throw;
+			}
+		}
+
+		public List<DATasksDistributor> GetDAAcceptedTasksDistributorByDeliveryAgentId(Int64 DeliveryPartnerId)
+		{
+			try
+			{
+				var list = _dbContext.DATasksDistributors.Where(a=> a.DeliveryPartnerId == DeliveryPartnerId).ToList();
+				return list;
+			}
+			catch
+			{
+				throw;
+			}
+		}
+
 	}
 }

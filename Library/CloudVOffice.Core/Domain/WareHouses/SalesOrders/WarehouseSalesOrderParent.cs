@@ -17,12 +17,18 @@ namespace CloudVOffice.Core.Domain.WareHouses.SalesOrders
         public string? WarehouseSalesOrderUniqueNumber { get; set; }
         public string? DPOUniqueNo { get; set; }
         public Int64 DistributorRegistrationId { get; set; }
-        public Int64? WareHuoseId { get; set; }
+        public Int64 WareHuoseId { get; set; }
         public double? TotalQuantity { get; set; }
         public double? TotalAmount { get; set; }
 
+
+        [ForeignKey("WareHuoseId")]
+        public WareHuose WareHuose { get; set; }
+
 		[ForeignKey("DistributorRegistrationId")]
 		public DistributorRegistration DistributorRegistration { get; set; }
+
+
 
 
 		public Int64 CreatedBy { get; set; }

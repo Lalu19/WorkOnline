@@ -14,6 +14,10 @@ namespace CloudVOffice.Services.DeliveryPartners
 
 		public Task<MessageEnum> CreateDATasksDistributor(DSODTO dSODTO);
 		public List<DATasksDistributor> GetDistributorTaskListByAssignedCode(string assignedCode);
+		public List<DATasksDistributor> GetDATasksDistributorList();
+		public List<DATasksDistributor> GetAcceptedTasksDistributorList();
+		public List<DATasksDistributor> GetUnAcceptedTasksDistributorList();
+		public List<DATasksDistributor> GetDAAcceptedTasksDistributorByDeliveryAgentId(Int64 DeliveryPartnerId);
 
 	}
 }

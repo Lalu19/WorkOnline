@@ -14,6 +14,12 @@ namespace CloudVOffice.Services.DeliveryPartners
 		public MessageEnum CreateWareHouseDAAccept(WareHouseDAAcceptDTO wareHouseDAAcceptDTO);
 		public List<WareHouseDAAccept> GetWareHouseDAAcceptList();
 		public WareHouseDAAccept GetWareHouseDAAcceptListById(Int64 WareHouseDAAcceptId);
+		public List<WareHouseDAAccept> GetWareHouseDAAcceptListByDeliveryPartnerId(Int64 DeliveryPartnerId);
+		public List<WareHouseDAAccept> GetWareHouseDAAcceptListByWarehouseTasks();
+		public List<WareHouseDAAccept> GetWareHouseDAAcceptListByDistributorTasks();
+		public WareHouseDAAccept GetWareHouseDAAcceptByDATasksWareHouseId(Int64 DATasksWareHouseId);
+		public WareHouseDAAccept GetWareHouseDAAcceptByDATasksDistributorId(Int64 DATasksDistributorId);
 
-    }
+
+	}
 }
